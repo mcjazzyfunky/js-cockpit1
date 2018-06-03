@@ -5,6 +5,8 @@ import { withStyles, Menu, MenuItem } from '@material-ui/core';
 import Avatar from '@material-ui/icons/AccountCircle';
 import Color from 'color';
 
+import DataNavigator from './DataNavigator';
+
 const styles = theme => (console.log(theme) || {
   controlCenter: {
     display: 'table',
@@ -125,7 +127,9 @@ const ControlCenterComponent = defineComponent({
               ? <div className={classes.sidebar}>{sidebar}</div>
               : null
           }
-          <div className={classes.center}></div>
+          <div className={classes.center}>
+            <DataNavigator />
+          </div>
         </div>
       </div>
     );

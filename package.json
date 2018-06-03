@@ -30,6 +30,7 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "classnames": "^2.2.5",
     "color": "^3.0.0",
     "js-seq": "0.0.1",
     "js-spec": "^0.1.32",
