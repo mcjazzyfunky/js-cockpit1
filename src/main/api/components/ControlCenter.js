@@ -1,7 +1,8 @@
 import React from 'react';
 import { defineComponent, isNode } from 'js-widgets';
 import { Spec } from 'js-spec';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Menu, MenuItem } from '@material-ui/core';
+import Avatar from '@material-ui/icons/AccountCircle';
 import Color from 'color';
 
 const styles = theme => (console.log(theme) || {
@@ -26,9 +27,9 @@ const styles = theme => (console.log(theme) || {
   brand: {
     display: 'table-cell',
     color: theme.palette.primary.contrastText,
-    backgroundColor: Color(theme.palette.primary.main).darken(0.08).toString(),
+    backgroundColor: Color(theme.palette.primary.main).darken(0.08).string(),
     whiteSpace: 'nowrap',
-    padding: '2px 5px'
+    padding: '4px 8px 2px 8px'
   },
 
   toolbar: {
@@ -36,9 +37,22 @@ const styles = theme => (console.log(theme) || {
     backgroundColor: theme.palette.primary.main
   },
 
+  userMenu: {
+    position: 'relative',
+    float: 'right',
+    color: theme.palette.primary.contrastText,
+    padding: '2px 12px 2px 30px',
+    fontSize: 14,
+    vertialAlign: 'middle'
+  },
+
   sidebar: {
     display: 'table-cell',
-    height: '100%'
+    height: '100%',
+    backgroundColor: Color(theme.palette.background.default).darken(0.03).string(),
+    borderWidth: '0 1px 0 0',
+    borderStyle: 'solid',
+    borderColor: '#d4d4d4'
   },
 
   center: {
@@ -78,6 +92,12 @@ const ControlCenterComponent = defineComponent({
       defaultValue: null
     },
 
+    sidebar: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    },
+
     onLogout: {
       type: Function,
       nullable: true,
@@ -85,16 +105,27 @@ const ControlCenterComponent = defineComponent({
     }
   },
 
-  main: ({ brand, user, classes, onLogout}) => {
+  main: ({ brand, user, sidebar, classes, onLogout}) => {
     return (
       <div className={classes.controlCenter}>
         <div className={classes.header}>
           <div className={classes.brand}>{brand}</div>
-          <div className={classes.toolbar}>North</div>
+          <div className={classes.toolbar}>
+            {
+              !user
+                ? null
+                : <div className={classes.userMenu}>
+                    <UserMenu user={user} classes={classes}/>
+                  </div>
+            }
+          </div>
         </div>
         <div className={classes.content}>
-          <div className={classes.sidebar}>West</div>
-          <div className={classes.center}>Center</div>
+          { sidebar
+              ? <div className={classes.sidebar}>{sidebar}</div>
+              : null
+          }
+          <div className={classes.center}></div>
         </div>
       </div>
     );
@@ -102,3 +133,57 @@ const ControlCenterComponent = defineComponent({
 });
 
 export default withStyles(styles)(ControlCenterComponent);
+
+// --- locals -------------------------------------------------------
+
+const UserMenu = defineComponent({
+  displayName: 'UserMenu',
+
+  properties: {
+    user: {
+      type: Object
+    },
+
+    classes: {
+      type: Object
+    }
+  },
+
+  main: class extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.onUserLinkClick = this.onUserLinkClick.bind(this);
+      this.onMenuClose = this.onMenuClose.bind(this);
+      this.userLinkRef = null;
+    }
+
+    onUserLinkClick(ev) {
+      this.userLinkRef = ev.target;
+      this.forceUpdate();
+    }
+
+    onMenuClose() {
+      this.userLinkRef = null;
+      this.forceUpdate();
+    }
+
+    render() {
+      const { user, classes } = this.props;
+
+      return (
+        <div className={classes.userMenu}>
+          <div>
+            <Avatar style={{ position: 'absolute', bottom: 0, left: 0 }}/>
+            <a onClick={this.onUserLinkClick}>{user.name}</a>
+            <Menu open={Boolean(this.userLinkRef)} onClose={this.onMenuClose} anchorEl={this.userLinkRef}>
+              <MenuItem>
+                Logout
+              </MenuItem>
+            </Menu>
+          </div>
+        </div>
+      );
+    }
+  }
+});
