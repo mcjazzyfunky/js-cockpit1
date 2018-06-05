@@ -23,9 +23,23 @@ module.exports = env => {
           options: {
             presets: ['babel-preset-env', 'react'],
             plugins: [
-              'transform-object-rest-spread'
+              'transform-object-rest-spread',
+              ['import', {
+                libraryName: 'antd',
+                libraryDirectory: 'es',
+                style: true
+              }],
             ]
           }
+        },
+        {
+          test: /\.less$/,
+
+          use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'less-loader', options: { javascriptEnabled: true } }
+          ]
         }
       ]
     },
@@ -33,23 +47,6 @@ module.exports = env => {
       extensions: ['.js', '.jsx'],
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: {
-        'js-surface$': path.resolve(__dirname, 'src/main/js-surface.js'),
-        'js-surface/common$': path.resolve(__dirname, 'src/main/submodules/common.js'),
-        'js-hyperscript/surface$': path.resolve(__dirname, 'node_modules/js-hyperscript/dist/surface.js'),
-        'js-dom-factories/surface$': path.resolve(__dirname, 'node_modules/js-dom-factories/dist/surface.js'),
-        //'react': path.resolve(__dirname, 'node_modules/react/umd/react.production.min.js'),
-        //'react-dom': path.resolve(__dirname, 'node_modules/react-dom/umd/react-dom.production.min.js'),
-        
-        ...(lib === 'dio' ? {
-          'react': path.resolve(__dirname, 'node_modules/dio.js/dist/umd.min.js'),
-          'react-dom': path.resolve(__dirname, 'node_modules/dio.js/dist/umd.min.js')
-        } : {}),
-        
-        ...(lib === 'nerv' ? {
-          'react': path.resolve(__dirname, 'node_modules/nervjs/index.js'),
-          'react-dom': path.resolve(__dirname, 'node_modules/nervjs/index.js')
-        } : {}),
-        
       }
     },
     output: {
@@ -59,6 +56,7 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         filename: 'demo/demo.html',
         template: 'src/demo/demo.html',
+        css: ['src/demo/demo.less'],
         inject: 'body'
       })
     ]
