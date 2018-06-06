@@ -10,10 +10,10 @@ export default defineComponent({
   main: class extends React.Component {
     render() {
       return (
-        <div className="side-menu">
-        <div className="side-menu__category-selector">
-          <div className="side-menu__category-back-icon"><Icon type="left"/></div>
-          <div className="side-menu__category-title">Global Configuration</div>
+        <div className="aw-side-menu">
+        <div className="aw-side-menu__category-selector">
+          <div className="aw-side-menu__category-back-icon"><Icon type="left"/></div>
+          <div className="aw-side-menu__category-title">Global Configuration</div>
         </div>
         <Menu
             onClick={this.handleClick}

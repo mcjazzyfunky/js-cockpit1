@@ -32,6 +32,8 @@
     "webpack-dev-server": "^3.1.0"
   },
   "dependencies": {
+    "ag-grid": "^17.1.1",
+    "ag-grid-react": "^17.1.0",
     "antd": "^3.6.1",
     "babel-plugin-import": "^1.7.0",
     "classnames": "^2.2.5",
@@ -40,7 +42,8 @@
     "js-spec": "^0.1.32",
     "js-widgets": "0.0.16",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-dom-factories": "^1.0.2"
   },
   "scripts": {
     "clean": "node_modules/.bin/shx rm -rf ./build ./dist",

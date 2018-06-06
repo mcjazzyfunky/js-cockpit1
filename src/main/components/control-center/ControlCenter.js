@@ -4,6 +4,9 @@ import { Spec } from 'js-spec';
 
 import { Icon } from 'antd';
 
+import DataNavigator from '../data-navigator/DataNavigator';
+
+
 import './ControlCenter.less';
 
 export default defineComponent({
@@ -47,36 +50,37 @@ export default defineComponent({
 
   main: ({ brand, user, sidebar, onLogout}) => {
     return (
-      <div className="control-center">
-        <div className="control-center__header">
-          <div className="control-center__brand">{brand}</div>
-          <div className="control-center__toolbar">
+      <div className="aw-control-center">
+        <div className="aw-control-center__header">
+          <div className="aw-control-center__brand">{brand}</div>
+          <div className="aw-control-center__toolbar">
             {
               !user
                 ? null
-                : <div className="control-center__user">
-                    <div className="control-center__user-icon">
+                : <div className="aw-control-center__user">
+                    <div className="aw-control-center__user-icon">
                       <Icon type="user"/>
                     </div>
-                    <div className="control-center__user-name">
+                    <div className="aw-control-center__user-name">
                       Jane Doe
                     </div>
-                    <button className="control-center__logout-button">
+                    <button className="aw-control-center__logout-button">
                       <Icon type="logout"/>
+                      <div className="aw-control-center__logout-text">Logout</div>
                     </button> 
                   </div>
             }
           </div>
         </div>
-        <div className="control-center__content">
+        <div className="aw-control-center__content">
           { sidebar
-              ? <div className="control-center__sidebar">{sidebar}</div>
+              ? <div className="aw-control-center__sidebar">{sidebar}</div>
               : null
           }
           {
             sidebar
-              ? <div className="control-center__center">
-                  DataNavigator
+              ? <div className="aw-control-center__center">
+                  <DataNavigator/>
                 </div>
               : null
           }
