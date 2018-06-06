@@ -27,11 +27,14 @@ const LoginFormComponent = defineComponent({
     onFormSubmit(ev) {
       ev.preventDefault();
 
-      this.props.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Values:', values);
-        }
-      });
+      if (!this.state.loading) {
+        this.props.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Values:', values);
+            this.setState(({ loading: true}));
+          }
+        });
+      }
     }
 
     render() {
@@ -57,25 +60,8 @@ const LoginFormComponent = defineComponent({
             </div>
           }
         >
-        <div className="aw-login-form__body">
-          {
-            !isLoading
-              ? null
-              : <div className="aw-login-form__spinner-container">
-                  <div className="aw-login-form__spinner">
-                    <Spin size="large" />
-                  </div>
-                  <div className="aw-login-form__spinner-text">
-                    Logging in, please wait...
-                  </div>
-                </div>
-          }
         <Form
           onSubmit={this.onFormSubmit}
-          className={classNames({
-            'aw-login-form__form': true,
-            'aw-login-form__form--hidden': isLoading
-          })}
         >
           <Form.Item>
             {
@@ -88,6 +74,8 @@ const LoginFormComponent = defineComponent({
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.5)' }} />}
                   placeholder="Username"
+                  autocomplete="off"
+                  disabled={isLoading}
                 />
               )
             }
@@ -104,6 +92,7 @@ const LoginFormComponent = defineComponent({
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.5)' }} />}
                   type="password"
                   placeholder="Password"
+                  disabled={isLoading}
                 />
               )
             }
@@ -114,7 +103,7 @@ const LoginFormComponent = defineComponent({
                 valuePropName: 'checked',
                 initialValue: true
               })(
-                <Checkbox>
+                <Checkbox disabled={isLoading}>
                   Remember me
                 </Checkbox>
               )
@@ -125,10 +114,24 @@ const LoginFormComponent = defineComponent({
             htmlType="submit"
             className="aw-login-form__submit-button"
           >
-            Log in
+            {
+              !isLoading
+                ? 'Log in'
+                : ['Logging in...',
+                  <Spin
+                    key="0"
+                    size="small"
+                    indicator={
+                      <Icon
+                        type="loading-3-quarters"
+                        className="aw-login-form__spin"
+                        spin
+                      />
+                    }
+                  />]
+            }
           </Button>
         </Form>
-        </div>
         </Card>
         </div>
       );
