@@ -54,7 +54,7 @@ const LoginFormComponent = defineComponent({
                 title="Back Office - Login"
                 
                 icon={
-                  <Icon type="cloud" className="aw-login-form__icon"/>
+                  <Icon type="cloud-o" className="aw-login-form__icon"/>
                 }
               />
             </div>

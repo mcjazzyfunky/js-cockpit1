@@ -9,7 +9,6 @@ import SideMenu from '../main/components/sidebar/SideMenu';
 import './demo.less';
 
 ReactDOM.render(
-  /*
   <ControlCenter
     brand={
       <Logo
@@ -26,9 +25,28 @@ ReactDOM.render(
     }}
 
     sidebar={
-      <SideMenu/>
+      <SideMenu
+        title="Mein menu"
+
+        menu={[
+          {
+            title: 'Catalog data'
+          },
+          {
+            title: 'Content managment'
+          },
+          {
+            title: 'Document managment'
+          },
+          {
+            title: 'Assets'
+          },
+          {
+            title: 'User managment'
+          }
+        ]}
+      />
     }
   />,
-  */
-  <LoginForm/>,
+  // <LoginForm/>,
   document.getElementById('main-content'));

@@ -72,7 +72,7 @@ export default defineComponent({
             }
           </div>
         </div>
-        <div className="aw-control-center__content">
+        <div className="aw-control-center__content" style={{ border: '1px', solid: 'green'}}>
           { sidebar
               ? <div className="aw-control-center__sidebar">{sidebar}</div>
               : null
@@ -80,7 +80,6 @@ export default defineComponent({
           {
             sidebar
               ? <div className="aw-control-center__center">
-                  <DataNavigator/>
                 </div>
               : null
           }

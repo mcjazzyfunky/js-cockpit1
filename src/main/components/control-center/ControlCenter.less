@@ -2,7 +2,9 @@
 
 .aw-control-center {
   position: absolute;
+  display: table;
   width: 100%;
+  height: 100%;
   top: 0;
   bottom: 0;
   padding: 0;
@@ -10,15 +12,17 @@
 
   &__header {
     display: table-row;
+    height: 0;
   }
 
   &__brand {
-    position: relative;
     display: table-cell;
     color: white;
     background: darken(@primary-color, 5%);
-    padding: 3px 20px 3px 0;
     white-space: nowrap;
+    text-align: left;
+    vertical-align: middle;
+    padding: 0 1rem;
   }
 
   &__toolbar {
@@ -62,8 +66,7 @@
 
   &__sidebar {
     display: table-cell;
-    min-height: 100%;
-    overflow: auto;
+    position: relative;
   }
 
   &__center {
