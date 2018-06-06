@@ -13,7 +13,7 @@ module.exports = env => {
   return {
     mode: modeName,
     entry: {
-      'js-admin-ui': './src/main/js-admin-ui.js',
+      'js-admin-widgets': './src/main/js-admin-widgets.js',
     },
     devtool: modeName === 'production' ? false : 'inline-source-map',
     module: {
@@ -44,7 +44,7 @@ module.exports = env => {
     output: {
       filename: (typeName === 'umd' ? '' : `${typeName}/`) + `[name].${modeName}.js`,
       path: path.resolve(__dirname, 'dist'),
-      library: 'jsBricks',
+      library: 'jsAdminWidgets',
       libraryTarget: typeName === 'cjs' ? 'commonjs2' : typeName
     },
     plugins: [

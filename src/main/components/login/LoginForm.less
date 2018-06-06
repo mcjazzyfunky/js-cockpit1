@@ -1,31 +1,35 @@
 @import '../../internal/styles/common.less';
 
-.login-form {
+.aw-login-form {
   position: absolute;
   width: 340px;
   left: 50%;
   top: 20%;
   transform: translate(-50%, -20%);
+
+  &__button {
+    width: 100%;
+  }
+
+  &__vendor {
+    font-size: 85%;
+  }
+
+  &__title {
+    color: @aw-primary-color;
+  }
+
+  &__header {
+    display: inline-block;
+    margin: 0 8px;
+  }
 }
 
-.login-form-button {
-  width: 100%;
-}
-
-.login-form-vendor {
-  font-size: 85%;
-}
-
-.login-form-title {
-  color: @primary-color;
-}
-
-
-.login-screen {
+.aw-login-screen {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: svg-gradient(to bottom right, darken(@primary-color, 10%), darken(@primary-color, 40%));
+  background-image: svg-gradient(to bottom right, lighten(@aw-primary-color, 10%), darken(@aw-primary-color, 40%));
 }

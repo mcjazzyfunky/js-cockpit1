@@ -2,7 +2,7 @@ const
   path = require('path'),
   HtmlWebpackPlugin  = require('html-webpack-plugin');
 
-module.exports = env => {
+module.exports = () => {
   return {
     mode: 'development',
     entry: './src/demo/demo.js',

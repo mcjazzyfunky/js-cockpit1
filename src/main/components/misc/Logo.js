@@ -33,33 +33,40 @@ export default defineComponent({
   },
 
   main: ({ icon, vendor, title }) => {
-    const
-      cells = [];
-
-    if (icon) {
-      cells.push(
-        <div key="icon" className="logo__icon">
-          {icon}
-        </div>);
-    }
+    let content = [];
 
     if (vendor) {
-      cells.push(
-        <div key="vendor" className="logo__vendor">
+      content.push(
+        <div key="vendor" className="aw-logo__vendor">
           {vendor}
         </div>);
     }
 
     if (title) {
-      cells.push(
-        <div key="title" className="logo__title">
+      content.push(
+        <div key="title" className="aw-logo__title">
           {title}
         </div>);
     }
+    
+    if (icon) {
+      content =
+        <div className="aw-logo__cells">
+          <div className="aw-logo__cell-left">
+            <div className="aw-logo__icon">
+              {icon}
+            </div>
+          </div>
+          <div className="aw-logo__cell-right">
+            {content}
+          </div>
+        </div>;
+    }
+
 
     return (
-      <div className="logo">
-        {cells}
+      <div className="aw-logo">
+        {content}
       </div>
     );
   }
