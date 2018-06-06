@@ -1,6 +1,7 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Card, Checkbox, Form, Icon, Input, Button } from 'antd';
+import { Button, Card, Checkbox, Form, Icon, Input, Spin } from 'antd';
+import classNames from 'classnames';
 import Logo from '../misc/Logo';
 
 import './LoginForm.less';
@@ -18,6 +19,8 @@ const LoginFormComponent = defineComponent({
     constructor(props) {
       super(props);
 
+      this.state = { loading: false };
+
       this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
@@ -32,11 +35,15 @@ const LoginFormComponent = defineComponent({
     }
 
     render() {
-      const { getFieldDecorator } = this.props.form;
+      const
+        { getFieldDecorator } = this.props.form,
+        isLoading = this.state.loading;
     
       return (
         <div className="aw-login-screen">
         <Card
+          className="aw-login-form"
+
           title={
             <div className="aw-login-form__header">
               <Logo
@@ -49,10 +56,27 @@ const LoginFormComponent = defineComponent({
               />
             </div>
           }
-
-          className="aw-login-form"
         >
-        <Form onSubmit={this.onFormSubmit}>
+        <div className="aw-login-form__body">
+          {
+            !isLoading
+              ? null
+              : <div className="aw-login-form__spinner-container">
+                  <div className="aw-login-form__spinner">
+                    <Spin size="large" />
+                  </div>
+                  <div className="aw-login-form__spinner-text">
+                    Logging in, please wait...
+                  </div>
+                </div>
+          }
+        <Form
+          onSubmit={this.onFormSubmit}
+          className={classNames({
+            'aw-login-form__form': true,
+            'aw-login-form__form--hidden': isLoading
+          })}
+        >
           <Form.Item>
             {
               getFieldDecorator('username', {
@@ -90,18 +114,21 @@ const LoginFormComponent = defineComponent({
                 valuePropName: 'checked',
                 initialValue: true
               })(
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox>
+                  Remember me
+                </Checkbox>
               )
             }
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="aw-login-form__button"
-            >
-              Log in
-            </Button>
           </Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="aw-login-form__submit-button"
+          >
+            Log in
+          </Button>
         </Form>
+        </div>
         </Card>
         </div>
       );
