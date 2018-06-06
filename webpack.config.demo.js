@@ -3,8 +3,6 @@ const
   HtmlWebpackPlugin  = require('html-webpack-plugin');
 
 module.exports = env => {
-  const lib = env && env.lib === 'dio' ? 'dio' : 'react';
-
   return {
     mode: 'development',
     entry: './src/demo/demo.js',
