@@ -5,24 +5,38 @@ import Logo from '../misc/Logo';
 
 import './LoginForm.less';
 
-export default defineComponent({
+const LoginFormComponent = defineComponent({
   displayName: 'LoginForm',
 
+  properties: {
+    form: {
+      type: Object
+    }
+  },
+
   main: class extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
+    onFormSubmit(ev) {
+      ev.preventDefault();
+
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Values:', values);
+        }
+      });
+    }
+
     render() {
+      const { getFieldDecorator } = this.props.form;
+    
       return (
         <div className="aw-login-screen">
         <Card
-        /*
-          title={
-            <div>
-              <div className="aw-login-form__vendor">Meet &amp; Greet - Back Office</div>
-              <div className="aw-login-form__title">Login</div>
-            </div>
-          }
-  */
-
-
           title={
             <div className="aw-login-form__header">
               <Logo
@@ -30,7 +44,7 @@ export default defineComponent({
                 title="Back Office - Login"
                 
                 icon={
-                  <Icon type="login" className="aw-login-form__icon"/>
+                  <Icon type="cloud" className="aw-login-form__icon"/>
                 }
               />
             </div>
@@ -38,25 +52,47 @@ export default defineComponent({
 
           className="aw-login-form"
         >
-        <Form>
-          <Form.Item
-          >
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.5)' }} />}
-              placeholder="User name"
-            />
+        <Form onSubmit={this.onFormSubmit}>
+          <Form.Item>
+            {
+              getFieldDecorator('username', {
+                rules: [{
+                  required: true,
+                  message: 'Please enter your username'
+                }]
+              })(
+                <Input
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.5)' }} />}
+                  placeholder="Username"
+                />
+              )
+            }
           </Form.Item>
-          <Form.Item
-          >
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.5)' }} />}
-              type="password"
-              placeholder="Password"
-            />
+          <Form.Item>
+            {
+              getFieldDecorator('password', {
+                rules: [{
+                  required: true,
+                  message: 'Please enter your password'
+                }]
+              })(
+                <Input
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.5)' }} />}
+                  type="password"
+                  placeholder="Password"
+                />
+              )
+            }
           </Form.Item>
-          <Form.Item
-          >
-            <Checkbox>Remeber me</Checkbox>
+          <Form.Item >
+            {
+              getFieldDecorator('remember', {
+                valuePropName: 'checked',
+                initialValue: true
+              })(
+                <Checkbox>Remember me</Checkbox>
+              )
+            }
             <Button
               type="primary"
               htmlType="submit"
@@ -72,3 +108,5 @@ export default defineComponent({
     }
   }
 });
+
+export default Form.create()(LoginFormComponent);

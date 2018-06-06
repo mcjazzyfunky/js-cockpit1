@@ -43,7 +43,8 @@
     "js-widgets": "0.0.16",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-dom-factories": "^1.0.2"
+    "react-dom-factories": "^1.0.2",
+    "rxjs": "^6.2.0"
   },
   "scripts": {
     "clean": "node_modules/.bin/shx rm -rf ./build ./dist",
