@@ -2,9 +2,9 @@ import React from 'react';
 import { defineComponent, isNode } from 'js-widgets';
 import { Spec } from 'js-spec';
 
-import { Icon } from 'antd';
+import { Button, Icon, Tooltip } from 'antd';
 
-import DataNavigator from '../data-navigator/DataNavigator';
+import DataNavigator from '../data-table/DataNavigator';
 
 
 import './ControlCenter.less';
@@ -64,10 +64,11 @@ export default defineComponent({
                     <div className="aw-control-center__user-name">
                       Jane Doe
                     </div>
-                    <button className="aw-control-center__logout-button">
-                      <Icon type="logout"/>
-                      <div className="aw-control-center__logout-text">Logout</div>
-                    </button> 
+                    <Tooltip title="Logout" placement="bottomRight" mouseEnterDelay={0.75}>
+                    <Button shape="circle" type="primary" size="small" style={{ marginRight: '15px', background: 'none' }}>
+                      <Icon type="poweroff"/>
+                    </Button>
+                    </Tooltip>
                   </div>
             }
           </div>
@@ -80,6 +81,7 @@ export default defineComponent({
           {
             sidebar
               ? <div className="aw-control-center__center">
+                  <DataNavigator/>
                 </div>
               : null
           }

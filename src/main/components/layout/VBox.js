@@ -29,7 +29,7 @@ const VBox = defineComponent({
     children: {
       constraint:
         Spec.valid(it => isNodeOfType(VBox.Cell, it))
-          .usingHint('Must be children of type HBox'),
+          .usingHint('Must be children of type VBox'),
 
       nullable: true,
       defaultValue: null
@@ -39,8 +39,8 @@ const VBox = defineComponent({
   main: ({ width, height, className, children }) => {
     let sumFlex = 0;
 
-    React.Children(children).forEach(cell => {
-      const flex = cell.flex;
+    React.Children.forEach(children, cell => {
+      const flex = cell.props.flex;
 
       sumFlex += flex === undefined ? 1 : flex;
     });
@@ -51,14 +51,13 @@ const VBox = defineComponent({
         style={{ width, height }}
       >
         {
-          React.Children(children).map((cell, key) => { 
+          React.Children.map(children, (cell, key) => {
             const
-              flex = cell.flex === undefined ? 1 : cell.flex,
+              flex = cell.props.flex === undefined ? 1 : cell.props.flex,
               height = Math.floor(100 * flex / sumFlex) + '%',
-              textAlign = cell.align === undefined ? 'auto' : cell.align,
-              verticalAlign = cell.valign === undefined ? 'auto' : cell.valign,
-              className = cell.className,
-              children = cell.children;
+              textAlign = cell.props.align === undefined ? 'auto' : cell.align,
+              verticalAlign = cell.props.valign === undefined ? 'auto' : cell.valign,
+              className = cell.props.className;
 
             return (
               <div
@@ -67,10 +66,10 @@ const VBox = defineComponent({
                 style={{ height }}
               >
                 <div
-                  className="vbox-cell"
+                  className="vbox__cell"
                   style={{ textAlign, verticalAlign, height }}
                 >
-                  {children}
+                  {cell.props.children}
                 </div>
               </div>
             );

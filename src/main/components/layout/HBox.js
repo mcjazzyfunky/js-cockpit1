@@ -35,8 +35,8 @@ const HBox = defineComponent({
   main: ({ height, width, children, className }) => {
     let sumFlex = 0;
 
-    React.Children(children).forEach(cell => {
-      const flex = cell.flex;
+    React.Children.forEach(children, cell => {
+      const flex = cell.props.flex;
 
       sumFlex += flex === undefined ? 1 : flex;
     });
@@ -51,15 +51,14 @@ const HBox = defineComponent({
           style={{ width, height }}
         >
           {
-            React.Children(children).map((cell, key) => { 
+            React.Children.map(children, (cell, key) => { 
               const
-                flex = cell.flex === undefined ? 1 : cell.flex,
+                flex = cell.props.flex === undefined ? 1 : cell.props.flex,
                 width = Math.floor(100 * flex / sumFlex) + '%',
-                height = cell.height === undefined ? '100%' : cell.height,
-                textAlign = cell.align === undefined ? 'auto' : cell.align,
-                verticalAlign = cell.valign === undefined ? 'auto' : cell.valign,
-                className = cell.className,
-                children = cell.children;
+                height = cell.props.height === undefined ? '100%' : cell.props.height,
+                textAlign = cell.props.align === undefined ? 'auto' : cell.props.align,
+                verticalAlign = cell.props.valign === undefined ? 'auto' : cell.props.valign,
+                className = cell.props.className;
 
               return (
                 <div
@@ -67,7 +66,7 @@ const HBox = defineComponent({
                   key={key}
                   style={{ textAlign, verticalAlign, width, height }}
                 >
-                  {children}
+                  {cell.props.children}
                 </div>);
             })
           }

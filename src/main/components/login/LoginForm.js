@@ -123,7 +123,8 @@ const LoginFormComponent = defineComponent({
                     size="small"
                     indicator={
                       <Icon
-                        type="loading-3-quarters"
+                        //type="loading-3-quarters"
+                        type="reload"
                         className="aw-login-form__spin"
                         spin
                       />

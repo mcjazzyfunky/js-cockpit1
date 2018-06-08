@@ -4,7 +4,7 @@ import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 import classNames from 'classnames';
 
-import { Icon } from 'antd';
+import { Button, Icon, Input, Tooltip } from 'antd';
 
 import PaginationUtils from './internal/PaginationUtils';
 
@@ -81,7 +81,6 @@ export default defineComponent({
       ret = createDefaultPaginator(props, paginationFacts); 
     }
 
-    console.log(paginationFacts);
     return ret;
   }
 });
@@ -94,7 +93,7 @@ function createDefaultPaginator(props, facts) {
       PaginationUtils.determineVisiblePageButtons(
         facts.pageIndex,
         facts.pageCount,
-        6),
+        7),
 
     onClick = createClickHandler(props.onChange),
 
@@ -155,7 +154,9 @@ function createSimplePaginator(props, facts) {
   return (
     <div>
       {previousPageButton}
+      <div style={{ display: 'inline-block', margin: '0 8px'}}>
       {paginationInfo}
+      </div>
       {nextPageButton}
     </div>
   );
@@ -169,10 +170,12 @@ function createAdvancedPaginator(props, facts) {
     lastPageButton = createLastPageButton(props, facts);
 
   return (
-    <div>
+    <div style={{ whiteSpace: 'nowrap' }}>
       {firstPageButton }
       {previousPageButton }
-      Page <input className="aw-paginator__input-page"/> of {facts.pageCount}
+      <div style={{ display: 'inline-block', margin: '0 10px' }}>
+      Page <Input size="default" className="aw-paginator__input-page" style={{ width: '60px', margin: '2px'}}/> of {facts.pageCount}
+      </div>
       {nextPageButton}
       {lastPageButton}
     </div>
@@ -194,48 +197,56 @@ function createPageButton(pageIndex, facts, onClick) {
         : 'aw-paginator__button-page';
 
   return (
-    <button className={className}>
+    <Button size="small" type={isActivePage ? 'primary' : null } style={{margin: '3px', border: 'none'}}>
       {pageIndex + 1}
-    </button>
+    </Button>
   );
 }
 
 function createFirstPageButton() {
   return (
-    <button className="aw-paginator__button-first">
+    <Tooltip title="First page" mouseEnterDelay={1}>
+    <Button shape="circle" size="small" className="aw-paginator__button-first" style={{border: 'none' }}>
       <Icon type="double-left"/>
-    </button>
+    </Button>
+    </Tooltip>
   );
 }
 
 function createPreviousPageButton() {
   return (
-    <button className="aw-paginator__button-previous">
-      <Icon type="left"/>
-    </button>
+    <Tooltip title="Previous page" mouseEnterDelay={1}>
+    <Button shape="circle" size="small" className="aw-paginator__button-previous" style={{ border: 'none'}}>
+      <Icon type="left" size="small"/>
+    </Button>
+    </Tooltip>
   );
 }
 
 function createEllipsisButton() {
   return (
-    <button className="aw-paginator__button-ellipsis">
+    <Button size="small" className="aw-paginator__button-ellipsis" style={{border: 'none'}}>
       &hellip;
-    </button>
+    </Button>
   );
 }
 
 function createNextPageButton() {
   return (
-     <button className="aw-paginator__button-next">
+    <Tooltip title="Next page" mouseEnterDelay={1}>
+     <Button shape="circle" size="small" className="aw-paginator__button-next" style={{border: 'none'}}>
        <Icon type="right"/>
-     </button>
+     </Button>
+     </Tooltip>
   );
 }
 
 function createLastPageButton() {
   return (
-     <button className="aw-paginator__button-last">
+    <Tooltip title="Last page" mouseEnterDelay={1}>
+     <Button shape="circle" size="small" className="aw-paginator__button-last" style={{border: 'none'}}>
        <Icon type="double-right"/>
-     </button>
+     </Button>
+     </Tooltip>
   );
 }

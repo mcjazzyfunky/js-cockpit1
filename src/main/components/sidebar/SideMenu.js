@@ -1,11 +1,121 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Icon, List } from 'antd';
+import { Icon } from 'antd';
 
 import { Seq } from 'js-seq';
 import { Spec } from 'js-spec';
 
 import './SideMenu.less';
+
+const
+  specItem =
+    Spec.shape({
+      id: Spec.or(Spec.integer, Spec.string),
+      title: Spec.string
+    }),
+
+  specItems =
+    Spec.shape({
+      type: Spec.is('items'),
+      items: Spec.arrayOf(specItem)
+    }),
+
+  specItemGroups =
+    Spec.shape({
+      type: Spec.is('itemGroups'),
+      itemGroups:
+        Spec.arrayOf(
+          Spec.shape({
+            title: Spec.string,
+            items: Spec.arrayOf(specItem)
+          }))
+    }),
+
+  specCategories =
+    Spec.shape({
+      type: Spec.is('categories'),
+      title: Spec.string,
+
+      categories:
+        Spec.arrayOf(
+          Spec.shape({
+            title: Spec.string,
+
+            submenu:
+              Spec.and(
+                Spec.prop(['submenu', 'item'],
+                  Spec.oneOf('item', 'itemsGroup')),
+                
+                  Spec.or(
+                    {
+                      when: submenu => submenu && submenu.type === 'items',
+                      check: specItems
+                    },
+                    {
+                      when: submenu => submenu && submenu.type === 'itemGroups',
+                      check: specItemGroups
+                    }))
+          }))
+    }),
+
+  specCategoryGroups =
+    Spec.shape({
+      type: Spec.is('categoryGroups'),
+      title: Spec.string,
+
+      categories:
+        Spec.arrayOf(
+          Spec.shape({
+            title: Spec.string,
+
+            categoryGroups:
+              Spec.arrayOf(
+                Spec.shape({
+                  title: Spec.string,
+
+                  submenu:
+                    Spec.or(
+                      {
+                        when:
+                          submenu => submenu && submenu.type === 'items',
+
+                        check:
+                          specItems
+                      },
+                      {
+                        when:
+                          submenu => submenu && submenu.type === 'itemGroups',
+
+                        check:
+                          specItemGroups
+                      })
+                }))
+          }))
+    }),
+
+  menuSpec =
+    Spec.and(
+      Spec.prop('type',
+        Spec.oneOf('item', 'itemGroups', 'categories', 'categoryGroups')),
+
+      Spec.or(
+        {
+          when: it => it.type === 'items',
+          check: specItems
+        },
+        {
+          when: it => it.type === 'itemGroups',
+          check: specItemGroups
+        },
+        {
+          when: it => it.type === 'categories',
+          check: specCategories
+        },
+        {
+          when: it => it.type === 'categoryGroups',
+          check: specCategoryGroups
+        }
+    ));
 
 export default defineComponent({
   displayName: 'SideMenu',
@@ -17,16 +127,11 @@ export default defineComponent({
 
     menu: {
       type: Object,
-      constraint:
-        Spec.arrayOf(
-          Spec.shape({
-            title:
-              Spec.string
-          }))
+      constraint: menuSpec
     },
 
-    activeId: {
-      type: String,
+    activeItemId: {
+      constraint: Spec.or(Spec.integer, Spec.string),
       nullable: true,
       defaultValue: null
     }
