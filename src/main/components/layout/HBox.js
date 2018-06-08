@@ -2,6 +2,7 @@
 import React from 'react';
 import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
 import { Spec } from 'js-spec';
+import { Seq } from 'js-seq';
 import classNames from 'classnames';
 
 import './HBox.less';
@@ -35,7 +36,7 @@ const HBox = defineComponent({
   main: ({ height, width, children, className }) => {
     let sumFlex = 0;
 
-    React.Children.forEach(children, cell => {
+    Seq.adjust(children).forEach(cell => {
       const flex = cell.props.flex;
 
       sumFlex += flex === undefined ? 1 : flex;
@@ -51,7 +52,7 @@ const HBox = defineComponent({
           style={{ width, height }}
         >
           {
-            React.Children.map(children, (cell, key) => { 
+            Seq.adjust(children).map((cell, key) => { 
               const
                 flex = cell.props.flex === undefined ? 1 : cell.props.flex,
                 width = Math.floor(100 * flex / sumFlex) + '%',

@@ -32,13 +32,14 @@
     "webpack-dev-server": "^3.1.0"
   },
   "dependencies": {
+    "@vaadin/vaadin-button": "^2.0.0-pre.4",
     "ag-grid": "^17.1.1",
     "ag-grid-react": "^17.1.0",
     "antd": "^3.6.1",
     "babel-plugin-import": "^1.7.0",
     "classnames": "^2.2.5",
     "color": "^3.0.0",
-    "js-seq": "0.0.1",
+    "js-seq": "0.0.2",
     "js-spec": "^0.1.32",
     "js-widgets": "0.0.16",
     "react": "^16.4.0",
