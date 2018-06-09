@@ -1,11 +1,10 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Icon } from 'antd';
 
 import { Seq } from 'js-seq';
 import { Spec } from 'js-spec';
 
-import './SideMenu.less';
+import './SideMenu.scss';
 
 const
   specItem =
@@ -155,7 +154,7 @@ export default defineComponent({
                       {item.title}
                   </div>
                   <div className="aw-side-menu__main-category-arrow">
-                    <Icon type="right"/>
+                    <i type="right"/>
                   </div>
                 </div>
               )

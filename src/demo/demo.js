@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Icon } from 'antd';
 import LoginForm from '../main/components/login/LoginForm';
 import ControlCenter from '../main/components/control-center/ControlCenter';
 import Logo from '../main/components/misc/Logo';
 import SideMenu from '../main/components/sidebar/SideMenu';
 
-import './demo.less';
+import { Fabric } from 'office-ui-fabric-react';
+
+import './demo.scss';
 
 ReactDOM.render(
+  /*
   <ControlCenter
     brand={
       <Logo
@@ -48,5 +50,8 @@ ReactDOM.render(
       />
     }
   />,
-  // <LoginForm/>,
+  */
+   <Fabric>
+     <LoginForm/>
+   </Fabric>,
   document.getElementById('main-content'));

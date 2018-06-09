@@ -3,7 +3,7 @@ import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 
-import './VBox.less';
+import './VBox.scss';
 
 const VBox = defineComponent({
   displayName: 'VBox',

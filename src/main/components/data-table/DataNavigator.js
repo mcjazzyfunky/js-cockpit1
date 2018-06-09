@@ -7,7 +7,7 @@ import PageSizeSelector from '../pagination/PageSizeSelector';
 import PaginationInfo from '../pagination/PaginationInfo';
 import DataTable from '../data-table/DataTable';
 
-import './DataNavigator.less';
+import './DataNavigator.scss';
 
 
 export default defineComponent({

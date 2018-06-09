@@ -2,12 +2,12 @@ import React from 'react';
 import { defineComponent, isNode } from 'js-widgets';
 import { Spec } from 'js-spec';
 
-import { Button, Icon, Tooltip } from 'antd';
+//import { Button, Icon, Tooltip } from 'antd';
 
 import DataNavigator from '../data-table/DataNavigator';
 
 
-import './ControlCenter.less';
+import './ControlCenter.scss';
 
 export default defineComponent({
   displayName: 'ControlCenter',
@@ -59,16 +59,14 @@ export default defineComponent({
                 ? null
                 : <div className="aw-control-center__user">
                     <div className="aw-control-center__user-icon">
-                      <Icon type="user"/>
+                      <i type="user"/>
                     </div>
                     <div className="aw-control-center__user-name">
                       Jane Doe
                     </div>
-                    <Tooltip title="Logout" placement="bottomRight" mouseEnterDelay={0.75}>
-                    <Button shape="circle" type="primary" size="small" style={{ marginRight: '15px', background: 'none' }}>
-                      <Icon type="poweroff"/>
-                    </Button>
-                    </Tooltip>
+                    <button shape="circle" type="primary" size="small" style={{ marginRight: '15px', background: 'none' }}>
+                      <i type="poweroff"/>
+                    </button>
                   </div>
             }
           </div>

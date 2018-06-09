@@ -31,12 +31,13 @@ module.exports = () => {
           }
         },
         {
-          test: /(\.css|\.less)$/,
+          test: /(\.css|\.scss|\.less)$/,
 
           use: [
             { loader: 'style-loader' },
             { loader: 'css-loader' },
-            { loader: 'less-loader', options: { javascriptEnabled: true } }
+            { loader: 'less-loader', options: { javascriptEnabled: true } },
+            { loader: 'sass-loader' }
           ]
         }
       ]

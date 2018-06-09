@@ -4,7 +4,7 @@ import { Spec } from 'js-spec';
 
 import PaginationUtils from './internal/PaginationUtils';
 
-import './PaginationInfo.less';
+import './PaginationInfo.scss';
 
 export default defineComponent({
   displayName: 'PaginationInfo',

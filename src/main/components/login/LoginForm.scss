@@ -1,4 +1,4 @@
-@import '../../internal/styles/common.less';
+//@import '../../internal/styles/common.less';
 
 .aw-login-form {
   position: absolute;
@@ -16,7 +16,7 @@
   }
 
   &__title {
-    color: @aw-primary-color;
+//    color: @aw-primary-color;
   }
 
   &__header {
@@ -30,7 +30,9 @@
     color: white;
   }
 }
-
+.xxx {
+  margin: 17px 0;
+}
 .aw-login-screen {
   position: absolute;
   top: 0;
@@ -39,7 +41,7 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-image: svg-gradient(to bottom right, lighten(@aw-primary-color, 10%), darken(@aw-primary-color, 40%));
+//  background-image: svg-gradient(to bottom right, lighten(@aw-primary-color, 10%), darken(@aw-primary-color, 40%));
   background-size: 100%;
 }
 

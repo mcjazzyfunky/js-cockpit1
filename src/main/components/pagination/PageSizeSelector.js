@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Select } from 'antd';
+//import { Select } from 'antd';
 
 export default defineComponent({
   displayName: 'PageSizeSelector',
@@ -10,6 +10,8 @@ export default defineComponent({
       <div style={{ display: 'inline-block' }}>
         <label>
           Items/Page: &nbsp;
+{
+/*
           <Select value={100}>
             <Select.Option key="10">
               10
@@ -30,6 +32,8 @@ export default defineComponent({
               500
             </Select.Option>
           </Select>
+*/
+}
          </label>
       </div>
     );

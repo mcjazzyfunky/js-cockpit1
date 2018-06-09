@@ -1,18 +1,13 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Button, Card, Checkbox, Form, Icon, Input, Spin } from 'antd';
-import classNames from 'classnames';
 import Logo from '../misc/Logo';
-
-import './LoginForm.less';
+import Card from '../card/Card';
+import { Checkbox, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 const LoginFormComponent = defineComponent({
   displayName: 'LoginForm',
 
   properties: {
-    form: {
-      type: Object
-    }
   },
 
   main: class extends React.Component {
@@ -38,101 +33,15 @@ const LoginFormComponent = defineComponent({
     }
 
     render() {
-      const
-        { getFieldDecorator } = this.props.form,
-        isLoading = this.state.loading;
-    
       return (
         <div className="aw-login-screen">
-        <Card
-          className="aw-login-form"
-
-          title={
-            <div className="aw-login-form__header">
-              <Logo
-                vendor="meet+greet"
-                title="Back Office - Login"
-                
-                icon={
-                  <Icon type="cloud-o" className="aw-login-form__icon"/>
-                }
-              />
-            </div>
-          }
-        >
-        <Form
-          onSubmit={this.onFormSubmit}
-        >
-          <Form.Item>
-            {
-              getFieldDecorator('username', {
-                rules: [{
-                  required: true,
-                  message: 'Please enter your username'
-                }]
-              })(
-                <Input
-                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.5)' }} />}
-                  placeholder="Username"
-                  autocomplete="off"
-                  disabled={isLoading}
-                />
-              )
-            }
-          </Form.Item>
-          <Form.Item>
-            {
-              getFieldDecorator('password', {
-                rules: [{
-                  required: true,
-                  message: 'Please enter your password'
-                }]
-              })(
-                <Input
-                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.5)' }} />}
-                  type="password"
-                  placeholder="Password"
-                  disabled={isLoading}
-                />
-              )
-            }
-          </Form.Item>
-          <Form.Item >
-            {
-              getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true
-              })(
-                <Checkbox disabled={isLoading}>
-                  Remember me
-                </Checkbox>
-              )
-            }
-          </Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="aw-login-form__submit-button"
-          >
-            {
-              !isLoading
-                ? 'Log in'
-                : ['Logging in...',
-                  <Spin
-                    key="0"
-                    size="small"
-                    indicator={
-                      <Icon
-                        //type="loading-3-quarters"
-                        type="reload"
-                        className="aw-login-form__spin"
-                        spin
-                      />
-                    }
-                  />]
-            }
-          </Button>
-        </Form>
+        <Card>
+          <Card.Body>
+            <TextField label="User name" autoComplete="off" />
+            <TextField label="Password" type="password" xerrorMessage="Please enter your password"/>
+            <Checkbox label="Remember me" onChange={this._onCheckboxChange} ariaDescribedBy={'descriptionID'} className='xxx' />
+            <PrimaryButton type="submit" style={{width: '100%' }}>Log in</PrimaryButton>
+          </Card.Body>
         </Card>
         </div>
       );
@@ -140,4 +49,4 @@ const LoginFormComponent = defineComponent({
   }
 });
 
-export default Form.create()(LoginFormComponent);
+export default LoginFormComponent;

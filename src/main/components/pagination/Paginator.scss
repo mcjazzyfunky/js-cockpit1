@@ -1,4 +1,4 @@
-@import '../../internal/styles/common.less';
+//@import '../../internal/styles/common.less';
 
 .aw-paginator {
   &__button-page {
@@ -9,7 +9,7 @@
   &__button-page--active {
     border: none;
     color: white;
-    background-color: @primary-color;
+//    background-color: @primary-color;
     border-radius: 3px;
   }
 
@@ -39,7 +39,7 @@
   }
 
   &__input-page {
-    .common-text-field;
+//   .common-text-field;
 
     width: 3em;
     margin: 1px 4px;

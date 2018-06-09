@@ -5,7 +5,7 @@ import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 import classNames from 'classnames';
 
-import './HBox.less';
+import './HBox.scss';
 
 const HBox = defineComponent({
   displayName: 'HBox',

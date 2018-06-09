@@ -1,7 +1,7 @@
 import React from 'react';
 import { defineComponent, isNode } from 'js-widgets';
 
-import './Logo.less';
+import './Logo.scss';
 
 export default defineComponent({
   displayName: 'Logo',

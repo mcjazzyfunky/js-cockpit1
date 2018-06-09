@@ -1,4 +1,3 @@
-@import '../../internal/styles/common.less';
 
 .aw-control-center {
   position: absolute;
@@ -18,7 +17,7 @@
   &__brand {
     display: table-cell;
     color: white;
-    background: darken(@primary-color, 5%);
+//    background: darken(@primary-color, 5%);
     white-space: nowrap;
     text-align: left;
     vertical-align: middle;
@@ -28,7 +27,7 @@
   &__toolbar {
     display: table-cell;
     color: white;
-    background-color: @primary-color;
+//    background-color: @primary-color;
     text-align: right;
     vertical-align: middle;
     width: 100%;
