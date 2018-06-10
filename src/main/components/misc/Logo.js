@@ -4,10 +4,14 @@ import Css from '../styling/Css';
 
 function getStyles() {
   return {
+    container: {
+      display: 'table',
+      margin: 0,
+      padding: 0
+    },
+
     icon: {
-      fontSize: '2rem',
-      marginRight: '0.5rem',
-      marginTop: '0.25rem'
+      fontSize: '1.5rem'
     },
 
     vendor: {
@@ -29,11 +33,13 @@ function getStyles() {
     cellLeft: {
       display: 'table-cell',
       textAlign: 'center',
-      verticalAlign: 'middle'
+      verticalAlign: 'middle',
+      padding: '0 0.5rem 0 0'
     },
 
     cellRight: {
       display: 'table-cell',
+      padding: 0,
       textAlign: 'left',
       verticalAlign: 'middle'
     }
@@ -62,56 +68,63 @@ export default defineComponent({
       nullable: true,
       defaultValue: null
     },
-
-    className: {
-      type: String,
-      nullable: true,
-      defaultValue: null
-    }
   },
 
-  main: ({ className, icon, vendor, title }) => {
+  main: ({ icon, vendor, title }) => {
     return (
       <Css getStyles={getStyles}>
-        {classes => {
-          let content = [];
+        {
+          classes => {
+            let
+              leftContent = null,
+              rightContent = null;
 
-          if (vendor) {
-            content.push(
-              <div key="vendor" className={classes.vendor}>
-                {vendor}
-              </div>);
-          }
+            if (vendor) {
+              rightContent =
+                <div key="vendor" className={classes.vendor}>
+                  {vendor}
+                </div>;
+            }
 
-          if (title) {
-            content.push(
-              <div key="title" className={classes.title}>
-                {title}
-              </div>);
-          }
-          
-          if (icon) {
-            content =
-              <div className={classes.cells}>
-                <div className={classes.cellLeft}>
-                  <div className={classes.icon}>
-                    {icon}
+            if (title) {
+              const titleContent =
+                <div key="title" className={classes.title}>
+                  {title}
+                </div>;
+
+              if (!rightContent) {
+                rightContent = titleContent;
+              } else {
+                rightContent =
+                  <React.Fragment>
+                    {rightContent}
+                    {titleContent}
+                  </React.Fragment>;
+              }
+            }
+            
+            if (icon) {
+              leftContent =
+                <div className={classes.icon}>
+                  {icon}
+                </div>;
+            }
+
+            return ( 
+              <div className={classes.container}>
+                <div className={classes.cells}>
+                  <div className={classes.cellLeft}>
+                    {leftContent}
+                  </div>
+                  <div className={classes.cellRight}>
+                    {rightContent}
                   </div>
                 </div>
-                <div className={classes.cellRight}>
-                  {content}
-                </div>
-              </div>;
+              </div>
+            );
           }
-
-          return (
-            <div className={classes.container + ' ' + className}>
-              {content}
-            </div>
-          );
         }
-      }
-    </Css>
+      </Css>
     );
   }
 });

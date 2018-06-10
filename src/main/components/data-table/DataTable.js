@@ -1,25 +1,19 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { DefaultButton, IconButton, ActionButton } from 'office-ui-fabric-react/lib/Button';
-import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
+import { CommandBar, DefaultButton, IconButton, ActionButton } from 'office-ui-fabric-react';
 
 
 import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
 import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
 import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 
+import Paginator from '../pagination/Paginator';
+
 import { AgGridReact } from 'ag-grid-react';
 
 
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham.css';
-
-//import FontAwesomeIcon from '@fontawesome/react-fontawesome';
-
-//Globalize.locale('en');
-
-//globalizeLocalizer();
-
 
 const
   columnDefs = [
@@ -41,11 +35,7 @@ export default defineComponent({
   main: class extends React.Component {
     render() {
       return <div style={{ fontSize: 12 }}>
-      <DatePicker onRenderIcon={
-        (...args) => {
-          console.log('>>>>', args)
-        }
-      }/>
+      <DatePicker showWeekNumbers />
 
 <Dropdown
           label="Disabled uncontrolled example with defaultSelectedKey:"
@@ -61,60 +51,9 @@ export default defineComponent({
           ]}
         />
 
+<Paginator type="default" pageIndex={13} pageSize={25} totalItemCount={1234} />
 
-
-<CommandBar
-          items={[
-            {
-              iconProps: {
-                iconName: 'chevronleft'
-              },
-            },
-            {
-              name: '1',
-            },
-            {
-              name: '...',
-            },
-            {
-              name: '11',
-            },
-            {
-              name: '12',
-            },
-            {
-              name: '13',
-            },
-            {
-              name: '...',
-            },
-            {
-              name: '27',
-            },
-            {
-              iconProps: {
-                iconName: 'chevronright'
-              },
-            },
-          ]}
-        />
-  <TooltipHost content="This is the tooltip" id="myID" calloutProps={{ gapSpace: 0 }}>
-       <IconButton
-          iconProps={{ iconName: 'ChevronLeft' }}
-        />
-  </TooltipHost>
-        <DefaultButton>...</DefaultButton>
-        <DefaultButton>11</DefaultButton>
-        <DefaultButton primary>12</DefaultButton>
-        <ActionButton>13</ActionButton>
-        <ActionButton>14</ActionButton>
-        <ActionButton>15</ActionButton>
-        <ActionButton>...</ActionButton>
-       <IconButton
-          iconProps={{ iconName: 'ChevronRight' }}
-        />
       </div>;
-      //  <AgGridReact columnDefs={columnDefs} rowData={rowData} />
     }
   }
 });

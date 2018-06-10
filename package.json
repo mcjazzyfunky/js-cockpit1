@@ -46,6 +46,7 @@
     "color": "^3.0.0",
     "globalize": "^1.3.0",
     "globalize-webpack-plugin": "^2.1.0",
+    "ionicons": "^4.1.2",
     "js-seq": "0.0.2",
     "js-spec": "^0.1.32",
     "js-widgets": "0.0.16",

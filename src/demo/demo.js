@@ -12,13 +12,11 @@ import { Fabric } from 'office-ui-fabric-react';
 initSystem();
 
 ReactDOM.render(
-  /*
+  <Fabric>
   <ControlCenter
     brand={
       <Logo
-        icon={
-          <Icon type="cloud-o"/>
-        }
+        icon={<i className="icon ion-ios-cloud-outline" style={{ fontSize: '1.5rem' }}/>}
         vendor="meet+greet"
         title="Back Office"
       />
@@ -51,9 +49,6 @@ ReactDOM.render(
         ]}
       />
     }
-  />,
-  */
-   <Fabric>
-     <LoginScreen/>
-   </Fabric>,
+  />
+  </Fabric>,
   document.getElementById('main-content'));

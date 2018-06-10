@@ -4,6 +4,8 @@ import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 import classNames from 'classnames';
 
+import { ActionButton, IconButton } from 'office-ui-fabric-react';
+
 import PaginationUtils from './internal/PaginationUtils';
 
 import './Paginator.scss';
@@ -193,16 +195,16 @@ function createPageButton(pageIndex, facts, onClick) {
   const
     isActivePage = pageIndex === facts.pageIndex,
 
-    className =
+    ret =
       isActivePage
-        ? 'aw-paginator__button-page--active'
-        : 'aw-paginator__button-page';
-
-  return (
-    <button size="small" type={isActivePage ? 'primary' : null } style={{margin: '3px', border: 'none'}}>
-      {pageIndex + 1}
-    </button>
-  );
+        ? <ActionButton disabled>
+            <div style={{ color: 'white', backgroundColor: 'rgb(0, 120, 212)', padding: '3px 6px' }}>
+              {pageIndex + 1}
+            </div>
+          </ActionButton>
+        : <ActionButton>{pageIndex + 1}</ActionButton>;
+  
+  return ret;
 }
 
 function createFirstPageButton() {
@@ -215,25 +217,25 @@ function createFirstPageButton() {
 
 function createPreviousPageButton() {
   return (
-    <button shape="circle" size="small" className="aw-paginator__button-previous" style={{ border: 'none'}}>
-      <i type="left" size="small"/>
-    </button>
+      <IconButton
+        iconProps={{ iconName: 'ChevronLeft' }}
+      />
   );
 }
 
 function createEllipsisButton() {
   return (
-    <button size="small" className="aw-paginator__button-ellipsis" style={{border: 'none'}}>
+    <ActionButton>
       &hellip;
-    </button>
+    </ActionButton>
   );
 }
 
 function createNextPageButton() {
   return (
-     <button shape="circle" size="small" className="aw-paginator__button-next" style={{border: 'none'}}>
-       <i type="right"/>
-     </button>
+      <IconButton
+        iconProps={{ iconName: 'ChevronRight' }}
+      />
   );
 }
 

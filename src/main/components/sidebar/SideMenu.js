@@ -143,7 +143,7 @@ export default defineComponent({
       return (
         <div className="aw-side-menu">
           <div className="aw-side-menu__category-selector">
-            <div className="aw-side-menu__category-back-icon"><Icon type="left"/></div>
+            <div className="aw-side-menu__category-back-icon"></div>
             <div className="aw-side-menu__category-title">{mainMenuTitle}</div>
           </div>
           <div className="aw-side-menu__list-container">
