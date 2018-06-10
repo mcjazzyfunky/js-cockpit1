@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginForm from '../main/components/login/LoginForm';
+import LoginScreen from '../main/components/login/LoginScreen';
 import ControlCenter from '../main/components/control-center/ControlCenter';
 import Logo from '../main/components/misc/Logo';
 import SideMenu from '../main/components/sidebar/SideMenu';
 
+import initSystem from '../main/system/initSystem';
+
 import { Fabric } from 'office-ui-fabric-react';
 
-import './demo.scss';
+initSystem();
 
 ReactDOM.render(
   /*
@@ -52,6 +54,6 @@ ReactDOM.render(
   />,
   */
    <Fabric>
-     <LoginForm/>
+     <LoginScreen/>
    </Fabric>,
   document.getElementById('main-content'));

@@ -1,6 +1,5 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { DefaultButton, IconButton, ActionButton } from 'office-ui-fabric-react/lib/Button';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 
@@ -8,59 +7,19 @@ import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
 import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
 import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-import { loadTheme, getTheme } from 'office-ui-fabric-react/lib/Styling';
-
-
-
-
-// import Globalize from 'globalize';
-// import globalizeLocalizer from 'react-widgets-globalize';
-//import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 import { AgGridReact } from 'ag-grid-react';
 
 
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham.css';
-import { queue } from 'rxjs';
 
-import { registerIcons } from '@uifabric/styling';
 //import FontAwesomeIcon from '@fontawesome/react-fontawesome';
 
 //Globalize.locale('en');
 
 //globalizeLocalizer();
 
-
-const theme = getTheme();
-
-console.log(theme);
-
-/*
-loadTheme({
-  semanticColors: {
-    inputBackground: '#eee',
-    inputBorder: '#eee'
-  }
-});
-*/
-
-registerIcons({
-  icons: {
-    'calendar': <i className="material-icons" style={{ fontSize: '100%' }}>calendar_today</i>,
-    //'up': <i className="fa fa-arrow-up"/>,
-    //'down': <i className="fa fa-arrow-down"/>,
-    'up': <i className="material-icons" style={{ fontSize: '100%' }}>arrow_upward</i>,
-    'down': <i className="material-icons" style={{ fontSize: '100%' }}>arrow_downward</i>,
-    'chevrondown': <i className="material-icons" style={{ fontSize: '1.8rem' }}>keyboard_arrow_down</i>,
-    'chevronup': <i className="material-icons" style={{ fontSize: '100%' }}>keyboard_arrow_up</i>,
-    'chevronleft': <i className="material-icons" style={{ fontSize: '100%' }}>keyboard_arrow_left</i>,
-    'chevronright': <i className="material-icons" style={{ fontSize: '100%' }}>keyboard_arrow_right</i>,
-
-    'checkmark': <i className="material-icons" style={{ fontSize: '120%', marginTop: '3px' }}>check</i>,
-    //'down': <i className="material-icons md-14" style={{ fontSize: 18 }}>arrow_downward</i>,
-  }
-});
 
 const
   columnDefs = [
@@ -75,9 +34,6 @@ const
       {make: 'Ford', model: 'Mondeo', price: 32000},
       {make: 'Porsche', model: 'Boxter', price: 72000}
   ];
-
-
-//initializeIcons();
 
 export default defineComponent({
   displayName: 'DataTable',

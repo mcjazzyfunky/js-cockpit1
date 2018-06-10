@@ -1,21 +1,35 @@
 import React from 'react';
 import { defineComponent, isNodeOfType } from 'js-widgets';
 import { Seq } from 'js-seq';
-import { classNamesFunction, customizable } from 'office-ui-fabric-react';
-
-const getClassNames = classNamesFunction();
+import Css from '../styling/Css';
+import classNames from 'classnames';
 
 function getStyles({ theme }) {
-  const themePrimary = theme.palette.themePrimary;
+  const
+    { palette } = theme,
+    padding = '0.75rem 1rem';
 
   return {
-    x: {
-      border: `1px solid ${themePrimary}`
+    container: {
+      backgroundColor: palette.white,
+      border: `1px solid ${palette.neutralTertiary}`
+    },
+
+    header: {
+      padding,
+    },
+
+    body: {
+      padding,
+    },
+
+    footer: {
+      padding,
     }
   };
 }
 
-const CardBase = defineComponent({
+const Card = defineComponent({
   displayName: 'Card',
 
   properties: {
@@ -29,17 +43,10 @@ const CardBase = defineComponent({
       constraint: it => isNodeOfType([Card.Header, Card.Body, Card.Footer], it),
       nullable: true,
       defaultValue: null
-    },
-
-    theme: {
     }
   },
 
-  main(props) {
-    const { children, theme } = props;
-    console.log('>>>>>>>>>>>>', theme)
-    const classes = getClassNames(getStyles, { theme });
-
+  main({ children, className }) {
     const
       header = [],
       body = [],
@@ -64,29 +71,25 @@ const CardBase = defineComponent({
     });
 
     return (
-        <div className={classes.x}>
-          <div>
-            {header}
+      <Css getStyles={getStyles}>
+        {classes =>
+          <div className={classNames(classes.container, className)}>
+            <div className={classes.header}>
+              {header}
+            </div>
+            <hr/>
+            <div className={classes.body}>
+              {body}
+            </div>
+            <div className={classes.footer}>
+              {footer} 
+            </div>
           </div>
-          <div>
-            {body}
-          </div>
-          <div>
-            {footer} 
-          </div>
-        </div>
+        }
+      </Css>
     );
   }
 });
-
-CardBase.propTypes.x = props => {
-  console.log('!!!!!!!!!', props)
-}
-
-const Card = customizable('Card', ['theme'])(CardBase);
-console.log(11111, Object.entries(CardBase))
-console.log(22222, Object.entries(Card))
-Card.propTypes = null;
 
 Card.Header = defineComponent({
   displayName: 'Card.Header',
@@ -113,3 +116,5 @@ Card.Footer = defineComponent({
 });
 
 export default Card;
+
+
