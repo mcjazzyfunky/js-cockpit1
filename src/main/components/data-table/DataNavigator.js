@@ -13,11 +13,18 @@ function getStyles({ theme }) {
   return {
     paginationBar: {
       backgroundColor: '#eee',
-      padding: '0.4rem 0.75rem'
+      padding: '0.4rem 0.75rem',
+      boxSizing: 'border-box',
     },
 
     pageSizeSelector: {
       padding: '0 3rem'
+    },
+
+    body: {
+      overflow: 'auto',
+      boxSizing: 'border-box',
+      maxWidth: '100%'
     }
   };
 }
@@ -37,8 +44,10 @@ export default defineComponent({
           {
             classes => {
               return (
-                <VBox height="100%">
-                  <VBox.Cell flex={1}>
+                <VBox>
+                  <VBox.Cell flex={0}>
+                  </VBox.Cell>
+                  <VBox.Cell flex={1} className={classes.body}>
                     <DataTable />
                   </VBox.Cell>
                   <VBox.Cell flex={0}>

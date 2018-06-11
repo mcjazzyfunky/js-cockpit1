@@ -1,6 +1,7 @@
 .aw-vbox {
   display: table;
   position: relative;
+  box-sizing: border-box;
 
   &__row {
     display: table-row;

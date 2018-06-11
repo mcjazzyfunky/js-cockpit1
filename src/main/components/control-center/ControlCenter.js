@@ -98,10 +98,15 @@ function getStyles({ theme }) {
     center: {
       display: 'table-cell',
       position: 'relative',
-      height: '100%',
-      padding: '1rem 2rem',
+      width: '100%',
+      maxWidth: '100%',
+      top: 0,
+      right: '0px',
+      left: '0px',
+      bottom: 0,
+      padding: 0,
       verticalAlign: 'top'
-    }
+    },
   };
 }
 
@@ -177,7 +182,7 @@ export default defineComponent({
               {
                 sidebar
                   ? <div className={classes.center}>
-                      <DataNavigator/>
+                     <DataNavigator/>
                     </div>
                   : null
               }

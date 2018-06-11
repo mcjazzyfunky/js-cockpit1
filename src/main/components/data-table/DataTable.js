@@ -35,24 +35,7 @@ export default defineComponent({
   main: class extends React.Component {
     render() {
       return <div style={{ fontSize: 12 }}>
-      <DatePicker showWeekNumbers />
-
-<Dropdown
-          label="Disabled uncontrolled example with defaultSelectedKey:"
-          defaultSelectedKey="D"
-          options={[
-            { key: 'A', text: 'Option a' },
-            { key: 'B', text: 'Option b' },
-            { key: 'C', text: 'Option c' },
-            { key: 'D', text: 'Option d' },
-            { key: 'E', text: 'Option e' },
-            { key: 'F', text: 'Option f' },
-            { key: 'G', text: 'Option g' }
-          ]}
-        />
-
-<Paginator type="default" pageIndex={13} pageSize={25} totalItemCount={1234} />
-
+        DataTable
       </div>;
     }
   }
