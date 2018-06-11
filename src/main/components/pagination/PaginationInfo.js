@@ -4,7 +4,11 @@ import { Spec } from 'js-spec';
 
 import PaginationUtils from './internal/PaginationUtils';
 
-import './PaginationInfo.scss';
+const styles = {
+  paginationInfo: {
+    whiteSpace: 'nowrap'
+  }
+};
 
 export default defineComponent({
   displayName: 'PaginationInfo',
@@ -47,7 +51,7 @@ export default defineComponent({
           ? buildInfoTextAboutPage(facts)
           : buildInfoTextAboutItems(facts);
       
-    return <div className="aw-pagination-info">{infoText}</div>;
+    return <div style={styles.paginationInfo}>{infoText}</div>;
   }
 });
 

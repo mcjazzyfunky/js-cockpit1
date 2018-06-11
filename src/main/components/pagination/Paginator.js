@@ -2,13 +2,97 @@ import React from 'react';
 import { defineComponent } from 'js-widgets';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
-import classNames from 'classnames';
 
-import { ActionButton, IconButton } from 'office-ui-fabric-react';
+import Css from '../styling/Css';
+
+import IconFirstPage from 'svg-react-loader?name=FirstPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_first_page_24px.svg';
+import IconPreviousPage from 'svg-react-loader?name=PreviousPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg';
+import IconNextPage from 'svg-react-loader?name=NextPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_chevron_right_24px.svg';
+import IconLastPage from 'svg-react-loader?name=LastPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_last_page_24px.svg';
+
+import { TextField } from 'office-ui-fabric-react';
 
 import PaginationUtils from './internal/PaginationUtils';
 
-import './Paginator.scss';
+function getStyles({ theme }) {
+  return {
+    paginator: {
+      display: 'table',
+    },
+
+    firstPage: {
+      display: 'table-cell',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    previousPage: {
+      display: 'table-cell',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    nextPage: {
+      display: 'table-cell',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    lastPage: {
+      display: 'table-cell',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    activePage: {
+      display: 'table-cell',
+      backgroundColor: theme.palette.themePrimary,
+      whiteSpace: 'nowrap',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    inactivePage: {
+      display: 'table-cell',
+      whiteSpace: 'nowrap',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+    
+    page: {
+      display: 'table-cell',
+      whiteSpace: 'nowrap',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    ellipsis: {
+      display: 'table-cell',
+      whiteSpace: 'nowrap',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+    },
+
+    pageTextFieldContainer: {
+      display: 'inline-block',
+      margin: '0 0.5rem'
+    },
+
+    pageTextField: {
+      width: '4rem',
+    },
+
+    button: {
+      border: 'none',
+      background: 'none'
+    },
+
+    icon: {
+      transform: 'scale(0.75,0.75) translate(5px, 5px)'
+    }
+  };
+}
+
 
 export default defineComponent({
   displayName: 'Paginator',
@@ -60,34 +144,39 @@ export default defineComponent({
   },
 
   main: (props) => {
-    const { pageIndex, pageSize, totalItemCount, type,
-      className, disabled, onChange } = props;
-
     const paginationFacts = PaginationUtils.preparePaginationFacts(
-      pageIndex, pageSize, totalItemCount);
+      props.pageIndex, props.pageSize, props.totalItemCount);
 
-    let ret = null;
+    return (
+      <Css getStyles={getStyles}>
+        {
+          classes => {
+            let ret = null;
 
-    switch (type) {
-      case 'simple':
-        ret = createSimplePaginator(props, paginationFacts);
-        break;
+            switch (props.type) {
+              case 'simple':
+                ret = createSimplePaginator(props, paginationFacts, classes);
+                break;
 
-      case 'advanced':
-        ret = createAdvancedPaginator(props, paginationFacts);
-        break;
-    
-      default:
-        ret = createDefaultPaginator(props, paginationFacts); 
-    }
-
-    return ret;
+              case 'advanced':
+                ret = createAdvancedPaginator(props, paginationFacts, classes);
+                break;
+            
+              default:
+                ret = createDefaultPaginator(props, paginationFacts, classes);
+            }
+            
+            return ret;
+          }
+        }
+        </Css>
+    );
   }
 });
 
 // --- locals ---------------------------------------------
 
-function createDefaultPaginator(props, facts) {
+function createDefaultPaginator(props, facts, classes) {
   const
     paginationInfo =
       PaginationUtils.determineVisiblePageButtons(
@@ -96,56 +185,78 @@ function createDefaultPaginator(props, facts) {
         7),
 
     onClick = createClickHandler(props.onChange),
-
-    firstPageButton = createPageButton(0, facts, onClick),
     
-    previousPageButton = createPreviousPageButton(facts, onClick),
+    firstPageButton =
+      <div className={classes.firstPage}>
+        {createPageButton(0, facts, classes)}
+      </div>,
     
-    precedingEllipsisLink =
+    previousPage =
+      <div className={classes.previousPage}>
+        {createPreviousPageButton(facts, classes)}
+      </div>,
+    
+    precedingEllipsis =
       paginationInfo.firstButtonIndex === 1
         ? null
-        : createEllipsisButton(
-          Math.max(0, paginationInfo.firstButtonIndex
-            - Math.floor(paginationInfo.maxPageButtonCount / 2)),
-            facts, onClick),
+        : <div className={classes.ellipsis}>
+            {
+              createEllipsisButton(
+                Math.max(0, paginationInfo.firstButtonIndex
+                  - Math.floor(paginationInfo.maxPageButtonCount / 2)),
+                  facts, classes, onClick)
+            }
+          </div>,
             
-    otherPageButtons =
+    otherPages =
       Seq.range(
         paginationInfo.firstButtonIndex ,
         paginationInfo.lastButtonIndex + 1)
-        .map(
-          index => createPageButton(index, facts, onClick)),
+        .map(index =>
+          <div key={index} className={classes.page}>
+            {createPageButton(index, facts, classes)}
+          </div>),
                 
-    succeedingEllipsisLink =
+    succeedingEllipsis =
       paginationInfo.lastButtonIndex === facts.pageCount - 2
         ? null
-        : createEllipsisButton(
-          Math.min(facts.pageCount - 1,
-            paginationInfo.lastButtonIndex
-              + Math.floor(paginationInfo.maxPageButtonCount / 2) - 1),
-            facts, onClick),
+        : <div className={classes.ellipsis}> 
+            {
+              createEllipsisButton(
+                Math.min(facts.pageCount - 1,
+                 paginationInfo.lastButtonIndex
+                   + Math.floor(paginationInfo.maxPageButtonCount / 2) - 1),
+                  facts, classes, onClick)
+            }
+          </div>,
 
-    nextPageButton = createNextPageButton(facts, onClick),
+    lastPageButton =
+      <div className={classes.lastPage}>
+        {createPageButton(facts.pageCount - 1, facts, classes)}
+      </div>,
 
-    lastPageButton = createPageButton(facts.pageCount - 1, facts, onClick);
+    nextPage =
+      <div className={classes.nextPage}> 
+        {createNextPageButton(facts, classes)}
+      </div>;
 
   return (
     <div>{[
-      previousPageButton,
+      previousPage,
       firstPageButton,
-      precedingEllipsisLink,
-      ...otherPageButtons, 
-      succeedingEllipsisLink,
+      precedingEllipsis,
+      otherPages, 
+      succeedingEllipsis,
       lastPageButton,
-      nextPageButton
+      nextPage
     ]}</div>
   );
 }
 
-function createSimplePaginator(props, facts) {
+function createSimplePaginator(props, facts, classes) {
   const
-    previousPageButton = createPreviousPageButton(props, facts),
-    nextPageButton = createNextPageButton(props, facts),
+    previousPageButton = createPreviousPageButton(props, facts, classes),
+    nextPageButton = createNextPageButton(facts, classes),
     paginationInfo =
       facts.totalPageCount !== null
         ? (facts.pageIndex + 1) + ' / ' + facts.pageCount
@@ -162,26 +273,32 @@ function createSimplePaginator(props, facts) {
   );
 }
 
-function createAdvancedPaginator(props, facts) {
+function createAdvancedPaginator(props, facts, classes) {
   const
-    firstPageButton = createFirstPageButton(props, facts),
-    previousPageButton = createPreviousPageButton(props, facts),
-    nextPageButton = createNextPageButton(props, facts),
-    lastPageButton = createLastPageButton(props, facts);
+    firstPageButton = createFirstPageButton(facts, classes),
+    previousPageButton = createPreviousPageButton(facts, classes),
+    nextPageButton = createNextPageButton(facts, classes),
+    lastPageButton = createLastPageButton(facts, classes);
 
   return (
-    <div style={{ whiteSpace: 'nowrap' }}>
-      {firstPageButton }
-      {previousPageButton }
-      <div style={{ display: 'inline-block', margin: '0 10px' }}>
-      {
-      /*
-      Page <Input size="default" className="aw-paginator__input-page" style={{ width: '60px', margin: '2px'}}/> of {facts.pageCount}
-      */
-      }
+    <div className={classes.paginator}>
+      <div className={classes.firstPage}>
+        {firstPageButton}
       </div>
-      {nextPageButton}
-      {lastPageButton}
+      {previousPageButton}
+      <div className={classes.page}>
+        Page
+        <div className={classes.pageTextFieldContainer}>
+          <TextField className={classes.pageTextField}/>
+        </div>
+        of {facts.pageCount}
+      </div>
+      <div className={classes.nextPage}>
+        {nextPageButton}
+      </div>
+      <div className={classes.lastPage}>
+        {lastPageButton}
+      </div>
     </div>
   );
 }
@@ -191,58 +308,64 @@ function createClickHandler() {
   return () => {};
 }
 
-function createPageButton(pageIndex, facts, onClick) {
+function createPageButton(pageIndex, facts, classes) {
   const
     isActivePage = pageIndex === facts.pageIndex,
 
     ret =
       isActivePage
-        ? <ActionButton disabled>
-            <div style={{ color: 'white', backgroundColor: 'rgb(0, 120, 212)', padding: '3px 6px' }}>
-              {pageIndex + 1}
-            </div>
-          </ActionButton>
-        : <ActionButton>{pageIndex + 1}</ActionButton>;
+        ? <div style={{ color: 'white', backgroundColor: 'rgb(0, 120, 212)', padding: '3px 6px' }}>
+            {pageIndex + 1}
+          </div>
+        : <button className={classes.button}>{pageIndex + 1}</button>;
   
   return ret;
 }
 
-function createFirstPageButton() {
+function createFirstPageButton(facts, classes) {
   return (
-    <button shape="circle" size="small" className="aw-paginator__button-first" style={{border: 'none' }}>
-      <i type="double-left"/>
+    <button className={classes.button}>
+      <div className={classes.icon}>
+        <IconFirstPage/>
+      </div>
     </button>
   );
 }
 
-function createPreviousPageButton() {
+function createPreviousPageButton(facts, classes) {
   return (
-      <IconButton
-        iconProps={{ iconName: 'ChevronLeft' }}
-      />
+    <button className={classes.button}>
+      <div className={classes.icon}>
+        <IconPreviousPage/>
+      </div>
+    </button>
   );
 }
 
-function createEllipsisButton() {
+function createEllipsisButton(pageIndex, facts, classes) {
   return (
-    <ActionButton>
+    <button className={classes.button}>
       &hellip;
-    </ActionButton>
+    </button>
   );
 }
 
-function createNextPageButton() {
+function createNextPageButton(facts, classes) {
   return (
-      <IconButton
-        iconProps={{ iconName: 'ChevronRight' }}
-      />
+    <button className={classes.button}>
+      <div className={classes.icon}>
+        <IconNextPage/>
+      </div>
+    </button>
   );
 }
 
-function createLastPageButton() {
+function createLastPageButton(facts, classes) {
   return (
-     <button shape="circle" size="small" className="aw-paginator__button-last" style={{border: 'none'}}>
-       <icon type="double-right"/>
-     </button>
+    <button className={classes.button}>
+      <div className={classes.icon}>
+        <IconLastPage/>
+      </div>
+    </button>
   );
 }

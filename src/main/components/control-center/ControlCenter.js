@@ -97,6 +97,8 @@ function getStyles({ theme }) {
 
     center: {
       display: 'table-cell',
+      position: 'relative',
+      height: '100%',
       padding: '1rem 2rem',
       verticalAlign: 'top'
     }

@@ -1,40 +1,47 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-//import { Select } from 'antd';
+import { Dropdown, DropdownMenuItemType } from 'office-ui-fabric-react';
+
+
+const styles = {
+  pageSizeSelector: {
+    display: 'table',
+    whiteSpace: 'nowrap',
+  },
+
+  cell: {
+    display: 'table-cell',
+    whiteSpace: 'nowrap',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+  }
+};
 
 export default defineComponent({
   displayName: 'PageSizeSelector',
 
   main: ({  }) => {
     return (
-      <div style={{ display: 'inline-block' }}>
-        <label>
-          Items/Page: &nbsp;
-{
-/*
-          <Select value={100}>
-            <Select.Option key="10">
-              10
-            </Select.Option>
-            <Select.Option key="25">
-              25
-            </Select.Option>
-            <Select.Option key="50">
-              50
-            </Select.Option>
-            <Select.Option key="100">
-              100
-            </Select.Option>
-            <Select.Option key="250">
-              250
-            </Select.Option>
-            <Select.Option key="500">
-              500
-            </Select.Option>
-          </Select>
-*/
-}
-         </label>
+      <div style={styles.pageSizeSelector}>
+        <div style={styles.cell}>
+          <label>
+            Items/Page: &nbsp;
+          </label>
+        </div>
+        <div style={styles.cell}>
+          <Dropdown
+            selectedKeys={[50]}
+
+            options={[
+              { key: 10, text: '10' },
+              { key: 25, text: '25' },
+              { key: 50, text: '50' },
+              { key: 100, text: '100' },
+              { key: 250, text: '250' },
+              { key: 500, text: '500' },
+            ]}
+          />
+        </div>
       </div>
     );
   }

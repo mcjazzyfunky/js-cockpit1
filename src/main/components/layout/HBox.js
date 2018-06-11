@@ -63,7 +63,7 @@ const HBox = defineComponent({
 
               return (
                 <div
-                  className={'aw-hbox__cell ' + className }
+                  className={classNames('aw-hbox__cell', className) }
                   key={key}
                   style={{ textAlign, verticalAlign, width, height }}
                 >
