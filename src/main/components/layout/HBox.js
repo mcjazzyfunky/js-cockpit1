@@ -30,6 +30,18 @@ const HBox = defineComponent({
 
       nullable: true,
       defaultValue: null
+    },
+
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
     }
   },
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
+import { Spec } from 'js-spec';
+
 import HBox from '../layout/HBox';
-import VBox from '../layout/VBox';
 import Paginator from '../pagination/Paginator';
 import PageSizeSelector from '../pagination/PageSizeSelector';
 import PaginationInfo from '../pagination/PaginationInfo';
@@ -71,7 +72,29 @@ export default defineComponent({
                       <div style={{ fontSize: '18px', margin: '10px' }}>Customers</div>
                     </div>
                     <div className={classes.body}>
-                      <DataTable/>
+                      <DataTable
+                        columns={[
+                          {
+                            type: 'column',
+                            title: 'Make',
+                            field: 'make'
+                          },
+                          {
+                            type: 'column',
+                            title: 'Model',
+                            field: 'model',
+                          },
+                          {
+                            type: 'column',
+                            title: 'Price',
+                            field: 'price',
+                            align: 'end'
+                          }
+                        ]}
+
+                        selectionMode="multi"
+                        onSelectionChanged={ (...args) => console.log(...args) }
+                      />
                     </div>
                     <div className={classes.footer}>
                       {createPaginationBar(pageIndex, pageSize, totalItemCount, classes)}
@@ -105,6 +128,7 @@ function createPaginationBar(pageIndex, pageSize, totalItemCount, classes) {
       </HBox.Cell>
       <HBox.Cell flex={0} align="right" valign="middle">
         <PaginationInfo
+          type="info-about-items"
           pageIndex={pageIndex}
           pageSize={pageSize}
           totalItemCount={totalItemCount}

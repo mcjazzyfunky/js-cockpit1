@@ -24,7 +24,7 @@ const styles = {
     padding: '0.25rem 1rem 0.25rem 1rem',
     borderWidth: '0 0 0 1px',
     borderColor: 'inherit',
-    borderStyle: 'solid'
+    borderStyle: 'dotted'
   }
 };
 
