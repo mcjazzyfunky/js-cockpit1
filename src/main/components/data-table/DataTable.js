@@ -56,12 +56,20 @@ export default defineComponent({
   displayName: 'DataTable',
 
   main: class extends React.Component {
-    render() {
-      return <div className="ag-theme-balham" style={{ height: '100%', padding: '0 0 1.5rem 0', boxSizing: 'border-box' }}>
-      DataTable
+    constructor(props) {
+      super(props);
+      this.gridRef = null;
+    }
 
-                    <AgGridReact
-                        domLayout="autoSize"
+    componentDidMount() {
+      this.gridRef.api.sizeColumnsToFit();
+    }
+
+    render() {
+      return <div className="ag-theme-balham" style={{ height: '100%', padding: '0 0 0.5rem 0', boxSizing: 'border-box' }}>
+
+                    <AgGridReact ref={ ref => this.gridRef = ref}
+                        sizeColumnsToFit={true}
                         columnDefs={columnDefs}
                         rowData={rowData}>
                     </AgGridReact>

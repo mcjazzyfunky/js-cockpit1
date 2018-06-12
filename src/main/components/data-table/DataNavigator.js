@@ -68,7 +68,7 @@ export default defineComponent({
                 <div className={this.props.className} style={{ boxSizing: 'border-box', height: '100%', ...this.props.style}}>
                   <div className={classes.dataNavigator}>
                     <div className={classes.header}>
-                      Header
+                      <div style={{ fontSize: '18px', margin: '10px' }}>Customers</div>
                     </div>
                     <div className={classes.body}>
                       <DataTable/>

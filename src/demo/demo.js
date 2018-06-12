@@ -68,7 +68,7 @@ ReactDOM.render(
       </ControlCenter.West>
       <ControlCenter.Center>
         <DataNavigator
-          style={{ padding: '0.15rem 0.25rem' }}
+          style={{ padding: '0.5rem 0.75rem' }}
         />
       </ControlCenter.Center>
     </ControlCenter>
