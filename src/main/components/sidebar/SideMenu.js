@@ -95,13 +95,14 @@ const
   menuSpec =
     Spec.and(
       Spec.prop('type',
-        Spec.oneOf('item', 'itemGroups', 'categories', 'categoryGroups')),
+        Spec.oneOf('items', /*'itemGroups', 'categories', 'categoryGroups'*/)),
 
       Spec.or(
         {
           when: it => it.type === 'items',
           check: specItems
         },
+        /*
         {
           when: it => it.type === 'itemGroups',
           check: specItemGroups
@@ -114,6 +115,7 @@ const
           when: it => it.type === 'categoryGroups',
           check: specCategoryGroups
         }
+        */
     ));
 
 export default defineComponent({
@@ -138,7 +140,7 @@ export default defineComponent({
 
   main: class extends React.Component {
     render() {
-      const { title: mainMenuTitle, menu: mainMenu } = this.props;
+      const { title: mainMenuTitle, menu } = this.props;
 
       return (
         <div className="aw-side-menu">
@@ -148,8 +150,8 @@ export default defineComponent({
           </div>
           <div className="aw-side-menu__list-container">
             {
-              Seq.from(mainMenu).map(item => 
-                <div className="aw-side-menu__main-category">
+              Seq.from(menu.items).map((item, idx) => 
+                <div key={idx} className="aw-side-menu__main-category">
                   <div>
                       {item.title}
                   </div>

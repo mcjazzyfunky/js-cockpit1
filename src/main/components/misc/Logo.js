@@ -11,7 +11,7 @@ function getStyles() {
     },
 
     icon: {
-      fontSize: '1.5rem'
+      fontSize: '1rem'
     },
 
     vendor: {
@@ -21,7 +21,7 @@ function getStyles() {
     },
 
     title: {
-      fontSize: '1rem',
+      fontSize: '1.0625rem',
       padding: 0,
       lineHeight: '0.9rem'
     },
@@ -34,7 +34,8 @@ function getStyles() {
       display: 'table-cell',
       textAlign: 'center',
       verticalAlign: 'middle',
-      padding: '0 0.5rem 0 0'
+      padding: '0.25rem 0.5rem 0 0',
+      overflow: 'hidden'
     },
 
     cellRight: {
@@ -45,7 +46,6 @@ function getStyles() {
     }
   };
 }
-
 
 export default defineComponent({
   displayName: 'Logo',
@@ -68,9 +68,21 @@ export default defineComponent({
       nullable: true,
       defaultValue: null
     },
+
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    }
   },
 
-  main: ({ icon, vendor, title }) => {
+  main: ({ icon, vendor, title, className, style }) => {
     return (
       <Css getStyles={getStyles}>
         {
@@ -110,14 +122,16 @@ export default defineComponent({
                 </div>;
             }
 
-            return ( 
-              <div className={classes.container}>
-                <div className={classes.cells}>
-                  <div className={classes.cellLeft}>
-                    {leftContent}
-                  </div>
-                  <div className={classes.cellRight}>
-                    {rightContent}
+            return (
+              <div className={className} style={style}>
+                <div className={classes.container}>
+                  <div className={classes.cells}>
+                    <div className={classes.cellLeft}>
+                      {leftContent}
+                    </div>
+                    <div className={classes.cellRight}>
+                      {rightContent}
+                    </div>
                   </div>
                 </div>
               </div>

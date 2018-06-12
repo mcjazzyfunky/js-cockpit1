@@ -1,116 +1,80 @@
 import React from 'react';
-import { defineComponent, isNode } from 'js-widgets';
+import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
+import { Seq } from 'js-seq';
 import { Spec } from 'js-spec';
 import Color from 'color';
 
 import Css from '../styling/Css';
-import DataNavigator from '../data-table/DataNavigator';
 
 function getStyles({ theme }) {
-  console.log(theme);
+  const lighterPrimaryColor =
+    Color(theme.palette.themePrimary).lighten(0.1).string();
 
   return {
     controlCenter: {
       position: 'absolute',
-      display: 'table',
       width: '100%',
       height: '100%',
-      top: '0',
-      bottom: '0',
-      padding: '0',
-      margin: '0'
+      display: 'grid',
+      gridTemplateColumns: '0fr 1fr 0fr',
+      gridTemplateRows: '0fr 1fr 0fr',
+
+      gridTemplateAreas: `
+        'north-west north north-east'
+        'west center center'
+      `,
     },
 
-    header: {
-      display: 'table-row',
-      padding: 0,
-      height: '2.75rem',
-      overflow: 'hidden'
-    },
-
-    brand: {
-      display: 'table-cell',
-      color: 'white',
-      background: theme.palette.themePrimary,
+    northWest: {
+      gridArea: 'north-west',
+      backgroundColor: 'purple',
       whiteSpace: 'nowrap',
-      textAlign: 'left',
-      verticalAlign: 'middle',
-      padding: '0 1rem 0 1rem',
-    },
-
-    toolbar: {
-      display: 'table-cell',
-      padding: 0,
-      height: '2.75rem',
-      width: '100%',
-      overflow: 'hidden',
       color: 'white',
-      background: Color(theme.palette.themePrimary).lighten(0.1).string(),
-      textAlign: 'right',
-      verticalAlign: 'middle',
+      fill: 'white',
+      background: theme.palette.themePrimary,
+      display: 'flex',
+      justifyItems: 'center',
+      alignItems: 'center',
     },
 
-    user: {
-      display: 'table',
-      padding: 0,
-      float: 'right'
-    },
-
-    userAvatar: {
-      display: 'table-cell',
-      padding: '2px 5px',
-      verticalAlign: 'middle',
-      fontSize: '1.25rem'
-    },
-
-    userName: {
-      display: 'table-cell',
-      fontSize: '1rem',
-      padding: '0 1rem 0 0.5rem',
-      verticalAlign: 'middle'
-    },
-
-    logout: {
-      display: 'table-cell',
+    north: {
+      gridArea: 'north',
+      backgroundColor: 'green',
+      whiteSpace: 'nowrap',
       color: 'white',
-      height: '2.75rem',
-      padding: '0 1rem',
-      background: 'none',
-      fontSize: '1.25rem',
-      verticalAlign: 'middle',
-      borderStyle: 'solid',
-      borderWidth: '0 0 0 1px',
+      fill: 'white',
+      background: lighterPrimaryColor,
+      display: 'flex',
+      justifyItems: 'center',
+      alignItems: 'center',
     },
 
-    content: {
-      display: 'table-row',
-      width: '100%',
-      height: '100%',
-      border: '2px solid white'
+    northEast: {
+      gridArea: 'north-east',
+      backgroundColor: 'yellow',
+      whiteSpace: 'nowrap',
+      color: 'white',
+      fill: 'white',
+      background: lighterPrimaryColor,
+      display: 'flex',
+      justifyItems: 'center',
+      alignItems: 'center',
     },
 
-    sidebar: {
-      display: 'table-cell',
-      position: 'relative',
-      verticalAlign: 'top'
+    west: {
+      gridArea: 'west',
+      whiteSpace: 'nowrap',
+      display: 'flex',
     },
 
     center: {
-      display: 'table-cell',
-      position: 'relative',
-      width: '100%',
-      maxWidth: '100%',
-      top: 0,
-      right: '0px',
-      left: '0px',
-      bottom: 0,
-      padding: 0,
-      verticalAlign: 'top'
-    },
+      gridArea: 'center',
+      display: 'flex',
+    }
   };
 }
 
-export default defineComponent({
+const ControlCenter = defineComponent({
   displayName: 'ControlCenter',
 
   properties: {
@@ -120,78 +84,219 @@ export default defineComponent({
       defaultValue: null
     },
 
-    brand: {
-      constraint: isNode,
-      nullable: true,
-      defaultValue: null
-    },
+    children: {
+      constraint: Spec.lazy(() => isNodeOfType([
+        ControlCenter.NorthWest,
+        ControlCenter.North,
+        ControlCenter.West,
+        ControlCenter.center
+      ])),
 
-    user: {
-      constraint:
-        Spec.shape({
-          name: Spec.string
-        }),
-
-      nullable: true,
-      defaultValue: null
-    },
-
-    sidebar: {
-      constraint: isNode,
-      nullable: true,
-      defaultValue: null
-    },
-
-    onLogout: {
-      type: Function,
       nullable: true,
       defaultValue: null
     }
   },
 
-  main: ({ brand, user, sidebar, onLogout}) => {
+  main: ({ children }) => {
     return (
       <Css getStyles={getStyles}>
-        {classes => 
-          <div className={classes.controlCenter}>
-            <div className={classes.header}>
-              <div className={classes.brand}>{brand}</div>
-              <div className={classes.toolbar}>
-                {
-                  !user
-                    ? null
-                    : <div className={classes.user}>
-                        <div className={classes.userAvatar}>
-                          <i className="icon ion-md-person"/>
-                        </div>
-                        <div className={classes.userName}>
-                          Jane Doe
-                        </div>
-                        <div className={classes.logout}>
-                          <i className="icon ion-md-power"></i>
-                        </div>
-                      </div>
-                }
+        {
+          classes => {
+            let
+              northWest = null,
+              north = null,
+              northEast = null,
+              west = null,
+              center = null;
+
+            Seq.adjust(children).forEach(({ type, props }) => {
+              const content =
+                <div className={props.className} style={props.style}>
+                  {props.children}
+                </div>;
+
+              if (type === ControlCenter.NorthWest) {
+                northWest = content;
+              } else if (type === ControlCenter.North) {
+                north = content;
+              } else if (type === ControlCenter.NorthEast) {
+                northEast = content;
+              } else if (type === ControlCenter.West) {
+                west = content; 
+              } else if (type === ControlCenter.Center) {
+                center = content;
+              }
+            });
+
+            return (
+              <div className={classes.controlCenter}>
+                <div className={classes.northWest}>
+                  {northWest}
+                </div>
+                <div className={classes.north}>
+                  {north}
+                </div>
+                <div className={classes.northEast}>
+                  {northEast}
+                </div>
+                <div className={classes.west}>
+                  {west} 
+                </div>
+                <div className={classes.center}>
+                  {center}
+                </div>
               </div>
-            </div>
-            <div className={classes.content}>
-              { sidebar
-                  ? <div className={classes.sidebar}>{sidebar}</div>
-                  : null
-              }
-              {
-                sidebar
-                  ? <div className={classes.center}>
-                     <DataNavigator/>
-                    </div>
-                  : null
-              }
-            </div>
-          </div>
+            );
+          }
         }
       </Css>
     );
   }
 });
 
-// --- locals -------------------------------------------------------
+ControlCenter.NorthWest = defineComponent({
+  displayName: 'ControlCenter.NorthWest',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.NorthWest can only be '
+      + 'used as children of ControllCentral');
+  }
+});
+
+ControlCenter.North = defineComponent({
+  displayName: 'ControlCenter.North',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.North can only be '
+      + 'used as children of ControllCentral');
+  }
+});
+
+ControlCenter.NorthEast = defineComponent({
+  displayName: 'ControlCenter.NorthEast',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.NorthWest can only be '
+      + 'used as children of ControllCentral');
+  }
+});
+
+ControlCenter.West = defineComponent({
+  displayName: 'ControlCenter.West',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.West can only be '
+      + 'used as children of ControllCentral');
+  }
+});
+
+ControlCenter.Center = defineComponent({
+  displayName: 'ControlCenter.Center',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    styles: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.Center can only be '
+      + 'used as children of ControllCentral');
+  }
+});
+
+export default ControlCenter;
