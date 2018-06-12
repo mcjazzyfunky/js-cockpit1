@@ -1,0 +1,1 @@
+export { default } from 'svg-react-loader?name=Icon!../../../../node_modules/material-design-icons/content/svg/production/ic_add_24px.svg';

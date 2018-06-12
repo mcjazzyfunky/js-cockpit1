@@ -69,6 +69,24 @@ ReactDOM.render(
       <ControlCenter.Center>
         <DataNavigator
           style={{ padding: '0.5rem 0.75rem' }}
+
+          commands={[
+            {
+              text: 'Add customer',
+              type: 'general',
+              icon: 'add',
+            },
+            {
+              text: 'Delete',
+              type: 'general',
+              icon: 'remove',
+            },
+            {
+              text: 'Download',
+              type: 'general',
+              icon: 'download',
+            }
+          ]}
         />
       </ControlCenter.Center>
     </ControlCenter>

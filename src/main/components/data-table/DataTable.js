@@ -39,37 +39,6 @@ const
               })
           })));
 
-const
-  rowData = [
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-      {make: 'Toyota', model: 'Celica', price: 35000},
-      {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000},
-  ];
-
 export default defineComponent({
   displayName: 'DataTable',
 
@@ -77,6 +46,12 @@ export default defineComponent({
     columns: {
       type: Array,
       constraint: columnsSpec
+    },
+
+    data: {
+      type: Array,
+      nullable: true,
+      defaultValue: null
     },
 
     selectionMode: {
@@ -117,6 +92,8 @@ export default defineComponent({
     render() {
       const
         columnDefs = convertColumnsConfig(this.props.columns),
+
+        rowData = this.props.data,
 
         rowSelection =
           { single: 'single', 'multi': 'multiple'}[this.props.selectionMode]
@@ -184,7 +161,7 @@ function convertColumnConfig(config) {
     ret.cellRendererFramework = (params) => {
       const
         field = params.colDef.field || null,
-        data = params.data,
+        data = params.data | [],
         value = params.value;
 
       return config.renderer({ value, data, field });
