@@ -64,12 +64,19 @@ function getStyles({ theme }) {
     west: {
       gridArea: 'west',
       whiteSpace: 'nowrap',
-      display: 'flex',
+      minWidth: '12rem',
+      display: 'grid',
+      width: '100%',
+      height: '100%',
     },
 
     center: {
       gridArea: 'center',
       display: 'flex',
+      width: '100%',
+      height: '100%',
+      overflow: 'auto',
+      boxSizing: 'border-box',
     }
   };
 }

@@ -38,7 +38,7 @@ ReactDOM.render(
       <ControlCenter.NorthEast>
         <UserCtrl username="Jane Doe"/>
       </ControlCenter.NorthEast>
-      <ControlCenter.West>
+      <ControlCenter.West style={{ borderWidth: '0 1px 0 0', borderStyle: 'solid', borderColor: '#d8d8d8'}}>
         <SideMenu
           title={'Modules'}
 
@@ -67,6 +67,9 @@ ReactDOM.render(
         />
       </ControlCenter.West>
       <ControlCenter.Center>
+        <DataNavigator
+          style={{ padding: '0.75rem 1rem' }}
+        />
       </ControlCenter.Center>
     </ControlCenter>
   </Fabric>,

@@ -1,10 +1,9 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-
 import { Seq } from 'js-seq';
 import { Spec } from 'js-spec';
 
-import './SideMenu.scss';
+import { Nav } from 'office-ui-fabric-react';
 
 const
   specItem =
@@ -95,7 +94,7 @@ const
   menuSpec =
     Spec.and(
       Spec.prop('type',
-        Spec.oneOf('items', /*'itemGroups', 'categories', 'categoryGroups'*/)),
+        Spec.oneOf('items', 'itemGroups', /* 'categories', 'categoryGroups'*/)),
 
       Spec.or(
         {
@@ -144,26 +143,65 @@ export default defineComponent({
 
       return (
         <div className="aw-side-menu">
+          {
+          /*
           <div className="aw-side-menu__category-selector">
             <div className="aw-side-menu__category-back-icon"></div>
             <div className="aw-side-menu__category-title">{mainMenuTitle}</div>
           </div>
-          <div className="aw-side-menu__list-container">
-            {
-              Seq.from(menu.items).map((item, idx) => 
-                <div key={idx} className="aw-side-menu__main-category">
-                  <div>
-                      {item.title}
-                  </div>
-                  <div className="aw-side-menu__main-category-arrow">
-                    <i type="right"/>
-                  </div>
-                </div>
-              )
-            }
+          */
+          }
+          <div>
+            <Nav {...buildNavConfigByItems()}/>
           </div>
         </div>
       );
     }
   }
 });
+
+// --- locals -------------------------------------------------------
+
+function buildNavConfigByItems(items) {
+  const ret = {
+    selectedKey: 'users',
+    groups: [
+      {
+        links: [
+          {
+            name: 'User management',
+
+            links: [
+              {
+                name: 'Users',
+                key: 'users'
+              },
+              {
+                name: 'User groups',
+                key: 'userGroups'
+              }
+            ],
+            isExpanded: true
+          },
+          {
+            name: 'CMS',
+
+            links: [
+              {
+                name: 'Pages',
+                key: 'pages'
+              },
+              {
+                name: 'Page tree',
+                key: 'pageTree'
+              }
+            ],
+            isExpanded: true
+          },
+        ]
+      }
+    ]
+  };
+
+  return ret;
+}

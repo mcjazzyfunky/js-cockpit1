@@ -30,7 +30,7 @@ export default defineComponent({
         </div>
         <div style={styles.cell}>
           <Dropdown
-            selectedKeys={[50]}
+            selectedKey={[50]}
 
             options={[
               { key: 10, text: '10' },

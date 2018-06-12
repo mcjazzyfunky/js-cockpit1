@@ -11,6 +11,14 @@ import Css from '../styling/Css';
 
 function getStyles({ theme }) {
   return {
+    dataNavigator: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      height: '100%',
+      boxSizing: 'border-box',
+    },
+
     paginationBar: {
       backgroundColor: '#eee',
       padding: '0.4rem 0.75rem',
@@ -22,15 +30,27 @@ function getStyles({ theme }) {
     },
 
     body: {
-      overflow: 'auto',
-      boxSizing: 'border-box',
-      maxWidth: '100%'
+      flexGrow: 1
     }
   };
 }
 
 export default defineComponent({
   displayName: 'DataNavigator',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    }
+  },
 
   main: class extends React.Component {
     render() {
@@ -44,16 +64,19 @@ export default defineComponent({
           {
             classes => {
               return (
-                <VBox>
-                  <VBox.Cell flex={0}>
-                  </VBox.Cell>
-                  <VBox.Cell flex={1} className={classes.body}>
-                    <DataTable />
-                  </VBox.Cell>
-                  <VBox.Cell flex={0}>
-                    {createPaginationBar(pageIndex, pageSize, totalItemCount, classes)}
-                  </VBox.Cell>
-                </VBox>
+                <div className={this.props.className} style={{ boxSizing: 'border-box', height: '100%', ...this.props.style}}>
+                  <div className={classes.dataNavigator}>
+                    <div className={classes.header}>
+                      Header
+                    </div>
+                    <div className={classes.body}>
+                      Body
+                    </div>
+                    <div className={classes.footer}>
+                      {createPaginationBar(pageIndex, pageSize, totalItemCount, classes)}
+                    </div>
+                  </div>
+                </div>
               );
             }
           }
