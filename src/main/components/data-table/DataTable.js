@@ -1,19 +1,18 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { CommandBar, DefaultButton, IconButton, ActionButton } from 'office-ui-fabric-react';
-
-
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
-import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
-import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-
-import Paginator from '../pagination/Paginator';
 
 import { AgGridReact } from 'ag-grid-react';
 
 
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham.css';
+
+/*
+import 'ag-grid/dist/styles/ag-theme-material.css';
+import 'ag-grid/dist/styles/ag-theme-fresh.css';
+import 'ag-grid/dist/styles/ag-theme-bootstrap.css';
+import 'ag-grid/dist/styles/ag-theme-blue.css';
+*/
 
 const
   columnDefs = [
@@ -26,7 +25,31 @@ const
   rowData = [
       {make: 'Toyota', model: 'Celica', price: 35000},
       {make: 'Ford', model: 'Mondeo', price: 32000},
-      {make: 'Porsche', model: 'Boxter', price: 72000}
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
+      {make: 'Toyota', model: 'Celica', price: 35000},
+      {make: 'Ford', model: 'Mondeo', price: 32000},
+      {make: 'Porsche', model: 'Boxter', price: 72000},
   ];
 
 export default defineComponent({
@@ -34,8 +57,14 @@ export default defineComponent({
 
   main: class extends React.Component {
     render() {
-      return <div style={{ fontSize: 12 }}>
-        DataTable
+      return <div className="ag-theme-balham" style={{ height: '100%', padding: '0 0 1.5rem 0', boxSizing: 'border-box' }}>
+      DataTable
+
+                    <AgGridReact
+                        domLayout="autoSize"
+                        columnDefs={columnDefs}
+                        rowData={rowData}>
+                    </AgGridReact>
       </div>;
     }
   }

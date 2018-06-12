@@ -9,7 +9,8 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
     justifyItems: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontSize: '1rem',
   },
 
   avatar: {

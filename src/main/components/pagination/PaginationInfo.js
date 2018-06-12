@@ -6,7 +6,8 @@ import PaginationUtils from './internal/PaginationUtils';
 
 const styles = {
   paginationInfo: {
-    whiteSpace: 'nowrap'
+    fontSize: '1rem',
+    whiteSpace: 'nowrap',
   }
 };
 

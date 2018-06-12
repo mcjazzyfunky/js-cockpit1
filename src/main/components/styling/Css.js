@@ -1,6 +1,6 @@
 import { classNamesFunction, customizable } from 'office-ui-fabric-react';
 
-export default customizable('Classes', ['theme'])((
+const CssConsumer = (
     { props, getStyles, theme, children }
   ) => {
   
@@ -18,4 +18,8 @@ export default customizable('Classes', ['theme'])((
     classes = getClassNames(getStyles, mergedProps);
 
   return children(classes);
-});
+};
+
+CssConsumer.displayName = 'CssConsumer';
+
+export default customizable('Classes', ['theme'])(CssConsumer);

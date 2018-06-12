@@ -30,7 +30,8 @@ function getStyles({ theme }) {
     },
 
     body: {
-      flexGrow: 1
+      flexGrow: 1,
+      height: '100%'
     }
   };
 }
@@ -70,7 +71,7 @@ export default defineComponent({
                       Header
                     </div>
                     <div className={classes.body}>
-                      Body
+                      <DataTable/>
                     </div>
                     <div className={classes.footer}>
                       {createPaginationBar(pageIndex, pageSize, totalItemCount, classes)}

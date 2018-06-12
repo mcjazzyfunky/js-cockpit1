@@ -7,8 +7,16 @@ import Color from 'color';
 import Css from '../styling/Css';
 
 function getStyles({ theme }) {
-  const lighterPrimaryColor =
-    Color(theme.palette.themePrimary).lighten(0.1).string();
+  const
+    /*
+    bgColor1 = theme.palette.themePrimary,
+
+    bgColor2 =
+      Color(theme.palette.themePrimary).lighten(0.1).string();
+    */
+
+    bgColor1 = Color(theme.palette.themePrimary).darken(0.05),
+    bgColor2 = Color(theme.palette.themePrimary).darken(0.15);
 
   return {
     controlCenter: {
@@ -31,7 +39,7 @@ function getStyles({ theme }) {
       whiteSpace: 'nowrap',
       color: 'white',
       fill: 'white',
-      background: theme.palette.themePrimary,
+      background: bgColor1,
       display: 'flex',
       justifyItems: 'center',
       alignItems: 'center',
@@ -43,7 +51,7 @@ function getStyles({ theme }) {
       whiteSpace: 'nowrap',
       color: 'white',
       fill: 'white',
-      background: lighterPrimaryColor,
+      background: bgColor2,
       display: 'flex',
       justifyItems: 'center',
       alignItems: 'center',
@@ -55,7 +63,7 @@ function getStyles({ theme }) {
       whiteSpace: 'nowrap',
       color: 'white',
       fill: 'white',
-      background: lighterPrimaryColor,
+      background: bgColor2,
       display: 'flex',
       justifyItems: 'center',
       alignItems: 'center',

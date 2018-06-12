@@ -18,6 +18,7 @@ function getStyles({ theme }) {
   return {
     paginator: {
       display: 'table',
+      fontSize: '1rem',
     },
 
     firstPage: {

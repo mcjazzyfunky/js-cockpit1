@@ -1,11 +1,12 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Dropdown, DropdownMenuItemType } from 'office-ui-fabric-react';
+import { Dropdown, DropdownMenuItemType, DirectionalHint } from 'office-ui-fabric-react';
 
 
 const styles = {
   pageSizeSelector: {
     display: 'table',
+    fontSize: '1rem',
     whiteSpace: 'nowrap',
   },
 
@@ -31,6 +32,10 @@ export default defineComponent({
         <div style={styles.cell}>
           <Dropdown
             selectedKey={[50]}
+
+            calloutProps={{
+              directionalHint: DirectionalHint.topAutoEdge
+            }}
 
             options={[
               { key: 10, text: '10' },
