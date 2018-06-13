@@ -63,7 +63,7 @@ const LoginFormComponent = defineComponent({
               <Card.Header>
                 <Logo
                   vendor="meet+greet"
-                  title="Back Office"
+                  title="Back Office - Login"
                   icon={<Icon className={classes.icon}/>}
                   className={classes.logo}
                 />

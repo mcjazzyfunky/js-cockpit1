@@ -13,8 +13,11 @@ import { Fabric } from 'office-ui-fabric-react';
 
 initSystem();
 
-ReactDOM.render(
-  <Fabric>
+const
+  loginScreen =
+    <LoginScreen/>,
+
+  controlCenter =
     <ControlCenter>
       <ControlCenter.NorthWest
         style={{
@@ -41,6 +44,8 @@ ReactDOM.render(
       <ControlCenter.West style={{ borderWidth: '0 1px 0 0', borderStyle: 'solid', borderColor: '#d8d8d8'}}>
         <SideMenu
           title={'Modules'}
+          activeItemId={2}
+          onSelect={ (ev) => console.log(ev)}
 
           menu={{
             type: 'items',
@@ -60,7 +65,7 @@ ReactDOM.render(
               },
               {
                 title: 'File management',
-                id: 3 
+                id: 4 
               },
             ]
           }}
@@ -100,7 +105,14 @@ ReactDOM.render(
           ]}
         />
       </ControlCenter.Center>
-    </ControlCenter>
+    </ControlCenter>;
+
+const
+  content = controlCenter;
+
+ReactDOM.render(
+  <Fabric>
+    {content}
   </Fabric>,
 
   document.getElementById('main-content'));

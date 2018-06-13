@@ -7,8 +7,8 @@ import Css from '../styling/Css';
 
 function getStyles({ theme }) {
   const
-    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.3),
-    gradientEndColor = Color(theme.palette.themePrimary).darken(0.4).desaturate(0.3);
+    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.1).desaturate(0.3),
+    gradientEndColor = Color(theme.palette.themePrimary).darken(0.3).desaturate(0.3);
 
   return {
     outerContainer: {
@@ -27,9 +27,9 @@ function getStyles({ theme }) {
       verticalAlign: 'middle',
       left: '50%',
       right: '50%',
-      top: '20%',
+      top: '30%',
       bottom: '50%',
-      transform: 'translate(-50%, -20%)'
+      transform: 'translate(-50%, -30%)'
     }
   };
 }
