@@ -1,11 +1,14 @@
 import React from 'react';
 import { defineComponent } from 'js-widgets';
-import { Dropdown, DropdownMenuItemType, DirectionalHint } from 'office-ui-fabric-react';
+import { DefaultButton } from 'office-ui-fabric-react';
 
 
 const styles = {
   pageSizeSelector: {
     display: 'table',
+  },
+
+  pageText: {
     fontSize: '0.875rem',
     whiteSpace: 'nowrap',
   },
@@ -15,37 +18,55 @@ const styles = {
     whiteSpace: 'nowrap',
     textAlign: 'center',
     verticalAlign: 'middle',
-  }
+  },
 };
 
 export default defineComponent({
   displayName: 'PageSizeSelector',
 
-  main: ({  }) => {
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main: ({ className, style }) => {
     return (
-      <div style={styles.pageSizeSelector}>
-        <div style={styles.cell}>
-          <label>
-            Items/Page: &nbsp;
-          </label>
-        </div>
-        <div style={styles.cell}>
-          <Dropdown
-            selectedKey={[50]}
+      <div className={className} style={style}>
+        <div style={styles.pageSizeSelector}>
+          <div style={styles.cell}>
+            <label>
+              Items/Page: &nbsp;
+            </label>
+          </div>
+          <div style={styles.cell}>
+            <DefaultButton
+              text={
+                <div style={styles.pageText}>
+                  50
+                </div>
+              } 
 
-            calloutProps={{
-              directionalHint: DirectionalHint.topAutoEdge
-            }}
-
-            options={[
-              { key: 10, text: '10' },
-              { key: 25, text: '25' },
-              { key: 50, text: '50' },
-              { key: 100, text: '100' },
-              { key: 250, text: '250' },
-              { key: 500, text: '500' },
-            ]}
-          />
+              menuProps={{
+                items: [
+                  { key: 10, text: '10' },
+                  { key: 25, text: '25' },
+                  { key: 50, text: '50' },
+                  { key: 100, text: '100' },
+                  { key: 250, text: '250' },
+                  { key: 500, text: '500' },
+                ]
+              }}
+            />
+          </div>
         </div>
       </div>
     );

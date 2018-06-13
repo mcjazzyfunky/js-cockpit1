@@ -172,28 +172,32 @@ export default defineComponent({
                 };
 
               } else {
+                const items = [];
+
+                let menuEnabled = false;
+
+                Seq.from(it.items).forEach((item, key) => {
+                  const enabled =
+                    item.type === 'general' || item.type === 'menu'
+                      || (selectedCount > 0 && item.type === 'multi'
+                      || item.type === 'single' && selectedCount === 1);
+
+                  menuEnabled = menuEnabled || enabled;
+              
+                  items.push({
+                    key,
+                    name: item.text,
+                    disabled: !enabled
+                  });
+                });
+
                 ret = {
                   key,
                   name: it.text,
                   iconProps: { iconName: it.icon },
+                  disabled: !menuEnabled,
                   isSubMenu: true,
-
-                  subMenuProps: {
-                    items:
-                      Seq.from(it.items).map((item, key) => {
-                        const enabled =
-                          item.type === 'general' || item.type === 'menu'
-                            || (selectedCount > 0 && item.type === 'multi'
-                            || item.type === 'single' && selectedCount === 1);
-                    
-                        return {
-                          key,
-                          name: item.text,
-                          disabled: !enabled
-                        };
-                      })
-                      .toArray()
-                  }
+                  subMenuProps: { items }
                 };
               }
 
