@@ -11,7 +11,7 @@ import IconNextPage from 'svg-react-loader?name=NextPageIcon!../../../../node_mo
 import IconLastPage from 'svg-react-loader?name=LastPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_last_page_24px.svg';
 
 import { TextField } from 'office-ui-fabric-react';
-
+ 
 import PaginationUtils from './internal/PaginationUtils';
 
 function getStyles({ theme }) {

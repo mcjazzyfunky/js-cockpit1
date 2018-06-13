@@ -6,7 +6,7 @@ import { Dropdown, DropdownMenuItemType, DirectionalHint } from 'office-ui-fabri
 const styles = {
   pageSizeSelector: {
     display: 'table',
-    fontSize: '1rem',
+    fontSize: '0.875rem',
     whiteSpace: 'nowrap',
   },
 

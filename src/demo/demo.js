@@ -72,26 +72,28 @@ ReactDOM.render(
 
           commands={[
             {
-              text: 'New',
               type: 'general',
+              text: 'New',
               icon: 'add',
             },
             {
-              text: 'Delete',
               type: 'multi',
+              text: 'Delete',
               icon: 'delete',
             },
             {
-              text: 'Download',
               type: 'menu',
+              text: 'Export',
               icon: 'download',
 
               items: [
                 {
-                  text: 'Download1',
+                  type: 'single',
+                  text: 'Export as CSV file',
                 },
                 {
-                  text: 'Download2',
+                  type: 'single',
+                  text: 'Export as Excel file',
                 }
               ]
             }

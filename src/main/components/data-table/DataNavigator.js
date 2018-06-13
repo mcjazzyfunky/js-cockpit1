@@ -4,7 +4,6 @@ import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 
 import { CommandBar } from 'office-ui-fabric-react';
-import { CommandBarButton } from 'office-ui-fabric-react';
 
 import HBox from '../layout/HBox';
 import Paginator from '../pagination/Paginator';
@@ -90,7 +89,7 @@ const commandsSpec =
           
           check:
             Spec.shape({
-              type: Spec.oneOf('general', 'single', 'mutli'),
+              type: Spec.oneOf('general', 'single', 'multi'),
               text: Spec.string,
               icon: Spec.optional(Spec.string)
             })
@@ -102,7 +101,15 @@ const commandsSpec =
             Spec.shape({
               type: Spec.is('menu'),
               text: Spec.string,
-              icon: Spec.optional(Spec.string)
+              icon: Spec.optional(Spec.string),
+              items:
+                Spec.optional(
+                  Spec.arrayOf(
+                    Spec.shape({
+                      type: Spec.oneOf('general', 'single', 'multi'),
+                      text: Spec.string,
+                      icon: Spec.optional(Spec.string),
+                    })))
             })
         })));
 
@@ -148,15 +155,50 @@ export default defineComponent({
 
         items =
           Seq.from(this.props.commands)
-            .map((it, key) => ({
-              name: it.text,
-              key,
-              iconProps: { iconName: it.icon },
-              disabled: 
-                !(it.type === 'general'
-                  || (selectedCount > 0 && it.type === 'multi'
-                  || it.type === 'single' && selectedCount === 1))
-            }))
+            .map((it, key) => {
+              let ret;
+
+              if (it.type !== 'menu') {
+                const enabled =
+                  it.type === 'general' || it.type === 'menu'
+                    || (selectedCount > 0 && it.type === 'multi'
+                    || it.type === 'single' && selectedCount === 1);
+    
+                ret = {
+                  name: it.text,
+                  key,
+                  iconProps: { iconName: it.icon },
+                  disabled: !enabled
+                };
+
+              } else {
+                ret = {
+                  key,
+                  name: it.text,
+                  iconProps: { iconName: it.icon },
+                  isSubMenu: true,
+
+                  subMenuProps: {
+                    items:
+                      Seq.from(it.items).map((item, key) => {
+                        const enabled =
+                          item.type === 'general' || item.type === 'menu'
+                            || (selectedCount > 0 && item.type === 'multi'
+                            || item.type === 'single' && selectedCount === 1);
+                    
+                        return {
+                          key,
+                          name: item.text,
+                          disabled: !enabled
+                        };
+                      })
+                      .toArray()
+                  }
+                };
+              }
+
+              return ret;
+            })
             .toArray();
 
       return (
