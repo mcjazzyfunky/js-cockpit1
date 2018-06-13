@@ -58,6 +58,55 @@ function getStyles({ theme }) {
       display: 'table-cell',
       padding: '0.5rem 0.75rem',
       fontSize: '1rem',
+    },
+    
+    itemGroupsMenu: {
+      display: 'table',
+      width: '100%',
+      margin: '0.5rem 0 0 0',
+    },
+
+    itemGroupsMenuHeader: {
+      display: 'block',
+      padding: '0.625rem 1rem',
+      margin: '-0.5rem 0 0.25rem 0',
+      backgroundColor: '#d8d8d8',
+      textAlign: 'center',
+      fontSize: '0.875rem',
+    },
+
+    itemGroupsMenuText: {
+      fontSize: '0.875rem', 
+      fontWeight: 'bold',
+      margin: '1rem 0.5rem 0.25rem 0.75rem',
+      opacity: 0.8,
+    },
+
+    itemGroupsMenuItem: {
+      padding: '0 0 1px 0',
+      cursor: 'pointer',
+
+      selectors: {
+        ':hover': {
+          color: theme.palette.themePrimary,
+          backgroundColor: '#eee'
+        }
+      }
+    },
+    
+    itemGroupsMenuActiveItem: {
+      padding: '0 0 1px 0',
+      color: theme.palette.themePrimary,
+      backgroundColor: '#eee',
+      borderWidth: '0 0 0 3px',
+      borderColor: theme.palette.themePrimary,
+      borderStyle: 'solid',
+    },
+    
+    itemGroupsMenuItemText: {
+      fontSize: '0.875rem',
+      margin: '0.25rem 0 0.25rem 1rem',
+      opacity: 0.9,
     }
   };
 }
@@ -148,6 +197,11 @@ export default defineComponent({
               switch (menuType) {
                 case 'items':
                   ret = createItemsMenu(this.props, classes);
+                  break;
+
+                case 'itemGroups':
+                  ret = createItemGroupsMenu(this.props, classes);
+                  break;
               }
 
               return ret;
@@ -180,8 +234,11 @@ function createItemsMenu({ title, menu, activeItemId = null, onSelect }, classes
     itemBoxes =
       items.map(item => {
         const
+          isActiveItem = !!activeItemId && item.id === activeItemId,
+          onClick = isActiveItem ? null : createClickHandler(item.id),
+
           className =
-            !!activeItemId && item.id === activeItemId
+            isActiveItem
               ? classes.itemsMenuActiveItem
               : classes.itemsMenuItem,
 
@@ -193,7 +250,7 @@ function createItemsMenu({ title, menu, activeItemId = null, onSelect }, classes
               : null;
             
         return (
-          <div key={item.id} className={className} onClick={createClickHandler(item.id)}>
+          <div key={item.id} className={className} onClick={onClick}>
             {iconDiv}
             <div className={classes.itemsMenuText}>
               {item.title}
@@ -206,6 +263,70 @@ function createItemsMenu({ title, menu, activeItemId = null, onSelect }, classes
     <div className={classes.itemsMenu}>
       { header }
       { itemBoxes }
+    </div>
+  );
+}
+
+function createItemGroupsMenu({ title, menu, activeItemId, onSelect }, classes) {
+  const
+    header =
+      title
+        ? <div className={classes.itemGroupsMenuHeader}>{title}</div> 
+        : null,
+
+    itemGroups = Array.from(menu.itemGroups),
+
+    hasIcons = itemGroups.some(
+      itemGroup => itemGroup && Array.isArray(itemGroup.items)
+        && itemGroup.items.some(item => item && item.icon)),
+
+    createClickHandler =
+      !onSelect
+        ? () => null
+        : id => () => onSelect({ type: 'select', selection: id }),
+
+    itemGroupBoxes = itemGroups.map(itemGroup => {
+      return (
+        <div key={itemGroup.id}>
+          <div className={classes.itemGroupsMenuText}>
+            {itemGroup.title}
+          </div>
+          {
+            Seq.from(itemGroup.items).map(item => {
+              const
+                isActive = !!activeItemId && item.id === activeItemId,
+                onClick = isActive ? null : createClickHandler(item.id),
+
+                className =
+                  isActive 
+                    ? classes.itemGroupsMenuActiveItem
+                    : classes.itemGroupsMenuItem,
+
+                iconDiv =  
+                  hasIcons
+                    ? <div className={classes.itemGroupsMenuIcon}>
+                        {item.icon}
+                      </div>
+                    : null;
+                  
+              return (
+                <div key={item.id} className={className} onClick={onClick}>
+                  {iconDiv}
+                  <div className={classes.itemGroupsMenuItemText}>
+                    {item.title}
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      );
+    });
+
+  return (
+    <div className={classes.itemsMenu}>
+      { header }
+      { itemGroupBoxes }
     </div>
   );
 }

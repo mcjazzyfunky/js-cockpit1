@@ -43,30 +43,48 @@ const
       </ControlCenter.NorthEast>
       <ControlCenter.West style={{ borderWidth: '0 1px 0 0', borderStyle: 'solid', borderColor: '#d8d8d8'}}>
         <SideMenu
-          title="Modules"
+          title="Main menu"
           activeItemId={2}
           onSelect={ (ev) => console.log(ev)}
 
           menu={{
-            type: 'items',
+            type: 'itemGroups',
 
-            items: [
+            itemGroups: [
               {
-                title: 'Users',
-                id: 1 
+                title: 'User management',
+                id: 'group-1',
+
+                items: [
+                  {
+                    title: 'Users',
+                    id: 1 
+                  },
+                  {
+                    title: 'User groups',
+                    id: 2 
+                  }
+                ]
               },
               {
-                title: 'User groups',
-                id: 2 
-              },
-              {
-                title: 'Content management',
-                id: 3 
-              },
-              {
-                title: 'File management',
-                id: 4 
-              },
+                title: 'Content managment',
+                id: 'group-2',
+
+                items: [
+                  {
+                    title: 'Pages',
+                    id: 11
+                  },
+                  {
+                    title: 'Cagegories',
+                    id: 12 
+                  },
+                  {
+                    title: 'Assets',
+                    id: 13 
+                  },
+                ]
+              }
             ]
           }}
         />
