@@ -43,7 +43,7 @@ const
       </ControlCenter.NorthEast>
       <ControlCenter.West style={{ borderWidth: '0 1px 0 0', borderStyle: 'solid', borderColor: '#d8d8d8'}}>
         <SideMenu
-          title={'Modules'}
+          xtitle="Modules"
           activeItemId={2}
           onSelect={ (ev) => console.log(ev)}
 

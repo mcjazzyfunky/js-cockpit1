@@ -5,7 +5,7 @@ import { Spec } from 'js-spec';
 
 import Css from '../styling/Css';
 
-function getStyles({ theme }) {
+function getStyles({ theme, title }) {
   return {
     sideMenu: {
       display: 'grid',
@@ -15,7 +15,16 @@ function getStyles({ theme }) {
     itemsMenu: {
       display: 'table',
       width: '100%',
-      marginTop: '0.5rem',
+      paddingTop: title ? null : '0.5rem'
+    },
+
+    itemsMenuHeader: {
+      display: 'block',
+      padding: '0.625rem 1rem',
+      margin: '0 0 0.25rem 0',
+      backgroundColor: '#d8d8d8',
+      textAlign: 'center',
+      fontSize: '0.875rem',
     },
 
     itemsMenuItem: {
@@ -129,7 +138,7 @@ export default defineComponent({
 
     render() {
       return (
-        <Css getStyles={getStyles}>
+        <Css getStyles={getStyles} props={this.props}>
           {
             classes => {
               let ret = null;
@@ -154,6 +163,11 @@ export default defineComponent({
 
 function createItemsMenu({ title, menu, activeItemId = null, onSelect }, classes) {
   const
+    header =
+      title
+        ? <div className={classes.itemsMenuHeader}>{title}</div> 
+        : null,
+
     items = Array.from(menu.items),
 
     hasIcons = items.some(it => !!it.icon),
@@ -190,6 +204,7 @@ function createItemsMenu({ title, menu, activeItemId = null, onSelect }, classes
 
   return (
     <div className={classes.itemsMenu}>
+      { header }
       { itemBoxes }
     </div>
   );
