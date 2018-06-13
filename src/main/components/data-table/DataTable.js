@@ -72,7 +72,7 @@ export default defineComponent({
       defaultValue: null
     },
 
-    onSelectionChanged: {
+    onSelectionChange: {
       type: Function,
       nullable: true,
       defaultValue: null
@@ -99,10 +99,10 @@ export default defineComponent({
           { single: 'single', 'multi': 'multiple'}[this.props.selectionMode]
             || null,
 
-        selectionChanged =
-          this.props.onSelectionChanged
-            ? ({ api }) => this.props.onSelectionChanged({
-              type: 'selectionChanged',
+        onSelectionChanged =
+          this.props.onSelectionChange
+            ? ({ api }) => this.props.onSelectionChange({
+              type: 'selectionChange',
               selectedRows: api.getSelectedRows()
             })
             : null;
@@ -124,7 +124,7 @@ export default defineComponent({
                         columnDefs={columnDefs}
                         rowData={rowData}
                         rowSelection={rowSelection}
-                        onSelectionChanged={selectionChanged}
+                        onSelectionChanged={onSelectionChanged}
                     >
                     </AgGridReact>
       </div>;

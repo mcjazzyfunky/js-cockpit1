@@ -72,19 +72,28 @@ ReactDOM.render(
 
           commands={[
             {
-              text: 'Add customer',
+              text: 'New',
               type: 'general',
               icon: 'add',
             },
             {
               text: 'Delete',
-              type: 'general',
-              icon: 'remove',
+              type: 'multi',
+              icon: 'delete',
             },
             {
               text: 'Download',
-              type: 'general',
+              type: 'menu',
               icon: 'download',
+
+              items: [
+                {
+                  text: 'Download1',
+                },
+                {
+                  text: 'Download2',
+                }
+              ]
             }
           ]}
         />

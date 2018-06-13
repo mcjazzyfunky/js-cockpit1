@@ -5,6 +5,7 @@
   "homepage": "https://github.com/js-works/js-admin-widgets",
   "main": "dist/react.js",
   "devDependencies": {
+    "@icon/linea-basic": "^1.0.0-3",
     "@mdi/svg": "^2.4.85",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",

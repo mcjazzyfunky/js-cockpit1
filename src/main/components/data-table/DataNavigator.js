@@ -56,8 +56,12 @@ function getStyles({ theme }) {
       boxSizing: 'border-box',
     },
 
+    commandBar: {
+      margin: '0.5rem 0'
+    },
+
     paginationBar: {
-      backgroundColor: '#eee',
+      backgroundColor: 'rgb(244, 244, 244)',
       padding: '0.4rem 0.75rem',
       boxSizing: 'border-box',
     },
@@ -76,12 +80,31 @@ function getStyles({ theme }) {
 
 const commandsSpec =
   Spec.arrayOf(
-    Spec.shape({
-      text: Spec.string,
-      type: Spec.optional(Spec.oneOf('general', 'single', 'multi')),
-      icon: Spec.optional(Spec.string)
-    }));
+    Spec.and(
+      Spec.prop('type', Spec.oneOf('general', 'single', 'multi', 'menu')),
 
+      Spec.or(
+        {
+          when:
+            it => it.type !== 'menu',
+          
+          check:
+            Spec.shape({
+              type: Spec.oneOf('general', 'single', 'mutli'),
+              text: Spec.string,
+              icon: Spec.optional(Spec.string)
+            })
+        },
+        {
+          when: it => it.type === 'menu',
+          
+          check: 
+            Spec.shape({
+              type: Spec.is('menu'),
+              text: Spec.string,
+              icon: Spec.optional(Spec.string)
+            })
+        })));
 
 export default defineComponent({
   displayName: 'DataNavigator',
@@ -108,26 +131,62 @@ export default defineComponent({
   },
 
   main: class extends React.Component {
-    render() {
-      const
-        pageIndex = 3,
-        pageSize = 100,
-        totalItemCount = 1235,
-        
-        commandBar =
-          this.props.commands && this.props.commands.length > 0  
-            ? createCommandBar(this.props.commands)
-            : null;
+    constructor(props) {
+      super(props);
 
+      this.state = { selectedRows: [] };
+      this.onSelectionChange = this.onSelectionChange.bind(this);
+    }
+
+    onSelectionChange({ selectedRows }) {
+      this.setState({ selectedRows });
+    }
+    
+    createCommandBar(classes) {
+      const
+        selectedCount = this.state.selectedRows.length,
+
+        items =
+          Seq.from(this.props.commands)
+            .map((it, key) => ({
+              name: it.text,
+              key,
+              iconProps: { iconName: it.icon },
+              disabled: 
+                !(it.type === 'general'
+                  || (selectedCount > 0 && it.type === 'multi'
+                  || it.type === 'single' && selectedCount === 1))
+            }))
+            .toArray();
+
+      return (
+        <CommandBar
+          items={items}
+          className={classes.commandBar}
+        />
+      );
+    }
+
+    render() {
       return (
         <Css getStyles={getStyles}>
           {
             classes => {
+              const
+                pageIndex = 3,
+                pageSize = 100,
+                totalItemCount = 1235,
+                
+                commandBar =
+                  this.props.commands && this.props.commands.length > 0  
+                    ? this.createCommandBar(classes)
+                    : null;
+
               return (
                 <div className={this.props.className} style={{ boxSizing: 'border-box', height: '100%', ...this.props.style}}>
                   <div className={classes.dataNavigator}>
                     <div className={classes.header}>
-                      <div style={{ fontSize: '18px', margin: '10px' }}>Customers</div>
+                      <div style={{ fontSize: '18px', margin: '10px 10px 0 10px' }}>Customers</div>
                       <div>
                         {commandBar}
                       </div>
@@ -155,7 +214,7 @@ export default defineComponent({
 
                         data={data}
                         selectionMode="multi"
-                        onSelectionChanged={ (...args) => console.log(...args) }
+                        onSelectionChange={ this.onSelectionChange }
                       />
                     </div>
                     <div className={classes.footer}>
@@ -197,18 +256,5 @@ function createPaginationBar(pageIndex, pageSize, totalItemCount, classes) {
         />
       </HBox.Cell>
     </HBox>
-  );
-}
-
-function createCommandBar(commands) {
-  const items =
-    Seq.from(commands)
-      .map((it, key) => ({ name: it.text, key, iconProps: { iconName: it.icon } }))
-      .toArray();
-
-  return (
-    <CommandBar
-      items={items}
-    />
   );
 }
