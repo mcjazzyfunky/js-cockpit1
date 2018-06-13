@@ -5,7 +5,7 @@ import { Spec } from 'js-spec';
 
 import Css from '../styling/Css';
 
-function getStyles({ theme, title }) {
+function getStyles({ theme }) {
   return {
     sideMenu: {
       display: 'grid',
@@ -15,13 +15,13 @@ function getStyles({ theme, title }) {
     itemsMenu: {
       display: 'table',
       width: '100%',
-      paddingTop: title ? null : '0.5rem'
+      margin: '0.5rem 0 0 0',
     },
 
     itemsMenuHeader: {
       display: 'block',
       padding: '0.625rem 1rem',
-      margin: '0 0 0.25rem 0',
+      margin: '-0.5rem 0 0.25rem 0',
       backgroundColor: '#d8d8d8',
       textAlign: 'center',
       fontSize: '0.875rem',
@@ -34,7 +34,7 @@ function getStyles({ theme, title }) {
         ':hover': {
           color: theme.palette.themePrimary,
           backgroundColor: '#eee',
-        }
+        },
       }
     },
 
