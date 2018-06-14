@@ -20,11 +20,11 @@ function getStyles({ theme }) {
 
     itemsMenuHeader: {
       display: 'block',
-      padding: '0.625rem 1rem',
+      padding: '0.6rem 1rem',
       margin: '-0.5rem 0 0.25rem 0',
       backgroundColor: '#d8d8d8',
       textAlign: 'center',
-      fontSize: '0.875rem',
+      fontSize: '0.8125em',
     },
 
     itemsMenuItem: {
@@ -68,22 +68,22 @@ function getStyles({ theme }) {
 
     itemGroupsMenuHeader: {
       display: 'block',
-      padding: '0.625rem 1rem',
+      padding: '0.6rem 1rem',
       margin: '-0.5rem 0 0.25rem 0',
       backgroundColor: '#d8d8d8',
       textAlign: 'center',
-      fontSize: '0.875rem',
+      fontSize: '0.8125',
     },
 
     itemGroupsMenuText: {
-      fontSize: '0.875rem', 
+      fontSize: '0.8125rem', 
       fontWeight: 'bold',
       margin: '1rem 0.5rem 0.25rem 0.75rem',
-      opacity: 0.8,
+      color: '#777',
     },
 
     itemGroupsMenuItem: {
-      padding: '0 0 1px 0',
+      padding: '1px 0 1px 0.5rem',
       cursor: 'pointer',
 
       selectors: {
@@ -95,7 +95,7 @@ function getStyles({ theme }) {
     },
     
     itemGroupsMenuActiveItem: {
-      padding: '0 0 1px 0',
+      padding: '1px 0 1px 0.5rem',
       color: theme.palette.themePrimary,
       backgroundColor: '#eee',
       borderWidth: '0 0 0 3px',
@@ -104,9 +104,9 @@ function getStyles({ theme }) {
     },
     
     itemGroupsMenuItemText: {
-      fontSize: '0.875rem',
+      fontSize: '0.935rem',
       margin: '0.25rem 0 0.25rem 1rem',
-      opacity: 0.9,
+      color: '#555',
     }
   };
 }

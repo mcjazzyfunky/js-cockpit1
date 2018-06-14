@@ -7,8 +7,8 @@ import Css from '../styling/Css';
 
 function getStyles({ theme }) {
   const
-    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.1).desaturate(0.3),
-    gradientEndColor = Color(theme.palette.themePrimary).darken(0.3).desaturate(0.3);
+    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.2).desaturate(0.4),
+    gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4);
 
   return {
     outerContainer: {

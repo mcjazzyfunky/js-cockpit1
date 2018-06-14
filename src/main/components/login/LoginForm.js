@@ -69,7 +69,7 @@ const LoginFormComponent = defineComponent({
                 />
               </Card.Header>
               <Card.Body>
-                <TextField label="User name" autoComplete="off" />
+                <TextField label="User name" autoComplete="off"/>
                 <TextField label="Password" type="password" xerrorMessage="Please enter your password"/>
                 <Checkbox label="Remember me" onChange={this._onCheckboxChange} ariaDescribedBy={'descriptionID'} className={classes.remember} />
               </Card.Body>
