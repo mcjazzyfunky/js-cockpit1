@@ -126,7 +126,7 @@ const
     </ControlCenter>;
 
 const
-  content = controlCenter;
+  content = loginScreen;
 
 ReactDOM.render(
   <Fabric>
