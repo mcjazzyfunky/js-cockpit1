@@ -4,9 +4,9 @@ import { Fabric } from 'office-ui-fabric-react';
 
 import LoginScreen from '../main/components/login/LoginScreen';
 import LoginForm from '../main/components/login/LoginForm';
-import ControlCenter from '../main/components/control-center/ControlCenter';
+import BorderLayout from '../main/components/layout/BorderLayout';
 import Logo from '../main/components/misc/Logo';
-import UserCtrl from '../main/components/misc/UserCtrl';
+import UserMenu from '../main/components/misc/UserMenu';
 import SideMenu from '../main/components/sidebar/SideMenu';
 import DataNavigator from '../main/components/data-table/DataNavigator';
 import LogoIcon from 'svg-react-loader?name=LogoIcon!../../node_modules/material-design-icons/file/svg/production/ic_cloud_queue_24px.svg';
@@ -47,13 +47,13 @@ const
     </LoginScreen>,
 
   controlCenter =
-    <ControlCenter>
-      <ControlCenter.TopStart
+    <BorderLayout>
+      <BorderLayout.TopStart
         style={{
           padding: '0 0.5rem',
           color: 'white',
           backgroundColor: 'rgb(0, 120, 212)',
-          height: '2.5rem',
+          height: '2.75rem',
         }}
       >
         <Logo
@@ -67,35 +67,36 @@ const
           vendor="meet+greet"
           title="Back Office"
         />
-      </ControlCenter.TopStart>
-      <ControlCenter.TopCenter
+      </BorderLayout.TopStart>
+      <BorderLayout.TopCenter
         style={{
           color: 'white',
           fill: 'white',
           backgroundColor: 'rgb(0, 120, 212)',
-          height: '2.5rem',
+          height: '2.75rem',
           overflow: 'hidden',
         }}
       >
-      </ControlCenter.TopCenter>
-      <ControlCenter.TopEnd
+      </BorderLayout.TopCenter>
+      <BorderLayout.TopEnd
         style={{
           color: 'white',
           fill: 'white',
           backgroundColor: 'rgb(0, 120, 212)',
-          height: '2.5rem',
+          height: '2.75rem',
           verticalAlign: 'middle'
         }}
       >
-        <UserCtrl username="Jane Doe"/>
-      </ControlCenter.TopEnd>
-      <ControlCenter.MiddleStart
+        <UserMenu username="Jane Doe"/>
+      </BorderLayout.TopEnd>
+      <BorderLayout.MiddleStart
         style={{
           borderWidth: '0 1px 0 0',
           borderStyle: 'solid',
           borderColor: '#d8d8d8',
           whiteSpace: 'nowrap',
           height: '100%',
+          minWidth: '12rem'
         }}
       >
         <SideMenu
@@ -144,8 +145,8 @@ const
             ]
           }}
         />
-      </ControlCenter.MiddleStart>
-      <ControlCenter.MiddleCenter
+      </BorderLayout.MiddleStart>
+      <BorderLayout.MiddleCenter
         style={{
           height: '100%'
         }}
@@ -182,8 +183,8 @@ const
             }
           ]}
         />
-      </ControlCenter.MiddleCenter>
-    </ControlCenter>;
+      </BorderLayout.MiddleCenter>
+    </BorderLayout>;
 
 const
   content = controlCenter; 

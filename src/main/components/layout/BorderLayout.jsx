@@ -7,19 +7,8 @@ import Color from 'color';
 import Css from '../styling/Css';
 
 function getStyles({ theme }) {
-  const
-    /*
-    bgColor1 = theme.palette.themePrimary,
-
-    bgColor2 =
-      Color(theme.palette.themePrimary).lighten(0.1).string();
-    */
-
-    bgColor1 = Color(theme.palette.themePrimary).darken(0.05),
-    bgColor2 = Color(theme.palette.themePrimary).darken(0.15);
-
   return {
-    controlCenter: {
+    borderLayout: {
       position: 'absolute',
       width: '100%',
       height: '100%',
@@ -74,8 +63,8 @@ function getStyles({ theme }) {
   };
 }
 
-const ControlCenter = defineComponent({
-  displayName: 'ControlCenter',
+const BorderLayout = defineComponent({
+  displayName: 'BorderLayout',
 
   properties: {
     className: {
@@ -86,15 +75,15 @@ const ControlCenter = defineComponent({
 
     children: {
       constraint: Spec.lazy(() => isNodeOfType([
-        ControlCenter.TopStart,
-        ControlCenter.TopCenter,
-        ControlCenter.TopEnd,
-        ControlCenter.MiddleStart,
-        ControlCenter.MiddleCenter,
-        ControlCenter.MiddleEnd,
-        ControlCenter.BottomStart,
-        ControlCenter.BotttomCenter,
-        ControlCenter.BottomEnd
+        BorderLayout.TopStart,
+        BorderLayout.TopCenter,
+        BorderLayout.TopEnd,
+        BorderLayout.MiddleStart,
+        BorderLayout.MiddleCenter,
+        BorderLayout.MiddleEnd,
+        BorderLayout.BottomStart,
+        BorderLayout.BotttomCenter,
+        BorderLayout.BottomEnd
       ])),
 
       nullable: true,
@@ -124,29 +113,29 @@ const ControlCenter = defineComponent({
                   {props.children}
                 </div>;
 
-              if (type === ControlCenter.TopStart) {
+              if (type === BorderLayout.TopStart) {
                 topStart = content;
-              } else if (type === ControlCenter.TopCenter) {
+              } else if (type === BorderLayout.TopCenter) {
                 topCenter = content;
-              } else if (type === ControlCenter.TopEnd) {
+              } else if (type === BorderLayout.TopEnd) {
                 topEnd = content;
-              } else if (type === ControlCenter.MiddleStart) {
+              } else if (type === BorderLayout.MiddleStart) {
                 middleStart = content; 
-              } else if (type === ControlCenter.MiddleCenter) {
+              } else if (type === BorderLayout.MiddleCenter) {
                 middleCenter = content;
-              } else if (type === ControlCenter.MiddleEnd) {
+              } else if (type === BorderLayout.MiddleEnd) {
                 middleEnd = content;
-              } else if (type === ControlCenter.bottomStart) {
+              } else if (type === BorderLayout.bottomStart) {
                 bottomStart = content;
-              } else if (type === ControlCenter.bottomCenter) {
+              } else if (type === BorderLayout.bottomCenter) {
                 bottomCenter = content;
-              } else if (type === ControlCenter.bottomEnd) {
+              } else if (type === BorderLayout.bottomEnd) {
                 bottomEnd = content;
               }
             });
 
             return (
-              <div className={classes.controlCenter}>
+              <div className={classes.borderLayout}>
                 <div className={classes.top}>
                   <div className={classes.topStart}>
                     {topStart}
@@ -191,8 +180,8 @@ const ControlCenter = defineComponent({
   }
 });
 
-ControlCenter.TopStart = defineComponent({
-  displayName: 'ControlCenter.TopStart',
+BorderLayout.TopStart = defineComponent({
+  displayName: 'BorderLayout.TopStart',
 
   properties: {
     className: {
@@ -215,13 +204,13 @@ ControlCenter.TopStart = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.TopStart can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.TopStart can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.TopCenter = defineComponent({
-  displayName: 'ControlCenter.TopCenter',
+BorderLayout.TopCenter = defineComponent({
+  displayName: 'BorderLayout.TopCenter',
 
   properties: {
     className: {
@@ -244,13 +233,13 @@ ControlCenter.TopCenter = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.TopCenter can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.TopCenter can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.TopEnd = defineComponent({
-  displayName: 'ControlCenter.TopEnd',
+BorderLayout.TopEnd = defineComponent({
+  displayName: 'BorderLayout.TopEnd',
 
   properties: {
     className: {
@@ -273,13 +262,13 @@ ControlCenter.TopEnd = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.TopStart can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.TopStart can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.MiddleStart = defineComponent({
-  displayName: 'ControlCenter.MiddleStart',
+BorderLayout.MiddleStart = defineComponent({
+  displayName: 'BorderLayout.MiddleStart',
 
   properties: {
     className: {
@@ -302,13 +291,13 @@ ControlCenter.MiddleStart = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.MiddleStart can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.MiddleStart can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.MiddleCenter = defineComponent({
-  displayName: 'ControlCenter.MiddleCenter',
+BorderLayout.MiddleCenter = defineComponent({
+  displayName: 'BorderLayout.MiddleCenter',
 
   properties: {
     className: {
@@ -317,7 +306,7 @@ ControlCenter.MiddleCenter = defineComponent({
       defaultValue: null
     },
 
-    styles: {
+    style: {
       type: Object,
       nullable: true,
       defaultValue: null
@@ -331,13 +320,13 @@ ControlCenter.MiddleCenter = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.MiddleCenter can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.MiddleCenter can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.MiddleEnd = defineComponent({
-  displayName: 'ControlCenter.MiddleEnd',
+BorderLayout.MiddleEnd = defineComponent({
+  displayName: 'BorderLayout.MiddleEnd',
 
   properties: {
     className: {
@@ -346,7 +335,7 @@ ControlCenter.MiddleEnd = defineComponent({
       defaultValue: null
     },
 
-    styles: {
+    style: {
       type: Object,
       nullable: true,
       defaultValue: null
@@ -360,13 +349,13 @@ ControlCenter.MiddleEnd = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.MiddleEnd can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.MiddleEnd can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.BottomStart = defineComponent({
-  displayName: 'ControlCenter.BottomStart',
+BorderLayout.BottomStart = defineComponent({
+  displayName: 'BorderLayout.BottomStart',
 
   properties: {
     className: {
@@ -375,7 +364,7 @@ ControlCenter.BottomStart = defineComponent({
       defaultValue: null
     },
 
-    styles: {
+    style: {
       type: Object,
       nullable: true,
       defaultValue: null
@@ -389,13 +378,13 @@ ControlCenter.BottomStart = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.BottomStart can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.BottomStart can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.BottomCenter = defineComponent({
-  displayName: 'ControlCenter.BottomCenter',
+BorderLayout.BottomCenter = defineComponent({
+  displayName: 'BorderLayout.BottomCenter',
 
   properties: {
     className: {
@@ -404,7 +393,7 @@ ControlCenter.BottomCenter = defineComponent({
       defaultValue: null
     },
 
-    styles: {
+    style: {
       type: Object,
       nullable: true,
       defaultValue: null
@@ -418,13 +407,13 @@ ControlCenter.BottomCenter = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.BottomCenter can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.BottomCenter can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
-ControlCenter.BottomEnd = defineComponent({
-  displayName: 'ControlCenter.BottomEnd',
+BorderLayout.BottomEnd = defineComponent({
+  displayName: 'BorderLayout.BottomEnd',
 
   properties: {
     className: {
@@ -433,7 +422,7 @@ ControlCenter.BottomEnd = defineComponent({
       defaultValue: null
     },
 
-    styles: {
+    style: {
       type: Object,
       nullable: true,
       defaultValue: null
@@ -447,10 +436,10 @@ ControlCenter.BottomEnd = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.BottomEnd can only be '
-      + 'used as children of ControlCenter');
+    throw new Error('Components of type BorderLayout.BottomEnd can only be '
+      + 'used as children of BorderLayout');
   }
 });
 
 
-export default ControlCenter;
+export default BorderLayout;

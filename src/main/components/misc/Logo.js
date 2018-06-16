@@ -21,9 +21,9 @@ function getStyles() {
     },
 
     title: {
-      fontSize: '1.0625rem',
+      fontSize: '1.125rem',
       padding: 0,
-      lineHeight: '0.9rem'
+      lineHeight: '1.25rem'
     },
 
     cells: {
@@ -40,7 +40,7 @@ function getStyles() {
 
     cellRight: {
       display: 'table-cell',
-      padding: 0,
+      padding: '0.125rem 0',
       textAlign: 'left',
       verticalAlign: 'middle'
     }

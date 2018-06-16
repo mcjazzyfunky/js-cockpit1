@@ -65,6 +65,7 @@ function getStyles({ theme }) {
       whiteSpace: 'nowrap',
       textAlign: 'center',
       verticalAlign: 'middle',
+      padding: '0 0.25rem',
     },
 
     ellipsis: {
@@ -89,7 +90,8 @@ function getStyles({ theme }) {
     },
 
     icon: {
-      transform: 'scale(0.75,0.75) translate(5px, 5px)'
+      margin: '0 -2px',
+      transform: 'scale(0.75,0.75) translate(0, 3px)'
     }
   };
 }
