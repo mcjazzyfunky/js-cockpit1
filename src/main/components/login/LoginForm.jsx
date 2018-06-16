@@ -65,6 +65,12 @@ export default defineComponent({
       defaultValue: null
     },
 
+    performLogin: {
+      type: Function,
+      nullable: true,
+      defaultValue: null
+    },
+
     className: {
       type: String,
       nullable: true,
@@ -88,8 +94,20 @@ export default defineComponent({
 
     onSubmit(ev) {
       if (!this.state.loading) {
-        console.log(ev);
         this.setState({ loading: true });
+
+        if (this.props.performLogin) {
+          try {
+            this.props.performLogin(ev.data)
+              .then(data => {
+                console.log('Login data: ', data);
+                this.setState({ loading: false },
+                  () => setTimeout(() => alert('Logged in successfully'), 100));
+              });
+          } catch (e) {
+            throw e;
+          }
+        }
       }
     }
 

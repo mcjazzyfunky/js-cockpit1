@@ -20,6 +20,15 @@ const
     <LoginScreen>
       <LoginScreen.Main>
         <LoginForm
+          performLogin={
+            ({ username, password, remember }) => {
+              console.log(`Logging in (${username}, ${password}, ${remember})`);
+
+              return new Promise(resolve => {
+                setTimeout(() => resolve({ status: 'succces' }), 1500);
+              });
+            }
+          }
           header={
             <Logo
               vendor="meet+greet"
