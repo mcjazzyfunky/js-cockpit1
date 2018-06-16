@@ -25,7 +25,7 @@ export default defineComponent({
     constructor(props) {
       super(props);
       this.onSubmit = this.onSubmit.bind(this);
-      this.baseFormMgr = new FormMgr(props.config);
+      this.baseFormMgr = new FormMgr(props.config, () => this.__update());
       this.formMgr = this.baseFormMgr;
     }
 
@@ -40,6 +40,9 @@ export default defineComponent({
 
     validate() {
       this.formMgr.validate();
+    }
+    
+    __update() {
       const f = () => {};
       f.prototype = this.baseFormMgr;
       this.formMgr = Object.create(f.prototype);

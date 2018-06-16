@@ -1,7 +1,7 @@
 import formMgrConfigSpec from './formMgrConfigSpec';
 
 export default class FormMgr {
-  constructor(config) {
+  constructor(config, onValidation = null) {
     const error = validateFormMgrConfig(config);
 
     if (error) {
@@ -10,31 +10,71 @@ export default class FormMgr {
           + error.message);
     }
 
-    this.fields = {};
+    this.__onValidation = onValidation;
+    this.__fields = {};
 
     for (let i = 0; i < config.fields.length; ++i) {
       const
         fieldConfig = config.fields[i],
         fieldName = fieldConfig.name;
     
-      this.fields[fieldName] = {
-        errorMsg: null
+      this.__fields[fieldName] = {
+        touched: false,
+        rules: fieldConfig.rules,
+        message: null
       };
     }
   }
 
-  validate() {
-    this.fields.password.errorMsg = 'Dooh';
-    console.log('validate')
+  validate(onlyTouchedFields = false) {
+    const fieldNames = Object.keys(this.__fields);
+
+    for (let i = 0; i < fieldNames.length; ++i) {
+      const
+        fieldName = fieldNames[i],
+        field = this.__fields[fieldName],
+        rules = field.rules;
+
+      if (!onlyTouchedFields || field.touched) {
+        for (let i = 0; i < rules.length; ++i) {
+          const rule = rules[i];
+
+          if (rule.condition(field.value)) {
+            field.message = null;
+          } else {
+            field.message = rule.errorMsg;
+            break;
+          }
+        }
+      }
+    }
+
+    if (this.__onValidation) {
+      this.__onValidation();
+    }
   }
 
-  getErrorMsgByField(name) {
+  markTouchedByField(name) {
+    if (this.__fields.hasOwnProperty(name)) {
+      this.__fields[name].touched = true;
+    }
+  }
+
+  setValueByField(name, value) {
+    if (this.__fields.hasOwnProperty(name)) {
+      this.__fields[name].value = value;
+      this.__fields[name].message = null;
+      this.validate(true);
+    }
+  }
+
+  getMessageByField(name) {
     let ret = null;
 
-    if (this.fields.hasOwnProperty(name)) {
-      ret = this.fields[name].errorMsg;
+    if (this.__fields.hasOwnProperty(name) && !this.__fields[name].dirty) {
+      ret = this.__fields[name].message;
     }
-console.log(name, ret)
+
     return ret;
   }
 }

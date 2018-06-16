@@ -32,10 +32,24 @@ function getStyles({ theme }) {
 const formConfig = {
   fields: [
     {
-      name: 'login'
+      name: 'username',
+
+      rules: [
+        {
+          condition: it => !!it,
+          errorMsg: 'Please enter your username'
+        }
+      ]
     },
     {
-      name: 'password'
+      name: 'password',
+
+      rules: [
+        {
+          condition: it => !!it,
+          errorMsg: 'Please enter your password'
+        }
+      ]
     }
   ]
 };

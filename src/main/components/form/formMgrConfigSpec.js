@@ -6,7 +6,13 @@ export default
       Spec.arrayOf(
         Spec.shape({
           name:
-            Spec.match(/[a-zA-Z][a-zA-Z0-9_-]/)
+            Spec.match(/[a-zA-Z][a-zA-Z0-9_-]/),
+          rules:
+            Spec.arrayOf(
+              Spec.shape({
+                condition: Spec.function,
+                errorMsg: Spec.string
+              }))
         })
       )
   });

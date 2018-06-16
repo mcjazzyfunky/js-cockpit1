@@ -65,7 +65,7 @@ export default defineComponent({
     let errorMsg = props.errorMessage || null;
 
     if (errorMsg === null && props.form && props.name) {
-      const formErrorMsg = props.form.getErrorMsgByField(props.name);
+      const formErrorMsg = props.form.getMessageByField(props.name);
       
       if (formErrorMsg) {
         errorMsg = formErrorMsg;
@@ -87,6 +87,20 @@ export default defineComponent({
     
     if (props.value !== undefined && props.value !== null) {
       convertedProps.value = props.value;
+    }
+
+    if (props.form && props.name) {
+      convertedProps.onChanged = value => {
+        props.form.setValueByField(props.name, value);
+      };
+    
+      convertedProps.onFocus = () => {
+        props.form.markTouchedByField(props.name);
+      },
+
+      convertedProps.onBlur = () => {
+        props.form.validate(true);
+      };
     }
 
     return (
