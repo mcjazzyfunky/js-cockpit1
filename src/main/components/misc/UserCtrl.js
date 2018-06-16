@@ -7,21 +7,27 @@ import IconAvatar from 'svg-react-loader?name=IconLogout!../../../../node_module
 const styles = {
   userCtrl: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
+    gridTemplateColumns: 'auto auto 4rem',
     justifyItems: 'center',
     alignItems: 'center',
     fontSize: '1rem',
   },
 
   avatar: {
+    margin: 0,
+    padding: 0,
+    overflow: 'hidden',
+    textAlign: 'center',
+    verticalAlign: 'middle',
   },
 
   username: {
-    margin: '0 1rem 0 0.5rem'
+    margin: '-0.5rem 0.5rem 0 0.5rem',
+    varticalAlign: 'middle'
   },
 
   logout: {
-    padding: '0.25rem 1rem 0.25rem 1rem',
+    padding: '0.5rem 0 0.5rem 0.75rem',
     borderWidth: '0 0 0 1px',
     borderColor: 'inherit',
     borderStyle: 'dotted'

@@ -48,9 +48,12 @@ const
 
   controlCenter =
     <ControlCenter>
-      <ControlCenter.NorthWest
+      <ControlCenter.TopStart
         style={{
-          padding: '0.25rem 1rem 0.5rem 0.75rem'
+          padding: '0 0.5rem',
+          color: 'white',
+          backgroundColor: 'rgb(0, 120, 212)',
+          height: '2.5rem',
         }}
       >
         <Logo
@@ -64,13 +67,37 @@ const
           vendor="meet+greet"
           title="Back Office"
         />
-      </ControlCenter.NorthWest>
-      <ControlCenter.North>
-      </ControlCenter.North>
-      <ControlCenter.NorthEast>
+      </ControlCenter.TopStart>
+      <ControlCenter.TopCenter
+        style={{
+          color: 'white',
+          fill: 'white',
+          backgroundColor: 'rgb(0, 120, 212)',
+          height: '2.5rem',
+          overflow: 'hidden',
+        }}
+      >
+      </ControlCenter.TopCenter>
+      <ControlCenter.TopEnd
+        style={{
+          color: 'white',
+          fill: 'white',
+          backgroundColor: 'rgb(0, 120, 212)',
+          height: '2.5rem',
+          verticalAlign: 'middle'
+        }}
+      >
         <UserCtrl username="Jane Doe"/>
-      </ControlCenter.NorthEast>
-      <ControlCenter.West style={{ borderWidth: '0 1px 0 0', borderStyle: 'solid', borderColor: '#d8d8d8'}}>
+      </ControlCenter.TopEnd>
+      <ControlCenter.MiddleStart
+        style={{
+          borderWidth: '0 1px 0 0',
+          borderStyle: 'solid',
+          borderColor: '#d8d8d8',
+          whiteSpace: 'nowrap',
+          height: '100%',
+        }}
+      >
         <SideMenu
           title="Main menu"
           activeItemId={2}
@@ -117,8 +144,12 @@ const
             ]
           }}
         />
-      </ControlCenter.West>
-      <ControlCenter.Center>
+      </ControlCenter.MiddleStart>
+      <ControlCenter.MiddleCenter
+        style={{
+          height: '100%'
+        }}
+      >
         <DataNavigator
           style={{ padding: '0.5rem 0.75rem' }}
 
@@ -151,11 +182,11 @@ const
             }
           ]}
         />
-      </ControlCenter.Center>
+      </ControlCenter.MiddleCenter>
     </ControlCenter>;
 
 const
-  content = loginScreen;
+  content = controlCenter; 
 
 ReactDOM.render(
   <Fabric>

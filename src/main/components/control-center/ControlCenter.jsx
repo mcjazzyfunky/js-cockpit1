@@ -23,68 +23,53 @@ function getStyles({ theme }) {
       position: 'absolute',
       width: '100%',
       height: '100%',
-      display: 'grid',
-      gridTemplateColumns: '0fr 1fr 0fr',
-      gridTemplateRows: '0fr 1fr 0fr',
-
-      gridTemplateAreas: `
-        'north-west north north-east'
-        'west center center'
-      `,
-    },
-
-    northWest: {
-      gridArea: 'north-west',
-      backgroundColor: 'purple',
-      whiteSpace: 'nowrap',
-      color: 'white',
-      fill: 'white',
-      background: bgColor1,
       display: 'flex',
-      justifyItems: 'center',
-      alignItems: 'center',
+      flexDirection: 'column',
     },
 
-    north: {
-      gridArea: 'north',
-      backgroundColor: 'green',
-      whiteSpace: 'nowrap',
-      color: 'white',
-      fill: 'white',
-      background: bgColor2,
+    top: {
       display: 'flex',
-      justifyItems: 'center',
-      alignItems: 'center',
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      backgroundColor: 'red'
     },
 
-    northEast: {
-      gridArea: 'north-east',
-      backgroundColor: 'yellow',
-      whiteSpace: 'nowrap',
-      color: 'white',
-      fill: 'white',
-      background: bgColor2,
+    middle: {
+      flexGrow: 1,
       display: 'flex',
-      justifyItems: 'center',
-      alignItems: 'center',
+      flexDiretion: 'row',
     },
 
-    west: {
-      gridArea: 'west',
-      whiteSpace: 'nowrap',
-      minWidth: '12rem',
-      display: 'grid',
-      width: '100%',
-      height: '100%',
-    },
-
-    center: {
-      gridArea: 'center',
+    bottom: {
       display: 'flex',
-      width: '100%',
-      height: '100%',
-      overflow: 'auto',
-      boxSizing: 'border-box',
+      flexDirection: 'row',
+    },
+
+    topStart: {
+    },
+
+    topCenter: {
+      flexGrow: 1
+    },
+
+    topEnd: {
+    },
+
+    middleStart: {
+    },
+
+    middleCenter: {
+      flexGrow: 1,
+    },
+
+    bottomStart: {
+    },
+
+    bottomCenter: {
+      flexGrow: 1
+    },
+
+    bottomEnd: {
     }
   };
 }
@@ -101,10 +86,15 @@ const ControlCenter = defineComponent({
 
     children: {
       constraint: Spec.lazy(() => isNodeOfType([
-        ControlCenter.NorthWest,
-        ControlCenter.North,
-        ControlCenter.West,
-        ControlCenter.center
+        ControlCenter.TopStart,
+        ControlCenter.TopCenter,
+        ControlCenter.TopEnd,
+        ControlCenter.MiddleStart,
+        ControlCenter.MiddleCenter,
+        ControlCenter.MiddleEnd,
+        ControlCenter.BottomStart,
+        ControlCenter.BotttomCenter,
+        ControlCenter.BottomEnd
       ])),
 
       nullable: true,
@@ -118,11 +108,15 @@ const ControlCenter = defineComponent({
         {
           classes => {
             let
-              northWest = null,
-              north = null,
-              northEast = null,
-              west = null,
-              center = null;
+              topStart = null,
+              topCenter = null,
+              topEnd = null,
+              middleStart = null,
+              middleCenter = null,
+              middleEnd = null,
+              bottomStart = null,
+              bottomCenter = null,
+              bottomEnd = null;
 
             Seq.adjust(children).forEach(({ type, props }) => {
               const content =
@@ -130,35 +124,63 @@ const ControlCenter = defineComponent({
                   {props.children}
                 </div>;
 
-              if (type === ControlCenter.NorthWest) {
-                northWest = content;
-              } else if (type === ControlCenter.North) {
-                north = content;
-              } else if (type === ControlCenter.NorthEast) {
-                northEast = content;
-              } else if (type === ControlCenter.West) {
-                west = content; 
-              } else if (type === ControlCenter.Center) {
-                center = content;
+              if (type === ControlCenter.TopStart) {
+                topStart = content;
+              } else if (type === ControlCenter.TopCenter) {
+                topCenter = content;
+              } else if (type === ControlCenter.TopEnd) {
+                topEnd = content;
+              } else if (type === ControlCenter.MiddleStart) {
+                middleStart = content; 
+              } else if (type === ControlCenter.MiddleCenter) {
+                middleCenter = content;
+              } else if (type === ControlCenter.MiddleEnd) {
+                middleEnd = content;
+              } else if (type === ControlCenter.bottomStart) {
+                bottomStart = content;
+              } else if (type === ControlCenter.bottomCenter) {
+                bottomCenter = content;
+              } else if (type === ControlCenter.bottomEnd) {
+                bottomEnd = content;
               }
             });
 
             return (
               <div className={classes.controlCenter}>
-                <div className={classes.northWest}>
-                  {northWest}
+                <div className={classes.top}>
+                  <div className={classes.topStart}>
+                    {topStart}
+                  </div>
+                  <div className={classes.topCenter}>
+                    {topCenter}
+                  </div>
+                  <div className={classes.topEnd}>
+                    {topEnd}
+                  </div>
                 </div>
-                <div className={classes.north}>
-                  {north}
+
+                <div className={classes.middle}>
+                  <div className={classes.middleStart}>
+                    {middleStart}
+                  </div>
+                  <div className={classes.middleCenter}>
+                    {middleCenter}
+                  </div>
+                  <div className={classes.middleEnd}>
+                    {middleEnd}
+                  </div>
                 </div>
-                <div className={classes.northEast}>
-                  {northEast}
-                </div>
-                <div className={classes.west}>
-                  {west} 
-                </div>
-                <div className={classes.center}>
-                  {center}
+
+                <div className={classes.bottom}>
+                  <div className={classes.bottomStart}>
+                    {bottomStart}
+                  </div>
+                  <div className={classes.bottomCenter}>
+                    {bottomCenter}
+                  </div>
+                  <div className={classes.bottomEnd}>
+                    {bottomEnd}
+                  </div>
                 </div>
               </div>
             );
@@ -169,8 +191,8 @@ const ControlCenter = defineComponent({
   }
 });
 
-ControlCenter.NorthWest = defineComponent({
-  displayName: 'ControlCenter.NorthWest',
+ControlCenter.TopStart = defineComponent({
+  displayName: 'ControlCenter.TopStart',
 
   properties: {
     className: {
@@ -193,13 +215,13 @@ ControlCenter.NorthWest = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.NorthWest can only be '
-      + 'used as children of ControllCentral');
+    throw new Error('Components of type ControlCenter.TopStart can only be '
+      + 'used as children of ControlCenter');
   }
 });
 
-ControlCenter.North = defineComponent({
-  displayName: 'ControlCenter.North',
+ControlCenter.TopCenter = defineComponent({
+  displayName: 'ControlCenter.TopCenter',
 
   properties: {
     className: {
@@ -222,13 +244,13 @@ ControlCenter.North = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.North can only be '
-      + 'used as children of ControllCentral');
+    throw new Error('Components of type ControlCenter.TopCenter can only be '
+      + 'used as children of ControlCenter');
   }
 });
 
-ControlCenter.NorthEast = defineComponent({
-  displayName: 'ControlCenter.NorthEast',
+ControlCenter.TopEnd = defineComponent({
+  displayName: 'ControlCenter.TopEnd',
 
   properties: {
     className: {
@@ -251,13 +273,13 @@ ControlCenter.NorthEast = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.NorthWest can only be '
-      + 'used as children of ControllCentral');
+    throw new Error('Components of type ControlCenter.TopStart can only be '
+      + 'used as children of ControlCenter');
   }
 });
 
-ControlCenter.West = defineComponent({
-  displayName: 'ControlCenter.West',
+ControlCenter.MiddleStart = defineComponent({
+  displayName: 'ControlCenter.MiddleStart',
 
   properties: {
     className: {
@@ -280,13 +302,13 @@ ControlCenter.West = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.West can only be '
-      + 'used as children of ControllCentral');
+    throw new Error('Components of type ControlCenter.MiddleStart can only be '
+      + 'used as children of ControlCenter');
   }
 });
 
-ControlCenter.Center = defineComponent({
-  displayName: 'ControlCenter.Center',
+ControlCenter.MiddleCenter = defineComponent({
+  displayName: 'ControlCenter.MiddleCenter',
 
   properties: {
     className: {
@@ -309,9 +331,126 @@ ControlCenter.Center = defineComponent({
   },
 
   main() {
-    throw new Error('Components of type ControlCenter.Center can only be '
-      + 'used as children of ControllCentral');
+    throw new Error('Components of type ControlCenter.MiddleCenter can only be '
+      + 'used as children of ControlCenter');
   }
 });
+
+ControlCenter.MiddleEnd = defineComponent({
+  displayName: 'ControlCenter.MiddleEnd',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    styles: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.MiddleEnd can only be '
+      + 'used as children of ControlCenter');
+  }
+});
+
+ControlCenter.BottomStart = defineComponent({
+  displayName: 'ControlCenter.BottomStart',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    styles: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.BottomStart can only be '
+      + 'used as children of ControlCenter');
+  }
+});
+
+ControlCenter.BottomCenter = defineComponent({
+  displayName: 'ControlCenter.BottomCenter',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    styles: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.BottomCenter can only be '
+      + 'used as children of ControlCenter');
+  }
+});
+
+ControlCenter.BottomEnd = defineComponent({
+  displayName: 'ControlCenter.BottomEnd',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    styles: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type ControlCenter.BottomEnd can only be '
+      + 'used as children of ControlCenter');
+  }
+});
+
 
 export default ControlCenter;
