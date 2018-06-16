@@ -96,9 +96,11 @@ export default defineComponent({
     
       convertedProps.onFocus = () => {
         props.form.markTouchedByField(props.name);
+        props.form.setSuppressValidationByField(props.name, true);
       },
 
       convertedProps.onBlur = () => {
+        props.form.setSuppressValidationByField(props.name, false);
         props.form.validate(true);
       };
     }

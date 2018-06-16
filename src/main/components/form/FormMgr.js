@@ -20,6 +20,7 @@ export default class FormMgr {
     
       this.__fields[fieldName] = {
         touched: false,
+        supressValidation: false,
         rules: fieldConfig.rules,
         message: null
       };
@@ -35,7 +36,9 @@ export default class FormMgr {
         field = this.__fields[fieldName],
         rules = field.rules;
 
-      if (!onlyTouchedFields || field.touched) {
+      if (field.suppressValidation) {
+        field.message = null;
+      } else if (!onlyTouchedFields || field.touched) {
         for (let i = 0; i < rules.length; ++i) {
           const rule = rules[i];
 
@@ -65,6 +68,12 @@ export default class FormMgr {
       this.__fields[name].value = value;
       this.__fields[name].message = null;
       this.validate(true);
+    }
+  }
+
+  setSuppressValidationByField(name, value) {
+    if (this.__fields.hasOwnProperty(name)) {
+      this.__fields[name].suppressValidation = !!value;
     }
   }
 
