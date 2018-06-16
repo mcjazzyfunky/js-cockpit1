@@ -91,11 +91,11 @@ export default defineComponent({
 
     if (props.form && props.name) {
       convertedProps.onChanged = value => {
+        props.form.markTouchedByField(props.name);
         props.form.setValueByField(props.name, value);
       };
     
       convertedProps.onFocus = () => {
-        props.form.markTouchedByField(props.name);
         props.form.setSuppressValidationByField(props.name, true);
       },
 
