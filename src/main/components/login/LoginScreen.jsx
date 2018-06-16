@@ -1,8 +1,8 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
+import { Seq } from 'js-seq';
 import Color from 'color';
 
-import LoginForm from './LoginForm';
 import Css from '../styling/Css';
 
 function getStyles({ theme }) {
@@ -34,16 +34,37 @@ function getStyles({ theme }) {
   };
 }
 
-export default defineComponent({
+const LoginScreen = defineComponent({
   displayName: 'LoginScreen',
 
-  main() {
+  properties: {
+    children: {
+      constraint: it => isNodeOfType([LoginScreen.Main], it),
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main({ children }) {
+    let mainContent = null;
+
+    Seq.adjust(children).forEach(({ type, props }) => {
+      const content =
+        <div className={props.className} style={props.style}>
+          {props.children}
+        </div>;
+
+      if (type === LoginScreen.Main) {
+        mainContent = content;
+      }
+    });
+
     return (
       <Css getStyles={getStyles}>
         {classes => 
           <div className={classes.outerContainer}>
             <div className={classes.innerContainer}>
-              <LoginForm/>
+              {mainContent}
             </div>
           </div>
         }
@@ -51,3 +72,34 @@ export default defineComponent({
     );
   }
 });
+
+LoginScreen.Main = defineComponent({
+  displayName: 'LoginScreen.Main',
+
+  properties: {
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    styles: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    },
+
+    children: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    }
+  },
+
+  main() {
+    throw new Error('Components of type LoginScreen.Main can only be '
+      + 'used as children of LoginScreen');
+  }
+});
+
+export default LoginScreen;

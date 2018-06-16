@@ -41,10 +41,9 @@ export default defineComponent({
       defaultValue: null
     },
 
-    errorMessage: {
-      type: String,
-      nullable: true,
-      defaultValue: null
+    disabled: {
+      type: Boolean,
+      defaultValue: false
     },
 
     autoComplete: {
@@ -61,54 +60,69 @@ export default defineComponent({
     }
   },
 
-  main(props) {
-    let errorMsg = props.errorMessage || null;
+  main: class extends React.Component {
+    constructor(props) {
+      super(props);
 
-    if (errorMsg === null && props.form && props.name) {
-      const formErrorMsg = props.form.getMessageByField(props.name);
-      
-      if (formErrorMsg) {
-        errorMsg = formErrorMsg;
+      if (props.name && props.form) {
+        const value =
+          typeof props.value === 'string'
+            ? props.value
+            : typeof props.defaultValue === 'string'
+            ? props.defaultValue
+            : '';
+
+        props.form.setValueByField(props.name, value);
       }
     }
 
-    const
-      convertedProps = {
-        name: props.name,
-        type: props.type,
-        label: props.label,
-        errorMessage: errorMsg,
-        autoComplete: props.autoComplete
-      };
+    render() {
+      const
+        props = this.props,
 
-    if (props.defaultValue !== undefined && props.defaultValue !== null) {
-      convertedProps.defaultValue = props.defaultValue;
+        errorMsg =
+          props.name && props.form
+            ? props.form.getMessageByField(props.name)
+            : null,
+
+        convertedProps = {
+          name: props.name,
+          type: props.type,
+          label: props.label,
+          disabled: props.disabled,
+          errorMessage: errorMsg,
+          autoComplete: props.autoComplete
+        };
+
+      if (props.defaultValue !== undefined && props.defaultValue !== null) {
+        convertedProps.defaultValue = props.defaultValue;
+      }
+      
+      if (props.value !== undefined && props.value !== null) {
+        convertedProps.value = props.value;
+      }
+
+      if (props.form && props.name) {
+        convertedProps.onChanged = value => {
+          props.form.markTouchedByField(props.name);
+          props.form.setValueByField(props.name, value);
+        };
+      
+        convertedProps.onFocus = () => {
+          props.form.setSuppressValidationByField(props.name, true);
+        },
+
+        convertedProps.onBlur = () => {
+          props.form.setSuppressValidationByField(props.name, false);
+          props.form.validate(true);
+        };
+      }
+
+      return (
+        <TextField
+          {...convertedProps}
+        />
+      );
     }
-    
-    if (props.value !== undefined && props.value !== null) {
-      convertedProps.value = props.value;
-    }
-
-    if (props.form && props.name) {
-      convertedProps.onChanged = value => {
-        props.form.markTouchedByField(props.name);
-        props.form.setValueByField(props.name, value);
-      };
-    
-      convertedProps.onFocus = () => {
-        props.form.setSuppressValidationByField(props.name, true);
-      },
-
-      convertedProps.onBlur = () => {
-        props.form.setSuppressValidationByField(props.name, false);
-        props.form.validate(true);
-      };
-    }
-
-    return (
-      <TextField
-        {...convertedProps}
-      />
-    );
   }
 });

@@ -11,16 +11,23 @@ function getStyles({ theme }) {
 
   return {
     container: {
+      display: 'flex',
+      flexDirection: 'column',
       backgroundColor: palette.white,
-      border: `1px solid ${palette.neutralTertiary}`
+      border: `1px solid ${palette.neutralTertiary}`,
+      boxSizing: 'border-box',
     },
 
     header: {
       padding,
+      borderWidth: '0 0 1px 0',
+      borderColor: '#aaa',
+      borderStyle: 'solid',
     },
 
     body: {
       padding,
+      flexGrow: '1',
     },
 
     footer: {
@@ -73,11 +80,10 @@ const Card = defineComponent({
     return (
       <Css getStyles={getStyles}>
         {classes =>
-          <div className={classNames(classes.container, className)}>
+          <div className={classNames(classes.container, className)} id="xxx">
             <div className={classes.header}>
               {header}
             </div>
-            <hr/>
             <div className={classes.body}>
               {body}
             </div>

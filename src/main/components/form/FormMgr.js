@@ -1,8 +1,11 @@
 import formMgrConfigSpec from './formMgrConfigSpec';
 
 export default class FormMgr {
-  constructor(config, onValidation = null) {
-    const error = validateFormMgrConfig(config);
+  constructor(validationConfig = null, onValidation = null) {
+    const error =
+      validationConfig
+        ? validateFormMgrConfig(validationConfig)
+        : null;
 
     if (error) {
       throw new TypeError(
@@ -13,22 +16,26 @@ export default class FormMgr {
     this.__onValidation = onValidation;
     this.__fields = {};
 
-    for (let i = 0; i < config.fields.length; ++i) {
-      const
-        fieldConfig = config.fields[i],
-        fieldName = fieldConfig.name;
-    
-      this.__fields[fieldName] = {
-        touched: false,
-        supressValidation: false,
-        rules: fieldConfig.rules,
-        message: null
-      };
+    if (validationConfig) {
+      for (let i = 0; i < validationConfig.fields.length; ++i) {
+        const
+          fieldConfig = validationConfig.fields[i],
+          fieldName = fieldConfig.name;
+      
+        this.__fields[fieldName] = {
+          touched: false,
+          supressValidation: false,
+          rules: fieldConfig.rules,
+          message: null
+        };
+      }
     }
   }
 
   validate(onlyTouchedFields = false) {
     const fieldNames = Object.keys(this.__fields);
+
+    let ret = true;
 
     for (let i = 0; i < fieldNames.length; ++i) {
       const
@@ -46,6 +53,7 @@ export default class FormMgr {
             field.message = null;
           } else {
             field.message = rule.errorMsg;
+            ret = false;
             break;
           }
         }
@@ -55,6 +63,8 @@ export default class FormMgr {
     if (this.__onValidation) {
       this.__onValidation();
     }
+
+    return ret;
   }
 
   markTouchedByField(name) {
@@ -82,6 +92,20 @@ export default class FormMgr {
 
     if (this.__fields.hasOwnProperty(name) && !this.__fields[name].dirty) {
       ret = this.__fields[name].message;
+    }
+
+    return ret;
+  }
+
+  getData() {
+    const
+      ret = {},
+      fieldNames = Object.keys(this.__fields);
+
+    for (let i = 0; i< fieldNames.length; ++i) {
+      const fieldName = fieldNames[i];
+
+      ret[fieldNames[i]] = this.__fields[fieldName].value;
     }
 
     return ret;

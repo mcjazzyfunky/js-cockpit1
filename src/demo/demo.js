@@ -1,21 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Fabric } from 'office-ui-fabric-react';
+
 import LoginScreen from '../main/components/login/LoginScreen';
+import LoginForm from '../main/components/login/LoginForm';
 import ControlCenter from '../main/components/control-center/ControlCenter';
 import Logo from '../main/components/misc/Logo';
 import UserCtrl from '../main/components/misc/UserCtrl';
 import SideMenu from '../main/components/sidebar/SideMenu';
 import DataNavigator from '../main/components/data-table/DataNavigator';
+import LogoIcon from 'svg-react-loader?name=LogoIcon!../../node_modules/material-design-icons/file/svg/production/ic_cloud_queue_24px.svg';
 
 import initSystem from '../main/system/initSystem';
-
-import { Fabric } from 'office-ui-fabric-react';
 
 initSystem();
 
 const
   loginScreen =
-    <LoginScreen/>,
+    <LoginScreen>
+      <LoginScreen.Main>
+        <LoginForm
+          header={
+            <Logo
+              vendor="meet+greet"
+              title="Back Office - Login"
+              icon={
+                <LogoIcon
+                  style={{
+                    margin: '0.4rem 0.125rem 0 0',
+                    fill: 'rgb(0, 120, 212)'
+                  }}
+                />}
+            />
+          }
+        />
+      </LoginScreen.Main>
+    </LoginScreen>,
 
   controlCenter =
     <ControlCenter>

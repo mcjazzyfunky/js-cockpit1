@@ -1,35 +1,32 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
-import Logo from '../misc/Logo';
+import { defineComponent, isNode } from 'js-widgets';
 import Card from '../card/Card';
 import Form from '../form/Form';
-import { Checkbox, PrimaryButton } from 'office-ui-fabric-react';
+import { PrimaryButton, Spinner, SpinnerSize } from 'office-ui-fabric-react';
 import TextField from '../form/TextField';
+import CheckBox from '../form/CheckBox';
 import Css from '../styling/Css';
-import Icon from 'svg-react-loader?name=Icon!../../../../node_modules/material-design-icons/file/svg/production/ic_cloud_queue_24px.svg';
 
 function getStyles({ theme }) {
   return {
     container: {
       width: '20rem',
-      textAlign: 'left'
-    },
-
-    logo: {
-      marginLeft: '0.75rem'
-    },
-
-    icon: {
-      fill: theme.palette.themePrimary
+      minHeight: '22rem',
+      textAlign: 'left',
     },
 
     remember: {
-      margin: '1.25rem 0 0 0'
+      margin: '1.25rem 0 0 0',
+    },
+
+    loadingIndicator: {
+      display: 'inline-block',
+      margin: '0 0 0 0.75rem',
     }
   };
 }
 
-const formConfig = {
+const validationConfig = {
   fields: [
     {
       name: 'username',
@@ -50,6 +47,10 @@ const formConfig = {
           errorMsg: 'Please enter your password'
         }
       ]
+    },
+    {
+      name: 'remember',
+      rules: []
     }
   ]
 };
@@ -58,6 +59,23 @@ export default defineComponent({
   displayName: 'LoginForm',
 
   properties: {
+    header: {
+      constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    },
+
+    className: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
+    style: {
+      type: Object,
+      nullable: true,
+      defaultValue: null
+    }
   },
 
   main: class extends React.Component {
@@ -65,55 +83,72 @@ export default defineComponent({
       super(props);
 
       this.state = { loading: false };
-
-      this.onFormSubmit = this.onFormSubmit.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onFormSubmit(ev) {
-      ev.preventDefault();
-
+    onSubmit(ev) {
       if (!this.state.loading) {
-        this.props.form.validateFields((err, values) => {
-          if (!err) {
-            console.log('Values:', values);
-            this.setState(({ loading: true}));
-          }
-        });
+        console.log(ev);
+        this.setState({ loading: true });
       }
     }
 
     render() {
+      const
+        loginButtonText =
+          this.state.loading
+            ? 'Logging in...'
+            : 'Log in';
+
       return (
         <Css getStyles={getStyles}>
-          {classes =>
-            <Form config={formConfig}>
-              <Card className={classes.container}>
-                <Card.Header>
-                  <Logo
-                    vendor="meet+greet"
-                    title="Back Office - Login"
-                    icon={<Icon className={classes.icon}/>}
-                    className={classes.logo}
-                  />
-                </Card.Header>
-                <Card.Body>
-                    <TextField
-                      name="username"
-                      label="User name"
-                      autoComplete="off"
-                    />
-                    <TextField
-                      name="password"
-                      label="Password"
-                      type="password"
-                    />
-                    <Checkbox label="Remember me" onChange={this._onCheckboxChange} ariaDescribedBy={'descriptionID'} className={classes.remember} />
-                  </Card.Body>
-                  <Card.Footer>
-                    <PrimaryButton type="submit" style={{width: '100%' }}>Log in</PrimaryButton>
-                  </Card.Footer>
-              </Card>
-            </Form>
+          {
+            classes => {
+              const loadingIndicator =
+                this.state.loading
+                  ? <div className={classes.loadingIndicator}>
+                      <Spinner
+                        size={SpinnerSize.small}
+                      />
+                    </div>
+                  : null;
+   
+              return (
+                <Form validationConfig={validationConfig} onSubmit={this.onSubmit}>
+                  <Card className={classes.container}>
+                    <Card.Header>
+                      {this.props.header}
+                    </Card.Header>
+                    <Card.Body>
+                        <TextField
+                          name="username"
+                          label="User name"
+                          autoComplete="off"
+                          disabled={this.state.loading}
+                        />
+                        <TextField
+                          name="password"
+                          label="Password"
+                          type="password"
+                          disabled={this.state.loading}
+                        />
+                        <CheckBox
+                          name="remember"
+                          label="Remember me"
+                          className={classes.remember}
+                          disabled={this.state.loading}
+                        />
+                      </Card.Body>
+                      <Card.Footer>
+                        <PrimaryButton type="submit" style={{width: '100%' }}>
+                          {loginButtonText}
+                          {loadingIndicator}
+                        </PrimaryButton>
+                      </Card.Footer>
+                  </Card>
+                </Form>
+              );
+            }
           }
         </Css>
       );

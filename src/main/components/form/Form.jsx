@@ -9,13 +9,21 @@ export default defineComponent({
   displayName: 'Form',
 
   properties: {
-    config: {
-      type: Object,
-      constraint: formMgrConfigSpec
-    },
-
     children: {
       constraint: isNode,
+      nullable: true,
+      defaultValue: null
+    },
+
+    validationConfig: {
+      type: Object,
+      constraint: formMgrConfigSpec,
+      nullable: true,
+      defaultValue: null
+    },
+
+    onSubmit: {
+      type: Function,
       nullable: true,
       defaultValue: null
     }
@@ -25,7 +33,7 @@ export default defineComponent({
     constructor(props) {
       super(props);
       this.onSubmit = this.onSubmit.bind(this);
-      this.baseFormMgr = new FormMgr(props.config, () => this.__update());
+      this.baseFormMgr = new FormMgr(props.validationConfig, () => this.__update());
       this.formMgr = this.baseFormMgr;
     }
 
@@ -35,7 +43,14 @@ export default defineComponent({
 
     onSubmit(ev) {
       ev.preventDefault();
-      this.validate();
+
+      if (this.formMgr.validate() && this.props.onSubmit) {
+        this.props.onSubmit({
+          type: 'submit',
+
+          data: this.formMgr.getData()
+        });
+      }
     }
 
     validate() {
