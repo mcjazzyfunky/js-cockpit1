@@ -60,8 +60,8 @@ function getStyles({ theme }) {
     },
 
     paginationBar: {
-      backgroundColor: 'rgb(244, 244, 244)',
-      padding: '0.4rem 0.75rem',
+      backgroundColor: theme.palette.neutralLighter,
+      padding: '0 0.75rem',
       boxSizing: 'border-box',
     },
 

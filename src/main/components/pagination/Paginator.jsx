@@ -10,15 +10,17 @@ import IconPreviousPage from 'svg-react-loader?name=PreviousPageIcon!../../../..
 import IconNextPage from 'svg-react-loader?name=NextPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_chevron_right_24px.svg';
 import IconLastPage from 'svg-react-loader?name=LastPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_last_page_24px.svg';
 
-import { TextField } from 'office-ui-fabric-react';
+import { TextField, loadTheme } from 'office-ui-fabric-react';
  
 import PaginationUtils from './internal/PaginationUtils';
 
+
 function getStyles({ theme }) {
+  console.log(JSON.stringify(theme, null, 2))
   return {
     paginator: {
       display: 'table',
-      fontSize: '1rem',
+      fontSize: '0.875rem',
     },
 
     firstPage: {
@@ -82,16 +84,45 @@ function getStyles({ theme }) {
 
     pageTextField: {
       width: '4rem',
+      padding: '2px',
+      maxHeight: '1rem',
+    
+      selectors: {
+        '.ms-TextField-fieldGroup': {
+          height: '1.75rem',
+        },
+
+        'input': {
+          padding: '2px', 
+        }
+      }
     },
 
     button: {
+      height: '2.5rem',
       border: 'none',
-      background: 'none'
+      background: 'none',
+      padding: '4px',
+      boxSizing: 'border-box',
+
+      selectors: {
+        ':focus': {
+          //border: '1px solid ' + theme.semanticColors.focusBorder,
+          border: '1px solid ' + theme.palette.neutralSecondary,
+          outline: 'none',
+          padding: '3px',
+        },
+        ':hover': {
+          backgroundColor: theme.semanticColors.buttonBackgroundHovered,
+        },
+        ':active': {
+          backgroundColor: theme.semanticColors.buttonBackgroundChecked,
+        }
+      }
     },
 
     icon: {
-      margin: '0 -2px',
-      transform: 'scale(0.75,0.75) translate(0, 3px)'
+      transform: 'scale(0.75,0.75) translate(0, 4px)'
     }
   };
 }
@@ -292,7 +323,10 @@ function createAdvancedPaginator(props, facts, classes) {
       <div className={classes.page}>
         Page
         <div className={classes.pageTextFieldContainer}>
-          <TextField className={classes.pageTextField}/>
+          <TextField 
+            className={classes.pageTextField}
+            defaultValue={facts.pageIndex}
+          />
         </div>
         of {facts.pageCount}
       </div>
@@ -327,7 +361,7 @@ function createPageButton(pageIndex, facts, classes) {
 
 function createFirstPageButton(facts, classes) {
   return (
-    <button className={classes.button}>
+    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
       <div className={classes.icon}>
         <IconFirstPage/>
       </div>
@@ -337,7 +371,7 @@ function createFirstPageButton(facts, classes) {
 
 function createPreviousPageButton(facts, classes) {
   return (
-    <button className={classes.button}>
+    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
       <div className={classes.icon}>
         <IconPreviousPage/>
       </div>
@@ -347,7 +381,7 @@ function createPreviousPageButton(facts, classes) {
 
 function createEllipsisButton(pageIndex, facts, classes) {
   return (
-    <button className={classes.button}>
+    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
       &hellip;
     </button>
   );
@@ -355,7 +389,7 @@ function createEllipsisButton(pageIndex, facts, classes) {
 
 function createNextPageButton(facts, classes) {
   return (
-    <button className={classes.button}>
+    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
       <div className={classes.icon}>
         <IconNextPage/>
       </div>
@@ -365,7 +399,7 @@ function createNextPageButton(facts, classes) {
 
 function createLastPageButton(facts, classes) {
   return (
-    <button className={classes.button}>
+    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
       <div className={classes.icon}>
         <IconLastPage/>
       </div>
