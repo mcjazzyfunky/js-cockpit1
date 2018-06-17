@@ -10,13 +10,10 @@ import IconPreviousPage from 'svg-react-loader?name=PreviousPageIcon!../../../..
 import IconNextPage from 'svg-react-loader?name=NextPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_chevron_right_24px.svg';
 import IconLastPage from 'svg-react-loader?name=LastPageIcon!../../../../node_modules/material-design-icons/navigation/svg/production/ic_last_page_24px.svg';
 
-import { TextField, loadTheme } from 'office-ui-fabric-react';
- 
 import PaginationUtils from './internal/PaginationUtils';
 
 
 function getStyles({ theme }) {
-  console.log(JSON.stringify(theme, null, 2))
   return {
     paginator: {
       display: 'table',
@@ -83,7 +80,7 @@ function getStyles({ theme }) {
     },
 
     pageTextField: {
-      width: '4rem',
+      width: '3rem',
       padding: '2px',
       maxHeight: '1rem',
     
@@ -104,6 +101,7 @@ function getStyles({ theme }) {
       background: 'none',
       padding: '4px',
       boxSizing: 'border-box',
+      cursor: 'pointer',
 
       selectors: {
         ':focus': {
@@ -117,6 +115,10 @@ function getStyles({ theme }) {
         },
         ':active': {
           backgroundColor: theme.semanticColors.buttonBackgroundChecked,
+        },
+        ':disabled': {
+          opacity: 0.25,
+          cursor: 'default',
         }
       }
     },
@@ -178,8 +180,12 @@ export default defineComponent({
   },
 
   main: (props) => {
-    const paginationFacts = PaginationUtils.preparePaginationFacts(
-      props.pageIndex, props.pageSize, props.totalItemCount);
+    const
+      onChange = props.onChange,
+
+      paginationFacts =
+        PaginationUtils.preparePaginationFacts(
+          props.pageIndex, props.pageSize, props.totalItemCount);
 
     return (
       <Css getStyles={getStyles}>
@@ -189,15 +195,15 @@ export default defineComponent({
 
             switch (props.type) {
               case 'simple':
-                ret = createSimplePaginator(props, paginationFacts, classes);
+                ret = createSimplePaginator(props, paginationFacts, classes, onChange);
                 break;
 
               case 'advanced':
-                ret = createAdvancedPaginator(props, paginationFacts, classes);
+                ret = createAdvancedPaginator(props, paginationFacts, classes, onChange);
                 break;
             
               default:
-                ret = createDefaultPaginator(props, paginationFacts, classes);
+                ret = createDefaultPaginator(props, paginationFacts, classes, onChange);
             }
             
             return ret;
@@ -287,10 +293,10 @@ function createDefaultPaginator(props, facts, classes) {
   );
 }
 
-function createSimplePaginator(props, facts, classes) {
+function createSimplePaginator(props, facts, classes, onChange) {
   const
-    previousPageButton = createPreviousPageButton(props, facts, classes),
-    nextPageButton = createNextPageButton(facts, classes),
+    previousPageButton = createPreviousPageButton(props, facts, classes, onChange),
+    nextPageButton = createNextPageButton(facts, classes, onChange),
     paginationInfo =
       facts.totalPageCount !== null
         ? (facts.pageIndex + 1) + ' / ' + facts.pageCount
@@ -307,12 +313,12 @@ function createSimplePaginator(props, facts, classes) {
   );
 }
 
-function createAdvancedPaginator(props, facts, classes) {
+function createAdvancedPaginator(props, facts, classes, onChange) {
   const
-    firstPageButton = createFirstPageButton(facts, classes),
-    previousPageButton = createPreviousPageButton(facts, classes),
-    nextPageButton = createNextPageButton(facts, classes),
-    lastPageButton = createLastPageButton(facts, classes);
+    firstPageButton = createFirstPageButton(facts, classes, onChange),
+    previousPageButton = createPreviousPageButton(facts, classes, onChange),
+    nextPageButton = createNextPageButton(facts, classes, onChange),
+    lastPageButton = createLastPageButton(facts, classes, onChange);
 
   return (
     <div className={classes.paginator}>
@@ -323,10 +329,7 @@ function createAdvancedPaginator(props, facts, classes) {
       <div className={classes.page}>
         Page
         <div className={classes.pageTextFieldContainer}>
-          <TextField 
-            className={classes.pageTextField}
-            defaultValue={facts.pageIndex}
-          />
+          {createPageTextField(facts, classes, onChange)}
         </div>
         of {facts.pageCount}
       </div>
@@ -359,9 +362,14 @@ function createPageButton(pageIndex, facts, classes) {
   return ret;
 }
 
-function createFirstPageButton(facts, classes) {
+function createFirstPageButton(facts, classes, onChange) {
   return (
-    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
+    <button
+      className={classes.button}
+      onMouseDown={ev => ev.preventDefault()}
+      onClick={() => handleChange(0, onChange)}
+      disabled={facts.pageIndex === 0}
+    >
       <div className={classes.icon}>
         <IconFirstPage/>
       </div>
@@ -369,9 +377,14 @@ function createFirstPageButton(facts, classes) {
   );
 }
 
-function createPreviousPageButton(facts, classes) {
+function createPreviousPageButton(facts, classes, onChange) {
   return (
-    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
+    <button
+      className={classes.button}
+      onMouseDown={ev => ev.preventDefault()}
+      onClick={() => handleChange(facts.pageIndex - 1, onChange)}
+      disabled={facts.pageIndex === 0}
+    >
       <div className={classes.icon}>
         <IconPreviousPage/>
       </div>
@@ -387,9 +400,14 @@ function createEllipsisButton(pageIndex, facts, classes) {
   );
 }
 
-function createNextPageButton(facts, classes) {
+function createNextPageButton(facts, classes, onChange) {
   return (
-    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
+    <button
+      className={classes.button}
+      onMouseDown={ev => ev.preventDefault()}
+      onClick={() => handleChange(facts.pageIndex + 1, onChange)}
+      disabled={facts.pageIndex === facts.pageCount - 1}
+    >
       <div className={classes.icon}>
         <IconNextPage/>
       </div>
@@ -397,12 +415,61 @@ function createNextPageButton(facts, classes) {
   );
 }
 
-function createLastPageButton(facts, classes) {
+function createLastPageButton(facts, classes, onChange) {
   return (
-    <button className={classes.button} onMouseDown={ev => ev.preventDefault()}>
+    <button
+      className={classes.button}
+      onMouseDown={ev => ev.preventDefault()}
+      onClick={() => handleChange(facts.pageCount - 1, onChange)}
+      disabled={facts.pageIndex === facts.pageCount - 1}
+    >
       <div className={classes.icon}>
         <IconLastPage/>
       </div>
     </button>
   );
+}
+
+function createPageTextField(facts, classes, onChange) {
+  return (
+    <input
+      className={classes.pageTextField}
+      defaultValue={facts.pageIndex + 1}
+      
+      onBlur={
+        ev => ev.target.value = facts.pageIndex + 1
+      }
+
+      onKeyDown={
+        ev => {
+          if (ev.keyCode === 13) {
+            const
+              value = ev.target.value;
+
+            ev.target.value = facts.pageIndex + 1;
+            
+            if (onChange && !isNaN(value)
+              && Number.isInteger(parseFloat(value))) {
+              
+              const pageIndex = parseInt(value) - 1;
+
+              if (pageIndex >= 0 && pageIndex < facts.pageCount) {
+                setTimeout(() =>
+                  handleChange(pageIndex, onChange), 0);
+              }
+            }
+          }
+        }
+      }
+    />
+  );
+}
+
+function handleChange(value, onChange) {
+  if (onChange) {
+    onChange({
+      type: 'change',
+      value
+    });
+  }
 }

@@ -141,7 +141,13 @@ export default defineComponent({
     constructor(props) {
       super(props);
 
-      this.state = { selectedRows: [] };
+      this.state = {
+        pageIndex: 24,
+        pageSize: 50,
+        totalItemCount: 1234,
+        selectedRows: []
+      };
+  
       this.onSelectionChange = this.onSelectionChange.bind(this);
     }
 
@@ -219,9 +225,9 @@ export default defineComponent({
           {
             classes => {
               const
-                pageIndex = 3,
-                pageSize = 100,
-                totalItemCount = 1235,
+                pageIndex = this.state.pageIndex,
+                pageSize = this.state.pageSize,
+                totalItemCount = this.state.totalItemCount,
                 
                 commandBar =
                   this.props.commands && this.props.commands.length > 0  
@@ -288,10 +294,11 @@ function createPaginationBar(pageIndex, pageSize, totalItemCount, classes) {
           pageIndex={pageIndex}
           pageSize={pageSize}
           totalItemCount={totalItemCount}
+          onChange={ev => alert(JSON.stringify(ev))}
         />
       </HBox.Cell>
       <HBox.Cell flex={1} align="left" valign="middle" className={classes.pageSizeSelector}>
-          <PageSizeSelector />
+          <PageSizeSelector value={pageSize} onChange={ev => alert(JSON.stringify(ev))}/>
       </HBox.Cell>
       <HBox.Cell flex={0} align="right" valign="middle">
         <PaginationInfo
