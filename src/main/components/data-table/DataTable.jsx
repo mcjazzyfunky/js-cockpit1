@@ -109,7 +109,7 @@ export default defineComponent({
 
       if (rowSelection === 'multiple') {
         columnDefs.unshift({
-          width: 32,
+          width: 38,
           checkboxSelection: true, 
           headerCheckboxSelection: true,
           suppressResize: true,

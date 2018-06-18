@@ -3,7 +3,7 @@ import { defineComponent } from 'js-widgets';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 
-import { CommandBar } from 'office-ui-fabric-react';
+import { CommandBar, SearchBox } from 'office-ui-fabric-react';
 
 import HBox from '../layout/HBox';
 import Paginator from '../pagination/Paginator';
@@ -57,6 +57,16 @@ function getStyles({ theme }) {
 
     commandBar: {
       margin: '0.5rem 0'
+    },
+
+    title: {
+      fontSize: '1.125rem',
+      margin: '0.5rem 1.5rem 0.5rem 0.25rem', 
+    },
+
+    search: {
+      width: '14rem',
+      margin: '3px 0 0 0'
     },
 
     paginationBar: {
@@ -117,6 +127,12 @@ export default defineComponent({
   displayName: 'DataNavigator',
 
   properties: {
+    title: {
+      type: String,
+      nullable: true,
+      defaultValue: null
+    },
+
     commands: {
       type: Array,
       constraint: commandsSpec,
@@ -209,11 +225,32 @@ export default defineComponent({
 
               return ret;
             })
-            .toArray();
+            .toArray(),
+
+        farItems = [
+          {
+            key: 'search',
+
+            onRender: () => <div><SearchBox placeholder="Search" className={classes.search}/></div>
+          }
+        ];
+      
+
+      if (this.props.title) {
+        items.unshift({
+          key: '_title_',
+
+          onRender: () =>
+            <div className={classes.title}>
+              {this.props.title}
+            </div>
+        });
+      }
 
       return (
         <CommandBar
           items={items}
+          farItems={farItems}
           className={classes.commandBar}
         />
       );
@@ -238,10 +275,7 @@ export default defineComponent({
                 <div className={this.props.className} style={{ boxSizing: 'border-box', height: '100%', ...this.props.style}}>
                   <div className={classes.dataNavigator}>
                     <div className={classes.header}>
-                      <div style={{ fontSize: '18px', margin: '10px 10px 0 10px' }}>Customers</div>
-                      <div>
-                        {commandBar}
-                      </div>
+                      {commandBar}
                     </div>
                     <div className={classes.body}>
                       <DataTable

@@ -113,7 +113,6 @@ function getStyles({ theme }) {
 
       selectors: {
         ':focus': {
-          //border: '1px solid ' + theme.semanticColors.focusBorder,
           border: '1px solid ' + theme.palette.neutralSecondary,
           outline: 'none',
           padding: '3px',
