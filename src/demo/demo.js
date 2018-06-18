@@ -8,7 +8,7 @@ import BorderLayout from '../main/components/layout/BorderLayout';
 import Logo from '../main/components/misc/Logo';
 import UserMenu from '../main/components/misc/UserMenu';
 import SideMenu from '../main/components/sidebar/SideMenu';
-import DataNavigator from '../main/components/data-table/DataNavigator';
+import DataNavigator from '../main/components/data-views/DataNavigator';
 import LogoIcon from 'svg-react-loader?name=LogoIcon!../../node_modules/material-design-icons/file/svg/production/ic_cloud_queue_24px.svg';
 
 import initSystem from '../main/system/initSystem';
@@ -50,10 +50,11 @@ const
     <BorderLayout>
       <BorderLayout.TopStart
         style={{
-          padding: '0 0.5rem',
+          padding: '0.125rem 0.625rem 0 0.625rem',
           color: 'white',
           backgroundColor: 'rgb(0, 120, 212)',
-          height: '2.75rem',
+          height: '3rem',
+          boxSizing: 'border-box',
         }}
       >
         <Logo
@@ -73,7 +74,7 @@ const
           color: 'white',
           fill: 'white',
           backgroundColor: 'rgb(0, 120, 212)',
-          height: '2.75rem',
+          height: '3rem',
           overflow: 'hidden',
         }}
       >
@@ -83,8 +84,8 @@ const
           color: 'white',
           fill: 'white',
           backgroundColor: 'rgb(0, 120, 212)',
-          height: '2.75rem',
-          verticalAlign: 'middle'
+          height: '3rem',
+          verticalAlign: 'middle',
         }}
       >
         <UserMenu username="Jane Doe"/>

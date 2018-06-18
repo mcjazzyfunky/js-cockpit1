@@ -4,12 +4,12 @@ import { registerIcons } from '@uifabric/styling';
 export default function initSystem() {
   registerIcons({
     icons: {
-      'add': <i className="material-icons">add_circle</i>,
+      'add': <i className="icon ion-md-add-circle" style={{ fontSize: '1.25rem' }}/>,
+      'delete': <i className="icon ion-md-remove-circle" style={{ fontSize: '1.25rem' }}/>,
+      'download': <i className="icon ion-md-download" style={{ fontSize: '1.25rem' }}/>,
       'calendar': <i className="icon ion-ios-calendar" style={{ fontSize: '115%' }}/>,
       'up': <i className="icon ion-md-arrow-up" style={{ fontSize: '100%' }}/>,
-      'delete': <i className="material-icons">remove_circle</i>,
-      'down': <i className="icon ion-md-arrow-down" style={{ fontSize: '100%' }}/>,
-      'download': <i className="material-icons">save_alt</i>, 
+      'down': <i className="icon ion-ios-arrow-down" style={{ fontSize: '100%' }}/>,
       'chevrondown': <i className="ion-ios-arrow-down" style={{ fontSize: '125%' }}/>,
       'chevronup': <i className="icon ion-ios-arrow-up" style={{ fontSize: '125%' }}/>,
       'chevronleft': <i className="icon ion-ios-arrow-back" style={{ fontSize: '125%' }}/>,

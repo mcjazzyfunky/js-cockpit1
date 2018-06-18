@@ -9,7 +9,7 @@ import HBox from '../layout/HBox';
 import Paginator from '../pagination/Paginator';
 import PageSizeSelector from '../pagination/PageSizeSelector';
 import PaginationInfo from '../pagination/PaginationInfo';
-import DataTable from '../data-table/DataTable';
+import DataTable from './DataTable';
 
 import Css from '../styling/Css';
 

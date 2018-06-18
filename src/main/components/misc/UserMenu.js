@@ -15,19 +15,19 @@ const styles = {
 
   avatar: {
     margin: 0,
-    padding: 0,
+    padding: '0.125rem 0 0 0',
     overflow: 'hidden',
     textAlign: 'center',
     verticalAlign: 'middle',
   },
 
   username: {
-    margin: '-0.25rem 0.5rem 0 0.5rem',
+    margin: '0 0.5rem',
     varticalAlign: 'middle'
   },
 
   logout: {
-    padding: '0.5rem 0 0.5rem 0.75rem',
+    padding: '0.625rem 0 0.5rem 0.875rem',
     borderWidth: '0 0 0 1px',
     borderColor: 'inherit',
     borderStyle: 'dotted'
