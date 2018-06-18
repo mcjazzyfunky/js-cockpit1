@@ -40,6 +40,7 @@ export default defineComponent({
       constraint:
         Spec.and(
           Spec.arrayOf(Spec.positiveInteger),
+          Spec.prop('length', Spec.greater(0)),
           Spec.unique),
 
       defaultValue:
@@ -63,6 +64,12 @@ export default defineComponent({
       nullable: true,
       defaultValue: null
     }
+  },
+
+  validate(props) {
+    return props.options.includes(props.value)
+      ? null
+      : new Error('Property "value" is not an allowed page size')
   },
 
   main: ({ value, options, className, style, onChange }) => {
@@ -92,7 +99,9 @@ export default defineComponent({
                       onClick:
                         !onChange
                           ? null
-                          : () => onChange({ type: 'change', value: it })
+                          : () => setTimeout(
+                              () => onChange({ type: 'change', value: it }),
+                              100)
                     }))
                     .toArray()
               }}

@@ -81,18 +81,26 @@ function getStyles({ theme }) {
 
     pageTextField: {
       width: '3rem',
-      padding: '2px',
-      maxHeight: '1rem',
-    
+      padding: '2px 0.375rem',
+      height: '1.5rem',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: theme.semanticColors.inputBorder,
+      outline: 'none',
+
       selectors: {
-        '.ms-TextField-fieldGroup': {
-          height: '1.75rem',
+        ':hover': {
+          borderColor: theme.semanticColors.inputBorderHovered,
         },
 
-        'input': {
-          padding: '2px', 
+        ':focus': {
+          borderColor: theme.semanticColors.inputFocusBorderAlt
+        },
+
+        ':active': {
+          borderColor: theme.semanticColors.inputFocusBorderAlt
         }
-      }
+      },
     },
 
     button: {
@@ -124,7 +132,7 @@ function getStyles({ theme }) {
     },
 
     icon: {
-      transform: 'scale(0.75,0.75) translate(0, 4px)'
+      transform: 'scale(0.75,0.75) translate(0, 3px)'
     }
   };
 }
@@ -455,7 +463,7 @@ function createPageTextField(facts, classes, onChange) {
 
               if (pageIndex >= 0 && pageIndex < facts.pageCount) {
                 setTimeout(() =>
-                  handleChange(pageIndex, onChange), 0);
+                  handleChange(pageIndex, onChange), 100);
               }
             }
           }

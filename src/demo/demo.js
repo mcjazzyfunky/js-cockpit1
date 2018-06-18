@@ -95,8 +95,10 @@ const
           borderStyle: 'solid',
           borderColor: '#d8d8d8',
           whiteSpace: 'nowrap',
-          height: '100%',
-          minWidth: '12rem'
+          minHeight: '100%',
+          minWidth: '12rem',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
         }}
       >
         <SideMenu
@@ -153,6 +155,8 @@ const
       >
         <DataNavigator
           style={{ padding: '0.5rem 0.75rem' }}
+
+          onSelectionChange={ ev => alert(JSON.stringify(ev))}
 
           commands={[
             {
