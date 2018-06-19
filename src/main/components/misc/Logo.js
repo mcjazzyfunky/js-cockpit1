@@ -15,15 +15,15 @@ function getStyles() {
     },
 
     vendor: {
-      fontSize: '0.75rem',
+      fontSize: '0.875rem',
       padding: 0,
-      margin: 0
+      margin: 0,
     },
 
     title: {
       fontSize: '1.125rem',
       padding: 0,
-      lineHeight: '1.25rem'
+      lineHeight: '1.25rem',
     },
 
     cells: {

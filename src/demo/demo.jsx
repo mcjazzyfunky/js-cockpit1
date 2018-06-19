@@ -9,9 +9,11 @@ import Logo from '../main/components/misc/Logo';
 import UserMenu from '../main/components/misc/UserMenu';
 import SideMenu from '../main/components/sidebar/SideMenu';
 import DataNavigator from '../main/components/data-views/DataNavigator';
+import DataForm from '../main/components/data-views/DataForm';
 import LogoIcon from 'svg-react-loader?name=LogoIcon!../../node_modules/material-design-icons/file/svg/production/ic_cloud_queue_24px.svg';
 
 import initSystem from '../main/system/initSystem';
+import TextField from '../main/components/form/TextField';
 
 initSystem();
 
@@ -45,6 +47,148 @@ const
         />
       </LoginScreen.Main>
     </LoginScreen>,
+
+  dataNavigator =
+    <DataNavigator
+      title="Customer"
+
+      style={{ padding: '0.5rem 0.75rem' }}
+
+      commands={[
+        {
+          type: 'general',
+          text: 'New',
+          icon: 'add',
+        },
+        {
+          type: 'multi',
+          text: 'Delete',
+          icon: 'delete',
+        },
+        {
+          type: 'menu',
+          text: 'Export',
+          icon: 'download',
+
+          items: [
+            {
+              type: 'single',
+              text: 'Export as CSV file',
+            },
+            {
+              type: 'single',
+              text: 'Export as Excel file',
+            }
+          ]
+        }
+      ]}
+    />,
+
+  dataForm =
+    <DataForm
+      title="Customer"
+      subtitle="Edit"
+
+      commands={[
+        {
+          key: 'save',
+          text: 'Save',
+          icon: 'add'
+        },
+        {
+          key: 'reset',
+          text: 'Reset',
+          icon: 'remove'
+        }
+      ]}
+
+      parts={[
+        {
+          type: 'default',
+
+          sections: [
+            {
+              type: 'default',
+
+              fields: [
+                {
+                  type: 'default',
+                  label: 'Customer no.',
+                  component: <TextField />
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'tabbed',
+
+          tabs: [
+            {
+              title: 'General',
+      
+              sections: [
+                {
+                  type: 'default',
+                  title: 'Personal information',
+
+                  fields: [
+                    {
+                      type: 'default',
+                      label: 'First name',
+
+                      component:
+                        <TextField
+                          key="firstName"
+                          name="firstName"
+                        />,
+                    },
+                    { 
+                      type: 'default',
+                      label: 'Last name',
+
+                      component:
+                        <TextField
+                          key="lastName"
+                          name="firstName"
+                        />,
+                    },
+                    {
+                      type: 'default',
+                      label: 'City',
+
+                      component:
+                        <TextField
+                          key="city"
+                          name="city"
+                        />
+                    }
+                  ]
+                },
+                {
+                  type: 'default',
+                  title: 'Account information',
+
+                  fields: [
+                    {
+                      type: 'default',
+                      label: 'E-Mail',
+                      component: <TextField/>
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              title: 'Contacts'
+            },
+            {
+              title: 'Extras'
+            }
+          ]
+        }
+      ]}
+    />,
 
   controlCenter =
     <BorderLayout>
@@ -154,42 +298,7 @@ const
           height: '100%'
         }}
       >
-        <DataNavigator
-          title="Customer"
-
-          style={{ padding: '0.5rem 0.75rem' }}
-
-          onSelectionChange={ ev => alert(JSON.stringify(ev))}
-
-          commands={[
-            {
-              type: 'general',
-              text: 'New',
-              icon: 'add',
-            },
-            {
-              type: 'multi',
-              text: 'Delete',
-              icon: 'delete',
-            },
-            {
-              type: 'menu',
-              text: 'Export',
-              icon: 'download',
-
-              items: [
-                {
-                  type: 'single',
-                  text: 'Export as CSV file',
-                },
-                {
-                  type: 'single',
-                  text: 'Export as Excel file',
-                }
-              ]
-            }
-          ]}
-        />
+        { dataForm }
       </BorderLayout.MiddleCenter>
     </BorderLayout>;
 

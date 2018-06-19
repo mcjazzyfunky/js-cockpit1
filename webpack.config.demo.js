@@ -5,7 +5,7 @@ const
 module.exports = () => {
   return {
     mode: 'development',
-    entry: './src/demo/demo.js',
+    entry: './src/demo/demo',
     devtool: 'inline-source-map',
     devServer: {
       openPage: 'demo/demo.html',
@@ -55,7 +55,6 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         filename: 'demo/demo.html',
         template: 'src/demo/demo.html',
-        css: ['src/demo/demo.less'],
         inject: 'body'
       })
     ]

@@ -11,7 +11,7 @@ function getStyles({ theme }) {
   return {
     container: {
       width: '20rem',
-      minHeight: '22rem',
+      minHeight: '23rem',
       textAlign: 'left',
     },
 
