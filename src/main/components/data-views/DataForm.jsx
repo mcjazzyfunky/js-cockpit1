@@ -13,8 +13,13 @@ function getStyles({ theme }) {
     dataForm: {
     },
 
+    title: {
+      fontSize: '1.125rem',
+      padding: '0.5rem 2rem 0.5rem 0.5rem',
+    },
+
     part: {
-      margin: '1rem 2rem 1rem 2rem',
+      margin: '0 1rem',
     },
 
     partTitle: {
@@ -48,9 +53,7 @@ function getStyles({ theme }) {
 
     sectionFieldLabel: {
       whiteSpace: 'nowrap',
-      xtextAlign: 'end',
       margin: '0.375rem 0 0 0.75rem',
-      xwidth: '9rem',
     },
 
     sectionFieldContainer: {
@@ -110,45 +113,40 @@ export default defineComponent({
       );
     }
 
-    __createToolbar() {
+    __createToolbar(classes) {
       let ret = null;
 
       const { title, subtitle, commands } = this.props;
    
       if (title || subtitle || commands && commands.length > 0) {
-
         const items = [];
 
-        if (title) {
+        let fullTitle = title || '';
+
+        if (subtitle) {
+          fullTitle += fullTitle ? ' - ' + subtitle : subtitle;
+        }
+
+        if (fullTitle) {
           items.push({
             key: '_title_',
 
             onRender() {
               return (
-                <div>{title}</div>
+                <div className={ classes.title }>{fullTitle}</div>
               );
             }
           });
         }
         
-        if (subtitle) {
-          items.push({
-            key: '_subtitle_',
-
-            onRender() {
-              return (
-                <div>{subtitle}</div>
-              );
-            }
-          });
-        }
-
         if (commands) {
           commands.forEach(command => {
             items.push({
               key: command.key,
               text: command.text,
-              icon: 'add'
+              iconProps: {
+                iconName: command.icon
+              }
             });
           });
         }
@@ -303,11 +301,11 @@ export default defineComponent({
     __createDefaultField(field, classes) {
       return (
         <Fragment>
-          <div style={{ display: 'flex', width: '10rem' }}>
+          <div style={{ display: 'flex', width: '12rem' }}>
             <label className={classes.sectionFieldLabel} style={{ flexGrow: 0 }}>
               {field.label}
             </label>
-            <div style={{ margin: '0 5px 0 8px', height: '1.75rem', display: 'inline-block', flexGrow: 1, borderWidth: '0 0 1px 0', borderStyle: 'dashed', borderColor: '#bbb' }}>
+            <div style={{ margin: '0 5px 0 8px', height: '1.625rem', display: 'inline-block', flexGrow: 1, borderWidth: '0 0 1px 0', borderStyle: 'dashed', borderColor: '#ccc' }}>
           
             </div>
           </div>
