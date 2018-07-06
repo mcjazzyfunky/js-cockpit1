@@ -52,7 +52,7 @@
     "js-seq": "0.0.2",
     "js-spec": "^0.1.32",
     "js-widgets": "0.0.16",
-    "office-ui-fabric-react": "^6.23.0",
+    "office-ui-fabric-react": "^6.26.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-dom-factories": "^1.0.2",
