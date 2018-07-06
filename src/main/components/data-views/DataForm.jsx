@@ -49,7 +49,7 @@ function getStyles({ theme }) {
     sectionFieldLabel: {
       whiteSpace: 'nowrap',
       xtextAlign: 'end',
-      margin: '0.25rem 0 0 0.75rem',
+      margin: '0.375rem 0 0 0.75rem',
       xwidth: '9rem',
     },
 
@@ -307,7 +307,7 @@ export default defineComponent({
             <label className={classes.sectionFieldLabel} style={{ flexGrow: 0 }}>
               {field.label}
             </label>
-            <div style={{ margin: '0 5px 0 6px', height: '23px', display: 'inline-block', flexGrow: 1, borderWidth: '0 0 1px 0', borderStyle: 'dashed', borderColor: '#bbb' }}>
+            <div style={{ margin: '0 5px 0 8px', height: '1.75rem', display: 'inline-block', flexGrow: 1, borderWidth: '0 0 1px 0', borderStyle: 'dashed', borderColor: '#bbb' }}>
           
             </div>
           </div>
