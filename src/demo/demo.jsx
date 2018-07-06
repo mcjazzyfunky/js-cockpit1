@@ -167,7 +167,6 @@ const
                 },
                 {
                   type: 'default',
-                  title: 'Personal information',
 
                   fields: [
                     {

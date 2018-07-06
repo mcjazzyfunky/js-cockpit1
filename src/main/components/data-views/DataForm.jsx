@@ -303,7 +303,7 @@ export default defineComponent({
     __createDefaultField(field, classes) {
       return (
         <Fragment>
-          <div style={{ display: 'flex', width: '8rem' }}>
+          <div style={{ display: 'flex', width: '10rem' }}>
             <label className={classes.sectionFieldLabel} style={{ flexGrow: 0 }}>
               {field.label}
             </label>
