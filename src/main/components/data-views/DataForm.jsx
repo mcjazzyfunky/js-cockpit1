@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, Component } from 'react';
 import { defineComponent, isNode } from 'js-widgets';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
@@ -22,35 +22,40 @@ function getStyles({ theme }) {
       margin: '0 0 0.5rem 0',
     },
 
+    tabbedPane:  {
+      margin: '1rem',
+    },
+
     tabContent: {
       margin: '1.5rem 1.5rem',
     },
 
     section: {
+      display: 'inline-grid',
+      gridTemplateColumns: '0fr 1fr',
+      gridRowGap: '0.5rem',
       width: '30rem',
-      margin: '0 0 1rem 0',
+      margin: '0 2rem 1.5rem 0',
     },
 
     sectionTitle: {
+      gridColumn: '1 / 3',
+      fontSize: '0.8125rem',
       fontWeight: 'bold',
       margin: '0 0 0.5rem 0',
+      opacity: 0.7,
     },
 
-    field: {
-      selectors: {
-        '& > label': {
-          width: '6rem',
-          float: 'left',
-          textAlign: 'end',
-          padding: '0.5rem 0.5rem'
-        },
+    sectionFieldLabel: {
+      whiteSpace: 'nowrap',
+      xtextAlign: 'end',
+      margin: '0.25rem 0 0 0.75rem',
+      xwidth: '9rem',
+    },
 
-        '& > div': {
-          display: 'inline-block',
-          margin: '0.25rem',
-        }
-      }
-    }
+    sectionFieldContainer: {
+      paddingLeft: '0.5rem',
+    },
   };
 }
 
@@ -86,7 +91,7 @@ export default defineComponent({
     }
   },
 
-  main: class extends React.Component {
+  main: class extends Component {
     constructor(props) {
       super(props);
     }
@@ -258,7 +263,9 @@ export default defineComponent({
       }
 
       return (
-        <Pivot>{pivotItems}</Pivot>
+        <Pivot className={classes.tabbedPane}>
+          {pivotItems}
+        </Pivot>
       );
     }
 
@@ -295,14 +302,19 @@ export default defineComponent({
 
     __createDefaultField(field, classes) {
       return (
-        <div className={classes.field}>
-          <label>
-            {field.label}
-          </label>
-          <div>
+        <Fragment>
+          <div style={{ display: 'flex', width: '8rem' }}>
+            <label className={classes.sectionFieldLabel} style={{ flexGrow: 0 }}>
+              {field.label}
+            </label>
+            <div style={{ margin: '0 5px 0 6px', height: '23px', display: 'inline-block', flexGrow: 1, borderWidth: '0 0 1px 0', borderStyle: 'dashed', borderColor: '#bbb' }}>
+          
+            </div>
+          </div>
+          <div className={classes.sectionFieldContainer}>
             {field.component}
           </div>
-        </div>
+        </Fragment>
       );
     }
   }

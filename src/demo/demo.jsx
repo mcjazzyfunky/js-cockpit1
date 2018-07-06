@@ -167,6 +167,43 @@ const
                 },
                 {
                   type: 'default',
+                  title: 'Personal information',
+
+                  fields: [
+                    {
+                      type: 'default',
+                      label: 'First name',
+
+                      component:
+                        <TextField
+                          key="firstName"
+                          name="firstName"
+                        />,
+                    },
+                    { 
+                      type: 'default',
+                      label: 'Last name',
+
+                      component:
+                        <TextField
+                          key="lastName"
+                          name="firstName"
+                        />,
+                    },
+                    {
+                      type: 'default',
+                      label: 'City',
+
+                      component:
+                        <TextField
+                          key="city"
+                          name="city"
+                        />
+                    }
+                  ]
+                },
+                {
+                  type: 'default',
                   title: 'Account information',
 
                   fields: [
@@ -280,7 +317,7 @@ const
                     id: 11
                   },
                   {
-                    title: 'Cagegories',
+                    title: 'Categories',
                     id: 12 
                   },
                   {
