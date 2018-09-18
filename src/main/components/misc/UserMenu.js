@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent } from 'js-scenery/react';
 
 import IconLogout from 'svg-react-loader?name=IconLogout!../../../../node_modules/material-design-icons/action/svg/production/ic_power_settings_new_24px.svg';
 import IconAvatar from 'svg-react-loader?name=IconLogout!../../../../node_modules/material-design-icons/social/svg/production/ic_person_24px.svg';
@@ -35,7 +35,7 @@ const styles = {
 };
 
 export default defineComponent({
-  displayName: 'UserCtrl',
+  displayName: 'UserMenu',
 
   properties: {
     username: {
@@ -43,7 +43,7 @@ export default defineComponent({
     }
   },
 
-  main({ username }) {
+  render({ username }) {
     return (
       <div style={styles.userCtrl}>
         <div style={styles.avatar}>

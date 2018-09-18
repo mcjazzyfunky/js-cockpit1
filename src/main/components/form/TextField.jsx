@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { TextField } from 'office-ui-fabric-react';
 
@@ -55,9 +55,12 @@ export default defineComponent({
     form: {
       type: FormMgr,
       nullable: true,
-      defaultValue: null,
-      inject: FormCtx
+      defaultValue: null
     }
+  },
+
+  inject: {
+    form: FormCtx
   },
 
   main: class extends React.Component {
@@ -73,6 +76,7 @@ export default defineComponent({
             : '';
 
         props.form.setValueByField(props.name, value);
+
       }
     }
 

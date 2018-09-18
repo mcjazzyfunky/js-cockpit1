@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent, isNodeOfType } from 'js-widgets';
+import { defineComponent, isElementsOf } from 'js-scenery/react';
 import { Seq } from 'js-seq';
 import Css from '../styling/Css';
 import classNames from 'classnames';
@@ -47,13 +47,13 @@ const Card = defineComponent({
     },
 
     children: {
-      constraint: it => isNodeOfType([Card.Header, Card.Body, Card.Footer], it),
+      constraint: it => isElementsOf([Card.Header, Card.Body, Card.Footer], it),
       nullable: true,
       defaultValue: null
     }
   },
 
-  main({ children, className }) {
+  render({ children, className }) {
     const
       header = [],
       body = [],
@@ -100,7 +100,7 @@ const Card = defineComponent({
 Card.Header = defineComponent({
   displayName: 'Card.Header',
 
-  main() {
+  render() {
     throw new Error('Card.Header can only be used as child of component Card');
   }
 });
@@ -108,7 +108,7 @@ Card.Header = defineComponent({
 Card.Body = defineComponent({
   displayName: 'Card.Body',
 
-  main() {
+  render() {
     throw new Error('Card.Body can only be used as child of component Card');
   }
 });
@@ -116,7 +116,7 @@ Card.Body = defineComponent({
 Card.Footer = defineComponent({
   displayName: 'Card.Footer',
 
-  main() {
+  render() {
     throw new Error('Card.Footer can only be used as child of component Card');
   }
 });

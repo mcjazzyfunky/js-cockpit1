@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 
@@ -72,7 +72,7 @@ export default defineComponent({
       : new Error('Property "value" is not an allowed page size')
   },
 
-  main: ({ value, options, className, style, onChange }) => {
+  render({ value, options, className, style, onChange }) {
     return (
       <div className={className} style={style}>
         <div style={styles.pageSizeSelector}>

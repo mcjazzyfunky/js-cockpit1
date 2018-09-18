@@ -1,8 +1,7 @@
 import React from 'react';
-import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
+import { defineComponent, isNode, isElementsOf } from 'js-scenery/react';
 import { Seq } from 'js-seq';
 import { Spec } from 'js-spec';
-import Color from 'color';
 
 import Css from '../styling/Css';
 
@@ -74,7 +73,7 @@ const BorderLayout = defineComponent({
     },
 
     children: {
-      constraint: Spec.lazy(() => isNodeOfType([
+      constraint: Spec.lazy(() => isElementsOf([
         BorderLayout.TopStart,
         BorderLayout.TopCenter,
         BorderLayout.TopEnd,
@@ -91,7 +90,7 @@ const BorderLayout = defineComponent({
     }
   },
 
-  main: ({ children }) => {
+  render: ({ children }) => {
     return (
       <Css getStyles={getStyles}>
         {
@@ -203,7 +202,7 @@ BorderLayout.TopStart = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.TopStart can only be '
       + 'used as children of BorderLayout');
   }
@@ -232,7 +231,7 @@ BorderLayout.TopCenter = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.TopCenter can only be '
       + 'used as children of BorderLayout');
   }
@@ -261,7 +260,7 @@ BorderLayout.TopEnd = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.TopStart can only be '
       + 'used as children of BorderLayout');
   }
@@ -290,7 +289,7 @@ BorderLayout.MiddleStart = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.MiddleStart can only be '
       + 'used as children of BorderLayout');
   }
@@ -319,7 +318,7 @@ BorderLayout.MiddleCenter = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.MiddleCenter can only be '
       + 'used as children of BorderLayout');
   }
@@ -348,7 +347,7 @@ BorderLayout.MiddleEnd = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.MiddleEnd can only be '
       + 'used as children of BorderLayout');
   }
@@ -377,7 +376,7 @@ BorderLayout.BottomStart = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.BottomStart can only be '
       + 'used as children of BorderLayout');
   }
@@ -406,7 +405,7 @@ BorderLayout.BottomCenter = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.BottomCenter can only be '
       + 'used as children of BorderLayout');
   }
@@ -435,7 +434,7 @@ BorderLayout.BottomEnd = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type BorderLayout.BottomEnd can only be '
       + 'used as children of BorderLayout');
   }

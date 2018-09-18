@@ -46,6 +46,8 @@ module.exports = () => {
       extensions: ['.js', '.jsx'],
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: {
+        'js-scenery/react$': path.resolve(__dirname, 'node_modules/js-scenery/dist/js-scenery.react.umd.production.js'),
+        'js-spec$': path.resolve(__dirname, 'node_modules/js-spec/dist/js-spec.umd.development.js')
       }
     },
     output: {

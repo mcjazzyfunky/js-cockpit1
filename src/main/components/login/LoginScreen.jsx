@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
+import { defineComponent, isNode, isElementsOf } from 'js-scenery/react';
 import { Seq } from 'js-seq';
 import Color from 'color';
 
@@ -39,13 +39,13 @@ const LoginScreen = defineComponent({
 
   properties: {
     children: {
-      constraint: it => isNodeOfType([LoginScreen.Main], it),
+      constraint: it => isElementsOf([LoginScreen.Main], it),
       nullable: true,
       defaultValue: null
     }
   },
 
-  main({ children }) {
+  render({ children }) {
     let mainContent = null;
 
     Seq.adjust(children).forEach(({ type, props }) => {
@@ -96,7 +96,7 @@ LoginScreen.Main = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type LoginScreen.Main can only be '
       + 'used as children of LoginScreen');
   }

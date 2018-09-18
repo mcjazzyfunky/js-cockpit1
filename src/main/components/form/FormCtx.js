@@ -1,4 +1,4 @@
-import { defineContext } from 'js-widgets';
+import { defineContext } from 'js-scenery/react';
 
 import FormMgr from './FormMgr';
 

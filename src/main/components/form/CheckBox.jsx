@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { Checkbox } from 'office-ui-fabric-react';
 
@@ -42,7 +42,7 @@ export default defineComponent({
       type: FormMgr,
       nullable: true,
       defaultValue: null,
-      inject: FormCtx
+//      inject: FormCtx
     },
 
     className: {
@@ -63,7 +63,7 @@ export default defineComponent({
       super(props);
 
       this.__onChange = this.__onChange.bind(this);
-
+/*
       if (props.name && props.form) {
         const value =
           typeof props.checked === 'boolean'
@@ -72,6 +72,7 @@ export default defineComponent({
 
         props.form.setValueByField(props.name, value);
       }
+*/
     }
 
     __onChange(_, value) {

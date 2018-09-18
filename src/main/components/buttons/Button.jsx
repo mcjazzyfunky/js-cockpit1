@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent } from 'js-scenery/react';
 import { DefaultButton, CommandBarButton } from 'office-ui-fabric-react';
 
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
     }
   },
 
-  main(props) {
+  render(props) {
     return <CommandBarButton style={{ padding: 0 }}>xxxyy</CommandBarButton>;
   }
 });

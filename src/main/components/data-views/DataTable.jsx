@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent } from 'js-widgets';
+import { defineComponent } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 

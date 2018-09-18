@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent, isNode } from 'js-widgets';
+import { defineComponent, isNode } from 'js-scenery/react';
 import Css from '../styling/Css';
 
 function getStyles() {
@@ -82,7 +82,7 @@ export default defineComponent({
     }
   },
 
-  main: ({ icon, vendor, title, className, style }) => {
+  render({ icon, vendor, title, className, style }) {
     return (
       <Css getStyles={getStyles}>
         {

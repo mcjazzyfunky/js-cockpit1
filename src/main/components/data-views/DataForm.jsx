@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { defineComponent, isNode } from 'js-widgets';
+import { defineComponent, isNode } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 

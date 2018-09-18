@@ -1,5 +1,5 @@
-import React from 'react';
-import { defineComponent, isNode } from 'js-widgets';
+import React, { Component } from 'react';
+import { defineComponent, isNode } from 'js-scenery/react';
 import Card from '../card/Card';
 import Form from '../form/Form';
 import { PrimaryButton, Spinner, SpinnerSize } from 'office-ui-fabric-react';
@@ -84,7 +84,7 @@ export default defineComponent({
     }
   },
 
-  main: class extends React.Component {
+  main: class extends Component {
     constructor(props) {
       super(props);
 

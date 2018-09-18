@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
+import { defineComponent, isNode, isElementsOf } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 import classNames from 'classnames';
@@ -25,7 +25,7 @@ const HBox = defineComponent({
 
     children: {
       constraint:
-        Spec.valid(it => isNodeOfType(HBox.Cell, it))
+        Spec.valid(it => isElementsOf(HBox.Cell, it))
           .usingHint('Must be children of type HBox'),
 
       nullable: true,
@@ -45,7 +45,7 @@ const HBox = defineComponent({
     }
   },
 
-  main: ({ height, width, children, className }) => {
+  render({ height, width, children, className }) {
     let sumFlex = 0;
 
     Seq.adjust(children).forEach(cell => {
@@ -132,7 +132,7 @@ HBox.Cell = defineComponent({
     }
   },
 
-  main: () => {
+  render() {
     throw new Error('HBox.Cell can only be used as a child of HBox');
   } 
 });

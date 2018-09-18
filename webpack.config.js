@@ -13,7 +13,7 @@ module.exports = env => {
   return {
     mode: modeName,
     entry: {
-      'js-admin-widgets': './src/main/js-admin-widgets.js',
+      'js-cockpit': './src/main/js-cockpit.js',
     },
     devtool: modeName === 'production' ? false : 'inline-source-map',
     module: {

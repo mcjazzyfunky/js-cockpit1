@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent, isNode } from 'js-widgets';
+import { defineComponent, isNode } from 'js-scenery/react';
 
 import FormMgr from './FormMgr';
 import FormCtx from './FormCtx';

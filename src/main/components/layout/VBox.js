@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineComponent, isNode, isNodeOfType } from 'js-widgets';
+import { defineComponent, isNode, isElementsOf } from 'js-scenery/react';
 import { Spec } from 'js-spec';
 import { Seq } from 'js-seq';
 
@@ -29,7 +29,7 @@ const VBox = defineComponent({
 
     children: {
       constraint:
-        Spec.valid(it => isNodeOfType(VBox.Cell, it))
+        Spec.valid(it => isElementsOf(VBox.Cell, it))
           .usingHint('Must be children of type VBox'),
 
       nullable: true,
