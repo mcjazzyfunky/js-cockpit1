@@ -1,0 +1,7 @@
+{
+  "name": "js-react-layouts",
+  "mode": "file",
+  "out": "dist/docs/api",
+  "theme": "minimal",
+  "ignoreCompilerErrors": "true"
+}
