@@ -3,7 +3,7 @@ import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import Css from '../styling/Css'
 
-function getStyles() {
+function getStyles({ theme }: any) {
   return {
     container: {
       display: 'table',
@@ -14,7 +14,7 @@ function getStyles() {
     icon: {
       fontSize: '1rem'
     },
-
+    
     vendor: {
       fontSize: '0.875rem',
       padding: 0,
@@ -57,7 +57,7 @@ type Props = {
 }
 
 export default defineComponent<Props>({
-  displayName: 'Logo',
+  displayName: 'Brand',
 
   properties: {
     icon: {
