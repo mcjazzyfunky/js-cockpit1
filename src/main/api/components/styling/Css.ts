@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { classNamesFunction, customizable } from 'office-ui-fabric-react';
-console.log(1, Object.keys((window as any)).sort())
+
 const CssConsumer = (
     { props, getStyles, theme, children }: { props: any, getStyles: any, theme: any, children: any } // TODO
   ) => {

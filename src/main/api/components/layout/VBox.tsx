@@ -18,40 +18,33 @@ const Cell = defineComponent<CellProps>({
   properties: {
     grow: {
       type: Number,
-      optional: true,
       validate: Spec.nonnegativeFloat
     },
     
     shrink: {
       type: Number,
-      optional: true,
       validate: Spec.nonnegativeFloat
     },
 
     horizontalAlign: {
       type: String,
-      optional: true,
       validate: Spec.oneOf('start', 'center', 'end'),
     },
 
     verticalAlign: {
       type: String,
-      optional: true,
       validate: Spec.oneOf('top', 'middle', 'bottom'),
     },
 
     className: {
-      type: String,
-      optional: true
+      type: String
     },
 
     style: {
-      type: Object,
-      optional: true
+      type: Object
     },
 
     children: {
-      optional: true,
       validate: withChildren(Spec.all(isNode))
     },
   },
@@ -73,17 +66,14 @@ const VBox = defineComponent<VBoxProps>({
 
   properties: {
     className: {
-      type: String,
-      optional: true
+      type: String
     },
 
     style: {
-      type: Object,
-      optional: true
+      type: Object
     },
 
     children: {
-      optional: true,
       validate: withChildren(Spec.all(isElementOfType(Cell)))
     }
   },

@@ -6,9 +6,12 @@ import Css from '../styling/Css';
 function getStyles({ theme }: { theme: ITheme}) { // TODO
   return {
     container: {
+      padding: '1rem 0.8rem',
       width: '20rem',
       minHeight: '23rem',
       textAlign: 'left',
+      backgroundColor: 'white',
+      border: '1px solid #888',
     },
 
     remember: {
@@ -67,13 +70,11 @@ export default defineComponent<LoginFormProps>({
 
   properties: {
     header: {
-      validate: isNode,
-      optional: true
+      validate: isNode
     },
 
     performLogin: {
-      type: Function,
-      optional: true
+      type: Function
     },
 
     className: {
@@ -89,7 +90,7 @@ export default defineComponent<LoginFormProps>({
     }
   },
 
-  main: class extends React.Component<LoginFormProps, LoginFormState> {
+  base: class extends React.Component<LoginFormProps, LoginFormState> {
     constructor(props: LoginFormProps) {
       super(props);
 

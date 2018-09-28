@@ -7,8 +7,10 @@ import Color from 'color'
 
 function getStyles({ theme }: { theme: ITheme }): Object { // TODO
   const
-    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.2).desaturate(0.4),
+    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
     gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
+    //gradientStartColor = Color('white'),
+    //gradientEndColor = Color('#888')
 
   return {
     outerContainer: {
@@ -45,18 +47,15 @@ const Content = defineComponent<LoginScreenContentProps>({
 
   properties: {
     className: {
-      type: String,
-      optional: true
+      type: String
     },
 
     style: {
-      //type: Object,
-      optional: true
+      type: Object,
     },
 
     children: {
-      //validate: isNode,
-      optional: true
+      validate: isNode
     }
   },
 
@@ -75,7 +74,6 @@ const LoginScreen = defineComponent<LoginScreenProps>({
 
   properties: {
     children: {
-      optional: true, 
       validate: withChildren(Spec.all(isElementOfType(Content)))
     }
   },
