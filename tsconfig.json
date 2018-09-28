@@ -13,7 +13,7 @@
       "node_modules/@types"
     ],
     "types": [
-      "node", "react", "react-dom", "mocha", "chai"
+      "node", "react", "react-dom", "mocha", "chai","color"
     ]
   },
   "files": [

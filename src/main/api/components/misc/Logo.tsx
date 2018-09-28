@@ -1,6 +1,7 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import DefaultAppIcon from '../../../internal/components/icons/DefaultAppIcon'
+import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
-import Css from '../styling/Css';
+import Css from '../styling/Css'
 
 function getStyles() {
   return {
@@ -44,15 +45,15 @@ function getStyles() {
       textAlign: 'left',
       verticalAlign: 'middle'
     }
-  };
+  }
 }
 
 type Props = {
   icon?: ReactNode,
   vendor?: string,
-  title: string,
-  className: string,
-  style: CSSProperties
+  title?: string,
+  className?: string,
+  style?: CSSProperties
 }
 
 export default defineComponent<Props>({
@@ -84,41 +85,39 @@ export default defineComponent<Props>({
     return (
       <Css getStyles={getStyles}>
         {
-          classes => {
+          (classes: any) => { // TODO
             let
               leftContent = null,
-              rightContent = null;
+              rightContent = null
 
             if (vendor) {
               rightContent =
                 <div key="vendor" className={classes.vendor}>
                   {vendor}
-                </div>;
+                </div>
             }
 
             if (title) {
               const titleContent =
                 <div key="title" className={classes.title}>
                   {title}
-                </div>;
+                </div>
 
               if (!rightContent) {
-                rightContent = titleContent;
+                rightContent = titleContent
               } else {
                 rightContent =
                   <React.Fragment>
                     {rightContent}
                     {titleContent}
-                  </React.Fragment>;
+                  </React.Fragment>
               }
             }
             
-            if (icon) {
-              leftContent =
-                <div className={classes.icon}>
-                  {icon}
-                </div>;
-            }
+            leftContent =
+              <div className={classes.icon}>
+                {icon  ||<DefaultAppIcon/>}
+              </div>
 
             return (
               <div className={className} style={style}>
@@ -133,10 +132,10 @@ export default defineComponent<Props>({
                   </div>
                 </div>
               </div>
-            );
+            )
           }
         }
       </Css>
-    );
+    )
   }
-});
+})

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec' // 3rd-party validation library
-import { LoginForm, LoginScreen } from '../main/js-cockpit'
+import { LoginForm, LoginScreen, Logo } from '../main/js-cockpit'
 
 const Demo = defineComponent({
   displayName: 'Demo',
@@ -11,7 +11,11 @@ const Demo = defineComponent({
     return (
       <LoginScreen>
         <LoginScreen.Content>
-          <LoginForm/>
+          <LoginForm>
+            <LoginForm.Header>
+              <Logo vendor="meet+greet" title="Back Office"/>
+            </LoginForm.Header>
+          </LoginForm>
         </LoginScreen.Content>
       </LoginScreen>
       /*

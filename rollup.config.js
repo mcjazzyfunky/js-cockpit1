@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
+import reactSvg from "rollup-plugin-react-svg"
 import typescript from 'rollup-plugin-typescript2'
 import { uglify as uglifyJS } from 'rollup-plugin-uglify'
 import uglifyES from 'rollup-plugin-uglify-es'
@@ -49,6 +50,16 @@ function createRollupConfig(moduleFormat, productive) {
             'Spec'
           ]
         },
+      }),
+      reactSvg({
+        svgo: {
+          plugins: [],
+          multipass: false
+        },
+
+        jsx: false,
+        include: './**/*.svg',
+        exclude: null
       }),
       typescript({
         exclude: 'node_modules/**'

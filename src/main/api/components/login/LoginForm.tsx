@@ -1,7 +1,8 @@
-import React, { ReactNode, CSSProperties } from 'react';
-import { defineComponent, isNode, withChildren } from 'js-react-utils';
-import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
 import Css from '../styling/Css';
+import React, { ReactNode, ReactElement, CSSProperties } from 'react';
+import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils';
+import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
+import { Spec } from 'js-spec'
 
 function getStyles({ theme }: { theme: ITheme}) { // TODO
   return {
@@ -54,25 +55,41 @@ const validationConfig = {
   ]
 };
 
+type HeaderProps = {
+  children: ReactNode
+}
+
+const Header = defineComponent<HeaderProps>({
+  displayName: 'LoginForm.Header',
+
+  properties: {
+    children: {
+      validate: isNode
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type LoginForm.Header can only be used as children '
+        + 'of LoginForm components')
+  }
+})
+
 type LoginFormProps = {
-  header?: ReactNode,
   performLogin?: Function,
   className?: string,
-  style?: CSSProperties
+  style?: CSSProperties,
+  children?: ReactNode
 }
 
 type LoginFormState = {
   loading: boolean
 }
 
-export default defineComponent<LoginFormProps>({
+const LoginForm = defineComponent<LoginFormProps>({
   displayName: 'LoginForm',
 
   properties: {
-    header: {
-      validate: isNode
-    },
-
     performLogin: {
       type: Function
     },
@@ -87,6 +104,10 @@ export default defineComponent<LoginFormProps>({
       type: Object,
       nullable: true,
       defaultValue: null
+    },
+
+    children: {
+      validate: withChildren(Spec.all(isElementOfType(Header)))
     }
   },
 
@@ -124,6 +145,23 @@ export default defineComponent<LoginFormProps>({
             ? 'Logging in...'
             : 'Log in';
 
+      let
+        header: ReactElement<any> = null, // TODO
+        headerBox: ReactNode = null
+
+      React.Children.forEach(this.props.children, (child: any) => {
+        if (isElementOfType(Header, child)) {
+          header = child
+        }
+      })
+
+      if (header) {
+        headerBox =
+          <div>
+            { header.props.children }
+          </div>
+      }
+
       return (
         <Css getStyles={getStyles}>
           {
@@ -139,9 +177,7 @@ export default defineComponent<LoginFormProps>({
    
               return (
                 <div className={classes.container}>
-                  <div>
-                    {this.props.header}
-                  </div>
+                  { headerBox }
                   <div>
                     <div>
                       <TextField
@@ -178,4 +214,8 @@ export default defineComponent<LoginFormProps>({
       );
     }
   }
-});
+})
+
+export default Object.assign(LoginForm, {
+  Header
+})
