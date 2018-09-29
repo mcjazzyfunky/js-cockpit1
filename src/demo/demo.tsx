@@ -2,22 +2,49 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec' // 3rd-party validation library
-import { LoginForm, LoginScreen, Brand } from '../main/js-cockpit'
+import { DataTable, LoginForm, LoginScreen, Brand } from '../main/js-cockpit'
+
+const loginScreen = 
+  <LoginScreen>
+    <LoginScreen.Content>
+      <LoginForm>
+        <LoginForm.Header>
+          <Brand vendor="meet+greet" title="Back Office - Login"/>
+        </LoginForm.Header>
+      </LoginForm>
+    </LoginScreen.Content>
+  </LoginScreen>
+
+const dataTable =
+  <DataTable
+    data={[
+      {
+        firstName: 'Jane',
+        lastName: 'Doe'
+      },
+      {
+        firstName: 'John',
+        lastName: 'Miller'
+      }
+    ]} 
+  >
+    <DataTable.Column
+      title="Column1"
+      field="firstName"
+    />
+    <DataTable.Column
+      title="Column2"
+      field="lastName"
+    />
+  </DataTable>
+
 
 const Demo = defineComponent({
   displayName: 'Demo',
 
   render() {
     return (
-      <LoginScreen>
-        <LoginScreen.Content>
-          <LoginForm>
-            <LoginForm.Header>
-              <Brand vendor="meet+greet" title="Back Office - Login" bicolor={true}/>
-            </LoginForm.Header>
-          </LoginForm>
-        </LoginScreen.Content>
-      </LoginScreen>
+      dataTable
       /*
       <VBox style={{ width: '100%', height: '100%', border: '1px solid green' }}>
         <VBox.Cell>
@@ -34,7 +61,7 @@ const Demo = defineComponent({
           </HBox>
         </VBox.Cell>
       </VBox>
-      */
+    */
     )
   }
 })
