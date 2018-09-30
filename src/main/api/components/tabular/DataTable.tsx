@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ComponentType, ReactNode } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
@@ -34,7 +34,7 @@ type ColumnGroupProps = {
   children?: ReactNode
 }
 
-const ColumnGroup = defineComponent<ColumnGroupProps>({
+const ColumnGroup: ComponentType<ColumnGroupProps> = defineComponent<ColumnGroupProps>({
   displayName: 'ColumnGroup',
 
   properties: {

@@ -1,7 +1,10 @@
 import ActionEvent from '../../events/ActionEvent'
-import React, { ReactNode, ReactElement } from 'react'
+import MenuBarRenderer from '../../../renderers/MenuBarRenderer'
+import React, { ComponentType, ReactNode, ReactElement } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
+
+const menuBarRenderer = new MenuBarRenderer()
 
 // --- MenuBar.Item -------------------------------------------------
 
@@ -9,7 +12,7 @@ type ItemProps = {
   text: string,
   name?: string,
   disabled?: boolean,
-  onAction: (event: ActionEvent) => void
+  onAction?: (event: ActionEvent) => void
 }
 
 const Item = defineComponent<ItemProps>({
@@ -48,7 +51,7 @@ type MenuProps = {
   children?: ReactNode
 }
 
-const Menu = defineComponent<MenuProps>({
+const Menu: ComponentType<MenuProps> = defineComponent<MenuProps>({
   displayName: 'MenuBar.Menu',
 
   properties: {
@@ -60,7 +63,8 @@ const Menu = defineComponent<MenuProps>({
     children: {
       validate:
         withChildren(
-          Spec.lazy(() => Spec.all(isElementOfType([Item, Menu])))
+          Spec.lazy(() =>
+            Spec.all(isElementOfType([Item, Menu]))))
     }
   },
 
@@ -74,8 +78,8 @@ const Menu = defineComponent<MenuProps>({
 // --- MenuBar ------------------------------------------------------
 
 type MenuBarProps = {
-  children: ReactNode,
-  onAction: (event: ActionEvent) => void
+  children?: ReactNode,
+  onAction?: (event: ActionEvent) => void
 }
 
 const MenuBar = defineComponent<MenuBarProps>({
@@ -83,7 +87,9 @@ const MenuBar = defineComponent<MenuBarProps>({
 
   properties: {
     children: {
-      validate: withChildren(Spec.all(isElementOfType([Menu])))
+      validate:
+        withChildren(
+          Spec.all(isElementOfType([Menu, Item])))
     },
   
     onAction: {
@@ -92,44 +98,49 @@ const MenuBar = defineComponent<MenuBarProps>({
   },
 
   base: class extends React.Component<MenuBarProps> {
-    private __menuBarInfo: MenuBarInfo
-    private __menuBarInfoSource: MenuBarProps
+    private __menuBarModel: MenuBarModel
+    private __menuBarModelSource: MenuBarProps
 
     constructor(props: MenuBarProps) {
       super(props)
-      this.__menuBarInfo = null
-      this.__menuBarInfoSource = null
+      this.__menuBarModel = null
+      this.__menuBarModelSource = null
     }
 
     render() {
-      return '[MenuBar ]'
+      this.__prepareMenuBarModel()
+
+      return menuBarRenderer.render(this.__menuBarModel)
     }
 
-    private __prepareMenuBarInfo() {
-      if (this.props !== this.__menuBarInfoSource) {
-        this.__menuBarInfo = getMenuBarInfo(this.props)
-        this.__menuBarInfoSource = this.props
+    private __prepareMenuBarModel() {
+      if (this.props !== this.__menuBarModelSource) {
+        this.__menuBarModel = getMenuBarModel(this.props)
+        this.__menuBarModelSource = this.props
       }
     }
   }
 })
 
-export default MenuBar
+export default Object.assign(MenuBar, {
+  Menu,
+  Item
+})
 
-// --- helpers ------------------------------------------------------
+// --- models -------------------------------------------------------
 
-type MenuBarInfo = {
-  menus: MenuInfo[],
+export type MenuBarModel = {
+  items: (ItemModel | MenuModel)[],
   onAction: (event: ActionEvent) => void | null
 }
 
-type MenuInfo = {
+export type MenuModel = {
   kind: 'menu',
   text: string,
-  items: ((MenuInfo | ItemInfo)[]) | null
+  items: ((MenuModel | ItemModel)[]) | null
 }
 
-type ItemInfo = {
+export type ItemModel = {
   kind: 'item',
   text: string,
   name: string | null,
@@ -137,19 +148,23 @@ type ItemInfo = {
   onAction: ((event: ActionEvent) => void) | null
 }
 
-function getMenuBarInfo(props: MenuBarProps): MenuBarInfo {
-  const menus: MenuInfo[] =
-    React.Children.map(props.children, (child: ReactElement<MenuProps>) =>
-      getMenuInfo(child.props as MenuProps))
+// --- helpers ------------------------------------------------------
+
+function getMenuBarModel(props: MenuBarProps): MenuBarModel {
+  const items: (ItemModel | MenuModel)[] =
+    React.Children.map(props.children, (child: ReactElement<ItemProps | MenuProps>) =>
+      child.type === Item
+        ? getItemModel(child.props as ItemProps)
+        : getMenuModel(child.props as MenuProps))
 
   return {
-    menus,
+    items,
     onAction: props.onAction || null
   }
 }
 
-function getMenuInfo(props: MenuProps): MenuInfo {
-  const ret: MenuInfo = {
+function getMenuModel(props: MenuProps): MenuModel {
+  const ret: MenuModel = {
     kind: 'menu',
     text: props.text,
     items: []
@@ -160,14 +175,14 @@ function getMenuInfo(props: MenuProps): MenuInfo {
 
     ret.items.push(
       type.child === Menu
-        ? getMenuInfo(child.props as MenuProps)
-        : getItemInfo(child.props as ItemProps))
+        ? getMenuModel(child.props as MenuProps)
+        : getItemModel(child.props as ItemProps))
   })
 
   return ret
 }
 
-function getItemInfo(props: ItemProps): ItemInfo {
+function getItemModel(props: ItemProps): ItemModel {
   return {
     kind: 'item',
     text: props.text,
