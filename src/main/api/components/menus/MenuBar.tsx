@@ -4,8 +4,6 @@ import React, { ComponentType, ReactNode, ReactElement } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
-const menuBarRenderer = new MenuBarRenderer()
-
 // --- MenuBar.Item -------------------------------------------------
 
 type ItemProps = {
@@ -110,7 +108,7 @@ const MenuBar = defineComponent<MenuBarProps>({
     render() {
       this.__prepareMenuBarModel()
 
-      return menuBarRenderer.render(this.__menuBarModel)
+      return MenuBarRenderer.render(this.__menuBarModel)
     }
 
     private __prepareMenuBarModel() {
