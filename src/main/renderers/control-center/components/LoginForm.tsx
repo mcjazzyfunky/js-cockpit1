@@ -1,10 +1,10 @@
-import Css from '../styling/Css';
+import defineStyle from '../../../api/styling/defineStyle'
 import React, { ReactNode, ReactElement, CSSProperties } from 'react';
 import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils';
 import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
 import { Spec } from 'js-spec'
 
-function getStyles({ theme }: { theme: ITheme}) { // TODO
+const Style = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
   return {
     container: {
       padding: '1rem 0.8rem',
@@ -24,7 +24,7 @@ function getStyles({ theme }: { theme: ITheme}) { // TODO
       margin: '0 0 0 0.75rem',
     }
   };
-}
+})
 
 const validationConfig = {
   fields: [
@@ -163,7 +163,7 @@ const LoginForm = defineComponent<LoginFormProps>({
       }
 
       return (
-        <Css getStyles={getStyles}>
+        <Style>
           {
             (classes: any) => { // TODO
               const loadingIndicator =
@@ -210,7 +210,7 @@ const LoginForm = defineComponent<LoginFormProps>({
               );
             }
           }
-        </Css>
+        </Style>
       );
     }
   }

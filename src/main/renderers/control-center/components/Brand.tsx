@@ -1,9 +1,9 @@
 import DefaultAppIcon from '../../../internal/components/icons/DefaultAppIcon'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
-import Css from '../styling/Css'
+import defineStyle from '../../../api/styling/defineStyle'
 
-function getStyles({ theme }: any) {
+const Style = defineStyle(() => {
   return {
     container: {
       display: 'table',
@@ -46,7 +46,7 @@ function getStyles({ theme }: any) {
       verticalAlign: 'middle'
     }
   }
-}
+})
 
 type Props = {
   icon?: ReactNode,
@@ -83,7 +83,7 @@ export default defineComponent<Props>({
 
   render({ icon, vendor, title, className, style }) {
     return (
-      <Css getStyles={getStyles}>
+      <Style>
         {
           (classes: any) => { // TODO
             let
@@ -135,7 +135,7 @@ export default defineComponent<Props>({
             )
           }
         }
-      </Css>
+      </Style>
     )
   }
 })

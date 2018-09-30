@@ -1,15 +1,18 @@
 import { ReactNode } from 'react'
+import { resetIds } from '@uifabric/utilities';
 
 export default function defineRenderer<Model>(render: (model: Model) => ReactNode) {
-  let renderFunction = render
+  const originalRender = render
+  
+  let renderFunction = originalRender
 
   return Object.freeze({
     render(model: Model) {
       return renderFunction(model)
     },
 
-    setRenderFunction(render: (model: Model) => ReactNode) {
-      renderFunction = render
-    }
+    reset(render?: (model: Model) => ReactNode) {
+      renderFunction = render || originalRender
+    },
   })
 }

@@ -8,7 +8,7 @@ import { Spec } from 'js-spec'
 
 type ItemProps = {
   text: string,
-  name?: string,
+  name: string,
   disabled?: boolean,
   onAction?: (event: ActionEvent) => void
 }
@@ -23,7 +23,8 @@ const Item = defineComponent<ItemProps>({
     },
 
     name: {
-      type: String
+      type: String,
+      required: true
     },
 
     disabled: {
