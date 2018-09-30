@@ -7,17 +7,35 @@ const getClasses = classNamesFunction()
 
 let styleId = 0
 
-export default function defineStyle(getStyles: any): ComponentType<any> {
-  const
-    render = ({ props, theme, children }: any): any => {
-      const classes = getClasses(getStyles, { props, theme })
-console.log(props, theme)  
-      return children(classes as any)  
-    },
+function defineStyle(styles: any): ComponentType<any>
+function defineStyle(getStyles: any): ComponentType<any>
+function defineStyle(arg: any): ComponentType<any> {
+  let ret: any
 
-	  Style: ComponentType<any> = customizable('Classes', ['theme', 'props'])(render as any)
- 
-  Style.displayName = 'Style-' + (++styleId)
+  if (typeof arg == 'function') {
+    const
+      render = ({ props, theme, children }: any): any => {
+        const classes = getClasses(arg, { props, theme })
+
+        return children(classes)  
+      }
+
+    ret = customizable('Classes', ['theme', 'props'])(render)
+  } else {
+    let classes: any = null
+
+    ret = ({ children }: any) => {
+      if (!classes) {
+        classes = getClasses(() => arg)
+      }
+
+      return children(classes)
+    }
+  } 
   
-  return Style
+  ret.displayName = 'Style-' + (++styleId)
+  
+  return ret
 }
+
+export default defineStyle
