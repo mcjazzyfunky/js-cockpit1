@@ -15,7 +15,7 @@ function defineStyle(arg: any): ComponentType<any> {
   if (typeof arg == 'function') {
     const
       render = ({ props, theme, children }: any): any => {
-        const classes = getClasses(arg, { props, theme })
+        const classes = getClasses((params: any) => arg(params.theme, params.props), { props, theme })
 
         return children(classes)  
       }

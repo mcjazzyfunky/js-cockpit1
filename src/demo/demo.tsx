@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec' // 3rd-party validation library
-import { Brand, ControlCenter, DataTable, MenuBar } from '../main/js-cockpit'
+import { ControlCenter, DataTable, MenuBar } from '../main/js-cockpit'
 
 const dataTable =
   <DataTable

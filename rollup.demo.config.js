@@ -2,7 +2,6 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import replace from 'rollup-plugin-replace'
-import reactSvg from "rollup-plugin-react-svg"
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
@@ -53,16 +52,6 @@ export default {
       values: {
         'process.env.NODE_ENV': "'development'"
       }
-    }),
-    reactSvg({
-      svgo: {
-        plugins: [],
-        multipass: false
-      },
-
-      jsx: false,
-      include: './**/*.svg',
-      exclude: null
     }),
     typescript(),
     //serve({

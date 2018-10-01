@@ -1,4 +1,4 @@
-import DefaultAppIcon from '../../../internal/components/icons/DefaultAppIcon'
+import DefaultLogo from '../icons/DefaultLogo'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import defineStyle from '../../../api/styling/defineStyle'
@@ -11,10 +11,6 @@ const Style = defineStyle(() => {
       padding: 0
     },
 
-    icon: {
-      fontSize: '1rem'
-    },
-    
     vendor: {
       fontSize: '0.875rem',
       padding: 0,
@@ -26,6 +22,11 @@ const Style = defineStyle(() => {
       padding: 0,
       lineHeight: '1.25rem',
     },
+
+    logo: {
+      fontSize: '1rem'
+    },
+    
 
     cells: {
       display: 'table-row'
@@ -48,19 +49,19 @@ const Style = defineStyle(() => {
   }
 })
 
-type Props = {
-  icon?: ReactNode,
+type BrandProps = {
   vendor?: string,
   title?: string,
+  logo?: ReactNode,
   className?: string,
   style?: CSSProperties
 }
 
-export default defineComponent<Props>({
+export default defineComponent<BrandProps>({
   displayName: 'Brand',
 
   properties: {
-    icon: {
+    logo: {
       validate: isNode
     },
 
@@ -81,7 +82,7 @@ export default defineComponent<Props>({
     }
   },
 
-  render({ icon, vendor, title, className, style }) {
+  render({ logo, vendor, title, className, style }) {
     return (
       <Style>
         {
@@ -115,8 +116,8 @@ export default defineComponent<Props>({
             }
             
             leftContent =
-              <div className={classes.icon}>
-                {icon  ||<DefaultAppIcon/>}
+              <div className={classes.logo}>
+                {logo  ||<DefaultLogo/>}
               </div>
 
             return (

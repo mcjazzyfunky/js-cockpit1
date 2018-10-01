@@ -160,10 +160,6 @@ const App = defineComponent<any>({
 
 // --- models -------------------------------------------------------
 
-type LoginModel = {
-  enabled: boolean
-}
-
 type AppModel = {
   name: string,
   title: string,
