@@ -4,9 +4,11 @@ import defineRenderer from '../defineRenderer'
 import { ControlCenterModel } from '../../api/components/control-center/ControlCenter'
 import Brand from './components/Brand'
 import defineStyle from '../../api/styling/defineStyle'
-import { css, ITheme, getNativeProps } from 'office-ui-fabric-react'
+import { css, ITheme, Callout, classNamesFunction } from 'office-ui-fabric-react'
 import DefaultAvatar from './icons/DefaultAvatar'
 import LogoutIcon from './icons/LogoutIcon'
+import AppsIcon from './icons/AppsIcon'
+import ArrowDownIcon from './icons/ArrowDownIcon'
 import Color from 'color'
 
 const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme) => {
@@ -17,27 +19,32 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
 
     header: {
       display: 'flex',
+      alignItems: 'center',
       width: '100%',
+      height: '42px',
       color: theme.palette.white,
-      backgroundColor: theme.palette.themePrimary
+      backgroundColor: theme.palette.themePrimary,
     },
 
     headerStart: {
-      padding: '0.1rem 0.3rem'
+      padding: '0.1rem 0.3rem',
+      whiteSpace: 'nowrap',
     },
 
     headerCenter: {
       flexGrow: 1,
-      padding: '0.2rem 2rem 0.2rem 4rem'
+      padding: '0.2rem 2rem 0.2rem 4rem',
+      whiteSpace: 'nowrap',
     },
 
     headerEnd: {
       display: 'flex',
       alignItems: 'center',
+      whiteSpace: 'nowrap',
 
       selectors: {
         '& > *': {
-          marginLeft: '0.7rem'
+          marginLeft: '0.9rem'
         }
       }
     },
@@ -55,7 +62,7 @@ function render(model: ControlCenterModel) {
                 <Brand vendor={model.vendor} title={model.title} logo={model.logo}/>
               </div>
               <div className={classes.headerCenter}>
-                header-center
+                <AppSelector/>
               </div>
               <div className={classes.headerEnd}>
                 { <DefaultAvatar/> }
@@ -75,6 +82,57 @@ export default defineRenderer(render)
 
 // ------------------------------------------------------------------
 
+const AppSelectorStyle = defineStyle({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '42px',
+    borderColor: 'white',
+    borderStyle: 'dotted',
+    borderWidth: '0 0 0 1px',
+    paddingLeft: '1rem',
+
+    selectors: {
+      '& > *': {
+        margin: '0.1rem 0.1rem'
+      }
+    }
+  },
+
+  label: {
+    fontStyle: 'italic',
+    fontSize: '0.9rem',
+  }
+})
+
+type AppSelectorProps = {
+}
+
+const AppSelector = defineComponent<AppSelectorProps>({
+  displayName: 'AppSelector',
+
+  render() {
+    return (
+      <AppSelectorStyle>
+        {
+          (classes: any) =>
+            <div>
+              <div className={classes.container}>
+                <AppsIcon/>
+                <label className={classes.label}>Content Management</label>
+                <ArrowDownIcon/>
+              </div>
+            </div>
+        }
+      </AppSelectorStyle>
+    )
+  }
+})
+
+
+// ------------------------------------------------------------------
+
+
 type UserMenuProps = {
   username: string
 }
@@ -91,8 +149,8 @@ const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
   button: {
     backgroundColor: Color(theme.palette.themePrimary).darken(0),
     border: 'none',
-    width: '40px',
-    height: '40px',
+    width: '42px',
+    height: '42px',
     textAlign: 'center',
     verticalAlign: 'middle',
     borderWidth: '0 0 0 1px',
@@ -101,10 +159,15 @@ const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    cursor: 'pointer',
     
     selectors: {
       '&:hover': {
-        backgroundColor: Color(theme.palette.themePrimary).darken(0.4)
+        backgroundColor: Color(theme.palette.themePrimary).darken(0.2)
+      },
+
+      '&:active': {
+        backgroundColor: Color(theme.palette.themePrimary).darken(0.1)
       }
     }
   }
