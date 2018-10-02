@@ -3,49 +3,47 @@ import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import defineStyle from '../../../api/styling/defineStyle'
 
-const Style = defineStyle(() => {
-  return {
-    container: {
-      display: 'table',
-      margin: 0,
-      padding: 0
-    },
+const Style = defineStyle({
+  container: {
+    display: 'table',
+    margin: 0,
+    padding: 0
+  },
 
-    vendor: {
-      fontSize: '0.875rem',
-      padding: 0,
-      margin: 0,
-    },
+  vendor: {
+    fontSize: '0.75rem',
+    padding: 0,
+    margin: 0,
+  },
 
-    title: {
-      fontSize: '1.125rem',
-      padding: 0,
-      lineHeight: '1.25rem',
-    },
+  title: {
+    fontSize: '1.125rem',
+    padding: 0,
+    margin: '-1px 0 0 0',
+    lineHeight: '1.25rem',
+  },
 
-    logo: {
-      fontSize: '1rem'
-    },
-    
+  logo: {
+    fontSize: '1rem'
+  },
+  
+  cells: {
+    display: 'table-row'
+  },
 
-    cells: {
-      display: 'table-row'
-    },
+  cellLeft: {
+    display: 'table-cell',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    padding: '0.25rem 0.5rem 0 0',
+    overflow: 'hidden'
+  },
 
-    cellLeft: {
-      display: 'table-cell',
-      textAlign: 'center',
-      verticalAlign: 'middle',
-      padding: '0.25rem 0.5rem 0 0',
-      overflow: 'hidden'
-    },
-
-    cellRight: {
-      display: 'table-cell',
-      padding: '0.125rem 0',
-      textAlign: 'left',
-      verticalAlign: 'middle'
-    }
+  cellRight: {
+    display: 'table-cell',
+    padding: '0.125rem 0',
+    textAlign: 'left',
+    verticalAlign: 'middle'
   }
 })
 

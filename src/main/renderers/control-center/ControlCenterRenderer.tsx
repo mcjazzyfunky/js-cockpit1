@@ -88,9 +88,9 @@ const AppSelectorStyle = defineStyle({
     alignItems: 'center',
     height: '42px',
     borderColor: 'white',
-    borderStyle: 'dotted',
     borderWidth: '0 0 0 1px',
     paddingLeft: '1rem',
+    cursor: 'pointer',
 
     selectors: {
       '& > *': {
@@ -100,7 +100,6 @@ const AppSelectorStyle = defineStyle({
   },
 
   label: {
-    fontStyle: 'italic',
     fontSize: '0.9rem',
   }
 })
@@ -132,6 +131,11 @@ const AppSelector = defineComponent<AppSelectorProps>({
 
 // ------------------------------------------------------------------
 
+const UserMenuStyle = defineStyle({
+  container: {
+    fontSize: '0.875rem'
+  }
+})
 
 type UserMenuProps = {
   username: string
@@ -139,9 +143,14 @@ type UserMenuProps = {
 
 const UserMenu: SFC<UserMenuProps> = props => {
   return (
-    <div>
-      { props.username }
-    </div>
+    <UserMenuStyle>
+      {
+        (classes: any) =>
+          <div className={classes.container}>
+            { props.username }
+          </div>
+      }
+    </UserMenuStyle>
   )
 }
 
