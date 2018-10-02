@@ -26,6 +26,7 @@
     "@types/node": "^8.0.0",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
+    "@zeit/next-typescript": "^1.1.1",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -70,6 +71,7 @@
     "react-dom": "^16.5.2"
   },
   "scripts": {
+    "next": "next",
     "clean": "shx rm -rf ./build ./dist",
     "build": "rollup --c rollup.config.js && tsc -d --emitDeclarationOnly --declarationDir dist/types",
     "build-watch": "watch -f \"src/main/**/*.js\" -r \"rollup --c rollup.config.js\"",
