@@ -1,18 +1,26 @@
-import ControlCenter from './api/components/control-center/ControlCenter'
+// import component types
+import AppsWithMenu from './api/components/misc/AppsWithMenu'
+import ControlCenter from './api/components/misc/ControlCenter'
 import DataTable from './api/components/tabular/DataTable'
 import HBox from './api/components/layout/HBox'
 import VBox from './api/components/layout/VBox'
-import MenuBar from './api/components/menus/MenuBar'
 
+// import event types
 import ActionEvent from './api/events/ActionEvent'
+
+// import functions
+import initSystemIcons from './api/styling/initSystemIcons'
 
 export {
   // components
+  AppsWithMenu,
   ControlCenter,
   DataTable,
   HBox,
   VBox,
-  MenuBar,
+
+  // functions
+  initSystemIcons,
 
   // event types
   ActionEvent,

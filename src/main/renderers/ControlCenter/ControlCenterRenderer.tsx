@@ -1,14 +1,14 @@
 import React, { SFC } from 'react'
 import { defineComponent } from 'js-react-utils'
 import defineRenderer from '../defineRenderer'
-import { ControlCenterModel } from '../../api/components/control-center/ControlCenter'
+import { ControlCenterModel } from '../../api/components/misc/ControlCenter'
 import Brand from './components/Brand'
 import defineStyle from '../../api/styling/defineStyle'
 import { css, ITheme, Callout, classNamesFunction } from 'office-ui-fabric-react'
 import DefaultAvatar from './icons/DefaultAvatar'
 import LogoutIcon from './icons/LogoutIcon'
 import AppsIcon from './icons/AppsIcon'
-import ArrowDownIcon from './icons/ArrowDownIcon'
+import ChevronDownIcon from '../../system-icons/ChevronDownIcon'
 import Color from 'color'
 
 const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme) => {
@@ -52,6 +52,11 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
 })
 
 function render(model: ControlCenterModel) {
+  const main =
+    model.apps.length === 0
+      ? null
+      : model.apps[0]
+
   return (
     <ControlCenterStyle>
       {
@@ -69,6 +74,9 @@ function render(model: ControlCenterModel) {
                 { UserMenu({ username: 'Jane Doe' }) }
                 { <LogoutButton/> }
               </div>
+            </div>
+            <div>
+              { model.apps.length > 0 ? model.apps[0].content : null }
             </div>
           </div>
       }
@@ -119,7 +127,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
               <div className={classes.container}>
                 <AppsIcon/>
                 <label className={classes.label}>Content Management</label>
-                <ArrowDownIcon/>
+                <ChevronDownIcon/>
               </div>
             </div>
         }

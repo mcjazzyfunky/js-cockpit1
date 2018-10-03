@@ -1,6 +1,6 @@
 import ControlCenterRenderer from '../../../renderers/ControlCenter/ControlCenterRenderer'
 import React, { ReactElement, ReactNode } from 'react'
-import { defineComponent, isElement, isElementOfType, withChildren } from 'js-react-utils'
+import { defineComponent, isElement, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // --- ControlCenter ------------------------------------------------
@@ -74,8 +74,23 @@ const ControlCenter = defineComponent<ControlCenterProps>({
         apps: []
       }
 
-      React.Children.forEach(props.children, (child: any) => {
-        // TODO
+      React.Children.forEach(props.children, (child: ReactElement<AppsProps>) => {
+        React.Children.forEach(child.props.children, (child2: ReactElement<AppProps>) => {
+          const
+            contents = React.Children.toArray(child2.props.children),
+            content =
+              !contents || contents.length === 0
+                ? null
+                : contents.length === 1
+                ? contents[0]
+                : <>{contents}</>
+
+          ret.apps.push({
+            name: child2.props.name,
+            title: child2.props.title,
+            content
+          })
+        })
       })
 
       return ret
@@ -102,7 +117,7 @@ const Login = defineComponent<LoginProps>({
 // --- ControlCenter.Apps -------------------------------------------
 
 type AppsProps = {
-  children: ReactNode
+  children?: ReactNode
 }
 
 const Apps = defineComponent({
@@ -127,11 +142,13 @@ const Apps = defineComponent({
 // --- ControlCenter.App --------------------------------------------
 
 type AppProps = {
+  name: string,
   title: string,
-  description?: string
+  description?: string,
+  children?: ReactNode // TODO
 }
 
-const App = defineComponent<any>({
+const App = defineComponent<AppProps>({
   displayName: 'ControlCenter.App',
 
   properties: {
@@ -147,6 +164,12 @@ const App = defineComponent<any>({
 
     description: {
       type: String
+    },
+
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isNode))
     }
   },
 
@@ -160,22 +183,23 @@ const App = defineComponent<any>({
 
 // --- models -------------------------------------------------------
 
-type AppModel = {
-  name: string,
-  title: string,
-  description: string | null
-}
-
 type ControlCenterModel = {
-  vendor: string | null,
+  vendor?: string,
   title: string,
-  logo: ReactElement<any>,
+  logo?: ReactElement<any>,
   
   login: {
     enabled: boolean
   },
 
   apps: AppModel[]
+}
+
+type AppModel = {
+  name: string,
+  title: string,
+  description?: string,
+  content: ReactNode
 }
 
 // --- exports ------------------------------------------------------

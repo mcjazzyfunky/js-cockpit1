@@ -1,5 +1,5 @@
-import defineRenderer from './defineRenderer'
-import { MenuBarModel, MenuModel, ItemModel } from '../api/components/menus/MenuBar'
+import defineRenderer from '../defineRenderer'
+import { MenuBarModel, MenuModel, ItemModel } from '../../api/components/menus/MenuBar'
 import React, { ReactNode } from 'react'
 import { CommandBar } from 'office-ui-fabric-react'
 

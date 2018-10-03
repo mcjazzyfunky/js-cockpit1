@@ -3,7 +3,7 @@ import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import defineStyle from '../../../api/styling/defineStyle'
 
-const Style = defineStyle({
+const BrandStyle = defineStyle({
   container: {
     display: 'table',
     margin: 0,
@@ -60,6 +60,7 @@ export default defineComponent<BrandProps>({
 
   properties: {
     logo: {
+      nullable: true,
       validate: isNode
     },
 
@@ -82,7 +83,7 @@ export default defineComponent<BrandProps>({
 
   render({ logo, vendor, title, className, style }) {
     return (
-      <Style>
+      <BrandStyle>
         {
           (classes: any) => { // TODO
             let
@@ -134,7 +135,7 @@ export default defineComponent<BrandProps>({
             )
           }
         }
-      </Style>
+      </BrandStyle>
     )
   }
 })
