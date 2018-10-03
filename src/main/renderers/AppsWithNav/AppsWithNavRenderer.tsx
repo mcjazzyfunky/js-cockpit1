@@ -9,8 +9,8 @@ import defineStyle from '../../api/styling/defineStyle'
 const AppsWithNavStyle = defineStyle({
   container: {
     display: 'flex',
-    width: '100%',
-    padding: '0.375rem'
+    flexGrow: 1,
+    padding: '0.375rem',
   },
 
   navigation: {
@@ -40,9 +40,11 @@ export default defineRenderer((model: Model_AppsWithNav) => {
                 <Nav
                   groups={
                     [{
-                      links: model.menu.map(getItemProps)
+                      links: model.menu.map(getLinkProps)
                     }]
                   }
+
+                  selectedKey="categories" // TODO
                 />
               </div>
             </div>
@@ -55,10 +57,11 @@ export default defineRenderer((model: Model_AppsWithNav) => {
 
 // --- helpers ------------------------------------------------------
 
-function getItemProps(model: Model_AppsWithNav_AppGroup | Model_AppsWithNav_App) {
+function getLinkProps(model: Model_AppsWithNav_AppGroup | Model_AppsWithNav_App) {
   const ret: any = { // TODO
     key: model.name,
     name: model.title,
+    isExpanded: true
   }
 
   if (model.kind === 'Model_AppsWithNav_AppGroup') {
@@ -66,7 +69,7 @@ function getItemProps(model: Model_AppsWithNav_AppGroup | Model_AppsWithNav_App)
 
     if (menu.items.length > 0) {
       ret.links = menu.items.map(it => {
-        return getItemProps(it)
+        return getLinkProps(it)
       })
     }
   } else if (model.kind === 'Model_AppsWithNav_App') {

@@ -14,6 +14,8 @@ import Color from 'color'
 const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme) => {
   return {
     controlCenter: {
+      display: 'flex',
+      flexDirection: 'column',
       position: 'absolute',
       width: '100%',
       height: '100%',
@@ -52,8 +54,10 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
     },
 
     content: {
-      width: '100%',
-      height: '100%',
+      flexGrow: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'stretch',
     }
   }
 })
