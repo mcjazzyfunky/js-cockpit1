@@ -13,7 +13,12 @@ export default class extends React.Component {
 
       body.style.margin = 0
       body.style.fontFamily = '"Segoe UI", Arial, Helvetica, sans-serif'
-      ReactDOM.render(<Demo/>, this.container)
+      ReactDOM.render(
+        <div>
+           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+           <Demo/>
+        </div>,
+        this.container)
     }
   }
 

@@ -1,5 +1,31 @@
 import React, { ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
+import { CommandBar, ITheme } from 'office-ui-fabric-react'
+import defineStyle from '../../../api/styling/defineStyle'
+
+// --- ActionBarStyle --------------------------------------------
+
+const ActionBarStyle = defineStyle((theme: ITheme) => ({
+  commandBar: {
+    backgroundColor: 'transparent',
+  },
+
+  actionButton: {
+    backgroundColor: 'transparent',
+  },
+
+  icon: {
+    color: theme.palette.themePrimary,
+
+    selectors: {
+      '& *': {
+        fontSize: '16px !important',
+        marginTop: '4px', 
+      }
+    }
+  }
+
+}))
 
 // --- ActionBar -------------------------------------------------
 
@@ -13,7 +39,61 @@ const ActionBar = defineComponent<ActionBarProps>({
   },
 
   render(props: ActionBarProps) {
-    return '[ActionBar]'
+    return (
+      <ActionBarStyle>
+        {
+          (classes: any) =>
+            <div>
+              <CommandBar
+                className={classes.commandBar}
+                items={[
+                  {
+                    key: 'new',
+                    name: 'New',
+                    iconProps: {
+                      iconName: 'new',
+                      className: classes.icon
+                    },
+                    
+                    className: classes.actionButton,
+
+                    onRenderIcon: () => <div className={classes.icon}><i className="material-icons">add</i></div>
+                  },
+                  {
+                    key: 'edit',
+                    name: 'Edit',
+                    iconProps: {
+                      iconName: 'edit',
+                      className: classes.icon
+                    },
+                    
+                    className: classes.actionButton,
+
+                    onRenderIcon: () => <div className={classes.icon}><i className="material-icons">subject</i></div>
+                  },
+                  {
+                    key: 'delete',
+                    name: 'Delete',
+                    iconProps: {
+                      iconName: 'delete',
+                      className: classes.icon
+                    },
+                    
+                    className: classes.actionButton,
+
+                    onRenderIcon: () => <div className={classes.icon}><i className="material-icons">clear</i></div>
+                  }
+                ]}
+
+              />
+            </div>
+        }
+      </ActionBarStyle>
+    )
+
+
+    //return <i className="material-icons" style={{fontSize: '16px'}}>add</i>
+    //return <FontAwesomeIcon icon="coffee" /> 
   }
 })
 

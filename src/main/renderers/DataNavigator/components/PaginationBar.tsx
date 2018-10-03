@@ -1,6 +1,6 @@
 import React from 'react'
 import { defineComponent } from 'js-react-utils'
-import { ITheme, TextField } from 'office-ui-fabric-react'
+import { DefaultButton, ITheme, TextField } from 'office-ui-fabric-react'
 import defineStyle from '../../../api/styling/defineStyle'
 import ArrowLeftIcon from '../icons/ArrowLeftIcon'
 import ArrowRightIcon from '../icons/ArrowRightIcon'
@@ -21,6 +21,12 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
 
   centerArea: {
     flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  pageSizeText: {
+    padding: '0 0.5rem 0 3rem',
   },
 
   endArea: {
@@ -99,10 +105,22 @@ const PaginationBar = defineComponent<PaginationBarProps>({
                 <button className={classes.button}><ArrowDoubleRightIcon/></button>
               </div>
               <div className={classes.centerArea}>
-                
+                <label className={classes.pageSizeText}>Items/Page</label>
+                <DefaultButton
+                  text="25"
+                  menuProps={{
+                    items: [
+                      { key: '25', name: '25' },
+                      { key: '50', name: '50' },
+                      { key: '100', name: '100' },
+                      { key: '250', name: '250' },
+                      { key: '500', name: '500' },
+                    ]
+                  }}
+                />
               </div>
               <div className={classes.endArea}>
-                Items 100-125 of 1.241
+                Items 100-125 of 1,241
               </div>
             </div>
         }
