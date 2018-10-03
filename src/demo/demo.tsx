@@ -22,41 +22,41 @@ const AdministrationApp = defineComponent({
   render() {
     return (
       <AppsWithMenu>
-        <AppsWithMenu.Menus>
-          <AppsWithMenu.Menu name="userMgmt" title="User management">
-            <AppsWithMenu.Item
+        <AppsWithMenu.Apps>
+          <AppsWithMenu.AppGroup name="userMgmt" title="User management">
+            <AppsWithMenu.App
               name="backendUsers"
               title="Backend Users"
             />
-            <AppsWithMenu.Item
+            <AppsWithMenu.App
               name="frontendUsers"
               title="Frontend Users"
             />
-          </AppsWithMenu.Menu>
-          <AppsWithMenu.Menu name="fileMgmt" title="File management">
-            <AppsWithMenu.Menu
+          </AppsWithMenu.AppGroup>
+          <AppsWithMenu.AppGroup name="fileMgmt" title="File management">
+            <AppsWithMenu.AppGroup
               name="images"
               title="Images"
             >
-              <AppsWithMenu.Item
+              <AppsWithMenu.App
                 name="jpg"
                 title="JPEG"
               />
-              <AppsWithMenu.Item
+              <AppsWithMenu.App
                 name="gif"
                 title="GIF"
               />
-              <AppsWithMenu.Item
+              <AppsWithMenu.App
                 name="png"
                 title="PNG"
               />
-            </AppsWithMenu.Menu>
-            <AppsWithMenu.Item
+            </AppsWithMenu.AppGroup>
+            <AppsWithMenu.App
               name="videos"
               title="Videos"
             />
-          </AppsWithMenu.Menu>
-        </AppsWithMenu.Menus>
+          </AppsWithMenu.AppGroup>
+        </AppsWithMenu.Apps>
       </AppsWithMenu>
     )
   }

@@ -2,9 +2,9 @@ import React, { ComponentType, ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 import ActionEvent from '../../events/ActionEvent'
-import AppsWithMenuRenderer from '../../../renderers/AppsWithMenu/AppsWithMenuRenderer'
+import Model_AppsWithNavRenderer from '../../../renderers/AppsWithNav/AppsWithNavRenderer'
 
-// --- AppsWithMenu.App --------------------------------------------
+// --- AppsWithNav.App --------------------------------------------
 
 type AppProps = {
   title: string,
@@ -13,7 +13,7 @@ type AppProps = {
 }
 
 const App = defineComponent<AppProps>({
-  displayName: 'AppsWithMenu.App',
+  displayName: 'AppsWithNav.App',
 
   properties: {
     title: {
@@ -33,12 +33,12 @@ const App = defineComponent<AppProps>({
   },
 
   render() {
-    throw new Error('Components of type AppsWithMenu.App must be children '
-      + 'of AppsWithMenu.Apps or AppsWithMenu.AppGroup components')
+    throw new Error('Components of type AppsWithNav.App must be children '
+      + 'of AppsWithNav.Apps or AppsWithNav.AppGroup components')
   }
 })
 
-// --- AppsWithMenu.AppGroup ----------------------------------------
+// --- AppsWithNav.AppGroup ----------------------------------------
 
 type AppGroupProps = {
   title: string,
@@ -47,7 +47,7 @@ type AppGroupProps = {
 }
 
 const AppGroup: ComponentType<AppGroupProps> = defineComponent<AppGroupProps>({
-  displayName: 'AppsWithMenu.AppGroup',
+  displayName: 'AppsWithNav.AppGroup',
 
   properties: {
     title: {
@@ -68,19 +68,19 @@ const AppGroup: ComponentType<AppGroupProps> = defineComponent<AppGroupProps>({
   },
 
   render() {
-    throw new Error('Components of type AppsWithMenu.Menu must be children '
-      + 'of AppsWithMenu.Menus or AppsWithMenu.Menu components')
+    throw new Error('Components of type AppsWithNav.Menu must be children '
+      + 'of AppsWithNav.Menus or AppsWithNav.Menu components')
   }
 })
 
-// --- AppsWithMenu.Apps --------------------------------------------
+// --- AppsWithNav.Apps --------------------------------------------
 
 type AppsProps = {
   children: ReactNode // TODO
 }
 
 const Apps = defineComponent({
-  displayName: 'AppsWithMenu.Apps',
+  displayName: 'AppsWithNav.Apps',
 
   properties: {
     children: {
@@ -91,19 +91,19 @@ const Apps = defineComponent({
   },
 
   render() {
-    throw new Error('Components of type AppsWithMenu.Apps must be children '
-      + 'of AppsWithMenu components')
+    throw new Error('Components of type AppsWithNav.Apps must be children '
+      + 'of AppsWithNav components')
   }
 })
 
-// --- AppsWithMenu -------------------------------------------------
+// --- AppsWithNav -------------------------------------------------
 
-type AppsWithMenuProps = {
+type AppsWithNavProps = {
   children: ReactNode // TODO
 }
 
-const AppsWithMenu = defineComponent<AppsWithMenuProps>({
-  displayName: 'AppsWithMenuProps',
+const AppsWithNav = defineComponent<AppsWithNavProps>({
+  displayName: 'AppsWithNavProps',
 
   properties: {
     children: {
@@ -113,15 +113,25 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
     }
   },
 
-  base: class Base extends React.PureComponent<AppsWithMenuProps> {
+  base: class Base extends React.Component<AppsWithNavProps> {
+    private _model: Model_AppsWithNav = null
+    private _modelSource: AppsWithNavProps = null
+    
     render() {
-      const model = Base._getAppsWithMenuModel(this.props)
-      return AppsWithMenuRenderer.render(model)
+      this._prepareModel_AppsWithNavModel()
+      return Model_AppsWithNavRenderer.render(this._model)
     }
 
-    static _getAppsWithMenuModel(props: AppsWithMenuProps): Model_AppsWithMenu {
-      const ret: Model_AppsWithMenu = {
-        kind: 'Model_AppsWithMenu',
+    private _prepareModel_AppsWithNavModel() {
+      if (this.props !== this._modelSource) {
+        this._model = Base._getAppsWithNavModel(this.props)
+        this._modelSource = this.props
+      }
+    }
+
+    static _getAppsWithNavModel(props: AppsWithNavProps): Model_AppsWithNav {
+      const ret: Model_AppsWithNav = {
+        kind: 'Model_AppsWithNav',
         menu: []
       }
 
@@ -142,9 +152,9 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
       return ret
     }
 
-    private static _getAppGroupModel(props: AppGroupProps): Model_AppsWithMenu_AppGroup {
-      const ret: Model_AppsWithMenu_AppGroup = {
-        kind: 'Model_AppsWithMenu_AppGroup',
+    private static _getAppGroupModel(props: AppGroupProps): Model_AppsWithNav_AppGroup {
+      const ret: Model_AppsWithNav_AppGroup = {
+        kind: 'Model_AppsWithNav_AppGroup',
         title: props.title,
         name: props.name,
         items: []
@@ -160,9 +170,9 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
       return ret
     }
 
-    private static _getAppModel(props: AppProps): Model_AppsWithMenu_App {
-      const ret: Model_AppsWithMenu_App = {
-        kind: 'Model_AppsWithMenu_App',
+    private static _getAppModel(props: AppProps): Model_AppsWithNav_App {
+      const ret: Model_AppsWithNav_App = {
+        kind: 'Model_AppsWithNav_App',
         title: props.title,
         name: props.name,
         content: props.children || null
@@ -175,20 +185,20 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
 
 // --- models -------------------------------------------------------
 
-type Model_AppsWithMenu = {
-  kind: 'Model_AppsWithMenu',
-  menu: (Model_AppsWithMenu_AppGroup | Model_AppsWithMenu_App)[]
+type Model_AppsWithNav = {
+  kind: 'Model_AppsWithNav',
+  menu: (Model_AppsWithNav_AppGroup | Model_AppsWithNav_App)[]
 }
 
-type Model_AppsWithMenu_AppGroup = {
-  kind: 'Model_AppsWithMenu_AppGroup',
+type Model_AppsWithNav_AppGroup = {
+  kind: 'Model_AppsWithNav_AppGroup',
   title: string,
   name: string,
-  items: (Model_AppsWithMenu_AppGroup | Model_AppsWithMenu_App)[]
+  items: (Model_AppsWithNav_AppGroup | Model_AppsWithNav_App)[]
 }
 
-type Model_AppsWithMenu_App = {
-  kind: 'Model_AppsWithMenu_App',
+type Model_AppsWithNav_App = {
+  kind: 'Model_AppsWithNav_App',
   title: string,
   name: string,
   content: ReactNode
@@ -196,14 +206,14 @@ type Model_AppsWithMenu_App = {
 
 // --- exports ------------------------------------------------------
 
-export default Object.assign(AppsWithMenu, {
+export default Object.assign(AppsWithNav, {
   App,
   Apps,
   AppGroup,
 })
 
 export {
-  Model_AppsWithMenu,
-  Model_AppsWithMenu_AppGroup,
-  Model_AppsWithMenu_App,
+  Model_AppsWithNav,
+  Model_AppsWithNav_AppGroup,
+  Model_AppsWithNav_App,
 }

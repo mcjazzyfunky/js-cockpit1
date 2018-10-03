@@ -14,7 +14,9 @@ import Color from 'color'
 const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme) => {
   return {
     controlCenter: {
-      width: '100%'
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
     },
 
     header: {
@@ -48,6 +50,11 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
         }
       }
     },
+
+    content: {
+      width: '100%',
+      height: '100%',
+    }
   }
 })
 
@@ -75,7 +82,7 @@ function render(model: ControlCenterModel) {
                 { <LogoutButton/> }
               </div>
             </div>
-            <div>
+            <div className={classes.content}>
               { model.apps.length > 0 ? model.apps[0].content : null }
             </div>
           </div>
