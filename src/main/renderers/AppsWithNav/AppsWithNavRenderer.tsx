@@ -4,6 +4,9 @@ import { Model_AppsWithNav, Model_AppsWithNav_AppGroup, Model_AppsWithNav_App } 
 import { Nav } from 'office-ui-fabric-react'
 import defineStyle from '../../api/styling/defineStyle'
 
+// TODO
+import DataNavigator from '../../api/components/data-views/DataNavigator'
+
 // --- AppWithNavStyle --------------------------------------------
 
 const AppsWithNavStyle = defineStyle({
@@ -20,9 +23,12 @@ const AppsWithNavStyle = defineStyle({
     borderStyle: 'solid',
   },
 
-  main: {
+  content: {
     flexGrow: '1',
-    border: '1px solid yellow'
+    marginLeft: '0.375rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch'
   }
 })
 
@@ -46,6 +52,9 @@ export default defineRenderer((model: Model_AppsWithNav) => {
 
                   selectedKey="categories" // TODO
                 />
+              </div>
+              <div className={classes.content}>
+                <DataNavigator/>
               </div>
             </div>
         }

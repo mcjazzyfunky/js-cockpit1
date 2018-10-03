@@ -1,7 +1,8 @@
 // import component types
 import AppsWithMenu from './api/components/misc/AppsWithMenu'
 import ControlCenter from './api/components/misc/ControlCenter'
-import DataTable from './api/components/tabular/DataTable'
+import DataNavigator from './api/components/data-views/DataNavigator'
+import DataTable from './api/components/data-views/DataTable'
 import HBox from './api/components/layout/HBox'
 import VBox from './api/components/layout/VBox'
 
@@ -15,6 +16,7 @@ export {
   // components
   AppsWithMenu,
   ControlCenter,
+  DataNavigator,
   DataTable,
   HBox,
   VBox,
