@@ -1,5 +1,5 @@
 import ActionEvent from '../../events/ActionEvent'
-import MenuBarRenderer from '../../../renderers/MenuBarRenderer'
+import MenuBarRenderer from '../../../renderers/MenuBar/MenuBarRenderer'
 import React, { ComponentType, ReactNode, ReactElement } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'

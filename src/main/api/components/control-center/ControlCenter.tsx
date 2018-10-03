@@ -1,4 +1,4 @@
-import ControlCenterRenderer from '../../../renderers/control-center/ControlCenterRenderer'
+import ControlCenterRenderer from '../../../renderers/ControlCenter/ControlCenterRenderer'
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, isElement, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
