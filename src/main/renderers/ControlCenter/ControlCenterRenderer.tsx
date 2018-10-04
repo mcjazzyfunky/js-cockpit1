@@ -120,7 +120,6 @@ const AppSelectorStyle = defineStyle({
   },
 
   label: {
-    fontSize: '0.9rem',
   }
 })
 
@@ -153,7 +152,6 @@ const AppSelector = defineComponent<AppSelectorProps>({
 
 const UserMenuStyle = defineStyle({
   container: {
-    fontSize: '0.875rem'
   }
 })
 

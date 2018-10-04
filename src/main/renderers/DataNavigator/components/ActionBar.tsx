@@ -23,7 +23,7 @@ const ActionBarStyle = defineStyle((theme: ITheme) => ({
 
     selectors: {
       '& *': {
-        fontSize: '20px !important',
+        fontSize: '16px !important',
         marginTop: '4px', 
       }
     }
