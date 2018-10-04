@@ -21,7 +21,7 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0 0.75rem 0 0',
+    padding: '0 0.75rem 2px 0',
     borderWidth: '0 0 0.5px 0',
     borderColor: '#eaeaea',
     borderStyle: 'solid',
@@ -43,7 +43,8 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   },
 
   content: {
-    flexGrow: 1
+    flexGrow: 1,
+    padding: '0.5rem 0',
   },
 
   footer: {
