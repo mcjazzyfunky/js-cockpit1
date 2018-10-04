@@ -9,8 +9,10 @@ export default class extends React.Component {
     if (typeof document !== 'undefined') {
       const Demo: any = require('../src/demo/Demo').default
       console.clear()
-      const body: any = document.body 
+      const body: any = document.body
+      const html: any = document.body.parentNode 
 
+      html.style.fontSize = '14px'
       body.style.margin = 0
       body.style.fontFamily = '"Segoe UI", Arial, Helvetica, sans-serif'
       ReactDOM.render(

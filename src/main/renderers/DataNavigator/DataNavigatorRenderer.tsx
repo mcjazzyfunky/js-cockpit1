@@ -6,6 +6,9 @@ import PaginationBar from './components/PaginationBar'
 import { ITheme, SearchBox, classNamesFunction } from 'office-ui-fabric-react'
 import ActionBar from './components/ActionBar'
 
+// TODO
+import DataTable from '../../api/components/data-views/DataTable'
+
 // --- DataNavigatorStyle -------------------------------------------
 
 const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
@@ -18,13 +21,14 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0 0.75rem',
-    borderWidth: '0 0 1px 0',
-    borderColor: '#ddd',
+    padding: '0 0.75rem 0 0',
+    borderWidth: '0 0 0.5px 0',
+    borderColor: '#eaeaea',
     borderStyle: 'solid',
   },
 
   headerStart: {
+    padding: '0 0 0 0.75rem'
   },
 
   headerCenter: {
@@ -45,7 +49,7 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   footer: {
     padding: '0.25rem 0.5rem',
     borderWidth: '1px 0 0 0',
-    borderColor: '#ddd',
+    borderColor: '#e8e8e8',
     borderStyle: 'solid',
   },
 
@@ -95,7 +99,7 @@ function renderHeader(model: Model_DataNavigator, classes: any) {
         </div>
       </div>
       <div className={classes.headerEnd}>
-        <SearchBox className={classes.searchBox} />
+        <SearchBox placeholder="Search" className={classes.searchBox} />
       </div>
     </div>
   ) 

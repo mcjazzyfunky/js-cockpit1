@@ -43,8 +43,8 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
     boxSizing: 'border-box',
     background: 'none',
     outline: 'none',
-    height: '1.5rem',
-    transform: 'translate(0, 7px)',
+    height: '24px',
+    transform: 'translate(0, 6px)',
 
     selectors: {
       '&:hover': {

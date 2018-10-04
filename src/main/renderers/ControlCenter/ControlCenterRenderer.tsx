@@ -16,16 +16,17 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
     controlCenter: {
       display: 'flex',
       flexDirection: 'column',
+      minWidth: '100%',
       position: 'absolute',
-      width: '100%',
       height: '100%',
+      justifyContent: 'stretch',
     },
 
     header: {
       display: 'flex',
       alignItems: 'center',
-      width: '100%',
       height: '42px',
+      minWidth: '100%',
       color: theme.palette.white,
       backgroundColor: theme.palette.themePrimary,
     },

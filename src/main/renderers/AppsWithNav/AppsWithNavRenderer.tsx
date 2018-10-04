@@ -18,9 +18,10 @@ const AppsWithNavStyle = defineStyle({
 
   navigation: {
     width: '15rem',
-    borderColor: '#ddd',
-    borderWidth: '0 1px 0 0',
+    borderColor: '#e8e8e8',
+    borderWidth: '0 0.5px 0 0',
     borderStyle: 'solid',
+    padding: '0 1px 0 0'
   },
 
   content: {
