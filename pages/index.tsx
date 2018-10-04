@@ -6,6 +6,8 @@ export default class extends React.Component {
   private container: any = null
 
   componentDidMount() {
+
+
     if (typeof document !== 'undefined') {
       const Demo: any = require('../src/demo/Demo').default
       console.clear()

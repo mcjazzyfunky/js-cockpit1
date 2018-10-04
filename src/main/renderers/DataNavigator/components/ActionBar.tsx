@@ -14,12 +14,12 @@ const ActionBarStyle = defineStyle((theme: ITheme) => ({
   actionButton: {
     backgroundColor: 'transparent',
     margin: '0 2px',
-    opacity: '0.9',
-    // color: theme.palette.themePrimary
+    //opacity: '0.9',
+    //color: theme.palette.themePrimary
   },
 
   icon: {
-    //color: theme.palette.themePrimary,
+    color: theme.palette.themePrimary,
 
     selectors: {
       '& *': {

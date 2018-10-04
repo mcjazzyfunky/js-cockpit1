@@ -24,21 +24,21 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
 
     header: {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'stretch',
       height: '42px',
       minWidth: '100%',
       color: theme.palette.white,
-      backgroundColor: theme.palette.themePrimary,
+      backgroundColor: 'rgb(64,64,64)' 
     },
 
     headerStart: {
-      padding: '0.1rem 0.3rem',
+      padding: '0.1rem 0.5rem',
       whiteSpace: 'nowrap',
     },
 
     headerCenter: {
       flexGrow: 1,
-      padding: '0.2rem 2rem 0.2rem 4rem',
+      padding: '0 2rem 0.2rem 4rem',
       whiteSpace: 'nowrap',
     },
 
@@ -180,21 +180,21 @@ const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
     height: '42px',
     textAlign: 'center',
     verticalAlign: 'middle',
-    borderWidth: '0 0 0 0.5px',
-    borderColor: theme.palette.themeTertiary,
-    borderStyle: 'solid',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
+    //borderWidth: '0 0 0 0.5px',
+    //borderStyle: 'solid',
+    //borderColor: Color(theme.palette.themePrimary).lighten(0.5),
     
     selectors: {
       '&:hover': {
-        backgroundColor: Color(theme.palette.themePrimary).darken(0.2)
+        backgroundColor: Color(theme.palette.themePrimary).lighten(0.2)
       },
 
       '&:active': {
-        backgroundColor: Color(theme.palette.themePrimary).darken(0.1)
+        backgroundColor: Color(theme.palette.themePrimary).lighten(0.1)
       }
     }
   }

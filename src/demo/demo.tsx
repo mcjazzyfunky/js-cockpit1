@@ -1,8 +1,15 @@
 import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { initSystemIcons, AppsWithMenu, ControlCenter } from '../main/js-cockpit'
+import { loadTheme } from 'office-ui-fabric-react'
 
 initSystemIcons()
+
+loadTheme({
+  palette: {
+    'themePrimary': '#e6522c'
+  }
+});
 
 export default function Demo() {
   return (

@@ -41,6 +41,7 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
 
   searchBox: {
     width: '15rem',
+    marginRight: '0.25rem',
   },
 
   content: {
@@ -57,8 +58,8 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
 
   title: {
     display: 'inline-block',
-    color: theme.palette.themePrimary,
-    ...theme.fonts.large,
+    //color: theme.palette.themePrimary,
+    ...theme.fonts.xLarge,
     //fontWeight: 400,
     marginRight: '0.5rem',
   },
