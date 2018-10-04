@@ -9,10 +9,27 @@ export default class extends React.Component {
     if (typeof document !== 'undefined') {
       const Demo: any = require('../src/demo/Demo').default
       console.clear()
+      const head: any = document.head
       const body: any = document.body
       const html: any = document.body.parentNode 
 
       html.style.fontSize = '14px'
+
+      const linkElem1 = document.createElement('link')
+      const linkElem2 = document.createElement('link')
+
+      linkElem1.rel = 'stylesheet'
+      linkElem2.rel = 'stylesheet'
+
+      linkElem1.type = 'text/css'
+      linkElem2.type = 'text/css'
+
+      linkElem1.href = '//unpkg.com/ag-grid-community@19.0.0/dist/styles/ag-grid.css'
+      linkElem2.href = '//unpkg.com/ag-grid-community@19.0.0/dist/styles/ag-theme-balham.css'
+
+      head.appendChild(linkElem1)
+      head.appendChild(linkElem2)
+
       body.style.margin = 0
       body.style.fontFamily = '"Segoe UI", Arial, Helvetica, sans-serif'
       ReactDOM.render(

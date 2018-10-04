@@ -75,6 +75,24 @@ const DataNavigatorRenderer = defineRenderer<Model_DataNavigator>(
             <div className={classes.container}>
               { renderHeader(model, classes) }
               <div className={classes.content}>
+                <DataTable>
+                  <DataTable.Column
+                    title="First name"
+                    field="firstName"
+                  />
+                  <DataTable.Column
+                    title="Last Name"
+                    field="lastName"
+                  />
+                  <DataTable.Column
+                    title="Postal code"
+                    field="postalCode"
+                  />
+                  <DataTable.Column
+                    title="City"
+                    field="city"
+                  />
+                </DataTable>
               </div>
               { renderFooter(model, classes) }
             </div>

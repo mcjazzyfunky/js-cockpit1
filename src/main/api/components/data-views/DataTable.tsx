@@ -1,6 +1,11 @@
-import React, { ComponentType, ReactNode } from 'react'
+import DataTableRenderer from '../../../renderers/DataTable/DataTableRenderer'
+
+import React, { ComponentType, ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
+
+
+// --- DataTable.Column ---------------------------------------------
 
 type ColumnProps = {
   title?: string,
@@ -28,6 +33,8 @@ const Column = defineComponent<ColumnProps>({
     )
   }
 })
+
+// --- DataTable.ColumnGroup ----------------------------------------
 
 type ColumnGroupProps = {
   title?: string,
@@ -90,67 +97,84 @@ const DataTable = defineComponent<DataTableProps>({
     }
   },
 
-  base: class extends React.Component<DataTableProps, DataTableState> {
-    private _tableInfo: TableInfo = null
-    private _tableInfoSource: DataTableProps = null
-
+  base: class Base extends React.Component<DataTableProps, DataTableState> {
     constructor(props: DataTableProps) {
       super(props)
-
-      this._tableInfo = null,
-      this._tableInfoSource = null
     }
 
     render() {
-      this._prepareTableInfo()
+      return DataTableRenderer.render(Base.getDataTableModel(this.props))
+    }
 
-      return (
-        <table>
-          <thead>
-            <tr>
-              {
-                this._tableInfo.columns.map((column, idx) => {
-                    return <th key={idx}>{column.title}</th>
-                })
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this._tableInfo.data.map((row: any, rowIdx) => 
-                <tr key={rowIdx}>
-                  {
-                    this._tableInfo.columns.map(({ field }, columnIdx) => {
-                      const value: any = row && field ? row[field] : null
+    // --- private --------------------------------------------------
 
-                      return <td key={`${rowIdx}-${columnIdx}`} >{ value }</td>
-                    })
-                  }
-                </tr>)
-            }
-          </tbody>
-        </table>
-      )
+    private static getDataTableModel(props: DataTableProps): Model_DataTable {
+      const model: Model_DataTable = {
+        kind: 'Model_DataTable',
+        columns: []
+      }
+
+      React.Children.forEach(props.children, (child: ReactElement<Model_DataTable_Column | Model_DataTable_ColumnGroup>) => {
+        model.columns.push(
+          child.type === Column
+            ? Base.getColumnModel(child.props)
+            : Base.getColumnGroupModel(child.props))
+      })
+
+      return model
+    }
+
+    private static getColumnModel(props: ColumnProps): Model_DataTable_Column {
+      let ret: Model_DataTable_Column = {
+        kind: 'Model_DataTable_Column'
+      }
+
+      if (props.title !== undefined) {
+        ret.title = props.title
+      }
+
+      if (props.field !== undefined) {
+        ret.field = props.field
+      }
+
+      if (props.sortable !== undefined) {
+        ret.sortable = props.sortable
+      }
+
+      return ret
     }
     
-    private _prepareTableInfo() {
-      if (this.props !== this._tableInfoSource) {
-        const children = this.props.children
+    private static getColumnGroupModel(props: ColumnGroupProps): Model_DataTable_ColumnGroup {
+      let ret: Model_DataTable_ColumnGroup
 
-        const columns = React.Children.map(children, (child: any) => {
-          const { title, field } = child.props
-
-          return { title, field }
-        })
-
-        this._tableInfo = { columns, data: this.props.data || [] }
-        this._tableInfoSource = this.props
-      }
+      return ret
     }
   }
 })
 
+// --- models ------------------------------------------------------
+
+type Model_DataTable = {
+  kind: 'Model_DataTable',
+  columns: (Model_DataTable_Column | Model_DataTable_ColumnGroup)[]
+}
+
+type Model_DataTable_Column = {
+  kind: 'Model_DataTable_Column',
+  title?: string,
+  field?: string,
+  sortable?: boolean
+}
+
+type Model_DataTable_ColumnGroup = {
+  kind: 'Model_DataTable_ColumnGroup',
+  title: string,
+  columns: (Model_DataTable_Column | Model_DataTable_ColumnGroup)[]
+}
+
+// --- exports ------------------------------------------------------
 
 export default Object.assign(DataTable, {
-  Column
-});
+  Column,
+  ColumnGroup
+})

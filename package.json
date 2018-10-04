@@ -68,6 +68,8 @@
     "ziptool": "^1.0.2"
   },
   "dependencies": {
+    "ag-grid-community": "^19.0.0",
+    "ag-grid-react": "^19.0.0",
     "color": "^3.0.0",
     "js-react-utils": "0.0.23",
     "office-ui-fabric-react": "^6.75.0",
