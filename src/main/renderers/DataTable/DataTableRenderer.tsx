@@ -1,10 +1,33 @@
 import defineRenderer from '../defineRenderer'
+import defineStyle from '../../api/styling/defineStyle'
 import React from 'react'
 import { defineComponent } from 'js-react-utils'
-
+import { css, ITheme } from 'office-ui-fabric-react'
 import { AgGridReact } from 'ag-grid-react'
 // import 'ag-grid-community/dist/styles/ag-grid.css'
 // import 'ag-grid-community/dist/styles/ag-theme-balham.css'
+
+// --- DataTableStyle -----------------------------------------------
+
+const DataTableStyle = defineStyle((theme: ITheme) => ({
+  container: {
+    width: '100%',
+    height: '400px',
+
+    selectors: {
+      '& .ag-cell': {
+        ...theme.fonts.smallPlus,
+      },
+
+      '& .ag-header-cell-text': {
+        ...theme.fonts.medium,
+        color: theme.semanticColors.bodyText
+      }
+    }
+  }
+}))
+
+// --- DataTableRenderer --------------------------------------------
 
 const DataTableRenderer = defineRenderer((model: any) => {
     const columnDefs: any = [
@@ -44,15 +67,20 @@ const DataTableRenderer = defineRenderer((model: any) => {
 
     console.log(model)
   return (
-    <div
-      className="ag-theme-balham"
-      style={{ width: '100%', flexGrow: 1, display: 'table', height: '400px' }}
-    >
-      <AgGridReact
-        columnDefs ={columnDefs}
-        rowData={rowData}>
-      </AgGridReact>
-    </div>
+    <DataTableStyle>
+      {
+        (classes: any) => 
+          <div
+            className={ css(classes.container, 'ag-theme-balham') }
+          >
+            <AgGridReact
+              columnDefs ={columnDefs}
+              rowData={rowData}>
+            </AgGridReact>
+          </div>
+      }
+    </DataTableStyle>
+
   )
 })
 

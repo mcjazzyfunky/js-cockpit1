@@ -24,8 +24,8 @@ export default class extends React.Component {
       linkElem1.type = 'text/css'
       linkElem2.type = 'text/css'
 
-      linkElem1.href = '//unpkg.com/ag-grid-community@19.0.0/dist/styles/ag-grid.css'
-      linkElem2.href = '//unpkg.com/ag-grid-community@19.0.0/dist/styles/ag-theme-balham.css'
+      linkElem1.href = '//unpkg.com/ag-grid-community/dist/styles/ag-grid.css'
+      linkElem2.href = '//unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css'
 
       head.appendChild(linkElem1)
       head.appendChild(linkElem2)
