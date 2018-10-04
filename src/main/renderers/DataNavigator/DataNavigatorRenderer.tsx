@@ -21,7 +21,8 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0.25rem 0.75rem 2px 0',
+    //padding: '0.25rem 0.75rem 2px 0',
+    height: '40px',
     borderWidth: '0 0 0.5px 0',
     borderColor: '#eaeaea',
     borderStyle: 'solid',
@@ -57,7 +58,8 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     color: theme.palette.themePrimary,
-    ...theme.fonts.xLarge,
+    ...theme.fonts.large,
+    //fontWeight: 400,
     marginRight: '0.5rem',
   },
 

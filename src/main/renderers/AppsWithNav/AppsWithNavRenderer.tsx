@@ -6,6 +6,7 @@ import defineStyle from '../../api/styling/defineStyle'
 
 // TODO
 import DataNavigator from '../../api/components/data-views/DataNavigator'
+import { scaleOne } from 'office-ui-fabric-react/lib/components/Coachmark/Coachmark.styles';
 
 // --- AppWithNavStyle --------------------------------------------
 
@@ -21,7 +22,7 @@ const AppsWithNavStyle = defineStyle({
     borderColor: '#e8e8e8',
     borderWidth: '0 0.5px 0 0',
     borderStyle: 'solid',
-    padding: '0 1px 0 0'
+    padding: '0 3px',
   },
 
   content: {
@@ -46,16 +47,14 @@ export default defineRenderer((model: Model_AppsWithNav) => {
               <div className={classes.navigation}>
                 <Nav
                   groups={
-                    [{
-                      links: model.menu.map(getLinkProps)
-                    }]
+                    model.menu.map(getLinkProps)
                   }
 
                   selectedKey="categories" // TODO
                 />
               </div>
               <div className={classes.content}>
-                <DataNavigator/>
+                <DataNavigator config={{}} data={null}/>
               </div>
             </div>
         }
