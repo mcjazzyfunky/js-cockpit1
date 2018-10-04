@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import { CommandBar, ITheme } from 'office-ui-fabric-react'
 import defineStyle from '../../../api/styling/defineStyle'
+import { NONAME } from 'dns';
 
 // --- ActionBarStyle --------------------------------------------
 
@@ -13,16 +14,16 @@ const ActionBarStyle = defineStyle((theme: ITheme) => ({
   actionButton: {
     backgroundColor: 'transparent',
     margin: '0 2px',
+    opacity: '0.9',
     //color: theme.palette.themePrimary
   },
 
   icon: {
-    //display: 'none',
     //color: theme.palette.themePrimary,
 
     selectors: {
       '& *': {
-        fontSize: '16px !important',
+        fontSize: '20px !important',
         marginTop: '4px', 
       }
     }
