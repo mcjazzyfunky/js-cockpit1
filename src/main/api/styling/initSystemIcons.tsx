@@ -2,6 +2,7 @@ import React from 'react'
 import { registerIcons } from '@uifabric/styling'
 import ChevronDownIcon from '../../system-icons/ChevronDownIcon'
 import ChevronRightIcon from '../../system-icons/ChevronRightIcon'
+import SearchIcon from '../../system-icons/SearchIcon'
 
 export default function initSystemIcons() {
   registerIcons({
@@ -18,7 +19,7 @@ export default function initSystemIcons() {
       'chevronright': <ChevronRightIcon/>,
       'checkmark': '[checkmark]',
       'remove': '[remove]',
-      'search': '[search]'
+      'search': <SearchIcon/>
     }
   })
 }

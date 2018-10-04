@@ -3,7 +3,7 @@ import defineRenderer from '../defineRenderer'
 import defineStyle from '../../api/styling/defineStyle'
 import { Model_DataNavigator } from '../../api/components/data-views/DataNavigator'
 import PaginationBar from './components/PaginationBar'
-import { ITheme } from 'office-ui-fabric-react'
+import { ITheme, SearchBox, classNamesFunction } from 'office-ui-fabric-react'
 import ActionBar from './components/ActionBar'
 
 // --- DataNavigatorStyle -------------------------------------------
@@ -16,10 +16,26 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   },
 
   header: {
-    padding: '0.25rem 0.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 0.75rem',
     borderWidth: '0 0 1px 0',
     borderColor: '#ddd',
     borderStyle: 'solid',
+  },
+
+  headerStart: {
+  },
+
+  headerCenter: {
+    flexGrow: 1,
+  },
+
+  headerEnd: {
+  },
+
+  searchBox: {
+    width: '15rem',
   },
 
   content: {
@@ -36,12 +52,12 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     color: theme.palette.themePrimary,
-    ...theme.fonts.large,
-    marginRight: '2rem'
+    ...theme.fonts.xLarge,
+    marginRight: '0.5rem',
   },
 
   actionBar: {
-    display: 'inline-flex'
+    display: 'inline-flex',
   }
 }))
 // --- DataNavigatorStyle -------------------------------------------
@@ -53,14 +69,10 @@ const DataNavigatorRenderer = defineRenderer<Model_DataNavigator>(
         {
           (classes: any) =>
             <div className={classes.container}>
-              <div className={classes.header}>
-                { renderHeader(model, classes) }
-              </div>
+              { renderHeader(model, classes) }
               <div className={classes.content}>
               </div>
-              <div className={classes.footer}>
-                { renderFooter(model) }
-              </div>
+              { renderFooter(model, classes) }
             </div>
         }
       </DataNavigatorStyle>
@@ -71,12 +83,19 @@ const DataNavigatorRenderer = defineRenderer<Model_DataNavigator>(
 
 function renderHeader(model: Model_DataNavigator, classes: any) {
   return (
-    <div>
-      <div className={classes.title}>
-        Product
+    <div className={classes.header}>
+      <div className={classes.headerStart}>
+        <div className={classes.title}>
+          Product
+        </div>
       </div>
-      <div className={classes.actionBar}>
-        <ActionBar/>
+      <div className={classes.headerCenter}>
+        <div className={classes.actionBar}>
+          <ActionBar/>
+        </div>
+      </div>
+      <div className={classes.headerEnd}>
+        <SearchBox className={classes.searchBox} />
       </div>
     </div>
   ) 
@@ -84,8 +103,12 @@ function renderHeader(model: Model_DataNavigator, classes: any) {
 
 // --- footer -------------------------------------------------------
 
-function renderFooter(model: Model_DataNavigator) {
-  return <PaginationBar/>
+function renderFooter(model: Model_DataNavigator, classes: any) {
+  return (
+    <div className={classes.footer}> 
+      <PaginationBar/>
+    </div>
+  )
 }
 
 // --- exports ------------------------------------------------------

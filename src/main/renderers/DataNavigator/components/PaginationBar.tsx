@@ -29,6 +29,10 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
     padding: '0 0.5rem 0 3rem',
   },
 
+  pageSizeSelector: {
+    // backgroundColor: 'transparent',
+  },
+
   endArea: {
   },
 
@@ -108,6 +112,7 @@ const PaginationBar = defineComponent<PaginationBarProps>({
                 <label className={classes.pageSizeText}>Items/Page</label>
                 <DefaultButton
                   text="25"
+                  className={classes.pageSizeSelector}
                   menuProps={{
                     items: [
                       { key: '25', name: '25' },
