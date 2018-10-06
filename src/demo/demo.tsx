@@ -2,14 +2,19 @@ import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { initSystemIcons, AppsWithMenu, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
+import Color from 'color'
 
 initSystemIcons()
 
+const primaryColor = '#e6522c'
+
 loadTheme({
   palette: {
-    'themePrimary': '#e6522c'
+    'themePrimary': primaryColor,
+    'themeSecondary': Color(primaryColor).lighten(0.2).string(),
+    'themeTertiary': Color(primaryColor).lighten(0.4).string(),
   }
-});
+})
 
 export default function Demo() {
   return (

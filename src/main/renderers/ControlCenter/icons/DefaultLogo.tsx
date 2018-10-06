@@ -9,10 +9,11 @@ export default defineComponent({
 
   render() {
     return ( 
-      <svg width="26" height="26" viewBox="0 0 64 64">
-        <g fill="none" stroke="currentColor" strokeWidth="2" strokeMiterlimit="10">
-          <path d="M32 1h-6v9l-6 2-6-6-8 8 6 6-2 6H1v12h9l2 6-6 6 8 8 6-6 6 2v9h12v-9l6-2 6 6 8-8-6-6 2-6h9V26h-9l-2-6 6-6-8-8-6 6-6-2V1z"/>
-          <circle cx="32" cy="32" r="6"/>
+      <svg width="20" height="20" viewBox="-1 0 64 65">
+        <g fill="none" stroke="currentColor" strokeWidth="4">
+          <path d="M54.999,36.001C55,50.913,42.912,63,28,62.999
+            C13.087,63,1,50.912,1.001,36C1,21.088,13.088,9,28,9.001V36L54.999,36.001z"/>
+          <path d="M63,28C63.001,13.087,50.914,0.998,36.001,1v27H63z"/>
         </g>
       </svg>
     )

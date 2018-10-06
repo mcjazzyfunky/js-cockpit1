@@ -11,20 +11,19 @@ const BrandStyle = defineStyle({
   },
 
   vendor: {
-    fontSize: '0.75rem',
+    fontSize: '12px',
     padding: 0,
     margin: 0,
   },
 
   title: {
-    fontSize: '1.125rem',
+    fontSize: '14px',
     padding: 0,
     margin: '-1px 0 0 0',
     lineHeight: '1.25rem',
   },
 
   logo: {
-    fontSize: '1rem'
   },
   
   cells: {

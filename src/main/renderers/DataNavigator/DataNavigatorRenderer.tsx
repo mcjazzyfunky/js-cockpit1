@@ -59,8 +59,8 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     //color: theme.palette.themePrimary,
-    ...theme.fonts.xLarge,
-    //fontWeight: 400,
+    ...theme.fonts.large,
+    fontWeight: 300,
     marginRight: '0.5rem',
   },
 

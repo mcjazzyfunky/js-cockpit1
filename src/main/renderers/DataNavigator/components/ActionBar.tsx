@@ -19,7 +19,7 @@ const ActionBarStyle = defineStyle((theme: ITheme) => ({
   },
 
   icon: {
-    color: theme.palette.themePrimary,
+    //color: theme.palette.themePrimary,
 
     selectors: {
       '& *': {

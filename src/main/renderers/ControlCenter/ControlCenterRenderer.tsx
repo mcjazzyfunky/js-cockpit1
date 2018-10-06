@@ -4,7 +4,7 @@ import defineRenderer from '../defineRenderer'
 import { ControlCenterModel } from '../../api/components/misc/ControlCenter'
 import Brand from './components/Brand'
 import defineStyle from '../../api/styling/defineStyle'
-import { css, ITheme, Callout, classNamesFunction } from 'office-ui-fabric-react'
+import { ITheme } from 'office-ui-fabric-react'
 import DefaultAvatar from './icons/DefaultAvatar'
 import LogoutIcon from './icons/LogoutIcon'
 import AppsIcon from './icons/AppsIcon'
@@ -27,8 +27,8 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
       alignItems: 'stretch',
       height: '42px',
       minWidth: '100%',
-      color: theme.palette.white,
-      backgroundColor: 'rgb(64,64,64)' 
+      color: '#f0f0f0',
+      backgroundColor: 'rgb(50,50,50)' 
     },
 
     headerStart: {
@@ -59,7 +59,7 @@ const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme)
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
-    }
+    },
   }
 })
 
@@ -102,7 +102,7 @@ export default defineRenderer(render)
 
 // ------------------------------------------------------------------
 
-const AppSelectorStyle = defineStyle({
+const AppSelectorStyle = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -119,9 +119,15 @@ const AppSelectorStyle = defineStyle({
     }
   },
 
+  icon: {
+    display: 'inline-block',
+    marginRight: '0.5rem',
+    color: theme.palette.themePrimary
+  },
+
   label: {
   }
-})
+}))
 
 type AppSelectorProps = {
 }
@@ -136,7 +142,9 @@ const AppSelector = defineComponent<AppSelectorProps>({
           (classes: any) =>
             <div>
               <div className={classes.container}>
-                <AppsIcon/>
+                <div className={classes.icon}>
+                  <AppsIcon/>
+                </div>
                 <label className={classes.label}>Content Management</label>
                 <ChevronDownIcon/>
               </div>
@@ -174,6 +182,7 @@ const UserMenu: SFC<UserMenuProps> = props => {
 
 const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
   button: {
+    color: theme.palette.white,
     backgroundColor: Color(theme.palette.themePrimary).darken(0),
     border: 'none',
     width: '42px',

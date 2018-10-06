@@ -13,10 +13,11 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
     display: 'flex',
     alignItems: 'center',
     whiteSpace: 'nowrap',
-    ...theme.fonts.medium,
   },
 
   startArea: {
+    display: 'flex',
+    alignItems: 'center',
   },
 
   centerArea: {
@@ -43,18 +44,21 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
     boxSizing: 'border-box',
     background: 'none',
     outline: 'none',
-    height: '24px',
-    transform: 'translate(0, 6px)',
+    height: '32px',
+    // color: theme.palette.themePrimary,
 
     selectors: {
       '&:hover': {
         backgroundColor: theme.semanticColors.buttonBackgroundHovered
       },
       '&:active': {
-        backgroundColor: theme.semanticColors.buttonBackgroundChecked
+        backgroundColor: theme.semanticColors.buttonBackgroundChecked,
       },
       '& svg': {
-        transform: 'translate(0px, -2px)'
+        transform: 'translate(0px, 2px)'
+      },
+      '&::-moz-focus-inner': {
+        border: 0
       }
     }
   },
@@ -78,8 +82,10 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
       '& .ms-TextField-fieldGroup': {
         height: '1.5rem',
       },
+
       '& .ms-TextField-field': {
-        padding: '0 0.375rem'
+        padding: '0 0.375rem',
+        ...theme.fonts.smallPlus
       }
     }
   }
