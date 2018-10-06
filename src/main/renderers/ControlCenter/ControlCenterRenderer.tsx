@@ -183,7 +183,7 @@ const UserMenu: SFC<UserMenuProps> = props => {
 const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
   button: {
     color: theme.palette.white,
-    backgroundColor: Color(theme.palette.themePrimary).darken(0),
+    backgroundColor: theme.palette.themePrimary,
     border: 'none',
     width: '42px',
     height: '42px',
@@ -199,11 +199,11 @@ const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
     
     selectors: {
       '&:hover': {
-        backgroundColor: Color(theme.palette.themePrimary).lighten(0.2)
+        backgroundColor: Color(theme.palette.themePrimary).darken(0.2)
       },
 
       '&:active': {
-        backgroundColor: Color(theme.palette.themePrimary).lighten(0.1)
+        backgroundColor: Color(theme.palette.themePrimary).darken(0.1)
       }
     }
   }
