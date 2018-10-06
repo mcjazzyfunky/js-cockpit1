@@ -29,7 +29,7 @@ const DataTableStyle = defineStyle((theme: ITheme) => ({
 
     selectors: {
       '& > tr > th': {
-        padding: '0.5rem',
+        padding: '0.25rem',
         borderCollapse: 'collapse',
         borderWidth: '0 0 1px 1px',
         borderStyle: 'solid',
@@ -54,20 +54,16 @@ const DataTableStyle = defineStyle((theme: ITheme) => ({
       },
 
       '& > tr > td': {
-        padding: '0.5rem',
+        padding: '0.375rem',
         borderCollapse: 'collapse',
-        borderWidth: '0 0 0 1px',
+        borderWidth: '0 1px 1px 0',
         borderStyle: 'solid',
-        borderColor: '#ddd transparent #e8e8e8 transparent',
+        borderColor: 'transparent #ddd #eee transparent',
         ...theme.fonts.medium,
       },
       
       '& > tr > td:first-child': {
         borderLeftWidth: 0
-      },
-
-      '& > tr:last-child > td': {
-        borderBottomWidth: '1px',
       }
     }
   }
