@@ -2,6 +2,9 @@ import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { initSystemIcons, AppsWithMenu, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
+import LoginScreen from '../main/renderers/ControlCenter/components/LoginScreen'
+import LoginForm from '../main/renderers/ControlCenter/components/LoginForm'
+import Brand from '../main/renderers/ControlCenter/components/Brand'
 import Color from 'color'
 
 initSystemIcons()
@@ -10,13 +13,27 @@ const primaryColor = '#e6522c'
 
 loadTheme({
   palette: {
-    'themePrimary': primaryColor,
-    'themeSecondary': Color(primaryColor).lighten(0.2).string(),
-    'themeTertiary': Color(primaryColor).lighten(0.4).string(),
+    //'themePrimary': primaryColor,
+    //'themeSecondary': Color(primaryColor).lighten(0.2).string(),
+    //'themeTertiary': Color(primaryColor).lighten(0.4).string(),
   }
 })
 
 export default function Demo() {
+  /*
+  return (
+    <LoginScreen>
+      <LoginScreen.Content>
+        <LoginForm>
+          <LoginForm.Header>
+            <Brand vendor="meet+greet" title="Back Office"/>
+          </LoginForm.Header>
+        </LoginForm>
+      </LoginScreen.Content>
+    </LoginScreen>
+  )
+  */
+
   return (
     <ControlCenter vendor="meet+greet" title="Back Office">
       <ControlCenter.Apps>

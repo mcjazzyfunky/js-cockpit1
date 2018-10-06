@@ -1,16 +1,16 @@
-import Css from '../styling/Css'
+import defineStyle from '../../../api/styling/defineStyle'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode, isElementOfType, withChildren } from 'js-react-utils'
 import { ITheme } from 'office-ui-fabric-react'
 import { Spec } from 'js-spec'
 import Color from 'color'
 
-function getStyles({ theme }: { theme: ITheme }): Object { // TODO
+const LoginScreenStyle = defineStyle((theme: ITheme) => {
   const
-    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
-    gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
-    //gradientStartColor = Color('white'),
-    //gradientEndColor = Color('#888')
+    //gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
+    //gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
+    gradientStartColor = Color('#f0f0f0'),
+    gradientEndColor = Color('#fff')
 
   return {
     outerContainer: {
@@ -19,7 +19,8 @@ function getStyles({ theme }: { theme: ITheme }): Object { // TODO
       width: '100%',
       height: '100%',
       overflow: 'auto',
-      backgroundImage: `linear-gradient(120deg, ${gradientStartColor}, ${gradientEndColor})`
+      //backgroundImage: `linear-gradient(120deg, ${gradientStartColor}, ${gradientEndColor})`
+      backgroundImage: 'linear-gradient(-120deg, #888, #aaa, #a8a8a8)'
     },
 
     innerContainer: {
@@ -34,7 +35,7 @@ function getStyles({ theme }: { theme: ITheme }): Object { // TODO
       transform: 'translate(-50%, -30%)'
     }
   }
-}
+})
 
 type LoginScreenContentProps = {
   className?: string,
@@ -93,7 +94,7 @@ const LoginScreen = defineComponent<LoginScreenProps>({
     })
 
     return (
-      <Css getStyles={getStyles}>
+      <LoginScreenStyle>
         {(classes: any) => 
           <div className={classes.outerContainer}>
             <div className={classes.innerContainer}>
@@ -101,7 +102,7 @@ const LoginScreen = defineComponent<LoginScreenProps>({
             </div>
           </div>
         }
-      </Css>
+      </LoginScreenStyle>
     )
   }
 })

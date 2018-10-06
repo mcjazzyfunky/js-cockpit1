@@ -6,7 +6,6 @@ import defineStyle from '../../api/styling/defineStyle'
 
 // TODO
 import DataNavigator from '../../api/components/data-views/DataNavigator'
-import { scaleOne } from 'office-ui-fabric-react/lib/components/Coachmark/Coachmark.styles';
 
 // --- AppWithNavStyle --------------------------------------------
 
@@ -15,6 +14,7 @@ const AppsWithNavStyle = defineStyle({
     display: 'flex',
     flexGrow: 1,
     padding: '0.375rem',
+    fontSize: '80%',
   },
 
   navigation: {

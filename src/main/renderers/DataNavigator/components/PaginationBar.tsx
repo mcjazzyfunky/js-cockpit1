@@ -13,6 +13,7 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
     display: 'flex',
     alignItems: 'center',
     whiteSpace: 'nowrap',
+    ...theme.fonts.medium,
   },
 
   startArea: {
@@ -80,12 +81,11 @@ const PaginationBarStyle = defineStyle((theme: ITheme) => ({
 
     selectors: {
       '& .ms-TextField-fieldGroup': {
-        height: '1.5rem',
+        height: '1.75rem',
       },
 
       '& .ms-TextField-field': {
-        padding: '0 0.375rem',
-        ...theme.fonts.smallPlus
+        padding: '0.25rem 0.5rem'
       }
     }
   }
