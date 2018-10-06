@@ -2,9 +2,11 @@ import React from 'react'
 import defineRenderer from '../defineRenderer'
 import defineStyle from '../../api/styling/defineStyle'
 import { Model_DataNavigator } from '../../api/components/data-views/DataNavigator'
-import PaginationBar from './components/PaginationBar'
 import { ITheme, SearchBox, classNamesFunction } from 'office-ui-fabric-react'
 import ActionBar from './components/ActionBar'
+import Paginator from '../../api/components/pagination/Paginator'
+import PageSizeSelector from '../../api/components/pagination/PageSizeSelector'
+import PaginationInfo from '../../api/components/pagination/PaginationInfo'
 
 // TODO
 import DataTable from '../../api/components/data-views/DataTable'
@@ -47,14 +49,25 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
   content: {
     display: 'flex',
     flexGrow: 1,
-    padding: '0.25rem 0rem',
+    padding: '3px 0rem',
   },
 
   footer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     padding: '0.25rem 0.5rem',
     borderWidth: '1px 0 0 0',
     borderColor: '#e8e8e8',
     borderStyle: 'solid',
+  },
+
+  footerStart: {
+  },
+
+  footerCenter: {
+    flexGrow: 1,
+    padding: '0 3rem',
   },
 
   title: {
@@ -133,7 +146,16 @@ function renderHeader(model: Model_DataNavigator, classes: any) {
 function renderFooter(model: Model_DataNavigator, classes: any) {
   return (
     <div className={classes.footer}> 
-      <PaginationBar/>
+      <div className={classes.footerStart}>
+        <Paginator pageIndex={2} totalItemCount={1243} pageSize={50}/>
+      </div>
+      <div className={classes.footerCenter}>
+        <PageSizeSelector pageIndex={2} totalItemCount={1243} pageSize={50}/>
+      </div>
+
+      <div className={classes.footerEnd}>
+        <PaginationInfo pageIndex={2} totalItemCount={1243} pageSize={50} about="items"/>
+      </div>
     </div>
   )
 }
