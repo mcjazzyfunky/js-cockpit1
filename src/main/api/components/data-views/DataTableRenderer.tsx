@@ -1,5 +1,5 @@
-import defineRenderer from '../defineRenderer'
-import defineStyle from '../../api/styling/defineStyle'
+import defineRenderer from '../../../renderers/defineRenderer'
+import defineStyle from '../../styling/defineStyle'
 import React from 'react'
 import { defineComponent } from 'js-react-utils'
 import { css, ITheme, classNamesFunction } from 'office-ui-fabric-react'

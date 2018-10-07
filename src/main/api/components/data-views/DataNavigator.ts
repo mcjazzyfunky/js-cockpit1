@@ -1,6 +1,6 @@
 import React from 'react'
 import { defineComponent, withChildren } from 'js-react-utils'
-import DataNavigatorRenderer from '../../../renderers/DataNavigator/DataNavigatorRenderer'
+import DataNavigatorRenderer from './DataNavigatorRenderer'
 
 // --- DataNavigator ------------------------------------------------
 

@@ -1,15 +1,14 @@
 import React from 'react'
-import defineRenderer from '../defineRenderer'
-import defineStyle from '../../api/styling/defineStyle'
-import { Model_DataNavigator } from '../../api/components/data-views/DataNavigator'
-import { ITheme, SearchBox, classNamesFunction } from 'office-ui-fabric-react'
-import ActionBar from './components/ActionBar'
-import Paginator from '../../api/components/pagination/Paginator'
-import PageSizeSelector from '../../api/components/pagination/PageSizeSelector'
-import PaginationInfo from '../../api/components/pagination/PaginationInfo'
+import defineStyle from '../../styling/defineStyle'
+import { Model_DataNavigator } from './DataNavigator'
+import { ITheme, SearchBox } from 'office-ui-fabric-react'
+import ActionBar from './data-navigator/ActionBar'
+import Paginator from '../pagination/Paginator'
+import PageSizeSelector from '../pagination/PageSizeSelector'
+import PaginationInfo from '../pagination/PaginationInfo'
 
 // TODO
-import DataTable from '../../api/components/data-views/DataTable'
+import DataTable from './DataTable'
 
 // --- DataNavigatorStyle -------------------------------------------
 
@@ -84,8 +83,8 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
 }))
 // --- DataNavigatorStyle -------------------------------------------
 
-const DataNavigatorRenderer = defineRenderer<Model_DataNavigator>(
-  (model: Model_DataNavigator) => {
+const DataNavigatorRenderer = { 
+  render(model: Model_DataNavigator) {
     return (
       <DataNavigatorStyle>
         {
@@ -117,7 +116,8 @@ const DataNavigatorRenderer = defineRenderer<Model_DataNavigator>(
         }
       </DataNavigatorStyle>
     )
-  })
+  }
+}
 
 // --- header -------------------------------------------------------
 

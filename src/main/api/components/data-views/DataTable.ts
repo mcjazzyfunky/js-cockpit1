@@ -1,6 +1,6 @@
-import DataTableRenderer from '../../../renderers/DataTable/DataTableRenderer'
+import DataTableRenderer from './DataTableRenderer'
 
-import React, { ComponentType, ReactElement, ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 

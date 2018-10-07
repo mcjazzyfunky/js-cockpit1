@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import { CommandBar, ITheme } from 'office-ui-fabric-react'
-import defineStyle from '../../../api/styling/defineStyle'
+import defineStyle from '../../../styling/defineStyle'
 import { NONAME } from 'dns';
 
 // --- ActionBarStyle --------------------------------------------
