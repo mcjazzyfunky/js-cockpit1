@@ -1,7 +1,7 @@
 import DefaultLogo from '../icons/DefaultLogo'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
-import defineStyle from '../../../api/styling/defineStyle'
+import defineStyle from '../../../../../api/styling/defineStyle'
 
 const BrandStyle = defineStyle({
   container: {

@@ -2,7 +2,7 @@ import React, { ComponentType, ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 import ActionEvent from '../../events/ActionEvent'
-import Model_AppsWithNavRenderer from '../../../renderers/AppsWithNav/AppsWithNavRenderer'
+import AppsWithNavRenderer from './AppsWithNavRenderer'
 
 // --- AppsWithNav.App --------------------------------------------
 
@@ -114,24 +114,24 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
   },
 
   base: class Base extends React.Component<AppsWithNavProps> {
-    private _model: Model_AppsWithNav = null
+    private _model: AppsWithNavData = null
     private _modelSource: AppsWithNavProps = null
     
     render() {
-      this._prepareModel_AppsWithNavModel()
-      return Model_AppsWithNavRenderer.render(this._model)
+      this._prepareAppsWithNavDataModel()
+      return AppsWithNavRenderer.render(this._model)
     }
 
-    private _prepareModel_AppsWithNavModel() {
+    private _prepareAppsWithNavDataModel() {
       if (this.props !== this._modelSource) {
         this._model = Base._getAppsWithNavModel(this.props)
         this._modelSource = this.props
       }
     }
 
-    static _getAppsWithNavModel(props: AppsWithNavProps): Model_AppsWithNav {
-      const ret: Model_AppsWithNav = {
-        kind: 'Model_AppsWithNav',
+    static _getAppsWithNavModel(props: AppsWithNavProps): AppsWithNavData {
+      const ret: AppsWithNavData = {
+        kind: 'AppsWithNavData',
         menu: []
       }
 
@@ -152,9 +152,9 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
       return ret
     }
 
-    private static _getAppGroupModel(props: AppGroupProps): Model_AppsWithNav_AppGroup {
-      const ret: Model_AppsWithNav_AppGroup = {
-        kind: 'Model_AppsWithNav_AppGroup',
+    private static _getAppGroupModel(props: AppGroupProps): AppsWithNavAppGroupData {
+      const ret: AppsWithNavAppGroupData = {
+        kind: 'AppsWithNavAppGroupData',
         title: props.title,
         name: props.name,
         items: []
@@ -170,9 +170,9 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
       return ret
     }
 
-    private static _getAppModel(props: AppProps): Model_AppsWithNav_App {
-      const ret: Model_AppsWithNav_App = {
-        kind: 'Model_AppsWithNav_App',
+    private static _getAppModel(props: AppProps): AppsWithNavAppData {
+      const ret: AppsWithNavAppData = {
+        kind: 'AppsWithNavAppData',
         title: props.title,
         name: props.name,
         content: props.children || null
@@ -185,20 +185,20 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
 
 // --- models -------------------------------------------------------
 
-type Model_AppsWithNav = {
-  kind: 'Model_AppsWithNav',
-  menu: (Model_AppsWithNav_AppGroup | Model_AppsWithNav_App)[]
+type AppsWithNavData = {
+  kind: 'AppsWithNavData',
+  menu: (AppsWithNavAppGroupData | AppsWithNavAppData)[]
 }
 
-type Model_AppsWithNav_AppGroup = {
-  kind: 'Model_AppsWithNav_AppGroup',
+type AppsWithNavAppGroupData = {
+  kind: 'AppsWithNavAppGroupData',
   title: string,
   name: string,
-  items: (Model_AppsWithNav_AppGroup | Model_AppsWithNav_App)[]
+  items: (AppsWithNavAppGroupData | AppsWithNavAppData)[]
 }
 
-type Model_AppsWithNav_App = {
-  kind: 'Model_AppsWithNav_App',
+type AppsWithNavAppData = {
+  kind: 'AppsWithNavAppData',
   title: string,
   name: string,
   content: ReactNode
@@ -213,7 +213,7 @@ export default Object.assign(AppsWithNav, {
 })
 
 export {
-  Model_AppsWithNav,
-  Model_AppsWithNav_AppGroup,
-  Model_AppsWithNav_App,
+  AppsWithNavData,
+  AppsWithNavAppGroupData,
+  AppsWithNavAppData,
 }

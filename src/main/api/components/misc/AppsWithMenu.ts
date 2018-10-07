@@ -1,8 +1,7 @@
 import React, { ComponentType, ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
-import ActionEvent from '../../events/ActionEvent'
-import AppsWithMenuRenderer from '../../../renderers/AppsWithMenu/AppsWithMenuRenderer'
+import AppsWithMenuRenderer from './AppsWithMenuRenderer'
 
 // --- AppsWithMenu.App --------------------------------------------
 
@@ -119,9 +118,9 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
       return AppsWithMenuRenderer.render(model)
     }
 
-    static _getAppsWithMenuModel(props: AppsWithMenuProps): Model_AppsWithMenu {
-      const ret: Model_AppsWithMenu = {
-        kind: 'Model_AppsWithMenu',
+    static _getAppsWithMenuModel(props: AppsWithMenuProps): AppsWithMenuData {
+      const ret: AppsWithMenuData = {
+        kind: 'AppsWithMenuData',
         menu: []
       }
 
@@ -142,9 +141,9 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
       return ret
     }
 
-    private static _getAppGroupModel(props: AppGroupProps): Model_AppsWithMenu_AppGroup {
-      const ret: Model_AppsWithMenu_AppGroup = {
-        kind: 'Model_AppsWithMenu_AppGroup',
+    private static _getAppGroupModel(props: AppGroupProps): AppsWithMenuAppGroupData {
+      const ret: AppsWithMenuAppGroupData = {
+        kind: 'AppsWithMenuAppGroupData',
         title: props.title,
         name: props.name,
         items: []
@@ -160,9 +159,9 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
       return ret
     }
 
-    private static _getAppModel(props: AppProps): Model_AppsWithMenu_App {
-      const ret: Model_AppsWithMenu_App = {
-        kind: 'Model_AppsWithMenu_App',
+    private static _getAppModel(props: AppProps): AppsWithMenuAppData {
+      const ret: AppsWithMenuAppData = {
+        kind: 'AppsWithMenuAppData',
         title: props.title,
         name: props.name,
         content: props.children || null
@@ -173,22 +172,22 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
   }
 })
 
-// --- models -------------------------------------------------------
+// --- data models --------------------------------------------------
 
-type Model_AppsWithMenu = {
-  kind: 'Model_AppsWithMenu',
-  menu: (Model_AppsWithMenu_AppGroup | Model_AppsWithMenu_App)[]
+type AppsWithMenuData = {
+  kind: 'AppsWithMenuData',
+  menu: (AppsWithMenuAppGroupData | AppsWithMenuAppData)[]
 }
 
-type Model_AppsWithMenu_AppGroup = {
-  kind: 'Model_AppsWithMenu_AppGroup',
+type AppsWithMenuAppGroupData = {
+  kind: 'AppsWithMenuAppGroupData',
   title: string,
   name: string,
-  items: (Model_AppsWithMenu_AppGroup | Model_AppsWithMenu_App)[]
+  items: (AppsWithMenuAppGroupData | AppsWithMenuAppData)[]
 }
 
-type Model_AppsWithMenu_App = {
-  kind: 'Model_AppsWithMenu_App',
+type AppsWithMenuAppData = {
+  kind: 'AppsWithMenuAppData',
   title: string,
   name: string,
   content: ReactNode
@@ -203,7 +202,7 @@ export default Object.assign(AppsWithMenu, {
 })
 
 export {
-  Model_AppsWithMenu,
-  Model_AppsWithMenu_AppGroup,
-  Model_AppsWithMenu_App,
+  AppsWithMenuData,
+  AppsWithMenuAppGroupData,
+  AppsWithMenuAppData,
 }

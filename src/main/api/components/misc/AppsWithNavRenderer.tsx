@@ -1,11 +1,11 @@
 import React from 'react'
-import defineRenderer from '../defineRenderer'
-import { Model_AppsWithNav, Model_AppsWithNav_AppGroup, Model_AppsWithNav_App } from '../../api/components/misc/AppsWithNav'
+import defineRenderer from '../../../renderers/defineRenderer'
+import { AppsWithNavData, AppsWithNavAppGroupData, AppsWithNavAppData } from './AppsWithNav'
 import { Nav } from 'office-ui-fabric-react'
-import defineStyle from '../../api/styling/defineStyle'
+import defineStyle from '../../styling/defineStyle'
 
 // TODO
-import DataNavigator from '../../api/components/data-views/DataNavigator'
+import DataNavigator from '../data-views/DataNavigator'
 
 // --- AppWithNavStyle --------------------------------------------
 
@@ -35,7 +35,7 @@ const AppsWithNavStyle = defineStyle({
 })
 
 
-export default defineRenderer((model: Model_AppsWithNav) => {
+export default defineRenderer((model: AppsWithNavData) => {
   let ret = null
 
   if (model.menu.length > 0) {
@@ -66,22 +66,22 @@ export default defineRenderer((model: Model_AppsWithNav) => {
 
 // --- helpers ------------------------------------------------------
 
-function getLinkProps(model: Model_AppsWithNav_AppGroup | Model_AppsWithNav_App) {
+function getLinkProps(model: AppsWithNavAppGroupData | AppsWithNavAppData) {
   const ret: any = { // TODO
     key: model.name,
     name: model.title,
     isExpanded: true
   }
 
-  if (model.kind === 'Model_AppsWithNav_AppGroup') {
-    const menu = model as Model_AppsWithNav_AppGroup
+  if (model.kind === 'AppsWithNavAppGroupData') {
+    const menu = model as AppsWithNavAppGroupData
 
     if (menu.items.length > 0) {
       ret.links = menu.items.map(it => {
         return getLinkProps(it)
       })
     }
-  } else if (model.kind === 'Model_AppsWithNav_App') {
+  } else if (model.kind === 'AppsWithNavAppData') {
     // TODO
   } else {
     throw new Error('This should never happen')

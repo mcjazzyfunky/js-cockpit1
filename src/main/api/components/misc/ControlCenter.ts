@@ -1,4 +1,4 @@
-import ControlCenterRenderer from '../../../renderers/ControlCenter/ControlCenterRenderer'
+import ControlCenterRenderer from './ControlCenterRenderer'
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, isElement, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
@@ -83,7 +83,7 @@ const ControlCenter = defineComponent<ControlCenterProps>({
                 ? null
                 : contents.length === 1
                 ? contents[0]
-                : <>{contents}</>
+                : React.createElement(React.Fragment, null, {contents})
 
           ret.apps.push({
             name: child2.props.name,
