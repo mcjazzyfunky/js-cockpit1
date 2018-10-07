@@ -12,7 +12,7 @@ import DataTable from './DataTable'
 
 // --- DataNavigatorStyle -------------------------------------------
 
-const styledDataNavigator = defineStyle((theme: ITheme) => ({
+const styleDataNavigator = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -85,7 +85,7 @@ const styledDataNavigator = defineStyle((theme: ITheme) => ({
 
 const DataNavigatorRenderer = { 
   render(model: Model_DataNavigator) {
-    return styledDataNavigator((classes: any) =>
+    return styleDataNavigator((classes: any) =>
       <div className={classes.container}>
         { renderHeader(model, classes) }
         <div className={classes.content}>

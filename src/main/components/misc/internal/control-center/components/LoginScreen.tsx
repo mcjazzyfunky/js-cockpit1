@@ -5,7 +5,7 @@ import { ITheme } from 'office-ui-fabric-react'
 import { Spec } from 'js-spec'
 import Color from 'color'
 
-const styledLoginScreen = defineStyle((theme: ITheme) => {
+const styleLoginScreen = defineStyle((theme: ITheme) => {
   const
     //gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
     //gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
@@ -93,7 +93,7 @@ const LoginScreen = defineComponent<LoginScreenProps>({
       }
     })
 
-    return styledLoginScreen((classes: any) => 
+    return styleLoginScreen((classes: any) => 
       <div className={classes.outerContainer}>
         <div className={classes.innerContainer}>
           {mainContent}

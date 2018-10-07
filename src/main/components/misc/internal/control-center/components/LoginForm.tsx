@@ -4,7 +4,7 @@ import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react
 import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
 import { Spec } from 'js-spec'
 
-const styledLoginForm = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
+const styleLoginForm = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
   return {
     container: {
       padding: '1rem 0.8rem',
@@ -162,7 +162,7 @@ const LoginForm = defineComponent<LoginFormProps>({
           </div>
       }
 
-      return styledLoginForm((classes: any) => { // TODO
+      return styleLoginForm((classes: any) => { // TODO
         const loadingIndicator =
           this.state.loading
             ? <div className={classes.loadingIndicator}>

@@ -13,7 +13,7 @@ import { ITheme, TextField } from 'office-ui-fabric-react'
 
 // --- PaginatorStyle -----------------------------------------------
 
-const styledPaginator = defineStyle((theme: ITheme) => ({
+const stylePaginator = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -96,7 +96,7 @@ const PaginatorRenderer = {
       nextButtonDisabled = pageIndex >= lastPageIndex,
       lastButtonDisabled = pageIndex >= lastPageIndex
 
-    return styledPaginator((classes: any) =>
+    return stylePaginator((classes: any) =>
       <div className={classes.container}>
         <button
           disabled={firstButtonDisabled}

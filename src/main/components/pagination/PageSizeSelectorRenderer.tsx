@@ -9,7 +9,7 @@ import { DefaultButton, ITheme } from 'office-ui-fabric-react'
 
 // --- PageSizeSelectorStyle ----------------------------------------
 
-const styledPageSizeSelector = defineStyle((theme: ITheme) => ({
+const stylePageSizeSelector = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -26,7 +26,7 @@ const styledPageSizeSelector = defineStyle((theme: ITheme) => ({
 
 const PageSizeSelectorRenderer = {
   render(data: PageSizeSelectorData) {
-    return styledPageSizeSelector((classes: any) =>
+    return stylePageSizeSelector((classes: any) =>
       <div className={classes.container}>
         <label className={classes.pageSizeText}>Items/Page</label>
         <DefaultButton

@@ -8,7 +8,7 @@ import AppsWithNav from './AppsWithNav'
 
 // --- AppsWithNavStyle ---------------------------------------------
 
-const styledAppsWithMenu = defineStyle({
+const styleAppsWithMenu = defineStyle({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,7 +28,7 @@ const AppsWithMenuRenderer = {
     let ret = null
 
     if (model.menu.length > 0) {
-      ret = styledAppsWithMenu((classes: any) =>
+      ret = styleAppsWithMenu((classes: any) =>
         <div className={classes.container}>
           <CommandBar
             items={

@@ -6,7 +6,7 @@ import { NONAME } from 'dns';
 
 // --- ActionBarStyle --------------------------------------------
 
-const styledActionBar = defineStyle((theme: ITheme) => ({
+const styleActionBar = defineStyle((theme: ITheme) => ({
   commandBar: {
     backgroundColor: 'transparent',
   },
@@ -43,7 +43,7 @@ const ActionBar = defineComponent<ActionBarProps>({
   },
 
   render(props: ActionBarProps) {
-    return styledActionBar((classes: any) =>
+    return styleActionBar((classes: any) =>
       <div>
         <CommandBar
           className={classes.commandBar}

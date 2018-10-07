@@ -3,7 +3,7 @@ import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import defineStyle from '../../../../../styling/defineStyle'
 
-const styledBrand = defineStyle({
+const styleBrand = defineStyle({
   container: {
     display: 'table',
     margin: 0,
@@ -81,7 +81,7 @@ export default defineComponent<BrandProps>({
   },
 
   render({ logo, vendor, title, className, style }) {
-    return styledBrand((classes: any) => { // TODO
+    return styleBrand((classes: any) => { // TODO
       let
         leftContent = null,
         rightContent = null

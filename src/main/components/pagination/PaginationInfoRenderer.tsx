@@ -8,7 +8,7 @@ import { ITheme } from 'office-ui-fabric-react'
 
 // --- PaginationInfoStyle ----------------------------------------
 
-const styledPaginationInfo = defineStyle((theme: ITheme) => ({
+const stylePaginationInfo = defineStyle((theme: ITheme) => ({
   container: {
     whiteSpace: 'nowrap',
     ...theme.fonts.medium
@@ -37,7 +37,7 @@ const PaginationInfoRenderer = {
         break
     }
 
-    return styledPaginationInfo((classes: any) =>
+    return stylePaginationInfo((classes: any) =>
       <div className={classes.container}>
           { content }
       </div>
