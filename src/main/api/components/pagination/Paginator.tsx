@@ -218,12 +218,12 @@ function handleKeyDown(
   if (event.keyCode === 13) {
     const
       target: any = event.nativeEvent.target,
-      value: any = (target as any).value
+      value: any = parseFloat((target as any).value)
 
-    if (isNaN(value) || !Number.isInteger(parseInt(value, 10)) || value < 0 || value >= lastPageIndex) {
+    if (!Number.isInteger(value) || value < 1 || value > lastPageIndex + 1) {
       target.value = pageIndex + 1
     } else {
-      handleAction(parseInt(value, 10), onAction)
+      handleAction(value - 1, onAction)
     }
   }
 }
@@ -231,4 +231,3 @@ function handleKeyDown(
 // --- exports ------------------------------------------------------
 
 export default Paginator
-
