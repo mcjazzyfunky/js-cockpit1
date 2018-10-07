@@ -8,11 +8,7 @@ const getClasses = classNamesFunction()
 let styleId = 0
 
 type Styles = {
-  [name: string]: CSSProperties,
-
-  selectors?: {
-    [name: string]: CSSProperties
-  } 
+  [name: string]: any, // TODO!!!
 }
 
 type Classes<S extends Styles> = {
