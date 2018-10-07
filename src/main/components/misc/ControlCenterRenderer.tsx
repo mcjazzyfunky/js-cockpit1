@@ -1,6 +1,5 @@
 import React, { SFC } from 'react'
 import { defineComponent } from 'js-react-utils'
-import defineRenderer from '../../../renderers/defineRenderer'
 import { ControlCenterModel } from './ControlCenter'
 import Brand from './control-center/components/Brand'
 import defineStyle from '../../styling/defineStyle'
@@ -8,7 +7,7 @@ import { ITheme } from 'office-ui-fabric-react'
 import DefaultAvatar from './control-center/icons/DefaultAvatar'
 import LogoutIcon from './control-center/icons/LogoutIcon'
 import AppsIcon from './control-center/icons/AppsIcon'
-import ChevronDownIcon from '../../../system-icons/ChevronDownIcon'
+import ChevronDownIcon from '../../system-icons/ChevronDownIcon'
 import Color from 'color'
 
 const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme) => {
@@ -98,7 +97,9 @@ function render(model: ControlCenterModel) {
 
 // --- exports ------------------------------------------------------
 
-export default defineRenderer(render)
+export default {
+  render
+}
 
 // ------------------------------------------------------------------
 

@@ -1,4 +1,3 @@
-import defineRenderer from '../../../renderers/defineRenderer'
 import defineStyle from '../../styling/defineStyle'
 import React from 'react'
 import { defineComponent } from 'js-react-utils'
@@ -71,24 +70,26 @@ const DataTableStyle = defineStyle((theme: ITheme) => ({
 
 // --- DataTableRenderer --------------------------------------------
 
-const DataTableRenderer = defineRenderer((model: any) => {
-  console.log(model)
+const DataTableRenderer = {
+  render(model: any)  {
+    console.log(model)
 
-  return (
-    <DataTableStyle>
-      {
-        (classes: any) => 
-          <div className={classes.container}>
-            <table cellSpacing={0} cellPadding={0} className={classes.table}>
-              {createTableHead(model, classes)}
-              {createTableBody(model, classes)}
-            </table>
-          </div>
-      }
-    </DataTableStyle>
+    return (
+      <DataTableStyle>
+        {
+          (classes: any) => 
+            <div className={classes.container}>
+              <table cellSpacing={0} cellPadding={0} className={classes.table}>
+                {createTableHead(model, classes)}
+                {createTableBody(model, classes)}
+              </table>
+            </div>
+        }
+      </DataTableStyle>
 
-  )
-})
+    )
+  }
+}
 
 // --- locals -------------------------------------------------------
 

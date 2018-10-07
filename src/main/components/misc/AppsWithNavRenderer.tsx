@@ -1,5 +1,4 @@
 import React from 'react'
-import defineRenderer from '../../../renderers/defineRenderer'
 import { AppsWithNavData, AppsWithNavAppGroupData, AppsWithNavAppData } from './AppsWithNav'
 import { Nav } from 'office-ui-fabric-react'
 import defineStyle from '../../styling/defineStyle'
@@ -35,34 +34,36 @@ const AppsWithNavStyle = defineStyle({
 })
 
 
-export default defineRenderer((model: AppsWithNavData) => {
-  let ret = null
+export default {
+  render(model: AppsWithNavData) {
+    let ret = null
 
-  if (model.menu.length > 0) {
-    ret =
-      <AppsWithNavStyle>
-        {
-          (classes: any) => 
-            <div className={classes.container}>
-              <div className={classes.navigation}>
-                <Nav
-                  groups={
-                    model.menu.map(getLinkProps)
-                  }
+    if (model.menu.length > 0) {
+      ret =
+        <AppsWithNavStyle>
+          {
+            (classes: any) => 
+              <div className={classes.container}>
+                <div className={classes.navigation}>
+                  <Nav
+                    groups={
+                      model.menu.map(getLinkProps)
+                    }
 
-                  selectedKey="categories" // TODO
-                />
+                    selectedKey="categories" // TODO
+                  />
+                </div>
+                <div className={classes.content}>
+                  <DataNavigator config={{}} data={null}/>
+                </div>
               </div>
-              <div className={classes.content}>
-                <DataNavigator config={{}} data={null}/>
-              </div>
-            </div>
-        }
-      </AppsWithNavStyle>
+          }
+        </AppsWithNavStyle>
+    }
+
+    return ret
   }
-
-  return ret
-})
+}
 
 // --- helpers ------------------------------------------------------
 

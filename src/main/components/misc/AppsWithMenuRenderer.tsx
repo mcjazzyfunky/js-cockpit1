@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppsWithMenuData, AppsWithMenuAppGroupData, AppsWithMenuAppData } from './AppsWithMenu'
 import { CommandBar } from 'office-ui-fabric-react'
-import defineStyle from '../../../api/styling/defineStyle'
+import defineStyle from '../../styling/defineStyle'
 
 // TODO
 import AppsWithNav from './AppsWithNav'

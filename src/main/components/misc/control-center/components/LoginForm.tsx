@@ -1,4 +1,4 @@
-import defineStyle from '../../../api/styling/defineStyle'
+import defineStyle from '../../../../styling/defineStyle'
 import React, { ReactNode, ReactElement, CSSProperties } from 'react';
 import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils';
 import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';

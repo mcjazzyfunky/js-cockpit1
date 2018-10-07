@@ -2,10 +2,10 @@
 import { PaginatorData } from './Paginator'
 import defineStyle from '../../styling/defineStyle'
 import ActionEvent from '../../events/ActionEvent'
-import ArrowDoubleLeftIcon from '../../../internal/components/icons/ArrowDoubleLeftIcon' 
-import ArrowDoubleRightIcon from '../../../internal/components/icons/ArrowDoubleRightIcon' 
-import ArrowLeftIcon from '../../../internal/components/icons/ArrowLeftIcon' 
-import ArrowRightIcon from '../../../internal/components/icons/ArrowRightIcon' 
+import ArrowDoubleLeftIcon from '../../icons/ArrowDoubleLeftIcon' 
+import ArrowDoubleRightIcon from '../../icons/ArrowDoubleRightIcon' 
+import ArrowLeftIcon from '../../icons/ArrowLeftIcon' 
+import ArrowRightIcon from '../../icons/ArrowRightIcon' 
 
 // external import
 import React, { KeyboardEvent, ReactNode } from 'react'

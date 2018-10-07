@@ -1,4 +1,4 @@
-import defineStyle from '../../../api/styling/defineStyle'
+import defineStyle from '../../../../styling/defineStyle'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode, isElementOfType, withChildren } from 'js-react-utils'
 import { ITheme } from 'office-ui-fabric-react'
