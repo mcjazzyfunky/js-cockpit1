@@ -162,7 +162,7 @@ const LoginForm = defineComponent<LoginFormProps>({
           </div>
       }
 
-      return styleLoginForm((classes: any) => { // TODO
+      return styleLoginForm(classes => { // TODO
         const loadingIndicator =
           this.state.loading
             ? <div className={classes.loadingIndicator}>

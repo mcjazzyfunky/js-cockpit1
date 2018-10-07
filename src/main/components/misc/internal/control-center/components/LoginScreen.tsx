@@ -93,7 +93,7 @@ const LoginScreen = defineComponent<LoginScreenProps>({
       }
     })
 
-    return styleLoginScreen((classes: any) => 
+    return styleLoginScreen(classes => 
       <div className={classes.outerContainer}>
         <div className={classes.innerContainer}>
           {mainContent}

@@ -28,7 +28,7 @@ const AppsWithMenuRenderer = {
     let ret = null
 
     if (model.menu.length > 0) {
-      ret = styleAppsWithMenu((classes: any) =>
+      ret = styleAppsWithMenu(classes =>
         <div className={classes.container}>
           <CommandBar
             items={

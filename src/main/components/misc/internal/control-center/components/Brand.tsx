@@ -81,7 +81,7 @@ export default defineComponent<BrandProps>({
   },
 
   render({ logo, vendor, title, className, style }) {
-    return styleBrand((classes: any) => { // TODO
+    return styleBrand(classes => { // TODO
       let
         leftContent = null,
         rightContent = null

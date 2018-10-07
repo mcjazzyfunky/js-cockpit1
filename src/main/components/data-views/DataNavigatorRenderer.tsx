@@ -85,7 +85,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
 const DataNavigatorRenderer = { 
   render(model: Model_DataNavigator) {
-    return styleDataNavigator((classes: any) =>
+    return styleDataNavigator(classes =>
       <div className={classes.container}>
         { renderHeader(model, classes) }
         <div className={classes.content}>

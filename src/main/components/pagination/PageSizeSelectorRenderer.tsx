@@ -26,7 +26,7 @@ const stylePageSizeSelector = defineStyle((theme: ITheme) => ({
 
 const PageSizeSelectorRenderer = {
   render(data: PageSizeSelectorData) {
-    return stylePageSizeSelector((classes: any) =>
+    return stylePageSizeSelector(classes =>
       <div className={classes.container}>
         <label className={classes.pageSizeText}>Items/Page</label>
         <DefaultButton

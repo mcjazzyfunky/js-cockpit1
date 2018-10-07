@@ -43,7 +43,7 @@ const ActionBar = defineComponent<ActionBarProps>({
   },
 
   render(props: ActionBarProps) {
-    return styleActionBar((classes: any) =>
+    return styleActionBar(classes =>
       <div>
         <CommandBar
           className={classes.commandBar}

@@ -74,7 +74,7 @@ const DataTableRenderer = {
   render(model: any)  {
     console.log(model)
 
-    return styleDataTable((classes: any) => 
+    return styleDataTable(classes => 
       <div className={classes.container}>
         <table cellSpacing={0} cellPadding={0} className={classes.table}>
           {createTableHead(model, classes)}

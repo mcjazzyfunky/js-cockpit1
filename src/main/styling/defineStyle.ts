@@ -1,14 +1,25 @@
 // TODO - please fix this mess
 
-import React, { ComponentType, StatelessComponent } from 'react'
-import { IStyle, ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
+import React, { ReactElement, ReactNode } from 'react'
+import { IRawStyle, ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
 
 const getClasses = classNamesFunction()
 
 let styleId = 0
 
-function defineStyle(styles: any): any
-function defineStyle(getStyles: (theme: ITheme, props?: any) => any): any
+type Styles = {
+  [name: string]: any 
+}
+
+type Classes<S extends Styles> = {
+  [name in keyof S]: string
+}
+
+type Return<S extends Styles> =
+  (f: (classes: Classes<S>) => ReactNode) => ReactNode
+
+function defineStyle<S extends Styles>(getStyles: (theme: ITheme, props?: any) => S): Return<S>
+function defineStyle<S extends Styles>(styles: S): Return<S>
 function defineStyle(arg: any): any {
   let StyleComponent: any
 
@@ -35,7 +46,7 @@ function defineStyle(arg: any): any {
   
   StyleComponent.displayName = 'Style-' + (++styleId)
   
-  return (f: (classes: any) => any): any =>
+  return (f: (classes: any) => any) =>
     React.createElement(StyleComponent, null, (classes: any) => f(classes))
 }
 

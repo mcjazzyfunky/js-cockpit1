@@ -68,7 +68,7 @@ function render(model: ControlCenterModel) {
       ? null
       : model.apps[0]
 
-  return styleControlCenter((classes: any) =>
+  return styleControlCenter(classes =>
     <div className={classes.controlCenter}>
       <div className={classes.header}>
         <div className={classes.headerStart}>
@@ -132,7 +132,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
   displayName: 'AppSelector',
 
   render() {
-    return styleAppSelector((classes: any) =>
+    return styleAppSelector(classes =>
       <div>
         <div className={classes.container}>
           <div className={classes.icon}>
@@ -158,8 +158,8 @@ type UserMenuProps = {
   username: string
 }
 
-const UserMenu: SFC<UserMenuProps> = props => {
-  return styleUserMenu((classes: any) =>
+const UserMenu = (props: UserMenuProps) => {
+  return styleUserMenu(classes =>
       <div className={classes.container}>
         { props.username }
       </div>
@@ -202,7 +202,7 @@ const LogoutButton = defineComponent<LogoutButtonProps>({
   displayName: 'LogoutButton',
 
   render() {
-    return styleLogoutButton((classes: any) =>
+    return styleLogoutButton(classes =>
       <a className={classes.button}>
         <LogoutIcon/>
       </a>

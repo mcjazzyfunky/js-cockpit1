@@ -37,7 +37,7 @@ const PaginationInfoRenderer = {
         break
     }
 
-    return stylePaginationInfo((classes: any) =>
+    return stylePaginationInfo(classes =>
       <div className={classes.container}>
           { content }
       </div>

@@ -96,7 +96,7 @@ const PaginatorRenderer = {
       nextButtonDisabled = pageIndex >= lastPageIndex,
       lastButtonDisabled = pageIndex >= lastPageIndex
 
-    return stylePaginator((classes: any) =>
+    return stylePaginator(classes =>
       <div className={classes.container}>
         <button
           disabled={firstButtonDisabled}

@@ -39,7 +39,7 @@ export default {
     let ret = null
 
     if (model.menu.length > 0) {
-      ret = styleAppsWithNav((classes: any) => 
+      ret = styleAppsWithNav(classes => 
         <div className={classes.container}>
           <div className={classes.navigation}>
             <Nav
