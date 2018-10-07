@@ -1,17 +1,15 @@
 // internal imports
+import { PaginatorData } from './Paginator'
 import defineStyle from '../../styling/defineStyle'
 import ActionEvent from '../../events/ActionEvent'
-
 import ArrowDoubleLeftIcon from '../../../internal/components/icons/ArrowDoubleLeftIcon' 
 import ArrowDoubleRightIcon from '../../../internal/components/icons/ArrowDoubleRightIcon' 
 import ArrowLeftIcon from '../../../internal/components/icons/ArrowLeftIcon' 
 import ArrowRightIcon from '../../../internal/components/icons/ArrowRightIcon' 
 
-// external imports
-import React, { FocusEvent, KeyboardEvent } from 'react'
-import { defineComponent } from 'js-react-utils'
-import { Spec } from 'js-spec'
-import { DefaultButton, ITheme, TextField } from 'office-ui-fabric-react'
+// external import
+import React, { KeyboardEvent, ReactNode } from 'react'
+import { ITheme, TextField } from 'office-ui-fabric-react'
 
 // --- PaginatorStyle -----------------------------------------------
 
@@ -85,61 +83,11 @@ const PaginatorStyle = defineStyle((theme: ITheme) => ({
   }
 }))
 
-// --- Paginator ----------------------------------------------------
-
-type PaginatorProps = {
-  pageIndex: number,
-  pageSize: number,
-  totalItemCount: number,
-  onAction?: (event: ActionEvent<number>) => void 
-}
-
-const Paginator = defineComponent<PaginatorProps>({
-  displayName: 'Paginator',
-
-  properties: {
-    pageIndex: {
-      type: Number,
-      validate: Spec.nonnegativeInteger,
-      required: true
-    },
-
-    pageSize: {
-      type: Number,
-      validate: Spec.positiveInteger,
-      required: true
-    },
-
-    totalItemCount: {
-      type: Number,
-      validate: Spec.nonnegativeInteger,
-      required: true
-    },
-
-    onAction: {
-      type: Function
-    }
-  },
-
-  render(props: PaginatorProps) {
-    return PaginatorRenderer.render(props)
-  }
-})
-
-// --- helpers ----------------------------------------------------
-
-function getPaginatorData(props: PaginatorProps) {
-  return props
-}
-
-// --- data models -------------------------------------------------
-
-type PaginatorData = PaginatorProps
 
 // --- PaginatorRenderer --------------------------------------------
 
 const PaginatorRenderer = {
-  render(data: PaginatorData) {
+  render(data: PaginatorData): ReactNode {
     const
       { pageIndex, pageSize, totalItemCount, onAction } = data,
       lastPageIndex = Math.floor(totalItemCount / pageSize),
@@ -230,4 +178,4 @@ function handleKeyDown(
 
 // --- exports ------------------------------------------------------
 
-export default Paginator
+export default PaginatorRenderer

@@ -1,17 +1,11 @@
 // internal imports
-import defineStyle from '../../styling/defineStyle'
+import { PAGE_SIZE_OPTIONS, PageSizeSelectorData } from './PageSizeSelector'
+import defineStyle from '../../styling/defineStyle' 
 import ActionEvent from '../../events/ActionEvent'
 
 // external imports
 import React from 'react'
-import { defineComponent } from 'js-react-utils'
-import { Spec } from 'js-spec'
 import { DefaultButton, ITheme } from 'office-ui-fabric-react'
-import { emitKeypressEvents } from 'readline';
-
-// constants
-
-const PAGE_SIZE_OPTIONS = [25, 50, 100, 250, 500]
 
 // --- PageSizeSelectorStyle ----------------------------------------
 
@@ -25,33 +19,13 @@ const PageSizeSelectorStyle = defineStyle((theme: ITheme) => ({
 
   pageSizeText: {
     marginRight: '0.75rem'
-  },
-
+  }
 }))
 
-// --- PageSizeSelector ---------------------------------------------
+// --- PageSizeSelectorRenderer -------------------------------------
 
-type PageSizeSelectorProps = {
-  pageSize: number,
-  onAction?: (event: ActionEvent<number>) => void
-}
-
-const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
-  displayName: 'PageSizeSelector',
-
-  properties: {
-    pageSize: {
-      type: Number,
-      required: true,
-      validate: Spec.in(PAGE_SIZE_OPTIONS)
-    },
-
-    onAction: {
-      type: Function
-    }
-  },
-
-  render(props: PageSizeSelectorProps) {
+const PageSizeSelectorRenderer = {
+  render(data: PageSizeSelectorData) {
     return (
       <PageSizeSelectorStyle>
         {
@@ -59,16 +33,17 @@ const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
             <div className={classes.container}>
               <label className={classes.pageSizeText}>Items/Page</label>
               <DefaultButton
-                text={String(props.pageSize)}
+                text={String(data.pageSize)}
                 className={classes.pageSizeSelector}
 
                 menuProps={{
                   items: PAGE_SIZE_OPTIONS.map(option => ({
                     key: String(option),
                     name: String(option),
+
                     onClick:
-                      props.onAction
-                        ? (ev: any) => emitActionEvent(option, props.onAction)
+                      data.onAction
+                        ? (ev: any) => emitActionEvent(option, data.onAction)
                         : null
                   }))
                 }}
@@ -77,8 +52,9 @@ const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
         }
       </PageSizeSelectorStyle>
     )
+
   }
-})
+}
 
 // --- helpers -----------------------------------------------------
 
@@ -92,4 +68,4 @@ function emitActionEvent(pageSize: number, onAction: (event: ActionEvent<number>
 
 // --- exports ------------------------------------------------------
 
-export default PageSizeSelector
+export default PageSizeSelectorRenderer

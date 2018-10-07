@@ -1,4 +1,5 @@
 // internal imports
+import PaginationInfoRenderer from './PaginationInfoRenderer'
 import defineStyle from '../../styling/defineStyle'
 
 // external imports
@@ -6,15 +7,6 @@ import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 import { ITheme } from 'office-ui-fabric-react'
-
-// --- PaginationInfoStyle ----------------------------------------
-
-const PaginationInfoStyle = defineStyle((theme: ITheme) => ({
-  container: {
-    whiteSpace: 'nowrap',
-    ...theme.fonts.medium
-  }
-}))
 
 // --- PaginationInfo ---------------------------------------------
 
@@ -55,37 +47,18 @@ const PaginationInfo = defineComponent<PaginationInfoProps>({
   },
 
   render(props: PaginationInfoProps) {
-    let content: ReactNode = null
-
-    const
-      pageIndex = props.pageIndex,
-      pageSize = props.pageSize,
-      totalItemCount = props.totalItemCount,
-      itemNumberStart = pageIndex * pageSize + 1,
-      itemNumberEnd = Math.min(totalItemCount, (pageIndex + 1) * pageSize)
-
-    switch (props.about) {
-      case 'items':
-        content =
-          <div>
-            Items {itemNumberStart}-{itemNumberEnd} of {totalItemCount}
-          </div>
-        break
-    }
-
-    return (
-      <PaginationInfoStyle>
-        {
-          (classes: any) =>
-            <div className={classes.container}>
-               { content }
-            </div>
-        }
-      </PaginationInfoStyle>
-    ) 
+    return PaginationInfoRenderer.render(props)
   }
 })
+
+// --- PaginationInfoData -------------------------------------------
+
+type PaginationInfoData = PaginationInfoProps
 
 // --- exports ------------------------------------------------------
 
 export default PaginationInfo
+
+export {
+  PaginationInfoData
+}

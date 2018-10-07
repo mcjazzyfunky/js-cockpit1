@@ -29,39 +29,12 @@ const Column = defineComponent<ColumnProps>({
   render() {
     throw new Error(
       'Components of type DataTable.Column only be used as children of '
-        + 'DataTable or DataTable.ColumnGroup components'
+        + 'DataTable components'
     )
   }
 })
 
-// --- DataTable.ColumnGroup ----------------------------------------
-
-type ColumnGroupProps = {
-  title?: string,
-  children?: ReactNode
-}
-
-const ColumnGroup: ComponentType<ColumnGroupProps> = defineComponent<ColumnGroupProps>({
-  displayName: 'ColumnGroup',
-
-  properties: {
-    title: {
-      type: String
-    },
-
-    children: {
-      validate:
-        withChildren(
-          Spec.lazy(() => Spec.all(isElementOfType([ColumnGroup, Column]))))
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type DataTable.Column only be used as children of '
-        + 'DataTable or DataTable.ColumnGroup components')
-  }
-})
+// --- DataTable ----------------------------------------------------
 
 type DataTableProps = {
   data: object[],
@@ -116,9 +89,7 @@ const DataTable = defineComponent<DataTableProps>({
 
       React.Children.forEach(props.children, (child: ReactElement<Model_DataTable_Column | Model_DataTable_ColumnGroup>) => {
         model.columns.push(
-          child.type === Column
-            ? Base.getColumnModel(child.props)
-            : Base.getColumnGroupModel(child.props))
+            Base.getColumnModel(child.props))
       })
 
       return model
@@ -140,12 +111,6 @@ const DataTable = defineComponent<DataTableProps>({
       if (props.sortable !== undefined) {
         ret.sortable = props.sortable
       }
-
-      return ret
-    }
-    
-    private static getColumnGroupModel(props: ColumnGroupProps): Model_DataTable_ColumnGroup {
-      let ret: Model_DataTable_ColumnGroup
 
       return ret
     }
@@ -172,9 +137,12 @@ type Model_DataTable_ColumnGroup = {
   columns: (Model_DataTable_Column | Model_DataTable_ColumnGroup)[]
 }
 
+// --- DataTableRenderer --------------------------------------------
+
+
+
 // --- exports ------------------------------------------------------
 
 export default Object.assign(DataTable, {
-  Column,
-  ColumnGroup
+  Column
 })
