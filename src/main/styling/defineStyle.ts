@@ -1,14 +1,18 @@
 // TODO - please fix this mess
 
-import React, { ReactElement, ReactNode } from 'react'
-import { IRawStyle, ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
+import React, { ReactNode, CSSProperties  } from 'react'
+import { ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
 
 const getClasses = classNamesFunction()
 
 let styleId = 0
 
 type Styles = {
-  [name: string]: any 
+  [name: string]: CSSProperties,
+
+  selectors?: {
+    [name: string]: CSSProperties
+  } 
 }
 
 type Classes<S extends Styles> = {

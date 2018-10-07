@@ -25,7 +25,7 @@ const styleAppsWithNav = defineStyle({
   },
 
   content: {
-    flexGrow: '1',
+    flexGrow: 1,
     marginLeft: '0.375rem',
     display: 'flex',
     flexDirection: 'column',
