@@ -68,6 +68,7 @@
     "ziptool": "^1.0.2"
   },
   "dependencies": {
+    "@uifabric/styling": "^6.29.1",
     "ag-grid-community": "^19.0.0",
     "ag-grid-react": "^19.0.0",
     "color": "^3.0.0",

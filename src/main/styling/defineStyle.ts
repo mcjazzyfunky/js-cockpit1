@@ -1,16 +1,16 @@
 // TODO - please fix this mess
 
 import React, { ComponentType, StatelessComponent } from 'react'
-import { classNamesFunction, customizable } from 'office-ui-fabric-react'
+import { IStyle, ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
 
 const getClasses = classNamesFunction()
 
 let styleId = 0
 
-function defineStyle(styles: any): ComponentType<any>
-function defineStyle(getStyles: any): ComponentType<any>
-function defineStyle(arg: any): ComponentType<any> {
-  let ret: any
+function defineStyle(styles: any): any
+function defineStyle(getStyles: (theme: ITheme, props?: any) => any): any
+function defineStyle(arg: any): any {
+  let StyleComponent: any
 
   if (typeof arg == 'function') {
     const
@@ -20,11 +20,11 @@ function defineStyle(arg: any): ComponentType<any> {
         return children(classes)  
       }
 
-    ret = customizable('Classes', ['theme', 'props'])(render)
+    StyleComponent = customizable('Classes', ['theme', 'props'])(render)
   } else {
     let classes: any = null
 
-    ret = ({ children }: any) => {
+    StyleComponent = ({ children }: any) => {
       if (!classes) {
         classes = getClasses(() => arg)
       }
@@ -33,9 +33,10 @@ function defineStyle(arg: any): ComponentType<any> {
     }
   } 
   
-  ret.displayName = 'Style-' + (++styleId)
+  StyleComponent.displayName = 'Style-' + (++styleId)
   
-  return ret
+  return (f: (classes: any) => any): any =>
+    React.createElement(StyleComponent, null, (classes: any) => f(classes))
 }
 
 export default defineStyle

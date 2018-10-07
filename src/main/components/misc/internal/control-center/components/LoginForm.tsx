@@ -4,7 +4,7 @@ import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react
 import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
 import { Spec } from 'js-spec'
 
-const Style = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
+const styledLoginForm = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
   return {
     container: {
       padding: '1rem 0.8rem',
@@ -162,56 +162,50 @@ const LoginForm = defineComponent<LoginFormProps>({
           </div>
       }
 
-      return (
-        <Style>
-          {
-            (classes: any) => { // TODO
-              const loadingIndicator =
-                this.state.loading
-                  ? <div className={classes.loadingIndicator}>
-                      <Spinner
-                        size={SpinnerSize.small}
-                      />
-                    </div>
-                  : null;
-   
-              return (
-                <div className={classes.container}>
-                  { headerBox }
-                  <div>
-                    <div>
-                      <TextField
-                        name="username"
-                        label="User name"
-                        autoComplete="off"
-                        disabled={this.state.loading}
-                      />
-                      <TextField
-                        name="password"
-                        label="Password"
-                        type="password"
-                        disabled={this.state.loading}
-                      />
-                      <Checkbox
-                        name="remember"
-                        label="Remember me"
-                        className={classes.remember}
-                        disabled={this.state.loading}
-                      />
-                    </div>
-                    <div>
-                      <PrimaryButton type="submit" style={{width: '100%' }}>
-                        {loginButtonText}
-                        {loadingIndicator}
-                      </PrimaryButton>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-          }
-        </Style>
-      );
+      return styledLoginForm((classes: any) => { // TODO
+        const loadingIndicator =
+          this.state.loading
+            ? <div className={classes.loadingIndicator}>
+                <Spinner
+                  size={SpinnerSize.small}
+                />
+              </div>
+            : null;
+
+        return (
+          <div className={classes.container}>
+            { headerBox }
+            <div>
+              <div>
+                <TextField
+                  name="username"
+                  label="User name"
+                  autoComplete="off"
+                  disabled={this.state.loading}
+                />
+                <TextField
+                  name="password"
+                  label="Password"
+                  type="password"
+                  disabled={this.state.loading}
+                />
+                <Checkbox
+                  name="remember"
+                  label="Remember me"
+                  className={classes.remember}
+                  disabled={this.state.loading}
+                />
+              </div>
+              <div>
+                <PrimaryButton type="submit" style={{width: '100%' }}>
+                  {loginButtonText}
+                  {loadingIndicator}
+                </PrimaryButton>
+              </div>
+            </div>
+          </div>
+        )
+      })
     }
   }
 })

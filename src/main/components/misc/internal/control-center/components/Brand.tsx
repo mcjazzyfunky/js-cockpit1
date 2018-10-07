@@ -3,7 +3,7 @@ import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import defineStyle from '../../../../../styling/defineStyle'
 
-const BrandStyle = defineStyle({
+const styledBrand = defineStyle({
   container: {
     display: 'table',
     margin: 0,
@@ -81,60 +81,54 @@ export default defineComponent<BrandProps>({
   },
 
   render({ logo, vendor, title, className, style }) {
-    return (
-      <BrandStyle>
-        {
-          (classes: any) => { // TODO
-            let
-              leftContent = null,
-              rightContent = null
+    return styledBrand((classes: any) => { // TODO
+      let
+        leftContent = null,
+        rightContent = null
 
-            if (vendor) {
-              rightContent =
-                <div key="vendor" className={classes.vendor}>
-                  {vendor}
-                </div>
-            }
+      if (vendor) {
+        rightContent =
+          <div key="vendor" className={classes.vendor}>
+            {vendor}
+          </div>
+      }
 
-            if (title) {
-              const titleContent =
-                <div key="title" className={classes.title}>
-                  {title}
-                </div>
+      if (title) {
+        const titleContent =
+          <div key="title" className={classes.title}>
+            {title}
+          </div>
 
-              if (!rightContent) {
-                rightContent = titleContent
-              } else {
-                rightContent =
-                  <React.Fragment>
-                    {rightContent}
-                    {titleContent}
-                  </React.Fragment>
-              }
-            }
-            
-            leftContent =
-              <div className={classes.logo}>
-                {logo  ||<DefaultLogo/>}
-              </div>
-
-            return (
-              <div className={className} style={style}>
-                <div className={classes.container}>
-                  <div className={classes.cells}>
-                    <div className={classes.cellLeft}>
-                      {leftContent}
-                    </div>
-                    <div className={classes.cellRight}>
-                      {rightContent}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )
-          }
+        if (!rightContent) {
+          rightContent = titleContent
+        } else {
+          rightContent =
+            <React.Fragment>
+              {rightContent}
+              {titleContent}
+            </React.Fragment>
         }
-      </BrandStyle>
-    )
+      }
+      
+      leftContent =
+        <div className={classes.logo}>
+          {logo  ||<DefaultLogo/>}
+        </div>
+
+      return (
+        <div className={className} style={style}>
+          <div className={classes.container}>
+            <div className={classes.cells}>
+              <div className={classes.cellLeft}>
+                {leftContent}
+              </div>
+              <div className={classes.cellRight}>
+                {rightContent}
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    })
   }
 })

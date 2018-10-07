@@ -8,7 +8,7 @@ import AppsWithNav from './AppsWithNav'
 
 // --- AppsWithNavStyle ---------------------------------------------
 
-const AppsWithMenuStyle = defineStyle({
+const styledAppsWithMenu = defineStyle({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,41 +28,36 @@ const AppsWithMenuRenderer = {
     let ret = null
 
     if (model.menu.length > 0) {
-      ret = (
-        <AppsWithMenuStyle>
-          {
-            (classes: any) =>
-              <div className={classes.container}>
-                <CommandBar
-                  items={
-                    model.menu.map(getItemProps)
-                  }
-                />
-                <div className={classes.content}>
-                  <AppsWithNav>
-                    <AppsWithNav.Apps>
-                      <AppsWithNav.AppGroup name="catalog" title="Catalog data">
-                        <AppsWithNav.App name="products" title="Products">
-                        </AppsWithNav.App>
-                        <AppsWithNav.App name="variants" title="Variants">
-                        </AppsWithNav.App>
-                        <AppsWithNav.App name="categories" title="Categories">
-                        </AppsWithNav.App>
-                      </AppsWithNav.AppGroup>
-                      <AppsWithNav.AppGroup name="yyy" title="Media">
-                        <AppsWithNav.App name="images" title="Images">
-                        </AppsWithNav.App>
-                        <AppsWithNav.App name="videos" title="Videos">
-                        </AppsWithNav.App>
-                        <AppsWithNav.App name="presentations" title="Presentations">
-                        </AppsWithNav.App>
-                      </AppsWithNav.AppGroup>
-                    </AppsWithNav.Apps>
-                  </AppsWithNav>
-                </div>
-              </div>
-          }
-        </AppsWithMenuStyle>
+      ret = styledAppsWithMenu((classes: any) =>
+        <div className={classes.container}>
+          <CommandBar
+            items={
+              model.menu.map(getItemProps)
+            }
+          />
+          <div className={classes.content}>
+            <AppsWithNav>
+              <AppsWithNav.Apps>
+                <AppsWithNav.AppGroup name="catalog" title="Catalog data">
+                  <AppsWithNav.App name="products" title="Products">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App name="variants" title="Variants">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App name="categories" title="Categories">
+                  </AppsWithNav.App>
+                </AppsWithNav.AppGroup>
+                <AppsWithNav.AppGroup name="yyy" title="Media">
+                  <AppsWithNav.App name="images" title="Images">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App name="videos" title="Videos">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App name="presentations" title="Presentations">
+                  </AppsWithNav.App>
+                </AppsWithNav.AppGroup>
+              </AppsWithNav.Apps>
+            </AppsWithNav>
+          </div>
+        </div>
       )
     }
 

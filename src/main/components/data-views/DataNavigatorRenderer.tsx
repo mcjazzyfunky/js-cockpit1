@@ -12,7 +12,7 @@ import DataTable from './DataTable'
 
 // --- DataNavigatorStyle -------------------------------------------
 
-const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
+const styledDataNavigator = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -85,36 +85,31 @@ const DataNavigatorStyle = defineStyle((theme: ITheme) => ({
 
 const DataNavigatorRenderer = { 
   render(model: Model_DataNavigator) {
-    return (
-      <DataNavigatorStyle>
-        {
-          (classes: any) =>
-            <div className={classes.container}>
-              { renderHeader(model, classes) }
-              <div className={classes.content}>
-                <DataTable>
-                  <DataTable.Column
-                    title="First name"
-                    field="firstName"
-                  />
-                  <DataTable.Column
-                    title="Last Name"
-                    field="lastName"
-                  />
-                  <DataTable.Column
-                    title="Postal code"
-                    field="postalCode"
-                  />
-                  <DataTable.Column
-                    title="City"
-                    field="city"
-                  />
-                </DataTable>
-              </div>
-              { renderFooter(model, classes) }
-            </div>
-        }
-      </DataNavigatorStyle>
+    return styledDataNavigator((classes: any) =>
+      <div className={classes.container}>
+        { renderHeader(model, classes) }
+        <div className={classes.content}>
+          <DataTable>
+            <DataTable.Column
+              title="First name"
+              field="firstName"
+            />
+            <DataTable.Column
+              title="Last Name"
+              field="lastName"
+            />
+            <DataTable.Column
+              title="Postal code"
+              field="postalCode"
+            />
+            <DataTable.Column
+              title="City"
+              field="city"
+            />
+          </DataTable>
+        </div>
+        { renderFooter(model, classes) }
+      </div>
     )
   }
 }

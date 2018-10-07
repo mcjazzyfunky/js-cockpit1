@@ -9,7 +9,7 @@ import { TabbedLayout } from 'ag-grid-community';
 
 // --- DataTableStyle -----------------------------------------------
 
-const DataTableStyle = defineStyle((theme: ITheme) => ({
+const styledDataTable = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -74,19 +74,13 @@ const DataTableRenderer = {
   render(model: any)  {
     console.log(model)
 
-    return (
-      <DataTableStyle>
-        {
-          (classes: any) => 
-            <div className={classes.container}>
-              <table cellSpacing={0} cellPadding={0} className={classes.table}>
-                {createTableHead(model, classes)}
-                {createTableBody(model, classes)}
-              </table>
-            </div>
-        }
-      </DataTableStyle>
-
+    return styledDataTable((classes: any) => 
+      <div className={classes.container}>
+        <table cellSpacing={0} cellPadding={0} className={classes.table}>
+          {createTableHead(model, classes)}
+          {createTableBody(model, classes)}
+        </table>
+      </div>
     )
   }
 }

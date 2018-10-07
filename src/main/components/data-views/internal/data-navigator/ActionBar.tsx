@@ -6,7 +6,7 @@ import { NONAME } from 'dns';
 
 // --- ActionBarStyle --------------------------------------------
 
-const ActionBarStyle = defineStyle((theme: ITheme) => ({
+const styledActionBar = defineStyle((theme: ITheme) => ({
   commandBar: {
     backgroundColor: 'transparent',
   },
@@ -43,56 +43,50 @@ const ActionBar = defineComponent<ActionBarProps>({
   },
 
   render(props: ActionBarProps) {
-    return (
-      <ActionBarStyle>
-        {
-          (classes: any) =>
-            <div>
-              <CommandBar
-                className={classes.commandBar}
-                items={[
-                  {
-                    key: 'new',
-                    name: 'New',
-                    iconProps: {
-                      iconName: 'new',
-                      className: classes.icon
-                    },
-                    
-                    className: classes.actionButton,
+    return styledActionBar((classes: any) =>
+      <div>
+        <CommandBar
+          className={classes.commandBar}
+          items={[
+            {
+              key: 'new',
+              name: 'New',
+              iconProps: {
+                iconName: 'new',
+                className: classes.icon
+              },
+              
+              className: classes.actionButton,
 
-                    onRenderIcon: () => <div className={classes.icon}><i className="material-icons">add</i></div>
-                  },
-                  {
-                    key: 'edit',
-                    name: 'Edit',
-                    iconProps: {
-                      iconName: 'edit',
-                      className: classes.icon
-                    },
-                    
-                    className: classes.actionButton,
+              onRenderIcon: () => <div className={classes.icon}><i className="material-icons">add</i></div>
+            },
+            {
+              key: 'edit',
+              name: 'Edit',
+              iconProps: {
+                iconName: 'edit',
+                className: classes.icon
+              },
+              
+              className: classes.actionButton,
 
-                    onRenderIcon: () => <div className={classes.icon}><i className="material-icons">subject</i></div>
-                  },
-                  {
-                    key: 'delete',
-                    name: 'Delete',
-                    iconProps: {
-                      iconName: 'delete',
-                      className: classes.icon
-                    },
-                    
-                    className: classes.actionButton,
+              onRenderIcon: () => <div className={classes.icon}><i className="material-icons">subject</i></div>
+            },
+            {
+              key: 'delete',
+              name: 'Delete',
+              iconProps: {
+                iconName: 'delete',
+                className: classes.icon
+              },
+              
+              className: classes.actionButton,
 
-                    onRenderIcon: () => <div className={classes.icon}><i className="material-icons">clear</i></div>
-                  }
-                ]}
-
-              />
-            </div>
-        }
-      </ActionBarStyle>
+              onRenderIcon: () => <div className={classes.icon}><i className="material-icons">clear</i></div>
+            }
+          ]}
+        />
+      </div>
     )
 
 

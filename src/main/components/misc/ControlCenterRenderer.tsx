@@ -10,7 +10,7 @@ import AppsIcon from './internal/control-center/icons/AppsIcon'
 import ChevronDownIcon from '../../system-icons/ChevronDownIcon'
 import Color from 'color'
 
-const ControlCenterStyle: React.ComponentType<any> = defineStyle((theme: ITheme) => {
+const styledControlCenter = defineStyle((theme: ITheme) => {
   return {
     controlCenter: {
       display: 'flex',
@@ -68,30 +68,25 @@ function render(model: ControlCenterModel) {
       ? null
       : model.apps[0]
 
-  return (
-    <ControlCenterStyle>
-      {
-        (classes: any) =>
-          <div className={classes.controlCenter}>
-            <div className={classes.header}>
-              <div className={classes.headerStart}>
-                <Brand vendor={model.vendor} title={model.title} logo={model.logo}/>
-              </div>
-              <div className={classes.headerCenter}>
-                <AppSelector/>
-              </div>
-              <div className={classes.headerEnd}>
-                { <DefaultAvatar/> }
-                { UserMenu({ username: 'Jane Doe' }) }
-                { <LogoutButton/> }
-              </div>
-            </div>
-            <div className={classes.content}>
-              { model.apps.length > 0 ? model.apps[0].content : null }
-            </div>
-          </div>
-      }
-    </ControlCenterStyle>
+  return styledControlCenter((classes: any) =>
+    <div className={classes.controlCenter}>
+      <div className={classes.header}>
+        <div className={classes.headerStart}>
+          <Brand vendor={model.vendor} title={model.title} logo={model.logo}/>
+        </div>
+        <div className={classes.headerCenter}>
+          <AppSelector/>
+        </div>
+        <div className={classes.headerEnd}>
+          { <DefaultAvatar/> }
+          { UserMenu({ username: 'Jane Doe' }) }
+          { <LogoutButton/> }
+        </div>
+      </div>
+      <div className={classes.content}>
+        { model.apps.length > 0 ? model.apps[0].content : null }
+      </div>
+    </div>
   )
 }
 
@@ -103,7 +98,7 @@ export default {
 
 // ------------------------------------------------------------------
 
-const AppSelectorStyle = defineStyle((theme: ITheme) => ({
+const styledAppSelector = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -137,21 +132,16 @@ const AppSelector = defineComponent<AppSelectorProps>({
   displayName: 'AppSelector',
 
   render() {
-    return (
-      <AppSelectorStyle>
-        {
-          (classes: any) =>
-            <div>
-              <div className={classes.container}>
-                <div className={classes.icon}>
-                  <AppsIcon/>
-                </div>
-                <label className={classes.label}>Content Management</label>
-                <ChevronDownIcon/>
-              </div>
-            </div>
-        }
-      </AppSelectorStyle>
+    return styledAppSelector((classes: any) =>
+      <div>
+        <div className={classes.container}>
+          <div className={classes.icon}>
+            <AppsIcon/>
+          </div>
+          <label className={classes.label}>Content Management</label>
+          <ChevronDownIcon/>
+        </div>
+      </div>
     )
   }
 })
@@ -159,7 +149,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
 
 // ------------------------------------------------------------------
 
-const UserMenuStyle = defineStyle({
+const styledUserMenu = defineStyle({
   container: {
   }
 })
@@ -169,19 +159,14 @@ type UserMenuProps = {
 }
 
 const UserMenu: SFC<UserMenuProps> = props => {
-  return (
-    <UserMenuStyle>
-      {
-        (classes: any) =>
-          <div className={classes.container}>
-            { props.username }
-          </div>
-      }
-    </UserMenuStyle>
+  return styledUserMenu((classes: any) =>
+      <div className={classes.container}>
+        { props.username }
+      </div>
   )
 }
 
-const LogoutButtonStyle = defineStyle((theme: ITheme) => ({
+const styledLogoutButton = defineStyle((theme: ITheme) => ({
   button: {
     color: theme.palette.white,
     backgroundColor: theme.palette.themePrimary,
@@ -217,18 +202,10 @@ const LogoutButton = defineComponent<LogoutButtonProps>({
   displayName: 'LogoutButton',
 
   render() {
-    return (
-      <LogoutButtonStyle>
-        {
-          (classes: any) => {
-            return (
-              <a className={classes.button}>
-                <LogoutIcon/>
-              </a>
-            )
-          }
-        }
-      </LogoutButtonStyle>
+    return styledLogoutButton((classes: any) =>
+      <a className={classes.button}>
+        <LogoutIcon/>
+      </a>
     )
   }
 })

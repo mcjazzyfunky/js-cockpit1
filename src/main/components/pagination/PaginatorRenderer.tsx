@@ -13,7 +13,7 @@ import { ITheme, TextField } from 'office-ui-fabric-react'
 
 // --- PaginatorStyle -----------------------------------------------
 
-const PaginatorStyle = defineStyle((theme: ITheme) => ({
+const styledPaginator = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -96,49 +96,44 @@ const PaginatorRenderer = {
       nextButtonDisabled = pageIndex >= lastPageIndex,
       lastButtonDisabled = pageIndex >= lastPageIndex
 
-    return (
-      <PaginatorStyle>
-        {
-          (classes: any) =>
-            <div className={classes.container}>
-              <button
-                disabled={firstButtonDisabled}
-                className={classes.button}
-                onClick={onAction ? () => handleAction(0, onAction) : null}
-              >
-                <ArrowDoubleLeftIcon/>
-              </button>
-              <button
-                disabled={previousButtonDisabled}
-                className={classes.button}
-                onClick={onAction ? () => handleAction(pageIndex - 1, onAction) : null}
-              >
-                <ArrowLeftIcon/>
-              </button>
-              <div className={classes.pageText1}>Page</div>
-                <TextField
-                  value={String(data.pageIndex  + 1)}
-                  className={classes.textField}
-                  onKeyDown={onAction ? event => handleKeyDown(event, onAction, pageIndex, lastPageIndex) : null}
-                />
-              <div className={classes.pageText2}>of {lastPageIndex + 1}</div>
-              <button
-                disabled={nextButtonDisabled}
-                className={classes.button}
-                onClick={onAction ? () => handleAction(pageIndex + 1, onAction) : null}
-              >
-                <ArrowRightIcon/>
-              </button>
-              <button
-                disabled={lastButtonDisabled}
-                className={classes.button}
-                onClick={onAction ? () => handleAction(lastPageIndex, onAction) : null}
-              >
-                <ArrowDoubleRightIcon/>
-              </button>
-            </div>
-        }
-      </PaginatorStyle>
+    return styledPaginator((classes: any) =>
+      <div className={classes.container}>
+        <button
+          disabled={firstButtonDisabled}
+          className={classes.button}
+          onClick={onAction ? () => handleAction(0, onAction) : null}
+        >
+          <ArrowDoubleLeftIcon/>
+        </button>
+        <button
+          disabled={previousButtonDisabled}
+          className={classes.button}
+          onClick={onAction ? () => handleAction(pageIndex - 1, onAction) : null}
+        >
+          <ArrowLeftIcon/>
+        </button>
+        <div className={classes.pageText1}>Page</div>
+          <TextField
+            value={String(data.pageIndex  + 1)}
+            className={classes.textField}
+            onKeyDown={onAction ? event => handleKeyDown(event, onAction, pageIndex, lastPageIndex) : null}
+          />
+        <div className={classes.pageText2}>of {lastPageIndex + 1}</div>
+        <button
+          disabled={nextButtonDisabled}
+          className={classes.button}
+          onClick={onAction ? () => handleAction(pageIndex + 1, onAction) : null}
+        >
+          <ArrowRightIcon/>
+        </button>
+        <button
+          disabled={lastButtonDisabled}
+          className={classes.button}
+          onClick={onAction ? () => handleAction(lastPageIndex, onAction) : null}
+        >
+          <ArrowDoubleRightIcon/>
+        </button>
+      </div>
     )
   }
 }

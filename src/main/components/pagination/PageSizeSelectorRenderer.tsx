@@ -9,7 +9,7 @@ import { DefaultButton, ITheme } from 'office-ui-fabric-react'
 
 // --- PageSizeSelectorStyle ----------------------------------------
 
-const PageSizeSelectorStyle = defineStyle((theme: ITheme) => ({
+const styledPageSizeSelector = defineStyle((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -26,33 +26,27 @@ const PageSizeSelectorStyle = defineStyle((theme: ITheme) => ({
 
 const PageSizeSelectorRenderer = {
   render(data: PageSizeSelectorData) {
-    return (
-      <PageSizeSelectorStyle>
-        {
-          (classes: any) =>
-            <div className={classes.container}>
-              <label className={classes.pageSizeText}>Items/Page</label>
-              <DefaultButton
-                text={String(data.pageSize)}
-                className={classes.pageSizeSelector}
+    return styledPageSizeSelector((classes: any) =>
+      <div className={classes.container}>
+        <label className={classes.pageSizeText}>Items/Page</label>
+        <DefaultButton
+          text={String(data.pageSize)}
+          className={classes.pageSizeSelector}
 
-                menuProps={{
-                  items: PAGE_SIZE_OPTIONS.map(option => ({
-                    key: String(option),
-                    name: String(option),
+          menuProps={{
+            items: PAGE_SIZE_OPTIONS.map(option => ({
+              key: String(option),
+              name: String(option),
 
-                    onClick:
-                      data.onAction
-                        ? (ev: any) => emitActionEvent(option, data.onAction)
-                        : null
-                  }))
-                }}
-              />
-            </div>
-        }
-      </PageSizeSelectorStyle>
+              onClick:
+                data.onAction
+                  ? (ev: any) => emitActionEvent(option, data.onAction)
+                  : null
+            }))
+          }}
+        />
+      </div>
     )
-
   }
 }
 

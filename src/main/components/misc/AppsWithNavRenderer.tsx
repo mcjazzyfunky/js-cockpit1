@@ -8,7 +8,7 @@ import DataNavigator from '../data-views/DataNavigator'
 
 // --- AppWithNavStyle --------------------------------------------
 
-const AppsWithNavStyle = defineStyle({
+const styledAppsWithNav = defineStyle({
   container: {
     display: 'flex',
     flexGrow: 1,
@@ -39,26 +39,22 @@ export default {
     let ret = null
 
     if (model.menu.length > 0) {
-      ret =
-        <AppsWithNavStyle>
-          {
-            (classes: any) => 
-              <div className={classes.container}>
-                <div className={classes.navigation}>
-                  <Nav
-                    groups={
-                      model.menu.map(getLinkProps)
-                    }
+      ret = styledAppsWithNav((classes: any) => 
+        <div className={classes.container}>
+          <div className={classes.navigation}>
+            <Nav
+              groups={
+                model.menu.map(getLinkProps)
+              }
 
-                    selectedKey="categories" // TODO
-                  />
-                </div>
-                <div className={classes.content}>
-                  <DataNavigator config={{}} data={null}/>
-                </div>
-              </div>
-          }
-        </AppsWithNavStyle>
+              selectedKey="categories" // TODO
+            />
+          </div>
+          <div className={classes.content}>
+            <DataNavigator config={{}} data={null}/>
+          </div>
+        </div>
+      )
     }
 
     return ret

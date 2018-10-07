@@ -1,11 +1,11 @@
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle from '../../../../../styling/defineStyle'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode, isElementOfType, withChildren } from 'js-react-utils'
 import { ITheme } from 'office-ui-fabric-react'
 import { Spec } from 'js-spec'
 import Color from 'color'
 
-const LoginScreenStyle = defineStyle((theme: ITheme) => {
+const styledLoginScreen = defineStyle((theme: ITheme) => {
   const
     //gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
     //gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
@@ -93,16 +93,12 @@ const LoginScreen = defineComponent<LoginScreenProps>({
       }
     })
 
-    return (
-      <LoginScreenStyle>
-        {(classes: any) => 
-          <div className={classes.outerContainer}>
-            <div className={classes.innerContainer}>
-              {mainContent}
-            </div>
-          </div>
-        }
-      </LoginScreenStyle>
+    return styledLoginScreen((classes: any) => 
+      <div className={classes.outerContainer}>
+        <div className={classes.innerContainer}>
+          {mainContent}
+        </div>
+      </div>
     )
   }
 })
