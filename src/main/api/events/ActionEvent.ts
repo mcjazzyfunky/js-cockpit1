@@ -1,4 +1,5 @@
-export default interface ActionEvent {
+export default interface ActionEvent<Value = any>  {
   type: 'action',
-  name: string | null
+  name?: string | null,
+  value?: Value
 }

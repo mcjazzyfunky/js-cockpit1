@@ -1,5 +1,6 @@
 // internal imports
 import defineStyle from '../../styling/defineStyle'
+import ActionEvent from '../../events/ActionEvent'
 
 import ArrowDoubleLeftIcon from '../../../internal/components/icons/ArrowDoubleLeftIcon' 
 import ArrowDoubleRightIcon from '../../../internal/components/icons/ArrowDoubleRightIcon' 
@@ -7,7 +8,7 @@ import ArrowLeftIcon from '../../../internal/components/icons/ArrowLeftIcon'
 import ArrowRightIcon from '../../../internal/components/icons/ArrowRightIcon' 
 
 // external imports
-import React from 'react'
+import React, { FocusEvent, KeyboardEvent } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 import { DefaultButton, ITheme, TextField } from 'office-ui-fabric-react'
@@ -30,17 +31,26 @@ const PaginatorStyle = defineStyle((theme: ITheme) => ({
     background: 'none',
     outline: 'none',
     height: '32px',
+    cursor: 'pointer',
 
     selectors: {
-      '&:hover': {
+      '&:disabled': {
+        cursor: 'not-allowed',
+        opacity: '0.7',
+      },
+
+      '&:hover:not(:disabled)': {
         backgroundColor: theme.semanticColors.buttonBackgroundHovered
       },
-      '&:active': {
+
+      '&:active:not(:disabled)': {
         backgroundColor: theme.semanticColors.buttonBackgroundChecked,
       },
+
       '& svg': {
         transform: 'translate(0px, 2px)'
       },
+
       '&::-moz-focus-inner': {
         border: 0
       }
@@ -68,19 +78,20 @@ const PaginatorStyle = defineStyle((theme: ITheme) => ({
       },
 
       '& .ms-TextField-field': {
-        padding: '0.25rem 0.5rem'
+        padding: '0.25rem 0.5rem',
+        ...theme.fonts.medium,
       }
     }
   }
 }))
-
 
 // --- Paginator ----------------------------------------------------
 
 type PaginatorProps = {
   pageIndex: number,
   pageSize: number,
-  totalItemCount: number, 
+  totalItemCount: number,
+  onAction?: (event: ActionEvent<number>) => void 
 }
 
 const Paginator = defineComponent<PaginatorProps>({
@@ -104,6 +115,10 @@ const Paginator = defineComponent<PaginatorProps>({
       validate: Spec.nonnegativeInteger,
       required: true
     },
+
+    onAction: {
+      type: Function
+    }
   },
 
   render(props: PaginatorProps) {
@@ -125,22 +140,91 @@ type PaginatorData = PaginatorProps
 
 const PaginatorRenderer = {
   render(data: PaginatorData) {
+    const
+      { pageIndex, pageSize, totalItemCount, onAction } = data,
+      lastPageIndex = Math.floor(totalItemCount / pageSize),
+      firstButtonDisabled = pageIndex <= 0,
+      previousButtonDisabled = pageIndex <= 0,
+      nextButtonDisabled = pageIndex >= lastPageIndex,
+      lastButtonDisabled = pageIndex >= lastPageIndex
+
     return (
       <PaginatorStyle>
         {
           (classes: any) =>
             <div className={classes.container}>
-              <button className={classes.button}><ArrowDoubleLeftIcon/></button>
-              <button className={classes.button}><ArrowLeftIcon/></button>
+              <button
+                disabled={firstButtonDisabled}
+                className={classes.button}
+                onClick={onAction ? () => handleAction(0, onAction) : null}
+              >
+                <ArrowDoubleLeftIcon/>
+              </button>
+              <button
+                disabled={previousButtonDisabled}
+                className={classes.button}
+                onClick={onAction ? () => handleAction(pageIndex - 1, onAction) : null}
+              >
+                <ArrowLeftIcon/>
+              </button>
               <div className={classes.pageText1}>Page</div>
-                <TextField value={String(data.pageIndex  + 1)} className={classes.textField}/>
-              <div className={classes.pageText2}>of 100</div>
-              <button className={classes.button}><ArrowRightIcon/></button>
-              <button className={classes.button}><ArrowDoubleRightIcon/></button>
+                <TextField
+                  value={String(data.pageIndex  + 1)}
+                  className={classes.textField}
+                  onKeyDown={onAction ? event => handleKeyDown(event, onAction, pageIndex, lastPageIndex) : null}
+                />
+              <div className={classes.pageText2}>of {lastPageIndex + 1}</div>
+              <button
+                disabled={nextButtonDisabled}
+                className={classes.button}
+                onClick={onAction ? () => handleAction(pageIndex + 1, onAction) : null}
+              >
+                <ArrowRightIcon/>
+              </button>
+              <button
+                disabled={lastButtonDisabled}
+                className={classes.button}
+                onClick={onAction ? () => handleAction(lastPageIndex, onAction) : null}
+              >
+                <ArrowDoubleRightIcon/>
+              </button>
             </div>
         }
       </PaginatorStyle>
     )
+  }
+}
+
+// --- helpers ------------------------------------------------------
+
+function handleAction(pageIndex: number, onAction: ((event: ActionEvent<number>) => void)) {
+  const event: ActionEvent = {
+    type: 'action',
+    name: 'pageIndex',
+    value: pageIndex
+  }
+
+  onAction(event)
+}
+
+function handleKeyDown(
+  event: KeyboardEvent ,
+  onAction: ((event: ActionEvent<number>) => void),
+  pageIndex: number,
+  lastPageIndex: number) {
+
+  console.log('juhu', event)
+
+  if (event.keyCode === 13) {
+    const
+      target: any = event.nativeEvent.target,
+      value: any = (target as any).value
+
+    if (isNaN(value) || !Number.isInteger(parseInt(value, 10)) || value < 0 || value >= lastPageIndex) {
+      target.value = pageIndex + 1
+    } else {
+      handleAction(parseInt(value, 10), onAction)
+    }
   }
 }
 
