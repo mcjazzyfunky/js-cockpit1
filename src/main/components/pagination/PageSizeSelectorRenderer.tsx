@@ -1,5 +1,5 @@
 // internal imports
-import { PAGE_SIZE_OPTIONS, PageSizeSelectorData } from './PageSizeSelector'
+import { PAGE_SIZE_OPTIONS, PageSizeSelectorModel } from './PageSizeSelector'
 import defineStyle from '../../styling/defineStyle' 
 import ActionEvent from '../../events/ActionEvent'
 
@@ -25,13 +25,12 @@ const stylePageSizeSelector = defineStyle((theme: ITheme) => ({
 // --- PageSizeSelectorRenderer -------------------------------------
 
 const PageSizeSelectorRenderer = {
-  render(data: PageSizeSelectorData) {
+  render(model: PageSizeSelectorModel) {
     return stylePageSizeSelector(classes =>
       <div className={classes.container}>
         <label className={classes.pageSizeText}>Items/Page</label>
         <DefaultButton
-          text={String(data.pageSize)}
-          className={classes.pageSizeSelector}
+          text={String(model.pageSize)}
 
           menuProps={{
             items: PAGE_SIZE_OPTIONS.map(option => ({
@@ -39,8 +38,8 @@ const PageSizeSelectorRenderer = {
               name: String(option),
 
               onClick:
-                data.onAction
-                  ? (ev: any) => emitActionEvent(option, data.onAction)
+                model.onAction
+                  ? (ev: any) => emitActionEvent(option, model.onAction)
                   : null
             }))
           }}

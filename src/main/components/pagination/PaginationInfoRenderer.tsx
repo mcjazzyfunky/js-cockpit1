@@ -1,5 +1,5 @@
 // internal imports
-import { PaginationInfoData } from './PaginationInfo'
+import { PaginationInfoModel } from './PaginationInfo'
 import defineStyle from '../../styling/defineStyle'
 
 // external imports
@@ -18,17 +18,17 @@ const stylePaginationInfo = defineStyle((theme: ITheme) => ({
 // --- PaginationInfoRenderer ---------------------------------------
 
 const PaginationInfoRenderer = {
-  render(data: PaginationInfoData) {
+  render(model: PaginationInfoModel) {
     let content: ReactNode = null
 
     const
-      pageIndex = data.pageIndex,
-      pageSize = data.pageSize,
-      totalItemCount = data.totalItemCount,
+      pageIndex = model.pageIndex,
+      pageSize = model.pageSize,
+      totalItemCount = model.totalItemCount,
       itemNumberStart = pageIndex * pageSize + 1,
       itemNumberEnd = Math.min(totalItemCount, (pageIndex + 1) * pageSize)
 
-    switch (data.about) {
+    switch (model.about) {
       case 'items':
         content =
           <div>

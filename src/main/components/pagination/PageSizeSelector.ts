@@ -42,7 +42,7 @@ const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
 
 // --- data models --------------------------------------------------
 
-type PageSizeSelectorData = PageSizeSelectorProps
+type PageSizeSelectorModel = PageSizeSelectorProps
 
 // --- exports ------------------------------------------------------
 
@@ -50,5 +50,5 @@ export default PageSizeSelector
 
 export {
   PAGE_SIZE_OPTIONS,
-  PageSizeSelectorData
+  PageSizeSelectorModel
 }

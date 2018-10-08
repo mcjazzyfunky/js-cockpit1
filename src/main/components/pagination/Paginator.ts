@@ -55,12 +55,12 @@ function getPaginatorData(props: PaginatorProps) {
 
 // --- data models -------------------------------------------------
 
-type PaginatorData = PaginatorProps
+type PaginatorModel = PaginatorProps
 
 // --- exports ------------------------------------------------------
 
 export default Paginator
 
 export {
-  PaginatorData
+  PaginatorModel
 }

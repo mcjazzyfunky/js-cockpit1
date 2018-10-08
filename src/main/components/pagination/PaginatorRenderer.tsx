@@ -1,5 +1,5 @@
 // internal imports
-import { PaginatorData } from './Paginator'
+import { PaginatorModel } from './Paginator'
 import defineStyle from '../../styling/defineStyle'
 import ActionEvent from '../../events/ActionEvent'
 import ArrowDoubleLeftIcon from '../../icons/ArrowDoubleLeftIcon' 
@@ -87,9 +87,9 @@ const stylePaginator = defineStyle((theme: ITheme) => ({
 // --- PaginatorRenderer --------------------------------------------
 
 const PaginatorRenderer = {
-  render(data: PaginatorData): ReactNode {
+  render(model: PaginatorModel): ReactNode {
     const
-      { pageIndex, pageSize, totalItemCount, onAction } = data,
+      { pageIndex, pageSize, totalItemCount, onAction } = model,
       lastPageIndex = Math.floor(totalItemCount / pageSize),
       firstButtonDisabled = pageIndex <= 0,
       previousButtonDisabled = pageIndex <= 0,
@@ -114,7 +114,7 @@ const PaginatorRenderer = {
         </button>
         <div className={classes.pageText1}>Page</div>
           <TextField
-            value={String(data.pageIndex  + 1)}
+            value={String(model.pageIndex  + 1)}
             className={classes.textField}
             onKeyDown={onAction ? event => handleKeyDown(event, onAction, pageIndex, lastPageIndex) : null}
           />

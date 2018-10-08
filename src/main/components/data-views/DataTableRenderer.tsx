@@ -32,6 +32,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         borderWidth: '0 0 1px 1px',
         borderStyle: 'solid',
         borderColor: '#ddd',
+        verticalAlign: 'center',
         ...theme.fonts.medium,
       },
 
@@ -48,8 +49,18 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
             borderBottomStyle: 'solid',
             borderBottomColor: theme.palette.themePrimary,
             backgroundColor: '#e8e8e8',
+          },
+
+          ':active': {
+            backgroundColor: '#e0e0e0',
           }
         }
+      },
+      
+      '& > tr > th > div': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }
     }
   },

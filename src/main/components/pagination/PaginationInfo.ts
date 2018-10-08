@@ -51,14 +51,14 @@ const PaginationInfo = defineComponent<PaginationInfoProps>({
   }
 })
 
-// --- PaginationInfoData -------------------------------------------
+// --- data models --------------------------------------------------
 
-type PaginationInfoData = PaginationInfoProps
+type PaginationInfoModel = PaginationInfoProps
 
 // --- exports ------------------------------------------------------
 
 export default PaginationInfo
 
 export {
-  PaginationInfoData
+  PaginationInfoModel
 }
