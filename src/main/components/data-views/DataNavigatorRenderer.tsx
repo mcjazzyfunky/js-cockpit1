@@ -93,7 +93,7 @@ const DataNavigatorRenderer = {
         { renderHeader(model, classes) }
         <div className={classes.content}>
           <DataTable
-            rowSelection={{
+            rowSelectionOptions={{
               mode: 'multi'
             }}
             

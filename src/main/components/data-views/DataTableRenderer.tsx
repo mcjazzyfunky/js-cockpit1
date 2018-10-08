@@ -78,6 +78,10 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         justifyContent: 'center',
       }
     }
+  },
+
+  selectedRow: {
+    backgroundColor: 'lemonChiffon !important',
   }
 }))
 
@@ -89,9 +93,7 @@ class DataTableRenderer {
   private selectedRows: [2]
 
   render(model: DataTableModel)  {
-    console.log(model)
-
-    const rowSelectionMode = model.rowSelection.mode
+    const rowSelectionMode = model.rowSelectionOptions.mode
 
     return styleDataTable(classes => {
       return (
@@ -109,23 +111,23 @@ class DataTableRenderer {
 // --- locals -------------------------------------------------------
 
 function createTableHead(model: DataTableModel, classes: DataTableClasses) {
-  console.log(model)
-
   const
-    selectionMode = model.rowSelection.mode,
+    selectionMode = model.rowSelectionOptions.mode,
 
     selectionColumn =
       selectionMode === 'none'
         ? null
-        : <th className={classes.rowSelectionColumn}><div>{ createSelectionCheckbox() }</div></th>
+        : <th className={classes.rowSelectionColumn}>
+            <div>{ createSelectionCheckbox(-1, model) }</div>
+          </th>
 
   return (
     <thead className={classes.tableHead}>
       <tr>
         {selectionColumn}
         {
-          model.columns.map(column =>
-            <th>
+          model.columns.map((column, columnIdx) =>
+            <th key={columnIdx}>
               {column.title}
             </th>)
         }
@@ -136,38 +138,56 @@ function createTableHead(model: DataTableModel, classes: DataTableClasses) {
 
 function createTableBody(model: DataTableModel, classes: DataTableClasses) {
   const
-    selectionMode = model.rowSelection.mode,
-
-    selectionColumn =
-      selectionMode === 'none'
-        ? null
-        : <td className={classes.rowSelectionColumn}><div>{ createSelectionCheckbox() }</div></td>
+    selectionMode = model.rowSelectionOptions.mode
 
   return (
     <tbody className={classes.tableBody}>
         {
-          model.data.map(row =>
-            <tr>
-              {selectionColumn}
-              {
-                model.columns.map(column =>
-                  <>
-                    <td>
+          model.data.map((row, rowIdx) => {
+            const selectionColumn =
+              selectionMode === 'none'
+                ? null
+                : <td className={classes.rowSelectionColumn}>
+                    <div>{createSelectionCheckbox(rowIdx, model)}
+                    </div>
+                  </td>
+
+            return (
+              <tr key={rowIdx} className={model.rowSelection.has(rowIdx) ? classes.selectedRow : null }>
+                {selectionColumn}
+                {
+                  model.columns.map((column, columnIdx) =>
+                    <td key={columnIdx}>
                       {row[column.field]}
                     </td>
-                  </>
-                )
-              }
-            </tr>
-          )
+                  )
+                }
+              </tr>
+            )
+          })
         }
     </tbody>
   )
 }
 
-function createSelectionCheckbox() {
+function createSelectionCheckbox(index: number, model: DataTableModel) {
+  const
+    checked = model.rowSelection.has(index),
+
+    onChange =() => {
+      const selectedRows = new Set(model.rowSelection)
+
+      if (selectedRows.has(index)) {
+        selectedRows.delete(index)
+      } else {
+        selectedRows.add(index)
+      }
+
+      model.api.setRowSelection(selectedRows)
+    }
+
   return (
-    <Checkbox />
+    <Checkbox checked={checked} onChange={onChange}/>
   ) 
 }
 

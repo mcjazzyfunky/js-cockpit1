@@ -3,6 +3,7 @@ import DataTableRenderer from './DataTableRenderer'
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
+import { strictEqual } from 'assert';
 
 
 // --- DataTable.Column ---------------------------------------------
@@ -38,7 +39,7 @@ const Column = defineComponent<ColumnProps>({
 type DataTableProps = {
   title?: string,
   
-  rowSelection?: {
+  rowSelectionOptions?: {
     mode: 'none' | 'single' | 'multi'
   },
 
@@ -47,6 +48,7 @@ type DataTableProps = {
 }
 
 type DataTableState = {
+  rowSelection: Set<number>
 }
 
 const DataTable = defineComponent<DataTableProps>({
@@ -57,7 +59,7 @@ const DataTable = defineComponent<DataTableProps>({
       type: String
     },
 
-    rowSelection: {
+    rowSelectionOptions: {
       type: Object,
 
       validate:
@@ -83,6 +85,10 @@ const DataTable = defineComponent<DataTableProps>({
 
     constructor(props: DataTableProps) {
       super(props)
+
+      this.state = {
+        rowSelection: new Set([2])
+      }
     }
 
     render() {
@@ -94,9 +100,16 @@ const DataTable = defineComponent<DataTableProps>({
     private getDataTableModel(): DataTableModel {
       const model: DataTableModel = {
         $kind: 'DataTableModel',
-        rowSelection: this.props.rowSelection,
+        rowSelectionOptions : this.props.rowSelectionOptions,
         columns: [],
-        data: this.props.data
+        data: this.props.data,
+        rowSelection: this.state.rowSelection,
+
+        api: {
+          setRowSelection: (rowIds: Iterable<number>) => {
+            this.setState({ rowSelection: new Set(rowIds)})
+          }
+        }
       }
 
       React.Children.forEach(this.props.children, (child: ReactElement<DataTableColumnModel>) => {
@@ -134,12 +147,18 @@ const DataTable = defineComponent<DataTableProps>({
 type DataTableModel = {
   $kind: 'DataTableModel',
 
-  rowSelection: {
+  rowSelectionOptions: {
     mode: 'none' | 'single' | 'multi',
   },
 
   columns: (DataTableColumnModel)[]
-  data: any[]
+  data: any[],
+
+  rowSelection: Set<number>,
+
+  api: {
+    setRowSelection: (rowIds:  Iterable<number>) => void,
+  }
 }
 
 type DataTableColumnModel = {
