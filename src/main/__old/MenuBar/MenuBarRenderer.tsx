@@ -12,7 +12,7 @@ function render(menuBarModel: MenuBarModel): ReactNode {
 
 function __convertItemModel(itemModel: ItemModel | MenuModel): { key: string, name: string, subMenuProps?: any} {
   return (
-    itemModel.kind === 'item'
+    itemModel.$kind === 'item'
       ? { key: itemModel.name, name: itemModel.text }
       : { key: 'itemModel.name', name:itemModel.text, subMenuProps: { items: itemModel.items.map(__convertItemModel)  }}
   )

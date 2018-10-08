@@ -1,5 +1,5 @@
 import React from 'react'
-import defineStyle from '../../styling/defineStyle'
+import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import { Model_DataNavigator } from './DataNavigator'
 import { ITheme, SearchBox } from 'office-ui-fabric-react'
 import ActionBar from './internal/data-navigator/ActionBar'
@@ -81,6 +81,9 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'inline-flex',
   }
 }))
+
+type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
+
 // --- DataNavigatorStyle -------------------------------------------
 
 const DataNavigatorRenderer = { 
@@ -89,7 +92,13 @@ const DataNavigatorRenderer = {
       <div className={classes.container}>
         { renderHeader(model, classes) }
         <div className={classes.content}>
-          <DataTable>
+          <DataTable
+            selectionOptions={{
+              mode: 'multi'
+            }}
+            
+            data={[]}
+          >
             <DataTable.Column
               title="First name"
               field="firstName"
@@ -106,6 +115,10 @@ const DataNavigatorRenderer = {
               title="City"
               field="city"
             />
+            <DataTable.Column
+              title="Country"
+              field="country"
+            />
           </DataTable>
         </div>
         { renderFooter(model, classes) }
@@ -116,7 +129,7 @@ const DataNavigatorRenderer = {
 
 // --- header -------------------------------------------------------
 
-function renderHeader(model: Model_DataNavigator, classes: any) {
+function renderHeader(model: Model_DataNavigator, classes: DataNavigatorClasses) {
   return (
     <div className={classes.header}>
       <div className={classes.headerStart}>

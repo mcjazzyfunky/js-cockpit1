@@ -8,8 +8,7 @@ import { Spec } from 'js-spec'
 // --- DataTable.Column ---------------------------------------------
 
 type ColumnProps = {
-  title?: string,
-  field?: string,
+  title?: string,  field?: string,
   sortable?: boolean
 }
 
@@ -37,29 +36,38 @@ const Column = defineComponent<ColumnProps>({
 // --- DataTable ----------------------------------------------------
 
 type DataTableProps = {
+  title?: string,
+  
+  selectionOptions?: {
+    mode: 'none' | 'single' | 'multi'
+  },
+
   data: object[],
   children?: ReactNode
 }
 
 type DataTableState = {
-  tableInfo: TableInfo
 }
-
-type ColumnInfo = {
-  title?: string,
-  field?: string
-}
-
-type TableInfo = {
-  data: any[],
-  columns: ColumnInfo[]
-}
-
 
 const DataTable = defineComponent<DataTableProps>({
   displayName: 'DataTable',
 
   properties: {
+    title: {
+      type: String
+    },
+
+    selectionOptions: {
+      type: Object,
+
+      validate:
+        Spec.strictShape({
+          mode: Spec.oneOf('none', 'single', 'multi')
+        }),
+
+      defaultValue: { mode:  'none' }
+    },
+
     data: {
       type: Array,
       validate: Spec.arrayOf(Spec.object)
@@ -81,13 +89,14 @@ const DataTable = defineComponent<DataTableProps>({
 
     // --- private --------------------------------------------------
 
-    private static getDataTableModel(props: DataTableProps): Model_DataTable {
-      const model: Model_DataTable = {
-        kind: 'Model_DataTable',
+    private static getDataTableModel(props: DataTableProps): DataTableModel {
+      const model: DataTableModel = {
+        $kind: 'DataTableModel',
+        selectionOptions: props.selectionOptions,
         columns: []
       }
 
-      React.Children.forEach(props.children, (child: ReactElement<Model_DataTable_Column | Model_DataTable_ColumnGroup>) => {
+      React.Children.forEach(props.children, (child: ReactElement<DataTableColumnModel>) => {
         model.columns.push(
             Base.getColumnModel(child.props))
       })
@@ -95,9 +104,9 @@ const DataTable = defineComponent<DataTableProps>({
       return model
     }
 
-    private static getColumnModel(props: ColumnProps): Model_DataTable_Column {
-      let ret: Model_DataTable_Column = {
-        kind: 'Model_DataTable_Column'
+    private static getColumnModel(props: ColumnProps): DataTableColumnModel {
+      let ret: DataTableColumnModel = {
+        $kind: 'DataTableColumnModel'
       }
 
       if (props.title !== undefined) {
@@ -117,32 +126,30 @@ const DataTable = defineComponent<DataTableProps>({
   }
 })
 
-// --- models ------------------------------------------------------
+// --- data models --------------------------------------------------
 
-type Model_DataTable = {
-  kind: 'Model_DataTable',
-  columns: (Model_DataTable_Column | Model_DataTable_ColumnGroup)[]
+type DataTableModel = {
+  $kind: 'DataTableModel',
+  selectionOptions: {
+    mode: 'none' | 'single' | 'multi',
+  },
+  columns: (DataTableColumnModel)[]
 }
 
-type Model_DataTable_Column = {
-  kind: 'Model_DataTable_Column',
+type DataTableColumnModel = {
+  $kind: 'DataTableColumnModel',
   title?: string,
   field?: string,
   sortable?: boolean
 }
-
-type Model_DataTable_ColumnGroup = {
-  kind: 'Model_DataTable_ColumnGroup',
-  title: string,
-  columns: (Model_DataTable_Column | Model_DataTable_ColumnGroup)[]
-}
-
-// --- DataTableRenderer --------------------------------------------
-
-
 
 // --- exports ------------------------------------------------------
 
 export default Object.assign(DataTable, {
   Column
 })
+
+export {
+  DataTableModel,
+  DataTableColumnModel
+}

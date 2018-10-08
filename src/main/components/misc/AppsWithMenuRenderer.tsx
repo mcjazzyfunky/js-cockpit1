@@ -73,7 +73,7 @@ function getItemProps(model: AppsWithMenuAppGroupData | AppsWithMenuAppData) {
     name: model.title,
   }
 
-  if (model.kind === 'AppsWithMenuAppGroupData') {
+  if (model.$kind === 'AppsWithMenuAppGroupData') {
     const menu = model as AppsWithMenuAppGroupData
 
     if (menu.items.length > 0) {
@@ -83,7 +83,7 @@ function getItemProps(model: AppsWithMenuAppGroupData | AppsWithMenuAppData) {
         })
       }
     }
-  } else if (model.kind === 'AppsWithMenuAppData') {
+  } else if (model.$kind === 'AppsWithMenuAppData') {
     // TODO
   } else {
     throw new Error('This should never happen')

@@ -120,7 +120,7 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
 
     static _getAppsWithMenuModel(props: AppsWithMenuProps): AppsWithMenuData {
       const ret: AppsWithMenuData = {
-        kind: 'AppsWithMenuData',
+        $kind: 'AppsWithMenuData',
         menu: []
       }
 
@@ -143,7 +143,7 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
 
     private static _getAppGroupModel(props: AppGroupProps): AppsWithMenuAppGroupData {
       const ret: AppsWithMenuAppGroupData = {
-        kind: 'AppsWithMenuAppGroupData',
+        $kind: 'AppsWithMenuAppGroupData',
         title: props.title,
         name: props.name,
         items: []
@@ -161,7 +161,7 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
 
     private static _getAppModel(props: AppProps): AppsWithMenuAppData {
       const ret: AppsWithMenuAppData = {
-        kind: 'AppsWithMenuAppData',
+        $kind: 'AppsWithMenuAppData',
         title: props.title,
         name: props.name,
         content: props.children || null
@@ -175,19 +175,19 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
 // --- data models --------------------------------------------------
 
 type AppsWithMenuData = {
-  kind: 'AppsWithMenuData',
+  $kind: 'AppsWithMenuData',
   menu: (AppsWithMenuAppGroupData | AppsWithMenuAppData)[]
 }
 
 type AppsWithMenuAppGroupData = {
-  kind: 'AppsWithMenuAppGroupData',
+  $kind: 'AppsWithMenuAppGroupData',
   title: string,
   name: string,
   items: (AppsWithMenuAppGroupData | AppsWithMenuAppData)[]
 }
 
 type AppsWithMenuAppData = {
-  kind: 'AppsWithMenuAppData',
+  $kind: 'AppsWithMenuAppData',
   title: string,
   name: string,
   content: ReactNode

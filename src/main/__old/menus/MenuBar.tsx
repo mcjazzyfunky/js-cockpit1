@@ -134,13 +134,13 @@ export type MenuBarModel = {
 }
 
 export type MenuModel = {
-  kind: 'menu',
+  $kind: 'menu',
   text: string,
   items: ((MenuModel | ItemModel)[]) | null
 }
 
 export type ItemModel = {
-  kind: 'item',
+  $kind: 'item',
   text: string,
   name: string | null,
   disabled: boolean,
@@ -164,7 +164,7 @@ function getMenuBarModel(props: MenuBarProps): MenuBarModel {
 
 function getMenuModel(props: MenuProps): MenuModel {
   const ret: MenuModel = {
-    kind: 'menu',
+    $kind: 'menu',
     text: props.text,
     items: []
   }
@@ -183,7 +183,7 @@ function getMenuModel(props: MenuProps): MenuModel {
 
 function getItemModel(props: ItemProps): ItemModel {
   return {
-    kind: 'item',
+    $kind: 'item',
     text: props.text,
     name: props.name,
     disabled: props.disabled,

@@ -11,12 +11,19 @@ type Styles = {
   [name: string]: any, // TODO!!!
 }
 
+type FirstArgumentType<T> = T extends (firstArg: infer A, ...otherArgs: any[]) => any ? A : never;
+
+type ClassesOf<T> = {
+  [key in keyof FirstArgumentType<FirstArgumentType<T>>]: string
+}
+
 type Classes<S extends Styles> = {
   [name in keyof S]: string
 }
 
 type Return<S extends Styles> =
   (f: (classes: Classes<S>) => ReactNode) => ReactNode
+
 
 function defineStyle<S extends Styles>(getStyles: (theme: ITheme, props?: any) => S): Return<S>
 function defineStyle<S extends Styles>(styles: S): Return<S>
@@ -51,3 +58,7 @@ function defineStyle(arg: any): any {
 }
 
 export default defineStyle
+
+export {
+  ClassesOf
+}

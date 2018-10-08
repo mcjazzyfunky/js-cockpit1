@@ -1,11 +1,7 @@
-import defineStyle from '../../styling/defineStyle'
+import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import React from 'react'
-import { defineComponent } from 'js-react-utils'
-import { css, ITheme, classNamesFunction } from 'office-ui-fabric-react'
-import { AgGridReact } from 'ag-grid-react'
-import { TabbedLayout } from 'ag-grid-community';
-// import 'ag-grid-community/dist/styles/ag-grid.css'
-// import 'ag-grid-community/dist/styles/ag-theme-balham.css'
+import { ITheme } from 'office-ui-fabric-react'
+import { DataTableModel } from './DataTable'
 
 // --- DataTableStyle -----------------------------------------------
 
@@ -68,10 +64,12 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   }
 }))
 
+type DataTableClassNames = ClassesOf<typeof styleDataTable>
+
 // --- DataTableRenderer --------------------------------------------
 
 const DataTableRenderer = {
-  render(model: any)  {
+  render(model: DataTableModel)  {
     console.log(model)
 
     return styleDataTable(classes => 
@@ -87,78 +85,51 @@ const DataTableRenderer = {
 
 // --- locals -------------------------------------------------------
 
-function createTableHead(model: any, classes: any) {
+function createTableHead(model: DataTableModel, classes: DataTableClassNames) {
+  console.log(model)
+
+  const
+    selectionMode = model.selectionOptions.mode,
+
+    selectionColumn =
+      selectionMode === 'none'
+        ? null
+        : <th>x</th>
+
   return (
     <thead className={classes.tableHead}>
       <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Postal code</th>
-        <th>City</th>
-        <th>Country</th>
+        {selectionColumn}
+        {
+          model.columns.map(column =>
+            <th>
+              {column.title}
+            </th>)
+        }
       </tr>
     </thead>
   )
 }
 
-function createTableBody(model: any, classes: any) {
+function createTableBody(model: DataTableModel, classes: DataTableClassNames) {
+  const
+    selectionMode = model.selectionOptions.mode,
+
+    selectionColumn =
+      selectionMode === 'none'
+        ? null
+        : <td>x</td>
+
   return (
     <tbody className={classes.tableBody}>
       <tr>
-        <td>Jane</td>
-        <td>Doe</td>
-        <td>12345</td>
-        <td>New York</td>
-        <td>USA</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Miller</td>
-        <td>7899</td>
-        <td>London</td>
-        <td>United Kingdom</td>
-      </tr>
-      <tr>
-        <td>Jane</td>
-        <td>Doe</td>
-        <td>12345</td>
-        <td>New York</td>
-        <td>USA</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Miller</td>
-        <td>7899</td>
-        <td>London</td>
-        <td>United Kingdom</td>
-      </tr>
-      <tr>
-        <td>Jane</td>
-        <td>Doe</td>
-        <td>12345</td>
-        <td>New York</td>
-        <td>USA</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Miller</td>
-        <td>7899</td>
-        <td>London</td>
-        <td>United Kingdom</td>
-      </tr>
-      <tr>
-        <td>Jane</td>
-        <td>Doe</td>
-        <td>12345</td>
-        <td>New York</td>
-        <td>USA</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Miller</td>
-        <td>7899</td>
-        <td>London</td>
-        <td>United Kingdom</td>
+        {selectionColumn}
+        {
+          model.columns.map(column =>
+            <td>
+              {column.title}
+            </td>)
+        }
       </tr>
     </tbody>
   )

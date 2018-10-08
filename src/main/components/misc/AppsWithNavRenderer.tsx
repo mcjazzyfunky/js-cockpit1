@@ -70,7 +70,7 @@ function getLinkProps(model: AppsWithNavAppGroupData | AppsWithNavAppData) {
     isExpanded: true
   }
 
-  if (model.kind === 'AppsWithNavAppGroupData') {
+  if (model.$kind === 'AppsWithNavAppGroupData') {
     const menu = model as AppsWithNavAppGroupData
 
     if (menu.items.length > 0) {
@@ -78,7 +78,7 @@ function getLinkProps(model: AppsWithNavAppGroupData | AppsWithNavAppData) {
         return getLinkProps(it)
       })
     }
-  } else if (model.kind === 'AppsWithNavAppData') {
+  } else if (model.$kind === 'AppsWithNavAppData') {
     // TODO
   } else {
     throw new Error('This should never happen')

@@ -131,7 +131,7 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
 
     static _getAppsWithNavModel(props: AppsWithNavProps): AppsWithNavData {
       const ret: AppsWithNavData = {
-        kind: 'AppsWithNavData',
+        $kind: 'AppsWithNavData',
         menu: []
       }
 
@@ -154,7 +154,7 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
 
     private static _getAppGroupModel(props: AppGroupProps): AppsWithNavAppGroupData {
       const ret: AppsWithNavAppGroupData = {
-        kind: 'AppsWithNavAppGroupData',
+        $kind: 'AppsWithNavAppGroupData',
         title: props.title,
         name: props.name,
         items: []
@@ -172,7 +172,7 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
 
     private static _getAppModel(props: AppProps): AppsWithNavAppData {
       const ret: AppsWithNavAppData = {
-        kind: 'AppsWithNavAppData',
+        $kind: 'AppsWithNavAppData',
         title: props.title,
         name: props.name,
         content: props.children || null
@@ -186,19 +186,19 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
 // --- models -------------------------------------------------------
 
 type AppsWithNavData = {
-  kind: 'AppsWithNavData',
+  $kind: 'AppsWithNavData',
   menu: (AppsWithNavAppGroupData | AppsWithNavAppData)[]
 }
 
 type AppsWithNavAppGroupData = {
-  kind: 'AppsWithNavAppGroupData',
+  $kind: 'AppsWithNavAppGroupData',
   title: string,
   name: string,
   items: (AppsWithNavAppGroupData | AppsWithNavAppData)[]
 }
 
 type AppsWithNavAppData = {
-  kind: 'AppsWithNavAppData',
+  $kind: 'AppsWithNavAppData',
   title: string,
   name: string,
   content: ReactNode
