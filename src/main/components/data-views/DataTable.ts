@@ -1,4 +1,6 @@
 import DataTableRenderer from './DataTableRenderer'
+import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
+import SortChangeEvent from '../../events/SortChangeEvent'
 
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
@@ -43,10 +45,13 @@ type DataTableProps = {
   },
 
   sortBy?: string,
-  sortDescending?: boolean,
+  sortDesc?: boolean,
 
   data: object[],
-  children?: ReactNode
+  children?: ReactNode,
+
+  onRowSelectionChange?: (event: RowSelectionChangeEvent) => void
+  onSortChange?: (event: SortChangeEvent) => void
 }
 
 type DataTableState = {
@@ -76,7 +81,7 @@ const DataTable = defineComponent<DataTableProps>({
       type: String
     },
 
-    sortDescending: {
+    sortDesc: {
       type: Boolean
     },
 
@@ -87,6 +92,14 @@ const DataTable = defineComponent<DataTableProps>({
 
     children: {
       validate: withChildren(Spec.all(isElementOfType(Column)))
+    },
+
+    onRowSelectionChange: {
+      type: Function
+    },
+
+    onSortChange: {
+      type: Function
     }
   },
 
@@ -115,11 +128,30 @@ const DataTable = defineComponent<DataTableProps>({
         data: this.props.data,
         rowSelection: this.state.rowSelection,
         sortBy: this.props.sortBy  || null,
-        sortDescending: this.props.sortDescending || false,
+        sortDesc: this.props.sortDesc || false,
 
         api: {
-          setRowSelection: (rowIds: Iterable<number>) => {
-            this.setState({ rowSelection: new Set(rowIds)})
+          changeRowSelection: (rowIds: Iterable<number>) => {
+            const rowSelection = new Set(rowIds)
+
+            this.setState({ rowSelection }, () => {
+              if (this.props.onRowSelectionChange) {
+                this.props.onRowSelectionChange({
+                  type: 'rowSelectionChange',
+                  selection: Array.from(rowSelection).sort()
+                })
+              }
+            })
+          },
+
+          changeSort: (sortBy: string, sortDesc: boolean) => {
+            if (this.props.onSortChange) {
+              this.props.onSortChange({
+                type: 'sortChange',
+                sortBy,
+                sortDesc
+              })
+            }
           }
         }
       }
@@ -167,12 +199,13 @@ type DataTableModel = {
   data: any[],
 
   sortBy: string | null,
-  sortDescending: boolean,
+  sortDesc: boolean,
 
   rowSelection: Set<number>,
 
   api: {
-    setRowSelection: (rowIds:  Iterable<number>) => void,
+    changeRowSelection: (rowIds:  Iterable<number>) => void,
+    changeSort: (sortBy: string, sortDesc: boolean) => void
   }
 }
 

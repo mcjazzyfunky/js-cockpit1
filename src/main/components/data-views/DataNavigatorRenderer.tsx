@@ -1,11 +1,16 @@
-import React from 'react'
+// internal imports
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import { DataNavigatorModel } from './DataNavigator'
-import { ITheme, SearchBox } from 'office-ui-fabric-react'
 import ActionBar from './internal/data-navigator/ActionBar'
 import Paginator from '../pagination/Paginator'
 import PageSizeSelector from '../pagination/PageSizeSelector'
 import PaginationInfo from '../pagination/PaginationInfo'
+import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
+import SortChangeEvent from '../../events/SortChangeEvent'
+
+// extenal imports
+import React from 'react'
+import { ITheme, SearchBox } from 'office-ui-fabric-react'
 
 // TODO
 import DataTable from './DataTable'
@@ -98,7 +103,19 @@ const DataNavigatorRenderer = {
             }}
 
             sortBy="firstName"
-            sortDescending={false}
+            sortDesc={false}
+
+            onRowSelectionChange={
+              (event: RowSelectionChangeEvent) => {
+                console.log(event)
+              }
+            }
+            
+            onSortChange={
+              (event: SortChangeEvent) => {
+                console.log(event)
+              }
+            }
             
             data={[
               {

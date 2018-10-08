@@ -205,19 +205,25 @@ function createColumnHeader(columnIdx: number, column: DataTableColumnModel, mod
   const
     sortable = model.columns[columnIdx].sortable,
     sortBy = model.sortBy,
-    sortDescending = model.sortDescending,
+    sortDesc = model.sortDesc,
     isSorted = sortBy !== null && sortBy === column.field,
 
     sortIcon =
       isSorted
-        ? (sortDescending ? <SortDescIcon/> : <SortAscIcon/>)
-        : null
+        ? (sortDesc ? <SortDescIcon/> : <SortAscIcon/>)
+        : null,
+
+    onClick =
+      !sortable && column.field
+        ? null
+        : () => {
+          model.api.changeSort(column.field, isSorted ? !sortDesc : false)
+        } 
 
   return (
-    <th key={columnIdx} data-sortable={String(sortable)}>
+    <th key={columnIdx} data-sortable={String(sortable)} onClick={onClick}>
       <div>
         {column.title}
-
         {sortIcon}
       </div>
     </th>
@@ -245,7 +251,7 @@ function createSelectCheckbox(index: number, model: DataTableModel) {
         }
       }
 
-      model.api.setRowSelection(selectedRows)
+      model.api.changeRowSelection(selectedRows)
     }
 
   return (
@@ -264,7 +270,7 @@ function createSelectAllCheckbox(model: DataTableModel) {
           ? []
           : model.data.keys()
 
-      model.api.setRowSelection(selectedRows)
+      model.api.changeRowSelection(selectedRows)
     }
 
   return (
