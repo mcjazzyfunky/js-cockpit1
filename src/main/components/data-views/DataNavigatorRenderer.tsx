@@ -1,6 +1,6 @@
 import React from 'react'
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
-import { Model_DataNavigator } from './DataNavigator'
+import { DataNavigatorModel } from './DataNavigator'
 import { ITheme, SearchBox } from 'office-ui-fabric-react'
 import ActionBar from './internal/data-navigator/ActionBar'
 import Paginator from '../pagination/Paginator'
@@ -87,17 +87,60 @@ type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
 // --- DataNavigatorStyle -------------------------------------------
 
 const DataNavigatorRenderer = { 
-  render(model: Model_DataNavigator) {
+  render(model: DataNavigatorModel) {
     return styleDataNavigator(classes =>
       <div className={classes.container}>
         { renderHeader(model, classes) }
         <div className={classes.content}>
           <DataTable
-            selectionOptions={{
+            rowSelection={{
               mode: 'multi'
             }}
             
-            data={[]}
+            data={[
+              {
+                firstName: 'Jane',
+                lastName: 'Doe',
+                postalCode: '1234',
+                city: 'New York',
+                country: 'USA'
+              },
+              {
+                firstName: 'Mary',
+                lastName: 'Miller',
+                postalCode: '88891',
+                city: 'London',
+                country: 'United Kingdom'
+              },
+              {
+                firstName: 'Jane',
+                lastName: 'Doe',
+                postalCode: '1234',
+                city: 'New York',
+                country: 'USA'
+              },
+              {
+                firstName: 'Mary',
+                lastName: 'Miller',
+                postalCode: '88891',
+                city: 'London',
+                country: 'United Kingdom'
+              },
+              {
+                firstName: 'Jane',
+                lastName: 'Doe',
+                postalCode: '1234',
+                city: 'New York',
+                country: 'USA'
+              },
+              {
+                firstName: 'Mary',
+                lastName: 'Miller',
+                postalCode: '88891',
+                city: 'London',
+                country: 'United Kingdom'
+              }
+            ]}
           >
             <DataTable.Column
               title="First name"
@@ -129,7 +172,7 @@ const DataNavigatorRenderer = {
 
 // --- header -------------------------------------------------------
 
-function renderHeader(model: Model_DataNavigator, classes: DataNavigatorClasses) {
+function renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) {
   return (
     <div className={classes.header}>
       <div className={classes.headerStart}>
@@ -151,7 +194,7 @@ function renderHeader(model: Model_DataNavigator, classes: DataNavigatorClasses)
 
 // --- footer -------------------------------------------------------
 
-function renderFooter(model: Model_DataNavigator, classes: any) {
+function renderFooter(model: DataNavigatorModel, classes: any) {
   return (
     <div className={classes.footer}> 
       <div className={classes.footerStart}>

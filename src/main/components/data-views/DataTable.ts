@@ -38,7 +38,7 @@ const Column = defineComponent<ColumnProps>({
 type DataTableProps = {
   title?: string,
   
-  selectionOptions?: {
+  rowSelection?: {
     mode: 'none' | 'single' | 'multi'
   },
 
@@ -57,7 +57,7 @@ const DataTable = defineComponent<DataTableProps>({
       type: String
     },
 
-    selectionOptions: {
+    rowSelection: {
       type: Object,
 
       validate:
@@ -78,33 +78,36 @@ const DataTable = defineComponent<DataTableProps>({
     }
   },
 
-  base: class Base extends React.Component<DataTableProps, DataTableState> {
+  base: class extends React.Component<DataTableProps, DataTableState> {
+    private renderer = new DataTableRenderer()
+
     constructor(props: DataTableProps) {
       super(props)
     }
 
     render() {
-      return DataTableRenderer.render(Base.getDataTableModel(this.props))
+      return this.renderer.render(this.getDataTableModel())
     }
 
     // --- private --------------------------------------------------
 
-    private static getDataTableModel(props: DataTableProps): DataTableModel {
+    private getDataTableModel(): DataTableModel {
       const model: DataTableModel = {
         $kind: 'DataTableModel',
-        selectionOptions: props.selectionOptions,
-        columns: []
+        rowSelection: this.props.rowSelection,
+        columns: [],
+        data: this.props.data
       }
 
-      React.Children.forEach(props.children, (child: ReactElement<DataTableColumnModel>) => {
+      React.Children.forEach(this.props.children, (child: ReactElement<DataTableColumnModel>) => {
         model.columns.push(
-            Base.getColumnModel(child.props))
+            this.getColumnModel(child.props))
       })
 
       return model
     }
 
-    private static getColumnModel(props: ColumnProps): DataTableColumnModel {
+    private getColumnModel(props: ColumnProps): DataTableColumnModel {
       let ret: DataTableColumnModel = {
         $kind: 'DataTableColumnModel'
       }
@@ -130,10 +133,13 @@ const DataTable = defineComponent<DataTableProps>({
 
 type DataTableModel = {
   $kind: 'DataTableModel',
-  selectionOptions: {
+
+  rowSelection: {
     mode: 'none' | 'single' | 'multi',
   },
+
   columns: (DataTableColumnModel)[]
+  data: any[]
 }
 
 type DataTableColumnModel = {

@@ -28,7 +28,7 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
 
   base: class Base extends React.PureComponent {
     render() {
-      const model: Model_DataNavigator = {
+      const model: DataNavigatorModel = {
       }
 
       return DataNavigatorRenderer.render(model)
@@ -38,7 +38,7 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
 
 // --- modesl -------------------------------------------------------
 
-type Model_DataNavigator = {
+type DataNavigatorModel = {
 }
 
 // --- exports ------------------------------------------------------
@@ -46,5 +46,5 @@ type Model_DataNavigator = {
 export default DataNavigator
 
 export {
-  Model_DataNavigator
+  DataNavigatorModel
 }

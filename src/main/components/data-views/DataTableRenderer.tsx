@@ -1,6 +1,6 @@
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import React from 'react'
-import { ITheme } from 'office-ui-fabric-react'
+import { Checkbox, ITheme } from 'office-ui-fabric-react'
 import { DataTableModel } from './DataTable'
 
 // --- DataTableStyle -----------------------------------------------
@@ -24,7 +24,8 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
 
     selectors: {
       '& > tr > th': {
-        padding: '0.25rem',
+        boxSizing: 'border-box',
+        padding: '0.5rem',
         borderCollapse: 'collapse',
         borderWidth: '0 0 1px 1px',
         borderStyle: 'solid',
@@ -49,6 +50,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
       },
 
       '& > tr > td': {
+        boxSizing: 'border-box',
         padding: '0.375rem',
         borderCollapse: 'collapse',
         borderWidth: '0 1px 1px 0',
@@ -61,40 +63,61 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         borderLeftWidth: 0
       }
     }
+  },
+
+  rowSelectionColumn: {
+    width: '38px',
+    boxSizing: 'border-box',
+    margin: 0,
+    padding: 0,
+
+    selectors: {
+      '& > div': {
+        overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'center',
+      }
+    }
   }
 }))
 
-type DataTableClassNames = ClassesOf<typeof styleDataTable>
+type DataTableClasses = ClassesOf<typeof styleDataTable>
 
 // --- DataTableRenderer --------------------------------------------
 
-const DataTableRenderer = {
+class DataTableRenderer {
+  private selectedRows: [2]
+
   render(model: DataTableModel)  {
     console.log(model)
 
-    return styleDataTable(classes => 
-      <div className={classes.container}>
-        <table cellSpacing={0} cellPadding={0} className={classes.table}>
-          {createTableHead(model, classes)}
-          {createTableBody(model, classes)}
-        </table>
-      </div>
-    )
+    const rowSelectionMode = model.rowSelection.mode
+
+    return styleDataTable(classes => {
+      return (
+        <div className={classes.container}>
+          <table cellSpacing={0} cellPadding={0} className={classes.table}>
+            {createTableHead(model, classes)}
+            {createTableBody(model, classes)}
+          </table>
+        </div>
+      )
+    })
   }
 }
 
 // --- locals -------------------------------------------------------
 
-function createTableHead(model: DataTableModel, classes: DataTableClassNames) {
+function createTableHead(model: DataTableModel, classes: DataTableClasses) {
   console.log(model)
 
   const
-    selectionMode = model.selectionOptions.mode,
+    selectionMode = model.rowSelection.mode,
 
     selectionColumn =
       selectionMode === 'none'
         ? null
-        : <th>x</th>
+        : <th className={classes.rowSelectionColumn}><div>{ createSelectionCheckbox() }</div></th>
 
   return (
     <thead className={classes.tableHead}>
@@ -111,28 +134,41 @@ function createTableHead(model: DataTableModel, classes: DataTableClassNames) {
   )
 }
 
-function createTableBody(model: DataTableModel, classes: DataTableClassNames) {
+function createTableBody(model: DataTableModel, classes: DataTableClasses) {
   const
-    selectionMode = model.selectionOptions.mode,
+    selectionMode = model.rowSelection.mode,
 
     selectionColumn =
       selectionMode === 'none'
         ? null
-        : <td>x</td>
+        : <td className={classes.rowSelectionColumn}><div>{ createSelectionCheckbox() }</div></td>
 
   return (
     <tbody className={classes.tableBody}>
-      <tr>
-        {selectionColumn}
         {
-          model.columns.map(column =>
-            <td>
-              {column.title}
-            </td>)
+          model.data.map(row =>
+            <tr>
+              {selectionColumn}
+              {
+                model.columns.map(column =>
+                  <>
+                    <td>
+                      {row[column.field]}
+                    </td>
+                  </>
+                )
+              }
+            </tr>
+          )
         }
-      </tr>
     </tbody>
   )
+}
+
+function createSelectionCheckbox() {
+  return (
+    <Checkbox />
+  ) 
 }
 
 // --- exports ------------------------------------------------------
