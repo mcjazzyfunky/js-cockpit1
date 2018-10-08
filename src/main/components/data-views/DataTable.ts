@@ -3,7 +3,6 @@ import DataTableRenderer from './DataTableRenderer'
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
-import { strictEqual } from 'assert';
 
 
 // --- DataTable.Column ---------------------------------------------
@@ -43,6 +42,9 @@ type DataTableProps = {
     mode: 'none' | 'single' | 'multi'
   },
 
+  sortBy?: string,
+  sortDescending?: boolean,
+
   data: object[],
   children?: ReactNode
 }
@@ -70,6 +72,14 @@ const DataTable = defineComponent<DataTableProps>({
       defaultValue: { mode:  'none' }
     },
 
+    sortBy: {
+      type: String
+    },
+
+    sortDescending: {
+      type: Boolean
+    },
+
     data: {
       type: Array,
       validate: Spec.arrayOf(Spec.object)
@@ -87,7 +97,7 @@ const DataTable = defineComponent<DataTableProps>({
       super(props)
 
       this.state = {
-        rowSelection: new Set([2])
+        rowSelection: new Set() 
       }
     }
 
@@ -104,6 +114,8 @@ const DataTable = defineComponent<DataTableProps>({
         columns: [],
         data: this.props.data,
         rowSelection: this.state.rowSelection,
+        sortBy: this.props.sortBy  || null,
+        sortDescending: this.props.sortDescending || false,
 
         api: {
           setRowSelection: (rowIds: Iterable<number>) => {
@@ -153,6 +165,9 @@ type DataTableModel = {
 
   columns: (DataTableColumnModel)[]
   data: any[],
+
+  sortBy: string | null,
+  sortDescending: boolean,
 
   rowSelection: Set<number>,
 

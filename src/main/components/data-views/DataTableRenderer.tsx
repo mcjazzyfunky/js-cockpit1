@@ -1,7 +1,9 @@
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import React from 'react'
 import { Checkbox, ITheme } from 'office-ui-fabric-react'
-import { DataTableModel } from './DataTable'
+import { DataTableModel, DataTableColumnModel } from './DataTable'
+import SortAscIcon from '../../icons/SortAscIcon'
+import SortDescIcon from '../../icons/SortDescIcon'
 
 // --- DataTableStyle -----------------------------------------------
 
@@ -35,6 +37,19 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
 
       '& > tr > th:first-child': {
         borderLeftWidth: 0
+      },
+
+      '& > tr > th[data-sortable=true]': {
+        cursor: 'pointer',
+        
+        selectors: {
+          ':hover': {
+            borderBottomWidth: '1px',
+            borderBottomStyle: 'solid',
+            borderBottomColor: theme.palette.themePrimary,
+            backgroundColor: '#e8e8e8',
+          }
+        }
       }
     }
   },
@@ -81,6 +96,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   },
 
   selectedRow: {
+    color: 'black !important',
     backgroundColor: 'lemonChiffon !important',
   }
 }))
@@ -118,7 +134,13 @@ function createTableHead(model: DataTableModel, classes: DataTableClasses) {
       selectionMode === 'none'
         ? null
         : <th className={classes.rowSelectionColumn}>
-            <div>{ createSelectionCheckbox(-1, model) }</div>
+            <div>
+              {
+                selectionMode === 'multi'
+                  ? createSelectAllCheckbox(model)
+                  : null
+              }
+            </div>
           </th>
 
   return (
@@ -127,9 +149,7 @@ function createTableHead(model: DataTableModel, classes: DataTableClasses) {
         {selectionColumn}
         {
           model.columns.map((column, columnIdx) =>
-            <th key={columnIdx}>
-              {column.title}
-            </th>)
+            createColumnHeader(columnIdx, column, model))
         }
       </tr>
     </thead>
@@ -148,7 +168,7 @@ function createTableBody(model: DataTableModel, classes: DataTableClasses) {
               selectionMode === 'none'
                 ? null
                 : <td className={classes.rowSelectionColumn}>
-                    <div>{createSelectionCheckbox(rowIdx, model)}
+                    <div>{createSelectCheckbox(rowIdx, model)}
                     </div>
                   </td>
 
@@ -170,18 +190,68 @@ function createTableBody(model: DataTableModel, classes: DataTableClasses) {
   )
 }
 
-function createSelectionCheckbox(index: number, model: DataTableModel) {
+function createColumnHeader(columnIdx: number, column: DataTableColumnModel, model: DataTableModel) {
   const
+    sortable = model.columns[columnIdx].sortable,
+    sortBy = model.sortBy,
+    sortDescending = model.sortDescending,
+    isSorted = sortBy !== null && sortBy === column.field,
+
+    sortIcon =
+      isSorted
+        ? (sortDescending ? <SortDescIcon/> : <SortAscIcon/>)
+        : null
+
+  return (
+    <th key={columnIdx} data-sortable={String(sortable)}>
+      <div>
+        {column.title}
+
+        {sortIcon}
+      </div>
+    </th>
+  )
+}
+
+
+function createSelectCheckbox(index: number, model: DataTableModel) {
+  const
+    selectionMode = model.rowSelectionOptions.mode,
     checked = model.rowSelection.has(index),
 
     onChange =() => {
-      const selectedRows = new Set(model.rowSelection)
-
-      if (selectedRows.has(index)) {
-        selectedRows.delete(index)
+      let selectedRows: Set<number>
+      
+      if (selectionMode === 'single') {
+        selectedRows = new Set([index])
       } else {
-        selectedRows.add(index)
+        selectedRows = new Set(model.rowSelection)
+
+        if (checked) {
+          selectedRows.delete(index)
+        } else {
+          selectedRows.add(index)
+        }
       }
+
+      model.api.setRowSelection(selectedRows)
+    }
+
+  return (
+    <Checkbox checked={checked} onChange={onChange}/>
+  ) 
+}
+
+function createSelectAllCheckbox(model: DataTableModel) {
+  const
+    rowSelectionSize = model.rowSelection.size,
+    checked = rowSelectionSize > 0 && rowSelectionSize === model.data.length,
+
+    onChange =() => {
+      const selectedRows: Iterable<number> =
+        checked
+          ? []
+          : model.data.keys()
 
       model.api.setRowSelection(selectedRows)
     }

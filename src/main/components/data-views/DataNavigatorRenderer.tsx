@@ -96,6 +96,9 @@ const DataNavigatorRenderer = {
             rowSelectionOptions={{
               mode: 'multi'
             }}
+
+            sortBy="firstName"
+            sortDescending={false}
             
             data={[
               {
@@ -145,22 +148,27 @@ const DataNavigatorRenderer = {
             <DataTable.Column
               title="First name"
               field="firstName"
+              sortable={true}
             />
             <DataTable.Column
               title="Last Name"
               field="lastName"
+              sortable={true}
             />
             <DataTable.Column
               title="Postal code"
               field="postalCode"
+              sortable={true}
             />
             <DataTable.Column
               title="City"
               field="city"
+              sortable={true}
             />
             <DataTable.Column
               title="Country"
               field="country"
+              sortable={true}
             />
           </DataTable>
         </div>
