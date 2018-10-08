@@ -1,4 +1,4 @@
-export default interface ChangePageEvent {
+export default interface PageChangeEvent {
   type: 'changePage',
   pageIndex: number
 }

@@ -8,7 +8,7 @@ import ArrowLeftIcon from '../../icons/ArrowLeftIcon'
 import ArrowRightIcon from '../../icons/ArrowRightIcon' 
 
 // external import
-import React, { KeyboardEvent, ReactNode } from 'react'
+import React, { KeyboardEvent, MouseEvent, ReactNode } from 'react'
 import { ITheme, TextField } from 'office-ui-fabric-react'
 
 // --- PaginatorStyle -----------------------------------------------
@@ -89,7 +89,7 @@ const stylePaginator = defineStyle((theme: ITheme) => ({
 const PaginatorRenderer = {
   render(model: PaginatorModel): ReactNode {
     const
-      { pageIndex, pageSize, totalItemCount, onAction } = model,
+      { pageIndex, pageSize, totalItemCount, api } = model,
       lastPageIndex = Math.floor(totalItemCount / pageSize),
       firstButtonDisabled = pageIndex <= 0,
       previousButtonDisabled = pageIndex <= 0,
@@ -101,14 +101,14 @@ const PaginatorRenderer = {
         <button
           disabled={firstButtonDisabled}
           className={classes.button}
-          onClick={onAction ? () => handleAction(0, onAction) : null}
+          onClick={() => model.api.changePage(0)}
         >
           <ArrowDoubleLeftIcon/>
         </button>
         <button
           disabled={previousButtonDisabled}
           className={classes.button}
-          onClick={onAction ? () => handleAction(pageIndex - 1, onAction) : null}
+          onClick={() => model.api.changePage(1)}
         >
           <ArrowLeftIcon/>
         </button>
@@ -116,20 +116,20 @@ const PaginatorRenderer = {
           <TextField
             value={String(model.pageIndex  + 1)}
             className={classes.textField}
-            onKeyDown={onAction ? event => handleKeyDown(event, onAction, pageIndex, lastPageIndex) : null}
+            onKeyDown={event => handleKeyDown(event, model)}
           />
         <div className={classes.pageText2}>of {lastPageIndex + 1}</div>
         <button
           disabled={nextButtonDisabled}
           className={classes.button}
-          onClick={onAction ? () => handleAction(pageIndex + 1, onAction) : null}
+          onClick={() => model.api.changePage(model.pageIndex + 1)}
         >
           <ArrowRightIcon/>
         </button>
         <button
           disabled={lastButtonDisabled}
           className={classes.button}
-          onClick={onAction ? () => handleAction(lastPageIndex, onAction) : null}
+          onClick={() => model.api.changePage(Math.ceil(model.totalItemCount / model.pageSize) - 1)}
         >
           <ArrowDoubleRightIcon/>
         </button>
@@ -140,33 +140,17 @@ const PaginatorRenderer = {
 
 // --- helpers ------------------------------------------------------
 
-function handleAction(pageIndex: number, onAction: ((event: ActionEvent<number>) => void)) {
-  const event: ActionEvent = {
-    type: 'action',
-    name: 'pageIndex',
-    value: pageIndex
-  }
-
-  onAction(event)
-}
-
-function handleKeyDown(
-  event: KeyboardEvent ,
-  onAction: ((event: ActionEvent<number>) => void),
-  pageIndex: number,
-  lastPageIndex: number) {
-
-  console.log('juhu', event)
-
+function handleKeyDown(event: KeyboardEvent, model: PaginatorModel) {
   if (event.keyCode === 13) {
     const
       target: any = event.nativeEvent.target,
-      value: any = parseFloat((target as any).value)
+      pageNo = parseFloat((target as any).value),
+      lastPageIndex = Math.ceil(model.totalItemCount / model.pageSize) - 1
 
-    if (!Number.isInteger(value) || value < 1 || value > lastPageIndex + 1) {
-      target.value = pageIndex + 1
+    if (!Number.isInteger(pageNo) || pageNo < 1 || pageNo > lastPageIndex + 1) {
+      target.value = model.pageIndex + 1
     } else {
-      handleAction(value - 1, onAction)
+      model.api.changePage(pageNo - 1)
     }
   }
 }

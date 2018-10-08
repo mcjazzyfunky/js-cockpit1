@@ -223,7 +223,7 @@ function renderFooter(model: DataNavigatorModel, classes: any) {
   return (
     <div className={classes.footer}> 
       <div className={classes.footerStart}>
-        <Paginator pageIndex={2} totalItemCount={1243} pageSize={50} onAction={ev => console.log(ev)}/>
+        <Paginator pageIndex={2} totalItemCount={1243} pageSize={50} onPageChange={ev => console.log(ev)}/>
       </div>
       <div className={classes.footerCenter}>
         <PageSizeSelector pageSize={50} onAction={ev => console.log(ev) }/>

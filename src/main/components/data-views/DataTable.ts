@@ -24,6 +24,10 @@ const Column = defineComponent<ColumnProps>({
 
     field: {
       type: String
+    },
+
+    sortable: {
+      type: Boolean
     }
   },
 
