@@ -51,7 +51,19 @@ export default {
             />
           </div>
           <div className={classes.content}>
-            <DataNavigator config={{}} data={null}/>
+            <DataNavigator title="Customers">
+              <DataNavigator.Actions>
+                <DataNavigator.GeneralAction
+                  title="New"
+                />
+                <DataNavigator.SingleRowAction
+                  title="Edit"
+                />
+                <DataNavigator.MultiRowAction
+                  title="Delete"
+                />
+              </DataNavigator.Actions>
+            </DataNavigator>
           </div>
         </div>
       )

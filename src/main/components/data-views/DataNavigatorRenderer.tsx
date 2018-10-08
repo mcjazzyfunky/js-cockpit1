@@ -1,7 +1,6 @@
 // internal imports
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import { DataNavigatorModel } from './DataNavigator'
-import ActionBar from './internal/data-navigator/ActionBar'
 import Paginator from '../pagination/Paginator'
 import PageSizeSelector from '../pagination/PageSizeSelector'
 import PaginationInfo from '../pagination/PaginationInfo'
@@ -10,7 +9,7 @@ import SortChangeEvent from '../../events/SortChangeEvent'
 
 // extenal imports
 import React from 'react'
-import { ITheme, SearchBox } from 'office-ui-fabric-react'
+import { CommandBar, ITheme, SearchBox } from 'office-ui-fabric-react'
 
 // TODO
 import DataTable from './DataTable'
@@ -74,6 +73,10 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     padding: '0 3rem',
   },
 
+  footerEnd: {
+
+  },
+
   title: {
     display: 'inline-block',
     //color: theme.palette.themePrimary,
@@ -84,7 +87,13 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
   actionBar: {
     display: 'inline-flex',
-  }
+    backgroundColor: 'transparent'
+  },
+  
+  actionButton: {
+    backgroundColor: 'transparent',
+    margin: '0 2px',
+  },
 }))
 
 type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
@@ -202,12 +211,12 @@ function renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) 
     <div className={classes.header}>
       <div className={classes.headerStart}>
         <div className={classes.title}>
-          Product
+          {model.title} 
         </div>
       </div>
       <div className={classes.headerCenter}>
         <div className={classes.actionBar}>
-          <ActionBar/>
+          {renderActionBar(model, 1, classes)}
         </div>
       </div>
       <div className={classes.headerEnd}>
@@ -219,7 +228,7 @@ function renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) 
 
 // --- footer -------------------------------------------------------
 
-function renderFooter(model: DataNavigatorModel, classes: any) {
+function renderFooter(model: DataNavigatorModel, classes: DataNavigatorClasses) {
   return (
     <div className={classes.footer}> 
       <div className={classes.footerStart}>
@@ -232,6 +241,31 @@ function renderFooter(model: DataNavigatorModel, classes: any) {
         <PaginationInfo pageIndex={2} totalItemCount={1243} pageSize={50} about="items"/>
       </div>
     </div>
+  )
+}
+
+// --- action bar ---------------------------------------------------
+
+function renderActionBar(model: DataNavigatorModel, selectionCount: number, classes: DataNavigatorClasses) {
+  return (
+    <CommandBar
+      className={classes.actionBar}
+
+      items={
+        model.actions.map((action, idx) => {
+          const disabled =
+              action.$kind === 'DataNavigatorSingleRowActionModel' && selectionCount !== 1
+                  || action.$kind === 'DataNavigatorMultiRowActionModel' && selectionCount === 0
+
+          return {
+            key: String(idx),
+            text: action.title,
+            disabled,
+            className: classes.actionButton
+          }
+        })
+      }
+    />
   )
 }
 
