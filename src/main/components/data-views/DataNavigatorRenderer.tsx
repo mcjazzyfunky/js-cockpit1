@@ -119,12 +119,12 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     overflow: 'hidden',
     zIndex: '10000',
     backgroundColor: 'rgba(63, 63, 63, 0.05)',
-    borderRadius: '3px',
+    borderRadius: '2px',
   },
 
   loadingPanelContent: {
     backgroundColor: Color(theme.palette.themeSecondary).darken(0.1),
-    borderRadius: '3px',
+    borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -180,7 +180,7 @@ class DataNavigatorRenderer {
         model.isLoading
           ? <div className={classes.loadingPanel}>
               <div className={classes.loadingPanelContent}>
-                <Spinner size={SpinnerSize.large} label="Loading, please wait..." ariaLive="assertive" /> 
+                <Spinner size={SpinnerSize.large} label="Loading data, please wait..." ariaLive="assertive" /> 
               </div>
             </div>
           : null
