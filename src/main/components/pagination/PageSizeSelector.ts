@@ -47,7 +47,7 @@ function getPageSizeSelectorModel(props: PageSizeSelectorProps): PageSizeSelecto
 
     api: {
       changePageSize: (pageSize: number): void => {
-        if (props.onPageSizeChange && pageSize !== props.pageSize) {
+        if (props.onPageSizeChange) {
           props.onPageSizeChange({
             type: 'pageSizeChange',
             pageSize

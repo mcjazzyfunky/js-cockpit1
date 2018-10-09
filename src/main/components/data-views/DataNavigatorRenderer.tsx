@@ -13,6 +13,7 @@ import SortChangeEvent from '../../events/SortChangeEvent'
 // extenal imports
 import React, { ReactElement } from 'react'
 import { CommandBar, ITheme, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import Color from 'color'
 
 // --- DataNavigatorStyle -------------------------------------------
 
@@ -122,7 +123,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.themePrimary,
+    backgroundColor: Color(theme.palette.themePrimary).darken(0.1),
     borderRadius: '3px',
     display: 'flex',
     alignItems: 'center',
@@ -132,7 +133,8 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
     selectors: {
       '& *': {
-        color: 'white'
+        color: 'white !important',
+        fontSize: theme.fonts.medium.fontSize
       }
     }
   }

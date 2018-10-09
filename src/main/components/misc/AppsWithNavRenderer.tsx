@@ -105,7 +105,7 @@ export default {
                   ]
 
                   return observableOf({data, totalItemCount: 1243 })
-                    .pipe(delay(2000))
+                    .pipe(delay(1000))
                 }
               }
             >

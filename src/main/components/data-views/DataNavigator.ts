@@ -214,14 +214,15 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
   },
 
   base: class extends React.Component<DataNavigatorProps, DataNavigatorState> {
-    private renderer = new DataNavigatorRenderer()
+    private _renderer = new DataNavigatorRenderer()
+    private _timeout: any = null
   
     constructor(props: DataNavigatorProps) {
       super(props)
 
       this.state = {
         isInitialized: false,
-        isLoading: true,
+        isLoading: false, 
         errorMessage: null,
         pageIndex: 1,
         pageSize: 50,
@@ -243,7 +244,7 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
     }
 
     render() {
-      return this.renderer.render(this._getDataNavigatorModel())
+      return this._renderer.render(this._getDataNavigatorModel())
     }
 
     private _getDataNavigatorModel() {
@@ -372,7 +373,10 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
         sortDesc: params.sortDesc 
       }).pipe(take(1))
 
-      this.setState({ isLoading: true })
+      this._timeout = setTimeout(() => {
+        clearTimeout(this._timeout)
+        this.setState({ isLoading: true })
+      }, 100)
 
       const subscription = observer.subscribe({
         next: result => {
@@ -391,6 +395,12 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
 
           if (params.onSuccess) {
             params.onSuccess()
+          }
+        },
+        complete: () => {
+          if (this._timeout) {
+            clearTimeout(this._timeout)
+            this._timeout = null
           }
         },
         error: e => {
