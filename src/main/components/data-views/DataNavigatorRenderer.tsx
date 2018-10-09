@@ -66,10 +66,10 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     justifyContent: 'flex-start',
     flexShrink: 0,
     padding: '0.125rem 0.5rem 0.25rem 0.5rem',
-    borderWidth: '1px 0 0 0',
-    borderColor: '#e8e8e8',
+    borderWidth: '1px',
+    borderColor:  theme.palette.neutralLight,
     borderStyle: 'solid',
-    backgroundColor: theme.palette.neutralLighter,
+    backgroundColor: theme.palette.white,
   },
 
   footerStart: {
