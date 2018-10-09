@@ -3,7 +3,6 @@ import PageSizeSelectorRenderer from './PageSizeSelectorRenderer'
 import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 
 // external imports
-import React from 'react'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
@@ -48,7 +47,7 @@ function getPageSizeSelectorModel(props: PageSizeSelectorProps): PageSizeSelecto
 
     api: {
       changePageSize: (pageSize: number): void => {
-        if (props.onPageSizeChange) {
+        if (props.onPageSizeChange && pageSize !== props.pageSize) {
           props.onPageSizeChange({
             type: 'pageSizeChange',
             pageSize
@@ -59,7 +58,7 @@ function getPageSizeSelectorModel(props: PageSizeSelectorProps): PageSizeSelecto
   }
 }
 
-// --- data models --------------------------------------------------
+// --- models -------------------------------------------------------
 
 type PageSizeSelectorModel = {
   $kind: 'PageSizeSelectorModel',

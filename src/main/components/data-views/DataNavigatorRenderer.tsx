@@ -100,11 +100,11 @@ type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
 
 // --- DataNavigatorStyle -------------------------------------------
 
-class DataNavigatorRenderer { 
+class DataNavigatorRenderer {
   render(model: DataNavigatorModel) {
     return styleDataNavigator(classes =>
       <div className={classes.container}>
-        { renderHeader(model, classes) }
+        { this._renderHeader(model, classes) }
         <div className={classes.content}>
           <DataTable
             rowSelectionOptions={{
@@ -116,7 +116,7 @@ class DataNavigatorRenderer {
 
             onRowSelectionChange={
               (event: RowSelectionChangeEvent) => {
-                console.log(event)
+                model.api.changeRowSelection(event.selection) 
               }
             }
             
@@ -198,75 +198,69 @@ class DataNavigatorRenderer {
             />
           </DataTable>
         </div>
-        { renderFooter(model, classes) }
+        { this._renderFooter(model, classes) }
       </div>
     )
   }
-}
 
-// --- header -------------------------------------------------------
-
-function renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) {
-  return (
-    <div className={classes.header}>
-      <div className={classes.headerStart}>
-        <div className={classes.title}>
-          {model.title} 
+  private _renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+    return (
+      <div className={classes.header}>
+        <div className={classes.headerStart}>
+          <div className={classes.title}>
+            {model.title} 
+          </div>
+        </div>
+        <div className={classes.headerCenter}>
+          <div className={classes.actionBar}>
+            {this._renderActionBar(model, classes)}
+          </div>
+        </div>
+        <div className={classes.headerEnd}>
+          <SearchBox placeholder="Search" className={classes.searchBox} />
         </div>
       </div>
-      <div className={classes.headerCenter}>
-        <div className={classes.actionBar}>
-          {renderActionBar(model, 1, classes)}
+    ) 
+  }
+
+  private _renderFooter(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+    return (
+      <div className={classes.footer}> 
+        <div className={classes.footerStart}>
+          <Paginator pageIndex={2} totalItemCount={1243} pageSize={50} onPageChange={ev => console.log(ev)}/>
+        </div>
+        <div className={classes.footerCenter}>
+          <PageSizeSelector pageSize={50} onPageSizeChange={ev => console.log(ev) }/>
+        </div>
+        <div className={classes.footerEnd}>
+          <PaginationInfo pageIndex={2} totalItemCount={1243} pageSize={50} about="items"/>
         </div>
       </div>
-      <div className={classes.headerEnd}>
-        <SearchBox placeholder="Search" className={classes.searchBox} />
-      </div>
-    </div>
-  ) 
-}
+    )
+  }
 
-// --- footer -------------------------------------------------------
+  private _renderActionBar(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+    return (
+      <CommandBar
+        className={classes.actionBar}
 
-function renderFooter(model: DataNavigatorModel, classes: DataNavigatorClasses) {
-  return (
-    <div className={classes.footer}> 
-      <div className={classes.footerStart}>
-        <Paginator pageIndex={2} totalItemCount={1243} pageSize={50} onPageChange={ev => console.log(ev)}/>
-      </div>
-      <div className={classes.footerCenter}>
-        <PageSizeSelector pageSize={50} onPageSizeChange={ev => console.log(ev) }/>
-      </div>
-      <div className={classes.footerEnd}>
-        <PaginationInfo pageIndex={2} totalItemCount={1243} pageSize={50} about="items"/>
-      </div>
-    </div>
-  )
-}
+        items={
+          model.actions.map((action, idx) => {
+            const disabled =
+                action.$kind === 'DataNavigatorSingleRowActionModel' && model.rowSelection.length !== 1
+                    || action.$kind === 'DataNavigatorMultiRowActionModel' && model.rowSelection.length === 0
 
-// --- action bar ---------------------------------------------------
-
-function renderActionBar(model: DataNavigatorModel, selectionCount: number, classes: DataNavigatorClasses) {
-  return (
-    <CommandBar
-      className={classes.actionBar}
-
-      items={
-        model.actions.map((action, idx) => {
-          const disabled =
-              action.$kind === 'DataNavigatorSingleRowActionModel' && selectionCount !== 1
-                  || action.$kind === 'DataNavigatorMultiRowActionModel' && selectionCount === 0
-
-          return {
-            key: String(idx),
-            text: action.title,
-            disabled,
-            className: classes.actionButton
-          }
-        })
-      }
-    />
-  )
+            return {
+              key: String(idx),
+              text: action.title,
+              disabled,
+              className: classes.actionButton
+            }
+          })
+        }
+      />
+    )
+  }
 }
 
 // --- exports ------------------------------------------------------

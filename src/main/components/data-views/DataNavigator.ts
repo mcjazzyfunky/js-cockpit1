@@ -106,6 +106,10 @@ type DataNavigatorProps = {
   children?: ReactNode // TODO
 }
 
+type DataNavigatorState = {
+  rowSelection: number[]
+}
+
 const DataNavigator = defineComponent<DataNavigatorProps>({
   displayName: 'DataNavigator',
 
@@ -121,14 +125,34 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
     }
   },
 
-  base: class Base extends React.PureComponent<DataNavigatorProps> {
+  base: class extends React.Component<DataNavigatorProps, DataNavigatorState> {
     private renderer = new DataNavigatorRenderer()
+  
+    constructor(props: DataNavigatorProps) {
+      super(props)
+
+      this.state = {
+        rowSelection: []
+      }
+    }
 
     render() {
+      return this.renderer.render(this._getDataNavigatorModel())
+    }
+
+    private _getDataNavigatorModel() {
       const model: DataNavigatorModel = {
         $kind: 'DataNavigatorModel',
         title: this.props.title || null,
-        actions: []
+        rowSelection: this.state.rowSelection,
+        data: [], // TODO
+        actions: [],
+
+        api: {
+          changeRowSelection: (rowSelection: number[]) => {
+            this.setState({ rowSelection })
+          }
+        }
       }
       
       React.Children.forEach(this.props.children, (child: any) => {
@@ -178,7 +202,7 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
           }
         })
 
-      return this.renderer.render(model)
+        return model
     }
   } 
 }) 
@@ -188,11 +212,17 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
 type DataNavigatorModel = {
   $kind: 'DataNavigatorModel',
   title: string | null,
+  rowSelection: number[],
+  data: any[],
 
   actions:
     (DataNavigatorGeneralActionModel
       | DataNavigatorSingleRowActionModel
-      | DataNavigatorMultiRowActionModel)[]
+      | DataNavigatorMultiRowActionModel)[],
+
+  api: {
+    changeRowSelection: (rowSelection: number[]) => void
+  }
 }
 
 type DataNavigatorGeneralActionModel = {
