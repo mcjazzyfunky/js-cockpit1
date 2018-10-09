@@ -66,7 +66,6 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     justifyContent: 'flex-start',
     flexShrink: 0,
     padding: '0 0.5rem',
-    backgroundColor: theme.palette.neutralLighter,
   },
 
   footerStart: {
@@ -78,7 +77,6 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   footerEnd: {
-
   },
 
   title: {
