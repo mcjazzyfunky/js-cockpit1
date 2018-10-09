@@ -4,6 +4,7 @@ import { Checkbox, ITheme } from 'office-ui-fabric-react'
 import { DataTableModel, DataTableColumnModel } from './DataTable'
 import SortAscIcon from '../../icons/SortAscIcon'
 import SortDescIcon from '../../icons/SortDescIcon'
+import { throttleTime } from 'rxjs/operators';
 
 // --- DataTableStyle -----------------------------------------------
 
@@ -14,7 +15,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     alignItems: 'stretch',
     justifyContent: 'stretch',
     flexGrow: 1,
-    border: '1px solid #ddd',
+    border: '1px solid ' + theme.palette.neutralQuaternaryAlt,
   },
 
   table: {
@@ -22,7 +23,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   },
 
   tableHead: {
-    backgroundColor: '#f2f2f2', 
+    backgroundColor: theme.palette.neutralLight, 
 
     selectors: {
       '& > tr > th': {
@@ -31,9 +32,10 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         borderCollapse: 'collapse',
         borderWidth: '0 0 1px 1px',
         borderStyle: 'solid',
-        borderColor: '#ddd',
+        borderColor:  theme.palette.neutralTertiary,
         verticalAlign: 'center',
-        ...theme.fonts.medium,
+        fontSize: theme.fonts.medium.fontSize,
+        fontWeight: 'normal',
       },
 
       '& > tr > th:first-child': {
@@ -45,14 +47,14 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         
         selectors: {
           ':hover': {
-            borderBottomWidth: '1px',
-            borderBottomStyle: 'solid',
-            borderBottomColor: theme.palette.themePrimary,
-            backgroundColor: '#e8e8e8',
+            //borderBottomWidth: '1px',
+            //borderBottomStyle: 'solid',
+            //borderBottomColor: theme.palette.themePrimary,
+            backgroundColor: theme.palette.neutralQuaternaryAlt,
           },
 
           ':active': {
-            backgroundColor: '#e0e0e0',
+            backgroundColor: theme.palette.neutralQuaternary,
           }
         }
       },
@@ -81,8 +83,8 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         borderCollapse: 'collapse',
         borderWidth: '0 1px 1px 0',
         borderStyle: 'solid',
-        borderColor: 'transparent #ddd #eee transparent',
-        ...theme.fonts.medium,
+        borderColor: theme.palette.neutralQuaternaryAlt,
+        fontSize: theme.fonts.medium.fontSize,
       },
       
       '& > tr > td:first-child': {
@@ -108,7 +110,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
 
   selectedRow: {
     color: 'black !important',
-    backgroundColor: 'lemonChiffon !important',
+    backgroundColor: theme.palette.themeLight + ' !important',
   }
 }))
 

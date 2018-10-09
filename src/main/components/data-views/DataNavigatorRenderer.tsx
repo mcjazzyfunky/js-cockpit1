@@ -134,7 +134,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     selectors: {
       '& *': {
         color: 'white !important',
-        fontSize: theme.fonts.smallPlus.fontSize
+        fontSize: theme.fonts.medium.fontSize
       }
     }
   }
