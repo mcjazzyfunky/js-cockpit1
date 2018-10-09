@@ -123,18 +123,18 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: Color(theme.palette.themePrimary).darken(0.1),
+    backgroundColor: Color(theme.palette.themeSecondary).darken(0.1),
     borderRadius: '3px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
 
-    padding: '15px 20px',
+    padding: '12px 14px',
 
     selectors: {
       '& *': {
         color: 'white !important',
-        fontSize: theme.fonts.medium.fontSize
+        fontSize: theme.fonts.smallPlus.fontSize
       }
     }
   }
