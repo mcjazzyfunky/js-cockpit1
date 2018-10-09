@@ -30,10 +30,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     flexShrink: 0,
     //padding: '0.25rem 0.75rem 2px 0',
-    height: '40px',
-    borderWidth: '0 0 0.5px 0',
-    borderColor: '#eaeaea',
-    borderStyle: 'solid',
+    height: '52px',
   },
 
   headerStart: {
@@ -56,7 +53,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'flex',
     flexGrow: 1,
     flexShrink: 1,
-    padding: '3px 0',
+    padding: '0 0 1px 0',
     overflow: 'auto',
   },
 
@@ -65,7 +62,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexShrink: 0,
-    padding: '0 0.5rem',
+    padding: '2px 5px',
   },
 
   footerStart: {
@@ -82,7 +79,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     color: theme.palette.themeSecondary,
-    fontSize: theme.fonts.large.fontSize,
+    fontSize: theme.fonts.xLarge.fontSize,
     marginRight: '0.5rem',
   },
 
