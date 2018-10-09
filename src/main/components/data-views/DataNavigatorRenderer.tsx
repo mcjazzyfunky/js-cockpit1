@@ -87,13 +87,21 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
   actionBar: {
     display: 'inline-flex',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   
   actionButton: {
     backgroundColor: 'transparent',
     margin: '0 2px',
   },
+
+  actionButtonSeparator: {
+    height: '10px',
+    marginTop: '16px',
+    borderWidth: '0 1px 0 0',
+    borderStyle: 'solid',
+    borderColor: '#aaa',
+  }
 }))
 
 type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
@@ -240,24 +248,33 @@ class DataNavigatorRenderer {
   }
 
   private _renderActionBar(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+    const items: any[] = []
+  
+    model.actions.forEach((action, idx) => {
+      const disabled =
+          action.$kind === 'DataNavigatorSingleRowActionModel' && model.rowSelection.length !== 1
+              || action.$kind === 'DataNavigatorMultiRowActionModel' && model.rowSelection.length === 0
+
+      if (idx > 0) {
+        items.push({
+          key: `separator-${idx}`,
+          onRender: () => <div className={classes.actionButtonSeparator}></div>
+        })
+      }
+
+      items.push({
+        key: String(idx),
+        text: action.title,
+        disabled,
+        className: classes.actionButton
+      })
+    })
+
     return (
       <CommandBar
         className={classes.actionBar}
 
-        items={
-          model.actions.map((action, idx) => {
-            const disabled =
-                action.$kind === 'DataNavigatorSingleRowActionModel' && model.rowSelection.length !== 1
-                    || action.$kind === 'DataNavigatorMultiRowActionModel' && model.rowSelection.length === 0
-
-            return {
-              key: String(idx),
-              text: action.title,
-              disabled,
-              className: classes.actionButton
-            }
-          })
-        }
+        items={items}
       />
     )
   }
