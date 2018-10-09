@@ -24,7 +24,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
 
   tableHead: {
     color: theme.palette.black, 
-    backgroundColor: theme.palette.neutralLight, 
+    backgroundColor: theme.palette.neutralLighter, 
 
     selectors: {
       '& > tr > th': {
