@@ -54,7 +54,7 @@ export default {
           </div>
           <div className={classes.content}>
             <DataNavigator
-              title="Customers"
+              title="Back-office users"
 
               loadData={
                 (params: { offset: number, count: number, sortBy: string | null, sortDesc: boolean }) => {

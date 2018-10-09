@@ -29,8 +29,8 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'flex',
     alignItems: 'center',
     flexShrink: 0,
-    //padding: '0.25rem 0.75rem 2px 0',
-    height: '52px',
+    padding: '0.25rem 0.5rem 0 0.5rem',
+    height: '50px',
   },
 
   headerStart: {
