@@ -15,7 +15,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     alignItems: 'stretch',
     justifyContent: 'stretch',
     flexGrow: 1,
-    border: '1px solid ' + theme.palette.neutralLight,
+    border: '1px solid ' + theme.palette.neutralQuaternary,
   },
 
   table: {
@@ -111,7 +111,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
 
   selectedRow: {
     color: 'black !important',
-    backgroundColor: theme.palette.themeLight + ' !important',
+    backgroundColor: theme.palette.themeLighter + ' !important',
   }
 }))
 

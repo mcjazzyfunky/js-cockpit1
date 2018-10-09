@@ -56,7 +56,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'flex',
     flexGrow: 1,
     flexShrink: 1,
-    padding: '3px 0rem',
+    padding: '3px 0',
     overflow: 'auto',
   },
 
@@ -65,11 +65,11 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexShrink: 0,
-    padding: '0.125rem 0.5rem 0.25rem 0.5rem',
+    padding: '0 0.5rem 1px 0.5rem',
     borderWidth: '1px',
-    borderColor:  theme.palette.neutralLight,
+    borderColor:  theme.palette.neutralQuaternary,
     borderStyle: 'solid',
-    backgroundColor: theme.palette.white,
+    backgroundColor: theme.palette.neutralLighterAlt,
   },
 
   footerStart: {
@@ -123,7 +123,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: Color(theme.palette.themeSecondary).darken(0.1),
+    backgroundColor: theme.palette.themeDarker,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
