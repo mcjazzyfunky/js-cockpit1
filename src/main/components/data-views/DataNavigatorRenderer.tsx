@@ -12,7 +12,7 @@ import SortChangeEvent from '../../events/SortChangeEvent'
 
 // extenal imports
 import React, { ReactElement } from 'react'
-import { CommandBar, ITheme, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import { CommandBar, DefaultButton, ITheme, Link, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
 import Color from 'color'
 
 // --- DataNavigatorStyle -------------------------------------------
@@ -90,8 +90,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   
   actionButton: {
     backgroundColor: 'transparent',
-    margin: '0 2px',
-    borderRedius: '3px',
+    margin: '0 4px',
   },
 
   actionButtonSeparator: {
