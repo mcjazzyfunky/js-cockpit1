@@ -69,7 +69,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     borderWidth: '1px',
     borderColor:  theme.palette.neutralQuaternary,
     borderStyle: 'solid',
-    backgroundColor: theme.palette.neutralLighterAlt,
+    backgroundColor: theme.palette.neutralLighter,
   },
 
   footerStart: {
