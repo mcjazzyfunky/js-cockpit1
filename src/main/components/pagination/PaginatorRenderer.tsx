@@ -27,8 +27,10 @@ const stylePaginator = defineStyle((theme: ITheme) => ({
     boxSizing: 'border-box',
     background: 'none',
     outline: 'none',
-    height: '32px',
+    height: '26x',
+    width: '28px',
     cursor: 'pointer',
+    borderRadius: '14px',
 
     selectors: {
       '&:disabled': {
@@ -37,6 +39,8 @@ const stylePaginator = defineStyle((theme: ITheme) => ({
       },
 
       '&:hover:not(:disabled)': {
+        color: 'black',
+        fontWeight: 'bold',
         backgroundColor: theme.semanticColors.buttonBackgroundHovered
       },
 

@@ -79,7 +79,8 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.xLarge.fontSize,
-    marginRight: '1.5rem',
+    marginRight: '2rem',
+    //color: theme.palette.themePrimary,
   },
 
   actionBar: {
