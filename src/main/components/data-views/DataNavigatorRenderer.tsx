@@ -30,11 +30,11 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     flexShrink: 0,
     padding: '0.25rem 0.5rem 0 0.5rem',
-    height: '50px',
+    height: '54px',
   },
 
   headerStart: {
-    padding: '0 0 0 0.75rem'
+    padding: '0 0 0 0.5rem'
   },
 
   headerCenter: {
@@ -78,7 +78,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
   title: {
     display: 'inline-block',
-    color: theme.palette.themeSecondary,
+    //color: theme.palette.themeSecondary,
     fontSize: theme.fonts.xLarge.fontSize,
     marginRight: '0.5rem',
   },

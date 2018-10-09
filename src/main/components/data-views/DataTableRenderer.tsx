@@ -15,7 +15,9 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     alignItems: 'stretch',
     justifyContent: 'stretch',
     flexGrow: 1,
-    border: '1px solid ' + theme.palette.neutralQuaternary,
+    borderWidth: '1px 0 1px 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralQuaternary,
   },
 
   table: {
@@ -23,20 +25,20 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   },
 
   tableHead: {
-    color: theme.palette.black, 
-    backgroundColor: theme.palette.neutralLight, 
+    color: theme.palette.black,
+    backgroundColor: '#f0f0f0', 
 
     selectors: {
       '& > tr > th': {
         boxSizing: 'border-box',
         padding: '0.5rem',
-        borderCollapse: 'collapse',
-        borderWidth: '0 0 1px 1px',
-        borderStyle: 'solid',
-        borderColor:  theme.palette.neutralTertiary,
         verticalAlign: 'center',
-        fontSize: theme.fonts.medium.fontSize,
+        fontSize: theme.fonts.mediumPlus.fontSize,
         fontWeight: 'normal',
+        borderWidth: '0 0 1px 1px',
+        borderLeftColor: theme.palette.neutralQuaternary,
+        borderBottomColor: theme.palette.neutralQuaternary,
+        borderStyle: 'solid',
       },
 
       '& > tr > th:first-child': {
@@ -71,7 +73,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   tableBody: {
     selectors: {
       '& > tr': {
-        backgroundColor: '#fafafa',
+       backgroundColor: theme.palette.neutralLighterAlt,
       },
 
       '& > tr:nth-child(even)': {
@@ -81,11 +83,10 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
       '& > tr > td': {
         boxSizing: 'border-box',
         padding: '0.375rem',
-        borderCollapse: 'collapse',
-        borderWidth: '0 1px 1px 0',
-        borderStyle: 'solid',
-        borderColor: theme.palette.neutralQuaternaryAlt,
         fontSize: theme.fonts.medium.fontSize,
+        borderWidth: '0 0 0.5px 0',
+        borderColor: theme.palette.neutralLight,
+        borderStyle: 'solid',
       },
       
       '& > tr > td:first-child': {
