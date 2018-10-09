@@ -19,7 +19,8 @@ const Column = defineComponent<ColumnProps>({
 
   properties: {
     title: {
-      type: String
+      type: String,
+      required: true
     },
 
     field: {
@@ -169,23 +170,12 @@ const DataTable = defineComponent<DataTableProps>({
     }
 
     private getColumnModel(props: ColumnProps): DataTableColumnModel {
-      let ret: DataTableColumnModel = {
-        $kind: 'DataTableColumnModel'
+      return {
+        $kind: 'DataTableColumnModel',
+        title: props.title,
+        field: props.field || null,
+        sortable: props.sortable || false
       }
-
-      if (props.title !== undefined) {
-        ret.title = props.title
-      }
-
-      if (props.field !== undefined) {
-        ret.field = props.field
-      }
-
-      if (props.sortable !== undefined) {
-        ret.sortable = props.sortable
-      }
-
-      return ret
     }
   }
 })
@@ -215,9 +205,9 @@ type DataTableModel = {
 
 type DataTableColumnModel = {
   $kind: 'DataTableColumnModel',
-  title?: string,
-  field?: string,
-  sortable?: boolean
+  title: string,
+  field: string | null,
+  sortable: boolean
 }
 
 // --- exports ------------------------------------------------------
@@ -227,6 +217,8 @@ export default Object.assign(DataTable, {
 })
 
 export {
+  DataTableProps,
   DataTableModel,
+  ColumnProps as DataTableColumnProps,
   DataTableColumnModel
 }

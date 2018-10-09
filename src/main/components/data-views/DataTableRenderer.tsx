@@ -209,7 +209,7 @@ function createColumnHeader(columnIdx: number, column: DataTableColumnModel, mod
     isSorted = sortBy !== null && sortBy === column.field,
 
     sortIcon =
-      isSorted
+      sortable && isSorted
         ? (sortDesc ? <SortDescIcon/> : <SortAscIcon/>)
         : null,
 

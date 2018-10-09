@@ -1,6 +1,7 @@
 // internal imports
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import { DataNavigatorModel } from './DataNavigator'
+import DataTable, { DataTableProps, DataTableColumnProps } from './DataTable'
 import Paginator from '../pagination/Paginator'
 import PageSizeSelector from '../pagination/PageSizeSelector'
 import PaginationInfo from '../pagination/PaginationInfo'
@@ -8,11 +9,8 @@ import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
 import SortChangeEvent from '../../events/SortChangeEvent'
 
 // extenal imports
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { CommandBar, ITheme, SearchBox } from 'office-ui-fabric-react'
-
-// TODO
-import DataTable from './DataTable'
 
 // --- DataNavigatorStyle -------------------------------------------
 
@@ -110,6 +108,25 @@ type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
 
 class DataNavigatorRenderer {
   render(model: DataNavigatorModel) {
+    console.log(model)
+
+    const tableColumns: ReactElement<DataTableProps>[] =
+      model.columns.map((column, columnIdx) => {
+        const props: DataTableColumnProps = {
+          title: column.title
+        }
+
+        if (column.field !== null) {
+          props.field = column.field
+        }
+
+        if (column.sortable) {
+          props.sortable = true
+        }
+
+        return <DataTable.Column key={columnIdx} {...props} />
+      })
+    
     return styleDataNavigator(classes =>
       <div className={classes.container}>
         { this._renderHeader(model, classes) }
@@ -179,31 +196,7 @@ class DataNavigatorRenderer {
               }
             ]}
           >
-            <DataTable.Column
-              title="First name"
-              field="firstName"
-              sortable={true}
-            />
-            <DataTable.Column
-              title="Last Name"
-              field="lastName"
-              sortable={true}
-            />
-            <DataTable.Column
-              title="Postal code"
-              field="postalCode"
-              sortable={true}
-            />
-            <DataTable.Column
-              title="City"
-              field="city"
-              sortable={true}
-            />
-            <DataTable.Column
-              title="Country"
-              field="country"
-              sortable={true}
-            />
+            {tableColumns}
           </DataTable>
         </div>
         { this._renderFooter(model, classes) }
@@ -251,7 +244,8 @@ class DataNavigatorRenderer {
     const items: any[] = []
   
     model.actions.forEach((action, idx) => {
-      const disabled =
+      const
+        disabled =
           action.$kind === 'DataNavigatorSingleRowActionModel' && model.rowSelection.length !== 1
               || action.$kind === 'DataNavigatorMultiRowActionModel' && model.rowSelection.length === 0
 
@@ -266,7 +260,7 @@ class DataNavigatorRenderer {
         key: String(idx),
         text: action.title,
         disabled,
-        className: classes.actionButton
+        className: classes.actionButton 
       })
     })
 

@@ -63,6 +63,28 @@ export default {
                   title="Delete"
                 />
               </DataNavigator.Actions>
+              <DataNavigator.Columns>
+                <DataNavigator.Column
+                  title="First name"
+                  field="firstName"
+                  sortable={true}
+                />
+                <DataNavigator.Column
+                  title="Last name"
+                  field="lastName"
+                  sortable={true}
+                />
+                <DataNavigator.Column
+                  title="Postal code"
+                  field="postalCode"
+                  sortable={true}
+                />
+                <DataNavigator.Column
+                  title="Country"
+                  field="country"
+                  sortable={true}
+                />
+              </DataNavigator.Columns>
             </DataNavigator>
           </div>
         </div>

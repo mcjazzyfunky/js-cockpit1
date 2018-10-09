@@ -75,13 +75,13 @@ const MultiRowAction = defineComponent<GeneralActionProps>({
   }
 })
 
-// --- DataNaviator.Actions --------------------------------------------------
+// --- DataNaviator.Actions -----------------------------------------
 
 type ActionsProps = {
   children?: ReactNode // TODO
 }
 
-const Actions = defineComponent({
+const Actions = defineComponent<ActionsProps>({
   displayName: 'DataNavigator.Actions',
 
   properties: {
@@ -98,6 +98,65 @@ const Actions = defineComponent({
         + 'DataNavigator.Actions components')
   }
 })
+
+// --- DataNaviator.Column ------------------------------------------
+
+type ColumnProps = {
+  title: string,
+  field?: string,
+  sortable?: boolean
+}
+
+const Column = defineComponent<ColumnProps>({
+  displayName: 'DataNavigator.Columns',
+
+  properties: {
+    title: {
+      type: String,
+      required: true
+    },
+
+    field: {
+      type: String
+    },
+
+    sortable: {
+      type: Boolean
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type DataNaviator.Column must be children of '
+        + 'DataNavigator.Columns components')
+  }
+})
+
+
+// --- DataNaviator.Columns -----------------------------------------
+
+type ColumnsProps = {
+  children?: ReactNode // TODO
+}
+
+const Columns = defineComponent<ColumnsProps>({
+  displayName: 'DataNavigator.Columns',
+
+  properties: {
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isElementOfType([Column])))
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type DataNaviator.Columns must be children of '
+        + 'DataNavigator components')
+  }
+})
+
 
 // --- DataNavigator ------------------------------------------------
 
@@ -121,7 +180,7 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
     children: {
       validate:
         withChildren(
-          Spec.all(isElementOfType([Actions])))
+          Spec.all(isElementOfType([Actions, Columns])))
     }
   },
 
@@ -147,6 +206,7 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
         rowSelection: this.state.rowSelection,
         data: [], // TODO
         actions: [],
+        columns: [],
 
         api: {
           changeRowSelection: (rowSelection: number[]) => {
@@ -196,6 +256,18 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
             })
 
             break
+
+          case Columns:
+            React.Children.forEach(child.props.children, (child2: any) => {
+              model.columns.push({
+                $kind: 'DataNavigatorColumnModel',
+                title: child2.props.title,
+                field: child2.props.field || null,
+                sortable: child2.props.sortable || false
+              })
+            })
+
+            break
           
           default:
             throw new Error('This should never happen')
@@ -219,6 +291,13 @@ type DataNavigatorModel = {
     (DataNavigatorGeneralActionModel
       | DataNavigatorSingleRowActionModel
       | DataNavigatorMultiRowActionModel)[],
+
+  columns: {
+    $kind: 'DataNavigatorColumnModel'
+    title: string,
+    field: string | null,
+    sortable: boolean
+  }[],
 
   api: {
     changeRowSelection: (rowSelection: number[]) => void
@@ -246,7 +325,9 @@ export default Object.assign(DataNavigator, {
   Actions,
   GeneralAction,
   SingleRowAction,
-  MultiRowAction
+  MultiRowAction,
+  Columns,
+  Column
 })
 
 export {
