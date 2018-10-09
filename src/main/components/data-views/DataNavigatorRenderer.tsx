@@ -66,9 +66,6 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     justifyContent: 'flex-start',
     flexShrink: 0,
     padding: '0 0.5rem',
-    borderWidth: '1px',
-    borderColor:  theme.palette.neutralQuaternary,
-    borderStyle: 'solid',
     backgroundColor: theme.palette.neutralLighter,
   },
 
@@ -128,7 +125,6 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-
     padding: '12px 14px',
 
     selectors: {
