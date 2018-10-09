@@ -5,6 +5,8 @@ import DataNavigatorRenderer from './DataNavigatorRenderer'
 import React, { ReactNode } from 'react'
 import { defineComponent, withChildren, isElementOfType } from 'js-react-utils'
 import { Spec } from 'js-spec/dev-only'
+import { Observable } from 'rxjs'
+import { take  } from 'rxjs/operators'
 
 // --- DataNavigator.GeneralAction ----------------------------------
 
@@ -160,16 +162,35 @@ const Columns = defineComponent<ColumnsProps>({
 
 // --- DataNavigator ------------------------------------------------
 
+type QueryParams = {
+  offset: number,
+  count: number,
+  sortBy: string | null,
+  sortDesc: boolean,
+}
+
+type QueryResult = {
+  data: any[],
+  totalItemCount: number
+}
+
 type DataNavigatorProps = {
   title?: string,
+  loadData: (params: QueryParams) => Observable<QueryResult>, // TODO
   children?: ReactNode // TODO
 }
 
 type DataNavigatorState = {
+  isInitialized: boolean,
+  isLoading: boolean,
+  errorMessage: string | null,
   pageIndex: number | null,
   pageSize: number,
+  sortBy: string | null,
+  sortDesc: boolean,
   totalItemCount: number | null,
-  rowSelection: number[]
+  rowSelection: number[],
+  data: any[]
 }
 
 const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
@@ -178,6 +199,11 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
   properties: {
     title: {
       type: String
+    },
+
+    loadData: {
+      type: Function,
+      required: true
     },
 
     children: {
@@ -194,11 +220,26 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
       super(props)
 
       this.state = {
+        isInitialized: false,
+        isLoading: true,
+        errorMessage: null,
         pageIndex: 1,
         pageSize: 50,
+        sortBy: null,
+        sortDesc: false,
         totalItemCount: 100,
-        rowSelection: []
+        rowSelection: [],
+        data: []
       }
+    }
+
+    componentDidMount() {
+      this._fetchData({
+        pageIndex: 0,
+        pageSize: this.state.pageSize,
+        sortBy: this.state.sortBy,
+        sortDesc: this.state.sortDesc
+      })
     }
 
     render() {
@@ -211,16 +252,52 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
         title: this.props.title || null,
         pageIndex: this.state.pageIndex,
         pageSize: this.state.pageSize,
+        sortBy: this.state.sortBy,
+        sortDesc: this.state.sortDesc,
+
+        isLoading: this.state.isLoading,
+        errorMessage: this.state.errorMessage,
+
         totalItemCount: this.state.totalItemCount,
-        
-        data: [], // TODO
+        data: this.state.data,
         rowSelection: this.state.rowSelection,
+
         actions: [],
         columns: [],
 
         api: {
           changeRowSelection: (rowSelection: number[]) => {
             this.setState({ rowSelection })
+          },
+
+          changePage: (pageIndex: number, onSuccess?: () => void) => {
+            this._fetchData({
+              pageIndex,
+              pageSize: this.state.pageSize,
+              sortBy: this.state.sortBy,
+              sortDesc: this.state.sortDesc,
+              onSuccess
+            })
+          },
+
+          changePageSize: (pageSize: number, onSuccess?: () => void) => {
+            this._fetchData({
+              pageIndex: 0,
+              pageSize,
+              sortBy: this.state.sortBy,
+              sortDesc: this.state.sortDesc,
+              onSuccess
+            })
+          },
+
+          changeSort: (sortBy: string, sortDesc: boolean, onSuccess?: () => void) => {
+            this._fetchData({
+              pageIndex: 0,
+              pageSize: this.state.pageSize,
+              sortBy: sortBy,
+              sortDesc: sortDesc,
+              onSuccess
+            })
           }
         }
       }
@@ -286,6 +363,44 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
 
         return model
     }
+
+    private _fetchData(params: { pageIndex: number, pageSize: number, sortBy: string | null, sortDesc: boolean, onSuccess?: () => void }) {
+      const observer = this.props.loadData({
+        offset: params.pageIndex * params.pageSize,
+        count: params.pageSize,
+        sortBy: params.sortBy,
+        sortDesc: params.sortDesc 
+      }).pipe(take(1))
+
+      this.setState({ isLoading: true })
+
+      const subscription = observer.subscribe({
+        next: result => {
+          this.setState({
+            isLoading: false,
+            errorMessage: null,
+            pageIndex: params.pageIndex,
+            pageSize: params.pageSize,
+            sortBy: params.sortBy,
+            sortDesc: params.sortDesc,
+            isInitialized: true,
+            data: result.data,
+            totalItemCount: result.totalItemCount,
+            rowSelection: []
+          })
+
+          if (params.onSuccess) {
+            params.onSuccess()
+          }
+        },
+        error: e => {
+          this.setState({
+            isLoading: false,
+            errorMessage: String(e) // TODO
+          })
+        }
+      })
+    }
   } 
 }) 
 
@@ -294,11 +409,13 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
 type DataNavigatorModel = {
   $kind: 'DataNavigatorModel',
   title: string | null,
-
   pageIndex: number | null,
   pageSize: number | null,
+  sortBy: string | null,
+  sortDesc: boolean,
+  isLoading: boolean,
+  errorMessage: string | null,
   totalItemCount: number | null,
-
   data: any[],
   rowSelection: number[],
 
@@ -315,7 +432,10 @@ type DataNavigatorModel = {
   }[],
 
   api: {
-    changeRowSelection: (rowSelection: number[]) => void
+    changeRowSelection: (rowSelection: number[]) => void,
+    changePage: (pageIndex: number, onSuccess?: () => void) => void,
+    changePageSize: (pageSize: number, onSuccess?: () => void) => void,
+    changeSort: (sortBy: string, sortDesc: boolean, onSuccess?: () => void) => void
   }
 }
 

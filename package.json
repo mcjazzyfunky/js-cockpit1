@@ -64,11 +64,12 @@
   },
   "dependencies": {
     "color": "^3.0.0",
-    "js-react-utils": "0.0.23",
+    "js-react-utils": "0.0.26",
     "js-spec": "^0.1.60",
     "office-ui-fabric-react": "^6.75.0",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "rxjs": "^6.3.3"
   },
   "scripts": {
     "next": "next",

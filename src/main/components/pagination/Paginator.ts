@@ -60,7 +60,7 @@ function getPaginatorModel(props: PaginatorProps): PaginatorModel {
       changePage: (pageIndex: number) => {
         if (props.onPageChange) {
           props.onPageChange({
-            type:'changePage',
+            type:'pageChange',
             pageIndex
           })
         }

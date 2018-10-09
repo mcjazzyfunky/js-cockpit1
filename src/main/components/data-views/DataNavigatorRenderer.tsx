@@ -6,16 +6,19 @@ import Paginator from '../pagination/Paginator'
 import PageSizeSelector from '../pagination/PageSizeSelector'
 import PaginationInfo from '../pagination/PaginationInfo'
 import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
+import PageChangeEvent from '../../events/PageChangeEvent'
+import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 import SortChangeEvent from '../../events/SortChangeEvent'
 
 // extenal imports
 import React, { ReactElement } from 'react'
-import { CommandBar, ITheme, SearchBox } from 'office-ui-fabric-react'
+import { CommandBar, ITheme, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
 
 // --- DataNavigatorStyle -------------------------------------------
 
 const styleDataNavigator = defineStyle((theme: ITheme) => ({
   container: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
@@ -24,6 +27,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',
+    flexShrink: 0,
     //padding: '0.25rem 0.75rem 2px 0',
     height: '40px',
     borderWidth: '0 0 0.5px 0',
@@ -50,13 +54,16 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   content: {
     display: 'flex',
     flexGrow: 1,
+    flexShrink: 1,
     padding: '3px 0rem',
+    overflow: 'auto',
   },
 
   footer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    flexShrink: 0,
     padding: '0.25rem 0.5rem',
     borderWidth: '1px 0 0 0',
     borderColor: '#e8e8e8',
@@ -99,107 +106,114 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     borderWidth: '0 1px 0 0',
     borderStyle: 'solid',
     borderColor: '#aaa',
+  },
+
+  loadingPanel: {
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    zIndex: '10000',
+    backgroundColor: 'rgba(63, 63, 63, 0.05)',
+    borderRadius: '3px',
+  },
+
+  loadingPanelContent: {
+    backgroundColor: theme.palette.themePrimary,
+    borderRadius: '3px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    padding: '15px 20px',
+
+    selectors: {
+      '& *': {
+        color: 'white'
+      }
+    }
   }
 }))
 
 type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
 
-// --- DataNavigatorStyle -------------------------------------------
+// --- DataNavigatorRenderer ----------------------------------------
 
 class DataNavigatorRenderer {
+  private _model: DataNavigatorModel | null = null
+  private _dataTable: any = null // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  constructor() {
+    this._onPageChange = this._onPageChange.bind(this)
+    this._onPageSizeChange = this._onPageSizeChange.bind(this)
+    this._onSortChange = this._onSortChange.bind(this)
+  }
+
   render(model: DataNavigatorModel) {
-    const tableColumns: ReactElement<DataTableProps>[] =
-      model.columns.map((column, columnIdx) => {
-        const props: DataTableColumnProps = {
-          title: column.title
-        }
+    this._model = model
 
-        if (column.field !== null) {
-          props.field = column.field
-        }
+    const
+      tableColumns: ReactElement<DataTableProps>[] =
+        model.columns.map((column, columnIdx) => {
+          const props: DataTableColumnProps = {
+            title: column.title
+          }
 
-        if (column.sortable) {
-          props.sortable = true
-        }
+          if (column.field !== null) {
+            props.field = column.field
+          }
 
-        return <DataTable.Column key={columnIdx} {...props} />
-      })
-    
-    return styleDataNavigator(classes =>
-      <div className={classes.container}>
-        { this._renderHeader(model, classes) }
-        <div className={classes.content}>
-          <DataTable
-            rowSelectionOptions={{
-              mode: 'multi'
-            }}
+          if (column.sortable) {
+            props.sortable = true
+          }
 
-            sortBy="firstName"
-            sortDesc={false}
+          return <DataTable.Column key={columnIdx} {...props} />
+        })
 
-            onRowSelectionChange={
-              (event: RowSelectionChangeEvent) => {
-                model.api.changeRowSelection(event.selection) 
+    return styleDataNavigator(classes => {
+      const loadingPanel =
+        model.isLoading
+          ? <div className={classes.loadingPanel}>
+              <div className={classes.loadingPanelContent}>
+                <Spinner size={SpinnerSize.large} label="Loading, please wait..." ariaLive="assertive" /> 
+              </div>
+            </div>
+          : null
+
+      return (
+        <div className={classes.container}>
+          {loadingPanel}
+          { this._renderHeader(model, classes) }
+          <div className={classes.content}>
+            <DataTable
+              ref={(it: any) => { this._dataTable = it }}
+              data={model.data}
+              rowSelectionOptions={{
+                mode: 'multi'
+              }}
+
+              sortBy={model.sortBy}
+              sortDesc={model.sortDesc}
+
+              onRowSelectionChange={
+                (event: RowSelectionChangeEvent) => {
+                  model.api.changeRowSelection(event.selection) 
+                }
               }
-            }
-            
-            onSortChange={
-              (event: SortChangeEvent) => {
-                console.log(event)
-              }
-            }
-            
-            data={[
-              {
-                firstName: 'Jane',
-                lastName: 'Doe',
-                postalCode: '1234',
-                city: 'New York',
-                country: 'USA'
-              },
-              {
-                firstName: 'Mary',
-                lastName: 'Miller',
-                postalCode: '88891',
-                city: 'London',
-                country: 'United Kingdom'
-              },
-              {
-                firstName: 'Jane',
-                lastName: 'Doe',
-                postalCode: '1234',
-                city: 'New York',
-                country: 'USA'
-              },
-              {
-                firstName: 'Mary',
-                lastName: 'Miller',
-                postalCode: '88891',
-                city: 'London',
-                country: 'United Kingdom'
-              },
-              {
-                firstName: 'Jane',
-                lastName: 'Doe',
-                postalCode: '1234',
-                city: 'New York',
-                country: 'USA'
-              },
-              {
-                firstName: 'Mary',
-                lastName: 'Miller',
-                postalCode: '88891',
-                city: 'London',
-                country: 'United Kingdom'
-              }
-            ]}
-          >
-            {tableColumns}
-          </DataTable>
+              
+              onSortChange={this._onSortChange}
+              
+            >
+              {tableColumns}
+            </DataTable>
+          </div>
+          { this._renderFooter(model, classes) }
         </div>
-        { this._renderFooter(model, classes) }
-      </div>
-    )
+      )
+    })
   }
 
   private _renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) {
@@ -234,13 +248,13 @@ class DataNavigatorRenderer {
             pageIndex={model.pageIndex}
             pageSize={model.pageSize}
             totalItemCount={model.totalItemCount}
-            onPageChange={ev => console.log(ev)}
+            onPageChange={this._onPageChange}
           />
         </div>
         <div className={classes.footerCenter}>
           <PageSizeSelector
             pageSize={model.pageSize}
-            onPageSizeChange={ev => console.log(ev) }
+            onPageSizeChange={this._onPageSizeChange}
           />
         </div>
         <div className={classes.footerEnd}>
@@ -282,10 +296,28 @@ class DataNavigatorRenderer {
     return (
       <CommandBar
         className={classes.actionBar}
-
         items={items}
       />
     )
+  }
+
+  private _onPageChange(event: PageChangeEvent) {
+    this._model.api.changePage(
+      event.pageIndex,
+      () => this._dataTable.unselectAllRows())
+  }
+
+  private _onPageSizeChange(event: PageSizeChangeEvent) {
+    this._model.api.changePageSize(
+      event.pageSize,
+      () => this._dataTable.unselectAllRows())
+  }
+
+  private _onSortChange(event: SortChangeEvent) {
+    this._model.api.changeSort(
+      event.sortBy,
+      event.sortDesc,
+      () => this._dataTable.unselectAllRows())
   }
 }
 

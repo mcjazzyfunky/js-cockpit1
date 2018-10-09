@@ -107,7 +107,7 @@ const PaginatorRenderer = {
         <button
           disabled={previousButtonDisabled}
           className={classes.button}
-          onClick={() => api.changePage(1)}
+          onClick={() => api.changePage(model.pageIndex - 1)}
         >
           <ArrowLeftIcon/>
         </button>

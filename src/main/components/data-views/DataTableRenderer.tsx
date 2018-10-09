@@ -208,10 +208,14 @@ function createColumnHeader(columnIdx: number, column: DataTableColumnModel, mod
     sortDesc = model.sortDesc,
     isSorted = sortBy !== null && sortBy === column.field,
 
-    sortIcon =
-      sortable && isSorted
-        ? (sortDesc ? <SortDescIcon/> : <SortAscIcon/>)
-        : null,
+    sortIcon = // TODO
+      <div style={{ width: '20px', height: '20px' }}>
+        {
+          sortable && isSorted
+            ? (sortDesc ? <SortDescIcon/> : <SortAscIcon/>)
+            : null
+        }
+      </div>,
 
     onClick =
       !sortable && column.field

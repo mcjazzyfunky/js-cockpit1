@@ -5,6 +5,8 @@ import defineStyle from '../../styling/defineStyle'
 
 // TODO
 import DataNavigator from '../data-views/DataNavigator'
+import { of as observableOf } from 'rxjs'
+import { delay } from 'rxjs/operators'
 
 // --- AppWithNavStyle --------------------------------------------
 
@@ -51,7 +53,62 @@ export default {
             />
           </div>
           <div className={classes.content}>
-            <DataNavigator title="Customers">
+            <DataNavigator
+              title="Customers"
+
+              loadData={
+                (params: { offset: number, count: number, sortBy: string | null, sortDesc: boolean }) => {
+
+                  const data = [
+                    {
+                      firstName: 'Jane',
+                      lastName: 'Doe',
+                      postalCode: '1234',
+                      city: 'New York',
+                      country: 'USA'
+                    },
+                    {
+                      firstName: 'Mary',
+                      lastName: 'Miller',
+                      postalCode: '88891',
+                      city: 'London',
+                      country: 'United Kingdom'
+                    },
+                    {
+                      firstName: 'Jane',
+                      lastName: 'Doe',
+                      postalCode: '1234',
+                      city: 'New York',
+                      country: 'USA'
+                    },
+                    {
+                      firstName: 'Mary',
+                      lastName: 'Miller',
+                      postalCode: '88891',
+                      city: 'London',
+                      country: 'United Kingdom'
+                    },
+                    {
+                      firstName: 'Jane',
+                      lastName: 'Doe',
+                      postalCode: '1234',
+                      city: 'New York',
+                      country: 'USA'
+                    },
+                    {
+                      firstName: 'Mary',
+                      lastName: 'Miller',
+                      postalCode: '88891',
+                      city: 'London',
+                      country: 'United Kingdom'
+                    }
+                  ]
+
+                  return observableOf({data, totalItemCount: 1243 })
+                    .pipe(delay(2000))
+                }
+              }
+            >
               <DataNavigator.Actions>
                 <DataNavigator.GeneralAction
                   title="New"

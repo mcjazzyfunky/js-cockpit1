@@ -60,10 +60,15 @@ type DataTableProps = {
 }
 
 type DataTableState = {
-  rowSelection: Set<number>
+  rowSelection: Set<number>,
+  data: any[]
 }
 
-const DataTable = defineComponent<DataTableProps>({
+type DataTableMethods = {
+  unselectAllRows: () => void
+}
+
+const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
   displayName: 'DataTable',
 
   properties: {
@@ -108,6 +113,8 @@ const DataTable = defineComponent<DataTableProps>({
     }
   },
 
+  methods: ['unselectAllRows'],
+
   base: class extends React.Component<DataTableProps, DataTableState> {
     private renderer = new DataTableRenderer()
 
@@ -115,22 +122,27 @@ const DataTable = defineComponent<DataTableProps>({
       super(props)
 
       this.state = {
-        rowSelection: new Set() 
+        rowSelection: new Set(),
+        data: [] 
       }
     }
 
+    unselectAllRows() {
+      this.setState({ rowSelection: new Set() })
+    }
+
     render() {
-      return this.renderer.render(this.getDataTableModel())
+      return this.renderer.render(this._getDataTableModel())
     }
 
     // --- private --------------------------------------------------
 
-    private getDataTableModel(): DataTableModel {
+    private _getDataTableModel(): DataTableModel {
       const model: DataTableModel = {
         $kind: 'DataTableModel',
         rowSelectionOptions : this.props.rowSelectionOptions,
         columns: [],
-        data: this.props.data,
+        data: this.props.data || [],
         rowSelection: this.state.rowSelection,
         sortBy: this.props.sortBy  || null,
         sortDesc: this.props.sortDesc || false,
@@ -163,13 +175,13 @@ const DataTable = defineComponent<DataTableProps>({
 
       React.Children.forEach(this.props.children, (child: ReactElement<DataTableColumnModel>) => {
         model.columns.push(
-            this.getColumnModel(child.props))
+            this._getColumnModel(child.props))
       })
 
       return model
     }
 
-    private getColumnModel(props: ColumnProps): DataTableColumnModel {
+    private _getColumnModel(props: ColumnProps): DataTableColumnModel {
       return {
         $kind: 'DataTableColumnModel',
         title: props.title,
@@ -189,9 +201,8 @@ type DataTableModel = {
     mode: 'none' | 'single' | 'multi',
   },
 
-  columns: (DataTableColumnModel)[]
+  columns: (DataTableColumnModel)[],
   data: any[],
-
   sortBy: string | null,
   sortDesc: boolean,
 
