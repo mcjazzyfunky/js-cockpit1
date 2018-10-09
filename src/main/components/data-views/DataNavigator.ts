@@ -106,6 +106,7 @@ const Actions = defineComponent<ActionsProps>({
 type ColumnProps = {
   title: string,
   field?: string,
+  align?: 'start' | 'center' | 'end'
   sortable?: boolean
 }
 
@@ -120,6 +121,11 @@ const Column = defineComponent<ColumnProps>({
 
     field: {
       type: String
+    },
+
+    align: {
+      type: String,
+      validate: Spec.oneOf('start', 'center', 'end')
     },
 
     sortable: {
@@ -351,6 +357,7 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 $kind: 'DataNavigatorColumnModel',
                 title: child2.props.title,
                 field: child2.props.field || null,
+                align: child2.props.align || null,
                 sortable: child2.props.sortable || false
               })
             })
@@ -438,6 +445,7 @@ type DataNavigatorModel = {
     $kind: 'DataNavigatorColumnModel'
     title: string,
     field: string | null,
+    align: 'start' | 'center' | 'end' | null,
     sortable: boolean
   }[],
 

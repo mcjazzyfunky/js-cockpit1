@@ -129,6 +129,7 @@ export default {
                 <DataNavigator.Column
                   title="Last name"
                   field="lastName"
+                  align="end"
                   sortable={true}
                 />
                 <DataNavigator.Column

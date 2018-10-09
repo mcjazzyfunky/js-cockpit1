@@ -10,7 +10,9 @@ import { Spec } from 'js-spec'
 // --- DataTable.Column ---------------------------------------------
 
 type ColumnProps = {
-  title?: string,  field?: string,
+  title?: string, 
+  field?: string,
+  align?: 'start' | 'center' | 'end',
   sortable?: boolean
 }
 
@@ -25,6 +27,11 @@ const Column = defineComponent<ColumnProps>({
 
     field: {
       type: String
+    },
+
+    align: {
+      type: String,
+      validate: Spec.oneOf('start', 'center', 'end')
     },
 
     sortable: {
@@ -186,6 +193,7 @@ const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
         $kind: 'DataTableColumnModel',
         title: props.title,
         field: props.field || null,
+        align: props.align || null,
         sortable: props.sortable || false
       }
     }
@@ -218,6 +226,7 @@ type DataTableColumnModel = {
   $kind: 'DataTableColumnModel',
   title: string,
   field: string | null,
+  align: 'start' | 'center' | 'end' | null,
   sortable: boolean
 }
 

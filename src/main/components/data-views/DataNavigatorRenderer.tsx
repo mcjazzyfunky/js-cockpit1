@@ -78,7 +78,6 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
   title: {
     display: 'inline-block',
-    //color: theme.palette.themeSecondary,
     fontSize: theme.fonts.xLarge.fontSize,
     marginRight: '1.5rem',
   },
@@ -117,7 +116,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.themeDark,
+    backgroundColor: theme.palette.themeDarker,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
@@ -159,6 +158,10 @@ class DataNavigatorRenderer {
 
           if (column.field !== null) {
             props.field = column.field
+          }
+
+          if (column.align !== null) {
+            props.align = column.align
           }
 
           if (column.sortable) {

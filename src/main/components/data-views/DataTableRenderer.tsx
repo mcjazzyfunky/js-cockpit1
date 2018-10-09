@@ -84,8 +84,9 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         boxSizing: 'border-box',
         padding: '0.375rem',
         fontSize: theme.fonts.medium.fontSize,
-        borderWidth: '0 0 0.5px 0',
-        borderColor: theme.palette.neutralLight,
+        borderWidth: '0 0 0.5px 0.5px',
+        borderLeftColor: theme.palette.neutralLight,
+        borderBottomColor: theme.palette.neutralLight,
         borderStyle: 'solid',
       },
       
@@ -93,6 +94,14 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         borderLeftWidth: 0
       }
     }
+  },
+
+  alignCenter: {
+    textAlign: 'center'
+  },
+
+  alignEnd: {
+    textAlign: 'right'
   },
 
   rowSelectionColumn: {
@@ -164,7 +173,7 @@ function createTableHead(model: DataTableModel, classes: DataTableClasses) {
         {selectionColumn}
         {
           model.columns.map((column, columnIdx) =>
-            createColumnHeader(columnIdx, column, model))
+            createColumnHeader(columnIdx, column, model, classes))
         }
       </tr>
     </thead>
@@ -191,11 +200,20 @@ function createTableBody(model: DataTableModel, classes: DataTableClasses) {
               <tr key={rowIdx} className={model.rowSelection.has(rowIdx) ? classes.selectedRow : null }>
                 {selectionColumn}
                 {
-                  model.columns.map((column, columnIdx) =>
-                    <td key={columnIdx}>
-                      {row[column.field]}
-                    </td>
-                  )
+                  model.columns.map((column, columnIdx) => {
+                    const className =
+                      column.align === 'center'
+                        ? classes.alignCenter
+                        : column.align === 'end'
+                        ? classes.alignEnd
+                        : null
+
+                    return (
+                      <td key={columnIdx} className={className}>
+                        {row[column.field]}
+                      </td>
+                    )
+                  })
                 }
               </tr>
             )
@@ -205,7 +223,7 @@ function createTableBody(model: DataTableModel, classes: DataTableClasses) {
   )
 }
 
-function createColumnHeader(columnIdx: number, column: DataTableColumnModel, model: DataTableModel) {
+function createColumnHeader(columnIdx: number, column: DataTableColumnModel, model: DataTableModel, classes: DataTableClasses) {
   const
     sortable = model.columns[columnIdx].sortable,
     sortBy = model.sortBy,
@@ -221,7 +239,7 @@ function createColumnHeader(columnIdx: number, column: DataTableColumnModel, mod
         }
       </div>,
 
-    onClick =
+    onClick = 
       !sortable && column.field
         ? null
         : () => {
