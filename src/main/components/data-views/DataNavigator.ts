@@ -122,6 +122,8 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
   },
 
   base: class Base extends React.PureComponent<DataNavigatorProps> {
+    private renderer = new DataNavigatorRenderer()
+
     render() {
       const model: DataNavigatorModel = {
         $kind: 'DataNavigatorModel',
@@ -176,7 +178,7 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
           }
         })
 
-      return DataNavigatorRenderer.render(model)
+      return this.renderer.render(model)
     }
   } 
 }) 

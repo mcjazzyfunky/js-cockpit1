@@ -1,5 +1,5 @@
 // internal imports
-import { PAGE_SIZE_OPTIONS, PageSizeSelectorModel } from './PageSizeSelector'
+import { PageSizeSelectorModel } from './PageSizeSelector'
 import defineStyle from '../../styling/defineStyle' 
 import ActionEvent from '../../events/ActionEvent'
 
@@ -33,14 +33,13 @@ const PageSizeSelectorRenderer = {
           text={String(model.pageSize)}
 
           menuProps={{
-            items: PAGE_SIZE_OPTIONS.map(option => ({
+            items: model.pageSizeOptions.map(option => ({
               key: String(option),
               name: String(option),
 
-              onClick:
-                model.onAction
-                  ? (ev: any) => emitActionEvent(option, model.onAction)
-                  : null
+              onClick() {
+                model.api.changePageSize(option)
+              }
             }))
           }}
         />

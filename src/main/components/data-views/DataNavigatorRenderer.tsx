@@ -100,7 +100,7 @@ type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
 
 // --- DataNavigatorStyle -------------------------------------------
 
-const DataNavigatorRenderer = { 
+class DataNavigatorRenderer { 
   render(model: DataNavigatorModel) {
     return styleDataNavigator(classes =>
       <div className={classes.container}>
@@ -235,7 +235,7 @@ function renderFooter(model: DataNavigatorModel, classes: DataNavigatorClasses) 
         <Paginator pageIndex={2} totalItemCount={1243} pageSize={50} onPageChange={ev => console.log(ev)}/>
       </div>
       <div className={classes.footerCenter}>
-        <PageSizeSelector pageSize={50} onAction={ev => console.log(ev) }/>
+        <PageSizeSelector pageSize={50} onPageSizeChange={ev => console.log(ev) }/>
       </div>
       <div className={classes.footerEnd}>
         <PaginationInfo pageIndex={2} totalItemCount={1243} pageSize={50} about="items"/>

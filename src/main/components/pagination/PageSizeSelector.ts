@@ -1,12 +1,11 @@
 // internal imports
 import PageSizeSelectorRenderer from './PageSizeSelectorRenderer'
-import ActionEvent from '../../events/ActionEvent'
+import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 
 // external imports
 import React from 'react'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
-import { emitKeypressEvents } from 'readline';
 
 // --- constants ----------------------------------------------------
 
@@ -16,7 +15,7 @@ const PAGE_SIZE_OPTIONS = [25, 50, 100, 250, 500]
 
 type PageSizeSelectorProps = {
   pageSize: number,
-  onAction?: (event: ActionEvent<number>) => void
+  onPageSizeChange?: (event: PageSizeChangeEvent) => void
 }
 
 const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
@@ -29,26 +28,53 @@ const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
       validate: Spec.in(PAGE_SIZE_OPTIONS)
     },
 
-    onAction: {
+    onPageSizeChange: {
       type: Function
     }
   },
 
   render(props: PageSizeSelectorProps) {
-    return PageSizeSelectorRenderer.render(props)
-
+    return PageSizeSelectorRenderer.render(getPageSizeSelectorModel(props))
   }
 })
 
+// --- helpers ------------------------------------------------------
+
+function getPageSizeSelectorModel(props: PageSizeSelectorProps): PageSizeSelectorModel {
+  return {
+    $kind: 'PageSizeSelectorModel',
+    pageSizeOptions: PAGE_SIZE_OPTIONS,
+    pageSize: props.pageSize,
+
+    api: {
+      changePageSize: (pageSize: number): void => {
+        if (props.onPageSizeChange) {
+          props.onPageSizeChange({
+            type: 'pageSizeChange',
+            pageSize
+          })
+        }
+      }
+    }
+  }
+}
+
 // --- data models --------------------------------------------------
 
-type PageSizeSelectorModel = PageSizeSelectorProps
+type PageSizeSelectorModel = {
+  $kind: 'PageSizeSelectorModel',
+  pageSizeOptions: number[],
+  pageSize: number,
+
+  api: {
+    changePageSize(pageSize: number): void
+  }
+}
 
 // --- exports ------------------------------------------------------
 
 export default PageSizeSelector
 
 export {
-  PAGE_SIZE_OPTIONS,
   PageSizeSelectorModel
 }
