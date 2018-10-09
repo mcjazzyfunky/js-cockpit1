@@ -7,6 +7,21 @@ import defineStyle from '../../styling/defineStyle'
 import DataNavigator from '../data-views/DataNavigator'
 import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
+import faker from 'faker'
+
+const data: any[] = []
+
+for(let i = 0; i < 1213; ++i) {
+  data.push({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    city: faker.address.city(),
+    postalCode: faker.address.zipCode(),
+    country: faker.address.country()
+  })
+}
+
+
 
 // --- AppWithNavStyle --------------------------------------------
 
@@ -59,52 +74,34 @@ export default {
               loadData={
                 (params: { offset: number, count: number, sortBy: string | null, sortDesc: boolean }) => {
 
-                  const data = [
-                    {
-                      firstName: 'Jane',
-                      lastName: 'Doe',
-                      postalCode: '1234',
-                      city: 'New York',
-                      country: 'USA'
-                    },
-                    {
-                      firstName: 'Mary',
-                      lastName: 'Miller',
-                      postalCode: '88891',
-                      city: 'London',
-                      country: 'United Kingdom'
-                    },
-                    {
-                      firstName: 'Jane',
-                      lastName: 'Doe',
-                      postalCode: '1234',
-                      city: 'New York',
-                      country: 'USA'
-                    },
-                    {
-                      firstName: 'Mary',
-                      lastName: 'Miller',
-                      postalCode: '88891',
-                      city: 'London',
-                      country: 'United Kingdom'
-                    },
-                    {
-                      firstName: 'Jane',
-                      lastName: 'Doe',
-                      postalCode: '1234',
-                      city: 'New York',
-                      country: 'USA'
-                    },
-                    {
-                      firstName: 'Mary',
-                      lastName: 'Miller',
-                      postalCode: '88891',
-                      city: 'London',
-                      country: 'United Kingdom'
-                    }
-                  ]
 
-                  return observableOf({data, totalItemCount: 1243 })
+                  if (params.sortBy) {
+                    data.sort((recs1, recs2) => {
+                      let ret = 0
+
+                      const
+                        v1 = recs1[params.sortBy],
+                        v2 = recs2[params.sortBy];
+
+                      if (v1 > v2) {
+                        ret = 1
+                      } else if (v1 < v2) {
+                        ret = -1
+                      } else {
+                        ret = 0
+                      }
+
+                      if (params.sortDesc) {
+                        ret = -ret
+                      }
+
+                      return ret
+                    })
+                  }
+
+                  const newData = data.slice(params.offset, params.offset + params.count)
+
+                  return observableOf({data: newData, totalItemCount: data.length })
                     .pipe(delay(1000))
                 }
               }
@@ -129,12 +126,16 @@ export default {
                 <DataNavigator.Column
                   title="Last name"
                   field="lastName"
-                  align="end"
                   sortable={true}
                 />
                 <DataNavigator.Column
                   title="Postal code"
                   field="postalCode"
+                  sortable={true}
+                />
+                <DataNavigator.Column
+                  title="City"
+                  field="city"
                   sortable={true}
                 />
                 <DataNavigator.Column

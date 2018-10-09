@@ -30,7 +30,6 @@ const stylePaginator = defineStyle((theme: ITheme) => ({
     height: '26x',
     width: '28px',
     cursor: 'pointer',
-    borderRadius: '14px',
 
     selectors: {
       '&:disabled': {
