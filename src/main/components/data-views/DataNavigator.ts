@@ -166,10 +166,13 @@ type DataNavigatorProps = {
 }
 
 type DataNavigatorState = {
+  pageIndex: number | null,
+  pageSize: number,
+  totalItemCount: number | null,
   rowSelection: number[]
 }
 
-const DataNavigator = defineComponent<DataNavigatorProps>({
+const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
   displayName: 'DataNavigator',
 
   properties: {
@@ -191,6 +194,9 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
       super(props)
 
       this.state = {
+        pageIndex: 1,
+        pageSize: 50,
+        totalItemCount: 100,
         rowSelection: []
       }
     }
@@ -203,8 +209,12 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
       const model: DataNavigatorModel = {
         $kind: 'DataNavigatorModel',
         title: this.props.title || null,
-        rowSelection: this.state.rowSelection,
+        pageIndex: this.state.pageIndex,
+        pageSize: this.state.pageSize,
+        totalItemCount: this.state.totalItemCount,
+        
         data: [], // TODO
+        rowSelection: this.state.rowSelection,
         actions: [],
         columns: [],
 
@@ -284,8 +294,13 @@ const DataNavigator = defineComponent<DataNavigatorProps>({
 type DataNavigatorModel = {
   $kind: 'DataNavigatorModel',
   title: string | null,
-  rowSelection: number[],
+
+  pageIndex: number | null,
+  pageSize: number | null,
+  totalItemCount: number | null,
+
   data: any[],
+  rowSelection: number[],
 
   actions:
     (DataNavigatorGeneralActionModel

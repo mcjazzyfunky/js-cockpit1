@@ -1,7 +1,6 @@
 // internal imports
 import { PaginatorModel } from './Paginator'
 import defineStyle from '../../styling/defineStyle'
-import ActionEvent from '../../events/ActionEvent'
 import ArrowDoubleLeftIcon from '../../icons/ArrowDoubleLeftIcon' 
 import ArrowDoubleRightIcon from '../../icons/ArrowDoubleRightIcon' 
 import ArrowLeftIcon from '../../icons/ArrowLeftIcon' 
@@ -90,7 +89,7 @@ const PaginatorRenderer = {
   render(model: PaginatorModel): ReactNode {
     const
       { pageIndex, pageSize, totalItemCount, api } = model,
-      lastPageIndex = Math.floor(totalItemCount / pageSize),
+      lastPageIndex = Math.ceil(totalItemCount / pageSize) - 1,
       firstButtonDisabled = pageIndex <= 0,
       previousButtonDisabled = pageIndex <= 0,
       nextButtonDisabled = pageIndex >= lastPageIndex,
@@ -101,14 +100,14 @@ const PaginatorRenderer = {
         <button
           disabled={firstButtonDisabled}
           className={classes.button}
-          onClick={() => model.api.changePage(0)}
+          onClick={() => api.changePage(0)}
         >
           <ArrowDoubleLeftIcon/>
         </button>
         <button
           disabled={previousButtonDisabled}
           className={classes.button}
-          onClick={() => model.api.changePage(1)}
+          onClick={() => api.changePage(1)}
         >
           <ArrowLeftIcon/>
         </button>
@@ -122,14 +121,14 @@ const PaginatorRenderer = {
         <button
           disabled={nextButtonDisabled}
           className={classes.button}
-          onClick={() => model.api.changePage(model.pageIndex + 1)}
+          onClick={() => api.changePage(model.pageIndex + 1)}
         >
           <ArrowRightIcon/>
         </button>
         <button
           disabled={lastButtonDisabled}
           className={classes.button}
-          onClick={() => model.api.changePage(Math.ceil(model.totalItemCount / model.pageSize) - 1)}
+          onClick={() => api.changePage(lastPageIndex)}
         >
           <ArrowDoubleRightIcon/>
         </button>

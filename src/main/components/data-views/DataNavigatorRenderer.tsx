@@ -108,8 +108,6 @@ type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
 
 class DataNavigatorRenderer {
   render(model: DataNavigatorModel) {
-    console.log(model)
-
     const tableColumns: ReactElement<DataTableProps>[] =
       model.columns.map((column, columnIdx) => {
         const props: DataTableColumnProps = {
@@ -225,16 +223,33 @@ class DataNavigatorRenderer {
   }
 
   private _renderFooter(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+    if (model.pageIndex === null || model.totalItemCount === null) {
+      return null
+    }    
+    
     return (
       <div className={classes.footer}> 
         <div className={classes.footerStart}>
-          <Paginator pageIndex={2} totalItemCount={1243} pageSize={50} onPageChange={ev => console.log(ev)}/>
+          <Paginator
+            pageIndex={model.pageIndex}
+            pageSize={model.pageSize}
+            totalItemCount={model.totalItemCount}
+            onPageChange={ev => console.log(ev)}
+          />
         </div>
         <div className={classes.footerCenter}>
-          <PageSizeSelector pageSize={50} onPageSizeChange={ev => console.log(ev) }/>
+          <PageSizeSelector
+            pageSize={model.pageSize}
+            onPageSizeChange={ev => console.log(ev) }
+          />
         </div>
         <div className={classes.footerEnd}>
-          <PaginationInfo pageIndex={2} totalItemCount={1243} pageSize={50} about="items"/>
+          <PaginationInfo
+            pageIndex={model.pageIndex}
+            totalItemCount={model.totalItemCount}
+            pageSize={model.pageSize}
+            about="items"
+          />
         </div>
       </div>
     )
