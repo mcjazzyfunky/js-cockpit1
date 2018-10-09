@@ -123,7 +123,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.themeDarker,
+    backgroundColor: theme.palette.themeDark,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
