@@ -80,25 +80,27 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'inline-block',
     //color: theme.palette.themeSecondary,
     fontSize: theme.fonts.xLarge.fontSize,
-    marginRight: '0.5rem',
+    marginRight: '1.5rem',
   },
 
   actionBar: {
     display: 'inline-flex',
+    height: '34px',
     backgroundColor: 'transparent',
   },
   
   actionButton: {
     backgroundColor: 'transparent',
     margin: '0 2px',
+    borderRedius: '3px',
   },
 
   actionButtonSeparator: {
     height: '10px',
-    marginTop: '16px',
     borderWidth: '0 1px 0 0',
     borderStyle: 'solid',
     borderColor: '#aaa',
+    margin: '13px 3px 0 3px'
   },
 
   loadingPanel: {
