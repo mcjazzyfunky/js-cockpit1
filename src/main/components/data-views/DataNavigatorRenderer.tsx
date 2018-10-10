@@ -34,11 +34,11 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     margin: '0 0 0px 0',
     zIndex: 1000,
     color: theme.palette.white,
-    backgroundColor: '#808080', //theme.palette.neutralTertiary,
+    backgroundColor: theme.palette.themeSecondary,
     borderWidth: '0px',
     borderStyle: 'solid',
     borderRadius: '1px',
-    borderColor: theme.palette.neutralPrimaryAlt, //theme.palette.neutralQuaternary,
+    borderColor: theme.palette.themePrimary, //theme.palette.neutralQuaternary,
     //borderBottomColor: theme.palette.neutralLight,
   },
 
@@ -129,7 +129,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.neutralSecondary,
+    backgroundColor: theme.palette.neutralSecondaryAlt,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
