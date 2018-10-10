@@ -30,12 +30,12 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     selectors: {
       '& > tr > th': {
         boxSizing: 'border-box',
-        padding: '4px',
+        padding: '5px',
         verticalAlign: 'center',
         fontSize: theme.fonts.mediumPlus.fontSize,
         fontWeight: 'normal',
         borderWidth: '1px',
-        borderColor: theme.palette.neutralTertiary,
+        borderColor: theme.palette.neutralTertiaryAlt,
         borderStyle: 'solid',
       },
 
