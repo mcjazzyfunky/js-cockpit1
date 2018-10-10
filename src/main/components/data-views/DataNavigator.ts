@@ -234,7 +234,7 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
         pageSize: 50,
         sortBy: null,
         sortDesc: false,
-        totalItemCount: 100,
+        totalItemCount: 0,
         rowSelection: [],
         data: []
       }

@@ -184,7 +184,7 @@ class DataNavigatorRenderer {
           return <DataTable.Column key={columnIdx} {...props} />
         })
 
-    return styleDataNavigator(classes => {
+    const ret = styleDataNavigator(classes => {
       const loadingPanel =
         model.isLoading
           ? <div className={classes.loadingPanel}>
@@ -221,10 +221,18 @@ class DataNavigatorRenderer {
               {tableColumns}
             </DataTable>
           </div>
-          { this._renderFooter(model, classes) }
+            {
+              this._model.pageIndex >= 0 && this._model.pageSize > 0 && this._model.totalItemCount > 0 
+                ? this._renderFooter(model, classes)
+                : null
+            }
         </div>
       )
     })
+
+    this._isInitalized = true
+
+    return ret
   }
 
   private _renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) {
