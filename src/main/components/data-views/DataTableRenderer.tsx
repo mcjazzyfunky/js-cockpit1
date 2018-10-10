@@ -119,7 +119,7 @@ type DataTableClasses = ClassesOf<typeof styleDataTable>
 // --- DataTableRenderer --------------------------------------------
 
 class DataTableRenderer {
-  private selectedRows: [2]
+  private selectedRows: []
 
   render(model: DataTableModel)  {
     const rowSelectionMode = model.rowSelectionOptions.mode
@@ -162,57 +162,14 @@ function createTableHead(model: DataTableModel, classes: DataTableClasses) {
         {selectionColumn}
         {
           model.columns.map((column, columnIdx) =>
-            createColumnHeader(columnIdx, column, model, classes))
+            createTableHeadCell(columnIdx, column, model, classes))
         }
       </tr>
     </thead>
   )
 }
 
-function createTableBody(model: DataTableModel, classes: DataTableClasses) {
-  const
-    selectionMode = model.rowSelectionOptions.mode
-
-  return (
-    <tbody className={classes.tableBody}>
-        {
-          model.data.map((row, rowIdx) => {
-            const selectionColumn =
-              selectionMode === 'none'
-                ? null
-                : <td className={classes.rowSelectionColumn}>
-                    <div>{createSelectCheckbox(rowIdx, model)}
-                    </div>
-                  </td>
-
-            return (
-              <tr key={rowIdx} className={model.rowSelection.has(rowIdx) ? classes.selectedRow : null }>
-                {selectionColumn}
-                {
-                  model.columns.map((column, columnIdx) => {
-                    const className =
-                      column.align === 'center'
-                        ? classes.alignCenter
-                        : column.align === 'end'
-                        ? classes.alignEnd
-                        : null
-
-                    return (
-                      <td key={columnIdx} className={className}>
-                        {row[column.field]}
-                      </td>
-                    )
-                  })
-                }
-              </tr>
-            )
-          })
-        }
-    </tbody>
-  )
-}
-
-function createColumnHeader(columnIdx: number, column: DataTableColumnModel, model: DataTableModel, classes: DataTableClasses) {
+function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, model: DataTableModel, classes: DataTableClasses) {
   const
     sortable = model.columns[columnIdx].sortable,
     sortBy = model.sortBy,
@@ -245,6 +202,57 @@ function createColumnHeader(columnIdx: number, column: DataTableColumnModel, mod
   )
 }
 
+function createTableBody(model: DataTableModel, classes: DataTableClasses) {
+  return (
+    <tbody className={classes.tableBody}>
+      {
+        model.data.map((row, rowIdx) => 
+          createTableBodyRow(rowIdx, model, classes))
+      }
+    </tbody>
+  )
+}
+
+function createTableBodyRow(rowIndex: number, model: DataTableModel, classes: DataTableClasses) {
+  const
+    row: any = model.data[rowIndex],
+    selectionMode = model.rowSelectionOptions.mode,
+  
+    selectionColumn =
+      selectionMode === 'none'
+        ? null
+        : <td className={classes.rowSelectionColumn}>
+            <div>{createSelectCheckbox(rowIndex, model)}
+            </div>
+          </td>
+
+  return (
+    <tr key={rowIndex} className={model.rowSelection.has(rowIndex) ? classes.selectedRow : null }>
+      {selectionColumn}
+      {
+        model.columns.map((column, columnIdx) =>
+          createTableBodyCell(columnIdx, model, row, classes))
+      }
+    </tr>
+  )
+}
+
+function createTableBodyCell(columnIndex: number, model: DataTableModel, row: any, classes: DataTableClasses) {
+  const column = model.columns[columnIndex]
+
+  const className =
+    column.align === 'center'
+      ? classes.alignCenter
+      : column.align === 'end'
+      ? classes.alignEnd
+      : null
+
+  return (
+    <td key={columnIndex} className={className}>
+      {row[column.field]}
+    </td>
+  )
+}
 
 function createSelectCheckbox(index: number, model: DataTableModel) {
   const
