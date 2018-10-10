@@ -37,7 +37,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     borderWidth: '1px 1px 1px 1px',
     borderStyle: 'solid',
     borderColor: theme.palette.themePrimary,
-    borderBottomColor: theme.palette.neutralLight,
+    //borderBottomColor: theme.palette.neutralLight,
   },
 
   headerStart: {
@@ -123,8 +123,11 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     borderRadius: '2px',
   },
 
+  loadingSpinner: {
+  },
+
   loadingPanelContent: {
-    backgroundColor: theme.palette.themeDark,
+    backgroundColor: theme.palette.neutralSecondary,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
@@ -184,7 +187,7 @@ class DataNavigatorRenderer {
         model.isLoading
           ? <div className={classes.loadingPanel}>
               <div className={classes.loadingPanelContent}>
-                <Spinner size={SpinnerSize.large} label="Loading data, please wait..." ariaLive="assertive" /> 
+                <Spinner size={SpinnerSize.large} className={classes.loadingSpinner} label="Loading data, please wait..." ariaLive="assertive" /> 
               </div>
             </div>
           : null
