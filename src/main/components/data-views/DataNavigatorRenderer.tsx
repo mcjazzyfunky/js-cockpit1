@@ -27,24 +27,23 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   header: {
-    display: 'flex',
     alignItems: 'center',
+    flexGrow: 0,
     flexShrink: 0,
-    padding: '4px 8px',
-    color: 'black', 
-    backgroundColor:  theme.palette.neutralLighterAlt,
-    borderWidth: '1px 1px 0 1px',
+    padding: '2px 10px 5px 10px',
+    margin: '0 0 0px 0',
+    color: '#f8f8f8',//theme.palette.white, 
+    backgroundColor: theme.palette.themeSecondary,
+    borderWidth: '1px 1px 1px 1px',
     borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternary
+    borderColor: theme.palette.themePrimary,
+    borderBottomColor: theme.palette.neutralLight,
   },
 
   headerStart: {
-    padding: '0 0 0 0.5rem'
   },
 
   headerCenter: {
-    flexGrow: 1,
-    flexShrink: 1,
   },
 
   headerEnd: {
@@ -70,7 +69,8 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     flexShrink: 0,
     padding: '3px 5px 1px 5px',
     borderWidth: '1px 0 0 0',
-    borderColor: theme.palette.neutralQuaternary,
+    //backgroundColor: theme.palette.neutralQuaternary,
+    borderColor: theme.palette.neutralTertiary,
     borderStyle: 'solid',
   },
 
@@ -231,12 +231,9 @@ class DataNavigatorRenderer {
           </div>
         </div>
         <div className={classes.headerCenter}>
-          <div className={classes.actionBar}>
-            {this._renderActionBar(model, classes)}
-          </div>
+            {/* this._renderActionBar(model, classes) */}
         </div>
         <div className={classes.headerEnd}>
-          <SearchBox placeholder="Search" className={classes.searchBox} />
         </div>
       </div>
     ) 
