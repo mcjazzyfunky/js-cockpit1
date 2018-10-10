@@ -34,7 +34,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     margin: '0 0 0px 0',
     zIndex: 1000,
     color: theme.palette.white,
-    backgroundColor: theme.palette.neutralSecondaryAlt,
+    backgroundColor: '#808080', //theme.palette.neutralTertiary,
     borderWidth: '0px',
     borderStyle: 'solid',
     borderRadius: '1px',
