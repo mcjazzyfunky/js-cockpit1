@@ -6,10 +6,8 @@ export default class extends React.Component {
   private container: any = null
 
   componentDidMount() {
-
-
     if (typeof document !== 'undefined') {
-      const Demo: any = require('../src/demo/Demo').default
+      const Demo: any = require('../src/demo/demo').default
       console.clear()
       const head: any = document.head
       const body: any = document.body

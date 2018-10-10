@@ -30,13 +30,15 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     flexGrow: 0,
     flexShrink: 0,
-    padding: '4px 10px',
+    padding: '5px 10px',
     margin: '0 0 0px 0',
+    zIndex: 1000,
     color: theme.palette.white,
-    backgroundColor: theme.palette.themeSecondary, //theme.palette.neutralQuaternaryAlt,
-    borderWidth: '1px 1px 1px 1px',
+    backgroundColor: theme.palette.neutralSecondaryAlt,
+    borderWidth: '0px',
     borderStyle: 'solid',
-    borderColor: theme.palette.themeSecondary, //theme.palette.neutralQuaternary,
+    borderRadius: '1px',
+    borderColor: theme.palette.neutralPrimaryAlt, //theme.palette.neutralQuaternary,
     //borderBottomColor: theme.palette.neutralLight,
   },
 
@@ -68,7 +70,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     justifyContent: 'flex-start',
     flexShrink: 0,
     padding: '3px 5px 1px 5px',
-    borderWidth: '1px 0 0 0',
+    borderWidth: '0.5px 0 0 0',
     //backgroundColor: theme.palette.neutralQuaternary,
     borderColor: theme.palette.neutralTertiary,
     borderStyle: 'solid',
@@ -88,7 +90,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.mediumPlus.fontSize,
-    marginRight: '2rem',
+    margin: '3px 7px 3px 7px'
   },
 
   actionBar: {
