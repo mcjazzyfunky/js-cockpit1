@@ -25,7 +25,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
 
   tableHead: {
     color: theme.palette.black,
-    backgroundColor: theme.palette.neutralQuaternaryAlt,
+    backgroundColor: theme.palette.neutralLight,
 
     selectors: {
       '& > tr > th': {
@@ -35,7 +35,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         fontSize: theme.fonts.mediumPlus.fontSize,
         fontWeight: 'normal',
         borderWidth: '1px',
-        borderColor: theme.palette.neutralTertiary,
+        borderColor: theme.palette.neutralQuaternary,
         borderStyle: 'solid',
       },
 
@@ -47,11 +47,11 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
             //borderBottomWidth: '1px',
             //borderBottomStyle: 'solid',
             //borderBottomColor: theme.palette.themePrimary,
-            backgroundColor: theme.palette.neutralQuaternary,
+            backgroundColor: theme.palette.neutralQuaternaryAlt,
           },
 
           ':active': {
-            backgroundColor: theme.palette.neutralTertiaryAlt,
+            backgroundColor: theme.palette.neutralQuaternary,
           }
         }
       },

@@ -84,7 +84,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'inline-block',
     fontSize: theme.fonts.xLarge.fontSize,
     marginRight: '2rem',
-    color: theme.palette.themeDarker
+    color: theme.palette.neutralDark,
   },
 
   actionBar: {
