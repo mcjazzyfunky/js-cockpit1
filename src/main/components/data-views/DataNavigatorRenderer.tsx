@@ -65,7 +65,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     flexShrink: 0,
     padding: '3px 5px 1px 5px',
     borderWidth: '1px 0 0 0',
-    borderColor: theme.palette.neutralQuaternary,
+    borderColor: theme.palette.neutralTertiaryAlt,
     borderStyle: 'solid',
   },
 
