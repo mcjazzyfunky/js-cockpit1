@@ -69,10 +69,10 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexShrink: 0,
-    padding: '3px 5px 1px 5px',
+    padding: '4px 5px 1px 5px',
     borderWidth: '0.5px 0 0 0',
     //backgroundColor: theme.palette.neutralQuaternary,
-    borderColor: theme.palette.neutralTertiary,
+    borderColor: theme.palette.neutralTertiaryAlt,
     borderStyle: 'solid',
   },
 
