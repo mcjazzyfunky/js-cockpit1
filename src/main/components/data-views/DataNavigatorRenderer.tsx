@@ -39,6 +39,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
   headerCenter: {
     flexGrow: 1,
+    flexShrink: 1,
   },
 
   headerEnd: {
@@ -62,7 +63,10 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexShrink: 0,
-    padding: '2px 5px',
+    padding: '3px 5px 1px 5px',
+    borderWidth: '1px 0 0 0',
+    borderColor: theme.palette.neutralQuaternary,
+    borderStyle: 'solid',
   },
 
   footerStart: {
@@ -80,7 +84,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'inline-block',
     fontSize: theme.fonts.xLarge.fontSize,
     marginRight: '2rem',
-    //color: theme.palette.themePrimary,
+    //color: theme.palette.themePrimary
   },
 
   actionBar: {
@@ -91,7 +95,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   
   actionButton: {
     backgroundColor: 'transparent',
-    margin: '0 4px',
+    margin: '0 0px',
   },
 
   actionButtonSeparator: {
@@ -116,7 +120,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.themeDarker,
+    backgroundColor: theme.palette.themeDark,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
@@ -276,7 +280,7 @@ class DataNavigatorRenderer {
           action.$kind === 'DataNavigatorSingleRowActionModel' && model.rowSelection.length !== 1
               || action.$kind === 'DataNavigatorMultiRowActionModel' && model.rowSelection.length === 0
 
-      if (idx > 0) {
+      if (idx > 100000) {
         items.push({
           key: `separator-${idx}`,
           onRender: () => <div className={classes.actionButtonSeparator}></div>

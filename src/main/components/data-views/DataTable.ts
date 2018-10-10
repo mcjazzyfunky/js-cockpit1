@@ -41,7 +41,7 @@ const Column = defineComponent<ColumnProps>({
 
   render() {
     throw new Error(
-      'Components of type DataTable.Column only be used as children of '
+      'Components of type DataTable.Column can only be used as children of '
         + 'DataTable components'
     )
   }

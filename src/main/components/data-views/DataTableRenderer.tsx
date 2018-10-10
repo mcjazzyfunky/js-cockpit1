@@ -15,34 +15,28 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     alignItems: 'stretch',
     justifyContent: 'stretch',
     flexGrow: 1,
-    borderWidth: '1px 0 1px 0',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternary,
   },
 
   table: {
     width: '100%',
+    borderCollapse: 'collapse',
+    boxSizing: 'border-box'
   },
 
   tableHead: {
     color: theme.palette.black,
-    backgroundColor: '#f0f0f0', 
+    backgroundColor: theme.palette.neutralLight, 
 
     selectors: {
       '& > tr > th': {
         boxSizing: 'border-box',
-        padding: '0.5rem',
+        padding: '4px',
         verticalAlign: 'center',
         fontSize: theme.fonts.mediumPlus.fontSize,
         fontWeight: 'normal',
-        borderWidth: '0 0 1px 1px',
-        borderLeftColor: theme.palette.neutralQuaternary,
-        borderBottomColor: theme.palette.neutralQuaternary,
+        borderWidth: '1px',
+        borderColor: theme.palette.neutralTertiary,
         borderStyle: 'solid',
-      },
-
-      '& > tr > th:first-child': {
-        borderLeftWidth: 0
       },
 
       '& > tr > th[data-sortable=true]': {
@@ -66,33 +60,28 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-      }
+      },
+      
+      '& > tr > th .ms-Checkbox': {
+        backgroundColor: 'white !important'
+      },
     }
   },
 
   tableBody: {
     selectors: {
       '& > tr': {
-       backgroundColor: theme.palette.neutralLighterAlt,
-      },
-
-      '& > tr:nth-child(even)': {
-        backgroundColor: 'white'
+        backgroundColor: theme.palette.white, 
       },
 
       '& > tr > td': {
         boxSizing: 'border-box',
         padding: '0.375rem',
         fontSize: theme.fonts.medium.fontSize,
-        borderWidth: '0 0 0.5px 0.5px',
-        borderLeftColor: theme.palette.neutralLight,
-        borderBottomColor: theme.palette.neutralLight,
+        borderWidth: '0 0 0.5px 0',
+        borderColor: theme.palette.neutralLight,
         borderStyle: 'solid',
       },
-      
-      '& > tr > td:first-child': {
-        borderLeftWidth: 0
-      }
     }
   },
 

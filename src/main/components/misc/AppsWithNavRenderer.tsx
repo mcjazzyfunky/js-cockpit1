@@ -11,7 +11,7 @@ import faker from 'faker'
 
 const data: any[] = []
 
-for(let i = 0; i < 1213; ++i) {
+for(let i = 0; i < 13; ++i) {
   data.push({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),

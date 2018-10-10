@@ -24,6 +24,7 @@ const styleControlCenter = defineStyle((theme: ITheme) => {
     header: {
       display: 'flex',
       alignItems: 'stretch',
+      flexShrink: 0,
       height: '42px',
       minWidth: '100%',
       color: '#f0f0f0',
