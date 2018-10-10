@@ -23,14 +23,19 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
+    //border: '1px solid ' + theme.palette.neutralLight,
   },
 
   header: {
     display: 'flex',
     alignItems: 'center',
     flexShrink: 0,
-    padding: '0.25rem 0.5rem 0 0.5rem',
-    height: '54px',
+    padding: '4px 8px',
+    color: 'black', 
+    backgroundColor:  theme.palette.neutralLighterAlt,
+    borderWidth: '1px 1px 0 1px',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralQuaternary
   },
 
   headerStart: {
@@ -65,7 +70,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     flexShrink: 0,
     padding: '3px 5px 1px 5px',
     borderWidth: '1px 0 0 0',
-    borderColor: theme.palette.neutralTertiaryAlt,
+    borderColor: theme.palette.neutralQuaternary,
     borderStyle: 'solid',
   },
 
@@ -82,9 +87,8 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
 
   title: {
     display: 'inline-block',
-    fontSize: theme.fonts.xLarge.fontSize,
+    fontSize: theme.fonts.large.fontSize,
     marginRight: '2rem',
-    color: theme.palette.neutralDark,
   },
 
   actionBar: {
