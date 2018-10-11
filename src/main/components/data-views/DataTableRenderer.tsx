@@ -1,10 +1,13 @@
+// internal imports
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
-import React from 'react'
-import { Checkbox, ITheme } from 'office-ui-fabric-react'
 import { DataTableModel, DataTableColumnModel } from './DataTable'
 import SortAscIcon from '../../icons/SortAscIcon'
 import SortDescIcon from '../../icons/SortDescIcon'
-import { throttleTime } from 'rxjs/operators';
+
+// external imports
+import React from 'react'
+import { css, Checkbox, ITheme } from 'office-ui-fabric-react'
+import { AutoSizer, Column, Table } from 'react-virtualized'
 
 // --- DataTableStyle -----------------------------------------------
 
@@ -15,31 +18,42 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     alignItems: 'stretch',
     justifyContent: 'stretch',
     flexGrow: 1,
-  },
+    overflow: 'hidden',
 
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    boxSizing: 'border-box'
+    selectors: {
+      '& .ReactVirtualized__Table__Grid': {
+        outline: 'none',
+      }
+    }
   },
 
   tableHead: {
-    color: theme.palette.black,
-    backgroundColor:  theme.palette.neutralLighter,
+    display: 'flex',
+    alignItems: 'stretch !important',
+    justifyContent: 'stretch',
+    flexWrap: 'nowrap',
 
     selectors: {
-      '& > tr > th': {
+      '& > *': {
+        display: 'flex',
+        justifyContent: 'center',
         boxSizing: 'border-box',
         padding: '5px',
-        verticalAlign: 'center',
-        fontSize: theme.fonts.mediumPlus.fontSize,
-        fontWeight: 'normal',
-        borderWidth: '1px',
+        color: theme.palette.black,
+        backgroundColor: theme.palette.neutralLighter,
+        borderWidth: '1px 0 1px 1px',
         borderColor: theme.palette.neutralTertiaryAlt,
         borderStyle: 'solid',
+        fontSize: theme.fonts.mediumPlus.fontSize,
+        fontWeight: 'normal',
+        textTransform: 'none',
       },
 
-      '& > tr > th[data-sortable=true]': {
+      '& > *:last-child': {
+        borderRightWidth: '1px'
+      },
+
+      '& > *[data-sortable=true]': {
         cursor: 'pointer',
         
         selectors: {
@@ -55,17 +69,12 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
           }
         }
       },
-      
-      '& > tr > th > div': {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      
-      '& > tr > th .ms-Checkbox': {
-        backgroundColor: 'white !important'
-      },
     }
+  },
+
+  tableHeadCellContent: {
+    display: 'flex',
+    whiteSpace: 'nowrap',
   },
 
   tableBody: {
@@ -85,6 +94,18 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     }
   },
 
+  tableRow: {
+    borderWidth: '0 0 1px 0',
+    borderColor: theme.palette.neutralLight,
+    borderStyle: 'solid',
+    fontSize: '14px',
+  },
+
+  dataCell: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
+
   alignCenter: {
     textAlign: 'center'
   },
@@ -94,12 +115,12 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   },
 
   rowSelectionColumn: {
-    width: '38px',
+    width: '32px',
     boxSizing: 'border-box',
     margin: 0,
     padding: 0,
 
-    selectors: {
+      selectors: {
       '& > div': {
         overflow: 'hidden',
         display: 'flex',
@@ -125,12 +146,54 @@ class DataTableRenderer {
     const rowSelectionMode = model.rowSelectionOptions.mode
 
     return styleDataTable(classes => {
-      return (
+       return (
         <div className={classes.container}>
-          <table cellSpacing={0} cellPadding={0} className={classes.table}>
-            {createTableHead(model, classes)}
-            {createTableBody(model, classes)}
-          </table>
+          <AutoSizer>
+            {
+              ({ width, height }) => { 
+                const
+                  columnWidths = calculateColumnWidths(model, width),
+  
+                  dataColumns = 
+                    model.columns.map((column, columnIndex)  =>
+                      <Column
+                        width={columnWidths.dataColumns[columnIndex]}
+                        label={column.title}
+                        dataKey={column.field}
+                        cellRenderer={({ rowIndex }) =>
+                          createTableBodyCell(columnIndex, model, model.data[rowIndex], classes)}
+                      />
+                    )
+
+                if (model.rowSelectionOptions.mode !== 'none') {
+                  dataColumns.unshift(
+                    <Column
+                      width={columnWidths.selectorColumn}
+                      dataKey={null}
+                      cellRenderer={({ rowIndex }) =>
+                        createSelectCheckbox(rowIndex, model)}
+                    />
+                  )
+                }
+
+
+                return (
+                  <Table
+                    width={width}
+                    height={height - 10}
+                    headerHeight={20}
+                    rowHeight={28}
+                    rowCount={model.data.length}
+                    rowGetter={({ index }) => model.data[index]}
+                    headerRowRenderer={(params: any) => createHeaderRow(model, columnWidths, classes)}
+                    rowClassName={classes.tableRow}
+                  >
+                    {dataColumns}
+                  </Table>
+                )
+              }
+            }
+          </AutoSizer>
         </div>
       )
     })
@@ -139,14 +202,52 @@ class DataTableRenderer {
 
 // --- locals -------------------------------------------------------
 
-function createTableHead(model: DataTableModel, classes: DataTableClasses) {
+function calculateColumnWidths(model: DataTableModel, totalWidth: number) {
+  const
+    hasSelectorColumn = model.rowSelectionOptions.mode !== 'none',
+    selectorColumnWidth = hasSelectorColumn ? 32 : 0,
+    columns = model.columns,
+    columnCount = columns.length,
+
+    ret = {
+      selectorColumn: selectorColumnWidth,
+      dataColumns: [] as number[]
+    }
+
+    const
+      realTotal = totalWidth - selectorColumnWidth,
+
+      ratioTotal = columns.reduce((sum, col) => {
+        return sum + col.width
+      }, 0)
+
+    let sumRealWidths = 0 
+
+    for (let i = 0; i < columnCount; ++i) {
+      const
+        column = columns[i],
+  
+        realWidth =
+          i < columnCount - 1
+            ? Math.round(column.width * realTotal / ratioTotal)
+            : realTotal - sumRealWidths - 0.5 // TODO: why -0.5
+
+      sumRealWidths += realWidth
+
+      ret.dataColumns.push(realWidth)
+    }
+
+    return ret
+}
+
+function createHeaderRow(model: DataTableModel, columnWidths: any,  classes: DataTableClasses) {
   const
     selectionMode = model.rowSelectionOptions.mode,
 
     selectionColumn =
       selectionMode === 'none'
         ? null
-        : <th className={classes.rowSelectionColumn}>
+        : <div className={classes.rowSelectionColumn} style={{ minWidth: columnWidths.selectorColumn }}>
             <div>
               {
                 selectionMode === 'multi'
@@ -154,22 +255,20 @@ function createTableHead(model: DataTableModel, classes: DataTableClasses) {
                   : null
               }
             </div>
-          </th>
+          </div>
 
   return (
-    <thead className={classes.tableHead}>
-      <tr>
-        {selectionColumn}
-        {
-          model.columns.map((column, columnIdx) =>
-            createTableHeadCell(columnIdx, column, model, classes))
-        }
-      </tr>
-    </thead>
+    <div className={css('ReactVirtualized__Table__headerRow', classes.tableHead)}>
+      {selectionColumn}
+      {
+        model.columns.map((column, columnIdx) =>
+          createTableHeadCell(columnIdx, column, model, columnWidths.dataColumns[columnIdx], classes))
+      }
+    </div>
   )
 }
 
-function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, model: DataTableModel, classes: DataTableClasses) {
+function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, model: DataTableModel, width: number, classes: DataTableClasses) {
   const
     sortable = model.columns[columnIdx].sortable,
     sortBy = model.sortBy,
@@ -193,23 +292,12 @@ function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, mo
         } 
 
   return (
-    <th key={columnIdx} data-sortable={String(sortable)} onClick={onClick}>
-      <div>
+    <div key={columnIdx} data-sortable={String(sortable)} onClick={onClick} style={{ width, minWidth: width, maxWidth: width }}>
+      <div className={classes.tableHeadCellContent}>
         {column.title}
         {sortIcon}
       </div>
-    </th>
-  )
-}
-
-function createTableBody(model: DataTableModel, classes: DataTableClasses) {
-  return (
-    <tbody className={classes.tableBody}>
-      {
-        model.data.map((row, rowIdx) => 
-          createTableBodyRow(rowIdx, model, classes))
-      }
-    </tbody>
+    </div>
   )
 }
 
@@ -221,10 +309,10 @@ function createTableBodyRow(rowIndex: number, model: DataTableModel, classes: Da
     selectionColumn =
       selectionMode === 'none'
         ? null
-        : <td className={classes.rowSelectionColumn}>
+        : <div className={classes.rowSelectionColumn}>
             <div>{createSelectCheckbox(rowIndex, model)}
             </div>
-          </td>
+          </div>
 
   return (
     <tr key={rowIndex} className={model.rowSelection.has(rowIndex) ? classes.selectedRow : null }>
@@ -242,15 +330,15 @@ function createTableBodyCell(columnIndex: number, model: DataTableModel, row: an
 
   const className =
     column.align === 'center'
-      ? classes.alignCenter
+      ? css(classes.dataCell, classes.alignCenter)
       : column.align === 'end'
-      ? classes.alignEnd
-      : null
+      ? css(classes.dataCell, classes.alignEnd)
+      : classes.dataCell
 
   return (
-    <td key={columnIndex} className={className}>
+    <div key={columnIndex} className={className}>
       {row[column.field]}
-    </td>
+    </div>
   )
 }
 

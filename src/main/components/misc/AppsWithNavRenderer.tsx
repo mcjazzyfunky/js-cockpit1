@@ -102,7 +102,7 @@ export default {
                   const newData = data.slice(params.offset, params.offset + params.count)
 
                   return observableOf({data: newData, totalItemCount: data.length })
-                    .pipe(delay(500))
+                    .pipe(delay(1000))
                 }
               }
             >

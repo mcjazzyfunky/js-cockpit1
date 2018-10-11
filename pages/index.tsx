@@ -35,6 +35,7 @@ export default class extends React.Component {
       ReactDOM.render(
         <div>
            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+           <link rel="stylesheet" href="//unpkg.com/react-virtualized/styles.css"/>
            <Demo/>
         </div>,
         this.container)

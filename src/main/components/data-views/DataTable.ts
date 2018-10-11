@@ -201,7 +201,8 @@ const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
         title: props.title,
         field: props.field || null,
         align: props.align || null,
-        sortable: props.sortable || false
+        sortable: props.sortable || false,
+        width: props.width
       }
     }
   }
@@ -234,7 +235,8 @@ type DataTableColumnModel = {
   title: string,
   field: string | null,
   align: 'start' | 'center' | 'end' | null,
-  sortable: boolean
+  sortable: boolean,
+  width: number
 }
 
 // --- exports ------------------------------------------------------

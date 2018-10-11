@@ -167,7 +167,7 @@ class DataNavigatorRenderer {
         model.columns.map((column, columnIdx) => {
           const props: DataTableColumnProps = {
             title: column.title,
-            width: column.withRatio
+            width: column.width
           }
 
           if (column.field !== null) {
@@ -204,7 +204,7 @@ class DataNavigatorRenderer {
               ref={(it: any) => { this._dataTable = it }}
               data={model.data}
               rowSelectionOptions={{
-                mode: 'multi'
+                mode: 'multi' // TODO
               }}
 
               sortBy={model.sortBy}
