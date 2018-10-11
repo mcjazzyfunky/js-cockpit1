@@ -13,6 +13,7 @@ type ColumnProps = {
   title?: string, 
   field?: string,
   align?: 'start' | 'center' | 'end',
+  width?: number,
   sortable?: boolean
 }
 
@@ -36,6 +37,11 @@ const Column = defineComponent<ColumnProps>({
 
     sortable: {
       type: Boolean
+    },
+
+    width: {
+      type: Number,
+      defaultValue: 200
     }
   },
 
@@ -95,7 +101,8 @@ const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
     },
 
     sortBy: {
-      type: String
+      type: String,
+      nullable: true
     },
 
     sortDesc: {

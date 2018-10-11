@@ -107,7 +107,8 @@ type ColumnProps = {
   title: string,
   field?: string,
   align?: 'start' | 'center' | 'end'
-  sortable?: boolean
+  sortable?: boolean,
+  width?: number
 }
 
 const Column = defineComponent<ColumnProps>({
@@ -130,6 +131,11 @@ const Column = defineComponent<ColumnProps>({
 
     sortable: {
       type: Boolean
+    },
+
+    width: {
+      type: Number,
+      defaultValue: 200
     }
   },
 
@@ -358,7 +364,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 title: child2.props.title,
                 field: child2.props.field || null,
                 align: child2.props.align || null,
-                sortable: child2.props.sortable || false
+                sortable: child2.props.sortable || false,
+                width: child2.props.width
               })
             })
 
@@ -446,7 +453,8 @@ type DataNavigatorModel = {
     title: string,
     field: string | null,
     align: 'start' | 'center' | 'end' | null,
-    sortable: boolean
+    sortable: boolean,
+    width: number
   }[],
 
   api: {

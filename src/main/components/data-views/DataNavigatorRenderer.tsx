@@ -166,7 +166,8 @@ class DataNavigatorRenderer {
       tableColumns: ReactElement<DataTableProps>[] =
         model.columns.map((column, columnIdx) => {
           const props: DataTableColumnProps = {
-            title: column.title
+            title: column.title,
+            width: column.withRatio
           }
 
           if (column.field !== null) {
@@ -229,8 +230,6 @@ class DataNavigatorRenderer {
         </div>
       )
     })
-
-    this._isInitalized = true
 
     return ret
   }

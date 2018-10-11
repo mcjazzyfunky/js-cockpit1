@@ -19,6 +19,8 @@ loadTheme({
   }
 })
 
+const AsyncMode = (React as any).unstable_AsyncMode 
+
 export default function Demo() {
   /*
   return (
@@ -35,6 +37,7 @@ export default function Demo() {
   */
 
   return (
+    <AsyncMode>
     <ControlCenter vendor="meet+greet" title="Back Office">
       <ControlCenter.Apps>
         <ControlCenter.App name="admin" title="Administration">
@@ -42,6 +45,7 @@ export default function Demo() {
         </ControlCenter.App>
       </ControlCenter.Apps>
     </ControlCenter>
+    </AsyncMode>
   )
 }
 
