@@ -88,7 +88,7 @@ const styleLoginForm = defineStyle(theme => ({
 type LoginFormProps = {
   performLogin?:
     (params: { username: string, password: string, remember: boolean }) =>
-      Promise<{ status: 'success', fullName: string } | { status: 'error', errorMessage: string }>
+      Promise<{ fullName: string }>
 
   className?: string,
   style?: CSSProperties,
@@ -181,7 +181,7 @@ const LoginForm = defineComponent<LoginFormProps>({
           try {
             this.props.performLogin(loginParams)
               .then(result => {
-                if (result && result.status === 'success'
+                if (result
                   && typeof result.fullName === 'string'
                   && result.fullName.trim() !== '') {
                   
@@ -190,19 +190,27 @@ const LoginForm = defineComponent<LoginFormProps>({
                     () => setTimeout(
                       () => alert(result.fullName + ' has been logged in successfully'), 100))
                 } else {
-                  const errorResult: any = result
-
-                  const errorMsg =
-                    errorResult && typeof errorResult.errorMessage === 'string'
-                      && errorResult.errorMessage.trim() !== ''
-                        ? 'Error: ' + errorResult.errorMessage
-                        : 'Error: Could not log in'
-console.log(result)
                   this.setState({
                     loading: false,
-                    generalErrorMsg: errorMsg
+                    generalErrorMsg: 'Error: Could not log in'
                   })
                 }
+              })
+              .catch(error => {
+                let errorMsg = ''
+
+                if (error instanceof Error) {
+                  errorMsg = 'Error: ' + String(error.message).trim()
+                } else if (typeof error === 'string' && error.trim() !== '') {
+                  errorMsg = 'Error: ' + error 
+                } else {
+                  errorMsg = 'Error: Could not log in'
+                }
+
+                this.setState({
+                  loading: false,
+                  generalErrorMsg: errorMsg
+                })
               })
           } catch (e) {
             this.setState({

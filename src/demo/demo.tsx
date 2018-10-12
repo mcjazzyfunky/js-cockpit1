@@ -27,8 +27,7 @@ export default function Demo() {
         <LoginForm
           performLogin={
             ({ username, password, remember }) =>
-              Promise.resolve({ status: 'success' as 'success', fullName: 'Jimmy Jumper' })
-              //Promise.resolve({ status: 'success' as 'success', fullName: 'Jimmy Jumper' })
+              Promise.resolve({ fullName: 'Jimmy Jumper' })
           }
         >
           <LoginForm.Header>
