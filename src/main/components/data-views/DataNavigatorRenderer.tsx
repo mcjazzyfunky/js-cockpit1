@@ -11,9 +11,10 @@ import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 import SortChangeEvent from '../../events/SortChangeEvent'
 
 // extenal imports
-import React, { ReactElement } from 'react'
-import { css, CommandBar, DefaultButton, ITheme, Link, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
-import Color from 'color'
+import React, { ReactElement, Ref } from 'react'
+import { defineComponent } from 'js-react-utils'
+import { css, ActionButton, Callout, CommandBar, DefaultButton, ITheme, SearchBox, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
+import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 
 // --- DataNavigatorStyle -------------------------------------------
 
@@ -31,7 +32,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     flexGrow: 0,
     flexShrink: 0,
-    padding: '2px 10px',
+    padding: '2px 0 2px 10px',
     height: '40px',
     boxSizing: 'border-box',
     margin: '0 0 -1px 0',
@@ -49,14 +50,11 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   headerCenter: {
+    flexGrow: 1
   },
 
   headerEnd: {
-  },
 
-  searchBox: {
-    width: '15rem',
-    marginRight: '0.25rem',
   },
 
   content: {
@@ -103,17 +101,22 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   
   actionButton: {
     backgroundColor: 'transparent',
+    borderRadius: '3px',
 
     selectors: {
-      ':active': {
+      ':hover': {
         backgroundColor: theme.palette.neutralTertiaryAlt
+      },
+  
+      ':active': {
+        backgroundColor: theme.palette.neutralTertiary
       }
     }
   },
 
   actionIcon: {
     margin: '2px 5px 0 0',
-    color: theme.palette.themePrimary
+    color: theme.palette.themePrimary,
   },
 
   actionIconDisabled: {
@@ -126,6 +129,15 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     borderStyle: 'solid',
     borderColor: '#aaa',
     margin: '13px 3px 0 3px'
+  },
+
+  searchBar: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+
+  searchBox: {
+    height: '32px',
   },
 
   loadingPanel: {
@@ -262,6 +274,7 @@ class DataNavigatorRenderer {
             { this._renderActionBar(model, classes) }
         </div>
         <div className={classes.headerEnd}>
+          <SearchBar />
         </div>
       </div>
     ) 
@@ -365,6 +378,172 @@ class DataNavigatorRenderer {
       () => this._dataTable.unselectAllRows())
   }
 }
+
+// --- SearchBar ----------------------------------------------------
+
+const styleSearchBar = defineStyle((theme: ITheme) => ({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  searchBox: {
+    height: '32px'
+  },
+
+  advancedFilter: {
+    padding: '0 16px 0 0',
+  },
+
+  filterButton: {
+    fontSize: '12px',
+    height: '30px',
+    marginLeft: '8px',
+  },
+
+  filterButtonActive: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.themePrimary,
+  },
+
+  icon: {
+    color: theme.palette.themePrimary
+  },
+
+  filterContainer: {
+    width: '400px',
+    minHeight: '200px'
+  }
+}))
+
+type SearchBarProps = {
+}
+
+type SearchBarState = {
+  advancedFilterActive: boolean,
+  calloutVisible: boolean
+}
+
+const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
+  displayName: 'SearchBar',
+
+  base: class extends React.Component<SearchBarProps, SearchBarState> {
+    private _advancedFilterRef: any = null // TODO
+
+    constructor(props: SearchBarProps) {
+      super(props)
+
+      this.state = {
+        advancedFilterActive: false,
+        calloutVisible: false 
+      }
+    }
+
+    render() {
+      const
+        advancedFilterActive = this.state.advancedFilterActive,
+        calloutVisible = this.state.calloutVisible
+        
+      return styleSearchBar(classes => {
+        const actionButtonClass =
+          advancedFilterActive || calloutVisible
+            ? css(classes.filterButton, classes.filterButtonActive) 
+            : classes.filterButton
+  
+        return (
+          <div className={classes.container}>
+            {
+              !advancedFilterActive && 
+                <SearchBox
+                  className={classes.searchBox}
+                  disableAnimation={true}
+                />
+            }
+            <div className={classes.advancedFilter} ref={ it => this._advancedFilterRef = it }>
+              <ActionButton
+                text="Advanced Filter"
+                className={classes.filterButton}
+                iconProps={{ iconName: 'icon' }}
+              
+                onClick={
+                  () => this.setState(
+                    state => ({
+                      advancedFilterActive: !state.advancedFilterActive,
+                      calloutVisible: !state.advancedFilterActive
+                    }))
+                }
+
+                onRenderIcon={
+                  () =>
+                    advancedFilterActive || calloutVisible
+                      ? <MdCheck/>
+                      : <MdFilterList/>
+                }
+              />
+            </div>
+            {
+                <Callout
+                  hidden={!calloutVisible}
+                  target={this._advancedFilterRef}
+                  setInitialFocus={true}
+                  onDismiss={ () => this._closeCallout()}
+                >
+                  <div className={classes.filterContainer}>
+                    Juhuxx
+                  </div>
+                  <CommandBar
+                    items={[
+                      {
+                        text: 'Apply filter',
+                        key: '1',
+
+                        iconProps: {
+                          iconName: 'applyFilter'
+                        },
+
+                        onRenderIcon: () => <MdFilterList className={classes.icon}/>
+                      },
+                      {
+                        text: 'Cancel',
+                        key: '2',
+                        
+                        iconProps: {
+                          iconName: 'cancel'
+                        },
+
+                        onRenderIcon: () => <MdClose className={classes.icon}/>
+                      }
+                    ]}
+
+                    farItems={[
+                      {
+                        text: 'Reset',
+                        key: '2',
+
+                        iconProps: {
+                          iconName: 'undo'
+                        },
+
+                        onRenderIcon: () => <MdUndo className={classes.icon}/>
+                      }
+                    ]}
+
+                  />
+              </Callout>
+            }
+          </div>
+        )
+      })
+    }
+
+    private _closeCallout() {
+      this.setState(state => ({
+        advancedFilterActive: false,
+        calloutVisible: false
+      }))
+    }
+  }
+})
 
 // --- exports ------------------------------------------------------
 
