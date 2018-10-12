@@ -2,82 +2,12 @@
 import defineStyle from '../../../../../styling/defineStyle'
 
 // external imports
-import React, { ReactNode, ReactElement, CSSProperties } from 'react';
-import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils';
-import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
+import React, { ReactNode, ReactElement, CSSProperties } from 'react'
+import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils'
+import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
 import { Spec } from 'js-spec'
 
-// --- LoginForm ----------------------------------------------------
-
-const styleLoginForm = defineStyle(theme => {
-  return {
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: '320px',
-      minHeight: '380px',
-      textAlign: 'left',
-      backgroundColor: theme.palette.white,
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: theme.palette.neutralSecondary,
-    },
-
-    header: {
-      borderWidth: '0 0 1px 0',
-      borderStyle: 'solid',
-      borderColor: theme.palette.neutralTertiary,
-      padding: '1rem 1.5rem',
-    },
-
-    content: {
-      flexGrow: 1,
-      padding: '1rem 1.5rem',
-    },
-
-    footer: {
-      padding: '1rem 1.5rem',
-    },
-
-    remember: {
-      margin: '1.25rem 0 0 0',
-    },
-
-    loadingIndicator: {
-      display: 'inline-block',
-      margin: '0 0 0 0.75rem',
-    }
-  }
-})
-
-const validationConfig = {
-  fields: [
-    {
-      name: 'username',
-
-      rules: [
-        {
-          condition: (it: string) => !!it,
-          errorMsg: 'Please enter your username'
-        }
-      ]
-    },
-    {
-      name: 'password',
-
-      rules: [
-        {
-          condition: (it: string) => !!it,
-          errorMsg: 'Please enter your password'
-        }
-      ]
-    },
-    {
-      name: 'remember',
-      rules: []
-    }
-  ]
-};
+// --- LoginForm.Header ---------------------------------------------
 
 type HeaderProps = {
   children: ReactNode
@@ -99,15 +29,75 @@ const Header = defineComponent<HeaderProps>({
   }
 })
 
+// --- LoginForm ----------------------------------------------------
+
+const styleLoginForm = defineStyle(theme => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '320px',
+    minHeight: '380px',
+    textAlign: 'left',
+    backgroundColor: theme.palette.white,
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralSecondary,
+  },
+
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+  },
+
+  header: {
+    borderWidth: '0 0 1px 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralTertiary,
+    padding: '1rem 1.5rem',
+  },
+
+  content: {
+    flexGrow: 1,
+    padding: '1rem 1.5rem',
+  },
+
+  footer: {
+    padding: '1rem 1.5rem',
+  },
+
+  remember: {
+    margin: '1.25rem 0 0 0',
+  },
+
+  submitButton: {
+    width: '100%'
+  },
+
+  loadingIndicator: {
+    display: 'inline-block',
+    margin: '0 0 0 0.75rem',
+  }
+}))
+
 type LoginFormProps = {
-  performLogin?: Function,
+  performLogin?:
+    (params: { username: string, password: string, remember: boolean }) =>
+      Promise<{ fullName: string }>
+
   className?: string,
   style?: CSSProperties,
   children?: ReactNode
 }
 
 type LoginFormState = {
-  loading: boolean
+  username: string,
+  password: string,
+  remember: boolean,
+  usernameErrorMsg: string,
+  passwordErrorMsg: string,
+  generalErrorMsg: string
+  loading: boolean,
 }
 
 const LoginForm = defineComponent<LoginFormProps>({
@@ -131,33 +121,66 @@ const LoginForm = defineComponent<LoginFormProps>({
     },
 
     children: {
-      validate: withChildren(Spec.all(isElementOfType(Header)))
+      validate:
+        withChildren(Spec.all(isElementOfType(Header)))
     }
   },
 
   base: class extends React.Component<LoginFormProps, LoginFormState> {
     constructor(props: LoginFormProps) {
-      super(props);
+      super(props)
 
-      this.state = { loading: false };
-      this.onSubmit = this.onSubmit.bind(this);
+      this.state = {
+        username: '',
+        password: '',
+        remember: false,
+        usernameErrorMsg: '',
+        passwordErrorMsg: '',
+        generalErrorMsg: '',
+        loading: false
+      }
+
+      this._onSubmit = this._onSubmit.bind(this)
     }
 
-    onSubmit(ev: any) { // TODO
-      if (!this.state.loading) {
-        this.setState({ loading: true });
+    private _onSubmit(ev: any) { // TODO
+      ev.preventDefault()
 
-        if (this.props.performLogin) {
-          try {
-            this.props.performLogin(ev.data)
-              .then((data: any) => { // TODO
-                console.log('Login data: ', data);
-                this.setState({ loading: false },
-                  () => setTimeout(() => alert('Logged in successfully'), 100));
-              });
-          } catch (e) {
-            throw e;
-          }
+      const
+        usernameGiven = this.state.username.trim().length > 0,
+        passwordGiven = this.state.password.trim().length > 0
+
+      if (!usernameGiven || !passwordGiven) {
+        this.setState({
+          usernameErrorMsg:
+            usernameGiven ? '' : 'Please enter username',
+
+          passwordErrorMsg:
+            passwordGiven ? '' : 'Please enter password',
+
+          generalErrorMsg: ''
+        })
+      } else if (typeof this.props.performLogin === 'function' && !this.state.loading) {
+        this.setState({
+          generalErrorMsg: '',
+          loading: true
+        })
+
+        const loginParams = {
+          username: this.state.username,
+          password: this.state.password,
+          remember: this.state.remember
+        }
+
+        try {
+          this.props.performLogin(loginParams)
+            .then(({ fullName }) => {
+              alert(fullName)
+              this.setState({ loading: false },
+                () => setTimeout(() => alert(fullName + ' has been logged in successfully'), 100))
+            })
+        } catch (e) {
+          throw e
         }
       }
     }
@@ -167,7 +190,7 @@ const LoginForm = defineComponent<LoginFormProps>({
         loginButtonText =
           this.state.loading
             ? 'Logging in...'
-            : 'Log in';
+            : 'Log in'
 
       let
         header: ReactElement<any> = null, // TODO
@@ -194,39 +217,67 @@ const LoginForm = defineComponent<LoginFormProps>({
                   size={SpinnerSize.small}
                 />
               </div>
-            : null;
+            : null
 
         return (
           <div className={classes.container}>
             { headerBox }
-            <div className={classes.content}>
-              <div>
+            <form onSubmit={this._onSubmit} className={classes.form}>
+              <div className={classes.content}>
                 <TextField
                   name="username"
                   label="User name"
                   autoComplete="off"
                   disabled={this.state.loading}
+                  value={this.state.username}
+                  errorMessage={this.state.usernameErrorMsg}
+
+                  onChange={
+                    event => this.setState({
+                      username: (event.target as any).value,
+                      usernameErrorMsg: '',
+                      passwordErrorMsg: '',
+                      generalErrorMsg: ''
+                    })
+                  }
                 />
                 <TextField
                   name="password"
                   label="Password"
                   type="password"
                   disabled={this.state.loading}
+                  value={this.state.password}
+                  errorMessage={this.state.passwordErrorMsg}
+                  
+                  onChange={
+                    event => this.setState({
+                      password: (event.target as any).value,
+                      usernameErrorMsg: '',
+                      passwordErrorMsg: '',
+                      generalErrorMsg: ''
+                    })
+                  }
                 />
                 <Checkbox
                   name="remember"
                   label="Remember me"
                   className={classes.remember}
                   disabled={this.state.loading}
+
+                  onChange={
+                    event => this.setState({
+                      remember: (event.target as any).checked
+                    })
+                  }
                 />
               </div>
-            </div>
-            <div className={classes.footer}>
-              <PrimaryButton type="submit" style={{width: '100%' }}>
-                {loginButtonText}
-                {loadingIndicator}
-              </PrimaryButton>
-            </div>
+              <div className={classes.footer}>
+                <PrimaryButton type="submit" className={classes.submitButton}>
+                  {loginButtonText}
+                  {loadingIndicator}
+                </PrimaryButton>
+              </div>
+            </form>
           </div>
         )
       })

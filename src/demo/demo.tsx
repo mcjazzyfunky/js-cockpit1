@@ -24,7 +24,12 @@ export default function Demo() {
  const loginScreen =  
     <LoginScreen>
       <LoginScreen.Content>
-        <LoginForm>
+        <LoginForm
+          performLogin={
+            ({ username, password, remember }) =>
+              Promise.resolve({ fullName: 'Jimmy Jumper' })
+          }
+        >
           <LoginForm.Header>
             <Brand vendor="meet+greet" title="Back Office - Login" size="large"/>
           </LoginForm.Header>
@@ -41,7 +46,7 @@ export default function Demo() {
       </ControlCenter.Apps>
     </ControlCenter>
 
-  return loginScreen 
+  return loginScreen
 }
 
 const AdministrationApp = defineComponent({
