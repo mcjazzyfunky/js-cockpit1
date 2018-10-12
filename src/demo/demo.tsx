@@ -26,7 +26,7 @@ export default function Demo() {
       <LoginScreen.Content>
         <LoginForm>
           <LoginForm.Header>
-            <Brand vendor="meet+greet" title="Back Office" size="large"/>
+            <Brand vendor="meet+greet" title="Back Office - Login" size="large"/>
           </LoginForm.Header>
         </LoginForm>
       </LoginScreen.Content>

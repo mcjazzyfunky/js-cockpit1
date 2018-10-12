@@ -6,8 +6,6 @@ import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import { css } from 'office-ui-fabric-react' 
 import { Spec } from 'js-spec/dev-only'
-import { FiLayers } from 'react-icons/fi'
-import { FiLayout } from 'react-icons/fi'
 import { FiLoader } from 'react-icons/fi'
 
 // --- Brand --------------------------------------------------------
@@ -48,7 +46,8 @@ const styleBrand = defineStyle(theme => ({
   },
 
   titleLarge: {
-    fontSize: theme.fonts.xLarge.fontSize + ' !important',
+    fontSize: theme.fonts.large.fontSize + ' !important',
+    margin: 0
   },
 
   logo: {
