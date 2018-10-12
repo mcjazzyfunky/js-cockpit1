@@ -70,6 +70,11 @@ const styleLoginForm = defineStyle(theme => ({
     margin: '1.25rem 0 0 0',
   },
 
+  generalError: {
+    marginTop: '2rem',
+    color: theme.semanticColors.errorText
+  },
+
   submitButton: {
     width: '100%'
   },
@@ -172,16 +177,24 @@ const LoginForm = defineComponent<LoginFormProps>({
           remember: this.state.remember
         }
 
-        try {
-          this.props.performLogin(loginParams)
-            .then(({ fullName }) => {
-              alert(fullName)
-              this.setState({ loading: false },
-                () => setTimeout(() => alert(fullName + ' has been logged in successfully'), 100))
+        setTimeout(() => {
+          try {
+            this.props.performLogin(loginParams)
+              .then(({ fullName }) => {
+                this.setState({
+                    loading: false
+                 },
+                 () => setTimeout(
+                    () => alert(fullName + ' has been logged in successfully'),
+                    100))
+              })
+          } catch (e) {
+            this.setState({
+              loading: false,
+              generalErrorMsg: 'Error: Could not log in'
             })
-        } catch (e) {
-          throw e
-        }
+          }
+        }, 1000)
       }
     }
 
@@ -270,6 +283,9 @@ const LoginForm = defineComponent<LoginFormProps>({
                     })
                   }
                 />
+                <div className={classes.generalError}>
+                    {this.state.generalErrorMsg}
+                </div>
               </div>
               <div className={classes.footer}>
                 <PrimaryButton type="submit" className={classes.submitButton}>
