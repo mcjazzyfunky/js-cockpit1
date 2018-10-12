@@ -9,7 +9,7 @@ import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import faker from 'faker'
 import { FaBeer } from 'react-icons/fa'
-import { MdAddCircleOutline, MdEdit, MdRemove, MdAddCircle, MdRemoveCircle } from 'react-icons/md'
+import { MdAddCircleOutline, MdEdit, MdRemove, MdAddCircle, MdRemoveCircle, MdArrowDropDownCircle, MdRemoveCircleOutline, MdAdd } from 'react-icons/md'
 import { FiPlusSquare, FiEdit, FiMinusSquare, FiPlusCircle, FiMinusCircle } from 'react-icons/fi'
 
 const data: any[] = []
@@ -112,15 +112,15 @@ export default {
               <DataNavigator.Actions>
                 <DataNavigator.GeneralAction
                   title="Add"
-                  icon={<FiPlusCircle/>}
+                  icon={<MdAddCircleOutline/>}
                 />
                 <DataNavigator.SingleRowAction
                   title="Edit"
-                  icon={<FiEdit/>}
+                  icon={<MdEdit/>}
                 />
                 <DataNavigator.MultiRowAction
                   title="Delete"
-                  icon={<FiMinusCircle/>}
+                  icon={<MdRemoveCircleOutline/>}
                 />
               </DataNavigator.Actions>
               <DataNavigator.Columns>

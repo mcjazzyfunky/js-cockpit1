@@ -101,7 +101,6 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   
   actionButton: {
     backgroundColor: 'transparent',
-    borderRadius: '3px',
 
     selectors: {
       ':hover': {
