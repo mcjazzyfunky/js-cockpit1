@@ -72,6 +72,7 @@
     "office-ui-fabric-react": "^6.75.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-virtualized": "^9.20.1",
     "rxjs": "^6.3.3"
   },
   "scripts": {

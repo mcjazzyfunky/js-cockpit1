@@ -1,16 +1,20 @@
+// internal imports
 import defineStyle from '../../../../../styling/defineStyle'
+
+// external imports
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode, isElementOfType, withChildren } from 'js-react-utils'
-import { ITheme } from 'office-ui-fabric-react'
 import { Spec } from 'js-spec'
 import Color from 'color'
 
-const styleLoginScreen = defineStyle((theme: ITheme) => {
+// --- LoginScreen --------------------------------------------------
+
+const styleLoginScreen = defineStyle(theme => {
   const
+    gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
+    gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
     //gradientStartColor = Color(theme.palette.themePrimary).lighten(0.4).desaturate(0.4),
     //gradientEndColor = Color(theme.palette.themePrimary).darken(0.2).desaturate(0.4)
-    gradientStartColor = Color('#f0f0f0'),
-    gradientEndColor = Color('#fff')
 
   return {
     outerContainer: {
@@ -19,8 +23,7 @@ const styleLoginScreen = defineStyle((theme: ITheme) => {
       width: '100%',
       height: '100%',
       overflow: 'auto',
-      //backgroundImage: `linear-gradient(120deg, ${gradientStartColor}, ${gradientEndColor})`
-      backgroundImage: 'linear-gradient(-120deg, #888, #aaa, #a8a8a8)'
+      backgroundImage: `linear-gradient(120deg, ${gradientStartColor}, ${gradientEndColor})`
     },
 
     innerContainer: {

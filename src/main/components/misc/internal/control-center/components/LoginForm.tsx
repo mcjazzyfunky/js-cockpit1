@@ -1,18 +1,42 @@
-import defineStyle from '../../../../styling/defineStyle'
+// internal imports
+import defineStyle from '../../../../../styling/defineStyle'
+
+// external imports
 import React, { ReactNode, ReactElement, CSSProperties } from 'react';
 import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils';
-import { Checkbox, ITheme, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
+import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
 import { Spec } from 'js-spec'
 
-const styleLoginForm = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
+// --- LoginForm ----------------------------------------------------
+
+const styleLoginForm = defineStyle(theme => {
   return {
     container: {
-      padding: '1rem 0.8rem',
-      width: '20rem',
-      minHeight: '23rem',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '320px',
+      minHeight: '380px',
       textAlign: 'left',
-      backgroundColor: 'white',
-      border: '1px solid #888',
+      backgroundColor: theme.palette.white,
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: theme.palette.neutralSecondary,
+    },
+
+    header: {
+      borderWidth: '0 0 1px 0',
+      borderStyle: 'solid',
+      borderColor: theme.palette.neutralTertiary,
+      padding: '1rem 1.5rem',
+    },
+
+    content: {
+      flexGrow: 1,
+      padding: '1rem 1.5rem',
+    },
+
+    footer: {
+      padding: '1rem 1.5rem',
     },
 
     remember: {
@@ -23,7 +47,7 @@ const styleLoginForm = defineStyle(({ theme }: { theme: ITheme}) => { // TODO
       display: 'inline-block',
       margin: '0 0 0 0.75rem',
     }
-  };
+  }
 })
 
 const validationConfig = {
@@ -155,14 +179,14 @@ const LoginForm = defineComponent<LoginFormProps>({
         }
       })
 
-      if (header) {
-        headerBox =
-          <div>
-            { header.props.children }
-          </div>
-      }
-
       return styleLoginForm(classes => { // TODO
+        if (header) {
+          headerBox =
+            <div className={classes.header}>
+              { header.props.children }
+            </div>
+        }
+
         const loadingIndicator =
           this.state.loading
             ? <div className={classes.loadingIndicator}>
@@ -175,7 +199,7 @@ const LoginForm = defineComponent<LoginFormProps>({
         return (
           <div className={classes.container}>
             { headerBox }
-            <div>
+            <div className={classes.content}>
               <div>
                 <TextField
                   name="username"
@@ -196,12 +220,12 @@ const LoginForm = defineComponent<LoginFormProps>({
                   disabled={this.state.loading}
                 />
               </div>
-              <div>
-                <PrimaryButton type="submit" style={{width: '100%' }}>
-                  {loginButtonText}
-                  {loadingIndicator}
-                </PrimaryButton>
-              </div>
+            </div>
+            <div className={classes.footer}>
+              <PrimaryButton type="submit" style={{width: '100%' }}>
+                {loginButtonText}
+                {loadingIndicator}
+              </PrimaryButton>
             </div>
           </div>
         )

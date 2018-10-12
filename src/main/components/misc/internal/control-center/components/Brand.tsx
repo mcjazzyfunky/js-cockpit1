@@ -1,55 +1,72 @@
-import DefaultLogo from '../icons/DefaultLogo'
-import React, { CSSProperties, ReactNode } from 'react'
-import { defineComponent, isNode } from 'js-react-utils'
+// internal imports
 import defineStyle from '../../../../../styling/defineStyle'
 
-const styleBrand = defineStyle({
+// external imports
+import React, { CSSProperties, ReactNode } from 'react'
+import { defineComponent, isNode } from 'js-react-utils'
+import { css } from 'office-ui-fabric-react' 
+import { Spec } from 'js-spec/dev-only'
+import { FiLayers } from 'react-icons/fi'
+import { FiLayout } from 'react-icons/fi'
+import { FiLoader } from 'react-icons/fi'
+
+// --- Brand --------------------------------------------------------
+
+const styleBrand = defineStyle(theme => ({
   container: {
-    display: 'table',
-    margin: 0,
-    padding: 0
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  firstColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+
+  secondColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '0 7px',
   },
 
   vendor: {
-    fontSize: '12px',
+    fontSize: theme.fonts.smallPlus.fontSize,
     padding: 0,
     margin: 0,
   },
 
+  vendorLarge: {
+    fontSize: theme.fonts.medium.fontSize + ' !important',
+  },
+
   title: {
-    fontSize: '14px',
+    fontSize: theme.fonts.mediumPlus.fontSize,
     padding: 0,
     margin: '-1px 0 0 0',
     lineHeight: '1.25rem',
   },
 
+  titleLarge: {
+    fontSize: theme.fonts.xLarge.fontSize + ' !important',
+  },
+
   logo: {
-  },
-  
-  cells: {
-    display: 'table-row'
+    width: '24px',
+    height: '24px',
   },
 
-  cellLeft: {
-    display: 'table-cell',
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    padding: '0.25rem 0.5rem 0 0',
-    overflow: 'hidden'
+  logoLarge: {
+    width: '24px',
+    height: '24px',
   },
-
-  cellRight: {
-    display: 'table-cell',
-    padding: '0.125rem 0',
-    textAlign: 'left',
-    verticalAlign: 'middle'
-  }
-})
+}))
 
 type BrandProps = {
   vendor?: string,
   title?: string,
   logo?: ReactNode,
+  size?: 'medium' | 'large',
   className?: string,
   style?: CSSProperties
 }
@@ -59,8 +76,7 @@ export default defineComponent<BrandProps>({
 
   properties: {
     logo: {
-      nullable: true,
-      validate: isNode
+      validate: isNode,
     },
 
     vendor: {
@@ -69,6 +85,12 @@ export default defineComponent<BrandProps>({
 
     title: {
       type: String
+    },
+
+    size: {
+      type: String,
+      validate: Spec.oneOf('medium', 'large'),
+      defaultValue: 'medium'
     },
 
     className: {
@@ -80,51 +102,62 @@ export default defineComponent<BrandProps>({
     }
   },
 
-  render({ logo, vendor, title, className, style }) {
-    return styleBrand(classes => { // TODO
+  render({ logo, vendor, title, size, className, style }) {
+    return styleBrand(classes => {
+      const
+        isLarge = size === 'large',
+
+        vendorClassName =
+          css(classes.vendor, isLarge ? classes.vendorLarge : null),
+        
+        titleClassName =
+          css(classes.title, isLarge ? classes.titleLarge : null),
+
+        logoClassName =
+          css(classes.logo, isLarge ? classes.logoLarge : null)
+
+
       let
-        leftContent = null,
-        rightContent = null
+        firstColumnContent = null,
+        secondColumnContent = null
 
       if (vendor) {
-        rightContent =
-          <div key="vendor" className={classes.vendor}>
+        secondColumnContent =
+          <div key="vendor" className={vendorClassName}>
             {vendor}
           </div>
       }
 
       if (title) {
         const titleContent =
-          <div key="title" className={classes.title}>
+          <div key="title" className={titleClassName}>
             {title}
           </div>
 
-        if (!rightContent) {
-          rightContent = titleContent
+        if (!secondColumnContent) {
+          secondColumnContent = titleContent
         } else {
-          rightContent =
+          secondColumnContent =
             <React.Fragment>
-              {rightContent}
+              {secondColumnContent}
               {titleContent}
             </React.Fragment>
         }
       }
-      
-      leftContent =
+     
+      firstColumnContent =
         <div className={classes.logo}>
-          {logo  ||<DefaultLogo/>}
+          {logo  ||<FiLoader className={logoClassName}/>}
         </div>
 
       return (
         <div className={className} style={style}>
           <div className={classes.container}>
-            <div className={classes.cells}>
-              <div className={classes.cellLeft}>
-                {leftContent}
-              </div>
-              <div className={classes.cellRight}>
-                {rightContent}
-              </div>
+            <div className={classes.firstColumn}>
+                {firstColumnContent}
+            </div>
+            <div className={classes.secondColumn}>
+              {secondColumnContent}
             </div>
           </div>
         </div>

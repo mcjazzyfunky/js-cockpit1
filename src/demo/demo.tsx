@@ -2,10 +2,11 @@ import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { initSystemIcons, AppsWithMenu, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
-import LoginScreen from '../main/renderers/ControlCenter/components/LoginScreen'
-import LoginForm from '../main/renderers/ControlCenter/components/LoginForm'
-import Brand from '../main/renderers/ControlCenter/components/Brand'
+import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
+import LoginForm from '../main/components/misc/internal/control-center/components/LoginForm'
+import Brand from '../main/components/misc/internal/control-center/components/Brand'
 import Color from 'color'
+import { FaHandshake } from 'react-icons/fa'
 
 initSystemIcons()
 
@@ -20,21 +21,18 @@ loadTheme({
 })
 
 export default function Demo() {
-  /*
-  return (
+ const loginScreen =  
     <LoginScreen>
       <LoginScreen.Content>
         <LoginForm>
           <LoginForm.Header>
-            <Brand vendor="meet+greet" title="Back Office"/>
+            <Brand vendor="meet+greet" title="Back Office" size="large"/>
           </LoginForm.Header>
         </LoginForm>
       </LoginScreen.Content>
     </LoginScreen>
-  )
-  */
 
-  return (
+  const controlCenter =
     <ControlCenter vendor="meet+greet" title="Back Office">
       <ControlCenter.Apps>
         <ControlCenter.App name="admin" title="Administration">
@@ -42,7 +40,8 @@ export default function Demo() {
         </ControlCenter.App>
       </ControlCenter.Apps>
     </ControlCenter>
-  )
+
+  return loginScreen 
 }
 
 const AdministrationApp = defineComponent({
