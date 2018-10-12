@@ -12,7 +12,7 @@ import SortChangeEvent from '../../events/SortChangeEvent'
 
 // extenal imports
 import React, { ReactElement } from 'react'
-import { CommandBar, DefaultButton, ITheme, Link, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import { css, CommandBar, DefaultButton, ITheme, Link, SearchBox, Spinner, SpinnerSize } from 'office-ui-fabric-react'
 import Color from 'color'
 
 // --- DataNavigatorStyle -------------------------------------------
@@ -27,10 +27,13 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   header: {
+    display: 'flex',
     alignItems: 'center',
     flexGrow: 0,
     flexShrink: 0,
-    padding: '4px 8px',
+    padding: '2px 10px',
+    height: '40px',
+    boxSizing: 'border-box',
     margin: '0 0 -1px 0',
     zIndex: 1000,
     color: theme.palette.black,
@@ -42,6 +45,7 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   },
 
   headerStart: {
+    marginRight: '30px',
   },
 
   headerCenter: {
@@ -99,7 +103,21 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   
   actionButton: {
     backgroundColor: 'transparent',
-    margin: '0 0px',
+
+    selectors: {
+      ':active': {
+        backgroundColor: theme.palette.neutralTertiaryAlt
+      }
+    }
+  },
+
+  actionIcon: {
+    margin: '2px 5px 0 0',
+    color: theme.palette.themePrimary
+  },
+
+  actionIconDisabled: {
+    color: theme.palette.neutralTertiary
   },
 
   actionButtonSeparator: {
@@ -241,7 +259,7 @@ class DataNavigatorRenderer {
           </div>
         </div>
         <div className={classes.headerCenter}>
-            {/* this._renderActionBar(model, classes) */}
+            { this._renderActionBar(model, classes) }
         </div>
         <div className={classes.headerEnd}>
         </div>
@@ -298,18 +316,32 @@ class DataNavigatorRenderer {
         })
       }
 
+      const
+        hasIcon = !!action.icon,
+        iconProps = hasIcon ? { iconName: 'icon' } : null,
+        
+        iconClassName =
+          hasIcon
+            ? (disabled ? css(classes.actionIcon, classes.actionIconDisabled) : classes.actionIcon)
+            : null
+
       items.push({
         key: String(idx),
         text: action.title,
+        iconProps,
         disabled,
-        className: classes.actionButton 
+        className: classes.actionButton,
+        onRenderIcon: action.icon ?
+          () => <div className={iconClassName}>{action.icon}</div>
+          : undefined
       })
     })
 
     return (
       <CommandBar
         className={classes.actionBar}
-        items={items}
+        items={[]}
+        farItems={items}
       />
     )
   }

@@ -61,11 +61,11 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
             //borderBottomWidth: '1px',
             //borderBottomStyle: 'solid',
             //borderBottomColor: theme.palette.themePrimary,
-            backgroundColor: theme.palette.neutralQuaternaryAlt,
+            backgroundColor: theme.palette.neutralLight,
           },
 
           ':active': {
-            backgroundColor: theme.palette.neutralQuaternary,
+            backgroundColor: theme.palette.neutralTertiaryAlt,
           }
         }
       },

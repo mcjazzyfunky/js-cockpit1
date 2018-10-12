@@ -3,7 +3,7 @@ import DataNavigatorRenderer from './DataNavigatorRenderer'
 
 // external imports
 import React, { ReactNode } from 'react'
-import { defineComponent, withChildren, isElementOfType } from 'js-react-utils'
+import { defineComponent, withChildren, isElementOfType, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec/dev-only'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
@@ -11,7 +11,8 @@ import { take  } from 'rxjs/operators'
 // --- DataNavigator.GeneralAction ----------------------------------
 
 type GeneralActionProps = {
-  title: string
+  title: string,
+  icon?: ReactNode
 }
 
 const GeneralAction = defineComponent<GeneralActionProps>({
@@ -21,6 +22,10 @@ const GeneralAction = defineComponent<GeneralActionProps>({
     title: {
       type: String,
       required: true
+    },
+
+    icon: {
+      validate: isNode
     }
   },
 
@@ -34,7 +39,8 @@ const GeneralAction = defineComponent<GeneralActionProps>({
 // --- DataNavigator.SingleRowAction --------------------------------
 
 type SingleRowActionProps = {
-  title: string
+  title: string,
+  icon?: ReactNode
 }
 
 const SingleRowAction = defineComponent<SingleRowActionProps>({
@@ -44,6 +50,10 @@ const SingleRowAction = defineComponent<SingleRowActionProps>({
     title: {
       type: String,
       required: true
+    },
+
+    icon: {
+      validate: isNode
     }
   },
 
@@ -323,7 +333,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 case GeneralAction: {
                   const actionModel: DataNavigatorGeneralActionModel = {
                     $kind: 'DataNavigatorGeneralActionModel',
-                    title: child2.props.title || null
+                    title: child2.props.title || null,
+                    icon: child2.props.icon || null
                   }
 
                   model.actions.push(actionModel)
@@ -333,7 +344,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 case SingleRowAction: {
                   const actionModel: DataNavigatorSingleRowActionModel = {
                     $kind: 'DataNavigatorSingleRowActionModel',
-                    title: child2.props.title || null
+                    title: child2.props.title || null,
+                    icon: child2.props.icon || null
                   }
 
                   model.actions.push(actionModel)
@@ -343,7 +355,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 case MultiRowAction: {
                   const actionModel: DataNavigatorMultiRowActionModel = {
                     $kind: 'DataNavigatorMultiRowActionModel',
-                    title: child2.props.title || null
+                    title: child2.props.title || null,
+                    icon: child2.props.icon || null
                   }
 
                   model.actions.push(actionModel)
@@ -467,17 +480,20 @@ type DataNavigatorModel = {
 
 type DataNavigatorGeneralActionModel = {
   $kind: 'DataNavigatorGeneralActionModel',
-  title: string | null
+  title: string | null,
+  icon: ReactNode | null
 }
 
 type DataNavigatorSingleRowActionModel = {
   $kind: 'DataNavigatorSingleRowActionModel',
-  title: string | null
+  title: string | null,
+  icon: ReactNode | null
 }
 
 type DataNavigatorMultiRowActionModel = {
   $kind: 'DataNavigatorMultiRowActionModel',
-  title: string
+  title: string,
+  icon: ReactNode | null
 }
 
 // --- exports ------------------------------------------------------

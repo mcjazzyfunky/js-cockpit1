@@ -8,6 +8,9 @@ import DataNavigator from '../data-views/DataNavigator'
 import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import faker from 'faker'
+import { FaBeer } from 'react-icons/fa'
+import { MdAddCircleOutline, MdEdit, MdRemove, MdAddCircle, MdRemoveCircle } from 'react-icons/md'
+import { FiPlusSquare, FiEdit, FiMinusSquare, FiPlusCircle, FiMinusCircle } from 'react-icons/fi'
 
 const data: any[] = []
 
@@ -108,13 +111,16 @@ export default {
             >
               <DataNavigator.Actions>
                 <DataNavigator.GeneralAction
-                  title="New"
+                  title="Add"
+                  icon={<FiPlusCircle/>}
                 />
                 <DataNavigator.SingleRowAction
                   title="Edit"
+                  icon={<FiEdit/>}
                 />
                 <DataNavigator.MultiRowAction
                   title="Delete"
+                  icon={<FiMinusCircle/>}
                 />
               </DataNavigator.Actions>
               <DataNavigator.Columns>
