@@ -88,7 +88,7 @@ const styleLoginForm = defineStyle(theme => ({
 type LoginFormProps = {
   performLogin?:
     (params: { username: string, password: string, remember: boolean }) =>
-      Promise<{ fullName: string }>
+      Promise<{ status: 'success', fullName: string } | { status: 'error', errorMessage: string }>
 
   className?: string,
   style?: CSSProperties,
@@ -180,13 +180,29 @@ const LoginForm = defineComponent<LoginFormProps>({
         setTimeout(() => {
           try {
             this.props.performLogin(loginParams)
-              .then(({ fullName }) => {
-                this.setState({
-                    loading: false
-                 },
-                 () => setTimeout(
-                    () => alert(fullName + ' has been logged in successfully'),
-                    100))
+              .then(result => {
+                if (result && result.status === 'success'
+                  && typeof result.fullName === 'string'
+                  && result.fullName.trim() !== '') {
+                  
+                  this.setState(
+                    { loading: false },
+                    () => setTimeout(
+                      () => alert(result.fullName + ' has been logged in successfully'), 100))
+                } else {
+                  const errorResult: any = result
+
+                  const errorMsg =
+                    errorResult && typeof errorResult.errorMessage === 'string'
+                      && errorResult.errorMessage.trim() !== ''
+                        ? 'Error: ' + errorResult.errorMessage
+                        : 'Error: Could not log in'
+console.log(result)
+                  this.setState({
+                    loading: false,
+                    generalErrorMsg: errorMsg
+                  })
+                }
               })
           } catch (e) {
             this.setState({
