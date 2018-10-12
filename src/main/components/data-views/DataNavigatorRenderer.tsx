@@ -502,7 +502,7 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
                   onDismiss={ () => this._closeCallout()}
                 >
                   <div className={classes.filterContainer}>
-                    [TODO: Adding filter here...] 
+                    [TODO: Add filters here...] 
                   </div>
                   <CommandBar
                     items={[
