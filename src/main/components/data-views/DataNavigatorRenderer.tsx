@@ -388,7 +388,8 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   searchBox: {
-    height: '32px'
+    height: '30px',
+    width: '180px',
   },
 
   advancedFilter: {
@@ -396,14 +397,25 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   filterButton: {
-    fontSize: '12px',
     height: '30px',
     marginLeft: '8px',
+
+    selectors: {
+      ':hover': {
+        color: theme.palette.white + ' !important',
+        backgroundColor: theme.palette.themeSecondary,
+      },
+      
+      ':active': {
+        color: theme.palette.white + ' !important',
+        backgroundColor: theme.palette.themePrimary,
+      }
+    }
   },
 
   filterButtonActive: {
-    color: theme.palette.white,
-    backgroundColor: theme.palette.themePrimary,
+    color: theme.palette.white + ' !important',
+    backgroundColor: theme.palette.themeSecondary,
   },
 
   icon: {
@@ -445,7 +457,7 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
         calloutVisible = this.state.calloutVisible
         
       return styleSearchBar(classes => {
-        const actionButtonClass =
+        const filterButtonClassName =
           advancedFilterActive || calloutVisible
             ? css(classes.filterButton, classes.filterButtonActive) 
             : classes.filterButton
@@ -455,14 +467,15 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
             {
               !advancedFilterActive && 
                 <SearchBox
+                  placeholder="Search..."
                   className={classes.searchBox}
-                  disableAnimation={true}
+                  disableAnimation={false}
                 />
             }
             <div className={classes.advancedFilter} ref={ it => this._advancedFilterRef = it }>
               <ActionButton
                 text="Advanced Filter"
-                className={classes.filterButton}
+                className={filterButtonClassName}
                 iconProps={{ iconName: 'icon' }}
               
                 onClick={
@@ -489,7 +502,7 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
                   onDismiss={ () => this._closeCallout()}
                 >
                   <div className={classes.filterContainer}>
-                    Juhuxx
+                    [TODO: Adding filter here...] 
                   </div>
                   <CommandBar
                     items={[
@@ -511,7 +524,9 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
                           iconName: 'cancel'
                         },
 
-                        onRenderIcon: () => <MdClose className={classes.icon}/>
+                        onRenderIcon: () => <MdClose className={classes.icon}/>,
+
+                        onClick: () => this._closeCallout()
                       }
                     ]}
 
