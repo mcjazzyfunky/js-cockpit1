@@ -4,7 +4,6 @@ import CheckmarkIcon from '../system-icons/CheckmarkIcon'
 import ChevronDownIcon from '../system-icons/ChevronDownIcon'
 import ChevronRightIcon from '../system-icons/ChevronRightIcon'
 import SearchIcon from '../system-icons/SearchIcon'
-
 import ClearIcon from '../system-icons/ClearIcon'
 
 export default function initSystemIcons() {
