@@ -8,9 +8,10 @@ import DataExplorer from '../data-views/DataExplorer'
 import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import faker from 'faker'
-import { FaBeer } from 'react-icons/fa'
+import { FaBeer, FaMinusCircle, FaPencilAlt } from 'react-icons/fa'
 import { MdAddCircleOutline, MdEdit, MdRemove, MdAddCircle, MdRemoveCircle, MdArrowDropDownCircle, MdRemoveCircleOutline, MdAdd } from 'react-icons/md'
 import { FiPlusSquare, FiEdit, FiMinusSquare, FiPlusCircle, FiMinusCircle } from 'react-icons/fi'
+import { FaPlusCircle } from 'react-icons/fa'
 
 const data: any[] = []
 
@@ -112,15 +113,15 @@ export default {
               <DataExplorer.Actions>
                 <DataExplorer.GeneralAction
                   title="Add"
-                  icon={<MdAddCircleOutline/>}
+                  icon={<FaPlusCircle/>}
                 />
                 <DataExplorer.SingleRowAction
                   title="Edit"
-                  icon={<MdEdit/>}
+                  icon={<FaPencilAlt/>}
                 />
                 <DataExplorer.MultiRowAction
                   title="Delete"
-                  icon={<MdRemoveCircleOutline/>}
+                  icon={<FaMinusCircle/>}
                 />
               </DataExplorer.Actions>
               <DataExplorer.Columns>
