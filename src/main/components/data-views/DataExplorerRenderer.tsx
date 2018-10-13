@@ -392,7 +392,6 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     justifyContent: 'stretch',
     padding: '2px 4px',
-    height: '28px',
     width: '220px',
     boxSizing: 'border-box',
     //backgroundColor: theme.palette.white,
@@ -406,6 +405,7 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   searchField: {
+    height: '20px',
     padding: '3px 8px',
     outline: 'none',
     fontSize: '14px',
