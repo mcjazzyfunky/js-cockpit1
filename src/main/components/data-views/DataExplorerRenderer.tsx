@@ -43,7 +43,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
 
     borderWidth: '1px 1px 1px 1px',
     borderStyle: 'solid',
-    borderRadius: '4px 4px 0 0',
+    borderRadius: '2px 2px 0 0',
     borderColor: theme.palette.neutralQuaternary,
   },
 
