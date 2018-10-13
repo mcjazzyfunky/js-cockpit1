@@ -3,6 +3,9 @@ import { registerIcons } from '@uifabric/styling'
 import CheckmarkIcon from '../system-icons/CheckmarkIcon'
 import ChevronDownIcon from '../system-icons/ChevronDownIcon'
 import ChevronRightIcon from '../system-icons/ChevronRightIcon'
+import SearchIcon from '../system-icons/SearchIcon'
+
+import ClearIcon from '../system-icons/ClearIcon'
 
 export default function initSystemIcons() {
   registerIcons({
@@ -11,6 +14,7 @@ export default function initSystemIcons() {
       'delete': '[delete]',
       'download': '[download]',
       'calendar': '[calendar]',
+      'clear': <ClearIcon/>,
       'up': '[up]',
       'down': '[down]', 
       'chevrondown': <ChevronDownIcon/>,
@@ -19,7 +23,7 @@ export default function initSystemIcons() {
       'chevronright': <ChevronRightIcon/>,
       'checkmark': <CheckmarkIcon/>,
       'remove': '[remove]',
-      'search': '[search]' 
+      'search': <SearchIcon/>
     }
   })
 }

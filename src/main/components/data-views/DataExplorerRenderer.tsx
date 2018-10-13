@@ -9,7 +9,7 @@ import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
 import PageChangeEvent from '../../events/PageChangeEvent'
 import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 import SortChangeEvent from '../../events/SortChangeEvent'
-import SearchIcon from '../../icons/SearchIcon'
+import SearchIcon from '../../system-icons/SearchIcon'
 
 
 // extenal imports
@@ -26,7 +26,6 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    //border: '1px solid ' + theme.palette.neutralLight,
   },
 
   header: {
@@ -388,40 +387,9 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   searchBox: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'stretch',
-    padding: '2px 4px',
-    boxSizing: 'border-box',
-    //backgroundColor: theme.palette.white,
-    overflow: 'hidden'
-  },
-
-  searchIcon: {
-    flexShrink: 0,
-    color: theme.palette.white,
-    margin: '0 10px 0 5px',
-  },
-
-  searchField: {
-    width: '200px',
-    height: '22px',
-    padding: '3px 8px',
-    outline: 'none',
-    fontSize: '13px',
-    fontFamily: theme.fonts.medium.fontFamily,
-    color: theme.palette.black,
-    backgroundColor: theme.palette.white,
-    flexGrow: 1,
-    borderWidth: '0 0 0px 0',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternary,
-
-    selectors: {
-      '&::placeholder': {
-        color: theme.semanticColors.inputPlaceholderText
-      }
-    }
+    width: '220px',
+    height: '30px',
+    paddingRight: '2px',
   },
 
   advancedFilter: {
@@ -510,16 +478,11 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
           <div className={classes.container}>
             {
               !advancedFilterActive && 
-                <div className={classes.searchBox}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon/>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className={classes.searchField}
-                  />
-                </div>
+                <SearchBox
+                  placeholder="Search..."
+                  className={classes.searchBox}
+                  disableAnimation={true}
+                />
             }
             <div className={classes.advancedFilter} ref={ it => this._advancedFilterRef = it }>
               <ActionButton
