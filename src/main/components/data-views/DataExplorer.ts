@@ -1,5 +1,5 @@
 // inteernal imports
-import DataNavigatorRenderer from './DataNavigatorRenderer'
+import DataExplorerRenderer from './DataExplorerRenderer'
 
 // external imports
 import React, { ReactNode } from 'react'
@@ -8,7 +8,7 @@ import { Spec } from 'js-spec/dev-only'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
 
-// --- DataNavigator.GeneralAction ----------------------------------
+// --- DataExplorer.GeneralAction ----------------------------------
 
 type GeneralActionProps = {
   title: string,
@@ -16,7 +16,7 @@ type GeneralActionProps = {
 }
 
 const GeneralAction = defineComponent<GeneralActionProps>({
-  displayName: 'DataNavigator.GeneralAction',
+  displayName: 'DataExplorer.GeneralAction',
 
   properties: {
     title: {
@@ -32,11 +32,11 @@ const GeneralAction = defineComponent<GeneralActionProps>({
   render() {
     throw new Error(
       'Components of type DataNaviator.GeneralAction must be children of '
-        + 'DataNavigator.Actions components')
+        + 'DataExplorer.Actions components')
   }
 })
 
-// --- DataNavigator.SingleRowAction --------------------------------
+// --- DataExplorer.SingleRowAction --------------------------------
 
 type SingleRowActionProps = {
   title: string,
@@ -44,7 +44,7 @@ type SingleRowActionProps = {
 }
 
 const SingleRowAction = defineComponent<SingleRowActionProps>({
-  displayName: 'DataNavigator.SingleRowAction',
+  displayName: 'DataExplorer.SingleRowAction',
 
   properties: {
     title: {
@@ -60,18 +60,18 @@ const SingleRowAction = defineComponent<SingleRowActionProps>({
   render() {
     throw new Error(
       'Components of type DataNaviator.SingleRowAction must be children of '
-        + 'DataNavigator.Actions components')
+        + 'DataExplorer.Actions components')
   }
 })
 
-// --- DataNavigator.MultiRowAction ---------------------------------
+// --- DataExplorer.MultiRowAction ---------------------------------
 
 type MultiRowActionProps = {
   title: string
 }
 
 const MultiRowAction = defineComponent<GeneralActionProps>({
-  displayName: 'DataNavigator.MultiRowAction',
+  displayName: 'DataExplorer.MultiRowAction',
 
   properties: {
     title: {
@@ -83,7 +83,7 @@ const MultiRowAction = defineComponent<GeneralActionProps>({
   render() {
     throw new Error(
       'Components of type DataNaviator.MultiRowAction must be children of '
-        + 'DataNavigator.Actions components')
+        + 'DataExplorer.Actions components')
   }
 })
 
@@ -94,7 +94,7 @@ type ActionsProps = {
 }
 
 const Actions = defineComponent<ActionsProps>({
-  displayName: 'DataNavigator.Actions',
+  displayName: 'DataExplorer.Actions',
 
   properties: {
     children: {
@@ -107,7 +107,7 @@ const Actions = defineComponent<ActionsProps>({
   render() {
     throw new Error(
       'Components of type DataNaviator.MultiRowAction must be children of '
-        + 'DataNavigator.Actions components')
+        + 'DataExplorer.Actions components')
   }
 })
 
@@ -122,7 +122,7 @@ type ColumnProps = {
 }
 
 const Column = defineComponent<ColumnProps>({
-  displayName: 'DataNavigator.Columns',
+  displayName: 'DataExplorer.Columns',
 
   properties: {
     title: {
@@ -152,7 +152,7 @@ const Column = defineComponent<ColumnProps>({
   render() {
     throw new Error(
       'Components of type DataNaviator.Column must be children of '
-        + 'DataNavigator.Columns components')
+        + 'DataExplorer.Columns components')
   }
 })
 
@@ -164,7 +164,7 @@ type ColumnsProps = {
 }
 
 const Columns = defineComponent<ColumnsProps>({
-  displayName: 'DataNavigator.Columns',
+  displayName: 'DataExplorer.Columns',
 
   properties: {
     children: {
@@ -177,12 +177,12 @@ const Columns = defineComponent<ColumnsProps>({
   render() {
     throw new Error(
       'Components of type DataNaviator.Columns must be children of '
-        + 'DataNavigator components')
+        + 'DataExplorer components')
   }
 })
 
 
-// --- DataNavigator ------------------------------------------------
+// --- DataExplorer ------------------------------------------------
 
 type QueryParams = {
   offset: number,
@@ -196,13 +196,13 @@ type QueryResult = {
   totalItemCount: number
 }
 
-type DataNavigatorProps = {
+type DataExplorerProps = {
   title?: string,
   loadData: (params: QueryParams) => Observable<QueryResult>, // TODO
   children?: ReactNode // TODO
 }
 
-type DataNavigatorState = {
+type DataExplorerState = {
   isInitialized: boolean,
   isLoading: boolean,
   errorMessage: string | null,
@@ -215,8 +215,8 @@ type DataNavigatorState = {
   data: any[]
 }
 
-const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
-  displayName: 'DataNavigator',
+const DataExplorer = defineComponent<DataExplorerProps, DataExplorerState>({
+  displayName: 'DataExplorer',
 
   properties: {
     title: {
@@ -235,11 +235,11 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
     }
   },
 
-  base: class extends React.Component<DataNavigatorProps, DataNavigatorState> {
-    private _renderer = new DataNavigatorRenderer()
+  base: class extends React.Component<DataExplorerProps, DataExplorerState> {
+    private _renderer = new DataExplorerRenderer()
     private _timeout: any = null
   
-    constructor(props: DataNavigatorProps) {
+    constructor(props: DataExplorerProps) {
       super(props)
 
       this.state = {
@@ -266,12 +266,12 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
     }
 
     render() {
-      return this._renderer.render(this._getDataNavigatorModel())
+      return this._renderer.render(this._getDataExplorerModel())
     }
 
-    private _getDataNavigatorModel() {
-      const model: DataNavigatorModel = {
-        $kind: 'DataNavigatorModel',
+    private _getDataExplorerModel() {
+      const model: DataExplorerModel = {
+        $kind: 'DataExplorerModel',
         title: this.props.title || null,
         pageIndex: this.state.pageIndex,
         pageSize: this.state.pageSize,
@@ -331,8 +331,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
             React.Children.forEach(child.props.children, (child2: any) => {
               switch (child2.type) {
                 case GeneralAction: {
-                  const actionModel: DataNavigatorGeneralActionModel = {
-                    $kind: 'DataNavigatorGeneralActionModel',
+                  const actionModel: DataExplorerGeneralActionModel = {
+                    $kind: 'DataExplorerGeneralActionModel',
                     title: child2.props.title || null,
                     icon: child2.props.icon || null
                   }
@@ -342,8 +342,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 }
         
                 case SingleRowAction: {
-                  const actionModel: DataNavigatorSingleRowActionModel = {
-                    $kind: 'DataNavigatorSingleRowActionModel',
+                  const actionModel: DataExplorerSingleRowActionModel = {
+                    $kind: 'DataExplorerSingleRowActionModel',
                     title: child2.props.title || null,
                     icon: child2.props.icon || null
                   }
@@ -353,8 +353,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
                 }
                 
                 case MultiRowAction: {
-                  const actionModel: DataNavigatorMultiRowActionModel = {
-                    $kind: 'DataNavigatorMultiRowActionModel',
+                  const actionModel: DataExplorerMultiRowActionModel = {
+                    $kind: 'DataExplorerMultiRowActionModel',
                     title: child2.props.title || null,
                     icon: child2.props.icon || null
                   }
@@ -373,7 +373,7 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
           case Columns:
             React.Children.forEach(child.props.children, (child2: any) => {
               model.columns.push({
-                $kind: 'DataNavigatorColumnModel',
+                $kind: 'DataExplorerColumnModel',
                 title: child2.props.title,
                 field: child2.props.field || null,
                 align: child2.props.align || null,
@@ -443,8 +443,8 @@ const DataNavigator = defineComponent<DataNavigatorProps, DataNavigatorState>({
 
 // --- models -------------------------------------------------------
 
-type DataNavigatorModel = {
-  $kind: 'DataNavigatorModel',
+type DataExplorerModel = {
+  $kind: 'DataExplorerModel',
   title: string | null,
   pageIndex: number | null,
   pageSize: number | null,
@@ -457,12 +457,12 @@ type DataNavigatorModel = {
   rowSelection: number[],
 
   actions:
-    (DataNavigatorGeneralActionModel
-      | DataNavigatorSingleRowActionModel
-      | DataNavigatorMultiRowActionModel)[],
+    (DataExplorerGeneralActionModel
+      | DataExplorerSingleRowActionModel
+      | DataExplorerMultiRowActionModel)[],
 
   columns: {
-    $kind: 'DataNavigatorColumnModel'
+    $kind: 'DataExplorerColumnModel'
     title: string,
     field: string | null,
     align: 'start' | 'center' | 'end' | null,
@@ -478,27 +478,27 @@ type DataNavigatorModel = {
   }
 }
 
-type DataNavigatorGeneralActionModel = {
-  $kind: 'DataNavigatorGeneralActionModel',
+type DataExplorerGeneralActionModel = {
+  $kind: 'DataExplorerGeneralActionModel',
   title: string | null,
   icon: ReactNode | null
 }
 
-type DataNavigatorSingleRowActionModel = {
-  $kind: 'DataNavigatorSingleRowActionModel',
+type DataExplorerSingleRowActionModel = {
+  $kind: 'DataExplorerSingleRowActionModel',
   title: string | null,
   icon: ReactNode | null
 }
 
-type DataNavigatorMultiRowActionModel = {
-  $kind: 'DataNavigatorMultiRowActionModel',
+type DataExplorerMultiRowActionModel = {
+  $kind: 'DataExplorerMultiRowActionModel',
   title: string,
   icon: ReactNode | null
 }
 
 // --- exports ------------------------------------------------------
 
-export default Object.assign(DataNavigator, {
+export default Object.assign(DataExplorer, {
   Actions,
   GeneralAction,
   SingleRowAction,
@@ -508,5 +508,5 @@ export default Object.assign(DataNavigator, {
 })
 
 export {
-  DataNavigatorModel
+  DataExplorerModel
 }

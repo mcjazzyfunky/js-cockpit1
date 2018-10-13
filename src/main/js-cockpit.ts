@@ -1,7 +1,7 @@
 // import component types
 import AppsWithMenu from './components/misc/AppsWithMenu'
 import ControlCenter from './components/misc/ControlCenter'
-import DataNavigator from './components/data-views/DataNavigator'
+import DataExplorer from './components/data-views/DataExplorer'
 import DataTable from './components/data-views/DataTable'
 import HBox from './components/layout/HBox'
 import VBox from './components/layout/VBox'
@@ -16,7 +16,7 @@ export {
   // components
   AppsWithMenu,
   ControlCenter,
-  DataNavigator,
+  DataExplorer,
   DataTable,
   HBox,
   VBox,

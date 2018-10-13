@@ -15,6 +15,17 @@ const styleAppsWithMenu = defineStyle({
     flexGrow: 1,
   },
 
+  menuBar: {
+    backgroundColor: 'rgb(225, 225, 225)', // TODO
+
+    selectors: {
+      '& *:not(:hover):not(:active)': {
+        backgroundColor: 'transparent !important'
+      }
+    }
+  },
+
+
   content: {
     display: 'flex',
     flexGrow: 1,
@@ -34,6 +45,7 @@ const AppsWithMenuRenderer = {
             items={
               model.menu.map(getItemProps)
             }
+            className={classes.menuBar}
           />
           <div className={classes.content}>
             <AppsWithNav>

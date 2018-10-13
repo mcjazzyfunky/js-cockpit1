@@ -46,7 +46,7 @@ export default function Demo() {
       </ControlCenter.Apps>
     </ControlCenter>
 
-  return loginScreen
+  return controlCenter
 }
 
 const AdministrationApp = defineComponent({

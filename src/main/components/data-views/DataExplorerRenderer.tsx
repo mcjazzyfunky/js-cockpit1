@@ -1,6 +1,6 @@
 // internal imports
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
-import { DataNavigatorModel } from './DataNavigator'
+import { DataExplorerModel } from './DataExplorer'
 import DataTable, { DataTableProps, DataTableColumnProps } from './DataTable'
 import Paginator from '../pagination/Paginator'
 import PageSizeSelector from '../pagination/PageSizeSelector'
@@ -16,9 +16,9 @@ import { defineComponent } from 'js-react-utils'
 import { css, ActionButton, Callout, CommandBar, DefaultButton, ITheme, SearchBox, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
 import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 
-// --- DataNavigatorStyle -------------------------------------------
+// --- DataExplorerStyle -------------------------------------------
 
-const styleDataNavigator = defineStyle((theme: ITheme) => ({
+const styleDataExplorer = defineStyle((theme: ITheme) => ({
   container: {
     position: 'relative',
     display: 'flex',
@@ -38,11 +38,13 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
     margin: '0 0 -1px 0',
     zIndex: 1000,
     color: theme.palette.black,
-    backgroundColor: theme.palette.neutralQuaternaryAlt,//theme.palette.themeSecondary,
+    //backgroundColor: theme.palette.neutralQuaternaryAlt,
+    backgroundColor: theme.palette.neutralLight,
+
     borderWidth: '1px 1px 1px 1px',
     borderStyle: 'solid',
     borderRadius: '1px',
-    borderColor: theme.palette.neutralQuaternary,
+    borderColor: theme.palette.neutralTertiaryAlt,
   },
 
   headerStart: {
@@ -172,12 +174,12 @@ const styleDataNavigator = defineStyle((theme: ITheme) => ({
   }
 }))
 
-type DataNavigatorClasses = ClassesOf<typeof styleDataNavigator>
+type DataExplorerClasses = ClassesOf<typeof styleDataExplorer>
 
-// --- DataNavigatorRenderer ----------------------------------------
+// --- DataExplorerRenderer ----------------------------------------
 
-class DataNavigatorRenderer {
-  private _model: DataNavigatorModel | null = null
+class DataExplorerRenderer {
+  private _model: DataExplorerModel | null = null
   private _dataTable: any = null // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   constructor() {
@@ -186,7 +188,7 @@ class DataNavigatorRenderer {
     this._onSortChange = this._onSortChange.bind(this)
   }
 
-  render(model: DataNavigatorModel) {
+  render(model: DataExplorerModel) {
     this._model = model
 
     const
@@ -212,7 +214,7 @@ class DataNavigatorRenderer {
           return <DataTable.Column key={columnIdx} {...props} />
         })
 
-    const ret = styleDataNavigator(classes => {
+    const ret = styleDataExplorer(classes => {
       const loadingPanel =
         model.isLoading
           ? <div className={classes.loadingPanel}>
@@ -261,7 +263,7 @@ class DataNavigatorRenderer {
     return ret
   }
 
-  private _renderHeader(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+  private _renderHeader(model: DataExplorerModel, classes: DataExplorerClasses) {
     return (
       <div className={classes.header}>
         <div className={classes.headerStart}>
@@ -279,7 +281,7 @@ class DataNavigatorRenderer {
     ) 
   }
 
-  private _renderFooter(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+  private _renderFooter(model: DataExplorerModel, classes: DataExplorerClasses) {
     if (model.pageIndex === null || model.totalItemCount === null) {
       return null
     }    
@@ -312,14 +314,14 @@ class DataNavigatorRenderer {
     )
   }
 
-  private _renderActionBar(model: DataNavigatorModel, classes: DataNavigatorClasses) {
+  private _renderActionBar(model: DataExplorerModel, classes: DataExplorerClasses) {
     const items: any[] = []
   
     model.actions.forEach((action, idx) => {
       const
         disabled =
-          action.$kind === 'DataNavigatorSingleRowActionModel' && model.rowSelection.length !== 1
-              || action.$kind === 'DataNavigatorMultiRowActionModel' && model.rowSelection.length === 0
+          action.$kind === 'DataExplorerSingleRowActionModel' && model.rowSelection.length !== 1
+              || action.$kind === 'DataExplorerMultiRowActionModel' && model.rowSelection.length === 0
 
       if (idx > 100000) {
         items.push({
@@ -561,4 +563,4 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
 
 // --- exports ------------------------------------------------------
 
-export default DataNavigatorRenderer
+export default DataExplorerRenderer

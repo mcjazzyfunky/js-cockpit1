@@ -4,7 +4,7 @@ import { Nav } from 'office-ui-fabric-react'
 import defineStyle from '../../styling/defineStyle'
 
 // TODO
-import DataNavigator from '../data-views/DataNavigator'
+import DataExplorer from '../data-views/DataExplorer'
 import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import faker from 'faker'
@@ -71,7 +71,7 @@ export default {
             />
           </div>
           <div className={classes.content}>
-            <DataNavigator
+            <DataExplorer
               title="Back-office users"
 
               loadData={
@@ -109,48 +109,48 @@ export default {
                 }
               }
             >
-              <DataNavigator.Actions>
-                <DataNavigator.GeneralAction
+              <DataExplorer.Actions>
+                <DataExplorer.GeneralAction
                   title="Add"
                   icon={<MdAddCircleOutline/>}
                 />
-                <DataNavigator.SingleRowAction
+                <DataExplorer.SingleRowAction
                   title="Edit"
                   icon={<MdEdit/>}
                 />
-                <DataNavigator.MultiRowAction
+                <DataExplorer.MultiRowAction
                   title="Delete"
                   icon={<MdRemoveCircleOutline/>}
                 />
-              </DataNavigator.Actions>
-              <DataNavigator.Columns>
-                <DataNavigator.Column
+              </DataExplorer.Actions>
+              <DataExplorer.Columns>
+                <DataExplorer.Column
                   title="First name"
                   field="firstName"
                   sortable={true}
                 />
-                <DataNavigator.Column
+                <DataExplorer.Column
                   title="Last name"
                   field="lastName"
                   sortable={true}
                 />
-                <DataNavigator.Column
+                <DataExplorer.Column
                   title="Postal code"
                   field="postalCode"
                   sortable={true}
                 />
-                <DataNavigator.Column
+                <DataExplorer.Column
                   title="City"
                   field="city"
                   sortable={true}
                 />
-                <DataNavigator.Column
+                <DataExplorer.Column
                   title="Country"
                   field="country"
                   sortable={true}
                 />
-              </DataNavigator.Columns>
-            </DataNavigator>
+              </DataExplorer.Columns>
+            </DataExplorer>
           </div>
         </div>
       )
