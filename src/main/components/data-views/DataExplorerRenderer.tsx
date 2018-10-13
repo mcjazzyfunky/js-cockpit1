@@ -9,7 +9,7 @@ import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
 import PageChangeEvent from '../../events/PageChangeEvent'
 import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 import SortChangeEvent from '../../events/SortChangeEvent'
-import SearchIcon from '../../system-icons/SearchIcon'
+import SearchIcon from '../../icons/SearchIcon'
 
 
 // extenal imports
@@ -144,7 +144,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     height: '100%',
     overflow: 'hidden',
     zIndex: '10000',
-    backgroundColor: 'rgba(63, 63, 63, 0.05)',
+    backgroundColor: 'rgba(63, 63, 63, 0.1)',
     borderRadius: '2px',
   },
 
@@ -392,7 +392,6 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
     alignItems: 'center',
     justifyContent: 'stretch',
     padding: '2px 4px',
-    width: '220px',
     boxSizing: 'border-box',
     //backgroundColor: theme.palette.white,
     overflow: 'hidden'
@@ -405,7 +404,8 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   searchField: {
-    height: '20px',
+    width: '220px',
+    height: '22px',
     padding: '3px 8px',
     outline: 'none',
     fontSize: '14px',
