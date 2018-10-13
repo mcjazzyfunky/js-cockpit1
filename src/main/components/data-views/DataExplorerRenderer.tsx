@@ -9,12 +9,14 @@ import RowSelectionChangeEvent from '../../events/RowSelectionChangeEvent'
 import PageChangeEvent from '../../events/PageChangeEvent'
 import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
 import SortChangeEvent from '../../events/SortChangeEvent'
+import SearchIcon from '../../system-icons/SearchIcon'
+
 
 // extenal imports
 import React, { ReactElement, Ref } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { css, ActionButton, Callout, CommandBar, DefaultButton, ITheme, SearchBox, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
-import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
+import { MdClose, MdFilterList, MdCheck, MdUndo, MdSearch } from 'react-icons/md'
 
 // --- DataExplorerStyle -------------------------------------------
 
@@ -38,13 +40,12 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     margin: '0 0 -1px 0',
     zIndex: 1,
     color: theme.palette.black,
-    //backgroundColor: theme.palette.neutralQuaternaryAlt,
-    backgroundColor: theme.palette.neutralLight,
+    backgroundColor: theme.palette.themeSecondary,
 
     borderWidth: '1px 1px 1px 1px',
     borderStyle: 'solid',
-    borderRadius: '2px 2px 0 0',
-    borderColor: theme.palette.neutralQuaternary,
+    borderRadius: '1px 1px 0 0',
+    borderColor: theme.palette.themePrimary,
   },
 
   headerStart: {
@@ -56,7 +57,6 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
 
   headerEnd: {
-
   },
 
   content: {
@@ -92,7 +92,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.large.fontSize,
-    //color: theme.palette.themeDark,
+    color: theme.palette.white,
     margin: '3px 6px 3px 6px'
   },
 
@@ -103,26 +103,28 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
   
   actionButton: {
+    color: theme.palette.white,
     backgroundColor: 'transparent',
 
     selectors: {
       ':hover': {
-        backgroundColor: theme.palette.neutralTertiaryAlt
+        color: theme.palette.white,
+        backgroundColor: theme.palette.themeDark,
       },
   
       ':active': {
-        backgroundColor: theme.palette.neutralTertiary
+        color: theme.palette.white,
+        backgroundColor: theme.palette.themeDarker
       }
     }
   },
 
-  actionIcon: {
-    margin: '2px 5px 0 0',
-    color: theme.palette.themePrimary,
+  actionButtonDisabled: {
+    color: theme.palette.themeTertiary,
   },
 
-  actionIconDisabled: {
-    color: theme.palette.neutralTertiary
+  actionIcon: {
+    margin: '2px 5px 0 0',
   },
 
   actionButtonSeparator: {
@@ -131,15 +133,6 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     borderStyle: 'solid',
     borderColor: '#aaa',
     margin: '13px 3px 0 3px'
-  },
-
-  searchBar: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-
-  searchBox: {
-    height: '32px',
   },
 
   loadingPanel: {
@@ -159,12 +152,12 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.neutralSecondaryAlt,
+    backgroundColor: theme.palette.themeDark,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '12px 14px',
+    padding: '14px 18px',
 
     selectors: {
       '& *': {
@@ -334,10 +327,15 @@ class DataExplorerRenderer {
       const
         hasIcon = !!action.icon,
         iconProps = hasIcon ? { iconName: 'icon' } : null,
+
+        actionButtonClassName =
+          disabled
+            ? css(classes.actionButton, classes.actionButtonDisabled)
+            : classes.actionButton,
         
         iconClassName =
           hasIcon
-            ? (disabled ? css(classes.actionIcon, classes.actionIconDisabled) : classes.actionIcon)
+            ? classes.actionIcon
             : null
 
       items.push({
@@ -345,7 +343,7 @@ class DataExplorerRenderer {
         text: action.title,
         iconProps,
         disabled,
-        className: classes.actionButton,
+        className: actionButtonClassName,
         onRenderIcon: action.icon ?
           () => <div className={iconClassName}>{action.icon}</div>
           : undefined
@@ -390,12 +388,52 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   searchBox: {
-    height: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '2px 4px',
+    height: '28px',
     width: '180px',
+    boxSizing: 'border-box',
+    backgroundColor: theme.palette.white,
+    border: '1px solid green',
+    overflow: 'hidden'
+  },
+
+  searchIcon: {
+    color: theme.palette.themePrimary,
+    margin: '0 10px 0 5px',
+  },
+
+  searchField: {
+    border: 'none',
+    outline: 'none',
+    fontSize: '14px',
+    fontFamily: theme.fonts.medium.fontFamily,
+    color: theme.palette.black,
+    flexGrow: 1,
+    width: '100%',
+
+    selectors: {
+      '&::placeholder': {
+        color: theme.semanticColors.inputPlaceholderText
+      }
+    }
   },
 
   advancedFilter: {
-    padding: '0 16px 0 0',
+    color: 'white',
+    margin: '0 16px',
+
+    selectors: {
+      '& *': {
+        color: 'white !important',
+        backgroundColor: 'transparent !important',
+      },
+
+      '&:hover': {
+        backgroundColor: theme.palette.themeDark
+      }
+     }
   },
 
   filterButton: {
@@ -468,11 +506,16 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
           <div className={classes.container}>
             {
               !advancedFilterActive && 
-                <SearchBox
-                  placeholder="Search..."
-                  className={classes.searchBox}
-                  disableAnimation={false}
-                />
+                <div className={classes.searchBox}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon/>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className={classes.searchField}
+                  />
+                </div>
             }
             <div className={classes.advancedFilter} ref={ it => this._advancedFilterRef = it }>
               <ActionButton

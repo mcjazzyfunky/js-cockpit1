@@ -75,6 +75,7 @@ export default defineComponent<BrandProps>({
 
   properties: {
     logo: {
+      nullable: true,
       validate: isNode,
     },
 

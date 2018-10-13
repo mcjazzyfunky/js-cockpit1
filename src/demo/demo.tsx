@@ -14,9 +14,9 @@ const primaryColor = '#e6522c'
 
 loadTheme({
   palette: {
-    //'themePrimary': primaryColor,
-    //'themeSecondary': Color(primaryColor).lighten(0.2).string(),
-    //'themeTertiary': Color(primaryColor).lighten(0.4).string(),
+    // 'themePrimary': primaryColor,
+    // 'themeSecondary': Color(primaryColor).lighten(0.2).string(),
+    // 'themeTertiary': Color(primaryColor).lighten(0.4).string(),
   }
 })
 
