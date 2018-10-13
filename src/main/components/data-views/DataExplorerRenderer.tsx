@@ -144,7 +144,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     height: '100%',
     overflow: 'hidden',
     zIndex: '10000',
-    backgroundColor: 'rgba(63, 63, 63, 0.1)',
+    backgroundColor: 'rgba(63, 63, 63, 0.08)',
     borderRadius: '2px',
   },
 
@@ -404,11 +404,11 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   searchField: {
-    width: '220px',
+    width: '200px',
     height: '22px',
     padding: '3px 8px',
     outline: 'none',
-    fontSize: '14px',
+    fontSize: '13px',
     fontFamily: theme.fonts.medium.fontFamily,
     color: theme.palette.black,
     backgroundColor: theme.palette.white,
