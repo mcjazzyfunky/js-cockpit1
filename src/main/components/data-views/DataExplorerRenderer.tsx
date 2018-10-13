@@ -33,17 +33,17 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     flexGrow: 0,
     flexShrink: 0,
     padding: '2px 0 2px 10px',
-    height: '40px',
+    height: '42px',
     boxSizing: 'border-box',
     margin: '0 0 -1px 0',
-    zIndex: 1000,
+    zIndex: 1,
     color: theme.palette.black,
     //backgroundColor: theme.palette.neutralQuaternaryAlt,
     backgroundColor: theme.palette.neutralLight,
 
     borderWidth: '1px 1px 1px 1px',
     borderStyle: 'solid',
-    borderRadius: '1px',
+    borderRadius: '6px 6px 0 0',
     borderColor: theme.palette.neutralTertiaryAlt,
   },
 
@@ -91,7 +91,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
 
   title: {
     display: 'inline-block',
-    fontSize: theme.fonts.mediumPlus.fontSize,
+    fontSize: theme.fonts.large.fontSize,
     margin: '3px 6px 3px 6px'
   },
 

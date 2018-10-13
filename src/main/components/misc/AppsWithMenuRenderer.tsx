@@ -16,11 +16,11 @@ const styleAppsWithMenu = defineStyle({
   },
 
   menuBar: {
-    backgroundColor: 'rgb(225, 225, 225)', // TODO
+    //backgroundColor: 'rgb(225, 225, 225)', // TODO
 
     selectors: {
       '& *:not(:hover):not(:active)': {
-        backgroundColor: 'transparent !important'
+        //backgroundColor: 'transparent !important'
       }
     }
   },
