@@ -390,28 +390,32 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   searchBox: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'stretch',
     padding: '2px 4px',
     height: '28px',
-    width: '180px',
+    width: '220px',
     boxSizing: 'border-box',
-    backgroundColor: theme.palette.white,
-    border: '1px solid green',
+    //backgroundColor: theme.palette.white,
     overflow: 'hidden'
   },
 
   searchIcon: {
-    color: theme.palette.themePrimary,
+    flexShrink: 0,
+    color: theme.palette.white,
     margin: '0 10px 0 5px',
   },
 
   searchField: {
-    border: 'none',
+    padding: '3px 8px',
     outline: 'none',
     fontSize: '14px',
     fontFamily: theme.fonts.medium.fontFamily,
     color: theme.palette.black,
+    backgroundColor: theme.palette.white,
     flexGrow: 1,
-    width: '100%',
+    borderWidth: '0 0 0px 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralQuaternary,
 
     selectors: {
       '&::placeholder': {
