@@ -29,20 +29,64 @@ for(let i = 0; i < 1213; ++i) {
 
 // --- AppWithNavStyle --------------------------------------------
 
-const styleAppsWithNav = defineStyle({
+const styleAppsWithNav = defineStyle(theme => ({
   container: {
     display: 'flex',
     flexGrow: 1,
-    padding: '0.375rem',
-    fontSize: '80%',
+    backgroundColor: theme.palette.white,
+
+    selectors: {
+      '& > * > * > * > * > button': {
+        color: theme.palette.neutralDark,
+        backgroundColor: 'transparent',
+
+        borderWidth: '0 0 1px 0',
+        borderColor: theme.palette.neutralQuaternaryAlt,
+        borderStyle: 'solid',
+        marginBottom: '0',
+
+        selectors: {
+          ':hover': {
+            backgroundColor: theme.palette.themeTertiary, 
+            borderColor: theme.palette.themePrimary,
+          }
+        }
+      },
+
+      '& .ms-Nav-compositeLink.is-expanded.is-selected > button': {
+        backgroundColor: theme.palette.themeLighterAlt
+      },
+
+      '& .ms-Nav-groupContent': {
+        backgroundColor: 'transparent', //'white !important',
+        padding: '0 !important',
+        margin: '0 !important',
+        marginTop: '0 !important',
+
+        selectors: {
+          '*': {
+            backgroundColor: 'transparent !important',
+          }
+        }
+      }
+    }
   },
 
   navigation: {
     width: '15rem',
-    borderColor: '#e8e8e8',
-    borderWidth: '0 0.5px 0 0',
+    padding: '0 6px',
+    boxSizing: 'border-box',
+    backgroundColor: theme.palette.neutralLighter,
+    borderColor: theme.palette.neutralQuaternary,
+    borderWidth: '0 1px 0 0',
     borderStyle: 'solid',
-    padding: '0 3px',
+
+    selectors: {
+      '& .ms-Nav-chevronButton': {
+        fontSize: theme.fonts.mediumPlus.fontSize,
+        // color: theme.palette.themePrimary
+      }
+    }
   },
 
   content: {
@@ -50,9 +94,10 @@ const styleAppsWithNav = defineStyle({
     marginLeft: '0.375rem',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    margin: '4px 6px'
   }
-})
+}))
 
 
 export default {

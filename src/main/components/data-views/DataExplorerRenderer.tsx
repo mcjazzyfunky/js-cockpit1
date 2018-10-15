@@ -26,6 +26,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
+    backgroundColor: theme.palette.white,
   },
 
   header: {

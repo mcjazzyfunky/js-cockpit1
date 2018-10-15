@@ -8,7 +8,7 @@ import AppsWithNav from './AppsWithNav'
 
 // --- AppsWithNavStyle ---------------------------------------------
 
-const styleAppsWithMenu = defineStyle({
+const styleAppsWithMenu = defineStyle(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -17,6 +17,9 @@ const styleAppsWithMenu = defineStyle({
 
   menuBar: {
     backgroundColor: 'rgb(225, 225, 225)', // TODO
+    borderWidth: '0 0 1px 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralQuaternaryAlt,
 
     selectors: {
       '& *:not(:hover):not(:active)': {
@@ -30,7 +33,7 @@ const styleAppsWithMenu = defineStyle({
     display: 'flex',
     flexGrow: 1,
   }
-})
+}))
 
 // --- AppsWithMenuRenderer -----------------------------------------
 
