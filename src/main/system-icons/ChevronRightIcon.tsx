@@ -6,10 +6,10 @@ export default defineComponent({
 
   render() {
     return (
-      <svg width="20px" height="20px" viewBox="0 0 64 64">
+      <svg width="12" height="12" viewBox="0 0 12 12">
         <g>
-          <polyline stroke="currentColor" fill="none" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10"
-            points="27,29 44,46 27,63"/>
+          <polyline fill="none" stroke="currentColor" strokeWidth="1" strokeLinejoin="bevel" strokeMiterlimit="10"
+            points="4,1 10,6 4,11"/>
         </g>
       </svg>
     )
