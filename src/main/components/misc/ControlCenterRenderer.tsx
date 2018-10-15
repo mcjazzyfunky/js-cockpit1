@@ -1,14 +1,16 @@
-import React, { SFC } from 'react'
-import { defineComponent } from 'js-react-utils'
 import { ControlCenterModel } from './ControlCenter'
 import Brand from './internal/control-center/components/Brand'
+import AppSelector from './internal/control-center/components/AppSelector'
 import defineStyle from '../../styling/defineStyle'
-import { ITheme } from 'office-ui-fabric-react'
 import DefaultAvatar from './internal/control-center/icons/DefaultAvatar'
 import LogoutIcon from './internal/control-center/icons/LogoutIcon'
-import AppsIcon from './internal/control-center/icons/AppsIcon'
-import ChevronDownIcon from '../../system-icons/ChevronDownIcon'
+
+// external importts
+import React, { SFC } from 'react'
+import { defineComponent } from 'js-react-utils'
+import { ITheme } from 'office-ui-fabric-react'
 import Color from 'color'
+
 
 const styleControlCenter = defineStyle((theme: ITheme) => {
   return {
@@ -98,48 +100,6 @@ export default {
 }
 
 // ------------------------------------------------------------------
-
-const styleAppSelector = defineStyle((theme: ITheme) => ({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    height: '42px',
-    borderColor: 'white',
-    borderWidth: '0 0 0 1px',
-    paddingLeft: '1rem',
-    cursor: 'pointer',
-  },
-
-  icon: {
-    display: 'inline-block',
-    color: theme.palette.themePrimary,
-  },
-
-  label: {
-    margin: '0 0.5rem',
-  }
-}))
-
-type AppSelectorProps = {
-}
-
-const AppSelector = defineComponent<AppSelectorProps>({
-  displayName: 'AppSelector',
-
-  render() {
-    return styleAppSelector(classes =>
-      <div>
-        <div className={classes.container}>
-          <div className={classes.icon}>
-            <AppsIcon/>
-          </div>
-          <label className={classes.label}>Content Management</label>
-          <ChevronDownIcon/>
-        </div>
-      </div>
-    )
-  }
-})
 
 
 // ------------------------------------------------------------------
