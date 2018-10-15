@@ -108,21 +108,15 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
     borderWidth: '0 0 0 1px',
     paddingLeft: '1rem',
     cursor: 'pointer',
-
-    selectors: {
-      '& > *': {
-        margin: '0.1rem 0.1rem'
-      }
-    }
   },
 
   icon: {
     display: 'inline-block',
-    marginRight: '0.5rem',
-    color: theme.palette.themePrimary
+    color: theme.palette.themePrimary,
   },
 
   label: {
+    margin: '0 0.5rem',
   }
 }))
 
