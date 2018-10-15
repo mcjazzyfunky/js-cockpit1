@@ -89,15 +89,17 @@ const styleAppsWithNav = defineStyle(theme => ({
       },
       
       '.ms-Nav-compositeLink.is-expanded': {
-      
         selectors: {
           '*': {
-            cursor: 'default !important',
 
           },
 
           ':hover': {
-            backgroundColor: theme.palette.neutralLight + ' !important'
+            backgroundColor: theme.palette.neutralLight + ' !important',
+          },
+          
+          ':active': {
+            backgroundColor: theme.palette.neutralQuaternary + ' !important',
           }
         }
       },
@@ -107,12 +109,21 @@ const styleAppsWithNav = defineStyle(theme => ({
       },
 
       '.ms-Nav-compositeLink.is-expanded.is-selected': {
-        backgroundColor: theme.palette.themeLight + ' !important',
+        backgroundColor: theme.palette.neutralLight + ' !important',
 
         selectors: {
+          '*': {
+            color: theme.palette.black + ' !important',
+            cursor: 'default !important',
+          },
+
+          '> button:after': {
+            borderColor: theme.palette.neutralSecondaryAlt,
+          },
+
           ':hover *': {
-            color: theme.palette.themeSecondary + ' !important',
-            backgroundColor: theme.palette.themeLighter + ' !important',
+            color: theme.palette.black + ' !important',
+            backgroundColor: theme.palette.neutralLight + ' !important',
           }
         }
       }
