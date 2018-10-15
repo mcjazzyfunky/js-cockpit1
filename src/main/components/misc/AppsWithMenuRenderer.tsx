@@ -51,22 +51,28 @@ const AppsWithMenuRenderer = {
             className={classes.menuBar}
           />
           <div className={classes.content}>
-            <AppsWithNav>
+            <AppsWithNav selectedId='be-users'>
               <AppsWithNav.Apps>
-                <AppsWithNav.AppGroup name="catalog" title="Catalog data">
-                  <AppsWithNav.App name="products" title="Products">
+                <AppsWithNav.AppGroup groupId="users" title="User Management">
+                  <AppsWithNav.App id="be-users" title="Back office users">
                   </AppsWithNav.App>
-                  <AppsWithNav.App name="variants" title="Variants">
-                  </AppsWithNav.App>
-                  <AppsWithNav.App name="categories" title="Categories">
+                  <AppsWithNav.App id="fe-users" title="Front end users">
                   </AppsWithNav.App>
                 </AppsWithNav.AppGroup>
-                <AppsWithNav.AppGroup name="yyy" title="Media">
-                  <AppsWithNav.App name="images" title="Images">
+                <AppsWithNav.AppGroup groupId="catalog" title="Catalog data">
+                  <AppsWithNav.App id="products" title="Products">
                   </AppsWithNav.App>
-                  <AppsWithNav.App name="videos" title="Videos">
+                  <AppsWithNav.App id="variants" title="Variants">
                   </AppsWithNav.App>
-                  <AppsWithNav.App name="presentations" title="Presentations">
+                  <AppsWithNav.App id="categories" title="Categories">
+                  </AppsWithNav.App>
+                </AppsWithNav.AppGroup>
+                <AppsWithNav.AppGroup groupId="yyy" title="Media">
+                  <AppsWithNav.App id="images" title="Images">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="videos" title="Videos">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="presentations" title="Presentations">
                   </AppsWithNav.App>
                 </AppsWithNav.AppGroup>
               </AppsWithNav.Apps>

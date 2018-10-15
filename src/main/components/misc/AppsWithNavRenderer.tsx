@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppsWithNavData, AppsWithNavAppGroupData, AppsWithNavAppData } from './AppsWithNav'
+import { AppsWithNavModel, AppsWithNavAppGroupModel, AppsWithNavAppModel } from './AppsWithNav'
 import { Nav } from 'office-ui-fabric-react'
 import defineStyle from '../../styling/defineStyle'
 
@@ -105,7 +105,7 @@ const styleAppsWithNav = defineStyle(theme => ({
       },
 
       '.ms-Nav-navItems': {
-        margin: '0.325rem 0 1.25rem 0',
+        margin: '0.325rem 0 1rem 0',
       },
 
       '.ms-Nav-compositeLink.is-expanded.is-selected': {
@@ -142,7 +142,7 @@ const styleAppsWithNav = defineStyle(theme => ({
 
 
 export default {
-  render(model: AppsWithNavData) {
+  render(model: AppsWithNavModel) {
     let ret = null
 
     if (model.menu.length > 0) {
@@ -154,7 +154,7 @@ export default {
                 model.menu.map(getLinkProps)
               }
 
-              selectedKey="categories" // TODO
+              selectedKey={model.selectedId}
             />
           </div>
           <div className={classes.content}>
@@ -189,9 +189,9 @@ export default {
                     })
                   }
 
-                  const newData = data.slice(params.offset, params.offset + params.count)
+                  const newModel = data.slice(params.offset, params.offset + params.count)
 
-                  return observableOf({data: newData, totalItemCount: data.length })
+                  return observableOf({data: newModel, totalItemCount: data.length })
                     .pipe(delay(1000))
                 }
               }
@@ -249,22 +249,22 @@ export default {
 
 // --- helpers ------------------------------------------------------
 
-function getLinkProps(model: AppsWithNavAppGroupData | AppsWithNavAppData) {
+function getLinkProps(model: AppsWithNavAppGroupModel | AppsWithNavAppModel) {
   const ret: any = { // TODO
-    key: model.name,
+    key: model.$kind === 'AppsWithNavAppGroupModel' ? model.groupId : model.id,
     name: model.title,
     isExpanded: true
   }
 
-  if (model.$kind === 'AppsWithNavAppGroupData') {
-    const menu = model as AppsWithNavAppGroupData
+  if (model.$kind === 'AppsWithNavAppGroupModel') {
+    const menu = model as AppsWithNavAppGroupModel
 
     if (menu.items.length > 0) {
       ret.links = menu.items.map(it => {
         return getLinkProps(it)
       })
     }
-  } else if (model.$kind === 'AppsWithNavAppData') {
+  } else if (model.$kind === 'AppsWithNavAppModel') {
     // TODO
   } else {
     throw new Error('This should never happen')
