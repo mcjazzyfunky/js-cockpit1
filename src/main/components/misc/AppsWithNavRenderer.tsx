@@ -36,22 +36,6 @@ const styleAppsWithNav = defineStyle(theme => ({
     backgroundColor: theme.palette.white,
 
     selectors: {
-      '& > * > * > * > * > button': {
-        color: theme.palette.neutralDark,
-        backgroundColor: 'transparent',
-
-        borderWidth: '0 0 1px 0',
-        borderColor: theme.palette.neutralQuaternaryAlt,
-        borderStyle: 'solid',
-        marginBottom: '0',
-
-        selectors: {
-          ':hover': {
-            backgroundColor: theme.palette.themeTertiary, 
-            borderColor: theme.palette.themePrimary,
-          }
-        }
-      },
 
       '& .ms-Nav-compositeLink.is-expanded.is-selected > button': {
         backgroundColor: theme.palette.themeLighterAlt
@@ -75,8 +59,9 @@ const styleAppsWithNav = defineStyle(theme => ({
   navigation: {
     width: '15rem',
     padding: '0 6px',
+    margin: '0',
     boxSizing: 'border-box',
-    backgroundColor: theme.palette.neutralLighter,
+    backgroundColor: theme.palette.neutralLighterAlt,
     borderColor: theme.palette.neutralQuaternary,
     borderWidth: '0 1px 0 0',
     borderStyle: 'solid',
@@ -84,7 +69,52 @@ const styleAppsWithNav = defineStyle(theme => ({
     selectors: {
       '& .ms-Nav-chevronButton': {
         fontSize: theme.fonts.mediumPlus.fontSize,
-        // color: theme.palette.themePrimary
+        color: theme.palette.neutralDark,
+        backgroundColor: 'transparent',
+
+        borderWidth: '0 0 1px 0',
+        borderColor: theme.palette.neutralQuaternaryAlt,
+        borderStyle: 'solid',
+        marginBottom: '0',
+
+        selectors: {
+          '& *': {
+            //color: theme.palette.neutralDark + ' !important',
+          },
+
+          ':hover': {
+            backgroundColor: theme.palette.neutralLight, 
+          }
+        }
+      },
+      
+      '.ms-Nav-compositeLink.is-expanded': {
+      
+        selectors: {
+          '*': {
+            cursor: 'default !important',
+
+          },
+
+          ':hover': {
+            backgroundColor: theme.palette.neutralLight + ' !important'
+          }
+        }
+      },
+
+      '.ms-Nav-navItems': {
+        margin: '0.325rem 0 1.25rem 0',
+      },
+
+      '.ms-Nav-compositeLink.is-expanded.is-selected': {
+        backgroundColor: theme.palette.themeLight + ' !important',
+
+        selectors: {
+          ':hover *': {
+            color: theme.palette.themeSecondary + ' !important',
+            backgroundColor: theme.palette.themeLighter + ' !important',
+          }
+        }
       }
     }
   },
