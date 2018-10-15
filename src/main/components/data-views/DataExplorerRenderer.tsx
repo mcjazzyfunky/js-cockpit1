@@ -149,10 +149,19 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
 
   loadingSpinner: {
+    selectors: {
+      '.ms-Spinner-circle': {
+        borderColor: 
+          theme.palette.neutralLight
+            + ' ' + theme.palette.neutralLight
+            + ' ' + theme.palette.neutralLight
+            + ' transparent !important'
+      }
+    }
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.themeSecondary,
+    backgroundColor: theme.palette.neutralSecondaryAlt,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
@@ -213,7 +222,12 @@ class DataExplorerRenderer {
         model.isLoading
           ? <div className={classes.loadingPanel}>
               <div className={classes.loadingPanelContent}>
-                <Spinner size={SpinnerSize.large} className={classes.loadingSpinner} label="Loading data, please wait..." ariaLive="assertive" /> 
+                <Spinner
+                  size={SpinnerSize.large}
+                  className={classes.loadingSpinner}
+                  label="Loading data, please wait..."
+                  ariaLive="assertive"
+                /> 
               </div>
             </div>
           : null
