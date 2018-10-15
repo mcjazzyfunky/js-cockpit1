@@ -152,7 +152,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.themeDark,
+    backgroundColor: theme.palette.themeSecondary,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
