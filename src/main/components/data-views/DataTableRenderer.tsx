@@ -104,12 +104,6 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   dataCell: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-
-    selectors: {
-      '*': {
-        'x-ms-format-detection': 'none !important',
-      }
-    }
   },
 
   alignCenter: {

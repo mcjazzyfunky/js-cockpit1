@@ -15,8 +15,13 @@ export default class extends React.Component {
 
       html.style.fontSize = '14px'
 
-      const linkElem1 = document.createElement('link')
-      const linkElem2 = document.createElement('link')
+      const
+        metaElem = document.createElement('meta'),
+        linkElem1 = document.createElement('link'),
+        linkElem2 = document.createElement('link')
+
+      metaElem.name ='format-detection'
+      metaElem.content = 'telephone=no'
 
       linkElem1.rel = 'stylesheet'
       linkElem2.rel = 'stylesheet'
@@ -27,6 +32,7 @@ export default class extends React.Component {
       linkElem1.href = '//unpkg.com/ag-grid-community/dist/styles/ag-grid.css'
       linkElem2.href = '//unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css'
 
+      head.appendChild(metaElem)
       head.appendChild(linkElem1)
       head.appendChild(linkElem2)
 
