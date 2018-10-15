@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppsWithNavModel, AppsWithNavAppGroupModel, AppsWithNavAppModel } from './AppsWithNav'
-import { Nav } from 'office-ui-fabric-react'
+import { Nav, INavLink } from 'office-ui-fabric-react'
 import defineStyle from '../../styling/defineStyle'
 
 // TODO
@@ -8,10 +8,7 @@ import DataExplorer from '../data-views/DataExplorer'
 import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import faker from 'faker'
-import { FaBeer, FaMinusCircle, FaPencilAlt, FaPlus, FaMinus } from 'react-icons/fa'
-import { MdAddCircleOutline, MdEdit, MdRemove, MdAddCircle, MdRemoveCircle, MdArrowDropDownCircle, MdRemoveCircleOutline, MdAdd } from 'react-icons/md'
-import { FiPlusSquare, FiEdit, FiMinusSquare, FiPlusCircle, FiMinusCircle } from 'react-icons/fi'
-import { FaPlusCircle } from 'react-icons/fa'
+import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 
 const data: any[] = []
 
@@ -35,25 +32,6 @@ const styleAppsWithNav = defineStyle(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.white,
 
-    selectors: {
-
-      '& .ms-Nav-compositeLink.is-expanded.is-selected > button': {
-        backgroundColor: theme.palette.themeLighterAlt
-      },
-
-      '& .ms-Nav-groupContent': {
-        backgroundColor: 'transparent', //'white !important',
-        padding: '0 !important',
-        margin: '0 !important',
-        marginTop: '0 !important',
-
-        selectors: {
-          '*': {
-            backgroundColor: 'transparent !important',
-          }
-        }
-      }
-    }
   },
 
   navigation: {
@@ -67,6 +45,17 @@ const styleAppsWithNav = defineStyle(theme => ({
     borderStyle: 'solid',
 
     selectors: {
+      '.ms-Nav-groupContent': {
+        backgroundColor: 'transparent',
+        padding: '0 !important',
+        margin: '0 !important',
+        marginTop: '0 !important',
+      },
+    
+      '.ms-Nav-navItems *': {
+        backgroundColor: 'transparent !important',
+      },
+
       '& .ms-Nav-chevronButton': {
         fontSize: theme.fonts.mediumPlus.fontSize,
         color: theme.palette.neutralDark,
@@ -78,10 +67,6 @@ const styleAppsWithNav = defineStyle(theme => ({
         marginBottom: '0',
 
         selectors: {
-          '& *': {
-            //color: theme.palette.neutralDark + ' !important',
-          },
-
           ':hover': {
             backgroundColor: theme.palette.neutralLight, 
           }
@@ -90,10 +75,6 @@ const styleAppsWithNav = defineStyle(theme => ({
       
       '.ms-Nav-compositeLink.is-expanded': {
         selectors: {
-          '*': {
-
-          },
-
           ':hover': {
             backgroundColor: theme.palette.neutralLight + ' !important',
           },
@@ -249,11 +230,12 @@ export default {
 
 // --- helpers ------------------------------------------------------
 
-function getLinkProps(model: AppsWithNavAppGroupModel | AppsWithNavAppModel) {
-  const ret: any = { // TODO
+function getLinkProps(model: AppsWithNavAppGroupModel | AppsWithNavAppModel): INavLink {
+  const ret: INavLink = { 
     key: model.$kind === 'AppsWithNavAppGroupModel' ? model.groupId : model.id,
     name: model.title,
-    isExpanded: true
+    isExpanded: true,
+    url: null
   }
 
   if (model.$kind === 'AppsWithNavAppGroupModel') {
