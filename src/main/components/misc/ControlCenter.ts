@@ -86,8 +86,9 @@ const ControlCenter = defineComponent<ControlCenterProps>({
                 : React.createElement(React.Fragment, null, {contents})
 
           ret.apps.push({
-            name: child2.props.name,
+            id: child2.props.id,
             title: child2.props.title,
+            description: child2.props.description,
             content
           })
         })
@@ -142,7 +143,7 @@ const Apps = defineComponent({
 // --- ControlCenter.App --------------------------------------------
 
 type AppProps = {
-  name: string,
+  id: string,
   title: string,
   description?: string,
   children?: ReactNode // TODO
@@ -152,7 +153,7 @@ const App = defineComponent<AppProps>({
   displayName: 'ControlCenter.App',
 
   properties: {
-    name: {
+    id: {
       type: String,
       required: true
     },
@@ -196,7 +197,7 @@ type ControlCenterModel = {
 }
 
 type AppModel = {
-  name: string,
+  id: string,
   title: string,
   description?: string,
   content: ReactNode

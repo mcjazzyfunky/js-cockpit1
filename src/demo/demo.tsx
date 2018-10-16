@@ -40,8 +40,12 @@ export default function Demo() {
   const controlCenter =
     <ControlCenter vendor="meet+greet" title="Back Office">
       <ControlCenter.Apps>
-        <ControlCenter.App name="admin" title="Administration">
+        <ControlCenter.App id="admin" title="Administration" description="This is for adminstration purposes">
           <AdministrationApp/>
+        </ControlCenter.App>
+        <ControlCenter.App id="content" title="Content Management" description="This is the CMS">
+        </ControlCenter.App>
+        <ControlCenter.App id="content" title="ERP" description="Enterprise Resource Planning">
         </ControlCenter.App>
       </ControlCenter.Apps>
     </ControlCenter>

@@ -78,7 +78,13 @@ function render(model: ControlCenterModel) {
           <Brand vendor={model.vendor} title={model.title} logo={model.logo}/>
         </div>
         <div className={classes.headerCenter}>
-          <AppSelector/>
+          <AppSelector apps={
+            model.apps.map(app => ({
+              id: app.id,
+              title: app.title,
+              description: app.description,
+            }))
+          }/>
         </div>
         <div className={classes.headerEnd}>
           { <DefaultAvatar/> }
