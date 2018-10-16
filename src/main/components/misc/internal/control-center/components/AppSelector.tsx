@@ -34,14 +34,9 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
   callout: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'stretch',
     padding: '1px',
-  },
-
-  calloutContent: {
-    flexGrow: 1,
-    alignSelf: 'stretch'
+    minWidth: '300px',
+    boxSizing: 'border-box',
   },
 
   appLink: {
@@ -159,9 +154,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
               setInitialFocus={true}
               onDismiss={() => this._closeCallout()}
             >
-              <div className={classes.calloutContent}>
-                { calloutContent } 
-              </div>
+            { calloutContent } 
             </Callout>
           </div>
         )
