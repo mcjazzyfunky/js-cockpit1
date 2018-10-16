@@ -6,9 +6,8 @@ import ChevronDownIcon from '../../../../../system-icons/ChevronDownIcon'
 // external imports
 import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
-import { ITheme, Callout, CommandBar } from 'office-ui-fabric-react'
+import { ITheme, Callout } from 'office-ui-fabric-react'
 import { Spec } from 'js-spec'
-import { MdCancel } from 'react-icons/md'
 
 // --- AppSelector --------------------------------------------------
 
@@ -37,8 +36,6 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
     flexDirection: 'column',
     alignItems: 'stretch',
     justifyContent: 'stretch',
-    minWidth: '300px',
-    minHeight: '200px',
     padding: '1px',
   },
 
@@ -48,12 +45,19 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
   },
 
   appLink: {
-    margin: '6px 6px',
+    margin: '4px 4px',
     padding: '4px 8px',
     color: theme.palette.black,
     cursor: 'pointer',
+    borderWidth: '1px 0 0 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralLight,
 
     selectors: {
+      ':first-child': {
+        borderTopWidth: 0
+      },
+
       ':hover': {
         color: theme.palette.themeDarker,
         backgroundColor: theme.palette.themeLight,
@@ -61,20 +65,13 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
     }
   },
 
-  appLinkIcon: {
-    display: 'inline-block',
-    width: '0px',
-    overflow: 'hidden',
-  },
-
   appLinkTitle: {
     display: 'inline-block',
-    fontSize: theme.fonts.mediumPlus.fontSize,
+    fontSize: theme.fonts.medium.fontSize,
   },
 
   appLinkDescription: {
     display: 'block',
-    margin: '0',
     fontSize: theme.fonts.smallPlus.fontSize,
     fontStyle: 'italic',
   }
@@ -131,9 +128,6 @@ const AppSelector = defineComponent<AppSelectorProps>({
 
           calloutContent.push(
             <div key={app.id} className={classes.appLink}>
-              <div className={classes.appLinkIcon}>
-                <AppsIcon/>
-              </div>
               <div className={classes.appLinkTitle}>
                 {app.title}
               </div>
@@ -168,18 +162,6 @@ const AppSelector = defineComponent<AppSelectorProps>({
               <div className={classes.calloutContent}>
                 { calloutContent } 
               </div>
-              <CommandBar
-                items={[]}
-
-                farItems={[
-                  {
-                    text: 'Close',
-                    key: '1',
-                    onRenderIcon: () => <MdCancel/>,
-                    onClick: () => this._closeCallout()
-                  }
-                ]}
-              />
             </Callout>
           </div>
         )
