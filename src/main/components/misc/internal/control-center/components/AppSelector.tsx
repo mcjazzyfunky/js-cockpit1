@@ -29,6 +29,7 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
 
   label: {
     margin: '0 0.5rem',
+    cursor: 'pointer',
   },
 
   callout: {
@@ -43,7 +44,6 @@ const styleAppSelector = defineStyle((theme: ITheme) => ({
     margin: '4px 4px',
     padding: '4px 8px',
     color: theme.palette.black,
-    cursor: 'pointer',
     borderWidth: '1px 0 0 0',
     borderStyle: 'solid',
     borderColor: theme.palette.neutralLight,
@@ -117,7 +117,6 @@ const AppSelector = defineComponent<AppSelectorProps>({
         const
           calloutContent: ReactNode[] = []
 
-        
         for (let i = 0; i < this.props.apps.length; ++i) {
           const app = this.props.apps[i]
 
@@ -136,12 +135,12 @@ const AppSelector = defineComponent<AppSelectorProps>({
         }
 
         return styleAppSelector(classes =>
-          <div className={classes.container}>
+          <div className={classes.container} onClick={() => this.setState(state => ({ calloutVisible: true }))}>
             <div ref={(it: any) => this._ref = it}>
               <div className={classes.icon}>
                   <AppsIcon/>
               </div>
-              <label className={classes.label} onClick={() => this.setState(state => ({ calloutVisible: true }))}>
+              <label className={classes.label}>
                 Content Management
               </label>
               <ChevronDownIcon/>
