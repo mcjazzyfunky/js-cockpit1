@@ -126,7 +126,7 @@ class DataTableRenderer {
     this._onRenderItemColumn = this._onRenderItemColumn.bind(this)
   }
 
-  render(model: DataTableModel) {
+  main(model: DataTableModel) {
     this._model = model
 
     const

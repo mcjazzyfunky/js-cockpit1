@@ -102,7 +102,7 @@ function render(model: ControlCenterModel) {
 // --- exports ------------------------------------------------------
 
 export default {
-  render
+  render 
 }
 
 // ------------------------------------------------------------------
@@ -162,7 +162,7 @@ type LogoutButtonProps = {
 const LogoutButton = defineComponent<LogoutButtonProps>({
   displayName: 'LogoutButton',
 
-  render() {
+  main() {
     return styleLogoutButton(classes =>
       <a className={classes.button}>
         <LogoutIcon/>

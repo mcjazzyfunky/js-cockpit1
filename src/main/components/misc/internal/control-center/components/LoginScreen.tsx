@@ -63,7 +63,7 @@ const Content = defineComponent<LoginScreenContentProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error('Components of type LoginScreen.Content can only be '
       + 'used as children of LoginScreen')
   }
@@ -82,7 +82,7 @@ const LoginScreen = defineComponent<LoginScreenProps>({
     }
   },
 
-  render({ children }) {
+  main({ children }) {
     let mainContent: ReactNode = null
 
     React.Children.forEach(children, ({ type, props }: any) => { // TODO

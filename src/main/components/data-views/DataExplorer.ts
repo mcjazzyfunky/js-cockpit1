@@ -2,7 +2,7 @@
 import DataExplorerRenderer from './DataExplorerRenderer'
 
 // external imports
-import React, { ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, withChildren, isElementOfType, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec/dev-only'
 import { Observable } from 'rxjs'
@@ -29,7 +29,7 @@ const GeneralAction = defineComponent<GeneralActionProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type DataNaviator.GeneralAction must be children of '
         + 'DataExplorer.Actions components')
@@ -57,7 +57,7 @@ const SingleRowAction = defineComponent<SingleRowActionProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type DataNaviator.SingleRowAction must be children of '
         + 'DataExplorer.Actions components')
@@ -67,7 +67,8 @@ const SingleRowAction = defineComponent<SingleRowActionProps>({
 // --- DataExplorer.MultiRowAction ---------------------------------
 
 type MultiRowActionProps = {
-  title: string
+  title: string,
+  icon?: ReactNode
 }
 
 const MultiRowAction = defineComponent<GeneralActionProps>({
@@ -77,10 +78,14 @@ const MultiRowAction = defineComponent<GeneralActionProps>({
     title: {
       type: String,
       required: true
+    },
+    
+    icon: {
+      validate: isNode
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type DataNaviator.MultiRowAction must be children of '
         + 'DataExplorer.Actions components')
@@ -104,7 +109,7 @@ const Actions = defineComponent<ActionsProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type DataNaviator.MultiRowAction must be children of '
         + 'DataExplorer.Actions components')
@@ -149,7 +154,7 @@ const Column = defineComponent<ColumnProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type DataNaviator.Column must be children of '
         + 'DataExplorer.Columns components')
@@ -174,7 +179,7 @@ const Columns = defineComponent<ColumnsProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type DataNaviator.Columns must be children of '
         + 'DataExplorer components')
@@ -215,7 +220,7 @@ type DataExplorerState = {
   data: any[]
 }
 
-const DataExplorer = defineComponent<DataExplorerProps, DataExplorerState>({
+const DataExplorer = defineComponent<DataExplorerProps>({
   displayName: 'DataExplorer',
 
   properties: {
@@ -231,11 +236,13 @@ const DataExplorer = defineComponent<DataExplorerProps, DataExplorerState>({
     children: {
       validate:
         withChildren(
-          Spec.all(isElementOfType([Actions, Columns])))
+          Spec.and(
+            Spec.all(isElementOfType([Actions, Columns])),
+            Spec.unique((it: ReactElement<any>) => it.type)))
     }
   },
 
-  base: class extends React.Component<DataExplorerProps, DataExplorerState> {
+  main: class extends React.Component<DataExplorerProps, DataExplorerState> {
     private _renderer = new DataExplorerRenderer()
     private _timeout: any = null
   

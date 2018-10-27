@@ -38,7 +38,7 @@ const ControlCenter = defineComponent<ControlCenterProps>({
     }
   },
 
-  base: class extends React.PureComponent<ControlCenterProps> {
+  main: class extends React.PureComponent<ControlCenterProps> {
     private __controlCenterModel: ControlCenterModel = null
     private __controlCenterModelSource: ControlCenterProps = null
 
@@ -107,7 +107,7 @@ type LoginProps = {
 const Login = defineComponent<LoginProps>({
   displayName: 'ControlCenter.Login',
 
-  render() {
+  main() {
     throw new Error(
       'Components of type ControlCenter.Login must be children of '
         + 'ControlCenter components'
@@ -132,7 +132,7 @@ const Apps = defineComponent({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type ControlCenter.Login must be children of '
         + 'ControlCenter components'
@@ -174,7 +174,7 @@ const App = defineComponent<AppProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error(
       'Components of type ControlCenter.App must be children of '
         + 'ControlCenter components'

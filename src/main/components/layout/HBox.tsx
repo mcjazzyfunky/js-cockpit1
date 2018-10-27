@@ -49,7 +49,7 @@ const Cell = defineComponent<CellProps>({
     },
   },
 
-  render() {
+  main() {
     throw new Error('Components of type HBox.Cell can only '
       + 'be used as direct children of HBox components')
   }
@@ -78,7 +78,7 @@ const HBox = defineComponent<HBoxProps>({
     }
   },
 
-  render({ className, style, children }: HBoxProps) {
+  main({ className, style, children }: HBoxProps) {
     const
       cells =
         React.Children.map(children, child => {

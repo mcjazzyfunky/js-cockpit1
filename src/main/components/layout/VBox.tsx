@@ -49,7 +49,7 @@ const Cell = defineComponent<CellProps>({
     },
   },
 
-  render() {
+  main() {
     throw new Error('Components of type VBox.Cell can only '
       + 'be used as direct children of VBox components')
   }
@@ -78,7 +78,7 @@ const VBox = defineComponent<VBoxProps>({
     }
   },
 
-  render({ className, style, children }: VBoxProps) {
+  main({ className, style, children }: VBoxProps) {
     const
       cells =
         React.Children.map(children, child => {

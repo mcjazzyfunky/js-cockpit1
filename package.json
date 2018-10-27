@@ -68,11 +68,11 @@
   },
   "dependencies": {
     "color": "^3.0.0",
-    "js-react-utils": "0.0.27",
-    "js-spec": "^0.1.60",
+    "js-react-utils": "0.0.29",
+    "js-spec": "^0.1.61",
     "office-ui-fabric-react": "^6.75.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
     "react-virtualized": "^9.20.1",
     "rxjs": "^6.3.3"
   },

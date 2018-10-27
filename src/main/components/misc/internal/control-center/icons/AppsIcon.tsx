@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'AppsIcon',
 
-  render() {
+  main() {
     return (
       <svg width="12" height="12" viewBox="0 0 64 64">
         <g fill="currentColor">

@@ -32,7 +32,7 @@ const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
     }
   },
 
-  render(props: PageSizeSelectorProps) {
+  main(props: PageSizeSelectorProps) {
     return PageSizeSelectorRenderer.render(getPageSizeSelectorModel(props))
   }
 })

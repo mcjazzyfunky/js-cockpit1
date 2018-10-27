@@ -42,7 +42,7 @@ const Paginator = defineComponent<PaginatorProps>({
     }
   },
 
-  render(props: PaginatorProps) {
+  main(props: PaginatorProps) {
     return PaginatorRenderer.render(getPaginatorModel(props))
   }
 })

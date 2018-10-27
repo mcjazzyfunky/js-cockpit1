@@ -56,7 +56,7 @@ export default function Demo() {
 const AdministrationApp = defineComponent({
   displayName: 'AdministrationApp',
 
-  render() {
+  main() {
     return (
       <AppsWithMenu>
         <AppsWithMenu.Apps>

@@ -102,7 +102,7 @@ export default defineComponent<BrandProps>({
     }
   },
 
-  render({ logo, vendor, title, size, className, style }) {
+  main({ logo, vendor, title, size, className, style }) {
     return styleBrand(classes => {
       const
         isLarge = size === 'large',

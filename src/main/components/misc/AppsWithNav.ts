@@ -32,7 +32,7 @@ const App = defineComponent<AppProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error('Components of type AppsWithNav.App must be children '
       + 'of AppsWithNav.Apps or AppsWithNav.AppGroup components')
   }
@@ -67,7 +67,7 @@ const AppGroup: ComponentType<AppGroupProps> = defineComponent<AppGroupProps>({
     }
   },
 
-  render() {
+  main() {
     throw new Error('Components of type AppsWithNav.Menu must be children '
       + 'of AppsWithNav.Menus or AppsWithNav.Menu components')
   }
@@ -90,7 +90,7 @@ const Apps = defineComponent({
     }
   },
 
-  render() {
+  main() {
     throw new Error('Components of type AppsWithNav.Apps must be children '
       + 'of AppsWithNav components')
   }
@@ -107,6 +107,10 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
   displayName: 'AppsWithNavProps',
 
   properties: {
+    selectedId: {
+      type: String
+    },
+
     children: {
       validate:
         withChildren(
@@ -114,7 +118,7 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
     }
   },
 
-  base: class Base extends React.Component<AppsWithNavProps> {
+  main: class Base extends React.Component<AppsWithNavProps> {
     private _model: AppsWithNavModel = null
     private _modelSource: AppsWithNavProps = null
     

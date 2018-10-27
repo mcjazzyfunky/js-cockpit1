@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'ArrowDoubleLeftIcon',
 
-  render() {
+  main() {
     return (
       <svg width="20px" height="20px" viewBox="0 0 64 64">
         <g>
