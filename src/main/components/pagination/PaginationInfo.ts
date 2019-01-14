@@ -46,7 +46,7 @@ const PaginationInfo = defineComponent<PaginationInfoProps>({
     }
   },
 
-  main(props: PaginationInfoProps) {
+  render(props: PaginationInfoProps) {
     return PaginationInfoRenderer.render(props)
   }
 })

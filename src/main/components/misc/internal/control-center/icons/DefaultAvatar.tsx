@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'DefaultAvatar',
 
-  main() {
+  render() {
     return (
       <svg viewBox="0 0 1000 1000" width="20" height="20">
         <g fill="currentColor"> 

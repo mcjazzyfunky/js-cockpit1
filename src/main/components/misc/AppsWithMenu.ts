@@ -31,7 +31,7 @@ const App = defineComponent<AppProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type AppsWithMenu.App must be children '
       + 'of AppsWithMenu.Apps or AppsWithMenu.AppGroup components')
   }
@@ -66,7 +66,7 @@ const AppGroup: ComponentType<AppGroupProps> = defineComponent<AppGroupProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type AppsWithMenu.Menu must be children '
       + 'of AppsWithMenu.Menus or AppsWithMenu.Menu components')
   }
@@ -89,7 +89,7 @@ const Apps = defineComponent({
     }
   },
 
-  main() {
+  render() {
     throw new Error('Components of type AppsWithMenu.Apps must be children '
       + 'of AppsWithMenu components')
   }
@@ -112,7 +112,7 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
     }
   },
 
-  main: class Base extends React.PureComponent<AppsWithMenuProps> {
+  render: class Base extends React.PureComponent<AppsWithMenuProps> {
     render() {
       const model = Base._getAppsWithMenuModel(this.props)
       return AppsWithMenuRenderer.render(model)

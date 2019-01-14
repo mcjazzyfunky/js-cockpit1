@@ -50,13 +50,13 @@ export default function Demo() {
       </ControlCenter.Apps>
     </ControlCenter>
 
-  return controlCenter
+  return controlCenter 
 }
 
 const AdministrationApp = defineComponent({
   displayName: 'AdministrationApp',
 
-  main() {
+  render() {
     return (
       <AppsWithMenu>
         <AppsWithMenu.Apps>

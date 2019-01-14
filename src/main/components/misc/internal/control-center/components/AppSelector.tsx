@@ -101,7 +101,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
     }
   },
 
-  main: class extends React.Component<AppSelectorProps, AppSelectorState> {
+  render: class extends React.Component<AppSelectorProps, AppSelectorState> {
     private _ref: any = null
 
     constructor(props: AppSelectorProps) {

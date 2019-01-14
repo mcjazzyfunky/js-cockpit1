@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'ChevronDownIcon',
 
-  main() {
+  render() {
     return (
       <svg width="20px" height="20px" viewBox="0 6 64 64">
         <g fill="none" stroke="currentColor" strokeWidth="4" strokeLinejoin="bevel" strokeMiterlimit="10">

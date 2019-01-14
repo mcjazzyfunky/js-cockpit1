@@ -5,7 +5,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'SortDescIcon',
 
-  main() {
+  render() {
     return (
       <svg width="20px" height="20px" viewBox="0 0 64 64">
         <g fill="none" stroke="currentColor" strokeWidth="2" strokeMiterlimit="10">

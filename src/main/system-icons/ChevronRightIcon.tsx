@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'ChevronDownIcon',
 
-  main() {
+  render() {
     return (
       <svg width="12" height="12" viewBox="0 0 12 12">
         <g>

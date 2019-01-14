@@ -22,7 +22,7 @@ const Header = defineComponent<HeaderProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type LoginForm.Header can only be used as children '
         + 'of LoginForm components')
@@ -131,7 +131,7 @@ const LoginForm = defineComponent<LoginFormProps>({
     }
   },
 
-  main: class extends React.Component<LoginFormProps, LoginFormState> {
+  render: class extends React.Component<LoginFormProps, LoginFormState> {
     constructor(props: LoginFormProps) {
       super(props)
 

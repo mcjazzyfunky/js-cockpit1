@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'LogoutIcon',
   
-  main() {
+  render() {
     return (
       <svg width="18" height="18" viewBox="0 0 1000 1000">
         <g fill="currentColor">

@@ -29,7 +29,7 @@ const GeneralAction = defineComponent<GeneralActionProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataNaviator.GeneralAction must be children of '
         + 'DataExplorer.Actions components')
@@ -57,7 +57,7 @@ const SingleRowAction = defineComponent<SingleRowActionProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataNaviator.SingleRowAction must be children of '
         + 'DataExplorer.Actions components')
@@ -85,7 +85,7 @@ const MultiRowAction = defineComponent<GeneralActionProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataNaviator.MultiRowAction must be children of '
         + 'DataExplorer.Actions components')
@@ -109,7 +109,7 @@ const Actions = defineComponent<ActionsProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataNaviator.MultiRowAction must be children of '
         + 'DataExplorer.Actions components')
@@ -154,7 +154,7 @@ const Column = defineComponent<ColumnProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataNaviator.Column must be children of '
         + 'DataExplorer.Columns components')
@@ -179,7 +179,7 @@ const Columns = defineComponent<ColumnsProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataNaviator.Columns must be children of '
         + 'DataExplorer components')
@@ -242,7 +242,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
     }
   },
 
-  main: class extends React.Component<DataExplorerProps, DataExplorerState> {
+  render: class extends React.Component<DataExplorerProps, DataExplorerState> {
     private _renderer = new DataExplorerRenderer()
     private _timeout: any = null
   

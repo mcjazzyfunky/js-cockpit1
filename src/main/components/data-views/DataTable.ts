@@ -45,7 +45,7 @@ const Column = defineComponent<ColumnProps>({
     }
   },
 
-  main() {
+  render() {
     throw new Error(
       'Components of type DataTable.Column can only be used as children of '
         + 'DataTable components'
@@ -129,7 +129,7 @@ const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
 
   methods: ['unselectAllRows'],
 
-  main: class extends React.Component<DataTableProps, DataTableState> {
+  render: class extends React.Component<DataTableProps, DataTableState> {
     private renderer = new DataTableRenderer()
 
     constructor(props: DataTableProps) {

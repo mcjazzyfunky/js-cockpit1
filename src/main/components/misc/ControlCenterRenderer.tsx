@@ -162,7 +162,7 @@ type LogoutButtonProps = {
 const LogoutButton = defineComponent<LogoutButtonProps>({
   displayName: 'LogoutButton',
 
-  main() {
+  render() {
     return styleLogoutButton(classes =>
       <a className={classes.button}>
         <LogoutIcon/>

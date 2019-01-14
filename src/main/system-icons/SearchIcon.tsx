@@ -4,7 +4,7 @@ import { defineComponent } from 'js-react-utils'
 export default defineComponent({
   displayName: 'SearchIcon',
 
-  main() {
+  render() {
     return (
       <svg width="20px" height="20px" viewBox="0 -24 620 580">
         <g fill="currentColor">

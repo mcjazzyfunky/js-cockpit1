@@ -466,7 +466,7 @@ type SearchBarState = {
 const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
   displayName: 'SearchBar',
 
-  main: class extends React.Component<SearchBarProps, SearchBarState> {
+  render: class extends React.Component<SearchBarProps, SearchBarState> {
     private _advancedFilterRef: any = null // TODO
 
     constructor(props: SearchBarProps) {
