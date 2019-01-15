@@ -1,5 +1,5 @@
 // internal imports
-import PageSizeChangeEvent from '../../events/PageSizeChangeEvent'
+import PageSizeChangeEvent from '../../../events/PageSizeChangeEvent'
 
 // --- PageSizeSelectorProps ----------------------------------------
 

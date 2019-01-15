@@ -4,7 +4,7 @@ import { ITheme } from 'office-ui-fabric-react'
 
 // internal imports
 import PaginationInfoProps from './PaginationInfoProps'
-import defineStyle from '../../styling/defineStyle'
+import defineStyle from '../../../styling/defineStyle'
 
 // --- PaginationInfoStyle ----------------------------------------
 

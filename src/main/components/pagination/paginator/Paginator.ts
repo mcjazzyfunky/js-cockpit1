@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 // internal imports
 import PaginatorProps from './PaginatorProps'
 import PaginatorView from './PaginatorView'
-import PageChangeEvent from '../../events/PageChangeEvent'
+import PageChangeEvent from '../../../events/PageChangeEvent'
 
 // --- Paginator ----------------------------------------------------
 

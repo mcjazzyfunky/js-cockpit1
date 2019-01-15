@@ -5,8 +5,8 @@ import { DefaultButton, ITheme } from 'office-ui-fabric-react'
 // internal imports
 import { PAGE_SIZE_OPTIONS } from './constants'
 import PageSizeSelectorProps from './PageSizeSelectorProps'
-import defineStyle from '../../styling/defineStyle' 
-import ActionEvent from '../../events/ActionEvent'
+import defineStyle from '../../../styling/defineStyle' 
+import ActionEvent from '../../../events/ActionEvent'
 
 // --- PageSizeSelectorStyle ----------------------------------------
 

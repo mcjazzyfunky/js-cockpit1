@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, AppsWithMenu, ControlCenter } from '../main/js-cockpit'
+import { initSystemIcons, AppsWithNav, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
 import LoginForm from '../main/components/misc/internal/control-center/components/LoginForm'
@@ -59,44 +59,33 @@ const AdministrationApp = defineComponent({
 
   render() {
     return (
-      <AppsWithMenu>
-        <AppsWithMenu.Apps>
-          <AppsWithMenu.AppGroup name="userMgmt" title="User management">
-            <AppsWithMenu.App
-              name="backendUsers"
-              title="Backend Users"
-            />
-            <AppsWithMenu.App
-              name="frontendUsers"
-              title="Frontend Users"
-            />
-          </AppsWithMenu.AppGroup>
-          <AppsWithMenu.AppGroup name="fileMgmt" title="File management">
-            <AppsWithMenu.AppGroup
-              name="images"
-              title="Images"
-            >
-              <AppsWithMenu.App
-                name="jpg"
-                title="JPEG"
-              />
-              <AppsWithMenu.App
-                name="gif"
-                title="GIF"
-              />
-              <AppsWithMenu.App
-                name="png"
-                title="PNG"
-              />
-            </AppsWithMenu.AppGroup>
-            <AppsWithMenu.App
-              name="videos"
-              title="Videos"
-            />
-          </AppsWithMenu.AppGroup>
-        </AppsWithMenu.Apps>
-      </AppsWithMenu>
-    )
+       <AppsWithNav selectedId='be-users'>
+              <AppsWithNav.Apps>
+                <AppsWithNav.AppGroup groupId="users" title="User Management">
+                  <AppsWithNav.App id="be-users" title="Back office users">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="fe-users" title="Front end users">
+                  </AppsWithNav.App>
+                </AppsWithNav.AppGroup>
+                <AppsWithNav.AppGroup groupId="catalog" title="Catalog data">
+                  <AppsWithNav.App id="products" title="Products">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="variants" title="Variants">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="categories" title="Categories">
+                  </AppsWithNav.App>
+                </AppsWithNav.AppGroup>
+                <AppsWithNav.AppGroup groupId="yyy" title="Media">
+                  <AppsWithNav.App id="images" title="Images">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="videos" title="Videos">
+                  </AppsWithNav.App>
+                  <AppsWithNav.App id="presentations" title="Presentations">
+                  </AppsWithNav.App>
+                </AppsWithNav.AppGroup>
+              </AppsWithNav.Apps>
+            </AppsWithNav>
+      )
   }
 })
 

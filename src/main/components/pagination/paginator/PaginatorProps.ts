@@ -1,5 +1,5 @@
 // internal imports
-import PageChangeEvent from '../../events/PageChangeEvent'
+import PageChangeEvent from '../../../events/PageChangeEvent'
 
 // --- PaginatorProps -----------------------------------------------
 

@@ -4,12 +4,12 @@ import { ITheme, TextField } from 'office-ui-fabric-react'
 
 // internal imports
 import PaginatorProps from './PaginatorProps'
-import PageChangeEvent from '../../events/PageChangeEvent'
-import defineStyle from '../../styling/defineStyle'
-import ArrowDoubleLeftIcon from '../../icons/ArrowDoubleLeftIcon' 
-import ArrowDoubleRightIcon from '../../icons/ArrowDoubleRightIcon' 
-import ArrowLeftIcon from '../../icons/ArrowLeftIcon' 
-import ArrowRightIcon from '../../icons/ArrowRightIcon' 
+import PageChangeEvent from '../../../events/PageChangeEvent'
+import defineStyle from '../../../styling/defineStyle'
+import ArrowDoubleLeftIcon from '../../../icons/ArrowDoubleLeftIcon' 
+import ArrowDoubleRightIcon from '../../../icons/ArrowDoubleRightIcon' 
+import ArrowLeftIcon from '../../../icons/ArrowLeftIcon' 
+import ArrowRightIcon from '../../../icons/ArrowRightIcon' 
 
 // --- PaginatorStyle -----------------------------------------------
 

@@ -1,10 +1,11 @@
 // import component types
-import AppsWithMenu from './components/misc/AppsWithMenu'
+
+import AppsWithNav from './components/misc/AppsWithNav'
 import ControlCenter from './components/misc/ControlCenter'
 import DataExplorer from './components/data-views/DataExplorer'
 import DataTable from './components/data-views/DataTable'
-import HBox from './components/layout/HBox'
-import VBox from './components/layout/VBox'
+import HBox from './components/layout/hbox/HBox'
+import VBox from './components/layout/vbox/VBox'
 
 // import event types
 import ActionEvent from './events/ActionEvent'
@@ -14,7 +15,7 @@ import initSystemIcons from './styling/initSystemIcons'
 
 export {
   // components
-  AppsWithMenu,
+  AppsWithNav,
   ControlCenter,
   DataExplorer,
   DataTable,
