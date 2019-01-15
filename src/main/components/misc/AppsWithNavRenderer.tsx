@@ -132,7 +132,7 @@ export default {
           <div className={classes.navigation}>
             <Nav
               groups={
-                model.menu.map(getLinkProps)
+                model.menu.map(getLinkProps) as any // TODO
               }
 
               selectedKey={model.selectedId}
@@ -235,6 +235,7 @@ function getLinkProps(model: AppsWithNavAppGroupModel | AppsWithNavAppModel): IN
     key: model.$kind === 'AppsWithNavAppGroupModel' ? model.groupId : model.id,
     name: model.title,
     isExpanded: true,
+    link: null, // TODO
     url: null
   }
 

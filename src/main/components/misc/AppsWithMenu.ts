@@ -169,7 +169,7 @@ const AppsWithMenu = defineComponent<AppsWithMenuProps>({
 
       return ret
     }
-  }
+  } as any // TODO
 })
 
 // --- data models --------------------------------------------------

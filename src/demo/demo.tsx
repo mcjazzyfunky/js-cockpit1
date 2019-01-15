@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
 import { initSystemIcons, AppsWithMenu, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
@@ -20,13 +21,13 @@ loadTheme({
   }
 })
 
-export default function Demo() {
+function Demo() {
  const loginScreen =  
     <LoginScreen>
       <LoginScreen.Content>
         <LoginForm
           performLogin={
-            ({ username, password, remember }) =>
+            (/* { username, password, remember } */) => // TODO
               Promise.resolve({ fullName: 'Jimmy Jumper' })
           }
         >
@@ -98,3 +99,6 @@ const AdministrationApp = defineComponent({
     )
   }
 })
+
+ReactDOM.render(<Demo/>, document.getElementById('main-content'))
+

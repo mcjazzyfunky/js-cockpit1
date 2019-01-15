@@ -186,7 +186,7 @@ const AppsWithNav = defineComponent<AppsWithNavProps>({
 
       return ret
     }
-  }
+  } as any // TODO
 })
 
 // --- models -------------------------------------------------------

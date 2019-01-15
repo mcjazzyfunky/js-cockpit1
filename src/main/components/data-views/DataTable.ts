@@ -81,7 +81,7 @@ type DataTableMethods = {
   unselectAllRows: () => void
 }
 
-const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
+const DataTable = defineComponent<DataTableProps, DataTableMethods>({
   displayName: 'DataTable',
 
   properties: {
@@ -205,7 +205,7 @@ const DataTable = defineComponent<DataTableProps, {}, DataTableMethods>({
         width: props.width
       }
     }
-  }
+  } as any // TODO
 })
 
 // --- data models --------------------------------------------------

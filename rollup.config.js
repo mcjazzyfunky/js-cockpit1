@@ -1,7 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
-import reactSvg from "rollup-plugin-react-svg"
+import reactSvg from 'rollup-plugin-react-svg'
 import typescript from 'rollup-plugin-typescript2'
 import { uglify as uglifyJS } from 'rollup-plugin-uglify'
 import uglifyES from 'rollup-plugin-uglify-es'
@@ -17,19 +17,23 @@ function createRollupConfig(moduleFormat, productive) {
         : `dist/js-cockpit.${moduleFormat}.development.js`,
 
       format: moduleFormat,
-      name: 'jsReactLayouts', 
+      name: 'jsCockpit', 
       sourcemap: productive ? false : 'inline',
 
       globals: {
         'js-react-utils': 'jsReactUtils',
         'js-spec': 'jsSpec',
-        'react': 'React'
-      }
+        'react': 'React',
+        'react-virtualized': 'RactVirtualized'
+      },
+      external: ['react', 'js-react-utils', 'js-spec', 'react-virtualized'],
     },
 
-    external: ['react', 'js-react-utils', 'js-spec'],
 
     plugins: [
+      resolve(),
+      commonjs(),
+      /*
       resolve({
         jsnext: true,
         main: true,
@@ -37,7 +41,7 @@ function createRollupConfig(moduleFormat, productive) {
       }),
       commonjs({
         include: 'node_modules/**',
-
+        
         namedExports: {
           'js-react-utils': [
             'defineComponent',
@@ -51,6 +55,7 @@ function createRollupConfig(moduleFormat, productive) {
           ]
         },
       }),
+      */
       reactSvg({
         svgo: {
           plugins: [],
@@ -79,8 +84,8 @@ function createRollupConfig(moduleFormat, productive) {
 
 const configs = []
 
-for (const format of ['umd', 'cjs', 'amd', 'esm']) {
-  for (const productive of [true, false]) {
+for (const format of ['umd', /*'cjs', 'amd', 'esm'*/]) {
+  for (const productive of [true/*, false*/]) {
     configs.push(createRollupConfig(format, productive))
   }
 }

@@ -10,6 +10,7 @@ export default {
   output: {
     file: './build/demo.js',
     format: 'umd',
+    name: 'jsCockpit',
 
     globals: {
       'react': 'React',
@@ -17,35 +18,29 @@ export default {
       'js-react-utils': 'jsReactUtils',
       'js-spec': 'jsSpec',
       'js-spec/dev-only': 'jsSpec',
-      'office-ui-fabric-react': 'Fabric'
-    }
+      'office-ui-fabric-react': 'Fabric',
+      'react-virtualized': 'ReactVirtualized',
+      'faker': 'Faker'
+    },
   },
 
-  external: ['react', 'react-dom', 'js-react-utils', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react'],
+  external: ['react', 'react-dom', 'js-react-utils', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react', 'react-virtualized'],
+
 
   plugins: [
+    resolve(),
+    commonjs(),
+    /*
+  
     resolve({
       main: true,
       module: true,
       jsnext: true,
-      //browser: true
     }),
-    commonjs({
-      include: 'node_modules/**',
-
-      namedExports: {
-        'js-react-utils': [
-          'defineComponent',
-          'defineContext',
-          'isElementOfType',
-          'isNode',
-          'withChildren'
-        ],
-        'js-spec/dev-only': [
-          'Spec'
-        ]
-      },
-    }),
+    //commonjs({
+   //   include: 'node_modules/**',
+   // }),
+   */
     replace({
       exclude: 'node_modules/**', // TODO
       
@@ -53,14 +48,18 @@ export default {
         'process.env.NODE_ENV': "'development'"
       }
     }),
-    typescript(),
-    //serve({
-    //  open: true,
-    //  contentBase: '.',
-    //  openPage: '/src/demo/demo.html'
-    //}),
-    //livereload({
-    //  watch: ['src/demo', 'build']
-    //})
+    typescript({
+      tsconfigOverride: {
+        include: ['./src/main/**/*.ts*', './src/demo/**/*.ts*']
+      }
+    }),
+    serve({
+      open: true,
+      contentBase: '.',
+      openPage: '/src/demo/demo.html'
+    }),
+    livereload({
+      watch: ['src/demo/', 'build']
+    })
   ]
 }

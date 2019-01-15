@@ -163,7 +163,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
     _closeCallout() {
       this.setState({ calloutVisible: false })
     }
-  }
+  } as any // TODO
 })
 
 // --- experts ------------------------------------------------------

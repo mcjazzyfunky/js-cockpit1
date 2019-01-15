@@ -463,7 +463,7 @@ type SearchBarState = {
   calloutVisible: boolean
 }
 
-const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
+const SearchBar = defineComponent<SearchBarProps>({
   displayName: 'SearchBar',
 
   render: class extends React.Component<SearchBarProps, SearchBarState> {
@@ -584,7 +584,7 @@ const SearchBar = defineComponent<SearchBarProps, SearchBarState>({
         calloutVisible: false
       }))
     }
-  }
+  } as any // TODO
 })
 
 // --- exports ------------------------------------------------------

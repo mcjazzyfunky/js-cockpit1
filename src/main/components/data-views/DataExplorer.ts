@@ -4,7 +4,7 @@ import DataExplorerRenderer from './DataExplorerRenderer'
 // external imports
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, withChildren, isElementOfType, isNode } from 'js-react-utils'
-import { Spec } from 'js-spec/dev-only'
+import { Spec } from 'js-spec'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
 
@@ -445,7 +445,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
         }
       })
     }
-  } 
+  } as any 
 }) 
 
 // --- models -------------------------------------------------------

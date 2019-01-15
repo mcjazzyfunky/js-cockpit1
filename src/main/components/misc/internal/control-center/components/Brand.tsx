@@ -5,7 +5,7 @@ import defineStyle from '../../../../../styling/defineStyle'
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isNode } from 'js-react-utils'
 import { css } from 'office-ui-fabric-react' 
-import { Spec } from 'js-spec/dev-only'
+import { Spec } from 'js-spec'
 import { FiLoader } from 'react-icons/fi'
 
 // --- Brand --------------------------------------------------------

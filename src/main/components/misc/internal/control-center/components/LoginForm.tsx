@@ -322,7 +322,7 @@ const LoginForm = defineComponent<LoginFormProps>({
         )
       })
     }
-  }
+  } as any // TODO
 })
 
 export default Object.assign(LoginForm, {

@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react'
 import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
-import { Spec } from 'js-spec/dev-only'
+import { Spec } from 'js-spec'
 
 type CellProps = {
   grow?: number,

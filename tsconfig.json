@@ -17,6 +17,10 @@
     ]
   },
   "files": [
-    "src/main/js-cockpit.ts"
+    "./src/main/js-cockpit.ts"
+  ],
+
+  "include": [
+    "./src/main/**/*.ts*"
   ]
 }

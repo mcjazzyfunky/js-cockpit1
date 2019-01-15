@@ -96,7 +96,7 @@ const ControlCenter = defineComponent<ControlCenterProps>({
 
       return ret
     }
-  }
+  } as any
 })
 
 // --- ControlCenter.Login ------------------------------------------
