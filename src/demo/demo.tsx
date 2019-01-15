@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, AppsWithNav, ControlCenter } from '../main/js-cockpit'
+import { initSystemIcons, SideNav, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
 import LoginForm from '../main/components/misc/internal/control-center/components/LoginForm'
@@ -55,36 +55,34 @@ function Demo() {
 }
 
 const AdministrationApp = defineComponent({
-  displayName: 'AdministrationApp',
+  displayName: 'Administratio.Item',
 
   render() {
     return (
-       <AppsWithNav selectedId='be-users'>
-              <AppsWithNav.Apps>
-                <AppsWithNav.AppGroup groupId="users" title="User Management">
-                  <AppsWithNav.App id="be-users" title="Back office users">
-                  </AppsWithNav.App>
-                  <AppsWithNav.App id="fe-users" title="Front end users">
-                  </AppsWithNav.App>
-                </AppsWithNav.AppGroup>
-                <AppsWithNav.AppGroup groupId="catalog" title="Catalog data">
-                  <AppsWithNav.App id="products" title="Products">
-                  </AppsWithNav.App>
-                  <AppsWithNav.App id="variants" title="Variants">
-                  </AppsWithNav.App>
-                  <AppsWithNav.App id="categories" title="Categories">
-                  </AppsWithNav.App>
-                </AppsWithNav.AppGroup>
-                <AppsWithNav.AppGroup groupId="yyy" title="Media">
-                  <AppsWithNav.App id="images" title="Images">
-                  </AppsWithNav.App>
-                  <AppsWithNav.App id="videos" title="Videos">
-                  </AppsWithNav.App>
-                  <AppsWithNav.App id="presentations" title="Presentations">
-                  </AppsWithNav.App>
-                </AppsWithNav.AppGroup>
-              </AppsWithNav.Apps>
-            </AppsWithNav>
+       <SideNav activeItemId='be-users'>
+                <SideNav.ItemGroup groupId="users" title="User Management">
+                  <SideNav.Item id="be-users" title="Back office users">
+                  </SideNav.Item>
+                  <SideNav.Item id="fe-users" title="Front end users">
+                  </SideNav.Item>
+                </SideNav.ItemGroup>
+                <SideNav.ItemGroup groupId="catalog" title="Catalog data">
+                  <SideNav.Item id="products" title="Products">
+                  </SideNav.Item>
+                  <SideNav.Item id="variants" title="Variants">
+                  </SideNav.Item>
+                  <SideNav.Item id="categories" title="Categories">
+                  </SideNav.Item>
+                </SideNav.ItemGroup>
+                <SideNav.ItemGroup groupId="yyy" title="Media">
+                  <SideNav.Item id="images" title="Images">
+                  </SideNav.Item>
+                  <SideNav.Item id="videos" title="Videos">
+                  </SideNav.Item>
+                  <SideNav.Item id="presentations" title="Presentations">
+                  </SideNav.Item>
+                </SideNav.ItemGroup>
+            </SideNav>
       )
   }
 })
