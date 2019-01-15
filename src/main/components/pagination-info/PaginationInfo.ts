@@ -1,21 +1,12 @@
-// internal imports
-import PaginationInfoRenderer from './PaginationInfoRenderer'
-import defineStyle from '../../styling/defineStyle'
-
 // external imports
-import React, { ReactNode } from 'react'
 import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
-import { ITheme } from 'office-ui-fabric-react'
+
+// internal imports
+import PaginationInfoProps from './PaginationInfoProps'
+import PaginationInfoView from './PaginationInfoView'
 
 // --- PaginationInfo ---------------------------------------------
-
-type PaginationInfoProps = {
-  pageIndex: number,
-  pageSize: number,
-  totalItemCount: number,
-  about: 'items'
-}
 
 const PaginationInfo = defineComponent<PaginationInfoProps>({
   displayName: 'PaginationInfo',
@@ -47,18 +38,10 @@ const PaginationInfo = defineComponent<PaginationInfoProps>({
   },
 
   render(props: PaginationInfoProps) {
-    return PaginationInfoRenderer.render(props)
+    return PaginationInfoView(props)
   }
 })
-
-// --- data models --------------------------------------------------
-
-type PaginationInfoModel = PaginationInfoProps
 
 // --- exports ------------------------------------------------------
 
 export default PaginationInfo
-
-export {
-  PaginationInfoModel
-}
