@@ -24,15 +24,42 @@ function createRollupConfig(moduleFormat, productive) {
         'js-react-utils': 'jsReactUtils',
         'js-spec': 'jsSpec',
         'react': 'React',
-        'react-virtualized': 'RactVirtualized'
+        'office-ui-fabric-react': 'Fabric',
+        'react-virtualized': 'ReactVirtualized'
       },
-      external: ['react', 'js-react-utils', 'js-spec', 'react-virtualized'],
+      external: ['react', 'js-react-utils', 'js-spec', 'office-ui-fabric-react', 'react-virtualized'],
     },
 
 
     plugins: [
-      resolve(),
-      commonjs(),
+      resolve({
+        jsnext: true,
+        main: true,
+        browser: true,
+      }),
+      commonjs({
+        include: 'node_modules/**',
+        
+        // TODO - what's the problem here?
+        namedExports: {
+          'react-dom': [
+            'render',
+            'createPortal',
+            'findDOMNode'
+          ],
+          'js-react-utils': [
+            'defineComponent',
+            'defineContext',
+            'isElement',
+            'isElementOfType',
+            'isNode',
+            'withChildren'
+          ],
+          'js-spec/dev-only': [
+            'Spec'
+          ]
+        },
+      }),
       /*
       resolve({
         jsnext: true,

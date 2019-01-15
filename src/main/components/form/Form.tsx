@@ -67,9 +67,11 @@ const Form = defineComponent<IFormProps>({
 
   render(props) {
     const
-      formCtrl = new FormCtrl(
+      formCtrl = new FormCtrl({
         fields: props.fields
-      )
+      })
+    
+    return 'TODO'
   }
 })
 
@@ -103,6 +105,10 @@ class FormCtrl implements IForm {
     this._fields = {}
   }
 
+  getEnabled(fieldName: string): boolean {
+    return true // TODO 
+  }
+
   getValue(fieldName: string): any {
 
   }
@@ -112,15 +118,15 @@ class FormCtrl implements IForm {
   }
 
   getErrorMsg(fieldName: string): string | null {
-
+    return null 
   }
 
   getRequired(fieldName: string): boolean {
-
+    return null
   }
 
   getDisabled(fieldName: string): boolean {
-
+    return null
   }
 
   private _getField(fieldName: string) {

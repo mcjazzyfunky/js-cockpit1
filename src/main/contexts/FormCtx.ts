@@ -1,7 +1,7 @@
 import React from 'react'
 import { defineContext } from 'js-react-utils'
 import { Spec } from 'js-spec'
-
+/*
 export default defineContext<IForm>({
   displayName: 'FormCtx',
   type: Object,
@@ -18,3 +18,4 @@ export default defineContext<IForm>({
 
   defaultValue: null 
 })
+*/

@@ -36,8 +36,6 @@ export default function createForm<T extends FormConfig>(config: T, f: (formCtrl
 const formConfig = {
   fields: {
     firstName: {
-      rules: [
-      ]
     },
 
     lastName: {
@@ -84,7 +82,7 @@ type FormProps<T extends FormConfig> = {
   children: FormCtrl<T>
 }
 
-const Form = defineComponent<FormProps<FormConfig<any>>>({
+const Form = defineComponent<FormProps<FormConfig>>({
   displayName: 'Form',
   
   properties: {
@@ -113,11 +111,11 @@ const Form = defineComponent<FormProps<FormConfig<any>>>({
     }
   },
 
-  render(props: FormProps) {
+  render(props: FormProps<any>) {
     return null
   }
 })
-
+/*
 void(
   <Form
     fields={{
@@ -134,3 +132,4 @@ void(
       }
     }
   </Form>)
+*/
