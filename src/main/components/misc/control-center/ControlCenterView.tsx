@@ -26,7 +26,7 @@ const styleControlCenter = defineStyle((theme: ITheme) => {
       display: 'flex',
       alignItems: 'center',
       flexShrink: 0,
-      height: '42px',
+      height: '46px',
       minWidth: '100%',
       color: '#f0f0f0',
       backgroundColor: 'rgb(50,50,50)' 
@@ -63,18 +63,33 @@ const styleControlCenter = defineStyle((theme: ITheme) => {
 
     sideNav: {
       display: 'flex',
+
+      selectors: {
+        '> div': {
+          flexGrow: 1
+        }
+      }
     },
 
     mainContent: {
       flexGrow: 1,
+      display: 'flex',
+      alignItems: 'stretch',
+      justifyContent: 'stretch',
+      
+      selectors: {
+        '> div': {
+          flexGrow: 1
+        }
+      }
     },
 
     logoutButton: {
       color: theme.palette.white,
       backgroundColor: theme.palette.themePrimary,
       border: 'none',
-      width: '42px',
-      height: '42px',
+      width: '46px',
+      height: '46px',
       textAlign: 'center',
       verticalAlign: 'middle',
       display: 'flex',

@@ -1,12 +1,17 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, HBox, SideNav, LoginForm, ControlCenter, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, HBox, SideNav, LoginForm, ControlCenter, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
+import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 
+import { of as observableOf } from 'rxjs'
+import { delay } from 'rxjs/operators'
+
+import faker from 'faker'
 import Color from 'color'
-import { FaHandshake } from 'react-icons/fa'
+import { FaHandshake, FaRetweet } from 'react-icons/fa'
 
 initSystemIcons()
 
@@ -71,81 +76,112 @@ function Demo() {
             />
         </SideNav>
       </ControlCenter.SideNav>
-      <ControlCenter.MainContent>
-        MainContent
+      <ControlCenter.MainContent style={{ padding: '5px' }}>
+         <DataExplorer
+              title="Back-office users"
+
+              loadData={loadData}
+            >
+              <DataExplorer.Actions>
+                <DataExplorer.GeneralAction
+                  title="Add"
+                  icon={<MdAdd/>}
+                />
+                <DataExplorer.SingleRowAction
+                  title="Edit"
+                  icon={<MdEdit/>}
+                />
+                <DataExplorer.MultiRowAction
+                  title="Delete"
+                  icon={<MdRemove/>}
+                />
+              </DataExplorer.Actions>
+              <DataExplorer.Columns>
+                <DataExplorer.Column
+                  title="First name"
+                  field="firstName"
+                  sortable={true}
+                />
+                <DataExplorer.Column
+                  title="Last name"
+                  field="lastName"
+                  sortable={true}
+                />
+                <DataExplorer.Column
+                  title="Postal code"
+                  field="postalCode"
+                  sortable={true}
+                />
+                <DataExplorer.Column
+                  title="City"
+                  field="city"
+                  sortable={true}
+                />
+                <DataExplorer.Column
+                  title="Country"
+                  field="country"
+                  sortable={true}
+                />
+              </DataExplorer.Columns>
+            </DataExplorer>
       </ControlCenter.MainContent>
-    </ControlCenter>
-
-  return controlCenter
-}
-
-/*
-function Demo() {
- const loginScreen =  
-    <LoginScreen>
-      <LoginScreen.Content>
-        <LoginForm
-          performLogin={
-            () => // TODO
-              Promise.resolve({ fullName: 'Jimmy Jumper' })
-          }
-        >
-          <LoginForm.Header>
-            <Brand vendor="meet+greet" title="Back Office - Login" size="large"/>
-          </LoginForm.Header>
-        </LoginForm>
-      </LoginScreen.Content>
-    </LoginScreen>
-
-  const controlCenter =
-    <ControlCenter vendor="meet+greet" title="Back Office">
-      <ControlCenter.Apps>
-        <ControlCenter.App id="admin" title="Administration" description="This is for adminstration purposes">
-          <AdministrationApp/>
-        </ControlCenter.App>
-        <ControlCenter.App id="content" title="Content Management" description="This is the CMS">
-        </ControlCenter.App>
-        <ControlCenter.App id="content" title="ERP" description="Enterprise Resource Planning">
-        </ControlCenter.App>
-      </ControlCenter.Apps>
     </ControlCenter>
 
   return controlCenter 
 }
 
-const AdministrationApp = defineComponent({
-  displayName: 'Administratio.Item',
+function fakeData(count: number) {
+  const ret: any[] = []
 
-  render() {
-    return (
-       <SideNav activeItemId='be-users'>
-                <SideNav.ItemGroup groupId="users" title="User Management">
-                  <SideNav.Item id="be-users" title="Back office users">
-                  </SideNav.Item>
-                  <SideNav.Item id="fe-users" title="Front end users">
-                  </SideNav.Item>
-                </SideNav.ItemGroup>
-                <SideNav.ItemGroup groupId="catalog" title="Catalog data">
-                  <SideNav.Item id="products" title="Products">
-                  </SideNav.Item>
-                  <SideNav.Item id="variants" title="Variants">
-                  </SideNav.Item>
-                  <SideNav.Item id="categories" title="Categories">
-                  </SideNav.Item>
-                </SideNav.ItemGroup>
-                <SideNav.ItemGroup groupId="yyy" title="Media">
-                  <SideNav.Item id="images" title="Images">
-                  </SideNav.Item>
-                  <SideNav.Item id="videos" title="Videos">
-                  </SideNav.Item>
-                  <SideNav.Item id="presentations" title="Presentations">
-                  </SideNav.Item>
-                </SideNav.ItemGroup>
-            </SideNav>
-      )
+  for(let i = 0; i < count; ++i) {
+    ret.push({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      city: faker.address.city(),
+      postalCode: faker.address.zipCode(),
+      country: faker.address.country()
+    })
   }
-})
-*/
+
+  return ret
+}
+
+function loadData(params: {offset: number, count: number, sortBy: string | null, sortDesc: boolean}) {
+  const totalItemCount = 1241
+  
+  let data = fakeData(totalItemCount)
+
+if (params.sortBy) {
+  data.sort((recs1, recs2) => {
+    let ret = 0
+
+    const
+      v1 = recs1[params.sortBy],
+      v2 = recs2[params.sortBy];
+
+    if (v1 > v2) {
+      ret = 1
+    } else if (v1 < v2) {
+      ret = -1
+    } else {
+      ret = 0
+    }
+
+    if (params.sortDesc) {
+      ret = -ret
+    }
+
+    return ret
+  })
+}
+
+  data = data.slice(params.offset, params.offset + params.count)
+
+  return observableOf({data, totalItemCount })
+                    .pipe(delay(1000))
+
+}
+
 
 ReactDOM.render(<Demo/>, document.getElementById('main-content'))
 
