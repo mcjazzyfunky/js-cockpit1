@@ -6,7 +6,11 @@ import { Spec } from 'js-spec'
 // internals import
 import ControlCenterProps from './ControlCenterProps'
 import ControlCenterView from './ControlCenterView'
-import ControlCenterAppProps from './ControlCenterAppProps'
+import ControlCenterBrandProps from './ControlCenterBrandProps'
+import ControlCenterTopNavProps from './ControlCenterTopNavProps'
+import ControlCenterUserNavProps from './ControlCenterUserNavProps'
+import ControlCenterSideNavProps from './ControlCenterSideNavProps'
+import ControlCenterMainContentProps from './ControlCenterMainContentProps'
 
 // --- ControlCenter ------------------------------------------------
 
@@ -14,24 +18,16 @@ const ControlCenter = defineComponent<ControlCenterProps>({
   displayName: 'ControlCenter',
 
   properties: {
-    vendor: {
-      type: String
-    },
-
-    title: {
-      type: String,
-      required: true
-    },
-
-    logo: {
-      type: Object,
-      validate: isElement
+    onLogout: {
+      type: Function
     },
 
     children: {
       validate:
         withChildren(
-          Spec.all(Spec.lazy(() => isElementOfType([Apps])))
+          Spec.all(
+            Spec.lazy(() =>
+              isElementOfType([Brand, TopNav, UserNav, SideNav, MainContent])))
         )
     }
   },
@@ -39,49 +35,18 @@ const ControlCenter = defineComponent<ControlCenterProps>({
   render: ControlCenterView 
 })
 
-// --- ControlCenter.Apps -------------------------------------------
+// --- ControlCenter.Brand ------------------------------------------
 
-type AppsProps = {
-  children?: ReactNode
-}
-
-const Apps = defineComponent({
-  displayName: 'ControlCenter.Apps',
+const Brand = defineComponent<ControlCenterBrandProps>({
+  displayName: 'ControlCenter.Brand',
 
   properties: {
-    children: {
-      validate:
-        withChildren(
-          Spec.lazy(() => Spec.all(isElementOfType(App))))
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type ControlCenter.Login must be children of '
-        + 'ControlCenter components'
-    )
-  }
-})
-
-// --- ControlCenter.App --------------------------------------------
-
-const App = defineComponent<ControlCenterAppProps>({
-  displayName: 'ControlCenter.App',
-
-  properties: {
-    id: {
-      type: String,
-      required: true
-    },
-
-    title: {
-      type: String,
-      required: true
-    },
-
-    description: {
+    className: {
       type: String
+    },
+
+    style: {
+      type: Object
     },
 
     children: {
@@ -93,7 +58,123 @@ const App = defineComponent<ControlCenterAppProps>({
 
   render() {
     throw new Error(
-      'Components of type ControlCenter.App must be children of '
+      'Components of type ControlCenter.Brand must be children of '
+        + 'ControlCenter components'
+    )
+  }
+})
+
+// --- ControlCenter.TopNav -----------------------------------------
+
+const TopNav = defineComponent<ControlCenterTopNavProps>({
+  displayName: 'ControlCenter.TopNav',
+
+  properties: {
+    className: {
+      type: String
+    },
+
+    style: {
+      type: Object
+    },
+
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isNode))
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type ControlCenter.TopNav must be children of '
+        + 'ControlCenter components'
+    )
+  }
+})
+
+// --- ControlCenter.UserNav ---------------------------------------
+
+const UserNav = defineComponent<ControlCenterUserNavProps>({
+  displayName: 'ControlCenter.UserNav',
+
+  properties: {
+    className: {
+      type: String
+    },
+
+    style: {
+      type: Object
+    },
+
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isNode))
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type ControlCenter.UserNav must be children of '
+        + 'ControlCenter components'
+    )
+  }
+})
+
+// --- ControlCenter.SideNav -----------------------------------------
+
+const SideNav = defineComponent<ControlCenterSideNavProps>({
+  displayName: 'ControlCenter.SideNav',
+
+  properties: {
+    className: {
+      type: String
+    },
+
+    style: {
+      type: Object
+    },
+
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isNode))
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type ControlCenter.SideNav must be children of '
+        + 'ControlCenter components'
+    )
+  }
+})
+
+// --- ControlCenter.Main -------------------------------------------
+
+const MainContent = defineComponent<ControlCenterMainContentProps>({
+  displayName: 'ControlCenter.MainContent',
+
+  properties: {
+    className: {
+      type: String
+    },
+
+    style: {
+      type: Object
+    },
+
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isNode))
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type ControlCenter.MainContent must be children of '
         + 'ControlCenter components'
     )
   }
@@ -102,6 +183,9 @@ const App = defineComponent<ControlCenterAppProps>({
 // --- exports ------------------------------------------------------
 
 export default Object.assign(ControlCenter, {
-  Apps,
-  App
+  Brand,
+  TopNav,
+  UserNav,
+  SideNav,
+  MainContent
 })

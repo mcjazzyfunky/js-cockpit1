@@ -1,13 +1,11 @@
 // external imports
-import { ReactElement } from 'react'
+import { ReactElement, ReactNode } from 'react'
 
 // --- ControlCenterProps -------------------------------------------
 
 type ControlCenterProps = {
-  vendor?: string,
-  title: string,
-  logo?: ReactElement<any>,
-  children?: ReactElement<LoginProps | AppsProps>
+  onLogout?: () => void,
+  children?: ReactNode// TODO
 }
 
 // --- exports ------------------------------------------------------

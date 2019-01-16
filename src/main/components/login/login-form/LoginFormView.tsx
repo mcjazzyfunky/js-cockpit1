@@ -25,9 +25,9 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.neutralQuaternary,
+    backgroundColor: theme.palette.neutralLighter,
     position: 'absolute',
-    top: '-50px'
+    top: '-50px',
   },
 
   inner: {
@@ -36,10 +36,6 @@ const styleLoginForm = defineStyle(theme => ({
     flexDirection: 'column',
     minHeight: '405px',
     textAlign: 'left',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralSecondary,
-    backgroundColor: theme.palette.white
   },
 
   form: {

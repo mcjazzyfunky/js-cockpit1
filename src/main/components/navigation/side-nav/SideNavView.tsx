@@ -13,12 +13,11 @@ const styleSideNav = defineStyle(theme => ({
   container: {
     display: 'flex',
     flexGrow: 1,
-    backgroundColor: theme.palette.white,
-
+    height: '100%',
   },
 
   navigation: {
-    width: '15rem',
+    width: '12rem',
     padding: '0 6px',
     margin: '0',
     boxSizing: 'border-box',

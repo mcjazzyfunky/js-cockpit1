@@ -1,14 +1,10 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, HBox, SideNav, LoginForm, ControlCenter } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, HBox, SideNav, LoginForm, ControlCenter, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
-//import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
-//import LoginForm from '../main/components/misc/internal/control-center/components/LoginForm'
 
-
-import Brand from '../main/components/misc/brand/Brand'
 import Color from 'color'
 import { FaHandshake } from 'react-icons/fa'
 
@@ -36,21 +32,51 @@ function Demo() {
       </LoginForm.Header>
     </LoginForm>
 
-
   const controlCenter =
-    <ControlCenter vendor="meet+greet" title="Back Office">
-      <ControlCenter.Apps>
-        <ControlCenter.App id="admin" title="Administration" description="This is for adminstration purposes">
-          xxxxx
-        </ControlCenter.App>
-        <ControlCenter.App id="content" title="Content Management" description="This is the CMS">
-        </ControlCenter.App>
-        <ControlCenter.App id="content" title="ERP" description="Enterprise Resource Planning">
-        </ControlCenter.App>
-      </ControlCenter.Apps>
+    <ControlCenter onLogout={() => alert('Juhu')}>
+      <ControlCenter.Brand>
+        <Brand
+          vendor="meet+greet"
+          title="Back Office"
+        />
+      </ControlCenter.Brand>
+      <ControlCenter.TopNav>
+        <AppSelector apps={[
+          {
+            id: 'cms',
+            title: 'Content management',
+            description: 'Some description for the CMS'
+          },
+          {
+            id: 'mms',
+            title: 'Media management',
+            description: 'Some description for the MMS'
+          }
+        ]}/>
+      </ControlCenter.TopNav>
+      <ControlCenter.UserNav>
+        <UserMenu
+          fullName="Jane Doe"
+        />
+      </ControlCenter.UserNav>
+      <ControlCenter.SideNav>
+        <SideNav>
+            <SideNav.Item
+              id="users"
+              title="Users"
+            />
+            <SideNav.Item
+              id="user-groups"
+              title="User groups"
+            />
+        </SideNav>
+      </ControlCenter.SideNav>
+      <ControlCenter.MainContent>
+        MainContent
+      </ControlCenter.MainContent>
     </ControlCenter>
 
-  return loginForm
+  return controlCenter
 }
 
 /*
