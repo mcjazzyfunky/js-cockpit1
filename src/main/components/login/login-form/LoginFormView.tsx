@@ -13,17 +13,21 @@ import defineStyle from '../../../styling/defineStyle'
 const styleLoginForm = defineStyle(theme => ({
   container: {
     width: '320px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: theme.palette.white,
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralSecondary,
   },
 
   containerFullSize: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.neutralSecondaryAlt,
+    backgroundColor: theme.palette.neutralLight,
     position: 'absolute',
-    top: '-30px'
+    top: '-50px'
   },
 
   inner: {
@@ -32,10 +36,10 @@ const styleLoginForm = defineStyle(theme => ({
     flexDirection: 'column',
     minHeight: '405px',
     textAlign: 'left',
-    backgroundColor: theme.palette.white,
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: theme.palette.neutralSecondary,
+    backgroundColor: theme.palette.white
   },
 
   form: {
@@ -205,7 +209,7 @@ function LoginFormView(props: LoginFormProps) {
           : null
 
       return (
-        <div className={classes.container + ' ' + (props.fullSize ? classes.containerFullSize : '')}>
+        <div className={props.fullSize ? classes.containerFullSize : classes.container}>
           <div className={classes.inner}>
           { headerBox }
           <form onSubmit={onSubmit} className={classes.form}>

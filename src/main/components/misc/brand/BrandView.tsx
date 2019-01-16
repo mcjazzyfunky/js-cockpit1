@@ -76,7 +76,6 @@ function BrandView(props: BrandProps) {
       logoClassName =
         css(classes.logo, isLarge ? classes.logoLarge : null)
 
-
     let
       firstColumnContent = null,
       secondColumnContent = null

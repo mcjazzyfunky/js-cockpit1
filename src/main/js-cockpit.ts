@@ -1,6 +1,8 @@
 // import component types
 
 //import ControlCenter from './components/misc/ControlCenter'
+import Brand from './components/misc/brand/Brand'
+import ControlCenter from './components/misc/control-center/ControlCenter'
 import DataExplorer from './components/data-views/DataExplorer'
 import DataTable from './components/data-views/DataTable'
 import HBox from './components/layout/hbox/HBox'
@@ -30,7 +32,8 @@ export {
   LoginForm,
   
   // misc components
-  // ControlCenter,
+  Brand,
+  ControlCenter,
 
   // functions
   initSystemIcons,

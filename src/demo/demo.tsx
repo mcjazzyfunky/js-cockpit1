@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, HBox, SideNav, LoginForm } from '../main/js-cockpit'
+import { initSystemIcons, HBox, SideNav, LoginForm, ControlCenter } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 //import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
@@ -25,17 +25,32 @@ loadTheme({
 })
 
 function Demo() {
-  return (
+  const loginForm =
     <LoginForm fullSize={true}>
       <LoginForm.Header>
         <Brand
           vendor="meet+greet"
-          title="Back Office - Login"
+          title="Back office - Login"
           size="large"
         />
       </LoginForm.Header>
     </LoginForm>
-  )
+
+
+  const controlCenter =
+    <ControlCenter vendor="meet+greet" title="Back Office">
+      <ControlCenter.Apps>
+        <ControlCenter.App id="admin" title="Administration" description="This is for adminstration purposes">
+          xxxxx
+        </ControlCenter.App>
+        <ControlCenter.App id="content" title="Content Management" description="This is the CMS">
+        </ControlCenter.App>
+        <ControlCenter.App id="content" title="ERP" description="Enterprise Resource Planning">
+        </ControlCenter.App>
+      </ControlCenter.Apps>
+    </ControlCenter>
+
+  return loginForm
 }
 
 /*
