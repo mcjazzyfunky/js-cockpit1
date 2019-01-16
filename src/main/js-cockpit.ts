@@ -1,9 +1,10 @@
 // import component types
 
-import ControlCenter from './components/misc/ControlCenter'
+//import ControlCenter from './components/misc/ControlCenter'
 import DataExplorer from './components/data-views/DataExplorer'
 import DataTable from './components/data-views/DataTable'
 import HBox from './components/layout/hbox/HBox'
+import LoginForm from './components/login/login-form/LoginForm'
 import SideNav from './components/navigation/side-nav/SideNav'
 import VBox from './components/layout/vbox/VBox'
 
@@ -20,13 +21,16 @@ export {
   
   // navigation components
   SideNav,
-  
+ 
   // data view components
   DataExplorer,
   DataTable,
   
+  // login
+  LoginForm,
+  
   // misc components
-  ControlCenter,
+  // ControlCenter,
 
   // functions
   initSystemIcons,

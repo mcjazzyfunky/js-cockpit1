@@ -1,11 +1,14 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, SideNav, ControlCenter } from '../main/js-cockpit'
+import { initSystemIcons, HBox, SideNav, LoginForm } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
-import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
-import LoginForm from '../main/components/misc/internal/control-center/components/LoginForm'
-import Brand from '../main/components/misc/internal/control-center/components/Brand'
+
+//import LoginScreen from '../main/components/misc/internal/control-center/components/LoginScreen'
+//import LoginForm from '../main/components/misc/internal/control-center/components/LoginForm'
+
+
+import Brand from '../main/components/misc/brand/Brand'
 import Color from 'color'
 import { FaHandshake } from 'react-icons/fa'
 
@@ -22,12 +25,27 @@ loadTheme({
 })
 
 function Demo() {
+  return (
+    <LoginForm fullSize={true}>
+      <LoginForm.Header>
+        <Brand
+          vendor="meet+greet"
+          title="Back Office - Login"
+          size="large"
+        />
+      </LoginForm.Header>
+    </LoginForm>
+  )
+}
+
+/*
+function Demo() {
  const loginScreen =  
     <LoginScreen>
       <LoginScreen.Content>
         <LoginForm
           performLogin={
-            (/* { username, password, remember } */) => // TODO
+            () => // TODO
               Promise.resolve({ fullName: 'Jimmy Jumper' })
           }
         >
@@ -86,6 +104,7 @@ const AdministrationApp = defineComponent({
       )
   }
 })
+*/
 
 ReactDOM.render(<Demo/>, document.getElementById('main-content'))
 
