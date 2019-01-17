@@ -148,7 +148,7 @@ function DataTableView(props: DataTableProps) {
     model = React.useMemo(() => getDataTableModel(props, selectedRows), null),
     rowSelectionMode = props.rowSelectionOptions.mode || 'none'
 
-  React.useEffect(() =>  {console.log(1)
+  React.useEffect(() =>  {
     for (let i = 0; i < runOnUpdater.current.length; ++i) {
       const action = runOnUpdater.current[i]
       action()

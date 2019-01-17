@@ -40,15 +40,12 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     padding: '2px 0 2px 10px',
     height: '40px',
     boxSizing: 'border-box',
-    margin: '0 0 -1px 0',
+    margin: '0 0 4px 0',
     zIndex: 1,
     color: theme.palette.black,
-    backgroundColor: theme.palette.themeSecondary,
-
-    borderWidth: '1px 1px 1px 1px',
+    borderWidth: '0 0 1px 0',
     borderStyle: 'solid',
-    borderRadius: '1px 1px 0 0',
-    borderColor: theme.palette.themePrimary,
+    borderColor: theme.palette.neutralQuaternaryAlt
   },
 
   headerStart: {
@@ -95,35 +92,35 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.large.fontSize,
-    color: theme.palette.white,
     margin: '3px 6px 3px 6px'
   },
 
   actionBar: {
     display: 'inline-flex',
-    height: '34px',
-    backgroundColor: 'transparent',
+
+    selectors: {
+      '& .ms-CommandBar': {
+        backgroundColor: 'transparent !important'
+      }
+    }
   },
   
   actionButton: {
-    color: theme.palette.white,
     backgroundColor: 'transparent',
 
     selectors: {
       ':hover': {
-        color: theme.palette.white,
-        backgroundColor: theme.palette.themeDark,
+        backgroundColor: theme.palette.neutralLight,
       },
   
       ':active': {
-        color: theme.palette.white,
-        backgroundColor: theme.palette.themeDarker
-      }
+        backgroundColor: theme.palette.neutralQuaternary
+      },
     }
   },
 
   actionButtonDisabled: {
-    color: theme.palette.themeTertiary,
+    color: theme.palette.neutralTertiary,
   },
 
   actionIcon: {
@@ -365,6 +362,10 @@ class DataExplorerRenderer {
           () => <div className={iconClassName}>{action.icon}</div>
           : undefined
       })
+
+      if (idx > 0) {
+        // items.push(<div>x</div>) // TODO xxx
+      }
     })
 
     return (
@@ -411,41 +412,45 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   advancedFilter: {
-    color: 'white',
     margin: '0 16px',
 
     selectors: {
       '& *': {
-        color: 'white !important',
+        color: theme.palette.black,
         backgroundColor: 'transparent !important',
       },
 
       '&:hover': {
-        backgroundColor: theme.palette.themeDark
+        backgroundColor: theme.palette.neutralLight
+      },
+      
+      '&:active': {
+        backgroundColor: theme.palette.neutralQuaternary
       }
      }
   },
 
   filterButton: {
+    color: theme.palette.black + ' !important',
     height: '30px',
     marginLeft: '8px',
 
     selectors: {
       ':hover': {
-        color: theme.palette.white + ' !important',
-        backgroundColor: theme.palette.themeSecondary,
+        color: theme.palette.white,
+        backgroundColor: theme.palette.neutralLight,
       },
       
       ':active': {
         color: theme.palette.white + ' !important',
-        backgroundColor: theme.palette.themePrimary,
+        backgroundColor: theme.palette.neutralQuaternary,
       }
     }
   },
 
   filterButtonActive: {
     color: theme.palette.white + ' !important',
-    backgroundColor: theme.palette.themeSecondary,
+    backgroundColor: theme.palette.neutralQuaternary,
   },
 
   icon: {
