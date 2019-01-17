@@ -1,13 +1,12 @@
 // external imports
 import { ReactNode } from 'react'
 
-// --- ControlCenterProps -------------------------------------------
+// --- MenuBarProps --------------------------------------------------
 
-type ControlCenterProps = {
-  onLogout?: () => void,
+type MenuBarProps = {
   children?: ReactNode // TODO
 }
 
 // --- exports ------------------------------------------------------
 
-export default ControlCenterProps
+export default MenuBarProps

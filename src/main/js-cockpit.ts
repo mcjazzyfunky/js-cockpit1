@@ -7,6 +7,7 @@ import DataExplorer from './components/data-views/DataExplorer'
 import DataTable from './components/data-views/data-table/DataTable'
 import HBox from './components/layout/hbox/HBox'
 import LoginForm from './components/login/login-form/LoginForm'
+import MenuBar from './components/navigation/menu-bar/MenuBar'
 import SideNav from './components/navigation/side-nav/SideNav'
 import UserMenu from './components/login/user-menu/UserMenu'
 import VBox from './components/layout/vbox/VBox'
@@ -24,6 +25,7 @@ export {
   
   // navigation components
   AppSelector,
+  MenuBar,
   SideNav,
  
   // data view components

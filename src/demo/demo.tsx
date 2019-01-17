@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, HBox, SideNav, LoginForm, ControlCenter, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, HBox, SideNav, LoginForm, MenuBar, ControlCenter, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -64,6 +64,24 @@ function Demo() {
           fullName="Jane Doe"
         />
       </ControlCenter.UserNav>
+      <ControlCenter.Menu>
+        <MenuBar>
+          <MenuBar.Menu text="Menu-1">
+            <MenuBar.Item id="1.1" text="Item-1.1"/>
+            <MenuBar.Item id="1.2" text="Item-1.2"/>
+            <MenuBar.Item id="1.3" text="Item-1.3"/>
+            <MenuBar.Item id="1.4" text="Item-1.4"/>
+          </MenuBar.Menu>
+          <MenuBar.Menu text="Menu-2">
+            <MenuBar.Item id="2.1" text="Item-2.1"/>
+            <MenuBar.Menu text="Menu-2.2">
+              <MenuBar.Item id="2.2.1" text="Item-2.2.1"/>
+              <MenuBar.Item id="2.2.2" text="Item-2.2.2"/>
+            </MenuBar.Menu>
+            <MenuBar.Item id="2.4" text="Item-2.4"/>
+          </MenuBar.Menu>
+        </MenuBar>
+      </ControlCenter.Menu>
       <ControlCenter.SideNav>
         <SideNav>
             <SideNav.Item

@@ -124,6 +124,7 @@ function ControlCenterView(props: ControlCenterProps) {
     brand: ReactNode = null,
     topNav: ReactNode = null,
     userNav: ReactNode = null,
+    menu: ReactNode = null,
     sideNav: ReactNode = null,
     mainContent: ReactNode = null,
     logoutButton: ReactNode = null
@@ -151,6 +152,7 @@ function ControlCenterView(props: ControlCenterProps) {
     brand = brand || getContent(child, ControlCenter.Brand)
     topNav = topNav || getContent(child, ControlCenter.TopNav)
     userNav = userNav || getContent(child, ControlCenter.UserNav)
+    menu = menu || getContent(child, ControlCenter.Menu)
     sideNav = sideNav || getContent(child, ControlCenter.SideNav)
     mainContent = mainContent || getContent(child, ControlCenter.MainContent)
   })
@@ -176,6 +178,9 @@ function ControlCenterView(props: ControlCenterProps) {
             {userNav}
             {logoutButton}
           </div>
+        </div>
+        <div>
+          {menu}
         </div>
         <div className={classes.content}>
           <div className={classes.sideNav}>

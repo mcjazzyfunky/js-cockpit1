@@ -122,6 +122,35 @@ const UserNav = defineComponent<ControlCenterUserNavProps>({
   }
 })
 
+// --- ControlCenter.Menu -------------------------------------------
+
+const Menu = defineComponent<ControlCenterUserNavProps>({
+  displayName: 'ControlCenter.Menu',
+
+  properties: {
+    className: {
+      type: String
+    },
+
+    style: {
+      type: Object
+    },
+
+    children: {
+      validate:
+        withChildren(
+          Spec.all(isNode))
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type ControlCenter.Menu must be children of '
+        + 'ControlCenter components'
+    )
+  }
+})
+
 // --- ControlCenter.SideNav -----------------------------------------
 
 const SideNav = defineComponent<ControlCenterSideNavProps>({
@@ -186,6 +215,7 @@ export default Object.assign(ControlCenter, {
   Brand,
   TopNav,
   UserNav,
+  Menu,
   SideNav,
   MainContent
 })

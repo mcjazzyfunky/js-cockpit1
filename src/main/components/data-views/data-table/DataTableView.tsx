@@ -167,6 +167,8 @@ function DataTableView(props: DataTableProps) {
         sortBy: field,
         sortDesc
       }))
+
+      setSelectionRows(selectedRows) // TODO
     }
   }
 
