@@ -442,7 +442,6 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   filterButton: {
-    color: theme.palette.black + ' !important',
     height: '30px',
     marginLeft: '8px',
 
@@ -465,7 +464,7 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   icon: {
-    color: theme.palette.themePrimary + ' !important',
+    color: theme.palette.themePrimary + ' !important' // TODO
   },
 
   filterContainer: {
@@ -537,8 +536,8 @@ const SearchBar = defineComponent<SearchBarProps>({
                     <div className={classes.icon}>
                       {
                         advancedFilterActive || calloutVisible
-                          ? <MdCheck/>
-                          : <MdFilterList/>
+                          ? <MdCheck className={classes.icon}/>
+                          : <MdFilterList className={classes.icon}/>
                       }
                     </div>
                 }
