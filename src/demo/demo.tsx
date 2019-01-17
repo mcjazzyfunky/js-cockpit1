@@ -11,7 +11,8 @@ import { delay } from 'rxjs/operators'
 
 import faker from 'faker'
 import Color from 'color'
-import { FaHandshake, FaRetweet } from 'react-icons/fa'
+import { FaEdit, FaHandshake, FaRetweet } from 'react-icons/fa'
+import { FiEdit, FiPlus, FiMinus, FiTrash } from 'react-icons/fi'
 
 initSystemIcons()
 
@@ -103,15 +104,15 @@ function Demo() {
               <DataExplorer.Actions>
                 <DataExplorer.GeneralAction
                   title="Add"
-                  icon={<MdAdd/>}
+                  icon={<FiPlus/>}
                 />
                 <DataExplorer.SingleRowAction
                   title="Edit"
-                  icon={<MdEdit/>}
+                  icon={<FiEdit/>}
                 />
                 <DataExplorer.MultiRowAction
                   title="Delete"
-                  icon={<MdRemove/>}
+                  icon={<FiTrash/>}
                 />
               </DataExplorer.Actions>
               <DataExplorer.Columns>

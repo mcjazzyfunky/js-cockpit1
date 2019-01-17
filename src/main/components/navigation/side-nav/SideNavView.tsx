@@ -18,11 +18,10 @@ const styleSideNav = defineStyle(theme => ({
 
   navigation: {
     width: '12rem',
-    padding: '0 6px',
-    margin: '0',
+    padding: '0 8px',
+    margin: '6px',
     boxSizing: 'border-box',
-    backgroundColor: theme.palette.neutralLighterAlt,
-    borderColor: theme.palette.neutralQuaternary,
+    borderColor: theme.palette.neutralLight,
     borderWidth: '0 1px 0 0',
     borderStyle: 'solid',
 

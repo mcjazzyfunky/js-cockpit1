@@ -45,7 +45,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     color: theme.palette.black,
     borderWidth: '0 0 1px 0',
     borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternaryAlt
+    borderColor: theme.palette.neutralLight
   },
 
   headerStart: {
@@ -92,7 +92,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.large.fontSize,
-    margin: '3px 6px 3px 6px'
+    margin: '0 6px 3px 6px'
   },
 
   actionBar: {
@@ -106,7 +106,9 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
   
   actionButton: {
+    color: theme.palette.black,
     backgroundColor: 'transparent',
+    marginLeft: '8px',
 
     selectors: {
       ':hover': {
@@ -124,6 +126,15 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   },
 
   actionIcon: {
+    color: theme.palette.themePrimary,
+    fontSize: theme.fonts.mediumPlus.fontSize,
+    //color: theme.palette.black,
+    margin: '2px 5px 0 0',
+  },
+  
+  actionIconDisabled: {
+    color: theme.palette.neutralTertiary,
+    fontSize: theme.fonts.mediumPlus.fontSize,
     margin: '2px 5px 0 0',
   },
 
@@ -349,7 +360,7 @@ class DataExplorerRenderer {
         
         iconClassName =
           hasIcon
-            ? classes.actionIcon
+            ? (disabled ? classes.actionIconDisabled : classes.actionIcon)
             : null
 
       items.push({
@@ -454,7 +465,7 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   },
 
   icon: {
-    color: theme.palette.themePrimary
+    color: theme.palette.themePrimary + ' !important',
   },
 
   filterContainer: {
@@ -523,9 +534,13 @@ const SearchBar = defineComponent<SearchBarProps>({
 
                 onRenderIcon={
                   () =>
-                    advancedFilterActive || calloutVisible
-                      ? <MdCheck/>
-                      : <MdFilterList/>
+                    <div className={classes.icon}>
+                      {
+                        advancedFilterActive || calloutVisible
+                          ? <MdCheck/>
+                          : <MdFilterList/>
+                      }
+                    </div>
                 }
               />
             </div>
