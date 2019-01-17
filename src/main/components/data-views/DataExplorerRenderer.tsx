@@ -1,7 +1,9 @@
 // internal imports
 import defineStyle, { ClassesOf } from '../../styling/defineStyle'
 import { DataExplorerModel } from './DataExplorer'
-import DataTable, { DataTableProps, DataTableColumnProps } from './DataTable'
+import DataTable from './data-table/DataTable'
+import DataTableProps from './data-table/DataTableProps'
+import DataTableColumnProps from './data-table/DataTableColumnProps'
 import Paginator from '../pagination/paginator/Paginator'
 import PageSizeSelector from '../pagination/page-size-selector/PageSizeSelector'
 import PaginationInfo from '../pagination/pagination-info/PaginationInfo'
