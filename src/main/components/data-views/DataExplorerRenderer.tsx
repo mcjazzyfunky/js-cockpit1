@@ -92,7 +92,8 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.large.fontSize,
-    margin: '0 6px 3px 6px'
+    margin: '0 6px 3px 6px',
+    whiteSpace: 'nowrap',
   },
 
   actionBar: {
@@ -108,7 +109,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   actionButton: {
     color: theme.palette.black,
     backgroundColor: 'transparent',
-    marginLeft: '8px',
+    marginLeft: '4px',
 
     selectors: {
       ':hover': {

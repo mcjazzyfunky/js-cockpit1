@@ -12,7 +12,7 @@ import { delay } from 'rxjs/operators'
 import faker from 'faker'
 import Color from 'color'
 import { FaEdit, FaHandshake, FaRetweet } from 'react-icons/fa'
-import { FiEdit, FiPlus, FiMinus, FiTrash } from 'react-icons/fi'
+import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
 
@@ -112,7 +112,7 @@ function Demo() {
                 />
                 <DataExplorer.MultiRowAction
                   title="Delete"
-                  icon={<FiTrash/>}
+                  icon={<FiTrash2/>}
                 />
               </DataExplorer.Actions>
               <DataExplorer.Columns>
@@ -146,7 +146,7 @@ function Demo() {
       </ControlCenter.MainContent>
     </ControlCenter>
 
-  return controlCenter 
+  return controlCenter
 }
 
 function fakeData(count: number) {

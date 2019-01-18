@@ -31,9 +31,7 @@ function MenuBarView(props: MenuBarProps) {
       <div className={classes.container}>
         <CommandBar
           className={classes.commandBar}
-          items={
-            React.Children.map(props.children, getItemProps)
-          }
+          items={getItemProps(props.children)}
         />
       </div>)
   }
@@ -43,11 +41,24 @@ function MenuBarView(props: MenuBarProps) {
 
 // --- locals -------------------------------------------------------
 
-function getItemProps() {
-  let ret = {
-    key: '',
-    text: 'Juhu'
-  }
+function getItemProps(children: any) { // TODO
+  const ret: any[] = []
+
+  React.Children.forEach(children, (child: any) => { // TODO
+    const item = {
+      key: Math.random(),
+      text: child.props.text,
+      subMenuProps: null as any
+    }
+
+    if (child.props && child.props.children) {
+      item.subMenuProps = {
+        items: getItemProps(child.props.children)
+      }
+    }
+
+    ret.push(item)
+  })
     
   return ret
 }
