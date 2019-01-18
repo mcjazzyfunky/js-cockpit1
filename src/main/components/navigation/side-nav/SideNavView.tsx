@@ -1,6 +1,6 @@
 // externals imports
 import React from 'react'
-import { Nav, INavLink } from 'office-ui-fabric-react'
+import { Nav, INavLink, INavLinkGroup } from 'office-ui-fabric-react'
 
 // internal imports
 import SideNav from './SideNav'
@@ -112,9 +112,7 @@ function SideNavView(props: SideNavProps) {
       <div className={classes.container}>
         <div className={classes.navigation}>
           <Nav
-            groups={
-              React.Children.map(props.children, getLinkProps) as any // TODO
-            }
+            groups={getGroups(props.children)}
 
             selectedKey={props.activeItemId}
           />
@@ -128,14 +126,26 @@ function SideNavView(props: SideNavProps) {
 
 // --- helpers ------------------------------------------------------
 
-function getLinkProps(child: any): INavLink {
-  return {
-    key: '1',
-    name: 'xxx',
-    isExpanded: true,
-    link: null,
-    url: null
-  }
+function getGroups(children: any): INavLinkGroup[] {
+  const groups: INavLinkGroup[] = []
+
+  React.Children.forEach(children, (child: any, idx: any) => {
+    const childProps = child && child.props ? child.props : null
+
+    const group = {
+      key: '1',
+      name: childProps.title,
+      isExpanded: true,
+      link: null as any,
+      url: null as any,
+      links: [] as any
+    }
+
+    groups.push(group)
+  })
+
+  return groups
+
   /*
   const
     type = child.type,

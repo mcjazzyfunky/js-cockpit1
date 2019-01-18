@@ -77,6 +77,17 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   tableHeadCellContent: {
     display: 'flex',
     whiteSpace: 'nowrap',
+    position: 'relative',
+  },
+
+  selectAllRowsCheckBox: {
+    padding: '5px 0 0 4px',
+  },
+  
+  selectRowCheckBox: {
+    position: 'absolute',
+    top: 4,
+    left: 6,
   },
 
   tableBody: {
@@ -119,14 +130,15 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   rowSelectionColumn: {
     width: '32px',
     boxSizing: 'border-box',
-    margin: 0,
     padding: 0,
+    margin: 0,
 
       selectors: {
       '& > div': {
         overflow: 'hidden',
         display: 'flex',
         justifyContent: 'center',
+        position: 'absolute',
       }
     }
   },
@@ -209,7 +221,7 @@ function DataTableView(props: DataTableProps) {
                       width={columnWidths.selectorColumn}
                       dataKey={null}
                       cellRenderer={({ rowIndex }) =>
-                        createSelectCheckbox(rowIndex, model, changeSelection)}
+                        createSelectRowCheckbox(rowIndex, model, changeSelection, classes)}
                     />
                   )
                 }
@@ -344,7 +356,7 @@ function createHeaderRow(model: DataTableModel, columnWidths: any,  classes: Dat
             <div>
               {
                 selectionMode === 'multi'
-                  ? createSelectAllCheckbox(model, changeSelection)
+                  ? createSelectAllCheckbox(model, changeSelection, classes)
                   : null
               }
             </div>
@@ -403,7 +415,7 @@ function createTableBodyRow(rowIndex: number, model: DataTableModel, classes: Da
       selectionMode === 'none'
         ? null
         : <div className={classes.rowSelectionColumn}>
-            <div>{createSelectCheckbox(rowIndex, model, changeRowSelection)}
+            <div>{createSelectRowCheckbox(rowIndex, model, changeRowSelection, classes)}
             </div>
           </div>
 
@@ -435,7 +447,7 @@ function createTableBodyCell(columnIndex: number, model: DataTableModel, row: an
   )
 }
 
-function createSelectCheckbox(index: number, model: DataTableModel, changeRowSelection: (selection: any) => void) { // TODO
+function createSelectRowCheckbox(index: number, model: DataTableModel, changeRowSelection: (selection: any) => void, classes: DataTableClasses) { // TODO
   const
     selectionMode = model.rowSelectionOptions.mode,
     checked = model.rowSelection.has(index),
@@ -459,11 +471,13 @@ function createSelectCheckbox(index: number, model: DataTableModel, changeRowSel
     }
 
   return (
-    <Checkbox checked={checked} onChange={onChange}/>
+    <div className={classes.selectRowCheckBox}>
+      <Checkbox checked={checked} onChange={onChange}/>
+    </div>
   ) 
 }
 
-function createSelectAllCheckbox(model: DataTableModel, changeRowSelection: (selection: Set<number>) => void) { // TODO
+function createSelectAllCheckbox(model: DataTableModel, changeRowSelection: (selection: Set<number>) => void, classes: DataTableClasses) { // TODO
   const
     rowSelectionSize = model.rowSelection.size,
     checked = rowSelectionSize > 0 && rowSelectionSize === model.data.length,
@@ -478,7 +492,7 @@ function createSelectAllCheckbox(model: DataTableModel, changeRowSelection: (sel
     }
 
   return (
-    <Checkbox checked={checked} onChange={onChange}/>
+    <Checkbox checked={checked} onChange={onChange} className={classes.selectAllRowsCheckBox}/>
   ) 
 }
 

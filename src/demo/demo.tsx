@@ -66,15 +66,15 @@ function Demo() {
         />
       </ControlCenter.UserNav>
       <ControlCenter.Menu>
-        <MenuBar>
+        <MenuBar onAction={() => alert('Juhu')}>
           <MenuBar.Menu text="Menu-1">
             <MenuBar.Item id="1.1" text="Item-1.1"/>
-            <MenuBar.Item id="1.2" text="Item-1.2"/>
+            <MenuBar.Item id="1.2" text="Item-1.2-disabled" disabled={true}/>
             <MenuBar.Item id="1.3" text="Item-1.3"/>
             <MenuBar.Item id="1.4" text="Item-1.4"/>
           </MenuBar.Menu>
           <MenuBar.Menu text="Menu-2">
-            <MenuBar.Item id="2.1" text="Item-2.1"/>
+            <MenuBar.Item id="2.1" text="Item-2.1" onAction={() => alert('Woohoo')}/>
             <MenuBar.Menu text="Menu-2.2">
               <MenuBar.Item id="2.2.1" text="Item-2.2.1"/>
               <MenuBar.Item id="2.2.2" text="Item-2.2.2"/>

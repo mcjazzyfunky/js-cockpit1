@@ -1,8 +1,10 @@
 // --- MenuBarItemProps ---------------------------------------------
 
 type MenuBarItemProps = {
-  id: string,
-  text: string
+  id?: string,
+  text: string,
+  disabled?: boolean,
+  onAction?: () => void
 }
 
 // --- exports ------------------------------------------------------
