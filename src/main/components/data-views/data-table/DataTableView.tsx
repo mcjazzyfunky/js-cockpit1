@@ -25,6 +25,10 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     selectors: {
       '& .ReactVirtualized__Table__Grid': {
         outline: 'none',
+      },
+
+      '& .ReactVirtualized__Table__rowColumn': {
+        margin: 0
       }
     }
   },
@@ -114,9 +118,18 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     fontSize: '14px',
   },
 
+  cell: {
+    position: 'relative',
+    boxSizing: 'border-box',
+    height: '2em',
+  },
+
   dataCell: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    boxSizing: 'border-box',
+    height: '2em',
+    padding: '4px 8px'
   },
 
   alignCenter: {
@@ -144,8 +157,10 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
   },
 
   selectedRow: {
-    color: 'black !important',
-    backgroundColor: theme.palette.themeLighter + ' !important',
+    boxSizing: 'border-box',
+    height: '2em',
+    //backgroundColor: theme.palette.themeLighterAlt
+    backgroundColor: 'rgb(255, 242, 193)'
   }
 }))
 
@@ -211,8 +226,12 @@ function DataTableView(props: DataTableProps) {
                       width={columnWidths.dataColumns[columnIndex]}
                       label={column.title}
                       dataKey={column.field}
-                      cellRenderer={({ rowIndex }) =>
-                        createTableBodyCell(columnIndex, model, model.data[rowIndex], classes)}
+                      className={classes.cell}
+                      cellRenderer={({ rowIndex }) => {
+                        const isSelected = selectedRows.has(rowIndex)
+
+                        return createTableBodyCell(columnIndex, model, model.data[rowIndex], classes, isSelected)}
+                      }
                     />
                   )
                if (model.rowSelectionOptions.mode !== 'none') {
@@ -220,8 +239,16 @@ function DataTableView(props: DataTableProps) {
                     <Column
                       width={columnWidths.selectorColumn}
                       dataKey={null}
-                      cellRenderer={({ rowIndex }) =>
-                        createSelectRowCheckbox(rowIndex, model, changeSelection, classes)}
+                      className={classes.cell}
+                      cellRenderer={({ rowIndex }) => {
+                        const isSelected = selectedRows.has(rowIndex)
+
+                        return (
+                          <div className={isSelected ? classes.selectedRow : null}>
+                            {createSelectRowCheckbox(rowIndex, model, changeSelection, classes)}
+                          </div>
+                        )
+                      }}
                     />
                   )
                 }
@@ -406,39 +433,19 @@ function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, mo
   )
 }
 
-function createTableBodyRow(rowIndex: number, model: DataTableModel, classes: DataTableClasses, changeRowSelection: (selection: any) => void) { // TODO
-  const
-    row: any = model.data[rowIndex],
-    selectionMode = model.rowSelectionOptions.mode,
-  
-    selectionColumn =
-      selectionMode === 'none'
-        ? null
-        : <div className={classes.rowSelectionColumn}>
-            <div>{createSelectRowCheckbox(rowIndex, model, changeRowSelection, classes)}
-            </div>
-          </div>
-
-  return (
-    <tr key={rowIndex} className={model.rowSelection.has(rowIndex) ? classes.selectedRow : null }>
-      {selectionColumn}
-      {
-        model.columns.map((column, columnIdx) =>
-          createTableBodyCell(columnIdx, model, row, classes))
-      }
-    </tr>
-  )
-}
-
-function createTableBodyCell(columnIndex: number, model: DataTableModel, row: any, classes: DataTableClasses) {
+function createTableBodyCell(columnIndex: number, model: DataTableModel, row: any, classes: DataTableClasses, isSelected: boolean) {
   const column = model.columns[columnIndex]
 
-  const className =
+  let className =
     column.align === 'center'
       ? css(classes.dataCell, classes.alignCenter)
       : column.align === 'end'
       ? css(classes.dataCell, classes.alignEnd)
       : classes.dataCell
+
+  if (isSelected) {
+    className = css(className, classes.selectedRow)
+  }
 
   return (
     <div key={columnIndex} className={className}>
