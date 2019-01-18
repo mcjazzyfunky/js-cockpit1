@@ -17,6 +17,7 @@ const styleLoginForm = defineStyle(theme => ({
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: theme.palette.neutralSecondary,
+    position: 'relative',
   },
 
   containerFullSize: {
@@ -26,11 +27,12 @@ const styleLoginForm = defineStyle(theme => ({
     width: '100%',
     height: '100%',
     backgroundColor: theme.palette.neutralLighter,
-    position: 'absolute',
-    top: '-50px',
+    position: 'absolute'
   },
 
   inner: {
+    position: 'relative',
+    top: '-10%',
     display: 'flex',
     width: '320px',
     flexDirection: 'column',

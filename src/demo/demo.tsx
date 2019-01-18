@@ -146,7 +146,7 @@ function Demo() {
       </ControlCenter.MainContent>
     </ControlCenter>
 
-  return controlCenter
+  return loginForm
 }
 
 function fakeData(count: number) {
