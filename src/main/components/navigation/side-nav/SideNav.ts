@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 // internal imports
 import SideNavProps from './SideNavProps'
 import SideNavItemProps from './SideNavItemProps'
-import SideNavItemGroupProps from './SideNavItemGroupProps'
+import SideNavMenuProps from './SideNavMenuProps'
 import SideNavView from './SideNavView'
 
 // --- SideNav.Item -------------------------------------------------
@@ -15,7 +15,7 @@ const Item = defineComponent<SideNavItemProps>({
   displayName: 'SideNav.Item',
 
   properties: {
-    title: {
+    text: {
       type: String,
       required: true
     },
@@ -28,22 +28,22 @@ const Item = defineComponent<SideNavItemProps>({
 
   render() {
     throw new Error('Components of type SideNav.Item must be children '
-      + 'of SideNav or SideNav.ItemGroup components')
+      + 'of SideNav or SideNav.Menu components')
   }
 })
 
-// --- SideNav.ItemGroup --------------------------------------------
+// --- SideNav.Menu --------------------------------------------
 
-const ItemGroup:  ComponentType<SideNavItemGroupProps> = defineComponent<SideNavItemGroupProps>({
-  displayName: 'SideNav.ItemGroup',
+const Menu:  ComponentType<SideNavMenuProps> = defineComponent<SideNavMenuProps>({
+  displayName: 'SideNav.Menu',
 
   properties: {
-    title: {
+    text: {
       type: String,
       required: true
     },
 
-    groupId: {
+    menuId: {
       type: String,
       required: true
     },
@@ -51,13 +51,13 @@ const ItemGroup:  ComponentType<SideNavItemGroupProps> = defineComponent<SideNav
     children: {
       validate:
         withChildren(
-          Spec.lazy(() => Spec.all(isElementOfType([Item, ItemGroup]))))
+          Spec.lazy(() => Spec.all(isElementOfType(Item))))
     }
   },
 
   render() {
-    throw new Error('Components of type SideNav.ItemGroup must be children '
-      + 'of SideNav or SideNav.ItemGroup components')
+    throw new Error('Components of type SideNav.Menu must be children '
+      + 'of SideNav or SideNav.Menu components')
   }
 })
 
@@ -74,7 +74,7 @@ const SideNav = defineComponent<SideNavProps>({
     children: {
       validate:
         withChildren(
-          Spec.singleOf(isElementOfType([ItemGroup])))
+          Spec.all(isElementOfType([Menu])))
     }
   },
 
@@ -87,5 +87,5 @@ const SideNav = defineComponent<SideNavProps>({
 
 export default Object.assign(SideNav, {
   Item,
-  ItemGroup,
+  Menu,
 })

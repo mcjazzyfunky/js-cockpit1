@@ -160,7 +160,7 @@ const styleDataTable = defineStyle((theme: ITheme) => ({
     boxSizing: 'border-box',
     height: '2em',
     //backgroundColor: theme.palette.themeLighterAlt
-    backgroundColor: 'rgb(255, 242, 193)'
+    backgroundColor: 'rgb(255, 244, 202)'
   }
 }))
 
@@ -168,12 +168,20 @@ type DataTableClasses = ClassesOf<typeof styleDataTable>
 
 // --- DataTableView ------------------------------------------------
 
-function DataTableView(props: DataTableProps) {
+function DataTableView(props: DataTableProps, ref: any) { // TODO
   const
     [selectedRows, setSelectionRows] = React.useState(() => new Set<number>()),
     runOnUpdater = React.useRef([]),
     model = React.useMemo(() => getDataTableModel(props, selectedRows), null),
     rowSelectionMode = props.rowSelectionOptions.mode || 'none'
+
+  React.useImperativeMethods(ref, () => {
+    return {
+      unselectAllRows: () => {
+        setSelectionRows(new Set()) 
+      }
+    }
+  }, [])
 
   React.useEffect(() =>  {
     for (let i = 0; i < runOnUpdater.current.length; ++i) {

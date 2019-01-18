@@ -22,6 +22,14 @@ const Item = defineComponent<MenuBarItemProps>({
     text: {
       type: String,
       required: true
+    },
+
+    disabled: {
+      type: Boolean
+    },
+
+    onAction: {
+      type: Function
     }
   },
 
@@ -61,6 +69,10 @@ const MenuBar = defineComponent<MenuBarProps>({
   displayName: 'MenuBar',
 
   properties: {
+    onAction: {
+      type: Function
+    },
+
     children: {
       type: Object
     }

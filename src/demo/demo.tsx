@@ -50,7 +50,7 @@ function Demo() {
         <AppSelector apps={[
           {
             id: 'cms',
-            title: 'Content management',
+            title: 'Web Shop',
             description: 'Some description for the CMS'
           },
           {
@@ -67,13 +67,19 @@ function Demo() {
       </ControlCenter.UserNav>
       <ControlCenter.Menu>
         <MenuBar onAction={() => alert('Juhu')}>
-          <MenuBar.Menu text="Menu-1">
+          <MenuBar.Menu text="Users">
             <MenuBar.Item id="1.1" text="Item-1.1"/>
             <MenuBar.Item id="1.2" text="Item-1.2-disabled" disabled={true}/>
             <MenuBar.Item id="1.3" text="Item-1.3"/>
             <MenuBar.Item id="1.4" text="Item-1.4"/>
           </MenuBar.Menu>
-          <MenuBar.Menu text="Menu-2">
+          <MenuBar.Menu text="Master data">
+            <MenuBar.Item id="1.1" text="Item-1.1"/>
+            <MenuBar.Item id="1.2" text="Item-1.2-disabled" disabled={true}/>
+            <MenuBar.Item id="1.3" text="Item-1.3"/>
+            <MenuBar.Item id="1.4" text="Item-1.4"/>
+          </MenuBar.Menu>
+          <MenuBar.Menu text="Content">
             <MenuBar.Item id="2.1" text="Item-2.1" onAction={() => alert('Woohoo')}/>
             <MenuBar.Menu text="Menu-2.2">
               <MenuBar.Item id="2.2.1" text="Item-2.2.1"/>
@@ -81,18 +87,36 @@ function Demo() {
             </MenuBar.Menu>
             <MenuBar.Item id="2.4" text="Item-2.4"/>
           </MenuBar.Menu>
+          <MenuBar.Menu text="Media">
+            <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
+          </MenuBar.Menu>
+          <MenuBar.Menu text="Help">
+            <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
+          </MenuBar.Menu>
         </MenuBar>
       </ControlCenter.Menu>
       <ControlCenter.SideNav>
-        <SideNav>
+        <SideNav activeItemId="user-groups">
+          <SideNav.Menu text="Menu1">
             <SideNav.Item
               id="users"
-              title="Users"
+              text="Users"
             />
             <SideNav.Item
               id="user-groups"
-              title="User groups"
+              text="User groups"
             />
+          </SideNav.Menu>
+          <SideNav.Menu text="Menu2">
+            <SideNav.Item
+              id="users2"
+              text="Users"
+            />
+            <SideNav.Item
+              id="user-groups2"
+              text="User groups"
+            />
+          </SideNav.Menu>
         </SideNav>
       </ControlCenter.SideNav>
       <ControlCenter.MainContent style={{ padding: '5px' }}>
@@ -146,7 +170,7 @@ function Demo() {
       </ControlCenter.MainContent>
     </ControlCenter>
 
-  return loginForm
+  return controlCenter
 }
 
 function fakeData(count: number) {

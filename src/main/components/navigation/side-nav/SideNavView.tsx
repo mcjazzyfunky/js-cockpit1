@@ -71,7 +71,7 @@ const styleSideNav = defineStyle(theme => ({
       },
 
       '.ms-Nav-compositeLink.is-expanded.is-selected': {
-        backgroundColor: theme.palette.neutralLight + ' !important',
+        backgroundColor: theme.palette.neutralLighter + ' !important',
 
         selectors: {
           '*': {
@@ -80,12 +80,12 @@ const styleSideNav = defineStyle(theme => ({
           },
 
           '> button:after': {
-            borderColor: theme.palette.neutralSecondaryAlt,
+            borderColor: theme.palette.themeSecondary,
           },
 
           ':hover *': {
             color: theme.palette.black + ' !important',
-            backgroundColor: theme.palette.neutralLight + ' !important',
+            backgroundColor: theme.palette.neutralLighter + ' !important',
           }
         }
       }
@@ -112,7 +112,7 @@ function SideNavView(props: SideNavProps) {
       <div className={classes.container}>
         <div className={classes.navigation}>
           <Nav
-            groups={getGroups(props.children)}
+            groups={getLinkGroups(props.children)}
 
             selectedKey={props.activeItemId}
           />
@@ -126,56 +126,41 @@ function SideNavView(props: SideNavProps) {
 
 // --- helpers ------------------------------------------------------
 
-function getGroups(children: any): INavLinkGroup[] {
-  const groups: INavLinkGroup[] = []
+function getLinkGroups(children: any): INavLinkGroup[] {
+  const linkGroups: INavLinkGroup[] = []
 
   React.Children.forEach(children, (child: any, idx: any) => {
     const childProps = child && child.props ? child.props : null
 
-    const group = {
-      key: '1',
-      name: childProps.title,
-      isExpanded: true,
-      link: null as any,
-      url: null as any,
-      links: [] as any
+    const linkGroup: INavLinkGroup = {
+      name: childProps.text,
+      links: getLinks(childProps.children)
     }
 
-    groups.push(group)
+    linkGroups.push(linkGroup)
   })
 
-  return groups
+  return linkGroups
+}
 
-  /*
-  const
-    type = child.type,
-    props = child.props,
-    isGroup = type === SideNav.ItemGroup 
+function getLinks(children: any): INavLink[] {
+  const links: INavLink[] = []
 
-  const ret: INavLink = { 
-    key: isGroup ? props.groupId : props.id,
-    name: props.title,
-    isExpanded: true,
-    link: null, // TODO
-    url: null
-  }
+  React.Children.forEach(children, (child: any, idx: any) => {
+    const childProps = child && child.props ? child.props : null
 
-  if (isGroup) {
-    const menu = model as AppsWithNavAppGroupModel
-
-    if (menu.items.length > 0) {
-      ret.links = menu.items.map(it => {
-        return getLinkProps(it)
-      })
+    const link: INavLink = {
+      key: childProps.id,
+      name: childProps.text,
+      isExpanded: true,
+      link: null as any,
+      url: null as any
     }
-  } else if (model.$kind === 'AppsWithNavAppModel') {
-    // TODO
-  } else {
-    throw new Error('This should never happen')
-  }
 
-  return ret
-  */
+    links.push(link)
+  })
+
+  return links
 }
 
 // --- exports ------------------------------------------------------

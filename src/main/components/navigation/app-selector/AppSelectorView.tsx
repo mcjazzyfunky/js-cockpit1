@@ -108,7 +108,7 @@ function AppSelectorView(props: AppSelectorProps) {
               <AppsIcon/>
           </div>
           <label className={classes.label}>
-            Content Management
+            Web Shop 
           </label>
           <ChevronDownIcon/>
         </div>

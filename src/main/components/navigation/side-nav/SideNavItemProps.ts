@@ -1,10 +1,10 @@
 // external imports
 import { ReactNode } from 'react'
 
-// --- SideNavItemsProps --------------------------------------------
+// --- SideNavItemProps ---------------------------------------------
 
 type SideNavItemProps = {
-  title: string,
+  text: string,
   id: string,
 }
 
