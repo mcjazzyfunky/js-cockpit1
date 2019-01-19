@@ -1,12 +1,13 @@
-// inteernal imports
-import DataExplorerRenderer from './DataExplorerRenderer'
-
 // external imports
 import React, { ReactElement, ReactNode } from 'react'
 import { defineComponent, withChildren, isElementOfType, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
+
+// internal imports
+import DataExplorerView from './DataExplorerView'
+
 
 // --- DataExplorer.GeneralAction ----------------------------------
 
@@ -243,7 +244,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
   },
 
   render: class extends React.Component<DataExplorerProps, DataExplorerState> {
-    private _renderer = new DataExplorerRenderer()
+    private _renderer = new DataExplorerView()
     private _timeout: any = null
   
     constructor(props: DataExplorerProps) {
