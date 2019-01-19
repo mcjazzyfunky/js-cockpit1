@@ -71,7 +71,7 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       }
     },
 
-    mainContent: {
+    Center: {
       flexGrow: 1,
       display: 'flex',
       alignItems: 'stretch',
@@ -126,7 +126,7 @@ function CockpitView(props: CockpitProps) {
     userNav: ReactNode = null,
     menu: ReactNode = null,
     sideNav: ReactNode = null,
-    mainContent: ReactNode = null,
+    Center: ReactNode = null,
     logoutButton: ReactNode = null
 
   const getContent = (child: any, type: any) => {
@@ -154,7 +154,7 @@ function CockpitView(props: CockpitProps) {
     userNav = userNav || getContent(child, Cockpit.UserNav)
     menu = menu || getContent(child, Cockpit.Menu)
     sideNav = sideNav || getContent(child, Cockpit.SideNav)
-    mainContent = mainContent || getContent(child, Cockpit.MainContent)
+    Center = Center || getContent(child, Cockpit.Center)
   })
 
   return styleCockpit(classes => {
@@ -186,8 +186,8 @@ function CockpitView(props: CockpitProps) {
           <div className={classes.sideNav}>
             {sideNav}
           </div>
-          <div className={classes.mainContent}>
-            {mainContent}
+          <div className={classes.Center}>
+            {Center}
           </div>
         </div>
       </div>

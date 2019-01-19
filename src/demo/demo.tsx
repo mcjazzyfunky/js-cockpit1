@@ -122,7 +122,7 @@ function Demo() {
           </SideNav.Menu>
         </SideNav>
       </Cockpit.SideNav>
-      <Cockpit.MainContent style={{ padding: '5px' }}>
+      <Cockpit.Center style={{ padding: '5px' }}>
          <DataExplorer
               title="Back-office users"
 
@@ -170,7 +170,7 @@ function Demo() {
                 />
               </DataExplorer.Columns>
             </DataExplorer>
-      </Cockpit.MainContent>
+      </Cockpit.Center>
     </Cockpit>
 
   return cockpit
