@@ -4,6 +4,7 @@ import AppSelector from './components/navigation/app-selector/AppSelector'
 import Brand from './components/misc/brand/Brand'
 import Cockpit from './components/outline/cockpit/Cockpit'
 import DataExplorer from './components/data-views/data-explorer/DataExplorer'
+import DataForm from './components/data-views/data-form/DataForm'
 import DataTable from './components/data-views/data-table/DataTable'
 import HBox from './components/layout/hbox/HBox'
 import LoginForm from './components/login/login-form/LoginForm'
@@ -30,6 +31,7 @@ export {
  
   // data view components
   DataExplorer,
+  DataForm,
   DataTable,
   
   // login
