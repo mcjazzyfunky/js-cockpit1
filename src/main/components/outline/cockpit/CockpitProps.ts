@@ -1,13 +1,13 @@
 // external imports
 import { ReactNode } from 'react'
 
-// --- ControlCenterProps -------------------------------------------
+// --- CockpitProps -------------------------------------------
 
-type ControlCenterProps = {
+type CockpitProps = {
   onLogout?: () => void,
   children?: ReactNode // TODO
 }
 
 // --- exports ------------------------------------------------------
 
-export default ControlCenterProps
+export default CockpitProps

@@ -2,7 +2,7 @@
 
 import AppSelector from './components/navigation/app-selector/AppSelector'
 import Brand from './components/misc/brand/Brand'
-import ControlCenter from './components/misc/control-center/ControlCenter'
+import Cockpit from './components/outline/cockpit/Cockpit'
 import DataExplorer from './components/data-views/DataExplorer'
 import DataTable from './components/data-views/data-table/DataTable'
 import HBox from './components/layout/hbox/HBox'
@@ -38,7 +38,7 @@ export {
   
   // misc components
   Brand,
-  ControlCenter,
+  Cockpit,
 
   // functions
   initSystemIcons,

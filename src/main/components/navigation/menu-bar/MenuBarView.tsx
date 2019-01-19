@@ -17,7 +17,7 @@ const styleMenuBar = defineStyle(theme => ({
   commandBar: {
     borderWidth: '0 0 1px 0',
     borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternary
+    borderColor: theme.palette.neutralQuaternaryAlt,
   },
 }))
 

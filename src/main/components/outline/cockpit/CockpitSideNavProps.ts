@@ -1,9 +1,9 @@
 // external imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- ControlCenterUserNavProps -------------------------------------------
+// --- CockpitSideNavProps -------------------------------------------
 
-type ControlCenterUserNavProps = {
+type CockpitSideNavProps = {
   className?: string,
   style?: CSSProperties,
   children?: ReactNode // TODO
@@ -11,4 +11,4 @@ type ControlCenterUserNavProps = {
 
 // --- exports ------------------------------------------------------
 
-export default ControlCenterUserNavProps
+export default CockpitSideNavProps

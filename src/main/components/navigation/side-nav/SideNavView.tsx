@@ -71,7 +71,7 @@ const styleSideNav = defineStyle(theme => ({
       },
 
       '.ms-Nav-compositeLink.is-expanded.is-selected': {
-        backgroundColor: theme.palette.neutralLighter + ' !important',
+        backgroundColor: theme.palette.themeLighterAlt + ' !important',
 
         selectors: {
           '*': {
@@ -85,7 +85,7 @@ const styleSideNav = defineStyle(theme => ({
 
           ':hover *': {
             color: theme.palette.black + ' !important',
-            backgroundColor: theme.palette.neutralLighter + ' !important',
+            backgroundColor: theme.palette.themeLighterAlt + ' !important',
           }
         }
       }

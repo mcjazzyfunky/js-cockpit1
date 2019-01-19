@@ -4,16 +4,16 @@ import { ITheme } from 'office-ui-fabric-react'
 import Color from 'color'
 
 // internal imports
-import ControlCenter from './ControlCenter'
-import ControlCenterProps from './ControlCenterProps'
+import Cockpit from './Cockpit'
+import CockpitProps from './CockpitProps'
 import defineStyle from '../../../styling/defineStyle'
 import LogoutIcon from './internal/icons/LogoutIcon'
 
-// --- styles for ControlCenter -------------------------------------
+// --- styles for Cockpit -------------------------------------
 
-const styleControlCenter = defineStyle((theme: ITheme) => {
+const styleCockpit = defineStyle((theme: ITheme) => {
   return {
-    controlCenter: {
+    cockpit: {
       display: 'flex',
       flexDirection: 'column',
       minWidth: '100%',
@@ -113,9 +113,9 @@ const styleControlCenter = defineStyle((theme: ITheme) => {
   }
 })
 
-// --- ControlCenterView --------------------------------------------
+// --- CockpitView --------------------------------------------
 
-function ControlCenterView(props: ControlCenterProps) {
+function CockpitView(props: CockpitProps) {
   const
     onLogout = React.useCallback(
       () => props.onLogout ? props.onLogout() : null, [props.onLogout])
@@ -149,15 +149,15 @@ function ControlCenterView(props: ControlCenterProps) {
   }
 
   React.Children.forEach(props.children, (child: any) => {
-    brand = brand || getContent(child, ControlCenter.Brand)
-    topNav = topNav || getContent(child, ControlCenter.TopNav)
-    userNav = userNav || getContent(child, ControlCenter.UserNav)
-    menu = menu || getContent(child, ControlCenter.Menu)
-    sideNav = sideNav || getContent(child, ControlCenter.SideNav)
-    mainContent = mainContent || getContent(child, ControlCenter.MainContent)
+    brand = brand || getContent(child, Cockpit.Brand)
+    topNav = topNav || getContent(child, Cockpit.TopNav)
+    userNav = userNav || getContent(child, Cockpit.UserNav)
+    menu = menu || getContent(child, Cockpit.Menu)
+    sideNav = sideNav || getContent(child, Cockpit.SideNav)
+    mainContent = mainContent || getContent(child, Cockpit.MainContent)
   })
 
-  return styleControlCenter(classes => {
+  return styleCockpit(classes => {
     if (props.onLogout) {
       logoutButton =
         <button className={classes.logoutButton}>
@@ -166,7 +166,7 @@ function ControlCenterView(props: ControlCenterProps) {
     }
 
     return (
-      <div className={classes.controlCenter}>
+      <div className={classes.cockpit}>
         <div className={classes.header}>
           <div className={classes.headerStart}>
             {brand}
@@ -197,4 +197,4 @@ function ControlCenterView(props: ControlCenterProps) {
 
 // --- exports ------------------------------------------------------
 
-export default ControlCenterView 
+export default CockpitView 

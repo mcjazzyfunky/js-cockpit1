@@ -38,7 +38,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     flexGrow: 0,
     flexShrink: 0,
     padding: '2px 0 2px 10px',
-    height: '40px',
+    height: '42px',
     boxSizing: 'border-box',
     margin: '0 0 4px 0',
     zIndex: 1,
@@ -109,7 +109,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
   actionButton: {
     color: theme.palette.black,
     backgroundColor: 'transparent',
-    marginLeft: '4px',
+    margin: '1px 0 0 4px',
 
     selectors: {
       ':hover': {
@@ -144,7 +144,7 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
     borderWidth: '0 1px 0 0',
     borderStyle: 'solid',
     borderColor: '#aaa',
-    margin: '13px 3px 0 3px'
+    margin: '17px 3px 0 3px'
   },
 
   loadingPanel: {
@@ -343,7 +343,7 @@ class DataExplorerRenderer {
           action.$kind === 'DataExplorerSingleRowActionModel' && model.rowSelection.length !== 1
               || action.$kind === 'DataExplorerMultiRowActionModel' && model.rowSelection.length === 0
 
-      if (idx > 100000) {
+      if (idx > 0) {
         items.push({
           key: `separator-${idx}`,
           onRender: () => <div className={classes.actionButtonSeparator}></div>

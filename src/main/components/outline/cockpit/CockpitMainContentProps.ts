@@ -1,9 +1,9 @@
 // external imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- ControlCenterBrandProps -------------------------------------------
+// --- CockpitMainContentProps -------------------------------------------
 
-type ControlCenterBrandProps = {
+type CockpitMainContentProps = {
   className?: string,
   style?: CSSProperties,
   children?: ReactNode // TODO
@@ -11,4 +11,4 @@ type ControlCenterBrandProps = {
 
 // --- exports ------------------------------------------------------
 
-export default ControlCenterBrandProps
+export default CockpitMainContentProps

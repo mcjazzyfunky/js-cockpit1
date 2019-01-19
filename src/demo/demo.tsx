@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, HBox, SideNav, LoginForm, MenuBar, ControlCenter, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, HBox, SideNav, LoginForm, MenuBar, Cockpit, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -38,15 +38,15 @@ function Demo() {
       </LoginForm.Header>
     </LoginForm>
 
-  const controlCenter =
-    <ControlCenter onLogout={() => alert('Juhu')}>
-      <ControlCenter.Brand>
+  const cockpit =
+    <Cockpit onLogout={() => alert('Juhu')}>
+      <Cockpit.Brand>
         <Brand
           vendor="meet+greet"
           title="Back Office"
         />
-      </ControlCenter.Brand>
-      <ControlCenter.TopNav>
+      </Cockpit.Brand>
+      <Cockpit.TopNav>
         <AppSelector apps={[
           {
             id: 'cms',
@@ -59,13 +59,13 @@ function Demo() {
             description: 'Some description for the MMS'
           }
         ]}/>
-      </ControlCenter.TopNav>
-      <ControlCenter.UserNav>
+      </Cockpit.TopNav>
+      <Cockpit.UserNav>
         <UserMenu
           fullName="Jane Doe"
         />
-      </ControlCenter.UserNav>
-      <ControlCenter.Menu>
+      </Cockpit.UserNav>
+      <Cockpit.Menu>
         <MenuBar onAction={() => alert('Juhu')}>
           <MenuBar.Menu text="Users">
             <MenuBar.Item id="1.1" text="Item-1.1"/>
@@ -90,12 +90,15 @@ function Demo() {
           <MenuBar.Menu text="Media">
             <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
           </MenuBar.Menu>
+          <MenuBar.Menu text="Settings">
+            <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
+          </MenuBar.Menu>
           <MenuBar.Menu text="Help">
             <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
           </MenuBar.Menu>
         </MenuBar>
-      </ControlCenter.Menu>
-      <ControlCenter.SideNav>
+      </Cockpit.Menu>
+      <Cockpit.SideNav>
         <SideNav activeItemId="user-groups">
           <SideNav.Menu text="Menu1">
             <SideNav.Item
@@ -118,8 +121,8 @@ function Demo() {
             />
           </SideNav.Menu>
         </SideNav>
-      </ControlCenter.SideNav>
-      <ControlCenter.MainContent style={{ padding: '5px' }}>
+      </Cockpit.SideNav>
+      <Cockpit.MainContent style={{ padding: '5px' }}>
          <DataExplorer
               title="Back-office users"
 
@@ -167,10 +170,10 @@ function Demo() {
                 />
               </DataExplorer.Columns>
             </DataExplorer>
-      </ControlCenter.MainContent>
-    </ControlCenter>
+      </Cockpit.MainContent>
+    </Cockpit>
 
-  return controlCenter
+  return cockpit
 }
 
 function fakeData(count: number) {
