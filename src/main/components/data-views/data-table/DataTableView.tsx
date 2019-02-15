@@ -175,7 +175,7 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
     model = React.useMemo(() => getDataTableModel(props, selectedRows), null),
     rowSelectionMode = props.rowSelectionOptions.mode || 'none'
 
-  React.useImperativeMethods(ref, () => {
+  React.useImperativeHandle(ref, () => {
     return {
       unselectAllRows: () => {
         setSelectionRows(new Set()) 

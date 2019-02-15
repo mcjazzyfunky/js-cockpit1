@@ -19,7 +19,7 @@ function DataFormView(props: DataFormProps) {
   return styleDataForm(classes => {
     return (
       <div className={classes.container}>
-        [DataForm]
+        [ DataForm ]
       </div>
     )
   })

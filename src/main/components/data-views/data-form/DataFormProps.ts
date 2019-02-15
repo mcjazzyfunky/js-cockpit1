@@ -5,7 +5,8 @@ import { ReactNode } from 'react'
 
 type DataFormProps = {
   headline: string,
-  onAction?: () => void // TODO
+  onAction?: () => void // TODO,
+  children: any // TODO
 }
 
 // --- exports ------------------------------------------------------

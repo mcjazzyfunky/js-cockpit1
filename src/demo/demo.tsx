@@ -38,6 +38,70 @@ function Demo() {
       </LoginForm.Header>
     </LoginForm>
 
+  const dataExplorer =
+    <DataExplorer
+      title="Back-office users"
+
+      loadData={loadData}
+    >
+      <DataExplorer.Actions>
+        <DataExplorer.GeneralAction
+          title="Add"
+          icon={<FiPlus/>}
+        />
+        <DataExplorer.SingleRowAction
+          title="Edit"
+          icon={<FiEdit/>}
+        />
+        <DataExplorer.MultiRowAction
+          title="Delete"
+          icon={<FiTrash2/>}
+        />
+      </DataExplorer.Actions>
+      <DataExplorer.Columns>
+        <DataExplorer.Column
+          title="First name"
+          field="firstName"
+          sortable={true}
+        />
+        <DataExplorer.Column
+          title="Last name"
+          field="lastName"
+          sortable={true}
+        />
+        <DataExplorer.Column
+          title="Postal code"
+          field="postalCode"
+          sortable={true}
+        />
+        <DataExplorer.Column
+          title="City"
+          field="city"
+          sortable={true}
+        />
+        <DataExplorer.Column
+          title="Country"
+          field="country"
+          sortable={true}
+        />
+      </DataExplorer.Columns>
+    </DataExplorer>
+
+  const dataForm =
+    <DataForm headline="My DataForm">
+      <DataForm.Actions>
+        <DataForm.Action
+          text="Save"
+        /> 
+        <DataForm.Action
+          text="Clone"
+        /> 
+        <DataForm.Action
+          text="Delete"
+        /> 
+      </DataForm.Actions>
+    </DataForm>
+
   const cockpit =
     <Cockpit onLogout={() => alert('Juhu')}>
       <Cockpit.Brand>
@@ -123,62 +187,11 @@ function Demo() {
         </SideNav>
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
-         <DataExplorer
-              title="Back-office users"
-
-              loadData={loadData}
-            >
-              <DataExplorer.Actions>
-                <DataExplorer.GeneralAction
-                  title="Add"
-                  icon={<FiPlus/>}
-                />
-                <DataExplorer.SingleRowAction
-                  title="Edit"
-                  icon={<FiEdit/>}
-                />
-                <DataExplorer.MultiRowAction
-                  title="Delete"
-                  icon={<FiTrash2/>}
-                />
-              </DataExplorer.Actions>
-              <DataExplorer.Columns>
-                <DataExplorer.Column
-                  title="First name"
-                  field="firstName"
-                  sortable={true}
-                />
-                <DataExplorer.Column
-                  title="Last name"
-                  field="lastName"
-                  sortable={true}
-                />
-                <DataExplorer.Column
-                  title="Postal code"
-                  field="postalCode"
-                  sortable={true}
-                />
-                <DataExplorer.Column
-                  title="City"
-                  field="city"
-                  sortable={true}
-                />
-                <DataExplorer.Column
-                  title="Country"
-                  field="country"
-                  sortable={true}
-                />
-              </DataExplorer.Columns>
-            </DataExplorer>
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 
-  const dataForm =
-    <DataForm headline="My DataForm">
-
-    </DataForm>
-
-  return dataForm 
+  return cockpit 
 }
 
 function fakeData(count: number) {

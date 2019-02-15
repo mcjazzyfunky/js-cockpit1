@@ -19,6 +19,10 @@ const Action = defineComponent<DataFormActionProps>({
     text: {
       type: String,
       required: true
+    },
+
+    onAction: {
+      type: Function
     }
   },
 
@@ -107,4 +111,8 @@ const DataForm = defineComponent<DataFormProps>({
 
 // --- exports ------------------------------------------------------
 
-export default DataForm
+export default Object.assign(DataForm, {
+  Action,
+  ActionMenu,
+  Actions
+})

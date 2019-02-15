@@ -67,7 +67,7 @@ const SideNav = defineComponent<SideNavProps>({
   displayName: 'SideNav',
 
   properties: {
-    selectedId: {
+    activeItemId: {
       type: String
     },
 
