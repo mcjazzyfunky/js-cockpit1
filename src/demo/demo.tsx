@@ -187,11 +187,11 @@ function Demo() {
         </SideNav>
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit 
+  return loginForm 
 }
 
 function fakeData(count: number) {

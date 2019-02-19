@@ -12,7 +12,6 @@ import defineStyle from '../../../styling/defineStyle'
 
 const styleLoginForm = defineStyle(theme => ({
   container: {
-    width: '320px',
     backgroundColor: theme.palette.white,
     borderWidth: '1px',
     borderStyle: 'solid',
@@ -26,15 +25,22 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.neutralLighter,
-    position: 'absolute'
+    backgroundColor: theme.palette.neutralLight,
+    position: 'absolute',
+
+    selectors: {
+      '& > *': {
+        borderRadius: '6px'
+      }
+    }
   },
 
   inner: {
     position: 'relative',
+    backgroundColor: theme.palette.white,
     top: '-10%',
     display: 'flex',
-    width: '320px',
+    width: '350px',
     flexDirection: 'column',
     minHeight: '405px',
     textAlign: 'left',
@@ -49,7 +55,7 @@ const styleLoginForm = defineStyle(theme => ({
   header: {
     borderWidth: '0 0 1px 0',
     borderStyle: 'solid',
-    borderColor: theme.palette.neutralTertiaryAlt,
+    borderColor: theme.palette.neutralQuaternaryAlt,
     padding: '1rem 1.5rem',
   },
 
