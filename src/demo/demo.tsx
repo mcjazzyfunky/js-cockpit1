@@ -191,7 +191,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return loginForm 
+  return cockpit 
 }
 
 function fakeData(count: number) {
