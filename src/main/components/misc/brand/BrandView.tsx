@@ -1,7 +1,7 @@
 // external imports
 import React from 'react'
 import { css } from 'office-ui-fabric-react' 
-import { FiLoader } from 'react-icons/fi'
+import { FiLoader  as DefaultLogo } from 'react-icons/fi'
 
 // internal imports
 import BrandProps from './BrandProps'
@@ -13,12 +13,16 @@ const styleBrand = defineStyle(theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',
+    textAlign: 'left',
   },
 
   firstColumn: {
+    justify: 'stretch',
+    alignSelf: 'stretch',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 
   secondColumn: {
@@ -35,28 +39,47 @@ const styleBrand = defineStyle(theme => ({
 
   vendorLarge: {
     fontSize: theme.fonts.medium.fontSize + ' !important',
+    margin: '0 0 0 2px',
+  },
+  
+  vendorHuge: {
+    fontSize: theme.fonts.mediumPlus.fontSize + ' !important',
+    margin: '0 0 0 8px', 
   },
 
   title: {
     fontSize: theme.fonts.mediumPlus.fontSize,
     padding: 0,
-    margin: '-1px 0 0 0',
+    margin: '-3px 0 0 0',
     lineHeight: '1.25rem',
   },
 
   titleLarge: {
     fontSize: theme.fonts.large.fontSize + ' !important',
-    margin: 0
+    margin: '-3px 0 0 2px',
+  },
+  
+  titleHuge: {
+    fontSize: theme.fonts.xLarge.fontSize + ' !important',
+    margin: '-1px 0 0 8px', 
   },
 
   logo: {
     width: '24px',
     height: '24px',
+    padding: '1px 0 0 0',
   },
 
   logoLarge: {
-    width: '24px',
-    height: '24px',
+    width: '28px',
+    height: '28px',
+    padding: 0
+  },
+
+  logoHuge: {
+    width: '32px',
+    height: '32px',
+    padding: 0
   },
 }))
 
@@ -65,16 +88,11 @@ const styleBrand = defineStyle(theme => ({
 function BrandView(props: BrandProps) {
   return styleBrand(classes => {
     const
-      isLarge = props.size === 'large',
-
-      vendorClassName =
-        css(classes.vendor, isLarge ? classes.vendorLarge : null),
-      
-      titleClassName =
-        css(classes.title, isLarge ? classes.titleLarge : null),
-
-      logoClassName =
-        css(classes.logo, isLarge ? classes.logoLarge : null)
+      size = props.size,
+      sizePascalCase = size[0].toUpperCase() + size.substring(1),
+      vendorClassName: string = css(classes.vendor, (classes as any)[`vendor${sizePascalCase}`]),
+      titleClassName: string = css(classes.title, (classes as any)[`title${sizePascalCase}`]),
+      logoClassName: string = css(classes.logo, (classes as any)[`logo${sizePascalCase}`])
 
     let
       firstColumnContent = null,
@@ -106,7 +124,7 @@ function BrandView(props: BrandProps) {
    
     firstColumnContent =
       <div className={classes.logo}>
-        {props.logo  ||<FiLoader className={logoClassName}/>}
+        {props.logo  || <DefaultLogo className={logoClassName}/>}
       </div>
 
     return (

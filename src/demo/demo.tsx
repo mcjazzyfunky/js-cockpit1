@@ -29,13 +29,13 @@ loadTheme({
 function Demo() {
   const loginForm =
     <LoginForm fullSize={true}>
-      <LoginForm.Header>
+      <LoginForm.Above>
         <Brand
           vendor="meet+greet"
-          title="Back office - Login"
-          size="large"
+          title="Back office"
+          size="huge"
         />
-      </LoginForm.Header>
+      </LoginForm.Above>
     </LoginForm>
 
   const dataExplorer =

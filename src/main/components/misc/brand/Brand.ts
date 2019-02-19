@@ -27,7 +27,7 @@ const Brand = defineComponent<BrandProps>({
 
     size: {
       type: String,
-      validate: Spec.oneOf('medium', 'large'),
+      validate: Spec.oneOf('medium', 'large', 'huge'),
       defaultValue: 'medium'
     },
 

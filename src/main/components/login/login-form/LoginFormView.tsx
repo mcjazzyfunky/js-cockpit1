@@ -2,6 +2,7 @@
 import React, { ReactNode, ReactElement, CSSProperties} from 'react'
 import { isElementOfType } from 'js-react-utils'
 import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
+import { IoIosContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
 import LoginForm from './LoginForm'
@@ -21,6 +22,7 @@ const styleLoginForm = defineStyle(theme => ({
 
   containerFullSize: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -38,11 +40,10 @@ const styleLoginForm = defineStyle(theme => ({
   inner: {
     position: 'relative',
     backgroundColor: theme.palette.white,
-    top: '-10%',
     display: 'flex',
     width: '350px',
     flexDirection: 'column',
-    minHeight: '405px',
+    minHeight: '430px',
     textAlign: 'left',
   },
 
@@ -57,6 +58,21 @@ const styleLoginForm = defineStyle(theme => ({
     borderStyle: 'solid',
     borderColor: theme.palette.neutralQuaternaryAlt,
     padding: '1rem 1.5rem',
+  },
+
+  defaultHeader: {
+    borderWidth: '0 0 1px 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralQuaternaryAlt,
+    padding: '0.5rem 1.5rem',
+    textAlign: 'center',
+    fontSize: theme.fonts.large.fontSize,
+  },
+
+  defaultIcon: {
+    height: '50px',
+    width: '50px',
+    color: theme.palette.neutralQuaternary
   },
 
   content: {
@@ -84,6 +100,20 @@ const styleLoginForm = defineStyle(theme => ({
   loadingIndicator: {
     display: 'inline-block',
     margin: '0 0 0 0.75rem',
+  },
+
+  above: {
+    fontSize: theme.fonts.mediumPlus.fontSize,
+    color: theme.palette.neutralSecondaryAlt,
+    padding: '1.25rem 0',
+    textAlign: 'center',
+  },
+
+  below: {
+    fontSize: theme.fonts.mediumPlus.fontSize,
+    color: theme.palette.neutralSecondaryAlt,
+    padding: '0.75rem 0',
+    textAlign: 'center',
   }
 }))
 
@@ -187,11 +217,23 @@ function LoginFormView(props: LoginFormProps) {
 
     let
       header: ReactElement<any> = null, // TODO
-      headerBox: ReactNode = null
+      above: ReactElement<any> = null, // TODO
+      below: ReactElement<any> = null, // TODO
+      headerBox: ReactNode = null,
+      aboveBox: ReactNode = null,
+      belowBox: ReactNode = null
 
     React.Children.forEach(props.children, (child: any) => {
       if (isElementOfType(LoginForm.Header, child)) {
         header = child
+      }
+
+      if (isElementOfType(LoginForm.Above, child)) {
+        above = child
+      }
+      
+      if (isElementOfType(LoginForm.Below, child)) {
+        below = child
       }
     })
 
@@ -200,6 +242,26 @@ function LoginFormView(props: LoginFormProps) {
         headerBox =
           <div className={classes.header}>
             { header.props.children }
+          </div>
+      } else {
+        headerBox =
+          <div className={classes.defaultHeader}>
+            <div><DefaultIcon className={classes.defaultIcon}/></div>
+            <div>User Login</div> 
+          </div>
+      }
+
+      if (above) {
+        aboveBox = 
+          <div className={classes.above}>
+            {above.props.children} 
+          </div>
+      }
+      
+      if (belowBox) {
+        belowBox = 
+          <div className={classes.below}>
+            {below.props.children} 
           </div>
       }
 
@@ -214,71 +276,73 @@ function LoginFormView(props: LoginFormProps) {
 
       return (
         <div className={props.fullSize ? classes.containerFullSize : classes.container}>
+          {aboveBox}
           <div className={classes.inner}>
-          { headerBox }
-          <form onSubmit={onSubmit} className={classes.form}>
-            <div className={classes.content}>
-              <TextField
-                name="username"
-                label="User name"
-                autoComplete="off"
-                disabled={state.loading}
-                value={state.username}
-                errorMessage={state.usernameErrorMsg}
+            {headerBox}
+            <form onSubmit={onSubmit} className={classes.form}>
+              <div className={classes.content}>
+                <TextField
+                  name="username"
+                  label="User name"
+                  autoComplete="off"
+                  disabled={state.loading}
+                  value={state.username}
+                  errorMessage={state.usernameErrorMsg}
 
-                onChange={
-                  event => setState({
-                    ...state,
-                    username: (event.target as any).value,
-                    usernameErrorMsg: '',
-                    passwordErrorMsg: '',
-                    generalErrorMsg: ''
-                  })
-                }
-              />
-              <TextField
-                name="password"
-                label="Password"
-                type="password"
-                disabled={state.loading}
-                value={state.password}
-                errorMessage={state.passwordErrorMsg}
-                
-                onChange={
-                  event => setState({
-                    ...state,
-                    password: (event.target as any).value,
-                    usernameErrorMsg: '',
-                    passwordErrorMsg: '',
-                    generalErrorMsg: ''
-                  })
-                }
-              />
-              <Checkbox
-                name="remember"
-                label="Remember me"
-                className={classes.remember}
-                disabled={state.loading}
+                  onChange={
+                    event => setState({
+                      ...state,
+                      username: (event.target as any).value,
+                      usernameErrorMsg: '',
+                      passwordErrorMsg: '',
+                      generalErrorMsg: ''
+                    })
+                  }
+                />
+                <TextField
+                  name="password"
+                  label="Password"
+                  type="password"
+                  disabled={state.loading}
+                  value={state.password}
+                  errorMessage={state.passwordErrorMsg}
+                  
+                  onChange={
+                    event => setState({
+                      ...state,
+                      password: (event.target as any).value,
+                      usernameErrorMsg: '',
+                      passwordErrorMsg: '',
+                      generalErrorMsg: ''
+                    })
+                  }
+                />
+                <Checkbox
+                  name="remember"
+                  label="Remember me"
+                  className={classes.remember}
+                  disabled={state.loading}
 
-                onChange={
-                  event => setState({
-                    ...state,
-                    remember: (event.target as any).checked
-                  })
-                }
-              />
-              <div className={classes.generalError}>
-                  {state.generalErrorMsg}
+                  onChange={
+                    event => setState({
+                      ...state,
+                      remember: (event.target as any).checked
+                    })
+                  }
+                />
+                <div className={classes.generalError}>
+                    {state.generalErrorMsg}
+                </div>
               </div>
-            </div>
-            <div className={classes.footer}>
-              <PrimaryButton type="submit" className={classes.submitButton}>
-                {loginButtonText}
-                {loadingIndicator}
-              </PrimaryButton>
-            </div>
-          </form>
-        </div>
+              <div className={classes.footer}>
+                <PrimaryButton type="submit" className={classes.submitButton}>
+                  {loginButtonText}
+                  {loadingIndicator}
+                </PrimaryButton>
+              </div>
+            </form>
+          </div>
+          {belowBox}
         </div>
       )
     })

@@ -6,6 +6,8 @@ import { Spec } from 'js-spec'
 // internal imports
 import LoginFormProps from './LoginFormProps' 
 import LoginFormHeaderProps from './LoginFormHeaderProps'
+import LoginFormAboveProps from './LoginFormAboveProps'
+import LoginFormBelowProps from './LoginFormBelowProps'
 import LoginFormView from './LoginFormView'
 
 // --- LoginForm.Header ---------------------------------------------
@@ -22,6 +24,42 @@ const Header = defineComponent<LoginFormHeaderProps>({
   render() {
     throw new Error(
       'Components of type LoginForm.Header can only be used as children '
+        + 'of LoginForm components')
+  }
+})
+
+// --- LoginForm.Above ----------------------------------------------
+
+const Above = defineComponent<LoginFormAboveProps>({
+  displayName: 'LoginForm.Above',
+
+  properties: {
+    children: {
+      validate: isNode
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type LoginForm.Above can only be used as children '
+        + 'of LoginForm components')
+  }
+})
+
+// --- LoginForm.Below ----------------------------------------------
+
+const Below = defineComponent<LoginFormBelowProps>({
+  displayName: 'LoginForm.Below',
+
+  properties: {
+    children: {
+      validate: isNode
+    }
+  },
+
+  render() {
+    throw new Error(
+      'Components of type LoginForm.Below can only be used as children '
         + 'of LoginForm components')
   }
 })
@@ -54,7 +92,7 @@ const LoginForm = defineComponent<LoginFormProps>({
 
     children: {
       validate:
-        withChildren(Spec.all(isElementOfType(Header)))
+        withChildren(Spec.all(isElementOfType([Header, Above, Below])))
     }
   }, 
 
@@ -66,5 +104,7 @@ const LoginForm = defineComponent<LoginFormProps>({
 // --- exports ------------------------------------------------------
 
 export default Object.assign(LoginForm, {
-  Header
+  Header,
+  Above,
+  Below
 })
