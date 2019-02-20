@@ -11,7 +11,9 @@ type LoginFormProps = {
 
   className?: string,
   style?: CSSProperties,
-  children?: ReactNode
+  header?: ReactNode,
+  above?: ReactNode,
+  below?: ReactNode
 }
 
 // --- exports ------------------------------------------------------

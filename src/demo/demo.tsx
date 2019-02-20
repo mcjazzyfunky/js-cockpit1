@@ -28,15 +28,17 @@ loadTheme({
 
 function Demo() {
   const loginForm =
-    <LoginForm fullSize={true}>
-      <LoginForm.Above>
+    <LoginForm
+      fullSize={true}
+
+      above={
         <Brand
           vendor="meet+greet"
           title="Back office"
           size="huge"
         />
-      </LoginForm.Above>
-    </LoginForm>
+      }
+    />
 
   const dataExplorer =
     <DataExplorer
@@ -191,7 +193,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit 
+  return cockpit
 }
 
 function fakeData(count: number) {

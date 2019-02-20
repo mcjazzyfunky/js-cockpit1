@@ -110,9 +110,9 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   below: {
-    fontSize: theme.fonts.mediumPlus.fontSize,
+    fontSize: theme.fonts.medium.fontSize,
     color: theme.palette.neutralSecondaryAlt,
-    padding: '0.75rem 0',
+    padding: '0.5rem 0',
     textAlign: 'center',
   }
 }))
@@ -216,32 +216,18 @@ function LoginFormView(props: LoginFormProps) {
         : 'Log in'
 
     let
-      header: ReactElement<any> = null, // TODO
-      above: ReactElement<any> = null, // TODO
-      below: ReactElement<any> = null, // TODO
+      header: ReactNode = props.header || null, 
+      above: ReactNode = props.above || null, 
+      below: ReactNode = props.below || null,
       headerBox: ReactNode = null,
       aboveBox: ReactNode = null,
       belowBox: ReactNode = null
-
-    React.Children.forEach(props.children, (child: any) => {
-      if (isElementOfType(LoginForm.Header, child)) {
-        header = child
-      }
-
-      if (isElementOfType(LoginForm.Above, child)) {
-        above = child
-      }
-      
-      if (isElementOfType(LoginForm.Below, child)) {
-        below = child
-      }
-    })
 
     return styleLoginForm(classes => { // TODO
       if (header) {
         headerBox =
           <div className={classes.header}>
-            { header.props.children }
+            {props.header}
           </div>
       } else {
         headerBox =
@@ -254,14 +240,14 @@ function LoginFormView(props: LoginFormProps) {
       if (above) {
         aboveBox = 
           <div className={classes.above}>
-            {above.props.children} 
+            {props.above} 
           </div>
       }
       
-      if (belowBox) {
+      if (below) {
         belowBox = 
           <div className={classes.below}>
-            {below.props.children} 
+            {props.below} 
           </div>
       }
 
