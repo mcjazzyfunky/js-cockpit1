@@ -296,7 +296,7 @@ function getDataTableModel(props: DataTableProps, rowSelection: Set<number>): Da
     sortDesc: props.sortDesc || false,
   }
 
-  React.Children.forEach(props.children, (child: ReactElement<DataTableColumnModel>) => {
+  React.Children.forEach(props.columns, (child: ReactElement<DataTableColumnModel>) => {
     model.columns.push(
         getColumnModel(child.props))
   })

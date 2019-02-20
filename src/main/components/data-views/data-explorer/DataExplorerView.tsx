@@ -267,9 +267,8 @@ class DataExplorerRenderer {
               
               onSortChange={this._onSortChange}
               
-            >
-              {tableColumns}
-            </DataTable>
+              columns={tableColumns}
+            />
           </div>
             {
               this._model.pageIndex >= 0 && this._model.pageSize > 0 && this._model.totalItemCount > 0 

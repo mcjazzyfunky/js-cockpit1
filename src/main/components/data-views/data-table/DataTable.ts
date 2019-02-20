@@ -81,11 +81,9 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
       validate: Spec.arrayOf(Spec.object)
     },
 
-    children: {
-      validate:
-        withChildren(
-          Spec.all(
-            isElementOfType(Column)))
+    columns: {
+      type: Array,
+      validate: Spec.arrayOf(isElementOfType('Column'))
     },
 
     onRowSelectionChange: {
