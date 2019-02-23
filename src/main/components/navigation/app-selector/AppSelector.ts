@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent, isNode } from 'js-react-utils'
+import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -18,6 +18,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
       validate:
         Spec.arrayOf(
           Spec.strictShape({
+            kind: Spec.is('app'),
             id: Spec.string,
             title: Spec.string,
             description: Spec.optional(Spec.string)

@@ -7,11 +7,12 @@ import AppSelectionEvent from '../../../events/AppSelectionEvent'
 // --- AppSelectorProps ------------------------------------------------
 
 type AppSelectorProps = {
-  apps: Array<{
+  apps: {
+    kind: 'app'
     id: string,
     title: string,
     description?: string
-  }> 
+  }[]
 
   onSelection?: (ev: AppSelectionEvent) => void
 }

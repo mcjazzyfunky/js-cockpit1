@@ -4,8 +4,6 @@ import { CommandBar } from 'office-ui-fabric-react'
 
 // internal imports
 import MenuBarProps from './MenuBarProps'
-import MenuBarItemProps from './MenuBarItemProps'
-import MenuBarMenuProps from './MenuBarMenuProps'
 import defineStyle from '../../../styling/defineStyle'
 
 // --- style from MenuBar -------------------------------------------
@@ -27,14 +25,14 @@ const styleMenuBar = defineStyle(theme => ({
 function MenuBarView(props: MenuBarProps) {
   let ret = null
 
-  const childCount = React.Children.count(props.children)
+  const itemCount = props.items.length 
 
-  if (childCount > 0) {
+  if (itemCount > 0) {
     ret = styleMenuBar(classes =>
       <div className={classes.container}>
         <CommandBar
           className={classes.commandBar}
-          items={getItemProps(props.children, props.onAction)}
+          items={getItemProps(props.items, props.onAction)}
         />
       </div>)
   }
@@ -44,14 +42,17 @@ function MenuBarView(props: MenuBarProps) {
 
 // --- locals -------------------------------------------------------
 
-function getItemProps(children: any, baseOnAction: any) { // TODO
+function getItemProps(items: any, baseOnAction: any) { // TODO
   const ret: any[] = []
 
-  React.Children.forEach(children, (child: any) => { // TODO
-    const childOnAction =
-      child.props && child.props.onAction
-        ? child.props.onAction
-        : null
+  for (let i = 0; i < items.length; ++i) {
+    const
+      child: any = items[i],
+
+      childOnAction =
+        child && child.onAction
+          ? child.onAction
+          : null
 
     let onClick: any = null
 
@@ -70,20 +71,20 @@ function getItemProps(children: any, baseOnAction: any) { // TODO
 
     const item = {
       key: Math.random(),
-      text: child.props.text,
-      disabled: !!child.props.disabled,
+      text: child.text,
+      disabled: !!child.disabled,
       subMenuProps: null as any,
       onClick
     }
 
-    if (child.props && child.props.children) {
+    if (child && child.items) {
       item.subMenuProps = {
-        items: getItemProps(child.props.children, baseOnAction),
+        items: getItemProps(child.items, baseOnAction),
       }
     }
 
     ret.push(item)
-  })
+  }
     
   return ret
 }

@@ -5,7 +5,21 @@ import { ReactNode } from 'react'
 
 type MenuBarProps = {
   onAction?: () => void,
-  children?: ReactNode // TODO
+  items: (Menu | Item)[]
+}
+
+type Menu = {
+  kind: 'menu',
+  text: string,
+  items: (Menu | Item)[] 
+}
+
+type Item = {
+  kind: 'item',
+  text: string,
+  id?: string,
+  disabled?: boolean,
+  onAction?: () => void
 }
 
 // --- exports ------------------------------------------------------

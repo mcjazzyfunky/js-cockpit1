@@ -11,7 +11,6 @@ import { delay } from 'rxjs/operators'
 
 import faker from 'faker'
 import Color from 'color'
-import { FaEdit, FaHandshake, FaRetweet } from 'react-icons/fa'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
@@ -28,17 +27,15 @@ loadTheme({
 
 function Demo() {
   const loginForm =
-    <LoginForm
-      fullSize={true}
-
-      above={
-        <Brand
-          vendor="meet+greet"
-          title="Back office"
-          size="huge"
-        />
-      }
-    />
+    <LoginForm fullSize={true}>
+      <LoginForm.Above>
+          <Brand
+            vendor="meet+greet"
+            title="Back office"
+            size="huge"
+          />
+      </LoginForm.Above>
+    </LoginForm>
 
   const dataExplorer =
     <DataExplorer
@@ -113,18 +110,22 @@ function Demo() {
         />
       </Cockpit.Brand>
       <Cockpit.TopNav>
-        <AppSelector apps={[
-          {
-            id: 'cms',
-            title: 'Web Shop',
-            description: 'Some description for the CMS'
-          },
-          {
-            id: 'mms',
-            title: 'Media management',
-            description: 'Some description for the MMS'
-          }
-        ]}/>
+        <AppSelector
+          apps={[
+            {
+              kind: 'app',
+              id: 'cms',
+              title: 'Web Shop',
+              description: 'Some description for the CMS'
+            },
+            {
+              kind: 'app',
+              id: 'mms',
+              title: 'Media management',
+              description: 'Some description for the MMS'
+            }
+          ]}
+        />
       </Cockpit.TopNav>
       <Cockpit.UserNav>
         <UserMenu
@@ -132,37 +133,61 @@ function Demo() {
         />
       </Cockpit.UserNav>
       <Cockpit.Menu>
-        <MenuBar onAction={() => alert('Juhu')}>
-          <MenuBar.Menu text="Users">
-            <MenuBar.Item id="1.1" text="Item-1.1"/>
-            <MenuBar.Item id="1.2" text="Item-1.2-disabled" disabled={true}/>
-            <MenuBar.Item id="1.3" text="Item-1.3"/>
-            <MenuBar.Item id="1.4" text="Item-1.4"/>
-          </MenuBar.Menu>
-          <MenuBar.Menu text="Master data">
-            <MenuBar.Item id="1.1" text="Item-1.1"/>
-            <MenuBar.Item id="1.2" text="Item-1.2-disabled" disabled={true}/>
-            <MenuBar.Item id="1.3" text="Item-1.3"/>
-            <MenuBar.Item id="1.4" text="Item-1.4"/>
-          </MenuBar.Menu>
-          <MenuBar.Menu text="Content">
-            <MenuBar.Item id="2.1" text="Item-2.1" onAction={() => alert('Woohoo')}/>
-            <MenuBar.Menu text="Menu-2.2">
-              <MenuBar.Item id="2.2.1" text="Item-2.2.1"/>
-              <MenuBar.Item id="2.2.2" text="Item-2.2.2"/>
-            </MenuBar.Menu>
-            <MenuBar.Item id="2.4" text="Item-2.4"/>
-          </MenuBar.Menu>
-          <MenuBar.Menu text="Media">
-            <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
-          </MenuBar.Menu>
-          <MenuBar.Menu text="Settings">
-            <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
-          </MenuBar.Menu>
-          <MenuBar.Menu text="Help">
-            <MenuBar.Item id="About" text="About" onAction={() => alert('Woohoo')}/>
-          </MenuBar.Menu>
-        </MenuBar>
+        <MenuBar
+          onAction={() => alert('Juhu')}
+
+          items={[
+            {
+              kind: 'menu',
+              text: 'Users',
+              
+              items: [
+                { kind: 'item', id: '1.1', text: 'Item-1.1'},
+                { kind: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
+                { kind: 'item', id: '1.3', text: 'Item-1.3'},
+                { kind: 'item', id: '1.4', text: 'Item-1.4'},
+              ]
+            },
+            {
+              kind: 'menu',
+              text: 'Content',
+              
+              items: [
+                { kind: 'item', id: '2.1', text: 'Item-2.1'},
+                { kind: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
+                { kind: 'item', id: '2.3', text: 'Item-2.3'},
+                { kind: 'item', id: '2.4', text: 'Item-2.4'},
+              ]
+            },
+            {
+              kind: 'menu',
+              text: 'Media',
+              
+              items: [
+                { kind: 'item', id: '3.1', text: 'Item-3.1'},
+                { kind: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
+                { kind: 'item', id: '3.3', text: 'Item-3.3'},
+
+                {
+                  kind: 'menu',
+                  text: 'Item-3.4',
+
+                  items: [
+                    { kind: 'item', id: '3.4.1', text: 'Item-3.4.1' }
+                  ]
+                },
+              ]
+            },
+            {
+              kind: 'menu',
+              text: 'Help',
+              
+              items: [
+                { kind: 'item', id: '4.1', text: 'About...'},
+              ]
+            }
+          ]}
+        />
       </Cockpit.Menu>
       <Cockpit.SideNav>
         <SideNav activeItemId="user-groups">
