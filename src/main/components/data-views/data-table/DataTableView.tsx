@@ -9,7 +9,6 @@ import DataTableProps from './DataTableProps'
 import SortAscIcon from './internal/icons/SortAscIcon'
 import SortDescIcon from './internal/icons/SortDescIcon'
 
-
 // --- styles of DataTable ------------------------------------------
 
 const styleDataTable = defineStyle((theme: ITheme) => ({
