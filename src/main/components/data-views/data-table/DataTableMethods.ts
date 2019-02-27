@@ -4,6 +4,6 @@ type DataTableMethods = {
   unselectAllRows: () => void
 }
 
-// --- expoert ------------------------------------------------------
+// --- export -------------------------------------------------------
 
 export default DataTableMethods

@@ -1,50 +1,12 @@
 // external imports
-import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
+import { Ref } from 'react'
+import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
 import DataTableProps from './DataTableProps'
 import DataTableMethods from './DataTableMethods'
-import DataTableColumnProps from './DataTableColumnProps'
 import DataTableView from './DataTableView'
-
-// --- DataTable.Column ---------------------------------------------
-
-const Column = defineComponent<DataTableColumnProps>({
-  displayName: 'DataTable.Column',
-
-  properties: {
-    title: {
-      type: String,
-      required: true
-    },
-
-    field: {
-      type: String
-    },
-
-    align: {
-      type: String,
-      validate: Spec.oneOf('start', 'center', 'end')
-    },
-
-    sortable: {
-      type: Boolean
-    },
-
-    width: {
-      type: Number,
-      defaultValue: 200
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type DataTable.Column can only be used as children of '
-        + 'DataTable components'
-    )
-  }
-})
 
 // --- DataTable ----------------------------------------------------
 
@@ -83,7 +45,17 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
 
     columns: {
       type: Array,
-      validate: Spec.arrayOf(isElementOfType('Column'))
+
+      validate:
+        Spec.arrayOf(
+          Spec.strictShape({
+            title: Spec.string, 
+            field: Spec.optional(Spec.string),
+            align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
+            width: Spec.optional(Spec.positiveFloat),
+            sortable: Spec.optional(Spec.boolean)
+          })
+        ) 
     },
 
     onRowSelectionChange: {
@@ -97,11 +69,11 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
 
   methods: ['unselectAllRows'],
 
-  render: DataTableView
+  render(props, ref) {
+    return DataTableView(props, ref)
+  }
 })
 
 // --- exports ------------------------------------------------------
 
-export default Object.assign(DataTable, {
-  Column
-})
+export default DataTable

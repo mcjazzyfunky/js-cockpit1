@@ -6,7 +6,6 @@ import { AutoSizer, Column, Table } from 'react-virtualized'
 // internal imports
 import defineStyle, { ClassesOf } from '../../../styling/defineStyle'
 import DataTableProps from './DataTableProps'
-import DataTableColumnProps from './DataTableColumnProps'
 import SortAscIcon from './internal/icons/SortAscIcon'
 import SortDescIcon from './internal/icons/SortDescIcon'
 
@@ -172,7 +171,6 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
   const
     [selectedRows, setSelectionRows] = React.useState(() => new Set<number>()),
     runOnUpdater = React.useRef([]),
-    model = React.useMemo(() => getDataTableModel(props, selectedRows), null),
     rowSelectionMode = props.rowSelectionOptions.mode || 'none'
 
   React.useImperativeHandle(ref, () => {
@@ -227,9 +225,9 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
           {
             ({ width, height }) => { 
               const
-                columnWidths = calculateColumnWidths(model, width),
+                columnWidths = calculateColumnWidths(props, width),
                    dataColumns = 
-                  model.columns.map((column: any, columnIndex: any)  => // TODO
+                  props.columns.map((column: any, columnIndex: any)  => // TODO
                     <Column
                       width={columnWidths.dataColumns[columnIndex]}
                       label={column.title}
@@ -238,11 +236,11 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
                       cellRenderer={({ rowIndex }) => {
                         const isSelected = selectedRows.has(rowIndex)
 
-                        return createTableBodyCell(columnIndex, model, model.data[rowIndex], classes, isSelected)}
+                        return createTableBodyCell(columnIndex, props, props.data[rowIndex], classes, isSelected)}
                       }
                     />
                   )
-               if (model.rowSelectionOptions.mode !== 'none') {
+               if (props.rowSelectionOptions.mode !== 'none') {
                   dataColumns.unshift(
                     <Column
                       width={columnWidths.selectorColumn}
@@ -253,7 +251,7 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
 
                         return (
                           <div className={isSelected ? classes.selectedRow : null}>
-                            {createSelectRowCheckbox(rowIndex, model, changeSelection, classes)}
+                            {createSelectRowCheckbox(rowIndex, props, selectedRows, changeSelection, classes)}
                           </div>
                         )
                       }}
@@ -267,9 +265,9 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
                     height={height - 10}
                     headerHeight={20}
                     rowHeight={28}
-                    rowCount={model.data.length}
-                    rowGetter={({ index }) => model.data[index]}
-                    headerRowRenderer={(params: any) => createHeaderRow(model, columnWidths, classes, changeSelection, changeSort)}
+                    rowCount={props.data.length}
+                    rowGetter={({ index }) => props.data[index]}
+                    headerRowRenderer={(params: any) => createHeaderRow(props, selectedRows, columnWidths, classes, changeSelection, changeSort)}
                     rowClassName={classes.tableRow}
                   >
                     {dataColumns}
@@ -285,68 +283,11 @@ function DataTableView(props: DataTableProps, ref: any) { // TODO
 
 // --- locals -------------------------------------------------------
 
-function getDataTableModel(props: DataTableProps, rowSelection: Set<number>): DataTableModel {
-  const model: DataTableModel = {
-    $kind: 'DataTableModel',
-    rowSelectionOptions : props.rowSelectionOptions,
-    columns: [],
-    data: props.data || [],
-    rowSelection,
-    sortBy: props.sortBy  || null,
-    sortDesc: props.sortDesc || false,
-  }
-
-  React.Children.forEach(props.columns, (child: ReactElement<DataTableColumnModel>) => {
-    model.columns.push(
-        getColumnModel(child.props))
-  })
-
-  return model
-}
-
-function getColumnModel(props: DataTableColumnProps): DataTableColumnModel {
-  return {
-    $kind: 'DataTableColumnModel',
-    title: props.title,
-    field: props.field || null,
-    align: props.align || null,
-    sortable: props.sortable || false,
-    width: props.width
-  }
-}
-
-// --- data models --------------------------------------------------
-
-type DataTableModel = {
-  $kind: 'DataTableModel',
-
-  rowSelectionOptions: {
-    mode: 'none' | 'single' | 'multi',
-  },
-
-  columns: (DataTableColumnModel)[],
-  data: any[],
-  sortBy: string | null,
-  sortDesc: boolean,
-
-  rowSelection: Set<number>,
-}
-
-type DataTableColumnModel = {
-  $kind: 'DataTableColumnModel',
-  title: string,
-  field: string | null,
-  align: 'start' | 'center' | 'end' | null,
-  sortable: boolean,
-  width: number
-}
-
-
-function calculateColumnWidths(model: DataTableModel, totalWidth: number) {
+function calculateColumnWidths(props: DataTableProps, totalWidth: number) {
   const
-    hasSelectorColumn = model.rowSelectionOptions.mode !== 'none',
+    hasSelectorColumn = props.rowSelectionOptions.mode !== 'none',
     selectorColumnWidth = hasSelectorColumn ? 32 : 0,
-    columns = model.columns,
+    columns = props.columns,
     columnCount = columns.length,
 
     ret = {
@@ -358,7 +299,7 @@ function calculateColumnWidths(model: DataTableModel, totalWidth: number) {
       realTotal = totalWidth - selectorColumnWidth,
 
       ratioTotal = columns.reduce((sum, col) => {
-        return sum + col.width
+        return sum + (col.width || 100)
       }, 0)
 
     let sumRealWidths = 0 
@@ -369,7 +310,7 @@ function calculateColumnWidths(model: DataTableModel, totalWidth: number) {
   
         realWidth =
           i < columnCount - 1
-            ? Math.round(column.width * realTotal / ratioTotal)
+            ? Math.round((column.width || 100) * realTotal / ratioTotal)
             : realTotal - sumRealWidths - 0.5 // TODO: why -0.5
 
       sumRealWidths += realWidth
@@ -380,9 +321,9 @@ function calculateColumnWidths(model: DataTableModel, totalWidth: number) {
     return ret
 }
 
-function createHeaderRow(model: DataTableModel, columnWidths: any,  classes: DataTableClasses, changeSelection: (selection: any) => void, changeSort: (field: string, sortDesc: boolean) => void) { // TODO
+function createHeaderRow(props: DataTableProps, selectedRows: Set<number>, columnWidths: any,  classes: DataTableClasses, changeSelection: (selection: any) => void, changeSort: (field: string, sortDesc: boolean) => void) { // TODO
   const
-    selectionMode = model.rowSelectionOptions.mode,
+    selectionMode = props.rowSelectionOptions.mode,
 
     selectionColumn =
       selectionMode === 'none'
@@ -391,7 +332,7 @@ function createHeaderRow(model: DataTableModel, columnWidths: any,  classes: Dat
             <div>
               {
                 selectionMode === 'multi'
-                  ? createSelectAllCheckbox(model, changeSelection, classes)
+                  ? createSelectAllCheckbox(props, selectedRows, changeSelection, classes)
                   : null
               }
             </div>
@@ -401,18 +342,19 @@ function createHeaderRow(model: DataTableModel, columnWidths: any,  classes: Dat
     <div className={css('ReactVirtualized__Table__headerRow', classes.tableHead)}>
       {selectionColumn}
       {
-        model.columns.map((column, columnIdx) =>
-          createTableHeadCell(columnIdx, column, model, columnWidths.dataColumns[columnIdx], classes, changeSort))
+        props.columns.map((column, columnIdx) =>
+          createTableHeadCell(columnIdx, props, columnWidths.dataColumns[columnIdx], classes, changeSort))
       }
     </div>
   )
 }
 
-function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, model: DataTableModel, width: number, classes: DataTableClasses, changeSort: (field: string, sortDesc: boolean) => void) {
+function createTableHeadCell(columnIdx: number, props: DataTableProps, width: number, classes: DataTableClasses, changeSort: (field: string, sortDesc: boolean) => void) {
   const
-    sortable = model.columns[columnIdx].sortable,
-    sortBy = model.sortBy,
-    sortDesc = model.sortDesc,
+    column = props.columns[columnIdx],
+    sortable = props.columns[columnIdx].sortable,
+    sortBy = props.sortBy,
+    sortDesc = props.sortDesc,
     isSorted = sortBy !== null && sortBy === column.field,
 
     sortIcon = // TODO
@@ -441,8 +383,8 @@ function createTableHeadCell(columnIdx: number, column: DataTableColumnModel, mo
   )
 }
 
-function createTableBodyCell(columnIndex: number, model: DataTableModel, row: any, classes: DataTableClasses, isSelected: boolean) {
-  const column = model.columns[columnIndex]
+function createTableBodyCell(columnIndex: number, props: DataTableProps, row: any, classes: DataTableClasses, isSelected: boolean) {
+  const column = props.columns[columnIndex]
 
   let className =
     column.align === 'center'
@@ -462,10 +404,10 @@ function createTableBodyCell(columnIndex: number, model: DataTableModel, row: an
   )
 }
 
-function createSelectRowCheckbox(index: number, model: DataTableModel, changeRowSelection: (selection: any) => void, classes: DataTableClasses) { // TODO
+function createSelectRowCheckbox(index: number, props: DataTableProps, selectedRows: Set<number>, changeRowSelection: (selection: any) => void, classes: DataTableClasses) { // TODO
   const
-    selectionMode = model.rowSelectionOptions.mode,
-    checked = model.rowSelection.has(index),
+    selectionMode = props.rowSelectionOptions.mode,
+    checked = selectedRows.has(index),
 
     onChange =() => {
       let selectedRows: Set<number>
@@ -473,7 +415,7 @@ function createSelectRowCheckbox(index: number, model: DataTableModel, changeRow
       if (selectionMode === 'single') {
         selectedRows = new Set([index])
       } else {
-        selectedRows = new Set(model.rowSelection)
+        selectedRows = new Set(selectedRows)
 
         if (checked) {
           selectedRows.delete(index)
@@ -492,16 +434,16 @@ function createSelectRowCheckbox(index: number, model: DataTableModel, changeRow
   ) 
 }
 
-function createSelectAllCheckbox(model: DataTableModel, changeRowSelection: (selection: Set<number>) => void, classes: DataTableClasses) { // TODO
+function createSelectAllCheckbox(props: DataTableProps, selectedRows: Set<number>, changeRowSelection: (selection: Set<number>) => void, classes: DataTableClasses) { // TODO
   const
-    rowSelectionSize = model.rowSelection.size,
-    checked = rowSelectionSize > 0 && rowSelectionSize === model.data.length,
+    rowSelectionSize = selectedRows.size,
+    checked = rowSelectionSize > 0 && rowSelectionSize === props.data.length,
 
     onChange =() => {
       const selectedRows: Iterable<number> =
         checked
           ? []
-          : model.data.keys()
+          : props.data.keys()
 
       changeRowSelection(new Set(selectedRows))
     }

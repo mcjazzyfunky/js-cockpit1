@@ -10,7 +10,6 @@ import DataExplorerStore from './DataExplorerStore'
 import defineStyle, { ClassesOf } from '../../../styling/defineStyle'
 import DataTable from '../data-table/DataTable'
 import DataTableProps from '../data-table/DataTableProps'
-import DataTableColumnProps from '../data-table/DataTableColumnProps'
 import Paginator from '../../pagination/paginator/Paginator'
 import PageSizeSelector from '../../pagination/page-size-selector/PageSizeSelector'
 import PaginationInfo from '../../pagination/pagination-info/PaginationInfo'
@@ -224,11 +223,14 @@ function DataExplorerView(props: DataExplorerProps, store: DataExplorerStore) {
         () => dataTableRef.current.unselectAllRows())
     }, null),
 
-    tableColumns: ReactElement<DataTableProps>[] =
+    tableColumns =
       props.columns.map((column, columnIdx) => {
-        const props: DataTableColumnProps = {
+        const props = {
           title: column.title,
-          width: column.width
+          width: column.width,
+          field: null as string, // TODO
+          align: 'start' as ('start' | 'center' | 'end'), // TODO
+          sortable: false
         }
 
         if (column.field !== null) {
@@ -243,7 +245,7 @@ function DataExplorerView(props: DataExplorerProps, store: DataExplorerStore) {
           props.sortable = true
         }
 
-        return <DataTable.Column key={columnIdx} {...props} />
+        return props 
       })
 
 

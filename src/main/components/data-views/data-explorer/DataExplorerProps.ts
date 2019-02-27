@@ -1,7 +1,6 @@
 // external imports
-import { CSSProperties, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Observable } from 'rxjs'
-import { take  } from 'rxjs/operators'
 
 // --- DataExplorerProps -----------------------------------------------
 

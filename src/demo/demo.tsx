@@ -48,7 +48,7 @@ function Demo() {
         { kind: 'column', title: 'Last name', field: 'lastName', sortable: true },
         { kind: 'column', title: 'Postal code', field: 'postalCold', sortable: true },
         { kind: 'column', title: 'City', field: 'city', sortable: true },
-        { kind: 'column', title: 'Countery', field: 'country', sortable: true }
+        { kind: 'column', title: 'Country', field: 'country', sortable: true }
       ]}
 
       actions={[

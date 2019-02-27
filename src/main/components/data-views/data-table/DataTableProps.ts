@@ -1,9 +1,4 @@
-// external imports
-import { ReactElement } from 'react'
-
 // internal imports
-import DataTable from './DataTable'
-import DataTableColumnProps from './DataTableColumnProps'
 import RowSelectionChangeEvent from '../../../events/RowSelectionChangeEvent'
 import SortChangeEvent from '../../../events/SortChangeEvent'
 
@@ -19,7 +14,13 @@ type DataTableProps = {
   sortBy?: string,
   sortDesc?: boolean,
 
-  columns: ReactElement<DataTableColumnProps>[], // TODO - second type parameter?
+  columns: {
+    title: string, 
+    field?: string,
+    align?: 'start' | 'center' | 'end',
+    width?: number,
+    sortable?: boolean
+  }[],
 
   data: object[],
 
