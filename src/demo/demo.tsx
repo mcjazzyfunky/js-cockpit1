@@ -42,48 +42,21 @@ function Demo() {
       title="Back-office users"
 
       loadData={loadData}
+
+      columns={[
+        { kind: 'column', title: 'First name', field: 'firstName', sortable: true },
+        { kind: 'column', title: 'Last name', field: 'lastName', sortable: true },
+        { kind: 'column', title: 'Postal code', field: 'postalCold', sortable: true },
+        { kind: 'column', title: 'City', field: 'city', sortable: true },
+        { kind: 'column', title: 'Countery', field: 'country', sortable: true }
+      ]}
+
+      actions={[
+        { kind: 'general', title: 'Add', icon: <FiPlus/> },
+        { kind: 'singleRow', title: 'Edit', icon: <FiEdit/> },
+        { kind: 'multiRow', title: 'Delete', icon: <FiTrash2/> }
+      ]}
     >
-      <DataExplorer.Actions>
-        <DataExplorer.GeneralAction
-          title="Add"
-          icon={<FiPlus/>}
-        />
-        <DataExplorer.SingleRowAction
-          title="Edit"
-          icon={<FiEdit/>}
-        />
-        <DataExplorer.MultiRowAction
-          title="Delete"
-          icon={<FiTrash2/>}
-        />
-      </DataExplorer.Actions>
-      <DataExplorer.Columns>
-        <DataExplorer.Column
-          title="First name"
-          field="firstName"
-          sortable={true}
-        />
-        <DataExplorer.Column
-          title="Last name"
-          field="lastName"
-          sortable={true}
-        />
-        <DataExplorer.Column
-          title="Postal code"
-          field="postalCode"
-          sortable={true}
-        />
-        <DataExplorer.Column
-          title="City"
-          field="city"
-          sortable={true}
-        />
-        <DataExplorer.Column
-          title="Country"
-          field="country"
-          sortable={true}
-        />
-      </DataExplorer.Columns>
     </DataExplorer>
 
   const dataForm =

@@ -68,10 +68,11 @@
   },
   "dependencies": {
     "color": "^3.1.0",
+    "js-react-store": "0.0.6",
     "js-spec": "^0.1.63",
     "office-ui-fabric-react": "^6.140.0",
-    "react": "16.8.2",
-    "react-dom": "16.8.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-virtualized": "^9.21.0",
     "rollup-plugin-react-svg": "^2.1.0",
     "rxjs": "^6.4.0"

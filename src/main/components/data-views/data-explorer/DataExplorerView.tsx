@@ -1,6 +1,13 @@
+// externals imports
+import React, { ReactElement, Ref } from 'react'
+import { defineComponent } from 'js-react-utils'
+import { css, ActionButton, Callout, CommandBar, DefaultButton, ITheme, SearchBox, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
+import { MdClose, MdFilterList, MdCheck, MdUndo, MdSearch } from 'react-icons/md'
+
 // internal imports
+import DataExplorerProps from './DataExplorerProps'
+import DataExplorerStore from './DataExplorerStore'
 import defineStyle, { ClassesOf } from '../../../styling/defineStyle'
-import { DataExplorerModel } from './DataExplorer'
 import DataTable from '../data-table/DataTable'
 import DataTableProps from '../data-table/DataTableProps'
 import DataTableColumnProps from '../data-table/DataTableColumnProps'
@@ -12,13 +19,11 @@ import PageChangeEvent from '../../../events/PageChangeEvent'
 import PageSizeChangeEvent from '../../../events/PageSizeChangeEvent'
 import SortChangeEvent from '../../../events/SortChangeEvent'
 import SearchIcon from '../../../system-icons/SearchIcon'
+import { any } from 'prop-types';
 
+// --- derived imports --------------------------------------------
 
-// extenal imports
-import React, { ReactElement, Ref } from 'react'
-import { defineComponent } from 'js-react-utils'
-import { css, ActionButton, Callout, CommandBar, DefaultButton, ITheme, SearchBox, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
-import { MdClose, MdFilterList, MdCheck, MdUndo, MdSearch } from 'react-icons/md'
+const { useEffect, useRef,  useState, useCallback } = React
 
 // --- DataExplorerStyle -------------------------------------------
 
@@ -191,221 +196,236 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
 
 type DataExplorerClasses = ClassesOf<typeof styleDataExplorer>
 
-// --- DataExplorerRenderer ----------------------------------------
+// --- DataExplorerView ---------------------------------------------
 
-class DataExplorerRenderer {
-  private _model: DataExplorerModel | null = null
-  private _dataTable: any = null // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function DataExplorerView(props: DataExplorerProps, store: DataExplorerStore) {
+  const
+    dataTableRef = useRef(null),
 
-  constructor() {
-    this._onPageChange = this._onPageChange.bind(this)
-    this._onPageSizeChange = this._onPageSizeChange.bind(this)
-    this._onSortChange = this._onSortChange.bind(this)
-  }
+    onSortChange = useCallback((event: any) => { // TODO
+      store.loadSorting(
+        event.sortBy,
+        event.sortDesc,
+        props.loadData,
+        () => this._dataTable.unselectAllRows())
+    }, null),
 
-  render(model: DataExplorerModel) {
-    this._model = model
+    onPageChange = useCallback((event: any) => { // TODO
+      store.loadPage(
+         event.pageIndex,
+         props.loadData,
+         () => this._dataTable.unselectAllRows())
+    }, null),
 
-    const
-      tableColumns: ReactElement<DataTableProps>[] =
-        model.columns.map((column, columnIdx) => {
-          const props: DataTableColumnProps = {
-            title: column.title,
-            width: column.width
-          }
+    onPageSizeChange = useCallback((event: any) => { // TODO
+      store.loadPageSize(
+        event.pageSize,
+        props.loadData,
+        () => dataTableRef.current.unselectAllRows())
+    }, null),
 
-          if (column.field !== null) {
-            props.field = column.field
-          }
+    tableColumns: ReactElement<DataTableProps>[] =
+      props.columns.map((column, columnIdx) => {
+        const props: DataTableColumnProps = {
+          title: column.title,
+          width: column.width
+        }
 
-          if (column.align !== null) {
-            props.align = column.align
-          }
+        if (column.field !== null) {
+          props.field = column.field
+        }
 
-          if (column.sortable) {
-            props.sortable = true
-          }
+        if (column.align !== null) {
+          props.align = column.align
+        }
 
-          return <DataTable.Column key={columnIdx} {...props} />
-        })
+        if (column.sortable) {
+          props.sortable = true
+        }
 
-    const ret = styleDataExplorer(classes => {
-      const loadingPanel =
-        model.isLoading
-          ? <div className={classes.loadingPanel}>
-              <div className={classes.loadingPanelContent}>
-                <Spinner
-                  size={SpinnerSize.large}
-                  className={classes.loadingSpinner}
-                  label="Loading data, please wait..."
-                  ariaLive="assertive"
-                /> 
-              </div>
-            </div>
-          : null
-
-      return (
-        <div className={classes.container}>
-          {loadingPanel}
-          { this._renderHeader(model, classes) }
-          <div className={classes.content}>
-            <DataTable
-              ref={(it: any) => { this._dataTable = it }}
-              data={model.data}
-              rowSelectionOptions={{
-                mode: 'multi' // TODO
-              }}
-
-              sortBy={model.sortBy}
-              sortDesc={model.sortDesc}
-
-              onRowSelectionChange={
-                (event: RowSelectionChangeEvent) => {
-                  model.api.changeRowSelection(event.selection) 
-                }
-              }
-              
-              onSortChange={this._onSortChange}
-              
-              columns={tableColumns}
-            />
-          </div>
-            {
-              this._model.pageIndex >= 0 && this._model.pageSize > 0 && this._model.totalItemCount > 0 
-                ? this._renderFooter(model, classes)
-                : null
-            }
-        </div>
-      )
-    })
-
-    return ret
-  }
-
-  private _renderHeader(model: DataExplorerModel, classes: DataExplorerClasses) {
-    return (
-      <div className={classes.header}>
-        <div className={classes.headerStart}>
-          <div className={classes.title}>
-            {model.title} 
-          </div>
-        </div>
-        <div className={classes.headerCenter}>
-            { this._renderActionBar(model, classes) }
-        </div>
-        <div className={classes.headerEnd}>
-          <SearchBar />
-        </div>
-      </div>
-    ) 
-  }
-
-  private _renderFooter(model: DataExplorerModel, classes: DataExplorerClasses) {
-    if (model.pageIndex === null || model.totalItemCount === null) {
-      return null
-    }    
-    
-    return (
-      <div className={classes.footer}> 
-        <div className={classes.footerStart}>
-          <Paginator
-            pageIndex={model.pageIndex}
-            pageSize={model.pageSize}
-            totalItemCount={model.totalItemCount}
-            onPageChange={this._onPageChange}
-          />
-        </div>
-        <div className={classes.footerCenter}>
-          <PageSizeSelector
-            pageSize={model.pageSize}
-            onPageSizeChange={this._onPageSizeChange}
-          />
-        </div>
-        <div className={classes.footerEnd}>
-          <PaginationInfo
-            pageIndex={model.pageIndex}
-            totalItemCount={model.totalItemCount}
-            pageSize={model.pageSize}
-            about="items"
-          />
-        </div>
-      </div>
-    )
-  }
-
-  private _renderActionBar(model: DataExplorerModel, classes: DataExplorerClasses) {
-    const items: any[] = []
-  
-    model.actions.forEach((action, idx) => {
-      const
-        disabled =
-          action.$kind === 'DataExplorerSingleRowActionModel' && model.rowSelection.length !== 1
-              || action.$kind === 'DataExplorerMultiRowActionModel' && model.rowSelection.length === 0
-
-      if (idx > 0) {
-        items.push({
-          key: `separator-${idx}`,
-          onRender: () => <div className={classes.actionButtonSeparator}></div>
-        })
-      }
-
-      const
-        hasIcon = !!action.icon,
-        iconProps = hasIcon ? { iconName: 'icon' } : null,
-
-        actionButtonClassName =
-          disabled
-            ? css(classes.actionButton, classes.actionButtonDisabled)
-            : classes.actionButton,
-        
-        iconClassName =
-          hasIcon
-            ? (disabled ? classes.actionIconDisabled : classes.actionIcon)
-            : null
-
-      items.push({
-        key: String(idx),
-        text: action.title,
-        iconProps,
-        disabled,
-        className: actionButtonClassName,
-        onRenderIcon: action.icon ?
-          () => <div className={iconClassName}>{action.icon}</div>
-          : undefined
+        return <DataTable.Column key={columnIdx} {...props} />
       })
 
-      if (idx > 0) {
-        // items.push(<div>x</div>) // TODO xxx
-      }
+
+  useEffect(() => {
+    store.loadPage(store.pageIndex, props.loadData, () => {
+      // TODO
     })
+  }, [])
+
+  const ret = styleDataExplorer(classes => {
+    const loadingPanel =
+      store.isLoading
+        ? <div className={classes.loadingPanel}>
+            <div className={classes.loadingPanelContent}>
+              <Spinner
+                size={SpinnerSize.large}
+                className={classes.loadingSpinner}
+                label="Loading data, please wait..."
+                ariaLive="assertive"
+              /> 
+            </div>
+          </div>
+        : null
 
     return (
-      <CommandBar
-        className={classes.actionBar}
-        items={[]}
-        farItems={items}
-      />
+      <div className={classes.container}>
+        {loadingPanel}
+        { renderHeader(props, store, classes) }
+        <div className={classes.content}>
+          <DataTable
+            ref={dataTableRef}
+            data={store.data}
+            rowSelectionOptions={{
+              mode: 'multi' // TODO
+            }}
+
+            sortBy={store.sortBy}
+            sortDesc={store.sortDesc}
+
+            onRowSelectionChange={
+              (event: RowSelectionChangeEvent) => {
+                store.setRowSelection(event.selection) 
+              }
+            }
+            
+            onSortChange={onSortChange}
+            
+            columns={tableColumns}
+          />
+        </div>
+          {
+             store.pageIndex >= 0 && store.pageSize > 0 && store.totalItemCount > 0 
+              ? renderFooter(props, store, classes, onPageChange, onPageSizeChange)
+              : null
+          }
+      </div>
     )
-  }
+  })
 
-  private _onPageChange(event: PageChangeEvent) {
-    this._model.api.changePage(
-      event.pageIndex,
-      () => this._dataTable.unselectAllRows())
-  }
+  return ret
+}
 
-  private _onPageSizeChange(event: PageSizeChangeEvent) {
-    this._model.api.changePageSize(
-      event.pageSize,
-      () => this._dataTable.unselectAllRows())
-  }
+// --- helpers ------------------------------------------------------
 
-  private _onSortChange(event: SortChangeEvent) {
-    this._model.api.changeSort(
-      event.sortBy,
-      event.sortDesc,
-      () => this._dataTable.unselectAllRows())
-  }
+function renderHeader(
+  props: DataExplorerProps,
+  store: DataExplorerStore,
+  classes: DataExplorerClasses
+) {
+  return (
+    <div className={classes.header}>
+      <div className={classes.headerStart}>
+        <div className={classes.title}>
+          {props.title} 
+        </div>
+      </div>
+      <div className={classes.headerCenter}>
+          { renderActionBar(props, store, classes) }
+      </div>
+      <div className={classes.headerEnd}>
+        <SearchBar />
+      </div>
+    </div>
+  ) 
+}
+
+function renderFooter(
+  props: DataExplorerProps,
+  store: DataExplorerStore,
+  classes: DataExplorerClasses,
+  onPageChange: any, // TODO
+  onPageSizeChange: any // TODO
+) {
+  if (store.pageIndex === null || store.totalItemCount === null) {
+    return null
+  }    
+  
+  return (
+    <div className={classes.footer}> 
+      <div className={classes.footerStart}>
+        <Paginator
+          pageIndex={store.pageIndex}
+          pageSize={store.pageSize}
+          totalItemCount={store.totalItemCount}
+          onPageChange={onPageChange}
+        />
+      </div>
+      <div className={classes.footerCenter}>
+        <PageSizeSelector
+          pageSize={store.pageSize}
+          onPageSizeChange={onPageSizeChange}
+        />
+      </div>
+      <div className={classes.footerEnd}>
+        <PaginationInfo
+          pageIndex={store.pageIndex}
+          totalItemCount={store.totalItemCount}
+          pageSize={store.pageSize}
+          about="items"
+        />
+      </div>
+    </div>
+  )
+}
+
+function renderActionBar(
+  props: DataExplorerProps,
+  store: DataExplorerStore,
+  classes: DataExplorerClasses
+) {
+  const items: any[] = []
+
+  props.actions.forEach((action, idx) => {
+    const
+      disabled =
+        action.kind === 'singleRow' && store.rowSelection.length !== 1
+            || action.kind === 'multiRow' && store.rowSelection.length === 0
+
+    if (idx > 0) {
+      items.push({
+        key: `separator-${idx}`,
+        onRender: () => <div className={classes.actionButtonSeparator}></div>
+      })
+    }
+
+    const
+      hasIcon = !!action.icon,
+      iconProps = hasIcon ? { iconName: 'icon' } : null,
+
+      actionButtonClassName =
+        disabled
+          ? css(classes.actionButton, classes.actionButtonDisabled)
+          : classes.actionButton,
+      
+      iconClassName =
+        hasIcon
+          ? (disabled ? classes.actionIconDisabled : classes.actionIcon)
+          : null
+
+    items.push({
+      key: String(idx),
+      text: action.title,
+      iconProps,
+      disabled,
+      className: actionButtonClassName,
+      onRenderIcon: action.icon ?
+        () => <div className={iconClassName}>{action.icon}</div>
+        : undefined
+    })
+
+    if (idx > 0) {
+      // items.push(<div>x</div>) // TODO xxx
+    }
+  })
+
+  return (
+    <CommandBar
+      className={classes.actionBar}
+      items={[]}
+      farItems={items}
+    />
+  )
 }
 
 // --- SearchBar ----------------------------------------------------
@@ -473,142 +493,125 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
   }
 }))
 
-type SearchBarProps = {
-}
-
-type SearchBarState = {
-  advancedFilterActive: boolean,
-  calloutVisible: boolean
-}
-
-const SearchBar = defineComponent<SearchBarProps>({
+const SearchBar = defineComponent({
   displayName: 'SearchBar',
 
-  render: class extends React.Component<SearchBarProps, SearchBarState> {
-    private _advancedFilterRef: any = null // TODO
+  render: function View() { 
+    const
+      [state, setState] = useState({
+        calloutVisible: false,
+        advancedFilterActive: false
+      }),
 
-    constructor(props: SearchBarProps) {
-      super(props)
+      advancedFilterRef = useRef(null)
 
-      this.state = {
-        advancedFilterActive: false,
-        calloutVisible: false 
-      }
-    }
+    return styleSearchBar(classes => {
+      const filterButtonClassName =
+        state.advancedFilterActive || state.calloutVisible
+          ? css(classes.filterButton, classes.filterButtonActive) 
+          : classes.filterButton
 
-    render() {
-      const
-        advancedFilterActive = this.state.advancedFilterActive,
-        calloutVisible = this.state.calloutVisible
-        
-      return styleSearchBar(classes => {
-        const filterButtonClassName =
-          advancedFilterActive || calloutVisible
-            ? css(classes.filterButton, classes.filterButtonActive) 
-            : classes.filterButton
-  
-        return (
-          <div className={classes.container}>
-            {
-              !advancedFilterActive && 
-                <SearchBox
-                  placeholder="Search..."
-                  className={classes.searchBox}
-                  disableAnimation={true}
-                />
-            }
-            <div className={classes.advancedFilter} ref={ it => this._advancedFilterRef = it }>
-              <ActionButton
-                text="Advanced Filter"
-                className={filterButtonClassName}
-                iconProps={{ iconName: 'icon' }}
-              
-                onClick={
-                  () => this.setState(
-                    state => ({
-                      advancedFilterActive: !state.advancedFilterActive,
-                      calloutVisible: !state.advancedFilterActive
-                    }))
-                }
-
-                onRenderIcon={
-                  () =>
-                    <div className={classes.icon}>
-                      {
-                        advancedFilterActive || calloutVisible
-                          ? <MdCheck className={classes.icon}/>
-                          : <MdFilterList className={classes.icon}/>
-                      }
-                    </div>
-                }
+      return (
+        <div className={classes.container}>
+          {
+            !state.advancedFilterActive && 
+              <SearchBox
+                placeholder="Search..."
+                className={classes.searchBox}
+                disableAnimation={true}
               />
-            </div>
-            {
-                <Callout
-                  hidden={!calloutVisible}
-                  target={this._advancedFilterRef}
-                  setInitialFocus={true}
-                  onDismiss={ () => this._closeCallout()}
-                >
-                  <div className={classes.filterContainer}>
-                    [TODO: Add filters here...] 
+          }
+          <div className={classes.advancedFilter} ref={ advancedFilterRef }>
+            <ActionButton
+              text="Advanced Filter"
+              className={filterButtonClassName}
+              iconProps={{ iconName: 'icon' }}
+            
+              onClick={
+                () => setState(
+                  state => ({
+                    advancedFilterActive: !state.advancedFilterActive,
+                    calloutVisible: !state.advancedFilterActive
+                  }))
+              }
+
+              onRenderIcon={
+                () =>
+                  <div className={classes.icon}>
+                    {
+                      state.advancedFilterActive || state.calloutVisible
+                        ? <MdCheck className={classes.icon}/>
+                        : <MdFilterList className={classes.icon}/>
+                    }
                   </div>
-                  <CommandBar
-                    items={[
-                      {
-                        text: 'Apply filter',
-                        key: '1',
-
-                        iconProps: {
-                          iconName: 'applyFilter'
-                        },
-
-                        onRenderIcon: () => <MdFilterList className={classes.icon}/>
-                      },
-                      {
-                        text: 'Cancel',
-                        key: '2',
-                        
-                        iconProps: {
-                          iconName: 'cancel'
-                        },
-
-                        onRenderIcon: () => <MdClose className={classes.icon}/>,
-
-                        onClick: () => this._closeCallout()
-                      }
-                    ]}
-
-                    farItems={[
-                      {
-                        text: 'Reset',
-                        key: '2',
-
-                        iconProps: {
-                          iconName: 'undo'
-                        },
-
-                        onRenderIcon: () => <MdUndo className={classes.icon}/>
-                      }
-                    ]}
-
-                  />
-              </Callout>
-            }
+              }
+            />
           </div>
-        )
-      })
-    }
+          {
+              <Callout
+                hidden={!state.calloutVisible}
+                target={advancedFilterRef.current}
+                setInitialFocus={true}
+                onDismiss={ () => closeCallout()}
+              >
+                <div className={classes.filterContainer}>
+                  [TODO: Add filters here...] 
+                </div>
+                <CommandBar
+                  items={[
+                    {
+                      text: 'Apply filter',
+                      key: '1',
 
-    private _closeCallout() {
-      this.setState(state => ({
+                      iconProps: {
+                        iconName: 'applyFilter'
+                      },
+
+                      onRenderIcon: () => <MdFilterList className={classes.icon}/>
+                    },
+                    {
+                      text: 'Cancel',
+                      key: '2',
+                      
+                      iconProps: {
+                        iconName: 'cancel'
+                      },
+
+                      onRenderIcon: () => <MdClose className={classes.icon}/>,
+
+                      onClick: () => closeCallout()
+                    }
+                  ]}
+
+                  farItems={[
+                    {
+                      text: 'Reset',
+                      key: '2',
+
+                      iconProps: {
+                        iconName: 'undo'
+                      },
+
+                      onRenderIcon: () => <MdUndo className={classes.icon}/>
+                    }
+                  ]}
+
+                />
+            </Callout>
+          }
+        </div>
+      )
+    })
+
+    function closeCallout() {
+      setState({
         advancedFilterActive: false,
         calloutVisible: false
-      }))
+      })
     }
   } as any // TODO
 })
 
 // --- exports ------------------------------------------------------
 
-export default DataExplorerRenderer
+export default DataExplorerView

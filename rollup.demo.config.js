@@ -16,6 +16,7 @@ export default {
       'react': 'React',
       'react-dom': 'ReactDOM',
       'js-react-utils': 'jsReactUtils',
+      'js-react-store': 'jsReactStore',
       'js-spec': 'jsSpec',
       'js-spec/dev-only': 'jsSpec',
       'office-ui-fabric-react': 'Fabric',
@@ -24,12 +25,14 @@ export default {
     },
   },
 
-  external: ['react', 'react-dom', 'js-react-utils', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react', 'react-virtualized'],
+  external: ['react', 'react-dom', 'js-react-utils', 'js-react-store', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react', 'react-virtualized'],
 
 
   plugins: [
     resolve(),
-    commonjs(),
+    commonjs({
+      include: 'node_modules/**',
+    }),
     /*
   
     resolve({
