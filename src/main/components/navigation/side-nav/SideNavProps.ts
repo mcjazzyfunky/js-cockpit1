@@ -1,14 +1,23 @@
-// external imports
-import { ReactNode } from 'react'
-
 // --- SideNavProps -------------------------------------------------
 
 type SideNavProps = {
   activeItemId?: string,
-  children: ReactNode // TODO
+  items: (Item | Menu)[]
+}
+
+type Item = {
+  type: 'item',
+  text: string,
+  id: string,
+}
+
+type Menu = {
+  type: 'menu'
+  text: string,
+  menuId?: string,
+  items?: (Item | Menu)[]  
 }
 
 // --- exports ------------------------------------------------------
 
 export default SideNavProps
-

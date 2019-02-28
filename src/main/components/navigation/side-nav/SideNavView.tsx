@@ -107,12 +107,12 @@ const styleSideNav = defineStyle(theme => ({
 function SideNavView(props: SideNavProps) {
   let ret = null
 
-  if (props.children) {
+  if (props.items) {
     ret = styleSideNav(classes => 
       <div className={classes.container}>
         <div className={classes.navigation}>
           <Nav
-            groups={getLinkGroups(props.children)}
+            groups={getLinkGroups(props.items)}
 
             selectedKey={props.activeItemId}
           />
@@ -126,15 +126,13 @@ function SideNavView(props: SideNavProps) {
 
 // --- helpers ------------------------------------------------------
 
-function getLinkGroups(children: any): INavLinkGroup[] {
+function getLinkGroups(items: any): INavLinkGroup[] { // TODO
   const linkGroups: INavLinkGroup[] = []
 
-  React.Children.forEach(children, (child: any, idx: any) => {
-    const childProps = child && child.props ? child.props : null
-
+  items.forEach((item: any, idx: any) => {
     const linkGroup: INavLinkGroup = {
-      name: childProps.text,
-      links: getLinks(childProps.children)
+      name: item.text,
+      links: getLinks(item.items)
     }
 
     linkGroups.push(linkGroup)
@@ -143,15 +141,13 @@ function getLinkGroups(children: any): INavLinkGroup[] {
   return linkGroups
 }
 
-function getLinks(children: any): INavLink[] {
+function getLinks(items: any): INavLink[] {
   const links: INavLink[] = []
 
-  React.Children.forEach(children, (child: any, idx: any) => {
-    const childProps = child && child.props ? child.props : null
-
+  items.forEach((item: any, idx: number) => { // TODO
     const link: INavLink = {
-      key: childProps.id,
-      name: childProps.text,
+      key: item.id,
+      name: item.text,
       isExpanded: true,
       link: null as any,
       url: null as any

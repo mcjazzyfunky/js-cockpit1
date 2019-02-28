@@ -163,28 +163,44 @@ function Demo() {
         />
       </Cockpit.Menu>
       <Cockpit.SideNav>
-        <SideNav activeItemId="user-groups">
-          <SideNav.Menu text="Menu1">
-            <SideNav.Item
-              id="users"
-              text="Users"
-            />
-            <SideNav.Item
-              id="user-groups"
-              text="User groups"
-            />
-          </SideNav.Menu>
-          <SideNav.Menu text="Menu2">
-            <SideNav.Item
-              id="users2"
-              text="Users"
-            />
-            <SideNav.Item
-              id="user-groups2"
-              text="User groups"
-            />
-          </SideNav.Menu>
-        </SideNav>
+        <SideNav
+          activeItemId="userGroups"
+
+          items={[
+            {
+              type: 'menu',
+              text: 'Menu 1',
+              items: [
+                {
+                  type: 'item',
+                  id: 'users',
+                  text: 'Users'
+                },
+                {
+                  type: 'item',
+                  id: 'userGroups',
+                  text: 'User groups'
+                }
+              ]
+            },
+            {
+              type: 'menu',
+              text: 'Menu 2',
+              items: [
+                {
+                  type: 'item',
+                  id: 'users2',
+                  text: 'Users'
+                },
+                {
+                  type: 'item',
+                  id: 'userGroups2',
+                  text: 'User groups'
+                }
+              ]
+            }
+          ]}
+        />
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}

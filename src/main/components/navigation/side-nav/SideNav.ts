@@ -5,61 +5,7 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import SideNavProps from './SideNavProps'
-import SideNavItemProps from './SideNavItemProps'
-import SideNavMenuProps from './SideNavMenuProps'
 import SideNavView from './SideNavView'
-
-// --- SideNav.Item -------------------------------------------------
-
-const Item = defineComponent<SideNavItemProps>({
-  displayName: 'SideNav.Item',
-
-  properties: {
-    text: {
-      type: String,
-      required: true
-    },
-
-    id: {
-      type: String,
-      required: true
-    },
-  },
-
-  render() {
-    throw new Error('Components of type SideNav.Item must be children '
-      + 'of SideNav or SideNav.Menu components')
-  }
-})
-
-// --- SideNav.Menu --------------------------------------------
-
-const Menu:  ComponentType<SideNavMenuProps> = defineComponent<SideNavMenuProps>({
-  displayName: 'SideNav.Menu',
-
-  properties: {
-    text: {
-      type: String,
-      required: true
-    },
-
-    menuId: {
-      type: String,
-      required: true
-    },
-
-    children: {
-      validate:
-        withChildren(
-          Spec.lazy(() => Spec.all(isElementOfType(Item))))
-    }
-  },
-
-  render() {
-    throw new Error('Components of type SideNav.Menu must be children '
-      + 'of SideNav or SideNav.Menu components')
-  }
-})
 
 // --- SideNav ------------------------------------------------------
 
@@ -71,10 +17,9 @@ const SideNav = defineComponent<SideNavProps>({
       type: String
     },
 
-    children: {
-      validate:
-        withChildren(
-          Spec.all(isElementOfType([Menu])))
+    items: {
+      type: Array,
+      validate: Spec.lazy(() => specItems)
     }
   },
 
@@ -83,9 +28,35 @@ const SideNav = defineComponent<SideNavProps>({
   }
 })
 
+// --- locals -------------------------------------------------------
+
+const specItems =
+  Spec.lazy(() =>
+    Spec.arrayOf(
+      Spec.and(
+        Spec.prop('type', Spec.oneOf('item', 'menu')),
+        Spec.or({
+          when:
+            Spec.prop('type', Spec.is('item')),
+
+          then:
+            Spec.strictShape({
+              type: Spec.is('item'),
+              id: Spec.string,
+              text: Spec.string,
+            })
+        }, {
+          when:
+            Spec.prop('type', Spec.is('menu')),
+            
+          then:
+            Spec.strictShape({
+              type: Spec.is('menu'),
+              menuId: Spec.optional(Spec.string),
+              items: specItems
+            })
+        }))))
+
 // --- exports ------------------------------------------------------
 
-export default Object.assign(SideNav, {
-  Item,
-  Menu,
-})
+export default SideNav
