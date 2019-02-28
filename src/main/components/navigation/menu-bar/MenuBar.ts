@@ -18,35 +18,7 @@ const MenuBar = defineComponent<MenuBarProps>({
 
     items: {
       type: Object,
-
-      validate:
-        Spec.arrayOf(
-          Spec.and(
-            Spec.prop('kind', Spec.oneOf('menu', 'item')),
-
-            Spec.or(
-              {
-                when: Spec.prop('kind', Spec.is('menu')),
-
-                then:
-                  Spec.strictShape({
-                    kind: Spec.is('menu'),
-                    text: Spec.string,
-                    items: Spec.array
-                  })
-              },
-              {
-                when: Spec.prop('kind', Spec.is('item')),
-
-                then:
-                  Spec.strictShape({
-                    kind: Spec.is('item'),
-                    text: Spec.string,
-                    disabled: Spec.optional(Spec.boolean),
-                    onAction: Spec.optional(Spec.function)
-                  })
-              }
-            )))
+      validate: Spec.lazy(() => specItems)
     }
   },
 
@@ -54,6 +26,37 @@ const MenuBar = defineComponent<MenuBarProps>({
     return MenuBarView(props)
   }
 })
+
+// locals
+const specItems =
+  Spec.lazy(() =>
+    Spec.arrayOf(
+      Spec.and(
+        Spec.prop('type', Spec.oneOf('menu', 'item')),
+
+        Spec.or(
+          {
+            when: Spec.prop('type', Spec.is('menu')),
+
+            then:
+              Spec.strictShape({
+                type: Spec.is('menu'),
+                text: Spec.string,
+                items: specItems 
+              })
+          },
+          {
+            when: Spec.prop('type', Spec.is('item')),
+
+            then:
+              Spec.strictShape({
+                type: Spec.is('item'),
+                text: Spec.string,
+                disabled: Spec.optional(Spec.boolean),
+                onAction: Spec.optional(Spec.function)
+              })
+          }
+        ))))
 
 // --- exports ------------------------------------------------------
 

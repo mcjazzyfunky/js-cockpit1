@@ -44,17 +44,17 @@ function Demo() {
       loadData={loadData}
 
       columns={[
-        { kind: 'column', title: 'First name', field: 'firstName', sortable: true },
-        { kind: 'column', title: 'Last name', field: 'lastName', sortable: true },
-        { kind: 'column', title: 'Postal code', field: 'postalCold', sortable: true },
-        { kind: 'column', title: 'City', field: 'city', sortable: true },
-        { kind: 'column', title: 'Country', field: 'country', sortable: true }
+        { type: 'column', title: 'First name', field: 'firstName', sortable: true },
+        { type: 'column', title: 'Last name', field: 'lastName', sortable: true },
+        { type: 'column', title: 'Postal code', field: 'postalCold', sortable: true },
+        { type: 'column', title: 'City', field: 'city', sortable: true },
+        { type: 'column', title: 'Country', field: 'country', sortable: true }
       ]}
 
       actions={[
-        { kind: 'general', title: 'Add', icon: <FiPlus/> },
-        { kind: 'singleRow', title: 'Edit', icon: <FiEdit/> },
-        { kind: 'multiRow', title: 'Delete', icon: <FiTrash2/> }
+        { type: 'general', title: 'Add', icon: <FiPlus/> },
+        { type: 'singleRow', title: 'Edit', icon: <FiEdit/> },
+        { type: 'multiRow', title: 'Delete', icon: <FiTrash2/> }
       ]}
     >
     </DataExplorer>
@@ -86,13 +86,13 @@ function Demo() {
         <AppSelector
           apps={[
             {
-              kind: 'app',
+              type: 'app',
               id: 'cms',
               title: 'Web Shop',
               description: 'Some description for the CMS'
             },
             {
-              kind: 'app',
+              type: 'app',
               id: 'mms',
               title: 'Media management',
               description: 'Some description for the MMS'
@@ -111,52 +111,52 @@ function Demo() {
 
           items={[
             {
-              kind: 'menu',
+              type: 'menu',
               text: 'Users',
               
               items: [
-                { kind: 'item', id: '1.1', text: 'Item-1.1'},
-                { kind: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
-                { kind: 'item', id: '1.3', text: 'Item-1.3'},
-                { kind: 'item', id: '1.4', text: 'Item-1.4'},
+                { type: 'item', id: '1.1', text: 'Item-1.1'},
+                { type: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
+                { type: 'item', id: '1.3', text: 'Item-1.3'},
+                { type: 'item', id: '1.4', text: 'Item-1.4'},
               ]
             },
             {
-              kind: 'menu',
+              type: 'menu',
               text: 'Content',
               
               items: [
-                { kind: 'item', id: '2.1', text: 'Item-2.1'},
-                { kind: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
-                { kind: 'item', id: '2.3', text: 'Item-2.3'},
-                { kind: 'item', id: '2.4', text: 'Item-2.4'},
+                { type: 'item', id: '2.1', text: 'Item-2.1'},
+                { type: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
+                { type: 'item', id: '2.3', text: 'Item-2.3'},
+                { type: 'item', id: '2.4', text: 'Item-2.4'},
               ]
             },
             {
-              kind: 'menu',
+              type: 'menu',
               text: 'Media',
               
               items: [
-                { kind: 'item', id: '3.1', text: 'Item-3.1'},
-                { kind: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
-                { kind: 'item', id: '3.3', text: 'Item-3.3'},
+                { type: 'item', id: '3.1', text: 'Item-3.1'},
+                { type: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
+                { type: 'item', id: '3.3', text: 'Item-3.3'},
 
                 {
-                  kind: 'menu',
+                  type: 'menu',
                   text: 'Item-3.4',
 
                   items: [
-                    { kind: 'item', id: '3.4.1', text: 'Item-3.4.1' }
+                    { type: 'item', id: '3.4.1', text: 'Item-3.4.1' }
                   ]
                 },
               ]
             },
             {
-              kind: 'menu',
+              type: 'menu',
               text: 'Help',
               
               items: [
-                { kind: 'item', id: '4.1', text: 'About...'},
+                { type: 'item', id: '4.1', text: 'About...'},
               ]
             }
           ]}
@@ -170,33 +170,19 @@ function Demo() {
             {
               type: 'menu',
               text: 'Menu 1',
+
               items: [
-                {
-                  type: 'item',
-                  id: 'users',
-                  text: 'Users'
-                },
-                {
-                  type: 'item',
-                  id: 'userGroups',
-                  text: 'User groups'
-                }
+                { type: 'item', id: 'users', text: 'Users' },
+                { type: 'item', id: 'userGroups', text: 'User groups' }
               ]
             },
             {
               type: 'menu',
               text: 'Menu 2',
+
               items: [
-                {
-                  type: 'item',
-                  id: 'users2',
-                  text: 'Users'
-                },
-                {
-                  type: 'item',
-                  id: 'userGroups2',
-                  text: 'User groups'
-                }
+                { type: 'item', id: 'users2', text: 'Users' },
+                { type: 'item', id: 'userGroups2', text: 'User groups' }
               ]
             }
           ]}

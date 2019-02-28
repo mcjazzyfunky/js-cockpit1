@@ -12,7 +12,7 @@ type DataExplorerProps = {
 }
 
 type Column = {
-  kind: 'column',
+  type: 'column',
   title: string,
   field?: string,
   align?: 'start' | 'center' | 'end'
@@ -21,19 +21,19 @@ type Column = {
 }
 
 type GeneralAction = {
-  kind: 'general',
+  type: 'general',
   title: string,
   icon?: ReactNode
 }
 
 type SingleRowAction = {
-  kind: 'singleRow',
+  type: 'singleRow',
   title: string,
   icon?: ReactNode
 }
 
 type MultiRowAction = {
-  kind: 'multiRow',
+  type: 'multiRow',
   title: string,
   icon?: ReactNode
 }

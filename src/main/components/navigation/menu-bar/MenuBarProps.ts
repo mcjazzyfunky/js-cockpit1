@@ -9,13 +9,13 @@ type MenuBarProps = {
 }
 
 type Menu = {
-  kind: 'menu',
+  type: 'menu',
   text: string,
   items: (Menu | Item)[] 
 }
 
 type Item = {
-  kind: 'item',
+  type: 'item',
   text: string,
   id?: string,
   disabled?: boolean,

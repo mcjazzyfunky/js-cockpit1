@@ -8,7 +8,7 @@ import AppSelectionEvent from '../../../events/AppSelectionEvent'
 
 type AppSelectorProps = {
   apps: {
-    kind: 'app'
+    type: 'app'
     id: string,
     title: string,
     description?: string

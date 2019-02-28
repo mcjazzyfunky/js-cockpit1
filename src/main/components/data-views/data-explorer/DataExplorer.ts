@@ -29,7 +29,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
       validate:
         Spec.arrayOf(
           Spec.strictShape({
-            kind: Spec.is('column'),
+            type: Spec.is('column'),
             title: Spec.string,
             field: Spec.optional(Spec.string),
             align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
@@ -46,7 +46,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
         Spec.arrayOf(
           Spec.and(
             Spec.strictShape({
-              kind: Spec.oneOf('general', 'singleRow', 'multiRow'),
+              type: Spec.oneOf('general', 'singleRow', 'multiRow'),
               title: Spec.string,
               icon: Spec.optional(isNode)
             })))

@@ -18,7 +18,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
       validate:
         Spec.arrayOf(
           Spec.strictShape({
-            kind: Spec.is('app'),
+            type: Spec.is('app'),
             id: Spec.string,
             title: Spec.string,
             description: Spec.optional(Spec.string)

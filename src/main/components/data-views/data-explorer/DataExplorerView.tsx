@@ -381,8 +381,8 @@ function renderActionBar(
   props.actions.forEach((action, idx) => {
     const
       disabled =
-        action.kind === 'singleRow' && store.rowSelection.length !== 1
-            || action.kind === 'multiRow' && store.rowSelection.length === 0
+        action.type === 'singleRow' && store.rowSelection.length !== 1
+            || action.type === 'multiRow' && store.rowSelection.length === 0
 
     if (idx > 0) {
       items.push({
