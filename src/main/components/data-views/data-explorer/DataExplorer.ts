@@ -8,6 +8,10 @@ import DataExplorerProps from './DataExplorerProps'
 import DataExplorerView from './DataExplorerView'
 import createStore from './createStore'
 
+// --- constants ---------------------------------------------------
+
+const REGEX_NAME = /^[a-z][a-zA-Z0-9]+/
+
 // --- DataExplorer ------------------------------------------------
 
 const DataExplorer = defineComponent<DataExplorerProps>({
@@ -25,6 +29,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
 
     columns: {
       type: Array,
+      required: true,
 
       validate:
         Spec.arrayOf(
@@ -41,6 +46,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
 
     actions: {
       type: Array,
+      required: true,
 
       validate:
         Spec.arrayOf(
@@ -50,6 +56,36 @@ const DataExplorer = defineComponent<DataExplorerProps>({
               title: Spec.string,
               icon: Spec.optional(isNode)
             })))
+    },
+
+    search: {
+      type: Object,
+
+      validate:
+        Spec.strictShape({
+          type: Spec.is('default'),
+          
+          basic:
+            Spec.strictShape({
+              type: Spec.is('fullText'),
+              name: Spec.match(REGEX_NAME)
+            }),
+          
+          advanced:
+            Spec.strictShape({
+              type: Spec.is('filters'),
+              
+              filters:
+                Spec.arrayOf(
+                  Spec.and(
+                    Spec.prop('type', Spec.oneOf('text')),
+                  
+                    Spec.or({
+                      when: Spec.prop('type', Spec.is('text')),
+                      then: Spec.lazy(() => specTextFilter)
+                    })))
+            })
+        })
     }
   },
 
@@ -59,6 +95,15 @@ const DataExplorer = defineComponent<DataExplorerProps>({
     return DataExplorerView(props, store)
   }
 }) 
+
+// --- specs of search filter ---------------------------------------
+
+const specTextFilter =
+  Spec.strictShape({
+    type: Spec.is('text'),
+    name: Spec.match(REGEX_NAME),
+    label: Spec.string
+  })
 
 // --- exports ------------------------------------------------------
 

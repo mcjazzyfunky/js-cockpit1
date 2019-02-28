@@ -56,6 +56,23 @@ function Demo() {
         { type: 'singleRow', title: 'Edit', icon: <FiEdit/> },
         { type: 'multiRow', title: 'Delete', icon: <FiTrash2/> }
       ]}
+
+      search={{
+        type: 'default',
+
+        basic: {
+          type: 'fullText',
+          name: 'fullText'
+        },
+
+        advanced: {
+          type: 'filters',
+
+          filters: [
+            { type: 'text', name: 'firstName', label: 'First name' }
+          ]
+        }
+      }}
     >
     </DataExplorer>
 

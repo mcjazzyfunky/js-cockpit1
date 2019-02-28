@@ -8,7 +8,8 @@ type DataExplorerProps = {
   title?: string,
   loadData: (params: QueryParams) => Observable<QueryResult>, // TODO
   columns: Column[],
-  actions: (GeneralAction | SingleRowAction | MultiRowAction)[]
+  actions: (GeneralAction | SingleRowAction | MultiRowAction)[],
+  search?: Search
 }
 
 type Column = {
@@ -48,6 +49,27 @@ type QueryParams = {
   count: number,
   sortBy: string | null,
   sortDesc: boolean,
+}
+
+type Search = {
+  type: 'default',
+
+  basic: {
+    type: 'fullText',
+    name: string
+  },
+
+  advanced: {
+    type: 'filters',
+
+    filters: (TextFilter)[]
+  }
+}
+
+type TextFilter = {
+  type: 'text',
+  name: string,
+  label: string
 }
 
 // --- exports ------------------------------------------------------

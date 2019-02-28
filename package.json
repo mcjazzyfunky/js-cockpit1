@@ -43,7 +43,7 @@
     "esdoc-importpath-plugin": "^1.0.2",
     "esdoc-standard-plugin": "^1.0.0",
     "faker": "^4.1.0",
-    "js-react-utils": "0.0.50",
+    "js-react-utils": "0.0.51",
     "mocha": "^5.2.0",
     "nyc": "^13.3.0",
     "react-icons": "^3.4.0",
