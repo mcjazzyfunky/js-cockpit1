@@ -353,14 +353,14 @@ function createTableHeadCell(columnIdx: number, props: DataTableProps, width: nu
     column = props.columns[columnIdx],
     sortable = props.columns[columnIdx].sortable,
     sortBy = props.sortBy,
-    sortDesc = props.sortDesc,
+    sortDir = props.sortDir,
     isSorted = sortBy !== null && sortBy === column.field,
 
     sortIcon = // TODO
       <div style={{ width: '20px', height: '20px' }}>
         {
           sortable && isSorted
-            ? (sortDesc ? <SortDescIcon/> : <SortAscIcon/>)
+            ? (sortDir === 'asc' ? <SortAscIcon/> : <SortDescIcon/>)
             : null
         }
       </div>,
@@ -369,7 +369,7 @@ function createTableHeadCell(columnIdx: number, props: DataTableProps, width: nu
       !sortable && column.field
         ? null
         : () => {
-          changeSort(column.field, isSorted ? !sortDesc : false)
+          changeSort(column.field, isSorted ? sortDir !== 'desc' : false)
         } 
 
   return (

@@ -1,30 +1,23 @@
 // externals imports
-import React, { ReactElement, Ref } from 'react'
-import { defineComponent } from 'js-react-utils'
-import { css, ActionButton, Callout, CommandBar, DefaultButton, ITheme, SearchBox, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
-import { MdClose, MdFilterList, MdCheck, MdUndo, MdSearch } from 'react-icons/md'
+import React from 'react'
+import { css, CommandBar, ITheme, Spinner, SpinnerSize } from 'office-ui-fabric-react'
 
 // internal imports
-import DataExplorerProps from './DataExplorerProps'
-import DataExplorerStore from './DataExplorerStore'
-import defineStyle, { ClassesOf } from '../../../styling/defineStyle'
-import DataTable from '../data-table/DataTable'
-import DataTableProps from '../data-table/DataTableProps'
-import Paginator from '../../pagination/paginator/Paginator'
-import PageSizeSelector from '../../pagination/page-size-selector/PageSizeSelector'
-import PaginationInfo from '../../pagination/pagination-info/PaginationInfo'
-import RowSelectionChangeEvent from '../../../events/RowSelectionChangeEvent'
-import PageChangeEvent from '../../../events/PageChangeEvent'
-import PageSizeChangeEvent from '../../../events/PageSizeChangeEvent'
-import SortChangeEvent from '../../../events/SortChangeEvent'
-import SearchIcon from '../../../system-icons/SearchIcon'
-import { any } from 'prop-types';
+import DataExplorerProps from '../types/DataExplorerProps'
+import DataExplorerStore from '../types/DataExplorerStore'
+import defineStyle, { ClassesOf } from '../../../../styling/defineStyle'
+import DataTable from '../../data-table/DataTable'
+import Paginator from '../../../pagination/paginator/Paginator'
+import PageSizeSelector from '../../../pagination/page-size-selector/PageSizeSelector'
+import PaginationInfo from '../../../pagination/pagination-info/PaginationInfo'
+import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
+import DataExplorerSearchBar from './DataExplorerSearchBar'
 
 // --- derived imports --------------------------------------------
 
 const { useEffect, useRef,  useState, useCallback } = React
 
-// --- DataExplorerStyle -------------------------------------------
+// --- styleDataExplorer -------------------------------------------
 
 const styleDataExplorer = defineStyle((theme: ITheme) => ({
   container: {
@@ -195,9 +188,9 @@ const styleDataExplorer = defineStyle((theme: ITheme) => ({
 
 type DataExplorerClasses = ClassesOf<typeof styleDataExplorer>
 
-// --- DataExplorerView ---------------------------------------------
+// --- renderDataExplorer -------------------------------------------
 
-function DataExplorerView(props: DataExplorerProps, store: DataExplorerStore) {
+function renderDataExplorer(props: DataExplorerProps, store: DataExplorerStore) {
   const
     dataTableRef = useRef(null),
 
@@ -283,7 +276,7 @@ function DataExplorerView(props: DataExplorerProps, store: DataExplorerStore) {
             }}
 
             sortBy={store.sortBy}
-            sortDesc={store.sortDesc}
+            sortDir={store.sortDir}
 
             onRowSelectionChange={
               (event: RowSelectionChangeEvent) => {
@@ -326,7 +319,7 @@ function renderHeader(
           { renderActionBar(props, store, classes) }
       </div>
       <div className={classes.headerEnd}>
-        <SearchBar />
+        <DataExplorerSearchBar search={props.search} store={store} />
       </div>
     </div>
   ) 
@@ -430,190 +423,6 @@ function renderActionBar(
   )
 }
 
-// --- SearchBar ----------------------------------------------------
-
-const styleSearchBar = defineStyle((theme: ITheme) => ({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-
-  searchBox: {
-    width: '220px',
-    height: '30px',
-    paddingRight: '2px',
-  },
-
-  advancedFilter: {
-    margin: '0 16px',
-
-    selectors: {
-      '& *': {
-        color: theme.palette.black,
-        backgroundColor: 'transparent !important',
-      },
-
-      '&:hover': {
-        backgroundColor: theme.palette.neutralLight
-      },
-      
-      '&:active': {
-        backgroundColor: theme.palette.neutralQuaternary
-      }
-     }
-  },
-
-  filterButton: {
-    height: '30px',
-    marginLeft: '8px',
-
-    selectors: {
-      ':hover': {
-        color: theme.palette.white,
-        backgroundColor: theme.palette.neutralLight,
-      },
-      
-      ':active': {
-        color: theme.palette.white + ' !important',
-        backgroundColor: theme.palette.neutralQuaternary,
-      }
-    }
-  },
-
-  filterButtonActive: {
-    color: theme.palette.white + ' !important',
-    backgroundColor: theme.palette.neutralQuaternary,
-  },
-
-  icon: {
-    color: theme.palette.themePrimary + ' !important' // TODO
-  },
-
-  filterContainer: {
-    width: '400px',
-    minHeight: '200px'
-  }
-}))
-
-const SearchBar = defineComponent({
-  displayName: 'SearchBar',
-
-  render: function View() { 
-    const
-      [state, setState] = useState({
-        calloutVisible: false,
-        advancedFilterActive: false
-      }),
-
-      advancedFilterRef = useRef(null)
-
-    return styleSearchBar(classes => {
-      const filterButtonClassName =
-        state.advancedFilterActive || state.calloutVisible
-          ? css(classes.filterButton, classes.filterButtonActive) 
-          : classes.filterButton
-
-      return (
-        <div className={classes.container}>
-          {
-            !state.advancedFilterActive && 
-              <SearchBox
-                placeholder="Search..."
-                className={classes.searchBox}
-                disableAnimation={true}
-              />
-          }
-          <div className={classes.advancedFilter} ref={ advancedFilterRef }>
-            <ActionButton
-              text="Advanced Filter"
-              className={filterButtonClassName}
-              iconProps={{ iconName: 'icon' }}
-            
-              onClick={
-                () => setState(
-                  state => ({
-                    advancedFilterActive: !state.advancedFilterActive,
-                    calloutVisible: !state.advancedFilterActive
-                  }))
-              }
-
-              onRenderIcon={
-                () =>
-                  <div className={classes.icon}>
-                    {
-                      state.advancedFilterActive || state.calloutVisible
-                        ? <MdCheck className={classes.icon}/>
-                        : <MdFilterList className={classes.icon}/>
-                    }
-                  </div>
-              }
-            />
-          </div>
-          {
-              <Callout
-                hidden={!state.calloutVisible}
-                target={advancedFilterRef.current}
-                setInitialFocus={true}
-                onDismiss={ () => closeCallout()}
-              >
-                <div className={classes.filterContainer}>
-                  [TODO: Add filters here...] 
-                </div>
-                <CommandBar
-                  items={[
-                    {
-                      text: 'Apply filter',
-                      key: '1',
-
-                      iconProps: {
-                        iconName: 'applyFilter'
-                      },
-
-                      onRenderIcon: () => <MdFilterList className={classes.icon}/>
-                    },
-                    {
-                      text: 'Cancel',
-                      key: '2',
-                      
-                      iconProps: {
-                        iconName: 'cancel'
-                      },
-
-                      onRenderIcon: () => <MdClose className={classes.icon}/>,
-
-                      onClick: () => closeCallout()
-                    }
-                  ]}
-
-                  farItems={[
-                    {
-                      text: 'Reset',
-                      key: '2',
-
-                      iconProps: {
-                        iconName: 'undo'
-                      },
-
-                      onRenderIcon: () => <MdUndo className={classes.icon}/>
-                    }
-                  ]}
-
-                />
-            </Callout>
-          }
-        </div>
-      )
-    })
-
-    function closeCallout() {
-      setState({
-        advancedFilterActive: false,
-        calloutVisible: false
-      })
-    }
-  } as any // TODO
-})
-
 // --- exports ------------------------------------------------------
 
-export default DataExplorerView
+export default renderDataExplorer

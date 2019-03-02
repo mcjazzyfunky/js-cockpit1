@@ -2,10 +2,10 @@
 import { Observable } from 'rxjs'
 
 // internal imports
-import QueryParams from './QueryParams'
-import QueryResult from './QueryResult'
+import DataExplorerQueryParams from './DataExplorerQueryParams'
+import DataExplorerQueryResult from './DataExplorerQueryResult'
 
-// -- DataExplorerStore ---------------------------------------------
+// -- DataExplorerStore --------------------------------------------
 
 type DataExplorerStore = {
   isInitialized: boolean,
@@ -14,7 +14,7 @@ type DataExplorerStore = {
   pageIndex: number | null,
   pageSize: number,
   sortBy: string | null,
-  sortDesc: boolean,
+  sortDir: 'asc' | 'desc',
   totalItemCount: number | null,
   rowSelection: number[],
   data: any[],
@@ -25,20 +25,20 @@ type DataExplorerStore = {
   
   loadPage(
     pageIndex: number,
-    loadData: (params: QueryParams) => Observable<QueryResult>,
+    loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
     onSuccess: () => void
   ): void,
 
   loadPageSize(
     pageSize: number,
-    loadData: (params: QueryParams) => Observable<QueryResult>,
+    loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
     onSuccess: () => void
   ): void,
 
   loadSorting(
     sortBy: string,
-    sortDesc: boolean,
-    loadData: (params: QueryParams) => Observable<QueryResult>,
+    sortDir: 'asc' | 'desc',
+    loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
     onSuccess: () => void
   ): void
 }

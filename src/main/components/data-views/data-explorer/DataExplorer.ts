@@ -4,9 +4,9 @@ import { useStore } from 'js-react-store'
 import { Spec } from 'js-spec'
 
 // internal imports
-import DataExplorerProps from './DataExplorerProps'
-import DataExplorerView from './DataExplorerView'
-import createStore from './createStore'
+import DataExplorerProps from './types/DataExplorerProps'
+import renderView from './view/renderView'
+import createStore from './store/createStore'
 
 // --- constants ---------------------------------------------------
 
@@ -92,7 +92,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
   render(props) {
     const store = useStore(createStore)
 
-    return DataExplorerView(props, store)
+    return renderView(props, store)
   }
 }) 
 

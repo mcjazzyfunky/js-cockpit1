@@ -34,8 +34,9 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
       nullable: true
     },
 
-    sortDesc: {
-      type: Boolean
+    sortDir: {
+      type: String,
+      validate: Spec.oneOf('asc', 'desc') 
     },
 
     data: {

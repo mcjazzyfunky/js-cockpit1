@@ -12,7 +12,7 @@ type DataTableProps = {
   },
 
   sortBy?: string,
-  sortDesc?: boolean,
+  sortDir?: 'asc' | 'desc',
 
   columns: {
     title: string, 

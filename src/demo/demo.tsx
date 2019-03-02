@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, DataForm, HBox, SideNav, LoginForm, MenuBar, Cockpit, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, SideNav, LoginForm, MenuBar, Cockpit, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -69,7 +69,10 @@ function Demo() {
           type: 'filters',
 
           filters: [
-            { type: 'text', name: 'firstName', label: 'First name' }
+            { type: 'text', name: 'firstName', label: 'First name' },
+            { type: 'text', name: 'lastName', label: 'Last name' },
+            { type: 'text', name: 'city', label: 'City' },
+            { type: 'text', name: 'coutry', label: 'Country' }
           ]
         }
       }}
@@ -229,7 +232,7 @@ function fakeData(count: number) {
   return ret
 }
 
-function loadData(params: {offset: number, count: number, sortBy: string | null, sortDesc: boolean}) {
+function loadData(params: DataExplorerQueryParams) {
   const totalItemCount = 1241
   
   let data = fakeData(totalItemCount)
@@ -250,7 +253,7 @@ if (params.sortBy) {
       ret = 0
     }
 
-    if (params.sortDesc) {
+    if (params.sortDir === 'desc') {
       ret = -ret
     }
 

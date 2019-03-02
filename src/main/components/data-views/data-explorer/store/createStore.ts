@@ -2,11 +2,11 @@
 import { initStore } from 'js-react-store'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
-import QueryParams from './QueryParams'
-import QueryResult from './QueryResult'
+import DataExplorerQueryParams from '../types/DataExplorerQueryParams'
+import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
 // internal imports
-import DataExplorerStore from './DataExplorerStore'
+import DataExplorerStore from '../types/DataExplorerStore'
 
 // ---createStore ----------------------------------------------------
 
@@ -21,7 +21,7 @@ function createStore(): DataExplorerStore {
     pageSize: 50,
     totalItemCount: null,
     sortBy: null,
-    sortDesc: false,
+    sortDir: 'asc', 
     rowSelection: [],
     errorMessage: null,
 
@@ -36,7 +36,7 @@ function createStore(): DataExplorerStore {
         pageIndex,
         pageSize: self.pageSize,
         sortBy: self.sortBy,
-        sortDesc: self.sortDesc,
+        sortDir: self.sortDir,
         loadData,
         onSuccess
       })
@@ -47,18 +47,18 @@ function createStore(): DataExplorerStore {
         pageIndex: 0,
         pageSize,
         sortBy: self.sortBy,
-        sortDesc: self.sortDesc,
+        sortDir: self.sortDir,
         loadData,
         onSuccess
       })
     },
 
-    loadSorting(sortBy, sortDesc, loadData, onSuccess) {
+    loadSorting(sortBy, sortDir, loadData, onSuccess) {
       fetchData({
         pageIndex: 0,
         pageSize: self.pageSize,
         sortBy: sortBy,
-        sortDesc: sortDesc,
+        sortDir: sortDir,
         loadData,
         onSuccess
       })
@@ -69,15 +69,15 @@ function createStore(): DataExplorerStore {
     pageIndex: number,
     pageSize: number,
     sortBy: string | null,
-    sortDesc: boolean,
-    loadData: (params: QueryParams) => Observable<QueryResult>,
+    sortDir: 'asc' | 'desc',
+    loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
     onSuccess?: () => void
   }) {
     const observer = params.loadData({
       offset: params.pageIndex * params.pageSize,
       count: params.pageSize,
       sortBy: params.sortBy,
-      sortDesc: params.sortDesc 
+      sortDir: params.sortDir
     }).pipe(take(1))
 
     timeout = setTimeout(() => {
@@ -96,7 +96,7 @@ function createStore(): DataExplorerStore {
           self.pageIndex = params.pageIndex,
           self.pageSize = params.pageSize,
           self.sortBy = params.sortBy,
-          self.sortDesc = params.sortDesc,
+          self.sortDir = params.sortDir,
           self.isInitialized = true,
           self.data = result.data,
           self.totalItemCount = result.totalItemCount,
