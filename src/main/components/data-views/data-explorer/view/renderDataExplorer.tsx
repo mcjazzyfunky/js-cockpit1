@@ -12,13 +12,13 @@ import PageSizeSelector from '../../../pagination/page-size-selector/PageSizeSel
 import PaginationInfo from '../../../pagination/pagination-info/PaginationInfo'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import DataExplorerSearchBar from './DataExplorerSearchBar'
-import { ClassesOf } from '../../../../styling/defineStyle'
+import CssClassesOf from '../../../../styling/types/CssClassesOf'
 
 // --- derived imports --------------------------------------------
 
 const { useEffect, useRef,  useState, useCallback } = React
 
-type DataExplorerClasses = ClassesOf<typeof styleDataExplorer>
+type DataExplorerClasses = CssClassesOf<typeof styleDataExplorer>
 
 // --- renderDataExplorer -------------------------------------------
 
@@ -151,7 +151,7 @@ function renderHeader(
           { renderActionBar(props, store, classes) }
       </div>
       <div className={classes.headerEnd}>
-        <DataExplorerSearchBar search={props.search} store={store} />
+        <DataExplorerSearchBar dataExplorerProps={props} dataExplorerStore={store} />
       </div>
     </div>
   ) 

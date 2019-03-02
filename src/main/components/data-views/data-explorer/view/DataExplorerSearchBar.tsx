@@ -5,12 +5,11 @@ import { css, ActionButton, Callout, CommandBar, ITheme, SearchBox } from 'offic
 import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 
 // internal imports
-import DataExplorerSearch from '../types/DataExplorerSearch'
+import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerStore from '../types/DataExplorerStore'
 import defineStyle from '../../../../styling/defineStyle'
 
 // derived imports
-
 const { useRef, useState } = React
 
 // --- styleSearchBar -----------------------------------------------
@@ -81,14 +80,14 @@ const styleSearchBar = defineStyle((theme: ITheme) => ({
 // --- SearchBar ----------------------------------------------------
 
 type SearchBarProps = {
-  search: DataExplorerSearch,
-  store: DataExplorerStore
+  dataExplorerProps: DataExplorerProps,
+  dataExplorerStore: DataExplorerStore
 }
 
 const SearchBar = defineComponent<SearchBarProps>({
   displayName: 'SearchBar',
 
-  render({ search, store }) { 
+  render({ dataExplorerProps: props, dataExplorerStore: store }) { 
     const
       [state, setState] = useState({
         calloutVisible: false,

@@ -5,19 +5,32 @@ import { Observable } from 'rxjs'
 // internal imports
 import DataExplorerQueryParams from './DataExplorerQueryParams'
 import DataExplorerQueryResult from './DataExplorerQueryResult'
-import DataExplorerSearch from './DataExplorerSearch'
 
 // --- DataExplorerProps ----------------------------------------------
 
 type DataExplorerProps = {
   title?: string,
   loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>, // TODO
-  columns: TColumn[],
-  actions: (TGeneralAction | TSingleRowAction | TMultiRowAction)[],
-  search?: DataExplorerSearch
+  columns: Column[],
+  actions: (GeneralAction | SingleRowAction | MultiRowAction)[],
+
+  search?: {
+    type: 'default',
+
+    basic: {
+      type: 'fullText',
+      name: string
+    },
+
+    advanced: {
+      type: 'filters',
+
+      filters: (TextFilter)[]
+    }
+  }
 }
 
-type TColumn = {
+type Column = {
   type: 'column',
   title: string,
   field?: string,
@@ -26,22 +39,27 @@ type TColumn = {
   width?: number
 }
 
-type TGeneralAction = {
+type GeneralAction = {
   type: 'general',
   title: string,
   icon?: ReactNode
 }
 
-type TSingleRowAction = {
+type SingleRowAction = {
   type: 'singleRow',
   title: string,
   icon?: ReactNode
 }
 
-type TMultiRowAction = {
+type MultiRowAction = {
   type: 'multiRow',
   title: string,
   icon?: ReactNode
+}
+type TextFilter = {
+  type: 'text',
+  name: string,
+  label: string
 }
 
 // --- exports ------------------------------------------------------

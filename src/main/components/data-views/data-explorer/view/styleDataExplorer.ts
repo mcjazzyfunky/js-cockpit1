@@ -1,5 +1,5 @@
 // internal imports
-import defineStyle, { ClassesOf } from '../../../../styling/defineStyle'
+import defineStyle from '../../../../styling/defineStyle'
 
 // --- styleDataExplorer -------------------------------------------
 

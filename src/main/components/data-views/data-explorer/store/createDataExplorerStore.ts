@@ -2,11 +2,11 @@
 import { initStore } from 'js-react-store'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
-import DataExplorerQueryParams from '../types/DataExplorerQueryParams'
-import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
 // internal imports
 import DataExplorerStore from '../types/DataExplorerStore'
+import DataExplorerQueryParams from '../types/DataExplorerQueryParams'
+import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
 // ---createDataExplorerStore ---------------------------------------
 

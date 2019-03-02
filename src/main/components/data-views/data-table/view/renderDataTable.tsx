@@ -5,12 +5,12 @@ import { AutoSizer, Column, Table } from 'react-virtualized'
 
 // internal imports
 import styleDataTable from './styleDataTable'
-import { ClassesOf } from '../../../../styling/defineStyle'
+import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableProps from '../types/DataTableProps'
 import SortAscIcon from './SortAscIcon'
 import SortDescIcon from './SortDescIcon'
 
-type DataTableClasses = ClassesOf<typeof styleDataTable>
+type DataTableClasses = CssClassesOf<typeof styleDataTable>
 
 // --- DataTableView ------------------------------------------------
 
