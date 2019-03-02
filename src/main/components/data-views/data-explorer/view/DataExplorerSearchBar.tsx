@@ -209,7 +209,7 @@ const SearchBar = defineComponent<SearchBarProps>({
 const FilterPanel = defineComponent({
   displayName: 'FilterPanel',
 
-  render: function View() {
+  render() {
     return 'Filters'
   }
 })

@@ -8,9 +8,9 @@ import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 // internal imports
 import DataExplorerStore from '../types/DataExplorerStore'
 
-// ---createStore ----------------------------------------------------
+// ---createDataExplorerStore ---------------------------------------
 
-function createStore(): DataExplorerStore {
+function createDataExplorerStore(): DataExplorerStore {
   let timeout: any
 
   const [self, update] = initStore<DataExplorerStore>({
@@ -127,4 +127,4 @@ function createStore(): DataExplorerStore {
 
 // --- exports ------------------------------------------------------
 
-export default createStore
+export default createDataExplorerStore

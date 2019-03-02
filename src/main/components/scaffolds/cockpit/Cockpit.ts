@@ -32,7 +32,9 @@ const Cockpit = defineComponent<CockpitProps>({
     }
   },
 
-  render: renderCockpit 
+  render(props) {
+    return renderCockpit(props)
+  }
 })
 
 // --- Cockpit.Brand ------------------------------------------

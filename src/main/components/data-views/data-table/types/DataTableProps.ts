@@ -1,6 +1,6 @@
 // internal imports
-import RowSelectionChangeEvent from '../../../events/RowSelectionChangeEvent'
-import SortChangeEvent from '../../../events/SortChangeEvent'
+import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
+import SortChangeEvent from '../../../../events/SortChangeEvent'
 
 // --- DataTableProps -----------------------------------------------
 

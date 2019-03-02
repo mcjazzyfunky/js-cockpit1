@@ -3,9 +3,9 @@ import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react
 import { Spec } from 'js-spec'
 
 // internal imports
+import renderVBox from '../view/renderVBox'
 import VBoxProps from './VBoxProps'
 import VBoxCellProps from './VBoxCellProps'
-import VBoxView from '../view/VBoxView'
 
 // --- VBox.Cell ----------------------------------------------------
 
@@ -72,7 +72,7 @@ const VBox = defineComponent<VBoxProps>({
   },
 
   render(props) {
-    return VBoxView(props)
+    return renderVBox(props)
   }
 })
 

@@ -30,7 +30,9 @@ const AppSelector = defineComponent<AppSelectorProps>({
     }
   },
 
-  render: renderAppSelector
+  render(props) {
+    return renderAppSelector(props)
+  }
 })
 
 // --- exports ------------------------------------------------------

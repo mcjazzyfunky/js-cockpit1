@@ -1,5 +1,4 @@
 // external imports
-import React, { ReactNode, ReactElement, CSSProperties } from 'react'
 import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
@@ -96,7 +95,9 @@ const LoginForm = defineComponent<LoginFormProps>({
     }
   }, 
 
-  render: renderLoginForm
+  render(props) {
+    return renderLoginForm(props)
+  }
 })
 
 // --- exports ------------------------------------------------------
