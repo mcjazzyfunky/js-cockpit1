@@ -3,8 +3,8 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import AppSelectorProps from './AppSelectorProps'
-import AppSelectorView from './AppSelectorView'
+import AppSelectorProps from './types/AppSelectorProps'
+import renderAppSelector from './view/renderAppSelector'
 
 // --- AppSelector -----------------------------------------------------
 
@@ -30,7 +30,7 @@ const AppSelector = defineComponent<AppSelectorProps>({
     }
   },
 
-  render: AppSelectorView
+  render: renderAppSelector
 })
 
 // --- exports ------------------------------------------------------

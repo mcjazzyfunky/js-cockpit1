@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import DataExplorerProps from './types/DataExplorerProps'
-import renderView from './view/renderView'
+import renderView from './view/renderDataExplorer'
 import createStore from './store/createStore'
 
 // --- constants ---------------------------------------------------

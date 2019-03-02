@@ -4,11 +4,11 @@ import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react
 import { Spec } from 'js-spec'
 
 // internal imports
-import LoginFormProps from './LoginFormProps' 
-import LoginFormHeaderProps from './LoginFormHeaderProps'
-import LoginFormAboveProps from './LoginFormAboveProps'
-import LoginFormBelowProps from './LoginFormBelowProps'
-import LoginFormView from './LoginFormView'
+import renderLoginForm from './view/renderLoginForm'
+import LoginFormProps from './types/LoginFormProps' 
+import LoginFormHeaderProps from './types/LoginFormHeaderProps'
+import LoginFormAboveProps from './types/LoginFormAboveProps'
+import LoginFormBelowProps from './types/LoginFormBelowProps'
 
 // --- LoginForm.Header ---------------------------------------------
 
@@ -96,9 +96,7 @@ const LoginForm = defineComponent<LoginFormProps>({
     }
   }, 
 
-  render(props) {
-    return LoginFormView(props)
-  }
+  render: renderLoginForm
 })
 
 // --- exports ------------------------------------------------------

@@ -3,9 +3,8 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import PaginatorProps from './PaginatorProps'
-import PaginatorView from './PaginatorView'
-import PageChangeEvent from '../../../events/PageChangeEvent'
+import PaginatorProps from './types/PaginatorProps'
+import PaginatorView from './view/renderPaginator'
 
 // --- Paginator ----------------------------------------------------
 

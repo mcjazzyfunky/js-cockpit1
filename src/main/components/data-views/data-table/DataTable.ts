@@ -4,9 +4,9 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import DataTableProps from './DataTableProps'
-import DataTableMethods from './DataTableMethods'
-import DataTableView from './DataTableView'
+import DataTableProps from './types/DataTableProps'
+import DataTableMethods from './types/DataTableMethods'
+import renderDataTable from './view/renderDataTable'
 
 // --- DataTable ----------------------------------------------------
 
@@ -71,7 +71,7 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
   methods: ['unselectAllRows'],
 
   render(props, ref) {
-    return DataTableView(props, ref)
+    return renderDataTable(props, ref)
   }
 })
 

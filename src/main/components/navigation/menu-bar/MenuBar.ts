@@ -3,8 +3,8 @@ import { defineComponent, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import MenuBarProps from './MenuBarProps'
-import MenuBarView from './MenuBarView'
+import MenuBarProps from './types/MenuBarProps'
+import renderMenuBar from './view/renderMenuBar'
 
 // --- MenuBar --------------------------------------------------------
 
@@ -23,7 +23,7 @@ const MenuBar = defineComponent<MenuBarProps>({
   },
 
   render(props) {
-    return MenuBarView(props)
+    return renderMenuBar(props)
   }
 })
 

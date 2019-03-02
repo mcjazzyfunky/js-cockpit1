@@ -3,8 +3,8 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import PaginationInfoProps from './PaginationInfoProps'
-import PaginationInfoView from './PaginationInfoView'
+import PaginationInfoProps from './types/PaginationInfoProps'
+import PaginationInfoView from './view/renderPaginatorInfo'
 
 // --- PaginationInfo ---------------------------------------------
 

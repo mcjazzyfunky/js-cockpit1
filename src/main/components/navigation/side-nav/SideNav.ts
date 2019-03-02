@@ -4,8 +4,8 @@ import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react
 import { Spec } from 'js-spec'
 
 // internal imports
-import SideNavProps from './SideNavProps'
-import SideNavView from './SideNavView'
+import SideNavProps from './types/SideNavProps'
+import SideNavView from './renderSideNav'
 
 // --- SideNav ------------------------------------------------------
 

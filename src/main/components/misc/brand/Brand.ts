@@ -3,8 +3,8 @@ import { defineComponent, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import BrandProps from './BrandProps'
-import BrandView from './BrandView'
+import BrandProps from './types/BrandProps'
+import renderBrand from './view/renderBrand'
 
 // --- Brand --------------------------------------------------------
 
@@ -41,7 +41,7 @@ const Brand = defineComponent<BrandProps>({
   },
 
   render(props) {
-    return BrandView(props)
+    return renderBrand(props)
   }
 })
 

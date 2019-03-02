@@ -2,8 +2,8 @@
 import { defineComponent } from 'js-react-utils'
 
 // internal imports
-import UserMenuProps from './UserMenuProps'
-import UserMenuView from './UserMenuView'
+import UserMenuProps from './types/UserMenuProps'
+import renderUserMenu from './view/renderUserMenu'
 
 // --- UserMenu -----------------------------------------------------
 
@@ -21,7 +21,7 @@ const UserMenu = defineComponent<UserMenuProps>({
   },
 
   render(props) {
-    return UserMenuView(props)
+    return renderUserMenu(props)
   }
 })
 

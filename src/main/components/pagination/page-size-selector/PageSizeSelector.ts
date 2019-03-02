@@ -3,9 +3,9 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import { PAGE_SIZE_OPTIONS } from './constants'
-import PageSizeSelectorProps from './PageSizeSelectorProps'
-import PageSizeSelectorView from './PageSizeSelectorView'
+import { PAGE_SIZE_OPTIONS } from '../misc/constants'
+import PageSizeSelectorProps from './types/PageSizeSelectorProps'
+import renderPageSizeSelector from './view/renderPageSizeSelector'
 
 // --- PageSizeSelector ---------------------------------------------
 
@@ -24,8 +24,8 @@ const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
     }
   },
 
-  render(props: PageSizeSelectorProps) {
-    return PageSizeSelectorView(props)
+  render(props) {
+    return renderPageSizeSelector(props)
   }
 })
 

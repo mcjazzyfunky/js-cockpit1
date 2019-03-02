@@ -2,9 +2,9 @@
 import { Spec } from 'js-spec'
 
 // internal imports
-import HBoxProps from './HBoxProps'
-import HBoxCellProps from './HBoxCellProps'
-import HBoxView from './HBoxView'
+import HBoxProps from './types/HBoxProps'
+import HBoxCellProps from './types/HBoxCellProps'
+import renderHBox from './view/renderHBox'
 import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 
 // --- HBox.Cell ----------------------------------------------------
@@ -72,7 +72,7 @@ const HBox = defineComponent<HBoxProps>({
   },
 
   render(props) {
-    return HBoxView(props)
+    return renderHBox(props)
   }
 })
 
