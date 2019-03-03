@@ -5,78 +5,14 @@ import { css, ActionButton, Callout, CommandBar, ITheme, SearchBox } from 'offic
 import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 
 // internal imports
+import styleDataExplorerSearchBar from './styleDataExplorerSearchBar'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerStore from '../types/DataExplorerStore'
-import defineStyle from '../../../../styling/defineStyle'
-import DataExplorerFilter from '../types/DataExplorerFilter';
+import DataExplorerFilter from '../types/DataExplorerFilter'
+import DataExplorerFilterPanel from './DataExplorerFilterPanel'
 
 // derived imports
 const { useCallback, useRef, useState } = React
-
-// --- styleSearchBar -----------------------------------------------
-
-const styleSearchBar = defineStyle((theme: ITheme) => ({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-
-  searchBox: {
-    width: '220px',
-    height: '30px',
-    paddingRight: '2px',
-  },
-
-  advancedFilter: {
-    margin: '0 16px',
-
-    selectors: {
-      '& *': {
-        color: theme.palette.black,
-        backgroundColor: 'transparent !important',
-      },
-
-      '&:hover': {
-        backgroundColor: theme.palette.neutralLight
-      },
-      
-      '&:active': {
-        backgroundColor: theme.palette.neutralQuaternary
-      }
-     }
-  },
-
-  filterButton: {
-    height: '30px',
-    marginLeft: '8px',
-
-    selectors: {
-      ':hover': {
-        color: theme.palette.white,
-        backgroundColor: theme.palette.neutralLight,
-      },
-      
-      ':active': {
-        color: theme.palette.white + ' !important',
-        backgroundColor: theme.palette.neutralQuaternary,
-      }
-    }
-  },
-
-  filterButtonActive: {
-    color: theme.palette.white + ' !important',
-    backgroundColor: theme.palette.neutralQuaternary,
-  },
-
-  icon: {
-    color: theme.palette.themePrimary + ' !important' // TODO
-  },
-
-  filterContainer: {
-    width: '400px',
-    minHeight: '200px'
-  }
-}))
 
 // --- SearchBar ----------------------------------------------------
 
@@ -116,7 +52,7 @@ const SearchBar = defineComponent<SearchBarProps>({
         store.loadFilter(filter, props.loadData, () => {}) // TODO
       }, null)
 
-    return styleSearchBar(classes => {
+    return styleDataExplorerSearchBar(classes => {
       const filterButtonClassName =
         state.advancedFilterActive || state.calloutVisible
           ? css(classes.filterButton, classes.filterButtonActive) 
@@ -167,7 +103,7 @@ const SearchBar = defineComponent<SearchBarProps>({
                 onDismiss={ () => closeCallout()}
               >
                 <div className={classes.filterContainer}>
-                  <FilterPanel/> 
+                  <DataExplorerFilterPanel dataExplorerProps={props} dataExplorerStore={store}/> 
                 </div>
                 <CommandBar
                   items={[
@@ -221,16 +157,6 @@ const SearchBar = defineComponent<SearchBarProps>({
         calloutVisible: false
       })
     }
-  }
-})
-
-// --- FilterPanel --------------------------------------------------
-
-const FilterPanel = defineComponent({
-  displayName: 'FilterPanel',
-
-  render() {
-    return 'Filters'
   }
 })
 
