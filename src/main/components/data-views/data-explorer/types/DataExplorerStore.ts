@@ -2,6 +2,7 @@
 import { Observable } from 'rxjs'
 
 // internal imports
+import DataExplorerFilter from './DataExplorerFilter'
 import DataExplorerQueryParams from './DataExplorerQueryParams'
 import DataExplorerQueryResult from './DataExplorerQueryResult'
 
@@ -15,6 +16,7 @@ type DataExplorerStore = {
   pageSize: number,
   sortBy: string | null,
   sortDir: 'asc' | 'desc',
+  filter: DataExplorerFilter,
   totalItemCount: number | null,
   rowSelection: number[],
   data: any[],
@@ -38,6 +40,12 @@ type DataExplorerStore = {
   loadSorting(
     sortBy: string,
     sortDir: 'asc' | 'desc',
+    loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
+    onSuccess: () => void
+  ): void,
+
+  loadFilter(
+    filter: DataExplorerFilter | null,
     loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
     onSuccess: () => void
   ): void

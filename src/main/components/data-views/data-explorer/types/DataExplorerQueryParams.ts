@@ -1,3 +1,6 @@
+// internal imports
+import DataExplorerFilter from './DataExplorerFilter'
+
 // --- DataExplorerQueryParams -------------------------------------
 
 type DataExplorerQueryParams = {
@@ -5,11 +8,7 @@ type DataExplorerQueryParams = {
   count: number,
   sortBy: string | null,
   sortDir: 'asc' | 'desc',
-  
-  filter?: {
-    operator: 'and',
-    operands: { type: 'default', name: string, value: any }[]
-  }
+  filter: DataExplorerFilter | null  
 }
 
 // --- exports ------------------------------------------------------

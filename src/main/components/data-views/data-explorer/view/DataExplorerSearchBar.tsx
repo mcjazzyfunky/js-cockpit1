@@ -8,9 +8,10 @@ import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerStore from '../types/DataExplorerStore'
 import defineStyle from '../../../../styling/defineStyle'
+import DataExplorerFilter from '../types/DataExplorerFilter';
 
 // derived imports
-const { useRef, useState } = React
+const { useCallback, useRef, useState } = React
 
 // --- styleSearchBar -----------------------------------------------
 
@@ -94,7 +95,26 @@ const SearchBar = defineComponent<SearchBarProps>({
         advancedFilterActive: false
       }),
 
-      advancedFilterRef = useRef(null)
+      advancedFilterRef = useRef(null),
+
+      handleSearch = useCallback(value => {
+        const
+          searchText = value.trim(),
+
+          filter: DataExplorerFilter = searchText.length === 0
+            ? null
+            : {
+                operator: 'and',
+
+                operands: [{
+                  type: 'default',
+                  name: 'fullText',
+                  value: searchText
+                }]
+              }
+
+        store.loadFilter(filter, props.loadData, () => {}) // TODO
+      }, null)
 
     return styleSearchBar(classes => {
       const filterButtonClassName =
@@ -110,6 +130,7 @@ const SearchBar = defineComponent<SearchBarProps>({
                 placeholder="Search..."
                 className={classes.searchBox}
                 disableAnimation={true}
+                onSearch={handleSearch} 
               />
           }
           <div className={classes.advancedFilter} ref={ advancedFilterRef }>
