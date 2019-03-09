@@ -27,7 +27,8 @@ const MenuBar = defineComponent<MenuBarProps>({
   }
 })
 
-// locals
+// --- locals -------------------------------------------------------
+
 const specItems =
   Spec.lazy(() =>
     Spec.arrayOf(
@@ -41,6 +42,7 @@ const specItems =
             then:
               Spec.strictShape({
                 type: Spec.is('menu'),
+                id: Spec.string,
                 text: Spec.string,
                 items: specItems 
               })
@@ -51,6 +53,7 @@ const specItems =
             then:
               Spec.strictShape({
                 type: Spec.is('item'),
+                id: Spec.string,
                 text: Spec.string,
                 disabled: Spec.optional(Spec.boolean),
                 onAction: Spec.optional(Spec.function)

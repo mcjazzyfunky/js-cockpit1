@@ -1,84 +1,11 @@
 // external imports
 import { ComponentType } from 'react'
-import { defineComponent, isElementOfType, withChildren } from 'js-react-utils'
+import { defineComponent, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import DataFormProps from './DataFormProps'
-import DataFormActionProps from './DataFormActionProps'
-import DataFormActionMenuProps from './DataFormActionMenuProps'
-import DataFormActionsProps from './DataFormActionsProps'
-import DataFormView from './DataFormView'
-
-// --- DataForm.Action ----------------------------------------------
-
-const Action = defineComponent<DataFormActionProps>({
-  displayName: 'DataForm.Action',
-
-  properties: {
-    text: {
-      type: String,
-      required: true
-    },
-
-    onAction: {
-      type: Function
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type DataForm.Action can only be used as children '
-        + 'of DataForm components')
-  }
-})
-
-// --- DataForm.ActionMenu ------------------------------------------
-
-const ActionMenu: ComponentType<DataFormActionMenuProps> = defineComponent<DataFormActionMenuProps>({
-  displayName: 'DataForm.ActionMenu',
-
-  properties: {
-    text: {
-      type: String,
-      required: true
-    },
-
-    children: {
-      validate:
-        withChildren(
-          Spec.all(
-            Spec.lazy(() => isElementOfType([Action, ActionMenu]))))
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type DataForm.ActionMenu can only be used as children '
-        + 'of DataForm.Actions or DataForm.ActionMenu components')
-  }
-})
-
-
-// --- DataForm.Actions ---------------------------------------------
-
-const Actions = defineComponent<DataFormActionsProps>({
-  displayName: 'DataForm.Actions',
-
-  properties: {
-    children: {
-      validate:
-        withChildren(
-          Spec.all(Spec.any))
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type DataForm.Actions can only be used as children '
-        + 'of DataForm components')
-  }
-})
+import DataFormProps from './types/DataFormProps'
+import renderDataForm from './view/renderDataForm'
 
 // --- DataForm -----------------------------------------------------
 
@@ -86,33 +13,43 @@ const DataForm = defineComponent<DataFormProps>({
   displayName: 'DataForm',
 
   properties: {
-    headline: {
+    title: {
       type: String,
       required: true
     },
 
-    onAction: {
-      type: Function
+    actions: {
+      type: Array,
+
+      validate:
+        Spec.arrayOf(
+          Spec.and(
+            Spec.prop('type', Spec.oneOf('action')),
+            Spec.or({
+              when: Spec.prop('type', Spec.is('action')),
+
+              then:
+                Spec.strictShape({
+                  type: Spec.is('action'),
+                  text: Spec.string,
+                  icon: Spec.optional(isNode)
+                })
+            })
+          )
+        )
     },
 
     children: {
       validate:
-        withChildren(
-          Spec.all(
-            isElementOfType([Action, ActionMenu])
-          ))
+        withChildren(isNode)
     }
   },
 
   render(props) {
-    return DataFormView(props)
+    return renderDataForm(props)
   }
 })
 
 // --- exports ------------------------------------------------------
 
-export default Object.assign(DataForm, {
-  Action,
-  ActionMenu,
-  Actions
-})
+export default DataForm

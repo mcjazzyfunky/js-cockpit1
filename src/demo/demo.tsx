@@ -98,18 +98,9 @@ function Demo() {
     </DataExplorer>
 
   const dataForm =
-    <DataForm headline="My DataForm">
-      <DataForm.Actions>
-        <DataForm.Action
-          text="Save"
-        /> 
-        <DataForm.Action
-          text="Clone"
-        /> 
-        <DataForm.Action
-          text="Delete"
-        /> 
-      </DataForm.Actions>
+    <DataForm
+      title="My DataForm"
+    >
     </DataForm>
 
   const cockpit =
@@ -150,6 +141,7 @@ function Demo() {
           items={[
             {
               type: 'menu',
+              id: '1',
               text: 'Users',
               
               items: [
@@ -161,6 +153,7 @@ function Demo() {
             },
             {
               type: 'menu',
+              id: '2',
               text: 'Content',
               
               items: [
@@ -172,6 +165,7 @@ function Demo() {
             },
             {
               type: 'menu',
+              id: '3',
               text: 'Media',
               
               items: [
@@ -181,6 +175,7 @@ function Demo() {
 
                 {
                   type: 'menu',
+                  id: '3.4',
                   text: 'Item-3.4',
 
                   items: [
@@ -191,6 +186,7 @@ function Demo() {
             },
             {
               type: 'menu',
+              id: '4',
               text: 'Help',
               
               items: [
@@ -229,7 +225,7 @@ function Demo() {
       </Cockpit.SideNav>
       */}
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 

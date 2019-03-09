@@ -10,14 +10,15 @@ type MenuBarProps = {
 
 type Menu = {
   type: 'menu',
+  id: string, 
   text: string,
   items: (Menu | Item)[] 
 }
 
 type Item = {
   type: 'item',
+  id: string,
   text: string,
-  id?: string,
   disabled?: boolean,
   onAction?: () => void
 }

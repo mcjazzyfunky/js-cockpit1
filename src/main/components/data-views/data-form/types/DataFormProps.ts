@@ -4,9 +4,17 @@ import { ReactNode } from 'react'
 // --- DataFormProps ------------------------------------------------
 
 type DataFormProps = {
-  headline: string,
-  onAction?: () => void // TODO,
-  children: any // TODO
+  title?: string,
+  actions?: (Action)[],
+  children?: ReactNode
+}
+
+// --- locals -------------------------------------------------------
+
+type Action = {
+  type: 'action',
+  title: string,
+  icon?: ReactNode
 }
 
 // --- exports ------------------------------------------------------
