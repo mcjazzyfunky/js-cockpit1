@@ -1,6 +1,7 @@
 // external imports
 import React from 'react'
-import { IoMdPerson as DefaultAvatarIcon } from 'react-icons/io'
+//import { IoMdPerson as DefaultAvatarIcon } from 'react-icons/io'
+import { FiUser as DefaultAvatarIcon } from 'react-icons/fi'
 
 // internal imports
 import styleUserMenu from './styleUserMenu'
