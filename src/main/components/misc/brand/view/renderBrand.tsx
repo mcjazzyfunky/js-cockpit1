@@ -1,7 +1,8 @@
 // external imports
 import React from 'react'
 import { css } from 'office-ui-fabric-react' 
-import { FiLoader  as DefaultLogo } from 'react-icons/fi'
+//import { FiBox  as DefaultLogo } from 'react-icons/fi'
+import { IoIosCloudOutline  as DefaultLogo } from 'react-icons/io'
 
 // internal imports
 import styleBrand from './styleBrand'

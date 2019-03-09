@@ -10,7 +10,9 @@ const styleUserMenu = defineStyle({
   },
 
   avatar: {
-    margin: '0 1rem',
+    width: '20px',
+    height: '20px',
+    margin: '0 0.5rem',
   },
 
   displayName: {
