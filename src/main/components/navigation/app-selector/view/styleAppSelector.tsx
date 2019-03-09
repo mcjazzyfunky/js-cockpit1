@@ -27,7 +27,6 @@ const styleAppSelector = defineStyle(theme => ({
   callout: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '1px',
     minWidth: '300px',
     boxSizing: 'border-box',
   },
@@ -47,7 +46,7 @@ const styleAppSelector = defineStyle(theme => ({
       },
 
       ':hover': {
-        backgroundColor: theme.palette.neutralLight,
+        backgroundColor: theme.palette.neutralLighter,
       }
     }
   },
