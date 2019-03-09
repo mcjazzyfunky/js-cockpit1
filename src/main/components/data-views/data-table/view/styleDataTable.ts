@@ -149,8 +149,8 @@ const styleDataTable = defineStyle(theme => ({
   selectedRow: {
     boxSizing: 'border-box',
     height: '2em',
-    //backgroundColor: theme.palette.themeLighterAlt
-    backgroundColor: 'rgb(255, 244, 202)'
+    backgroundColor: theme.palette.themeLighter
+    //backgroundColor: 'rgb(255, 244, 202)'
   }
 }))
 

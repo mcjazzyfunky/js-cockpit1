@@ -56,16 +56,16 @@ const styleLoginForm = defineStyle(theme => ({
     borderWidth: '0 0 1px 0',
     borderStyle: 'solid',
     borderColor: theme.palette.neutralQuaternaryAlt,
-    padding: '0.5rem 1.5rem',
+    padding: '0.75rem 1.5rem',
     textAlign: 'center',
     fontSize: theme.fonts.xLarge.fontSize,
     color: theme.palette.themePrimary,
   },
 
   defaultIcon: {
-    height: '50px',
-    width: '50px',
-    color: theme.palette.themeSecondary,
+    height: '40px',
+    width: '40px',
+    color: theme.palette.themePrimary,
   },
 
   content: {

@@ -2,7 +2,8 @@
 import React, { ReactNode, ReactElement, CSSProperties} from 'react'
 import { isElementOfType } from 'js-react-utils'
 import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
-import { IoIosContact as DefaultIcon } from 'react-icons/io'
+//import { IoIosContact as DefaultIcon } from 'react-icons/io'
+import { FiUser as DefaultIcon } from 'react-icons/fi'
 
 // internal imports
 import styleLoginForm from './styleLoginForm'
