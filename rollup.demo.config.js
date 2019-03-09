@@ -10,7 +10,7 @@ export default {
   output: {
     file: './build/demo.js',
     format: 'umd',
-    name: 'jsCockpit',
+    name: 'jsCockpitDemo',
 
     globals: {
       'react': 'React',
@@ -21,29 +21,16 @@ export default {
       'js-spec/dev-only': 'jsSpec',
       'office-ui-fabric-react': 'Fabric',
       'react-virtualized': 'ReactVirtualized',
+      'rxjs': 'rxjs',
       'faker': 'Faker'
     },
   },
 
-  external: ['react', 'react-dom', 'js-react-utils', 'js-react-store', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react', 'react-virtualized'],
-
+  external: ['react', 'react-dom', 'js-react-utils', 'js-react-store', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react', 'react-virtualized', 'rxjs'],
 
   plugins: [
     resolve(),
-    commonjs({
-      include: 'node_modules/**',
-    }),
-    /*
-  
-    resolve({
-      main: true,
-      module: true,
-      jsnext: true,
-    }),
-    //commonjs({
-   //   include: 'node_modules/**',
-   // }),
-   */
+    commonjs(),
     replace({
       exclude: 'node_modules/**', // TODO
       

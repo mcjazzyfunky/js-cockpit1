@@ -182,6 +182,7 @@ function Demo() {
           ]}
         />
       </Cockpit.Menu>
+      {/*
       <Cockpit.SideNav>
         <SideNav
           activeItemId="userGroups"
@@ -208,6 +209,7 @@ function Demo() {
           ]}
         />
       </Cockpit.SideNav>
+      */}
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}
       </Cockpit.Center>

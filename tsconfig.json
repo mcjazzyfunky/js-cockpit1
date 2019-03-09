@@ -6,7 +6,7 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "lib": ["es7", "dom"],
     "esModuleInterop": true,
     "typeRoots": [
