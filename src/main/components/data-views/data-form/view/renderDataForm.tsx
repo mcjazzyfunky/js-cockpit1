@@ -18,8 +18,13 @@ type DataFormClasses = CssClassesOf<typeof styleDataForm>
 function renderDataForm(props: DataFormProps) {
   return styleDataForm(classes => {
     return (
-      <div className={classes.container}>
-        { renderHeader(props, classes) } 
+      <div>
+        <div className={classes.container}>
+          { renderHeader(props, classes) } 
+        </div>
+        <div>
+          { props.children }
+        </div>
       </div>
     )
   })

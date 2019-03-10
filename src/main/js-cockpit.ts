@@ -14,6 +14,8 @@ import HBoxProps from './components/layout/hbox/types/HBoxProps'
 import LoginForm from './components/login/login-form/LoginForm'
 import MenuBar from './components/navigation/menu-bar/MenuBar'
 import SideNav from './components/navigation/side-nav/SideNav'
+import Section from './components/layout/section/Section'
+import SectionProps from './components/layout/section/types/SectionProps'
 import UserMenu from './components/login/user-menu/UserMenu'
 import VBox from './components/layout/vbox/VBox'
 import VBoxProps from './components/layout/vbox/types/VBoxProps'
@@ -30,6 +32,8 @@ export {
   HBoxProps,
   VBox,
   VBoxProps,
+  Section,
+  SectionProps,
   
   // navigation components
   AppSelector,

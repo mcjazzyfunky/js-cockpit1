@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, SideNav, LoginForm, MenuBar, Cockpit, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, MenuBar, Cockpit, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -107,6 +107,10 @@ function Demo() {
         { type: 'default', text: 'Delete', icon: <FiTrash2/> }
       ]}
     >
+      <Section title="Section-1">
+      </Section>
+      <Section title="Section-2">
+      </Section>
     </DataForm>
 
   const cockpit =

@@ -1,11 +1,11 @@
 // external imports 
+import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
+import renderHBox from './view/renderHBox'
 import HBoxProps from './types/HBoxProps'
 import HBoxCellProps from './types/HBoxCellProps'
-import renderHBox from './view/renderHBox'
-import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 
 // --- HBox.Cell ----------------------------------------------------
 
