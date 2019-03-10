@@ -97,7 +97,7 @@ const styleLoginForm = defineStyle(theme => ({
 
   above: {
     fontSize: theme.fonts.mediumPlus.fontSize,
-    color: theme.palette.neutralSecondaryAlt,
+    color: theme.palette.neutralSecondary,
     padding: '1.25rem 0',
     textAlign: 'center',
   },

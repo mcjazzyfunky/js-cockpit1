@@ -240,7 +240,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit 
+  return cockpit
 }
 
 function fakeData(count: number) {
