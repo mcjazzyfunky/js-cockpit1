@@ -12,7 +12,7 @@ type DataExplorerProps = {
   title?: string,
   loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>, // TODO
   columns: Column[],
-  actions: (GeneralAction | SingleRowAction | MultiRowAction)[],
+  actions: (DefaultAction | SingleRowAction | MultiRowAction)[],
 
   search?: {
     type: 'default',
@@ -39,21 +39,21 @@ type Column = {
   width?: number
 }
 
-type GeneralAction = {
-  type: 'general',
-  title: string,
+type DefaultAction = {
+  type: 'default',
+  text: string,
   icon?: ReactNode
 }
 
 type SingleRowAction = {
   type: 'singleRow',
-  title: string,
+  text: string,
   icon?: ReactNode
 }
 
 type MultiRowAction = {
   type: 'multiRow',
-  title: string,
+  text: string,
   icon?: ReactNode
 }
 type TextFilter = {

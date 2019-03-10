@@ -12,9 +12,10 @@ type DataFormProps = {
 // --- locals -------------------------------------------------------
 
 type Action = {
-  type: 'action',
-  title: string,
-  icon?: ReactNode
+  type: 'default',
+  text: string,
+  icon?: ReactNode,
+  disabled?: boolean
 }
 
 // --- exports ------------------------------------------------------

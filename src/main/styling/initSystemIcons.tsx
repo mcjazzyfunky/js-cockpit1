@@ -7,6 +7,10 @@ import SearchIcon from '../system-icons/SearchIcon'
 import ClearIcon from '../system-icons/ClearIcon'
 
 export default function initSystemIcons() {
+  if (alreadyRegistered) {
+    return
+  }
+
   registerIcons({
     icons: {
       'add': '[add]',
@@ -26,3 +30,7 @@ export default function initSystemIcons() {
     }
   })
 }
+
+// --- locals -------------------------------------------------------
+
+let alreadyRegistered = false

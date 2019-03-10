@@ -5,14 +5,14 @@ import { ReactNode } from 'react'
 
 type MenuBarProps = {
   onAction?: () => void,
-  items: (Menu | Item)[]
+  items: (Menu | Item | Divider)[]
 }
 
 type Menu = {
   type: 'menu',
   id: string, 
   text: string,
-  items: (Menu | Item)[] 
+  items: (Menu | Item | Divider)[] 
 }
 
 type Item = {
@@ -21,6 +21,10 @@ type Item = {
   text: string,
   disabled?: boolean,
   onAction?: () => void
+}
+
+type Divider = {
+  type: 'divider'
 }
 
 // --- exports ------------------------------------------------------

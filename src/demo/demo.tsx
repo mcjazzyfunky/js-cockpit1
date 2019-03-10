@@ -70,9 +70,9 @@ function Demo() {
       ]}
 
       actions={[
-        { type: 'general', title: 'Add', icon: <FiPlus/> },
-        { type: 'singleRow', title: 'Edit', icon: <FiEdit/> },
-        { type: 'multiRow', title: 'Delete', icon: <FiTrash2/> }
+        { type: 'default', text: 'Add', icon: <FiPlus/> },
+        { type: 'singleRow', text: 'Edit', icon: <FiEdit/> },
+        { type: 'multiRow', text: 'Delete', icon: <FiTrash2/> }
       ]}
 
       search={{
@@ -100,6 +100,12 @@ function Demo() {
   const dataForm =
     <DataForm
       title="My DataForm"
+      
+      actions={[
+        { type: 'default', text: 'Add', icon: <FiPlus/> },
+        { type: 'default', text: 'Edit', icon: <FiEdit/> },
+        { type: 'default', text: 'Delete', icon: <FiTrash2/> }
+      ]}
     >
     </DataForm>
 
@@ -160,6 +166,7 @@ function Demo() {
                 { type: 'item', id: '2.1', text: 'Item-2.1'},
                 { type: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
                 { type: 'item', id: '2.3', text: 'Item-2.3'},
+                { type: 'divider' },
                 { type: 'item', id: '2.4', text: 'Item-2.4'},
               ]
             },

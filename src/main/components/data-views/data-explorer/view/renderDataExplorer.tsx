@@ -232,7 +232,7 @@ function renderActionBar(
 
     items.push({
       key: String(idx),
-      text: action.title,
+      text: action.text,
       iconProps,
       disabled,
       className: actionButtonClassName,

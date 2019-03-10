@@ -55,17 +55,26 @@ function getItemProps(items: any, baseOnAction: any) { // TODO
       onClick = () => baseOnAction()
     }
 
-    const item = {
-      key: Math.random(),
-      text: child.text,
-      disabled: !!child.disabled,
-      subMenuProps: null as any,
-      onClick
+    let item: any = {
     }
 
-    if (child && child.items) {
-      item.subMenuProps = {
-        items: getItemProps(child.items, baseOnAction),
+    if (child.type === 'divider') {
+      item = {
+        text: '-'
+      }
+    } else {
+      item = {
+        key: Math.random(),
+        text: child.text,
+        disabled: !!child.disabled,
+        subMenuProps: null as any,
+        onClick
+      }
+
+      if (child && child.items) {
+        item.subMenuProps = {
+          items: getItemProps(child.items, baseOnAction),
+        }
       }
     }
 

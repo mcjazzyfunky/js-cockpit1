@@ -46,7 +46,13 @@ const styleAppSelector = defineStyle(theme => ({
       },
 
       ':hover': {
-        backgroundColor: theme.palette.neutralLighter,
+        color: theme.palette.themeDarker,
+        backgroundColor: theme.palette.themeLighter,
+      },
+      
+      ':active': {
+        color: theme.palette.themeDarker,
+        backgroundColor: theme.palette.themeLight,
       }
     }
   },

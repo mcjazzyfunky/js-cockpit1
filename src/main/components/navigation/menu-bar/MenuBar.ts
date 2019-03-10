@@ -33,7 +33,7 @@ const specItems =
   Spec.lazy(() =>
     Spec.arrayOf(
       Spec.and(
-        Spec.prop('type', Spec.oneOf('menu', 'item')),
+        Spec.prop('type', Spec.oneOf('menu', 'item', 'divider')),
 
         Spec.or(
           {
@@ -57,6 +57,14 @@ const specItems =
                 text: Spec.string,
                 disabled: Spec.optional(Spec.boolean),
                 onAction: Spec.optional(Spec.function)
+              })
+          },
+          {
+            when: Spec.prop('type', Spec.is('divider')),
+
+            then:
+              Spec.strictShape({
+                type: Spec.is('divider')
               })
           }
         ))))

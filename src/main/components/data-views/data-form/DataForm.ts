@@ -24,13 +24,13 @@ const DataForm = defineComponent<DataFormProps>({
       validate:
         Spec.arrayOf(
           Spec.and(
-            Spec.prop('type', Spec.oneOf('action')),
+            Spec.prop('type', Spec.oneOf('default')),
             Spec.or({
-              when: Spec.prop('type', Spec.is('action')),
+              when: Spec.prop('type', Spec.is('default')),
 
               then:
                 Spec.strictShape({
-                  type: Spec.is('action'),
+                  type: Spec.is('default'),
                   text: Spec.string,
                   icon: Spec.optional(isNode)
                 })

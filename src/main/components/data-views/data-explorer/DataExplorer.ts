@@ -52,8 +52,8 @@ const DataExplorer = defineComponent<DataExplorerProps>({
         Spec.arrayOf(
           Spec.and(
             Spec.strictShape({
-              type: Spec.oneOf('general', 'singleRow', 'multiRow'),
-              title: Spec.string,
+              type: Spec.oneOf('default', 'singleRow', 'multiRow'),
+              text: Spec.string,
               icon: Spec.optional(isNode)
             })))
     },
