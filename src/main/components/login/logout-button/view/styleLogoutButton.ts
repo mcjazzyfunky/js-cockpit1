@@ -22,10 +22,7 @@ const styleLogoutButton = defineStyle(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    //borderWidth: '0 0 0 0.5px',
-    //borderStyle: 'solid',
-    //borderColor: Color(theme.palette.themePrimary).lighten(0.5),
-    
+
     selectors: {
       '&:hover': {
         backgroundColor: Color(theme.palette.themePrimary).darken(0.2)
