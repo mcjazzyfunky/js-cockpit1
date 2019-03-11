@@ -20,6 +20,10 @@ const styleSideNav = defineStyle(theme => ({
     borderStyle: 'solid',
 
     selectors: {
+      '*': {
+        color: theme.palette.neutralDark,
+      },
+
       '.ms-Nav-groupContent': {
         backgroundColor: 'transparent',
         padding: '0 !important',
@@ -28,12 +32,12 @@ const styleSideNav = defineStyle(theme => ({
       },
     
       '.ms-Nav-navItems *': {
-        backgroundColor: 'transparent !important',
+      //  backgroundColor: 'transparent !important',
       },
 
       '& .ms-Nav-chevronButton': {
         fontSize: theme.fonts.mediumPlus.fontSize,
-        color: theme.palette.neutralDark,
+        //color: theme.palette.neutralDark,
         backgroundColor: 'transparent',
 
         borderWidth: '0 0 1px 0',
@@ -43,19 +47,19 @@ const styleSideNav = defineStyle(theme => ({
 
         selectors: {
           ':hover': {
-            backgroundColor: theme.palette.neutralLight, 
+            //backgroundColor: theme.palette.neutralLight, 
           }
         }
       },
-      
+
       '.ms-Nav-compositeLink.is-expanded': {
         selectors: {
           ':hover': {
-            backgroundColor: theme.palette.neutralLight + ' !important',
+            //backgroundColor: theme.palette.neutralLight + ' !important',
           },
           
           ':active': {
-            backgroundColor: theme.palette.neutralQuaternary + ' !important',
+            //backgroundColor: theme.palette.neutralQuaternary + ' !important',
           }
         }
       },
@@ -69,8 +73,8 @@ const styleSideNav = defineStyle(theme => ({
 
         selectors: {
           '*': {
-            color: theme.palette.black + ' !important',
-            fontWeight: '600 !important',
+            //color: theme.palette.black + ' !important',
+            //fontWeight: '600 !important',
             cursor: 'default !important',
           },
 
@@ -79,8 +83,8 @@ const styleSideNav = defineStyle(theme => ({
           },
 
           ':hover *': {
-            color: theme.palette.black + ' !important',
-            backgroundColor: theme.palette.themeLighterAlt + ' !important',
+            //color: theme.palette.black + ' !important',
+            //backgroundColor: theme.palette.themeLighterAlt + ' !important',
           }
         }
       }
