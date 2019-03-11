@@ -265,7 +265,7 @@ function Demo() {
         />
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 

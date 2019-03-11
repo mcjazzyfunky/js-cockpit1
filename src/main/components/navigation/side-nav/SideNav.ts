@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import SideNavProps from './types/SideNavProps'
-import SideNavView from './renderSideNav'
+import renderSideNav from './view/renderSideNav'
 
 // --- SideNav ------------------------------------------------------
 
@@ -24,7 +24,7 @@ const SideNav = defineComponent<SideNavProps>({
   },
 
   render(props) {
-    return SideNavView(props)
+    return renderSideNav(props)
   }
 })
 
