@@ -21,7 +21,9 @@ function renderTabs(props: TabsProps) {
             Children.map(props.children, (page: ReactElement<TabsPageProps>) => {
               return (
                 <PivotItem headerText={page.props.title}>
-                   {page.props.children}
+                  <div className={classes.page}>
+                    {page.props.children}
+                  </div>
                 </PivotItem>
               )
             })

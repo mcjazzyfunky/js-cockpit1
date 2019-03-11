@@ -37,6 +37,22 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       flexGrow: 1,
       padding: '0 2rem 0.2rem 4rem',
       whiteSpace: 'nowrap',
+
+      selectors: {
+        '& [data-component=MenuBar] [data-component="MenuBar:icon"]': {
+          display: 'block !important'
+        },
+        
+        '& [data-component=MenuBar] [data-component="MenuBar:icon"] *': {
+          color: theme.palette.themeSecondary + ' !important'
+        },
+
+        '& [data-component=MenuBar] *': {
+           color: theme.palette.white,
+           backgroundColor: 'transparent !important',
+           borderStyle: 'hidden !important',
+        }
+      }
     },
 
     headerEnd: {
@@ -45,6 +61,12 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       whiteSpace: 'nowrap',
 
       selectors: {
+        '& > div': {
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        },
+
         '& > *': {
           marginLeft: '0.9rem'
         }
@@ -80,32 +102,6 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       }
     },
 
-    logoutButton: {
-      color: theme.palette.white,
-      backgroundColor: theme.palette.themePrimary,
-      border: 'none',
-      width: '46px',
-      height: '46px',
-      textAlign: 'center',
-      verticalAlign: 'middle',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      //borderWidth: '0 0 0 0.5px',
-      //borderStyle: 'solid',
-      //borderColor: Color(theme.palette.themePrimary).lighten(0.5),
-     
-      selectors: {
-        '&:hover': {
-          backgroundColor: Color(theme.palette.themePrimary).darken(0.2)
-        },
- 
-        '&:active': {
-          backgroundColor: Color(theme.palette.themePrimary).darken(0.1)
-        }
-      }
-    }
   }
 })
 

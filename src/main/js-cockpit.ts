@@ -12,6 +12,8 @@ import DataTable from './components/data-views/data-table/DataTable'
 import HBox from './components/layout/hbox/HBox'
 import HBoxProps from './components/layout/hbox/types/HBoxProps'
 import LoginForm from './components/login/login-form/LoginForm'
+import LogoutButton from './components/login/logout-button/LogoutButton'
+import LogoutButtonProps from './components/login/logout-button/types/LogoutButtonProps'
 import MenuBar from './components/navigation/menu-bar/MenuBar'
 import SideNav from './components/navigation/side-nav/SideNav'
 import Section from './components/layout/section/Section'
@@ -62,6 +64,8 @@ export {
   
   // login
   LoginForm,
+  LogoutButton,
+  LogoutButtonProps,
   UserMenu,
   
   // misc components

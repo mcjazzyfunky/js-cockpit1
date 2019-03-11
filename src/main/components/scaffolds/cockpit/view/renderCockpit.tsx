@@ -5,23 +5,17 @@ import React, { ReactNode } from 'react'
 import styleCockpit from './styleCockpit'
 import Cockpit from '../Cockpit'
 import CockpitProps from '../types/CockpitProps'
-import LogoutIcon from './LogoutIcon'
 
 // --- renderCockpit ------------------------------------------------
 
 function renderCockpit(props: CockpitProps) {
-  const
-    onLogout = React.useCallback(
-      () => props.onLogout ? props.onLogout() : null, [props.onLogout])
-
   let
     brand: ReactNode = null,
     topNav: ReactNode = null,
     userNav: ReactNode = null,
     menu: ReactNode = null,
     sideNav: ReactNode = null,
-    Center: ReactNode = null,
-    logoutButton: ReactNode = null
+    Center: ReactNode = null
 
   const getContent = (child: any, type: any) => {
     let ret = null
@@ -32,7 +26,7 @@ function renderCockpit(props: CockpitProps) {
 
       ret =
         <div
-          className={child.props.chlassName}
+          className={child.props.className}
           style={child.props.style}
         >
           {child.props.children}
@@ -52,13 +46,6 @@ function renderCockpit(props: CockpitProps) {
   })
 
   return styleCockpit(classes => {
-    if (props.onLogout) {
-      logoutButton =
-        <button className={classes.logoutButton}>
-          <LogoutIcon/> 
-        </button>
-    }
-
     return (
       <div className={classes.cockpit}>
         <div className={classes.header}>
@@ -70,7 +57,6 @@ function renderCockpit(props: CockpitProps) {
           </div>
           <div className={classes.headerEnd}>
             {userNav}
-            {logoutButton}
           </div>
         </div>
         <div>

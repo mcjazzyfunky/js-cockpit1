@@ -4,7 +4,6 @@ import { ReactNode } from 'react'
 // --- CockpitProps -------------------------------------------
 
 type CockpitProps = {
-  onLogout?: () => void,
   children?: ReactNode // TODO
 }
 

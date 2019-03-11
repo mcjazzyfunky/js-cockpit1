@@ -15,7 +15,11 @@ const styleSection = defineStyle(theme => ({
   },
 
   content: {
-    padding: '0 0 0 1rem'
+    padding: '0 0 0 1rem',
+  },
+
+  page: {
+    margin: '0.5rem 0 0 0',
   }
 }))
 

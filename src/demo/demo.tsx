@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -41,6 +41,93 @@ if (true) {
       white: '#ffffff',
     }
   })
+}
+
+function MainMenuBar() {
+  return (
+    <MenuBar
+      onAction={() => alert('Juhu')}
+
+      items={[
+        {
+          type: 'menu',
+          id: '1',
+          text: 'Users',
+          
+          items: [
+            { type: 'item', id: '1.1', text: 'Item-1.1'},
+            { type: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
+            { type: 'item', id: '1.3', text: 'Item-1.3'},
+            { type: 'item', id: '1.4', text: 'Item-1.4'},
+          ]
+        },
+        {
+          type: 'menu',
+          id: '2',
+          text: 'Content',
+          
+          items: [
+            { type: 'item', id: '2.1', text: 'Item-2.1'},
+            { type: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
+            { type: 'item', id: '2.3', text: 'Item-2.3'},
+            { type: 'divider' },
+            { type: 'item', id: '2.4', text: 'Item-2.4'},
+          ]
+        },
+        {
+          type: 'menu',
+          id: '3',
+          text: 'Media',
+          
+          items: [
+            { type: 'item', id: '3.1', text: 'Item-3.1'},
+            { type: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
+            { type: 'item', id: '3.3', text: 'Item-3.3'},
+
+            {
+              type: 'menu',
+              id: '3.4',
+              text: 'Item-3.4',
+
+              items: [
+                { type: 'item', id: '3.4.1', text: 'Item-3.4.1' }
+              ]
+            },
+          ]
+        },
+        {
+          type: 'menu',
+          id: '4',
+          text: 'Help',
+          
+          items: [
+            { type: 'item', id: '4.1', text: 'About...'},
+          ]
+        }
+      ]}
+    />
+  )
+}
+
+function MainAppSelector() {
+  return (
+    <AppSelector
+      apps={[
+        {
+          type: 'app',
+          id: 'cms',
+          title: 'Web Shop',
+          description: 'Some description for the CMS'
+        },
+        {
+          type: 'app',
+          id: 'mms',
+          title: 'Media management',
+          description: 'Some description for the MMS'
+        }
+      ]}
+    />
+  )
 }
 
 function Demo() {
@@ -99,7 +186,7 @@ function Demo() {
 
   const dataForm =
     <DataForm
-      title="My DataForm"
+      title="Customer"
       
       actions={[
         { type: 'default', text: 'Add', icon: <FiPlus/> },
@@ -112,7 +199,7 @@ function Demo() {
       </Section>
 
       <Tabs>
-        <Tabs.Page title="Page-1">
+        <Tabs.Page title="Contact data">
           <Section title="Section-1">
             <TextField label="First name"/>
             <TextField label="Last name"/>
@@ -123,14 +210,17 @@ function Demo() {
           <Section title="Section-2">
           </Section>
         </Tabs.Page>
-        <Tabs.Page title="Page-2">
+        <Tabs.Page title="Documents">
           This is page 2....
+        </Tabs.Page>
+        <Tabs.Page title="Images">
+          This is page 3....
         </Tabs.Page>
       </Tabs>
     </DataForm>
 
   const cockpit =
-    <Cockpit onLogout={() => alert('Juhu')}>
+    <Cockpit>
       <Cockpit.Brand>
         <Brand
           vendor="meet+greet"
@@ -138,92 +228,16 @@ function Demo() {
         />
       </Cockpit.Brand>
       <Cockpit.TopNav>
-        <AppSelector
-          apps={[
-            {
-              type: 'app',
-              id: 'cms',
-              title: 'Web Shop',
-              description: 'Some description for the CMS'
-            },
-            {
-              type: 'app',
-              id: 'mms',
-              title: 'Media management',
-              description: 'Some description for the MMS'
-            }
-          ]}
-        />
+        <MainMenuBar/>
       </Cockpit.TopNav>
       <Cockpit.UserNav>
         <UserMenu
           fullName="Jane Doe"
         />
+        <LogoutButton/>
       </Cockpit.UserNav>
       <Cockpit.Menu>
-        <MenuBar
-          onAction={() => alert('Juhu')}
-
-          items={[
-            {
-              type: 'menu',
-              id: '1',
-              text: 'Users',
-              
-              items: [
-                { type: 'item', id: '1.1', text: 'Item-1.1'},
-                { type: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
-                { type: 'item', id: '1.3', text: 'Item-1.3'},
-                { type: 'item', id: '1.4', text: 'Item-1.4'},
-              ]
-            },
-            {
-              type: 'menu',
-              id: '2',
-              text: 'Content',
-              
-              items: [
-                { type: 'item', id: '2.1', text: 'Item-2.1'},
-                { type: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
-                { type: 'item', id: '2.3', text: 'Item-2.3'},
-                { type: 'divider' },
-                { type: 'item', id: '2.4', text: 'Item-2.4'},
-              ]
-            },
-            {
-              type: 'menu',
-              id: '3',
-              text: 'Media',
-              
-              items: [
-                { type: 'item', id: '3.1', text: 'Item-3.1'},
-                { type: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
-                { type: 'item', id: '3.3', text: 'Item-3.3'},
-
-                {
-                  type: 'menu',
-                  id: '3.4',
-                  text: 'Item-3.4',
-
-                  items: [
-                    { type: 'item', id: '3.4.1', text: 'Item-3.4.1' }
-                  ]
-                },
-              ]
-            },
-            {
-              type: 'menu',
-              id: '4',
-              text: 'Help',
-              
-              items: [
-                { type: 'item', id: '4.1', text: 'About...'},
-              ]
-            }
-          ]}
-        />
       </Cockpit.Menu>
-      {/*
       <Cockpit.SideNav>
         <SideNav
           activeItemId="userGroups"
@@ -250,7 +264,6 @@ function Demo() {
           ]}
         />
       </Cockpit.SideNav>
-      */}
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataForm}
       </Cockpit.Center>

@@ -5,6 +5,7 @@ import { CommandBar } from 'office-ui-fabric-react'
 // internal imports
 import styleMenuBar from './styleMenuBar'
 import MenuBarProps from '../types/MenuBarProps'
+import MenuBarIcon from './MenuBarIcon'
 
 // --- renderMenuBar ------------------------------------------------
 
@@ -15,11 +16,16 @@ function renderMenuBar(props: MenuBarProps) {
 
   if (itemCount > 0) {
     ret = styleMenuBar(classes =>
-      <div className={classes.container}>
-        <CommandBar
-          className={classes.commandBar}
-          items={getItemProps(props.items, props.onAction)}
-        />
+      <div data-component="MenuBar" className={classes.container}>
+        <div className={classes.inner}>
+          <div data-component="MenuBar:icon" className={classes.icon}>
+            <MenuBarIcon/>
+          </div>
+          <CommandBar
+            className={classes.commandBar}
+            items={getItemProps(props.items, props.onAction)}
+          />
+        </div>
       </div>)
   }
 

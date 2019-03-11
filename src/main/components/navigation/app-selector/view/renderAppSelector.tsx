@@ -6,7 +6,7 @@ import { FiLoader } from 'react-icons/fi'
 // internal imports
 import styleAppSelector from './styleAppSelector'
 import AppSelectorProps from '../types/AppSelectorProps'
-import AppsIcon from './AppsIcon'
+import AppSelectorIcon from './AppSelectorIcon'
 import ChevronDownIcon from '../../../../system-icons/ChevronDownIcon'
 
 // --- renderAppSelector --------------------------------------------
@@ -41,7 +41,7 @@ function renderAppSelector(props: AppSelectorProps) {
       <div className={classes.container} onClick={() => setCalloutVisible(true)}>
         <div ref={ref}>
           <div className={classes.icon}>
-              <AppsIcon/>
+              <AppSelectorIcon/>
           </div>
           <label className={classes.label}>
             Web Shop 

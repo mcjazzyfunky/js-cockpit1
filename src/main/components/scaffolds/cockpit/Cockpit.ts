@@ -18,10 +18,6 @@ const Cockpit = defineComponent<CockpitProps>({
   displayName: 'Cockpit',
 
   properties: {
-    onLogout: {
-      type: Function
-    },
-
     children: {
       validate:
         withChildren(
