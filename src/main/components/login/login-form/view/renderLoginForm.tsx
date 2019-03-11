@@ -119,14 +119,11 @@ function renderLoginForm(props: LoginFormProps) {
     React.Children.forEach(props.children, (child: any) => {
       if (isElementOfType(LoginForm.Header, child)) {
         header = child
-      }
-
-      if (isElementOfType(LoginForm.Above, child)) {
+      } else if (isElementOfType(LoginForm.Above, child)) {
         above = child
-      }
-      
-      if (isElementOfType(LoginForm.Below, child)) {
+      } else if (isElementOfType(LoginForm.Below, child)) {
         below = child
+        console.log('juhu', child)
       }
     })
 
@@ -151,10 +148,10 @@ function renderLoginForm(props: LoginFormProps) {
           </div>
       }
       
-      if (belowBox) {
+      if (below) {
         belowBox = 
           <div className={classes.below}>
-            {below.props.children} 
+            {below.props.children}
           </div>
       }
 
@@ -170,7 +167,7 @@ function renderLoginForm(props: LoginFormProps) {
       return (
         <div className={props.fullSize ? classes.containerFullSize : classes.container}>
           {aboveBox}
-          <div className={classes.inner}>
+          <div data-component="LoginForm:inner" className={classes.inner}>
             {headerBox}
             <form onSubmit={onSubmit} className={classes.form}>
               <div className={classes.content}>

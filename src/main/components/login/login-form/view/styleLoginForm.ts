@@ -19,12 +19,16 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.neutralLight,
+    backgroundColor: theme.palette.neutralQuaternaryAlt,
     position: 'absolute',
 
     selectors: {
       '& > *': {
         borderRadius: '6px'
+      },
+
+      '& [data-component="LoginForm:inner"]': {
+        marginTop: '-5%',
       }
     }
   },

@@ -5,6 +5,9 @@ import defineStyle from '../../../../styling/defineStyle'
 
 const styleAppSelector = defineStyle(theme => ({
   container: {
+  },
+
+  inner: {
     display: 'inline-flex',
     alignItems: 'center',
     height: '42px',
@@ -12,6 +15,12 @@ const styleAppSelector = defineStyle(theme => ({
     borderWidth: '0 0 0 1px',
     paddingLeft: '1rem',
     cursor: 'pointer',
+
+    selectors: {
+      '& .ms-Pivot': {
+        marginLeft: '0.25rem',
+      }
+    }
   },
 
   icon: {

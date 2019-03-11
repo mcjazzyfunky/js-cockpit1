@@ -70,7 +70,7 @@ const styleSideNav = defineStyle(theme => ({
         selectors: {
           '*': {
             color: theme.palette.black + ' !important',
-            fontWeight: 'bold !important',
+            fontWeight: '600 !important',
             cursor: 'default !important',
           },
 

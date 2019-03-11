@@ -115,15 +115,27 @@ function MainAppSelector() {
       apps={[
         {
           type: 'app',
+          id: 'dashboard',
+          title: 'Dashboard',
+          description: 'Some description for the Dashboard'
+        },
+        {
+          type: 'app',
+          id: 'catalog',
+          title: 'Catalog',
+          description: 'Some description for the Catalog'
+        },
+        {
+          type: 'app',
           id: 'cms',
-          title: 'Web Shop',
+          title: 'CMS',
           description: 'Some description for the CMS'
         },
         {
           type: 'app',
-          id: 'mms',
+          id: 'cms',
           title: 'Media management',
-          description: 'Some description for the MMS'
+          description: 'Some description for the media'
         }
       ]}
     />
@@ -132,15 +144,33 @@ function MainAppSelector() {
 
 function Demo() {
   const loginForm =
-    <LoginForm fullSize={true}>
-      <LoginForm.Above>
-          <Brand
-            vendor="meet+greet"
-            title="Back office"
-            size="huge"
-          />
-      </LoginForm.Above>
-    </LoginForm>
+    <Cockpit>
+      <Cockpit.Brand>
+        <Brand
+          vendor="meet+greet"
+          title="Back office"
+          size="medium"
+        />
+      </Cockpit.Brand>
+      <Cockpit.TopNav>
+        <AppSelector
+          apps={[
+            {
+              type: 'app',
+              id: '0',
+              title: 'User Login'
+            }
+          ]}
+        />
+      </Cockpit.TopNav>
+      <Cockpit.Center>
+        <LoginForm fullSize={true}>
+          <LoginForm.Below>
+            &copy; 2019, meet+greet
+          </LoginForm.Below>
+        </LoginForm>
+      </Cockpit.Center>
+    </Cockpit>
 
   const dataExplorer =
     <DataExplorer
@@ -228,7 +258,7 @@ function Demo() {
         />
       </Cockpit.Brand>
       <Cockpit.TopNav>
-        <MainMenuBar/>
+        <MainAppSelector/>
       </Cockpit.TopNav>
       <Cockpit.UserNav>
         <UserMenu
@@ -269,7 +299,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit
+  return cockpit 
 }
 
 function fakeData(count: number) {
@@ -323,7 +353,6 @@ if (params.sortBy) {
                     .pipe(delay(1000))
 
 }
-
 
 ReactDOM.render(<Demo/>, document.getElementById('main-content'))
 

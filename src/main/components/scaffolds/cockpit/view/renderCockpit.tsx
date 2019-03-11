@@ -66,7 +66,7 @@ function renderCockpit(props: CockpitProps) {
           <div className={classes.sideNav}>
             {sideNav}
           </div>
-          <div className={classes.Center}>
+          <div className={classes.center}>
             {Center}
           </div>
         </div>

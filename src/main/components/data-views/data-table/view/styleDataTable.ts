@@ -36,10 +36,9 @@ const styleDataTable = defineStyle(theme => ({
         boxSizing: 'border-box',
         padding: '5px',
         color: theme.palette.black,
-        // backgroundColor: theme.palette.neutralLighter,
-        backgroundColor: '#fdfdfd',
+        //backgroundColor: theme.palette.neutralLighter,
         borderWidth: '1px 0 1px 1px',
-        borderColor: theme.palette.neutralQuaternary,
+        borderColor: theme.palette.neutralTertiary,
         borderStyle: 'solid',
         fontSize: theme.fonts.mediumPlus.fontSize,
         fontWeight: 'normal',
@@ -58,11 +57,11 @@ const styleDataTable = defineStyle(theme => ({
             //borderBottomWidth: '1px',
             //borderBottomStyle: 'solid',
             //borderBottomColor: theme.palette.themePrimary,
-            backgroundColor: theme.palette.neutralLight,
+            backgroundColor: theme.palette.neutralLighter,
           },
 
           ':active': {
-            backgroundColor: theme.palette.neutralTertiaryAlt,
+            backgroundColor: theme.palette.neutralLight,
           }
         }
       },
@@ -71,6 +70,7 @@ const styleDataTable = defineStyle(theme => ({
 
   tableHeadCellContent: {
     display: 'flex',
+    fontWeight: '600',
     whiteSpace: 'nowrap',
     position: 'relative',
   },

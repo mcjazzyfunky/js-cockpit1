@@ -12,7 +12,9 @@ type AppSelectorProps = {
     id: string,
     title: string,
     description?: string
-  }[]
+  }[],
+
+  showCallout?: boolean,
 
   onSelection?: (ev: AppSelectionEvent) => void
 }

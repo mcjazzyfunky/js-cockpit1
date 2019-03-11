@@ -19,13 +19,15 @@ const styleCockpit = defineStyle((theme: ITheme) => {
     },
 
     header: {
+      position: 'relative',
       display: 'flex',
       alignItems: 'center',
       flexShrink: 0,
       height: '46px',
       minWidth: '100%',
       color: '#f0f0f0',
-      backgroundColor: 'rgb(50,50,50)' 
+      backgroundColor: 'rgb(50,50,50)',
+      zIndex: 32000
     },
 
     headerStart: {
@@ -39,12 +41,20 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       whiteSpace: 'nowrap',
 
       selectors: {
+        '& [data-component=AppSelector] [data-component="AppSelector:inner"]': {
+          paddingTop: '5px',
+        },
+  
+        '& [data-component=AppSelector] .ms-Pivot-text': {
+          color: theme.palette.white,
+        },
+
         '& [data-component=MenuBar] [data-component="MenuBar:icon"]': {
-          display: 'block !important'
+          display: 'block !important',
         },
         
         '& [data-component=MenuBar] [data-component="MenuBar:icon"] *': {
-          color: theme.palette.themeSecondary + ' !important'
+          color: theme.palette.themeSecondary + ' !important',
         },
 
         '& [data-component=MenuBar] *': {
@@ -89,7 +99,8 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       }
     },
 
-    Center: {
+    center: {
+      position: 'relative',
       flexGrow: 1,
       display: 'flex',
       alignItems: 'stretch',

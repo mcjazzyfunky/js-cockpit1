@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { CommandBar } from 'office-ui-fabric-react'
+import { CommandBar, DirectionalHint } from 'office-ui-fabric-react'
 
 // internal imports
 import styleMenuBar from './styleMenuBar'

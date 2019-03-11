@@ -25,6 +25,11 @@ const AppSelector = defineComponent<AppSelectorProps>({
           }))
     },
 
+    showCallout: {
+      type: Boolean,
+      defaultValue: false
+    },
+
     onSelection: {
       type: Function
     }
