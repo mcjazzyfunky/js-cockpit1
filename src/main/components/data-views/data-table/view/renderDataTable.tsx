@@ -249,12 +249,12 @@ function createTableBodyCell(rowIndex: number, columnIndex: number, props: DataT
       ? css(classes.dataCell, classes.alignEnd)
       : classes.dataCell
 
-  if (isSelected) {
-    className = css(className, classes.selectedRow)
-  }
-
   if (rowIndex % 2 === 1) {
     className = css(className, classes.evenRow)
+  }
+
+  if (isSelected) {
+    className = css(className, classes.selectedRow)
   }
 
   return (

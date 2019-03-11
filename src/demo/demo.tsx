@@ -14,7 +14,7 @@ import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
 
-if (true) {
+if (false) {
   loadTheme({
     palette: {
       themePrimary: '#d75d30',

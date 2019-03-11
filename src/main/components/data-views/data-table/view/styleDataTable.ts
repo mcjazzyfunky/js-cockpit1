@@ -1,3 +1,6 @@
+// external import
+import Color from 'color'
+
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
@@ -148,8 +151,14 @@ const styleDataTable = defineStyle(theme => ({
   selectedRow: {
     boxSizing: 'border-box',
     height: '2em',
-    backgroundColor: theme.palette.themeLighter
-    //backgroundColor: 'rgb(255, 244, 202)'
+    backgroundColor: Color(theme.palette.themeLighter).lighten(0.05),
+    //backgroundColor: 'rgb(255, 244, 202)',
+
+    selectors: {
+      '&[class*="evenRow"]': {
+        backgroundColor: theme.palette.themeLighter,
+      }
+    }
   },
 
   checkbox: {
