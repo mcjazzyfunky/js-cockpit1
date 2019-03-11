@@ -14,7 +14,7 @@ import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
 
-if (true) {
+if (false) {
   loadTheme({
     palette: {
       themePrimary: '#d75d30',
@@ -143,7 +143,7 @@ function MainAppSelector() {
 }
 
 function Demo() {
-  const loginForm =
+  const loginScreen =
     <Cockpit>
       <Cockpit.Brand>
         <Brand
@@ -295,7 +295,7 @@ function Demo() {
         />
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 

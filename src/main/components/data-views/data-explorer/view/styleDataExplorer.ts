@@ -137,7 +137,7 @@ const styleDataExplorer = defineStyle(theme => ({
     height: '100%',
     overflow: 'hidden',
     zIndex: '10000',
-    backgroundColor: 'rgba(63, 63, 63, 0.08)',
+    backgroundColor: 'rgba(63, 63, 63, 0.06)',
     borderRadius: '2px',
   },
 
