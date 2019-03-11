@@ -1,6 +1,6 @@
 // import component types
 
-import AppSelector from './components/navigation/app-selector/AppSelector'
+import AppMenu from './components/navigation/app-menu/AppMenu'
 import Brand from './components/misc/brand/Brand'
 import Cockpit from './components/scaffolds/cockpit/Cockpit'
 import DataExplorer from './components/data-views/data-explorer/DataExplorer'
@@ -50,7 +50,7 @@ export {
   TabsPageProps,
   
   // navigation components
-  AppSelector,
+  AppMenu,
   MenuBar,
   SideNav,
  

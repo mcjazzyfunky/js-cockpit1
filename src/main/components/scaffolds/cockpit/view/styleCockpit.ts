@@ -41,11 +41,11 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       whiteSpace: 'nowrap',
 
       selectors: {
-        '& [data-component=AppSelector] [data-component="AppSelector:inner"]': {
+        '& [data-component=AppMenu] [data-component="AppMenu:inner"]': {
           paddingTop: '5px',
         },
   
-        '& [data-component=AppSelector] .ms-Pivot-text': {
+        '& [data-component=AppMenu] .ms-Pivot-text': {
           color: theme.palette.white,
         },
 

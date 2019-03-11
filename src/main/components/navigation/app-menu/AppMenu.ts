@@ -3,13 +3,13 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import AppSelectorProps from './types/AppSelectorProps'
-import renderAppSelector from './view/renderAppSelector'
+import AppMenuProps from './types/AppMenuProps'
+import renderAppMenu from './view/renderAppMenu'
 
-// --- AppSelector -----------------------------------------------------
+// --- AppMenu -----------------------------------------------------
 
-const AppSelector = defineComponent<AppSelectorProps>({
-  displayName: 'AppSelector',
+const AppMenu = defineComponent<AppMenuProps>({
+  displayName: 'AppMenu',
 
   properties: {
     apps: {
@@ -36,10 +36,10 @@ const AppSelector = defineComponent<AppSelectorProps>({
   },
 
   render(props) {
-    return renderAppSelector(props)
+    return renderAppMenu(props)
   }
 })
 
 // --- exports ------------------------------------------------------
 
-export default AppSelector
+export default AppMenu

@@ -95,18 +95,16 @@ const styleDataTable = defineStyle(theme => ({
         boxSizing: 'border-box',
         padding: '0.375rem',
         fontSize: theme.fonts.medium.fontSize,
-        borderWidth: '0 0 0.5px 0',
-        borderColor: theme.palette.neutralLight,
-        borderStyle: 'solid',
       },
     }
   },
 
   tableRow: {
-    borderWidth: '0 0 1px 0',
-    borderColor: theme.palette.neutralLight,
-    borderStyle: 'solid',
     fontSize: '14px',
+  },
+
+  evenRow: {
+    backgroundColor: theme.palette.neutralLighterAlt,
   },
 
   cell: {
@@ -152,6 +150,15 @@ const styleDataTable = defineStyle(theme => ({
     height: '2em',
     backgroundColor: theme.palette.themeLighter
     //backgroundColor: 'rgb(255, 244, 202)'
+  },
+
+  checkbox: {
+    selectors: {
+      '& .ms-Checkbox-label': {
+        backgroundColor: theme.palette.white,
+        width: '20px'
+      }
+    }
   }
 }))
 

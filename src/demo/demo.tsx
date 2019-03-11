@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -14,7 +14,7 @@ import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
 
-if (false) {
+if (true) {
   loadTheme({
     palette: {
       themePrimary: '#d75d30',
@@ -109,9 +109,9 @@ function MainMenuBar() {
   )
 }
 
-function MainAppSelector() {
+function MainAppMenu() {
   return (
-    <AppSelector
+    <AppMenu
       apps={[
         {
           type: 'app',
@@ -153,7 +153,7 @@ function Demo() {
         />
       </Cockpit.Brand>
       <Cockpit.TopNav>
-        <AppSelector
+        <AppMenu
           apps={[
             {
               type: 'app',
@@ -258,7 +258,7 @@ function Demo() {
         />
       </Cockpit.Brand>
       <Cockpit.TopNav>
-        <MainAppSelector/>
+        <MainAppMenu/>
       </Cockpit.TopNav>
       <Cockpit.UserNav>
         <UserMenu
@@ -299,7 +299,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit 
+  return cockpit
 }
 
 function fakeData(count: number) {

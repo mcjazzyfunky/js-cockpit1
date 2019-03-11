@@ -154,7 +154,7 @@ const styleDataExplorer = defineStyle(theme => ({
   },
 
   loadingPanelContent: {
-    backgroundColor: theme.palette.neutralSecondary,
+    backgroundColor: theme.palette.neutralPrimaryAlt,
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',

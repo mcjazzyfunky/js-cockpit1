@@ -4,9 +4,9 @@ import { CSSProperties, ReactNode } from 'react'
 //internal imports
 import AppSelectionEvent from '../../../../events/AppSelectionEvent'
 
-// --- AppSelectorProps ------------------------------------------------
+// --- AppMenuProps ------------------------------------------------
 
-type AppSelectorProps = {
+type AppMenuProps = {
   apps: {
     type: 'app'
     id: string,
@@ -21,4 +21,4 @@ type AppSelectorProps = {
 
 // --- exports ------------------------------------------------------
 
-export default AppSelectorProps
+export default AppMenuProps

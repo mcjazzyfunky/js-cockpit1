@@ -4,23 +4,23 @@ import { css, Callout, Pivot, PivotItem } from 'office-ui-fabric-react'
 import { FiLoader } from 'react-icons/fi'
 
 // internal imports
-import styleAppSelector from './styleAppSelector'
-import AppSelectorProps from '../types/AppSelectorProps'
-import AppSelectorIcon from './AppSelectorIcon'
+import styleAppMenu from './styleAppMenu'
+import AppMenuProps from '../types/AppMenuProps'
+import AppMenuIcon from './AppMenuIcon'
 import ChevronDownIcon from '../../../../system-icons/ChevronDownIcon'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 
 // derived imports
-type AppSelectorClasses = CssClassesOf<typeof styleAppSelector>
+type AppMenuClasses = CssClassesOf<typeof styleAppMenu>
 
-// --- renderAppSelector --------------------------------------------
+// --- renderAppMenu --------------------------------------------
 
-function renderAppSelector(props: AppSelectorProps) {
-  return styleAppSelector(classes =>
-    <div data-component="AppSelector" className={classes.container}>
-      <div data-component="AppSelector:inner" className={classes.inner}>
+function renderAppMenu(props: AppMenuProps) {
+  return styleAppMenu(classes =>
+    <div data-component="AppMenu" className={classes.container}>
+      <div data-component="AppMenu:inner" className={classes.inner}>
         <div className={classes.icon}>
-          <AppSelectorIcon/>
+          <AppMenuIcon/>
         </div>
         {
           props.showCallout
@@ -31,7 +31,7 @@ function renderAppSelector(props: AppSelectorProps) {
     </div>)
 }
 
-function renderDefault(props: AppSelectorProps, classes: AppSelectorClasses) {
+function renderDefault(props: AppMenuProps, classes: AppMenuClasses) {
   return (
     <Pivot>
       {
@@ -43,7 +43,7 @@ function renderDefault(props: AppSelectorProps, classes: AppSelectorClasses) {
   )
 }
 
-function renderWithCallout(props: AppSelectorProps, classes: AppSelectorClasses) {
+function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
   const
     ref = React.useRef(null),
     [calloutVisible, setCalloutVisible] = React.useState(false),
@@ -90,4 +90,4 @@ function renderWithCallout(props: AppSelectorProps, classes: AppSelectorClasses)
 
 // --- experts ------------------------------------------------------
 
-export default renderAppSelector
+export default renderAppMenu

@@ -73,7 +73,8 @@ function renderDataTable(props: DataTableProps, ref: any) { // TODO
             ({ width, height }) => { 
               const
                 columnWidths = calculateColumnWidths(props, width),
-                   dataColumns = 
+
+                dataColumns = 
                   props.columns.map((column: any, columnIndex: any)  => // TODO
                     <Column
                       width={columnWidths.dataColumns[columnIndex]}
@@ -83,7 +84,7 @@ function renderDataTable(props: DataTableProps, ref: any) { // TODO
                       cellRenderer={({ rowIndex }) => {
                         const isSelected = selectedRows.has(rowIndex)
 
-                        return createTableBodyCell(columnIndex, props, props.data[rowIndex], classes, isSelected)}
+                        return createTableBodyCell(rowIndex, columnIndex, props, props.data[rowIndex], classes, isSelected)}
                       }
                     />
                   )
@@ -96,8 +97,16 @@ function renderDataTable(props: DataTableProps, ref: any) { // TODO
                       cellRenderer={({ rowIndex }) => {
                         const isSelected = selectedRows.has(rowIndex)
 
+                        let className = rowIndex % 2 === 1 ? classes.evenRow : null
+                       
+                        className = css(className, classes.dataCell)
+
+                        if (isSelected) {
+                          className = css(className, classes.selectedRow)
+                        }
+
                         return (
-                          <div className={isSelected ? classes.selectedRow : null}>
+                          <div className={className}>
                             {createSelectRowCheckbox(rowIndex, props, selectedRows, changeSelection, classes)}
                           </div>
                         )
@@ -230,7 +239,7 @@ function createTableHeadCell(columnIdx: number, props: DataTableProps, width: nu
   )
 }
 
-function createTableBodyCell(columnIndex: number, props: DataTableProps, row: any, classes: DataTableClasses, isSelected: boolean) {
+function createTableBodyCell(rowIndex: number, columnIndex: number, props: DataTableProps, row: any, classes: DataTableClasses, isSelected: boolean) {
   const column = props.columns[columnIndex]
 
   let className =
@@ -244,6 +253,10 @@ function createTableBodyCell(columnIndex: number, props: DataTableProps, row: an
     className = css(className, classes.selectedRow)
   }
 
+  if (rowIndex % 2 === 1) {
+    className = css(className, classes.evenRow)
+  }
+
   return (
     <div key={columnIndex} className={className}>
       {row[column.field]}
@@ -251,32 +264,38 @@ function createTableBodyCell(columnIndex: number, props: DataTableProps, row: an
   )
 }
 
-function createSelectRowCheckbox(index: number, props: DataTableProps, selectedRows: Set<number>, changeRowSelection: (selection: any) => void, classes: DataTableClasses) { // TODO
+function createSelectRowCheckbox(rowIndex: number, props: DataTableProps, selectedRows: Set<number>, changeRowSelection: (selection: any) => void, classes: DataTableClasses) { // TODO
   const
     selectionMode = props.rowSelectionOptions.mode,
-    checked = selectedRows.has(index),
+    checked = selectedRows.has(rowIndex),
 
     onChange =() => {
       let selectedRows: Set<number>
       
       if (selectionMode === 'single') {
-        selectedRows = new Set([index])
+        selectedRows = new Set([rowIndex])
       } else {
         selectedRows = new Set(selectedRows)
 
         if (checked) {
-          selectedRows.delete(index)
+          selectedRows.delete(rowIndex)
         } else {
-          selectedRows.add(index)
+          selectedRows.add(rowIndex)
         }
       }
 
       changeRowSelection(selectedRows)
     }
 
+  let className = classes.selectRowCheckBox
+
+  if (rowIndex % 2 === 1) {
+    className = css(className, classes.evenRow)
+  }
+
   return (
-    <div className={classes.selectRowCheckBox}>
-      <Checkbox checked={checked} onChange={onChange}/>
+    <div className={className}>
+      <Checkbox className={classes.checkbox} checked={checked} onChange={onChange}/>
     </div>
   ) 
 }

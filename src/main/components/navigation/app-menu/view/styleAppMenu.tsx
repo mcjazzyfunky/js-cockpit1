@@ -1,9 +1,9 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleAppSelector ---------------------------------------------
+// --- styleAppMenu ---------------------------------------------
 
-const styleAppSelector = defineStyle(theme => ({
+const styleAppMenu = defineStyle(theme => ({
   container: {
   },
 
@@ -78,4 +78,4 @@ const styleAppSelector = defineStyle(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleAppSelector
+export default styleAppMenu
