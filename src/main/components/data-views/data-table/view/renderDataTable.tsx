@@ -12,9 +12,9 @@ import SortDescIcon from './SortDescIcon'
 
 type DataTableClasses = CssClassesOf<typeof styleDataTable>
 
-// --- DataTableView ------------------------------------------------
+// --- renderDataTable ----------------------------------------------
 
-function DataTableView(props: DataTableProps, ref: any) { // TODO
+function renderDataTable(props: DataTableProps, ref: any) { // TODO
   const
     [selectedRows, setSelectionRows] = React.useState(() => new Set<number>()),
     runOnUpdater = React.useRef([]),
@@ -302,4 +302,4 @@ function createSelectAllCheckbox(props: DataTableProps, selectedRows: Set<number
 
 // --- exports ------------------------------------------------------
 
-export default DataTableView
+export default renderDataTable

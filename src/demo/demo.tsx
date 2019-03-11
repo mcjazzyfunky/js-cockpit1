@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, MenuBar, Cockpit, UserMenu } from '../main/js-cockpit'
+import { initSystemIcons, Brand, AppSelector, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
 import { loadTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -107,10 +107,26 @@ function Demo() {
         { type: 'default', text: 'Delete', icon: <FiTrash2/> }
       ]}
     >
-      <Section title="Section-1">
+      <Section>
+        <TextField label="Cusomer no."></TextField>
       </Section>
-      <Section title="Section-2">
-      </Section>
+
+      <Tabs>
+        <Tabs.Page title="Page-1">
+          <Section title="Section-1">
+            <TextField label="First name"/>
+            <TextField label="Last name"/>
+            <TextField label="Postal code"/>
+            <TextField label="City"/>
+            <TextField label="Country"/>
+          </Section>
+          <Section title="Section-2">
+          </Section>
+        </Tabs.Page>
+        <Tabs.Page title="Page-2">
+          This is page 2....
+        </Tabs.Page>
+      </Tabs>
     </DataForm>
 
   const cockpit =

@@ -16,6 +16,11 @@ import MenuBar from './components/navigation/menu-bar/MenuBar'
 import SideNav from './components/navigation/side-nav/SideNav'
 import Section from './components/layout/section/Section'
 import SectionProps from './components/layout/section/types/SectionProps'
+import Tabs from './components/layout/tabs/Tabs'
+import TabsProps from './components/layout/tabs/types/TabsProps'
+import TabsPageProps from './components/layout/tabs/types/TabsPageProps'
+import TextField from './components/form/text-field/TextField'
+import TextFieldProps from './components/form/text-field/types/TextFieldProps'
 import UserMenu from './components/login/user-menu/UserMenu'
 import VBox from './components/layout/vbox/VBox'
 import VBoxProps from './components/layout/vbox/types/VBoxProps'
@@ -27,6 +32,10 @@ import ActionEvent from './events/ActionEvent'
 import initSystemIcons from './styling/initSystemIcons'
 
 export {
+  // form related components
+  TextField,
+  TextFieldProps,
+
   // layout component
   HBox,
   HBoxProps,
@@ -34,6 +43,9 @@ export {
   VBoxProps,
   Section,
   SectionProps,
+  Tabs,
+  TabsProps,
+  TabsPageProps,
   
   // navigation components
   AppSelector,
