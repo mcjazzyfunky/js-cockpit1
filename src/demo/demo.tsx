@@ -13,7 +13,7 @@ import faker from 'faker'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('orange')
+loadThemeByName('orange', true)
 
 function MainMenuBar() {
   return (
@@ -267,7 +267,7 @@ function Demo() {
         />
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 

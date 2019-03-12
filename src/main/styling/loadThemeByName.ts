@@ -1,4 +1,4 @@
-import { createTheme, loadTheme } from 'office-ui-fabric-react/lib/Styling'
+import { createTheme, loadTheme, ITheme } from 'office-ui-fabric-react/lib/Styling'
 
 type ThemeName = 'blue' | 'orange'
 
@@ -58,31 +58,32 @@ const themes: any = {
   }
 }
 
-const fontSizes = [
-  'tiny', 'xSmall', 'small', 'smallPlus', 'medium', 'mediumPlus', 'large',
-  'xLarge', 'xxLarge', 'superLarge', 'mega'
-]
-
-Object.keys(themes).forEach(themeName => {
-  let fonts = themes[themeName].fonts
-
-  if (!fonts) {
-    fonts = themes[themeName].fonts = {}
+function loadThemeByName(name: ThemeName, fontFamily?: string): void
+function loadThemeByName(name: ThemeName, substituteFontFamily?: boolean): void
+function loadThemeByName(name: ThemeName, fontFamilySubstitution: boolean | string | undefined): void {
+  if (!themes[name]) {
+    throw new TypeError('[loadThemeByName] Illegal first argument "name" - unkown theme')
   }
 
-  fontSizes.forEach(fontSize => {
-    if (!fonts[fontSize]) {
-      fonts[fontSize] = {}
-    }
+  const theme: ITheme = createTheme(themes[name])
+  
+  let fontFamily: string | null = null
+  
+  if (fontFamilySubstitution === true) {
+    fontFamily = 'Arial, Helvetica, sans-serif'
+  } else if (typeof fontFamilySubstitution === 'string') {
+    fontFamily = fontFamilySubstitution
+  }
 
-    fonts[fontSize].fontFamily = "Arial, Helvetia, sans-serif"
-  })
+  if (fontFamily) {
+    let fonts: any = theme.fonts
 
-  themes[themeName] = createTheme(themes[themeName])
-})
+    Object.keys(fonts).forEach(fontSize => {
+      fonts[fontSize].fontFamily = fontFamily 
+    })
+  }
 
-function loadThemeByName(name: ThemeName) {
-  loadTheme(themes[name])
+  loadTheme(theme)
 }
 
 // --- exports ------------------------------------------------------
