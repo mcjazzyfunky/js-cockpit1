@@ -50,45 +50,47 @@ function renderHeader(props: DataFormProps, classes: DataFormClasses) {
 function renderActionBar(props: DataFormProps, classes: DataFormClasses) {
   const items: any[] = []
 
-  props.actions.forEach((action, idx) => {
-      const disabled = action.disabled
+  if (props.actions) {
+    props.actions.forEach((action, idx) => {
+        const disabled = action.disabled
 
-    if (idx > 0) {
+      if (idx > 0) {
+        items.push({
+          key: `separator-${idx}`,
+          onRender: () => <div className={classes.actionButtonSeparator}></div>
+        })
+      }
+
+      const
+        hasIcon = !!action.icon,
+        iconProps = hasIcon ? { iconName: 'icon' } : null,
+
+        actionButtonClassName =
+          disabled
+            ? css(classes.actionButton, classes.actionButtonDisabled)
+            : classes.actionButton,
+        
+        iconClassName =
+          hasIcon
+            ? (disabled ? classes.actionIconDisabled : classes.actionIcon)
+            : undefined
+
       items.push({
-        key: `separator-${idx}`,
-        onRender: () => <div className={classes.actionButtonSeparator}></div>
+        key: String(idx),
+        text: action.text,
+        iconProps,
+        disabled,
+        className: actionButtonClassName,
+        onRenderIcon: action.icon ?
+          () => <div className={iconClassName}>{action.icon}</div>
+          : undefined
       })
-    }
 
-    const
-      hasIcon = !!action.icon,
-      iconProps = hasIcon ? { iconName: 'icon' } : null,
-
-      actionButtonClassName =
-        disabled
-          ? css(classes.actionButton, classes.actionButtonDisabled)
-          : classes.actionButton,
-      
-      iconClassName =
-        hasIcon
-          ? (disabled ? classes.actionIconDisabled : classes.actionIcon)
-          : null
-
-    items.push({
-      key: String(idx),
-      text: action.text,
-      iconProps,
-      disabled,
-      className: actionButtonClassName,
-      onRenderIcon: action.icon ?
-        () => <div className={iconClassName}>{action.icon}</div>
-        : undefined
+      if (idx > 0) {
+        // items.push(<div>x</div>) // TODO xxx
+      }
     })
-
-    if (idx > 0) {
-      // items.push(<div>x</div>) // TODO xxx
-    }
-  })
+  }
 
   return (
     <CommandBar

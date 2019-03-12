@@ -26,14 +26,22 @@ function renderPaginator(props: PaginatorProps): ReactNode {
       <button
         disabled={firstButtonDisabled}
         className={classes.button}
-        onClick={() => onPageChange({ type: 'pageChange', pageIndex: 0 })}
+        onClick={
+          onPageChange
+            ? () => onPageChange({ type: 'pageChange', pageIndex: 0 })
+            : undefined
+        }
       >
         <ArrowDoubleLeftIcon/>
       </button>
       <button
         disabled={previousButtonDisabled}
         className={classes.button}
-        onClick={() => onPageChange({ type: 'pageChange', pageIndex: pageIndex -1 })}
+        onClick={
+          onPageChange
+            ? () => onPageChange({ type: 'pageChange', pageIndex: pageIndex -1 })
+            :undefined
+        }
       >
         <ArrowLeftIcon/>
       </button>
@@ -41,20 +49,32 @@ function renderPaginator(props: PaginatorProps): ReactNode {
         <TextField
           value={String(pageIndex  + 1)}
           className={classes.textField}
-          onKeyDown={event => handleKeyDown(event, pageIndex, totalItemCount, pageSize, onPageChange )}
+          onKeyDown={
+            onPageChange
+              ? event => handleKeyDown(event, pageIndex, totalItemCount, pageSize, onPageChange)
+              : undefined
+          }
         />
       <div className={classes.pageText2}>of {lastPageIndex + 1}</div>
       <button
         disabled={nextButtonDisabled}
         className={classes.button}
-        onClick={() => onPageChange({ type: 'pageChange', pageIndex: pageIndex + 1 })}
+        onClick={
+          onPageChange
+           ? () => onPageChange({ type: 'pageChange', pageIndex: pageIndex + 1 })
+           : undefined
+        }
       >
         <ArrowRightIcon/>
       </button>
       <button
         disabled={lastButtonDisabled}
         className={classes.button}
-        onClick={() => onPageChange({ type: 'pageChange', pageIndex: lastPageIndex })}
+        onClick={
+          onPageChange
+            ? () => onPageChange({ type: 'pageChange', pageIndex: lastPageIndex })
+            : undefined
+        }
       >
         <ArrowDoubleRightIcon/>
       </button>

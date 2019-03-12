@@ -4,9 +4,9 @@ import { defineComponent } from 'js-react-utils'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
-import styleDataExplorerFilterPanel from './styleDataExplorerFilterPanel'
-import DataExplorerProps from '../types/DataExplorerProps'
-import DataExplorerStore from '../types/DataExplorerStore'
+import styleDataExplorerFilterPanel from '../styleDataExplorerFilterPanel'
+import DataExplorerProps from '../../types/DataExplorerProps'
+import DataExplorerStore from '../../types/DataExplorerStore'
 
 // --- DataExplorerFilterPanel --------------------------------------
 
@@ -19,8 +19,12 @@ const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
   displayName: 'FilterPanel',
 
   render({ dataExplorerProps: props, dataExplorerStore: store }) {
+    if (!props.search) {
+      return null
+    }
+
     return styleDataExplorerFilterPanel(classes => {
-      const rows = props.search.advanced.filters.map(filter => {
+      const rows = props.search!.advanced.filters.map(filter => {
         let filterField: any = null // TODO
 
         switch (filter.type) {

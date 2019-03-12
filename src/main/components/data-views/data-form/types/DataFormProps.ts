@@ -4,8 +4,8 @@ import { ReactNode } from 'react'
 // --- DataFormProps ------------------------------------------------
 
 type DataFormProps = {
-  title?: string,
-  actions?: (Action)[],
+  title?: string | null,
+  actions?: (Action)[] | null,
   children?: ReactNode
 }
 

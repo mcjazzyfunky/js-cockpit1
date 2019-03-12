@@ -62,30 +62,31 @@ const DataExplorer = defineComponent<DataExplorerProps>({
       type: Object,
 
       validate:
-        Spec.strictShape({
-          type: Spec.is('default'),
-          
-          basic:
-            Spec.strictShape({
-              type: Spec.is('fullText'),
-              name: Spec.match(REGEX_NAME)
-            }),
-          
-          advanced:
-            Spec.strictShape({
-              type: Spec.is('filters'),
-              
-              filters:
-                Spec.arrayOf(
-                  Spec.and(
-                    Spec.prop('type', Spec.oneOf('text')),
-                  
-                    Spec.or({
-                      when: Spec.prop('type', Spec.is('text')),
-                      then: Spec.lazy(() => specTextFilter)
-                    })))
-            })
-        })
+        Spec.nullable(
+          Spec.strictShape({
+            type: Spec.is('default'),
+            
+            basic:
+              Spec.strictShape({
+                type: Spec.is('fullText'),
+                name: Spec.match(REGEX_NAME)
+              }),
+            
+            advanced:
+              Spec.strictShape({
+                type: Spec.is('filters'),
+                
+                filters:
+                  Spec.arrayOf(
+                    Spec.and(
+                      Spec.prop('type', Spec.oneOf('text')),
+                    
+                      Spec.or({
+                        when: Spec.prop('type', Spec.is('text')),
+                        then: Spec.lazy(() => specTextFilter)
+                      })))
+              })
+          }))
     }
   },
 

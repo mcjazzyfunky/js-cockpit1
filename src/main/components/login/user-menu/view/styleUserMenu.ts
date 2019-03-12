@@ -3,7 +3,7 @@ import defineStyle from '../../../../styling/defineStyle'
 
 // --- styleUserMenu ------------------------------------------------
 
-const styleUserMenu = defineStyle({
+const styleUserMenu = defineStyle(theme => ({
   container: {
     display: 'flex',
     adjustItems: 'center',
@@ -16,9 +16,11 @@ const styleUserMenu = defineStyle({
   },
 
   displayName: {
+    fontSize: theme.fonts.medium.fontSize,
+    fontFamily: theme.fonts.medium.fontFamily,
     margin: '0 1rem 0 0',
   }
-})
+}))
 
 // --- exports ------------------------------------------------------
 

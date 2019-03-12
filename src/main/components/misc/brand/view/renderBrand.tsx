@@ -15,7 +15,7 @@ function renderBrand(props: BrandProps) {
   return styleBrand(classes => {
     const
       size = props.size,
-      sizePascalCase = size[0].toUpperCase() + size.substring(1),
+      sizePascalCase = !size ? null : size[0].toUpperCase() + size.substring(1),
       vendorClassName: string = css(classes.vendor, (classes as any)[`vendor${sizePascalCase}`]),
       titleClassName: string = css(classes.title, (classes as any)[`title${sizePascalCase}`]),
       logoClassName: string = css(classes.logo, (classes as any)[`logo${sizePascalCase}`])

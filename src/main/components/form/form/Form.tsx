@@ -122,11 +122,11 @@ class FormCtrl implements IForm {
   }
 
   getRequired(fieldName: string): boolean {
-    return null
+    return false 
   }
 
   getDisabled(fieldName: string): boolean {
-    return null
+    return false
   }
 
   private _getField(fieldName: string) {
@@ -141,7 +141,3 @@ class FormCtrl implements IForm {
 // --- exports ------------------------------------------------------
 
 export default Form
-
-export {
-  IForm
-}

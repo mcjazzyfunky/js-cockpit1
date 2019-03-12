@@ -72,6 +72,7 @@ const styleDataExplorer = defineStyle(theme => ({
 
   title: {
     display: 'inline-block',
+    fontFamily: theme.fonts.large.fontFamily,
     fontSize: theme.fonts.large.fontSize,
     margin: '0 6px 3px 6px',
     whiteSpace: 'nowrap',
@@ -154,6 +155,8 @@ const styleDataExplorer = defineStyle(theme => ({
   },
 
   loadingPanelContent: {
+    fontSize: theme.fonts.medium.fontSize,
+    fontFamily: theme.fonts.medium.fontFamily,
     backgroundColor: theme.palette.neutralPrimaryAlt,
     borderRadius: '2px',
     display: 'flex',

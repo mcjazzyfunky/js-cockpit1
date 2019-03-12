@@ -18,7 +18,7 @@ function renderTabs(props: TabsProps) {
       <div className={classes.container}>
         <Pivot>
           {
-            Children.map(props.children, (page: ReactElement<TabsPageProps>) => {
+            Children.map((props.children as any), (page: ReactElement<TabsPageProps>) => {
               return (
                 <PivotItem headerText={page.props.title}>
                   <div className={classes.page}>

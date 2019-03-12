@@ -9,6 +9,8 @@ const stylePaginator = defineStyle((theme: ITheme) => ({
     display: 'flex',
     alignItems: 'center',
     whiteSpace: 'nowrap',
+    fontSize: theme.fonts.medium.fontSize,
+    fontFamily: theme.fonts.medium.fontFamily,
     ...theme.fonts.medium
   },
   

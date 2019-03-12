@@ -55,51 +55,53 @@ function renderLoginForm(props: LoginFormProps) {
           remember: state.remember
         }
 
-        setTimeout(() => {
-          try {
-            props.performLogin(loginParams)
-              .then((result: any) => {
-                if (result
-                  && typeof result.fullName === 'string'
-                  && result.fullName.trim() !== '') {
-                  
-                  setState(
-                    { ...state, loading: false })
-// TODO                () => setTimeout(
-// TODO                      () => alert(result.fullName + ' has been logged in successfully'), 100))
-                } else {
+        if (props.performLogin) {
+          setTimeout(() => {
+            try {
+              (props as any).performLogin(loginParams)
+                .then((result: any) => {
+                  if (result
+                    && typeof result.fullName === 'string'
+                    && result.fullName.trim() !== '') {
+                    
+                    setState(
+                      { ...state, loading: false })
+  // TODO                () => setTimeout(
+  // TODO                      () => alert(result.fullName + ' has been logged in successfully'), 100))
+                  } else {
+                    setState({
+                      ...state,
+                      loading: false,
+                      generalErrorMsg: 'Error: Could not log in'
+                    })
+                  }
+                })
+                .catch((error: Error | string) => {
+                  let errorMsg = ''
+
+                  if (error instanceof Error) {
+                    errorMsg = 'Error: ' + String(error.message).trim()
+                  } else if (typeof error === 'string' && error.trim() !== '') {
+                    errorMsg = 'Error: ' + error 
+                  } else {
+                    errorMsg = 'Error: Could not log in'
+                  }
+
                   setState({
                     ...state,
                     loading: false,
-                    generalErrorMsg: 'Error: Could not log in'
+                    generalErrorMsg: errorMsg
                   })
-                }
-              })
-              .catch((error: Error | string) => {
-                let errorMsg = ''
-
-                if (error instanceof Error) {
-                  errorMsg = 'Error: ' + String(error.message).trim()
-                } else if (typeof error === 'string' && error.trim() !== '') {
-                  errorMsg = 'Error: ' + error 
-                } else {
-                  errorMsg = 'Error: Could not log in'
-                }
-
-                setState({
-                  ...state,
-                  loading: false,
-                  generalErrorMsg: errorMsg
                 })
+            } catch (e) {
+              setState({
+                ...state,
+                loading: false,
+                generalErrorMsg: 'Error: Could not log in'
               })
-          } catch (e) {
-            setState({
-              ...state,
-              loading: false,
-              generalErrorMsg: 'Error: Could not log in'
-            })
-          }
-        }, 1000)
+            }
+          }, 1000)
+        }
       }
     }, []),
 
@@ -109,12 +111,12 @@ function renderLoginForm(props: LoginFormProps) {
         : 'Log in'
 
     let
-      header: ReactElement<any> = null, // TODO
-      above: ReactElement<any> = null, // TODO
-      below: ReactElement<any> = null, // TODO
-      headerBox: ReactNode = null,
-      aboveBox: ReactNode = null,
-      belowBox: ReactNode = null
+      header: ReactElement<any> | null = null, // TODO
+      above: ReactElement<any> | null = null, // TODO
+      below: ReactElement<any> | null = null, // TODO
+      headerBox: ReactNode | null = null,
+      aboveBox: ReactNode | null = null,
+      belowBox: ReactNode | null = null
 
     React.Children.forEach(props.children, (child: any) => {
       if (isElementOfType(LoginForm.Header, child)) {
@@ -216,7 +218,7 @@ function renderLoginForm(props: LoginFormProps) {
                   onChange={
                     event => setState({
                       ...state,
-                      remember: (event.target as any).checked
+                      remember: (event!.target as any).checked
                     })
                   }
                 />

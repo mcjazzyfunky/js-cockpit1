@@ -43,6 +43,7 @@ const styleDataTable = defineStyle(theme => ({
         borderWidth: '1px 0 1px 1px',
         borderColor: theme.palette.neutralTertiary,
         borderStyle: 'solid',
+        fontFamily: theme.fonts.medium.fontFamily,
         fontSize: theme.fonts.medium.fontSize,
         fontWeight: 'normal',
         textTransform: 'none',
@@ -73,7 +74,6 @@ const styleDataTable = defineStyle(theme => ({
 
   tableHeadCellContent: {
     display: 'flex',
-    //fontWeight: '600',
     whiteSpace: 'nowrap',
     position: 'relative',
   },
@@ -97,13 +97,16 @@ const styleDataTable = defineStyle(theme => ({
       '& > tr > td': {
         boxSizing: 'border-box',
         padding: '0.375rem',
+        fontFamily: theme.fonts.medium.fontFamily,
         fontSize: theme.fonts.medium.fontSize,
       },
     }
   },
 
   tableRow: {
-    fontSize: '14px',
+    fontFamily: theme.fonts.medium.fontFamily,
+    fontSize: theme.fonts.medium.fontSize,
+    verticalAlign: 'center',
   },
 
   evenRow: {

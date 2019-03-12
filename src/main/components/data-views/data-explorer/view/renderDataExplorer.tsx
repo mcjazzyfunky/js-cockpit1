@@ -1,18 +1,20 @@
 // externals imports
 import React from 'react'
-import { css, CommandBar, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import { css, CommandBar, Spinner, SpinnerSize, Text } from 'office-ui-fabric-react'
 
 // internal imports
 import styleDataExplorer from './styleDataExplorer'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerStore from '../types/DataExplorerStore'
 import DataTable from '../../data-table/DataTable'
+import DataTableProps from '../../data-table/types/DataTableProps'
 import Paginator from '../../../pagination/paginator/Paginator'
 import PageSizeSelector from '../../../pagination/page-size-selector/PageSizeSelector'
 import PaginationInfo from '../../../pagination/pagination-info/PaginationInfo'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
-import DataExplorerSearchBar from './DataExplorerSearchBar'
+import DataExplorerSearchBar from './types/DataExplorerSearchBar'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
+import DataTableMethods from '../../data-table/types/DataTableMethods';
 
 // --- derived imports --------------------------------------------
 
@@ -24,53 +26,53 @@ type DataExplorerClasses = CssClassesOf<typeof styleDataExplorer>
 
 function renderDataExplorer(props: DataExplorerProps, store: DataExplorerStore) {
   const
-    dataTableRef = useRef(null),
+    dataTableRef = useRef(null as unknown as DataTableMethods),
 
     onSortChange = useCallback((event: any) => { // TODO
       store.loadSorting(
         event.sortBy,
         event.sortDesc,
         props.loadData,
-        () => this._dataTable.unselectAllRows())
-    }, null),
+        () => dataTableRef.current.unselectAllRows())
+    }, []),
 
     onPageChange = useCallback((event: any) => { // TODO
       store.loadPage(
          event.pageIndex,
          props.loadData,
-         () => this._dataTable.unselectAllRows())
-    }, null),
+         () => dataTableRef.current.unselectAllRows())
+    }, []),
 
     onPageSizeChange = useCallback((event: any) => { // TODO
       store.loadPageSize(
         event.pageSize,
         props.loadData,
         () => dataTableRef.current.unselectAllRows())
-    }, null),
+    }, []),
 
     tableColumns =
-      props.columns.map((column, columnIdx) => {
-        const props = {
+      props.columns.map(column => {
+        const tableColumn = {
           title: column.title,
           width: column.width,
-          field: null as string, // TODO
+          field: null as string | null,
           align: 'start' as ('start' | 'center' | 'end'), // TODO
           sortable: false
         }
 
-        if (column.field !== null) {
-          props.field = column.field
+        if (column.field) {
+          tableColumn.field = column.field
         }
 
-        if (column.align !== null) {
-          props.align = column.align
+        if (column.align) {
+          tableColumn.align = column.align
         }
 
         if (column.sortable) {
-          props.sortable = true
+          tableColumn.sortable = true
         }
 
-        return props 
+        return tableColumn 
       })
 
 
@@ -107,7 +109,7 @@ function renderDataExplorer(props: DataExplorerProps, store: DataExplorerStore) 
               mode: 'multi' // TODO
             }}
 
-            sortBy={store.sortBy}
+            sortBy={store.sortBy || undefined}
             sortDir={store.sortDir}
 
             onRowSelectionChange={
@@ -122,7 +124,7 @@ function renderDataExplorer(props: DataExplorerProps, store: DataExplorerStore) 
           />
         </div>
           {
-             store.pageIndex >= 0 && store.pageSize > 0 && store.totalItemCount > 0 
+             store.pageIndex >= 0 && store.pageSize > 0 && (store.totalItemCount as number) > 0 
               ? renderFooter(props, store, classes, onPageChange, onPageSizeChange)
               : null
           }
@@ -228,7 +230,7 @@ function renderActionBar(
       iconClassName =
         hasIcon
           ? (disabled ? classes.actionIconDisabled : classes.actionIcon)
-          : null
+          : undefined
 
     items.push({
       key: String(idx),

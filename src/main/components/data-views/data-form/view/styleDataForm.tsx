@@ -40,6 +40,7 @@ const styleDataForm = defineStyle(theme => ({
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.large.fontSize,
+    fontFamily: theme.fonts.large.fontFamily,
     margin: '0 6px 3px 6px',
     whiteSpace: 'nowrap',
   },
@@ -77,6 +78,7 @@ const styleDataForm = defineStyle(theme => ({
   actionIcon: {
     color: theme.palette.themePrimary,
     fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
     //color: theme.palette.black,
     margin: '2px 5px 0 0',
   },
@@ -84,6 +86,7 @@ const styleDataForm = defineStyle(theme => ({
   actionIconDisabled: {
     color: theme.palette.neutralTertiary,
     fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
     margin: '2px 5px 0 0',
   },
 

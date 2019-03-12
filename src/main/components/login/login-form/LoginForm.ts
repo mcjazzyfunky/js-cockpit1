@@ -70,7 +70,8 @@ const LoginForm = defineComponent<LoginFormProps>({
 
   properties: {
     performLogin: {
-      type: Function
+      type: Function,
+      nullable: true
     },
 
     fullSize: {

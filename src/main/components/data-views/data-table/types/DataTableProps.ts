@@ -1,22 +1,23 @@
 // internal imports
+import DataTableColumn from './DataTableColumn'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import SortChangeEvent from '../../../../events/SortChangeEvent'
 
 // --- DataTableProps -----------------------------------------------
 
 type DataTableProps = {
-  title?: string,
+  title?: string | null,
   
   rowSelectionOptions?: {
     mode: 'none' | 'single' | 'multi'
-  },
+  } | null,
 
-  sortBy?: string,
+  sortBy?: string | null,
   sortDir?: 'asc' | 'desc',
 
   columns: {
     title: string, 
-    field?: string,
+    field?: string | null,
     align?: 'start' | 'center' | 'end',
     width?: number,
     sortable?: boolean

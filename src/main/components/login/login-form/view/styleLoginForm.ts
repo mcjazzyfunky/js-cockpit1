@@ -63,6 +63,7 @@ const styleLoginForm = defineStyle(theme => ({
     padding: '0.75rem 1.5rem',
     textAlign: 'center',
     fontSize: theme.fonts.xLarge.fontSize,
+    fontFamily: theme.fonts.xLarge.fontFamily,
     color: theme.palette.themePrimary,
   },
 
@@ -101,6 +102,7 @@ const styleLoginForm = defineStyle(theme => ({
 
   above: {
     fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
     color: theme.palette.neutralSecondary,
     padding: '1.25rem 0',
     textAlign: 'center',
@@ -108,6 +110,7 @@ const styleLoginForm = defineStyle(theme => ({
 
   below: {
     fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
     color: theme.palette.neutralSecondaryAlt,
     padding: '0.75rem 0',
     textAlign: 'center',

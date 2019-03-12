@@ -15,16 +15,18 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
 
   properties: {
     title: {
-      type: String
+      type: String,
+      validate: Spec.nullable(Spec.string)
     },
 
     rowSelectionOptions: {
       type: Object,
 
       validate:
-        Spec.strictShape({
-          mode: Spec.oneOf('none', 'single', 'multi')
-        }),
+        Spec.nullable(
+          Spec.strictShape({
+            mode: Spec.oneOf('none', 'single', 'multi')
+          })),
 
       defaultValue: { mode:  'none' }
     },
@@ -41,19 +43,21 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
 
     data: {
       type: Array,
-      validate: Spec.arrayOf(Spec.object)
+      required: true,
+      validate: Spec.arrayOf(Spec.object),
     },
 
     columns: {
       type: Array,
+      required: true,
 
       validate:
         Spec.arrayOf(
           Spec.strictShape({
             title: Spec.string, 
-            field: Spec.optional(Spec.string),
+            field: Spec.nullableOptional(Spec.string),
             align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
-            width: Spec.optional(Spec.positiveFloat),
+            width: Spec.nullableOptional(Spec.positiveFloat),
             sortable: Spec.optional(Spec.boolean)
           })
         ) 

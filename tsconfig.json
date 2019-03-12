@@ -4,22 +4,36 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": false,
-    "lib": ["es7", "dom"],
+    "lib": [
+      "es7",
+      "dom"
+    ],
     "esModuleInterop": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "types": [
-      "node", "react", "react-dom", "mocha", "chai","color"
-    ]
+      "node",
+      "react",
+      "react-dom",
+      "mocha",
+      "chai",
+      "color"
+    ],
+    "allowJs": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
   },
   "files": [
     "./src/main/js-cockpit.ts"
   ],
-
   "include": [
     "./src/main/**/*.ts*"
   ]

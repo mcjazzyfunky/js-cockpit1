@@ -37,6 +37,7 @@ const styleSideNav = defineStyle(theme => ({
 
       '& .ms-Nav-chevronButton': {
         fontSize: theme.fonts.mediumPlus.fontSize,
+        fontFamily: theme.fonts.mediumPlus.fontFamily,
         //color: theme.palette.neutralDark,
         backgroundColor: 'transparent',
 

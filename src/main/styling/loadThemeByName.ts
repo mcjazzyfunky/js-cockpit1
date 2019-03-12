@@ -27,87 +27,7 @@ const themes: any = {
       neutralDark: '#272727',
       black: '#1d1d1d',
       white: '#ffffff',
-    },
-
-  "fonts": {
-    "tiny": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "10px",
-      "fontWeight": 600
-    },
-    "xSmall": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "11px",
-      "fontWeight": 400
-    },
-    "small": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "12px",
-      "fontWeight": 400
-    },
-    "smallPlus": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "13px",
-      "fontWeight": 400
-    },
-    "medium": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "14px",
-      "fontWeight": 400
-    },
-    "mediumPlus": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "15px",
-      "fontWeight": 400
-    },
-    "large": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "17px",
-      "fontWeight": 300
-    },
-    "xLarge": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "21px",
-      "fontWeight": 100
-    },
-    "xxLarge": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "28px",
-      "fontWeight": 100
-    },
-    "superLarge": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "42px",
-      "fontWeight": 100
-    },
-    "mega": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
-      "MozOsxFontSmoothing": "grayscale",
-      "WebkitFontSmoothing": "antialiased",
-      "fontSize": "72px",
-      "fontWeight": 100
     }
-}
   },
 
   orange: {
@@ -155,7 +75,7 @@ Object.keys(themes).forEach(themeName => {
       fonts[fontSize] = {}
     }
 
-    fonts[fontSize].fontFamily = "'Open Sans', Roboto, Arial, Helvetia, sans-serif"
+    fonts[fontSize].fontFamily = "Arial, Helvetia, sans-serif"
   })
 
   themes[themeName] = createTheme(themes[themeName])

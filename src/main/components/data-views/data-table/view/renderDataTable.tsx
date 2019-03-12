@@ -17,8 +17,8 @@ type DataTableClasses = CssClassesOf<typeof styleDataTable>
 function renderDataTable(props: DataTableProps, ref: any) { // TODO
   const
     [selectedRows, setSelectionRows] = React.useState(() => new Set<number>()),
-    runOnUpdater = React.useRef([]),
-    rowSelectionMode = props.rowSelectionOptions.mode || 'none'
+    runOnUpdater = React.useRef([] as Function[]),
+    rowSelectionMode = props.rowSelectionOptions && props.rowSelectionOptions.mode || 'none'
 
   React.useImperativeHandle(ref, () => {
     return {
@@ -88,11 +88,11 @@ function renderDataTable(props: DataTableProps, ref: any) { // TODO
                       }
                     />
                   )
-               if (props.rowSelectionOptions.mode !== 'none') {
+               if (props.rowSelectionOptions && props.rowSelectionOptions.mode !== 'none') {
                   dataColumns.unshift(
                     <Column
                       width={columnWidths.selectorColumn}
-                      dataKey={null}
+                      dataKey={'-1'}
                       className={classes.cell}
                       cellRenderer={({ rowIndex }) => {
                         const isSelected = selectedRows.has(rowIndex)
@@ -141,7 +141,7 @@ function renderDataTable(props: DataTableProps, ref: any) { // TODO
 
 function calculateColumnWidths(props: DataTableProps, totalWidth: number) {
   const
-    hasSelectorColumn = props.rowSelectionOptions.mode !== 'none',
+    hasSelectorColumn = !!props.rowSelectionOptions && props.rowSelectionOptions.mode !== 'none',
     selectorColumnWidth = hasSelectorColumn ? 32 : 0,
     columns = props.columns,
     columnCount = columns.length,
@@ -179,7 +179,7 @@ function calculateColumnWidths(props: DataTableProps, totalWidth: number) {
 
 function createHeaderRow(props: DataTableProps, selectedRows: Set<number>, columnWidths: any,  classes: DataTableClasses, changeSelection: (selection: any) => void, changeSort: (field: string, sortDesc: boolean) => void) { // TODO
   const
-    selectionMode = props.rowSelectionOptions.mode,
+    selectionMode = props.rowSelectionOptions ? props.rowSelectionOptions.mode : null,
 
     selectionColumn =
       selectionMode === 'none'
@@ -226,11 +226,11 @@ function createTableHeadCell(columnIdx: number, props: DataTableProps, width: nu
       !sortable && column.field
         ? null
         : () => {
-          changeSort(column.field, isSorted ? sortDir !== 'desc' : false)
+          changeSort(column.field!, isSorted ? sortDir !== 'desc' : false)
         } 
 
   return (
-    <div key={columnIdx} data-sortable={String(sortable)} onClick={onClick} style={{ width, minWidth: width, maxWidth: width }}>
+    <div key={columnIdx} data-sortable={String(sortable)} onClick={onClick || undefined} style={{ width, minWidth: width, maxWidth: width }}>
       <div className={classes.tableHeadCellContent}>
         {column.title}
         {sortIcon}
@@ -259,24 +259,20 @@ function createTableBodyCell(rowIndex: number, columnIndex: number, props: DataT
 
   return (
     <div key={columnIndex} className={className}>
-      {row[column.field]}
+      {column.field ? row[column.field] : null}
     </div>
   )
 }
 
 function createSelectRowCheckbox(rowIndex: number, props: DataTableProps, selectedRows: Set<number>, changeRowSelection: (selection: any) => void, classes: DataTableClasses) { // TODO
   const
-    selectionMode = props.rowSelectionOptions.mode,
+    selectionMode = props.rowSelectionOptions ? props.rowSelectionOptions.mode : 'none',
     checked = selectedRows.has(rowIndex),
 
     onChange =() => {
-      let selectedRows: Set<number>
-      
       if (selectionMode === 'single') {
         selectedRows = new Set([rowIndex])
-      } else {
-        selectedRows = new Set(selectedRows)
-
+      } else if (selectionMode === 'multi') {
         if (checked) {
           selectedRows.delete(rowIndex)
         } else {

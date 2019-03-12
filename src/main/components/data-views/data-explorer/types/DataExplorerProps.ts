@@ -9,7 +9,7 @@ import DataExplorerQueryResult from './DataExplorerQueryResult'
 // --- DataExplorerProps ----------------------------------------------
 
 type DataExplorerProps = {
-  title?: string,
+  title?: string | null,
   loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>, // TODO
   columns: Column[],
   actions: (DefaultAction | SingleRowAction | MultiRowAction)[],
@@ -20,14 +20,14 @@ type DataExplorerProps = {
     basic: {
       type: 'fullText',
       name: string
-    },
+    }
 
     advanced: {
       type: 'filters',
 
       filters: (TextFilter)[]
     }
-  }
+  } | null
 }
 
 type Column = {

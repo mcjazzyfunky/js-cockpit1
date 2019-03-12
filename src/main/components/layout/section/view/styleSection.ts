@@ -11,7 +11,8 @@ const styleSection = defineStyle(theme => ({
   title: {
     color: theme.palette.neutralPrimary,
     fontSize: theme.fonts.mediumPlus.fontSize,
-    padding: '0 0 1rem 0',
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
+    padding: '0 0 0.5rem 0',
   },
 
   content: {

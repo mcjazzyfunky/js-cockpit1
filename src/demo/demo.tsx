@@ -197,7 +197,7 @@ function Demo() {
       ]}
     >
       <Section>
-        <TextField label="Cusomer no."></TextField>
+        <TextField label="Customer no."></TextField>
       </Section>
 
       <Tabs>
@@ -267,11 +267,11 @@ function Demo() {
         />
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit
+  return cockpit 
 }
 
 function fakeData(count: number) {
@@ -300,8 +300,8 @@ if (params.sortBy) {
     let ret = 0
 
     const
-      v1 = recs1[params.sortBy],
-      v2 = recs2[params.sortBy];
+      v1 = recs1[params.sortBy!],
+      v2 = recs2[params.sortBy!];
 
     if (v1 > v2) {
       ret = 1
