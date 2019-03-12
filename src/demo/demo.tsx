@@ -13,7 +13,7 @@ import faker from 'faker'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('violet', true)
+loadThemeByName('orange', true)
 
 const menuBar = 
   <MenuBar
