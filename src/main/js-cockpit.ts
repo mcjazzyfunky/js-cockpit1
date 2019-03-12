@@ -32,6 +32,7 @@ import ActionEvent from './events/ActionEvent'
 
 // import functions
 import initSystemIcons from './styling/initSystemIcons'
+import loadThemeByName from './styling/loadThemeByName'
 
 export {
   // form related components
@@ -74,6 +75,7 @@ export {
 
   // functions
   initSystemIcons,
+  loadThemeByName,
 
   // event types
   ActionEvent,

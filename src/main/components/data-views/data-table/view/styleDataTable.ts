@@ -37,13 +37,13 @@ const styleDataTable = defineStyle(theme => ({
         display: 'flex',
         justifyContent: 'center',
         boxSizing: 'border-box',
-        padding: '5px',
+        padding: '4px',
         color: theme.palette.black,
         //backgroundColor: theme.palette.neutralLighter,
         borderWidth: '1px 0 1px 1px',
         borderColor: theme.palette.neutralTertiary,
         borderStyle: 'solid',
-        fontSize: theme.fonts.mediumPlus.fontSize,
+        fontSize: theme.fonts.medium.fontSize,
         fontWeight: 'normal',
         textTransform: 'none',
       },
@@ -73,13 +73,13 @@ const styleDataTable = defineStyle(theme => ({
 
   tableHeadCellContent: {
     display: 'flex',
-    fontWeight: '600',
+    //fontWeight: '600',
     whiteSpace: 'nowrap',
     position: 'relative',
   },
 
   selectAllRowsCheckBox: {
-    padding: '5px 0 0 4px',
+    padding: '4px 0 0 4px',
   },
   
   selectRowCheckBox: {
