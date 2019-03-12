@@ -18,7 +18,13 @@ function renderMenuBar(props: MenuBarProps) {
     
   if (props.showMenuBeaks) {
     buttonAs = (props: any) => 
-      <CommandBarButton {...props} menuProps={{...props.menuProps, isBeakVisible: true}}/>
+      <CommandBarButton 
+        {...props}
+        menuProps={{
+          ...props.menuProps,
+          isBeakVisible: true,
+          gapSpace: -2
+        }}/>
   }
 
   if (itemCount > 0) {

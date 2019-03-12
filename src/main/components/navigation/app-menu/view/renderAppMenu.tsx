@@ -70,7 +70,7 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
     <div onClick={() => setCalloutVisible(true)}>
       <div ref={ref}>
         <label className={classes.label}>
-           Web Shop 
+          {props.apps[0].title}
         </label>
         <ChevronDownIcon/>
       </div>
@@ -78,7 +78,7 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
         target={ ref.current }
         hidden={!calloutVisible}
         className={classes.callout}
-        gapSpace={1}
+        gapSpace={7}
         setInitialFocus={true}
         onDismiss={() => setCalloutVisible(false)}
       >

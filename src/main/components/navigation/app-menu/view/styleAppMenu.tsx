@@ -31,6 +31,8 @@ const styleAppMenu = defineStyle(theme => ({
   label: {
     margin: '0 0.5rem',
     cursor: 'pointer',
+    fontSize: theme.fonts.medium.fontSize,
+    fontFamily: theme.fonts.medium.fontFamily,
   },
 
   callout: {
@@ -42,7 +44,7 @@ const styleAppMenu = defineStyle(theme => ({
 
   appLink: {
     margin: '4px 4px',
-    padding: '4px 8px',
+    padding: '6px 10px',
     color: theme.palette.black,
     borderWidth: '1px 0 0 0',
     borderStyle: 'solid',
@@ -67,12 +69,14 @@ const styleAppMenu = defineStyle(theme => ({
   appLinkTitle: {
     display: 'inline-block',
     fontSize: theme.fonts.medium.fontSize,
+    fontFamily: theme.fonts.medium.fontFamily,
   },
 
   appLinkDescription: {
     display: 'block',
     fontSize: theme.fonts.smallPlus.fontSize,
-    fontStyle: 'italic',
+    fontFamily: theme.fonts.smallPlus.fontFamily,
+    marginTop: '4px'
   }
 }))
 
