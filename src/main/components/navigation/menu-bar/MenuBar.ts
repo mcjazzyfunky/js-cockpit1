@@ -19,6 +19,11 @@ const MenuBar = defineComponent<MenuBarProps>({
     items: {
       type: Object,
       validate: Spec.lazy(() => specItems)
+    },
+
+    showMenuBeaks: {
+      type: Boolean,
+      defaultValue: false
     }
   },
 

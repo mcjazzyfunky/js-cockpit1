@@ -13,106 +13,127 @@ import faker from 'faker'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('orange', true)
+loadThemeByName('violet', true)
 
-function MainMenuBar() {
-  return (
-    <MenuBar
-      onAction={() => alert('Juhu')}
+const menuBar = 
+  <MenuBar
+    onAction={() => alert('Juhu')}
+    showMenuBeaks={true}
+   
+    items={[
+      {
+        type: 'menu',
+        id: '1',
+        text: 'Users',
+        
+        items: [
+          { type: 'item', id: '1.1', text: 'Item-1.1'},
+          { type: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
+          { type: 'item', id: '1.3', text: 'Item-1.3'},
+          { type: 'item', id: '1.4', text: 'Item-1.4'},
+        ]
+      },
+      {
+        type: 'menu',
+        id: '2',
+        text: 'Content',
+        
+        items: [
+          { type: 'item', id: '2.1', text: 'Item-2.1'},
+          { type: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
+          { type: 'item', id: '2.3', text: 'Item-2.3'},
+          { type: 'divider' },
+          { type: 'item', id: '2.4', text: 'Item-2.4'},
+        ]
+      },
+      {
+        type: 'menu',
+        id: '3',
+        text: 'Media',
+        
+        items: [
+          { type: 'item', id: '3.1', text: 'Item-3.1'},
+          { type: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
+          { type: 'item', id: '3.3', text: 'Item-3.3'},
 
-      items={[
-        {
-          type: 'menu',
-          id: '1',
-          text: 'Users',
-          
-          items: [
-            { type: 'item', id: '1.1', text: 'Item-1.1'},
-            { type: 'item', id: '1.2', text: 'Item-1.2', disabled: true },
-            { type: 'item', id: '1.3', text: 'Item-1.3'},
-            { type: 'item', id: '1.4', text: 'Item-1.4'},
-          ]
-        },
-        {
-          type: 'menu',
-          id: '2',
-          text: 'Content',
-          
-          items: [
-            { type: 'item', id: '2.1', text: 'Item-2.1'},
-            { type: 'item', id: '2.2', text: 'Item-2.2', disabled: true },
-            { type: 'item', id: '2.3', text: 'Item-2.3'},
-            { type: 'divider' },
-            { type: 'item', id: '2.4', text: 'Item-2.4'},
-          ]
-        },
-        {
-          type: 'menu',
-          id: '3',
-          text: 'Media',
-          
-          items: [
-            { type: 'item', id: '3.1', text: 'Item-3.1'},
-            { type: 'item', id: '3.2', text: 'Item-3.2', disabled: true },
-            { type: 'item', id: '3.3', text: 'Item-3.3'},
+          {
+            type: 'menu',
+            id: '3.4',
+            text: 'Item-3.4',
 
-            {
-              type: 'menu',
-              id: '3.4',
-              text: 'Item-3.4',
-
-              items: [
-                { type: 'item', id: '3.4.1', text: 'Item-3.4.1' }
-              ]
-            },
-          ]
-        },
-        {
-          type: 'menu',
-          id: '4',
-          text: 'Help',
-          
-          items: [
-            { type: 'item', id: '4.1', text: 'About...'},
-          ]
-        }
-      ]}
+            items: [
+              { type: 'item', id: '3.4.1', text: 'Item-3.4.1' }
+            ]
+          },
+        ]
+      },
+      {
+        type: 'menu',
+        id: '4',
+        text: 'Help',
+        
+        items: [
+          { type: 'item', id: '4.1', text: 'About...'},
+        ]
+      }
+    ]}
     />
-  )
-}
 
-function MainAppMenu() {
-  return (
-    <AppMenu
-      apps={[
-        {
-          type: 'app',
-          id: 'dashboard',
-          title: 'Dashboard',
-          description: 'Some description for the Dashboard'
-        },
-        {
-          type: 'app',
-          id: 'catalog',
-          title: 'Catalog',
-          description: 'Some description for the Catalog'
-        },
-        {
-          type: 'app',
-          id: 'cms',
-          title: 'CMS',
-          description: 'Some description for the CMS'
-        },
-        {
-          type: 'app',
-          id: 'cms',
-          title: 'Media management',
-          description: 'Some description for the media'
-        }
-      ]}
-    />
-  )
-}
+const appMenu = 
+  <AppMenu
+    apps={[
+      {
+        type: 'app',
+        id: 'dashboard',
+        title: 'Dashboard',
+        description: 'Some description for the Dashboard'
+      },
+      {
+        type: 'app',
+        id: 'catalog',
+        title: 'Catalog',
+        description: 'Some description for the Catalog'
+      },
+      {
+        type: 'app',
+        id: 'cms',
+        title: 'CMS',
+        description: 'Some description for the CMS'
+      },
+      {
+        type: 'app',
+        id: 'cms',
+        title: 'Media management',
+        description: 'Some description for the media'
+      }
+    ]}
+  />
+
+const sideNav =
+  <SideNav
+    activeItemId="userGroups"
+
+    items={[
+      {
+        type: 'menu',
+        text: 'Menu 1',
+
+        items: [
+          { type: 'item', id: 'users', text: 'Users' },
+          { type: 'item', id: 'userGroups', text: 'User groups' }
+        ]
+      },
+      {
+        type: 'menu',
+        text: 'Menu 2',
+
+        items: [
+          { type: 'item', id: 'users2', text: 'Users' },
+          { type: 'item', id: 'userGroups2', text: 'User groups' }
+        ]
+      }
+    ]}
+  />
 
 function Demo() {
   const loginScreen =
@@ -230,7 +251,7 @@ function Demo() {
         />
       </Cockpit.Brand>
       <Cockpit.TopNav>
-        <MainAppMenu/>
+        {appMenu}
       </Cockpit.TopNav>
       <Cockpit.UserNav>
         <UserMenu
@@ -241,30 +262,7 @@ function Demo() {
       <Cockpit.Menu>
       </Cockpit.Menu>
       <Cockpit.SideNav>
-        <SideNav
-          activeItemId="userGroups"
-
-          items={[
-            {
-              type: 'menu',
-              text: 'Menu 1',
-
-              items: [
-                { type: 'item', id: 'users', text: 'Users' },
-                { type: 'item', id: 'userGroups', text: 'User groups' }
-              ]
-            },
-            {
-              type: 'menu',
-              text: 'Menu 2',
-
-              items: [
-                { type: 'item', id: 'users2', text: 'Users' },
-                { type: 'item', id: 'userGroups2', text: 'User groups' }
-              ]
-            }
-          ]}
-        />
+        {sideNav}
       </Cockpit.SideNav>
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}

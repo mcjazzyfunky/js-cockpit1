@@ -5,8 +5,11 @@ import { ReactNode } from 'react'
 
 type MenuBarProps = {
   onAction?: () => void,
-  items: (Menu | Item | Divider)[]
+  items: (Menu | Item | Divider)[],
+  showMenuBeaks?: boolean
 }
+
+// --- locals -------------------------------------------------------
 
 type Menu = {
   type: 'menu',

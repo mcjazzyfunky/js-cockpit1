@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { CommandBar, DirectionalHint } from 'office-ui-fabric-react'
+import { CommandBar, DirectionalHint, CommandBarButton } from 'office-ui-fabric-react'
 
 // internal imports
 import styleMenuBar from './styleMenuBar'
@@ -10,9 +10,16 @@ import MenuBarIcon from './MenuBarIcon'
 // --- renderMenuBar ------------------------------------------------
 
 function renderMenuBar(props: MenuBarProps) {
-  let ret = null
+  let
+    ret = null,
+    buttonAs: any = null
 
-  const itemCount = props.items.length 
+  const itemCount = props.items.length
+    
+  if (props.showMenuBeaks) {
+    buttonAs = (props: any) => 
+      <CommandBarButton {...props} menuProps={{...props.menuProps, isBeakVisible: true}}/>
+  }
 
   if (itemCount > 0) {
     ret = styleMenuBar(classes =>
@@ -24,6 +31,7 @@ function renderMenuBar(props: MenuBarProps) {
           <CommandBar
             className={classes.commandBar}
             items={getItemProps(props.items, props.onAction)}
+            buttonAs={buttonAs}
           />
         </div>
       </div>)
