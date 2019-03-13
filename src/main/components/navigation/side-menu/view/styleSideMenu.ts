@@ -15,6 +15,7 @@ const styleSideMenu = defineStyle(theme => ({
     flex: 0,
     padding: '11px 20px',
     fontSize: theme.fonts.mediumPlus.fontSize,
+    fontWeight: theme.fonts.medium.fontWeight,
     fontFamily: theme.fonts.mediumPlus.fontFamily,
     borderColor: theme.palette.neutralLight,
     borderStyle: 'solid',
@@ -48,8 +49,7 @@ const styleSideMenu = defineStyle(theme => ({
       },
 
       '& .ms-Nav-chevronButton': {
-        fontSize: theme.fonts.mediumPlus.fontSize,
-        fontFamily: theme.fonts.mediumPlus.fontFamily,
+        ...theme.fonts.mediumPlus,
         //color: theme.palette.neutralDark,
         backgroundColor: 'transparent',
 
