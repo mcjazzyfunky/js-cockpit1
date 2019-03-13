@@ -1,16 +1,28 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleSideNav --------------------------------------------------
+// --- styleSideMenu --------------------------------------------------
 
-const styleSideNav = defineStyle(theme => ({
+const styleSideMenu = defineStyle(theme => ({
   container: {
     display: 'flex',
     flexGrow: 1,
+    flexDirection: 'column',
     height: '100%',
   },
 
+  header: {
+    flex: 0,
+    padding: '11px 20px',
+    fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
+    borderColor: theme.palette.neutralLight,
+    borderStyle: 'solid',
+    borderWidth: '0 0 1px 0',
+  },
+
   navigation: {
+    flex: 1,
     width: '12rem',
     padding: '0 8px',
     margin: '6px',
@@ -90,18 +102,9 @@ const styleSideNav = defineStyle(theme => ({
         }
       }
     }
-  },
-
-  content: {
-    flexGrow: 1,
-    marginLeft: '0.375rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    margin: '4px 6px'
   }
 }))
 
 // --- exports ------------------------------------------------------
 
-export default styleSideNav
+export default styleSideMenu

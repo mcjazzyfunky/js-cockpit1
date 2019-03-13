@@ -1,6 +1,6 @@
-// --- SideNavProps -------------------------------------------------
+// --- SideMenuProps -------------------------------------------------
 
-type SideNavProps = {
+type SideMenuProps = {
   activeItemId?: string,
   items: (Item | Menu)[]
 }
@@ -20,4 +20,4 @@ type Menu = {
 
 // --- exports ------------------------------------------------------
 
-export default SideNavProps
+export default SideMenuProps

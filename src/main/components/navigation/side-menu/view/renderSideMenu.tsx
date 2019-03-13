@@ -3,19 +3,19 @@ import React, { ReactNode } from 'react'
 import { Nav, INavLink, IRenderFunction, INavLinkGroup } from 'office-ui-fabric-react'
 
 // internal imports
-import styleSideNav from './styleSideNav'
-import SideNavProps from '../types/SideNavProps'
+import styleSideMenu from './styleSideMenu'
+import SideMenuProps from '../types/SideMenuProps'
 
-// --- SideNav View -------------------------------------------------
+// --- SideMenu View -------------------------------------------------
 
-function SideNavView(props: SideNavProps) {
+function SideMenuView(props: SideMenuProps) {
   let ret = undefined
 
   if (props.items) {
     const
       linkGroups = getLinkGroups(props.items)
 
-    ret = styleSideNav(classes => { 
+    ret = styleSideMenu(classes => { 
       let onRenderGroupHeader: IRenderFunction<INavLinkGroup> | undefined = undefined 
 
       if (linkGroups.length === 1 && typeof linkGroups[0].name === 'string') {
@@ -102,6 +102,6 @@ function getLinks(items: any): INavLink[] {
 
 // --- exports ------------------------------------------------------
 
-export default SideNavView
+export default SideMenuView
 
 

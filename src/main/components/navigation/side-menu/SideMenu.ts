@@ -4,13 +4,13 @@ import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react
 import { Spec } from 'js-spec'
 
 // internal imports
-import SideNavProps from './types/SideNavProps'
-import renderSideNav from './view/renderSideNav'
+import SideMenuProps from './types/SideMenuProps'
+import renderSideMenu from './view/renderSideMenu'
 
-// --- SideNav ------------------------------------------------------
+// --- SideMenu ------------------------------------------------------
 
-const SideNav = defineComponent<SideNavProps>({
-  displayName: 'SideNav',
+const SideMenu = defineComponent<SideMenuProps>({
+  displayName: 'SideMenu',
 
   properties: {
     activeItemId: {
@@ -24,7 +24,7 @@ const SideNav = defineComponent<SideNavProps>({
   },
 
   render(props) {
-    return renderSideNav(props)
+    return renderSideMenu(props)
   }
 })
 
@@ -59,4 +59,4 @@ const specItems =
 
 // --- exports ------------------------------------------------------
 
-export default SideNav
+export default SideMenu

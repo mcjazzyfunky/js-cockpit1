@@ -14,7 +14,7 @@ function renderCockpit(props: CockpitProps) {
     topNav: ReactNode = null,
     userNav: ReactNode = null,
     menu: ReactNode = null,
-    sideNav: ReactNode = null,
+    sideMenu: ReactNode = null,
     Center: ReactNode = null
 
   const getContent = (child: any, type: any) => {
@@ -41,7 +41,7 @@ function renderCockpit(props: CockpitProps) {
     topNav = topNav || getContent(child, Cockpit.TopNav)
     userNav = userNav || getContent(child, Cockpit.UserNav)
     menu = menu || getContent(child, Cockpit.Menu)
-    sideNav = sideNav || getContent(child, Cockpit.SideNav)
+    sideMenu = sideMenu || getContent(child, Cockpit.SideMenu)
     Center = Center || getContent(child, Cockpit.Center)
   })
 
@@ -63,8 +63,8 @@ function renderCockpit(props: CockpitProps) {
           {menu}
         </div>
         <div className={classes.content}>
-          <div className={classes.sideNav}>
-            {sideNav}
+          <div className={classes.sideMenu}>
+            {sideMenu}
           </div>
           <div className={classes.center}>
             {Center}

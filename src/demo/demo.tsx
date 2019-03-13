@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideNav, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
 import { loadTheme, createTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -109,8 +109,8 @@ const appMenu =
     ]}
   />
 
-const sideNav =
-  <SideNav
+const sideMenu =
+  <SideMenu
     activeItemId="userGroups"
 
     items={[
@@ -261,9 +261,9 @@ function Demo() {
       </Cockpit.UserNav>
       <Cockpit.Menu>
       </Cockpit.Menu>
-      <Cockpit.SideNav>
-        {sideNav}
-      </Cockpit.SideNav>
+      <Cockpit.SideMenu>
+        {sideMenu}
+      </Cockpit.SideMenu>
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}
       </Cockpit.Center>
