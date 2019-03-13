@@ -13,7 +13,7 @@ type Item = {
 
 type Menu = {
   type: 'menu'
-  text?: string,
+  text: string,
   menuId?: string,
   items?: (Item | Menu)[]  
 }

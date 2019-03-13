@@ -95,11 +95,13 @@ const styleDataExplorer = defineStyle(theme => ({
 
     selectors: {
       ':hover': {
-        backgroundColor: theme.palette.neutralLight,
+        //backgroundColor: theme.palette.neutralLighter,
+        backgroundColor: theme.semanticColors.buttonBackgroundHovered,
       },
   
       ':active': {
-        backgroundColor: theme.palette.neutralQuaternary
+        //backgroundColor: theme.palette.neutralLight
+        backgroundColor: theme.semanticColors.buttonBackgroundChecked,
       },
     }
   },
