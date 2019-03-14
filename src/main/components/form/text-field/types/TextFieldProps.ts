@@ -3,6 +3,7 @@
 type TextFieldProps = {
   name?: string
   label?: string,
+  grow?: number
 }
 
 // --- exports ------------------------------------------------------

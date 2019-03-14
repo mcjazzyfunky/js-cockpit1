@@ -19,6 +19,10 @@ const TextField = defineComponent<TextFieldProps>({
     name: {
       type: String
     },
+
+    grow: {
+      type: Number
+    }
   },
 
   render(props) {

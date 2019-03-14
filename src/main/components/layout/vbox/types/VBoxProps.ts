@@ -1,7 +1,7 @@
 // externals imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- VBoxCellProps ------------------------------------------------
+// --- VBoxProps ----------------------------------------------------
 
 type VBoxProps = {
   className?: string,

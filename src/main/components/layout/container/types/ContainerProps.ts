@@ -1,9 +1,9 @@
-// externals imports
+// external imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- VBoxCellProps ------------------------------------------------
+// --- ContainerProps -----------------------------------------------
 
-type VBoxCellProps = {
+type ContainerProps = {
   grow?: number,
   shrink?: number,
   horizontalAlign?: 'start' | 'center' | 'end',
@@ -15,4 +15,4 @@ type VBoxCellProps = {
 
 // --- exports ------------------------------------------------------
 
-export default VBoxCellProps
+export default ContainerProps

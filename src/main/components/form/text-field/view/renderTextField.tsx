@@ -9,12 +9,18 @@ import TextFieldProps from '../types/TextFieldProps'
 // --- renderTextField ------------------------------------------------
 
 function renderTextField(props: TextFieldProps) {
+  const
+    style =
+      props.grow === undefined
+        ? undefined
+        : { flexGrow: props.grow }
+
   return (
     styleTextField(classes =>
-      <div className={classes.container}>
+      <div data-component="TextField" className={classes.container} style={style}>
         <div className={classes.label}>{props.label}</div>
         <div>
-            <TextField/>
+          <TextField/>
         </div>
       </div>
     )
