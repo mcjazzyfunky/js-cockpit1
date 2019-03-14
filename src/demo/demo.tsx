@@ -12,7 +12,7 @@ import { delay } from 'rxjs/operators'
 import faker from 'faker'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
-import { FluentCustomizations } from '@uifabric/fluent-theme';
+//import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 
 initSystemIcons()
@@ -213,6 +213,8 @@ function Demo() {
   const dataForm =
     <DataForm
       title="Customer"
+
+      onClose={() => alert('close')}
       
       actions={[
         { type: 'default', text: 'Add', icon: <FiPlus/> },

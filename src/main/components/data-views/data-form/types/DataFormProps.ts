@@ -6,7 +6,8 @@ import { ReactNode } from 'react'
 type DataFormProps = {
   title?: string | null,
   actions?: (Action)[] | null,
-  children?: ReactNode
+  onClose?: () => void,
+  children?: ReactNode,
 }
 
 // --- locals -------------------------------------------------------

@@ -39,6 +39,10 @@ const DataForm = defineComponent<DataFormProps>({
         )
     },
 
+    onClose: {
+      type: Function
+    },
+
     children: {
       validate:
         withChildren(isNode)

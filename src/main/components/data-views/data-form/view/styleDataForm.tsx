@@ -37,6 +37,9 @@ const styleDataForm = defineStyle(theme => ({
     flexGrow: 1
   },
 
+  headerEnd: {
+  },
+
   title: {
     display: 'inline-block',
     fontSize: theme.fonts.large.fontSize,
@@ -47,10 +50,11 @@ const styleDataForm = defineStyle(theme => ({
   
   actionBar: {
     display: 'inline-flex',
+    marginBottom: '2px',
 
     selectors: {
       '& .ms-CommandBar': {
-        backgroundColor: 'transparent !important'
+        backgroundColor: 'transparent !important',
       }
     }
   },
@@ -98,7 +102,28 @@ const styleDataForm = defineStyle(theme => ({
     margin: '17px 3px 0 3px'
   },
 
+  closeButton: {
+    color: theme.palette.themeSecondary,
+    backgroundColor: 'transparent',
+    padding: '0 !important',
+    minWidth: 'auto',
+    marginRight: '0.5rem',
 
+    selectors: {
+      '&:hover': {
+        color: theme.palette.themeSecondary,
+      },
+
+      '&:active': {
+        color: theme.palette.themeSecondary,
+      }
+    }
+  },
+
+  closeIcon: {
+    width: '24px',
+    height: '24px',
+  }
 }))
 
 // --- exports ------------------------------------------------------

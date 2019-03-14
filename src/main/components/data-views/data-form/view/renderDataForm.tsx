@@ -1,6 +1,7 @@
 // externals imports
 import React from 'react'
-import { css, CommandBar, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import { css, CommandBar, Button, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 // internal imports
 import styleDataForm from './styleDataForm'
@@ -33,6 +34,13 @@ function renderDataForm(props: DataFormProps) {
 // --- locals -------------------------------------------------------
 
 function renderHeader(props: DataFormProps, classes: DataFormClasses) {
+  const closeButton =
+    props.onClose
+      ? <Button className={classes.closeButton} onClick={props.onClose}>
+          <CloseIcon className={classes.closeIcon}/>
+        </Button>
+      : null
+
   return (
     <div className={classes.header}>
       <div className={classes.headerStart}>
@@ -43,12 +51,16 @@ function renderHeader(props: DataFormProps, classes: DataFormClasses) {
       <div className={classes.headerCenter}>
          { renderActionBar(props, classes) }
       </div>
+      <div className={classes.headerEnd}>
+        {closeButton}
+      </div>
     </div>
   ) 
 }
 
 function renderActionBar(props: DataFormProps, classes: DataFormClasses) {
-  const items: any[] = []
+  const
+    items: any[] = []
 
   if (props.actions) {
     props.actions.forEach((action, idx) => {
@@ -85,18 +97,13 @@ function renderActionBar(props: DataFormProps, classes: DataFormClasses) {
           () => <div className={iconClassName}>{action.icon}</div>
           : undefined
       })
-
-      if (idx > 0) {
-        // items.push(<div>x</div>) // TODO xxx
-      }
     })
   }
 
   return (
     <CommandBar
       className={classes.actionBar}
-      items={[]}
-      farItems={items}
+      items={items}
     />
   )
 }
