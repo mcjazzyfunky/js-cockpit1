@@ -89,7 +89,7 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       flexDirection: 'row',
     },
 
-    sideMenu: {
+    sidebar: {
       display: 'flex',
 
       selectors: {

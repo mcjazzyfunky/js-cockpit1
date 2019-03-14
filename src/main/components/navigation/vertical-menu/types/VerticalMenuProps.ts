@@ -1,6 +1,6 @@
-// --- SideMenuProps -------------------------------------------------
+// --- VerticalMenuProps -------------------------------------------------
 
-type SideMenuProps = {
+type VerticalMenuProps = {
   activeItemId?: string,
   collapsible?: boolean,
   items: (Item | Menu)[]
@@ -21,4 +21,4 @@ type Menu = {
 
 // --- exports ------------------------------------------------------
 
-export default SideMenuProps
+export default VerticalMenuProps

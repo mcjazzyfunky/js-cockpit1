@@ -15,7 +15,7 @@ import LoginForm from './components/login/login-form/LoginForm'
 import LogoutButton from './components/login/logout-button/LogoutButton'
 import LogoutButtonProps from './components/login/logout-button/types/LogoutButtonProps'
 import MenuBar from './components/navigation/menu-bar/MenuBar'
-import SideMenu from './components/navigation/side-menu/SideMenu'
+import VerticalMenu from './components/navigation/vertical-menu/VerticalMenu'
 import Section from './components/layout/section/Section'
 import SectionProps from './components/layout/section/types/SectionProps'
 import Tabs from './components/layout/tabs/Tabs'
@@ -53,7 +53,7 @@ export {
   // navigation components
   AppMenu,
   MenuBar,
-  SideMenu,
+  VerticalMenu,
  
   // data view components
   DataExplorer,

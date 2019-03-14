@@ -23,7 +23,7 @@ const Cockpit = defineComponent<CockpitProps>({
         withChildren(
           Spec.all(
             Spec.lazy(() =>
-              isElementOfType([Brand, TopNav, UserNav, SideMenu, Center])))
+              isElementOfType([Brand, TopNav, UserNav, Sidebar, Center])))
         )
     }
   },
@@ -149,10 +149,10 @@ const Menu = defineComponent<CockpitUserNavProps>({
   }
 })
 
-// --- Cockpit.SideMenu -----------------------------------------
+// --- Cockpit.Sidebar -----------------------------------------
 
-const SideMenu = defineComponent<CockpitSidebarProps>({
-  displayName: 'Cockpit.SideMenu',
+const Sidebar = defineComponent<CockpitSidebarProps>({
+  displayName: 'Cockpit.Sidebar',
 
   properties: {
     className: {
@@ -172,7 +172,7 @@ const SideMenu = defineComponent<CockpitSidebarProps>({
 
   render() {
     throw new Error(
-      'Components of type Cockpit.SideMenu must be children of '
+      'Components of type Cockpit.Sidebar must be children of '
         + 'Cockpit components'
     )
   }
@@ -214,6 +214,6 @@ export default Object.assign(Cockpit, {
   TopNav,
   UserNav,
   Menu,
-  SideMenu,
+  Sidebar,
   Center
 })

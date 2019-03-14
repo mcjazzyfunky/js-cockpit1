@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, SideMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
 import { loadTheme, createTheme } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -13,12 +13,12 @@ import faker from 'faker'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('orange', true)
+loadThemeByName('orange', false)
 
 const menuBar = 
   <MenuBar
     onAction={() => alert('Juhu')}
-    showMenuBeaks={true}
+    showMenuBeaks={false}
    
     items={[
       {
@@ -109,8 +109,8 @@ const appMenu =
     ]}
   />
 
-const sideMenu =
-  <SideMenu
+const verticalMenu =
+  <VerticalMenu
     activeItemId="userGroups"
 
     items={[
@@ -239,6 +239,12 @@ function Demo() {
         <Tabs.Page title="Images">
           This is page 3....
         </Tabs.Page>
+        <Tabs.Page title="Settings">
+          This is page 4
+        </Tabs.Page>
+        <Tabs.Page title="Permissions">
+          This is page 5 
+        </Tabs.Page>
       </Tabs>
     </DataForm>
 
@@ -261,15 +267,15 @@ function Demo() {
       </Cockpit.UserNav>
       <Cockpit.Menu>
       </Cockpit.Menu>
-      <Cockpit.SideMenu>
-        {sideMenu}
-      </Cockpit.SideMenu>
+      <Cockpit.Sidebar>
+        {verticalMenu}
+      </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit
+  return cockpit 
 }
 
 function fakeData(count: number) {

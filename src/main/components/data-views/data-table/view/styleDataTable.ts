@@ -155,11 +155,12 @@ const styleDataTable = defineStyle(theme => ({
     boxSizing: 'border-box',
     height: '2em',
     backgroundColor: Color(theme.palette.themeLight).lighten(0.05),
-    //backgroundColor: 'rgb(255, 244, 202)',
+    //backgroundColor: Color.rgb(255, 244, 202).darken(0.05),
 
     selectors: {
       '&[class*="evenRow"]': {
         backgroundColor: theme.palette.themeLight,
+        //backgroundColor: Color.rgb(255, 244, 202).darken(0.15),
       }
     }
   },

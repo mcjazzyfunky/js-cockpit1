@@ -4,13 +4,13 @@ import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react
 import { Spec } from 'js-spec'
 
 // internal imports
-import SideMenuProps from './types/SideMenuProps'
-import renderSideMenu from './view/renderSideMenu'
+import VerticalMenuProps from './types/VerticalMenuProps'
+import renderVerticalMenu from './view/renderVerticalMenu'
 
-// --- SideMenu ------------------------------------------------------
+// --- VerticalMenu ------------------------------------------------------
 
-const SideMenu = defineComponent<SideMenuProps>({
-  displayName: 'SideMenu',
+const VerticalMenu = defineComponent<VerticalMenuProps>({
+  displayName: 'VerticalMenu',
 
   properties: {
     activeItemId: {
@@ -28,7 +28,7 @@ const SideMenu = defineComponent<SideMenuProps>({
   },
 
   render(props) {
-    return renderSideMenu(props)
+    return renderVerticalMenu(props)
   }
 })
 
@@ -63,4 +63,4 @@ const specItems =
 
 // --- exports ------------------------------------------------------
 
-export default SideMenu
+export default VerticalMenu

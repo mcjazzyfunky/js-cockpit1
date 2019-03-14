@@ -14,7 +14,7 @@ function renderCockpit(props: CockpitProps) {
     topNav: ReactNode = null,
     userNav: ReactNode = null,
     menu: ReactNode = null,
-    sideMenu: ReactNode = null,
+    sidebar: ReactNode = null,
     Center: ReactNode = null
 
   const getContent = (child: any, type: any) => {
@@ -41,30 +41,35 @@ function renderCockpit(props: CockpitProps) {
     topNav = topNav || getContent(child, Cockpit.TopNav)
     userNav = userNav || getContent(child, Cockpit.UserNav)
     menu = menu || getContent(child, Cockpit.Menu)
-    sideMenu = sideMenu || getContent(child, Cockpit.SideMenu)
+    sidebar = sidebar || getContent(child, Cockpit.Sidebar)
     Center = Center || getContent(child, Cockpit.Center)
   })
 
   return styleCockpit(classes => {
+    const header =
+      !brand && !topNav && !userNav
+        ? null
+        : <div className={classes.header}>
+            <div className={classes.headerStart}>
+              {brand}
+            </div>
+            <div className={classes.headerCenter}>
+              {topNav}
+            </div>
+            <div className={classes.headerEnd}>
+              {userNav}
+            </div>
+          </div>
+
     return (
       <div className={classes.cockpit}>
-        <div className={classes.header}>
-          <div className={classes.headerStart}>
-            {brand}
-          </div>
-          <div className={classes.headerCenter}>
-            {topNav}
-          </div>
-          <div className={classes.headerEnd}>
-            {userNav}
-          </div>
-        </div>
+        {header}
         <div>
           {menu}
         </div>
         <div className={classes.content}>
-          <div className={classes.sideMenu}>
-            {sideMenu}
+          <div className={classes.sidebar}>
+            {sidebar}
           </div>
           <div className={classes.center}>
             {Center}

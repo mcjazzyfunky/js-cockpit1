@@ -19,7 +19,7 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.neutralQuaternaryAlt,
+    backgroundColor: theme.palette.neutralLight,
     position: 'absolute',
 
     selectors: {

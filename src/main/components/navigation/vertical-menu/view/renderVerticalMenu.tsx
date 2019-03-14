@@ -3,23 +3,23 @@ import React, { ReactNode } from 'react'
 import { Nav, INavLink, IRenderFunction, INavLinkGroup } from 'office-ui-fabric-react'
 
 // internal imports
-import styleSideMenu from './styleSideMenu'
-import SideMenuProps from '../types/SideMenuProps'
+import styleVerticalMenu from './styleVerticalMenu'
+import VerticalMenuProps from '../types/VerticalMenuProps'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 
 // derived imports
-type SideMenuClasses = CssClassesOf<typeof styleSideMenu>
+type VerticalMenuClasses = CssClassesOf<typeof styleVerticalMenu>
 
-// --- SideMenu View -------------------------------------------------
+// --- VerticalMenu View -------------------------------------------------
 
-function SideMenuView(props: SideMenuProps) {
+function VerticalMenuView(props: VerticalMenuProps) {
   let ret = undefined
 
   if (props.items) {
     const
       linkGroups = getLinkGroups(props.items)
 
-    ret = styleSideMenu(classes => { 
+    ret = styleVerticalMenu(classes => { 
       let onRenderGroupHeader: IRenderFunction<INavLinkGroup> | undefined = undefined 
 
       if (props.collapsible === false || linkGroups.length === 1 && typeof linkGroups[0].name === 'string') {
@@ -103,12 +103,12 @@ function getLinks(items: any): INavLink[] {
   return links
 }
 
-function renderGroupHeader(linkGroup: INavLinkGroup, classes: SideMenuClasses) {
+function renderGroupHeader(linkGroup: INavLinkGroup, classes: VerticalMenuClasses) {
   return <div className={classes.header}>{linkGroup.name}</div>
 }
 
 // --- exports ------------------------------------------------------
 
-export default SideMenuView
+export default VerticalMenuView
 
 
