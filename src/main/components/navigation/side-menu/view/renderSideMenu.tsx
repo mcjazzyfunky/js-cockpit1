@@ -5,6 +5,10 @@ import { Nav, INavLink, IRenderFunction, INavLinkGroup } from 'office-ui-fabric-
 // internal imports
 import styleSideMenu from './styleSideMenu'
 import SideMenuProps from '../types/SideMenuProps'
+import CssClassesOf from '../../../../styling/types/CssClassesOf'
+
+// derived imports
+type SideMenuClasses = CssClassesOf<typeof styleSideMenu>
 
 // --- SideMenu View -------------------------------------------------
 
@@ -18,10 +22,9 @@ function SideMenuView(props: SideMenuProps) {
     ret = styleSideMenu(classes => { 
       let onRenderGroupHeader: IRenderFunction<INavLinkGroup> | undefined = undefined 
 
-      if (linkGroups.length === 1 && typeof linkGroups[0].name === 'string') {
-        onRenderGroupHeader = ((linkGroup: INavLinkGroup) => {
-          return <div className={classes.header}>{linkGroup.name}</div>
-        }) as any // TODO
+      if (props.collapsible === false || linkGroups.length === 1 && typeof linkGroups[0].name === 'string') {
+        onRenderGroupHeader =
+          ((linkGroup: INavLinkGroup) => renderGroupHeader(linkGroup, classes)) as any
       }
 
       return (
@@ -98,6 +101,10 @@ function getLinks(items: any): INavLink[] {
   })
 
   return links
+}
+
+function renderGroupHeader(linkGroup: INavLinkGroup, classes: SideMenuClasses) {
+  return <div className={classes.header}>{linkGroup.name}</div>
 }
 
 // --- exports ------------------------------------------------------

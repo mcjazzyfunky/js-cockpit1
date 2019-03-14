@@ -12,13 +12,13 @@ const styleUserMenu = defineStyle(theme => ({
   avatar: {
     width: '20px',
     height: '20px',
-    margin: '0 0.5rem',
+    margin: '0 0.625rem',
   },
 
   displayName: {
     fontSize: theme.fonts.medium.fontSize,
     fontFamily: theme.fonts.medium.fontFamily,
-    margin: '0 1rem 0 0',
+    margin: '1px 1.25rem 0 0',
   }
 }))
 

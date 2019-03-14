@@ -270,17 +270,20 @@ function createSelectRowCheckbox(rowIndex: number, props: DataTableProps, select
     checked = selectedRows.has(rowIndex),
 
     onChange =() => {
+      const newSelection = new Set(selectedRows)
+
       if (selectionMode === 'single') {
-        selectedRows = new Set([rowIndex])
+        newSelection.clear()
+        newSelection.add(rowIndex)
       } else if (selectionMode === 'multi') {
         if (checked) {
-          selectedRows.delete(rowIndex)
+          newSelection.delete(rowIndex)
         } else {
-          selectedRows.add(rowIndex)
+          newSelection.add(rowIndex)
         }
       }
 
-      changeRowSelection(selectedRows)
+      changeRowSelection(newSelection)
     }
 
   let className = classes.selectRowCheckBox

@@ -17,6 +17,10 @@ const SideMenu = defineComponent<SideMenuProps>({
       type: String
     },
 
+    collapsible: {
+      type: Boolean
+    },
+
     items: {
       type: Array,
       validate: Spec.lazy(() => specItems)

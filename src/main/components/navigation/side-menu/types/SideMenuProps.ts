@@ -2,6 +2,7 @@
 
 type SideMenuProps = {
   activeItemId?: string,
+  collapsible?: boolean,
   items: (Item | Menu)[]
 }
 
