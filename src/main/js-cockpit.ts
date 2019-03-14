@@ -3,6 +3,7 @@
 import AppMenu from './components/navigation/app-menu/AppMenu'
 import Brand from './components/misc/brand/Brand'
 import Cockpit from './components/scaffolds/cockpit/Cockpit'
+import Compound from './components/layout/compound/Compound'
 import DataExplorer from './components/data-views/data-explorer/DataExplorer'
 import DataExplorerProps from './components/data-views/data-explorer/types/DataExplorerProps'
 import DataExplorerQueryParams from './components/data-views/data-explorer/types/DataExplorerQueryParams'
@@ -40,6 +41,7 @@ export {
   TextFieldProps,
 
   // layout component
+  Compound,
   HBox,
   HBoxProps,
   VBox,

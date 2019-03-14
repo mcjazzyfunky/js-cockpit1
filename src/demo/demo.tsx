@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, Compound, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
 //import { Customizer } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -223,10 +223,10 @@ function Demo() {
       ]}
     >
       <Section>
-        <HBox>
+        <Compound>
           <TextField label="Customer no." grow={1}></TextField>
           <TextField label="Display name" grow={5}></TextField>
-        </HBox>
+        </Compound>
       </Section>
 
       <Tabs>
@@ -235,23 +235,29 @@ function Demo() {
             <Section title="Section-1">
               <TextField label="First name"/>
               <TextField label="Last name"/>
-              <TextField label="Postal code"/>
-              <TextField label="City"/>
+              <Compound>
+                <TextField label="Postal code"/>
+                <TextField label="City"/>
+              </Compound>
               <TextField label="Country"/>
             </Section>
             <Section title="Section-1">
               <TextField label="First name"/>
               <TextField label="Last name"/>
-              <TextField label="Postal code"/>
-              <TextField label="City"/>
+              <Compound>
+                <TextField label="Postal code"/>
+                <TextField label="City"/>
+              </Compound>
               <TextField label="Country"/>
             </Section>
           </HBox>
           <Section title="Section-1">
             <TextField label="First name"/>
             <TextField label="Last name"/>
-            <TextField label="Postal code"/>
-            <TextField label="City"/>
+            <Compound>
+              <TextField label="Postal code"/>
+              <TextField label="City"/>
+            </Compound>
             <TextField label="Country"/>
           </Section>
           <Section title="Section-2">
