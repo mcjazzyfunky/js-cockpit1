@@ -9,12 +9,14 @@ import defineStyle from '../../../../styling/defineStyle'
 
 const styleCockpit = defineStyle((theme: ITheme) => {
   return {
-    cockpit: {
+    container: {
+      position: 'absolute',
       display: 'flex',
       flexDirection: 'column',
+      width: '100%',
       minWidth: '100%',
-      position: 'absolute',
       height: '100%',
+      maxHeight: '100%',
       justifyContent: 'stretch',
     },
 
@@ -104,7 +106,6 @@ const styleCockpit = defineStyle((theme: ITheme) => {
     },
 
     center: {
-      position: 'relative',
       flexGrow: 1,
       display: 'flex',
       alignItems: 'stretch',

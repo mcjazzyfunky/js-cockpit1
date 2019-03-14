@@ -177,7 +177,7 @@ function Demo() {
       columns={[
         { type: 'column', title: 'First name', field: 'firstName', sortable: true },
         { type: 'column', title: 'Last name', field: 'lastName', sortable: true },
-        { type: 'column', title: 'Postal code', field: 'postalCold', sortable: true },
+        { type: 'column', title: 'Postal code', field: 'postalCode', sortable: true },
         { type: 'column', title: 'City', field: 'city', sortable: true },
         { type: 'column', title: 'Country', field: 'country', sortable: true }
       ]}
@@ -231,7 +231,7 @@ function Demo() {
 
       <Tabs>
         <Tabs.Page title="Contact data">
-          <HBox>
+          <Compound>
             <Section title="Section-1">
               <TextField label="First name"/>
               <TextField label="Last name"/>
@@ -250,7 +250,7 @@ function Demo() {
               </Compound>
               <TextField label="Country"/>
             </Section>
-          </HBox>
+          </Compound>
           <Section title="Section-1">
             <TextField label="First name"/>
             <TextField label="Last name"/>
@@ -264,7 +264,7 @@ function Demo() {
           </Section>
         </Tabs.Page>
         <Tabs.Page title="Documents">
-          This is page 2....
+          {dataExplorer}
         </Tabs.Page>
         <Tabs.Page title="Images">
           This is page 3....
@@ -301,7 +301,7 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 

@@ -16,6 +16,7 @@ const styleSection = defineStyle(theme => ({
 
   content: {
     padding: '0 0 0 1rem',
+    display: 'flex',
   },
 
   page: {

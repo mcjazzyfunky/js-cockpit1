@@ -23,7 +23,7 @@ function renderDataForm(props: DataFormProps) {
         <div className={classes.container}>
           { renderHeader(props, classes) } 
         </div>
-        <div>
+        <div className={classes.content}>
           { props.children }
         </div>
       </div>

@@ -62,7 +62,7 @@ function renderCockpit(props: CockpitProps) {
           </div>
 
     return (
-      <div className={classes.cockpit}>
+      <div data-component="Cockpit" className={classes.container}>
         {header}
         <div>
           {menu}

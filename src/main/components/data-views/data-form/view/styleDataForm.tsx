@@ -7,10 +7,8 @@ const styleDataForm = defineStyle(theme => ({
   container: {
     position: 'relative',
     display: 'flex',
-    flexDirection: 'column',
     flexGrow: 1,
     backgroundColor: theme.palette.white,
-    height: '100%',
   },
 
   header: {
@@ -123,6 +121,11 @@ const styleDataForm = defineStyle(theme => ({
   closeIcon: {
     width: '24px',
     height: '24px',
+  },
+
+  content: {
+    overflow: 'auto',
+    flexGrow: 1,
   }
 }))
 
