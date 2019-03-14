@@ -1,6 +1,6 @@
 // externals imports
 import React from 'react'
-import { css, CommandBar, Button, Spinner, SpinnerSize } from 'office-ui-fabric-react'
+import { css, CommandBar, Button, Spinner, SpinnerSize, TooltipHost } from 'office-ui-fabric-react'
 import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 // internal imports
@@ -36,9 +36,11 @@ function renderDataForm(props: DataFormProps) {
 function renderHeader(props: DataFormProps, classes: DataFormClasses) {
   const closeButton =
     props.onClose
-      ? <Button className={classes.closeButton} onClick={props.onClose}>
-          <CloseIcon className={classes.closeIcon}/>
-        </Button>
+      ? <TooltipHost content="Close" calloutProps={{ gapSpace: 20 }}>
+          <Button className={classes.closeButton} onClick={props.onClose}>
+            <CloseIcon className={classes.closeIcon}/>
+          </Button>
+        </TooltipHost>
       : null
 
   return (
