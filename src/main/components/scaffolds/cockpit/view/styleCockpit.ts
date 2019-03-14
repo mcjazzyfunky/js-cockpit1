@@ -48,6 +48,10 @@ const styleCockpit = defineStyle((theme: ITheme) => {
         '& [data-component=AppMenu] .ms-Pivot-text': {
           color: theme.palette.white,
         },
+        
+        '& [data-component=AppMenu] *:hover *': {
+          backgroundColor: 'transparent',
+        },
 
         '& [data-component=MenuBar] [data-component="MenuBar:icon"]': {
           display: 'block !important',

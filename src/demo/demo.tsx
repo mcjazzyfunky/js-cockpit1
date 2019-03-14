@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
 import { loadThemeByName, initSystemIcons, Brand, AppMenu, DataExplorer, DataExplorerQueryParams, DataForm, HBox, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
-import { loadTheme, createTheme } from 'office-ui-fabric-react'
+//import { Customizer } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 
@@ -11,6 +11,9 @@ import { delay } from 'rxjs/operators'
 
 import faker from 'faker'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
+
+import { FluentCustomizations } from '@uifabric/fluent-theme';
+
 
 initSystemIcons()
 loadThemeByName('orange', false)
@@ -271,7 +274,7 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 
@@ -330,5 +333,9 @@ if (params.sortBy) {
 
 }
 
-ReactDOM.render(<Demo/>, document.getElementById('main-content'))
+ReactDOM.render(
+ // <Customizer {...FluentCustomizations}>
+    <Demo/>,
+ // </Customizer>,
+  document.getElementById('main-content'))
 
