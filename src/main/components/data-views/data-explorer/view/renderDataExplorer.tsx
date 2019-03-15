@@ -211,12 +211,14 @@ function renderActionBar(
         action.type === 'singleRow' && store.rowSelection.length !== 1
             || action.type === 'multiRow' && store.rowSelection.length === 0
 
+    /*
     if (idx > 0) {
       items.push({
         key: `separator-${idx}`,
         onRender: () => <div className={classes.actionButtonSeparator}></div>
       })
     }
+    */
 
     const
       hasIcon = !!action.icon,

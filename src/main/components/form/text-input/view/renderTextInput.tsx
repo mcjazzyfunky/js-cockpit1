@@ -3,12 +3,12 @@ import React, { ReactElement } from 'react'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
-import styleTextField from './styleTextField'
-import TextFieldProps from '../types/TextFieldProps'
+import styleTextInput from './styleTextInput'
+import TextInputProps from '../types/TextInputProps'
 
 // --- renderTextField ------------------------------------------------
 
-function renderTextField(props: TextFieldProps) {
+function renderTextInput(props: TextInputProps) {
   const
     style =
       props.grow === undefined
@@ -16,7 +16,7 @@ function renderTextField(props: TextFieldProps) {
         : { flexGrow: props.grow }
 
   return (
-    styleTextField(classes =>
+    styleTextInput(classes =>
       <div data-component="TextField" className={classes.container} style={style}>
         <div className={classes.label}>{props.label}</div>
         <div>
@@ -31,4 +31,4 @@ function renderTextField(props: TextFieldProps) {
 
 // --- exports ------------------------------------------------------
 
-export default renderTextField
+export default renderTextInput

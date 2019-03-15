@@ -1,6 +1,6 @@
-// --- TextFieldProps -----------------------------------------------
+// --- TextInputProps -----------------------------------------------
 
-type TextFieldProps = {
+type TextInputProps = {
   name?: string
   label?: string,
   grow?: number
@@ -8,4 +8,4 @@ type TextFieldProps = {
 
 // --- exports ------------------------------------------------------
 
-export default TextFieldProps 
+export default TextInputProps 

@@ -9,6 +9,7 @@ const styleDataForm = defineStyle(theme => ({
     display: 'flex',
     flexGrow: 1,
     backgroundColor: theme.palette.white,
+    width: '100%',
   },
 
   header: {
@@ -24,7 +25,8 @@ const styleDataForm = defineStyle(theme => ({
     color: theme.palette.black,
     borderWidth: '0 0 1px 0',
     borderStyle: 'solid',
-    borderColor: theme.palette.neutralLight
+    borderColor: theme.palette.neutralLight,
+    width: '100%',
   },
 
   headerStart: {
@@ -125,6 +127,7 @@ const styleDataForm = defineStyle(theme => ({
 
   content: {
     overflow: 'auto',
+    width: '100%',
     flexGrow: 1,
   }
 }))

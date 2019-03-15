@@ -3,13 +3,13 @@ import { defineComponent } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import TextFieldProps from './types/TextFieldProps'
-import renderTextField from './view/renderTextField'
+import TextInputProps from './types/TextInputProps'
+import renderTextInput from './view/renderTextInput'
 
-// --- TextField ----------------------------------------------------
+// --- TextInput ----------------------------------------------------
 
-const TextField = defineComponent<TextFieldProps>({
-  displayName: 'TextField',
+const TextInput = defineComponent<TextInputProps>({
+  displayName: 'TextInput',
 
   properties: {
     label: {
@@ -26,10 +26,10 @@ const TextField = defineComponent<TextFieldProps>({
   },
 
   render(props) {
-    return renderTextField(props)
+    return renderTextInput(props)
   }
 })
 
 // --- exports ------------------------------------------------------
 
-export default TextField
+export default TextInput

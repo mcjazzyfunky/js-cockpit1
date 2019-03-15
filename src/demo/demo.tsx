@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, Compound, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextField, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, Compound, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
 //import { Customizer } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -224,8 +224,8 @@ function Demo() {
     >
       <Section>
         <Compound>
-          <TextField label="Customer no." grow={1}></TextField>
-          <TextField label="Display name" grow={5}></TextField>
+          <TextInput label="Customer no." grow={1}></TextInput>
+          <TextInput label="Display name" grow={5}></TextInput>
         </Compound>
       </Section>
 
@@ -233,32 +233,32 @@ function Demo() {
         <Tabs.Page title="Contact data">
           <Compound>
             <Section title="Section-1">
-              <TextField label="First name"/>
-              <TextField label="Last name"/>
+              <TextInput label="First name"/>
+              <TextInput label="Last name"/>
               <Compound>
-                <TextField label="Postal code"/>
-                <TextField label="City"/>
+                <TextInput label="Postal code"/>
+                <TextInput label="City"/>
               </Compound>
-              <TextField label="Country"/>
+              <TextInput label="Country"/>
             </Section>
             <Section title="Section-1">
-              <TextField label="First name"/>
-              <TextField label="Last name"/>
+              <TextInput label="First name"/>
+              <TextInput label="Last name"/>
               <Compound>
-                <TextField label="Postal code"/>
-                <TextField label="City"/>
+                <TextInput label="Postal code"/>
+                <TextInput label="City"/>
               </Compound>
-              <TextField label="Country"/>
+              <TextInput label="Country"/>
             </Section>
           </Compound>
           <Section title="Section-1">
-            <TextField label="First name"/>
-            <TextField label="Last name"/>
+            <TextInput label="First name"/>
+            <TextInput label="Last name"/>
             <Compound>
-              <TextField label="Postal code"/>
-              <TextField label="City"/>
+              <TextInput label="Postal code"/>
+              <TextInput label="City"/>
             </Compound>
-            <TextField label="Country"/>
+            <TextInput label="Country"/>
           </Section>
           <Section title="Section-2">
           </Section>
@@ -301,11 +301,11 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit 
+  return cockpit
 }
 
 function fakeData(count: number) {

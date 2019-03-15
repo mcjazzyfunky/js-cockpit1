@@ -68,12 +68,14 @@ function renderActionBar(props: DataFormProps, classes: DataFormClasses) {
     props.actions.forEach((action, idx) => {
         const disabled = action.disabled
 
+      /*
       if (idx > 0) {
         items.push({
           key: `separator-${idx}`,
           onRender: () => <div className={classes.actionButtonSeparator}></div>
         })
       }
+      */
 
       const
         hasIcon = !!action.icon,

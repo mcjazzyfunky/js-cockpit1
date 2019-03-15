@@ -1,9 +1,9 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleTextField -----------------------------------------------
+// --- styleTextInput -----------------------------------------------
 
-const styleTextField = defineStyle(theme => ({
+const styleTextInput = defineStyle(theme => ({
   container: {
     margin: '0.5rem 0 0.5rem 0',
   },
@@ -17,4 +17,4 @@ const styleTextField = defineStyle(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleTextField
+export default styleTextInput
