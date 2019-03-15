@@ -1,12 +1,12 @@
 // external imports
 import React from 'react'
-import { TextField } from 'office-ui-fabric-react'
+import { Label, TextField } from 'office-ui-fabric-react'
 
 // internal imports
 import styleTextInput from './styleTextInput'
 import TextInputProps from '../types/TextInputProps'
 
-// --- renderTextField ------------------------------------------------
+// --- renderTextInput ----------------------------------------------
 
 function renderTextInput(props: TextInputProps) {
   const
@@ -18,7 +18,7 @@ function renderTextInput(props: TextInputProps) {
   return (
     styleTextInput(classes =>
       <div data-component="TextInput" className={classes.container} style={style}>
-        <div className={classes.label}>{props.label}</div>
+        <Label className={classes.label}>{props.label}</Label>
         <div>
           <TextField/>
         </div>

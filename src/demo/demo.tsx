@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, Choice, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, CheckGroup, Choice, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
 //import { Customizer } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -272,6 +272,15 @@ function Demo() {
                   { key: 'de', text: 'Germany' },
                   { key: 'de', text: 'Great Britain' },
                   { key: 'us', text: 'United States' }
+                ]}
+              />
+              <CheckGroup
+                label="Options"
+
+                options={[
+                  { key: 'a', text: 'is regular customer' },
+                  { key: 'b', text: 'highly priorized' },
+                  { key: 'b', text: 'receives newsletter' }
                 ]}
               />
             </Section>

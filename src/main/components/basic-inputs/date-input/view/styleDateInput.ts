@@ -9,9 +9,9 @@ const styleDateInput = defineStyle(theme => ({
   },
 
   label: {
-    fontSize: theme.fonts.smallPlus.fontSize,
-    fontFamily: theme.fonts.smallPlus.fontFamily,
-    margin: '0 0 1px 0',
+    //fontSize: theme.fonts.smallPlus.fontSize,
+    //fontFamily: theme.fonts.smallPlus.fontFamily,
+    //margin: '0 0 1px 0',
   },
 }))
 

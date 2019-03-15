@@ -1,12 +1,12 @@
 // external imports
 import React from 'react'
-import { DatePicker } from 'office-ui-fabric-react'
+import { DatePicker, Label } from 'office-ui-fabric-react'
 
 // internal imports
 import styleTextInput from './styleDateInput'
 import DateInputProps from '../types/DateInputProps'
 
-// --- renderTextField ------------------------------------------------
+// --- renderDateInput ----------------------------------------------
 
 function renderDateInput(props: DateInputProps) {
   const
@@ -18,7 +18,7 @@ function renderDateInput(props: DateInputProps) {
   return (
     styleTextInput(classes =>
       <div data-component="DateInput" className={classes.container} style={style}>
-        <div className={classes.label}>{props.label}</div>
+        <Label className={classes.label}>{props.label}</Label>
         <div>
           <DatePicker/>
         </div>

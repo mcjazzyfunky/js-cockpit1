@@ -2,6 +2,8 @@
 
 import AppMenu from './components/navigation/app-menu/AppMenu'
 import Brand from './components/misc/brand/Brand'
+import CheckGroup from './components/basic-inputs/check-group/CheckGroup'
+import CheckGroupProps from './components/basic-inputs/check-group/types/CheckGroupProps'
 import Choice from './components/basic-inputs/choice/Choice'
 import ChoiceProps from './components/basic-inputs/choice/types/ChoiceProps'
 import Cockpit from './components/scaffolds/cockpit/Cockpit'
@@ -41,6 +43,8 @@ import loadThemeByName from './styling/loadThemeByName'
 
 export {
   // basic inputs 
+  CheckGroup,
+  CheckGroupProps,
   Choice,
   ChoiceProps,
   DateInput,
