@@ -2,6 +2,8 @@
 
 import AppMenu from './components/navigation/app-menu/AppMenu'
 import Brand from './components/misc/brand/Brand'
+import Choice from './components/basic-inputs/choice/Choice'
+import ChoiceProps from './components/basic-inputs/choice/types/ChoiceProps'
 import Cockpit from './components/scaffolds/cockpit/Cockpit'
 import Compound from './components/layout/compound/Compound'
 import DataExplorer from './components/data-views/data-explorer/DataExplorer'
@@ -10,6 +12,8 @@ import DataExplorerQueryParams from './components/data-views/data-explorer/types
 import DataExplorerQueryResult from './components/data-views/data-explorer/types/DataExplorerQueryResult'
 import DataForm from './components/data-views/data-form/DataForm'
 import DataTable from './components/data-views/data-table/DataTable'
+import DateInput from './components/basic-inputs/date-input/DateInput'
+import DateInputProps from './components/basic-inputs/date-input/types/DateInputProps'
 import HBox from './components/layout/hbox/HBox'
 import HBoxProps from './components/layout/hbox/types/HBoxProps'
 import LoginForm from './components/login/login-form/LoginForm'
@@ -22,8 +26,8 @@ import SectionProps from './components/layout/section/types/SectionProps'
 import Tabs from './components/layout/tabs/Tabs'
 import TabsProps from './components/layout/tabs/types/TabsProps'
 import TabsPageProps from './components/layout/tabs/types/TabsPageProps'
-import TextInput from './components/form/text-input/TextInput'
-import TextInputProps from './components/form/text-input/types/TextInputProps'
+import TextInput from './components/basic-inputs/text-input/TextInput'
+import TextInputProps from './components/basic-inputs/text-input/types/TextInputProps'
 import UserMenu from './components/login/user-menu/UserMenu'
 import VBox from './components/layout/vbox/VBox'
 import VBoxProps from './components/layout/vbox/types/VBoxProps'
@@ -36,7 +40,11 @@ import initSystemIcons from './styling/initSystemIcons'
 import loadThemeByName from './styling/loadThemeByName'
 
 export {
-  // form related components
+  // basic inputs 
+  Choice,
+  ChoiceProps,
+  DateInput,
+  DateInputProps,
   TextInput,
   TextInputProps,
 

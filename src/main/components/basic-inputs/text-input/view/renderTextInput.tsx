@@ -1,5 +1,5 @@
 // external imports
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
@@ -17,7 +17,7 @@ function renderTextInput(props: TextInputProps) {
 
   return (
     styleTextInput(classes =>
-      <div data-component="TextField" className={classes.container} style={style}>
+      <div data-component="TextInput" className={classes.container} style={style}>
         <div className={classes.label}>{props.label}</div>
         <div>
           <TextField/>

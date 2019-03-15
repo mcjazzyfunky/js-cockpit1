@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, Compound, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, Choice, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
 //import { Customizer } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -233,13 +233,30 @@ function Demo() {
         <Tabs.Page title="Contact data">
           <Compound>
             <Section title="Section-1">
+              <Choice
+                label="Salutation"
+                options={[
+                  { key: 'empty', text: '' },
+                  { key: 'ms', text: 'Ms' },
+                  { key: 'mr', text: 'Mr' },
+                ]}
+              />
               <TextInput label="First name"/>
               <TextInput label="Last name"/>
               <Compound>
                 <TextInput label="Postal code"/>
                 <TextInput label="City"/>
               </Compound>
-              <TextInput label="Country"/>
+              <Choice
+                label="Country"
+
+                options={[
+                  { key: 'de', text: 'Germany' },
+                  { key: 'de', text: 'Great Britain' },
+                  { key: 'us', text: 'United States' }
+                ]}
+              />
+              <DateInput name="dateOfBirth" label="Date of birth"/>
             </Section>
             <Section title="Section-1">
               <TextInput label="First name"/>
@@ -248,7 +265,15 @@ function Demo() {
                 <TextInput label="Postal code"/>
                 <TextInput label="City"/>
               </Compound>
-              <TextInput label="Country"/>
+              <Choice
+                label="Country"
+
+                options={[
+                  { key: 'de', text: 'Germany' },
+                  { key: 'de', text: 'Great Britain' },
+                  { key: 'us', text: 'United States' }
+                ]}
+              />
             </Section>
           </Compound>
           <Section title="Section-1">
@@ -258,7 +283,15 @@ function Demo() {
               <TextInput label="Postal code"/>
               <TextInput label="City"/>
             </Compound>
-            <TextInput label="Country"/>
+            <Choice
+              label="Country"
+
+              options={[
+                { key: 'de', text: 'Germany' },
+                { key: 'de', text: 'Great Britain' },
+                { key: 'us', text: 'United States' }
+              ]}
+            />
           </Section>
           <Section title="Section-2">
           </Section>
