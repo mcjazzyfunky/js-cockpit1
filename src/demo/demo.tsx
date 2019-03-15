@@ -343,7 +343,7 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 
