@@ -23,6 +23,8 @@ import LogoutButton from './components/login/logout-button/LogoutButton'
 import LogoutButtonProps from './components/login/logout-button/types/LogoutButtonProps'
 import MenuBar from './components/navigation/menu-bar/MenuBar'
 import VerticalMenu from './components/navigation/vertical-menu/VerticalMenu'
+import RadioGroup from './components/basic-inputs/radio-group/RadioGroup'
+import RadioGroupProps from './components/basic-inputs/radio-group/types/RadioGroupProps'
 import Section from './components/layout/section/Section'
 import SectionProps from './components/layout/section/types/SectionProps'
 import Tabs from './components/layout/tabs/Tabs'
@@ -49,6 +51,8 @@ export {
   ChoiceProps,
   DateInput,
   DateInputProps,
+  RadioGroup,
+  RadioGroupProps,
   TextInput,
   TextInputProps,
 

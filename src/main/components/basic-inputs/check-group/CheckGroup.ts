@@ -20,6 +20,10 @@ const CheckGroup = defineComponent<CheckGroupProps>({
       type: String
     },
 
+    orientation: {
+      type: String
+    },
+
     grow: {
       type: Number
     },

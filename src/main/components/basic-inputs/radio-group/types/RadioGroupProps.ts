@@ -1,6 +1,6 @@
-// --- CheckGroupProps ----------------------------------------------
+// --- RadioGroupProps ----------------------------------------------
 
-type CheckGroupProps = {
+type RadioGroupProps = {
   name?: string
   label?: string,
   orientation?: 'horizontal' | 'vertical',
@@ -17,4 +17,4 @@ type Option = {
 
 // --- exports ------------------------------------------------------
 
-export default CheckGroupProps 
+export default RadioGroupProps 
