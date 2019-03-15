@@ -20,6 +20,10 @@ const RadioGroup = defineComponent<RadioGroupProps>({
       type: String
     },
 
+    defaultSelectedKey: {
+      type: String
+    },
+
     orientation: {
       type: String,
       defaultValue: 'vertical',

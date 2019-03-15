@@ -25,7 +25,11 @@ function renderDateInput(props: RadioGroupProps) {
       <div data-component="RadioGroup" className={classes.container} style={style}>
         <Label className={classes.label}>{props.label}</Label>
         <div>
-          <ChoiceGroup options={props.options} className={choiceGroupClassName}/> 
+          <ChoiceGroup
+            options={props.options}
+            defaultSelectedKey={props.defaultSelectedKey}
+            className={choiceGroupClassName}
+          /> 
         </div>
       </div>
     )

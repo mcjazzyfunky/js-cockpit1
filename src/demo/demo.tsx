@@ -235,6 +235,7 @@ function Demo() {
             <Section title="Section-1">
               <RadioGroup
                 label="Salutation"
+                defaultSelectedKey={'ms'}
                 orientation="horizontal"
                 options={[
                   { key: 'ms', text: 'Ms' },
@@ -261,6 +262,7 @@ function Demo() {
             <Section title="Section-1">
               <RadioGroup
                 label="Salutation"
+                defaultSelectedKey={'ms'}
                 orientation="horizontal"
                 options={[
                   { key: 'ms', text: 'Ms' },
@@ -276,10 +278,12 @@ function Demo() {
               <CheckGroup
                 label="Options"
 
+                selectedKeys={['a', 'c']}
+
                 options={[
                   { key: 'a', text: 'is regular customer' },
                   { key: 'b', text: 'highly priorized' },
-                  { key: 'b', text: 'receives newsletter' }
+                  { key: 'c', text: 'receives newsletter' }
                 ]}
               />
             </Section>
@@ -342,7 +346,7 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 

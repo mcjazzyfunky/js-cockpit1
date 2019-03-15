@@ -20,6 +20,11 @@ const CheckGroup = defineComponent<CheckGroupProps>({
       type: String
     },
 
+    selectedKeys: {
+      type: Array,
+      validate: Spec.arrayOf(Spec.string)
+    },
+
     orientation: {
       type: String
     },

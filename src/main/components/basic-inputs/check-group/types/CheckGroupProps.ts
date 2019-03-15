@@ -3,6 +3,7 @@
 type CheckGroupProps = {
   name?: string
   label?: string,
+  selectedKeys?: string[],
   orientation?: 'horizontal' | 'vertical',
   grow?: number,
   options?: Option[]

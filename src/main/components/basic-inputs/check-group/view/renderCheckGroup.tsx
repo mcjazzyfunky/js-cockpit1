@@ -20,9 +20,12 @@ function renderDateInput(props: CheckGroupProps) {
   return styleCheckGroup(classes => {
     if (props.options) {
       props.options.forEach(option => {
+        const checked =
+          props.selectedKeys && props.selectedKeys.includes(option.key) 
+
         checkBoxes.push(
           <div className={classes.option}>
-            <Checkbox key={option.key} label={option.text}/>
+            <Checkbox key={option.key} label={option.text} checked={checked}/>
           </div>
         )
       })

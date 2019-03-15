@@ -3,6 +3,7 @@
 type RadioGroupProps = {
   name?: string
   label?: string,
+  defaultSelectedKey?: string,
   orientation?: 'horizontal' | 'vertical',
   grow?: number,
   options?: Option[]
