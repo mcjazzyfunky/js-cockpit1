@@ -17,7 +17,6 @@ const styleSection = defineStyle(theme => ({
     fontFamily: theme.fonts.smallPlus.fontFamily,
     fontWeight: 'bold',
     padding: '0 0 0.5rem 0',
-    opacity: 0.8,
   },
 
   content: {
