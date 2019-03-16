@@ -3,7 +3,6 @@ import React, { ReactNode } from 'react'
 
 // internal imports
 import styleCockpit from './styleCockpit'
-import Cockpit from '../Cockpit'
 import CockpitProps from '../types/CockpitProps'
 
 // --- renderCockpit ------------------------------------------------
@@ -17,10 +16,10 @@ function renderCockpit(props: CockpitProps) {
     sidebar: ReactNode = null,
     Center: ReactNode = null
 
-  const getContent = (child: any, type: any) => {
+  const getContent = (child: any, displayName: string) => {
     let ret = null
 
-    if (child && child.type === type
+    if (child && child.type && child.type.displayName === displayName
       && child.hasOwnProperty('props')
       && child.props && child.props.children) {
 
@@ -37,12 +36,12 @@ function renderCockpit(props: CockpitProps) {
   }
 
   React.Children.forEach(props.children, (child: any) => {
-    brand = brand || getContent(child, Cockpit.Brand)
-    topNav = topNav || getContent(child, Cockpit.TopNav)
-    userNav = userNav || getContent(child, Cockpit.UserNav)
-    menu = menu || getContent(child, Cockpit.Menu)
-    sidebar = sidebar || getContent(child, Cockpit.Sidebar)
-    Center = Center || getContent(child, Cockpit.Center)
+    brand = brand || getContent(child, 'Cockpit.Brand')
+    topNav = topNav || getContent(child, 'Cockpit.TopNav')
+    userNav = userNav || getContent(child, 'Cockpit.UserNav')
+    menu = menu || getContent(child, 'Cockpit.Menu')
+    sidebar = sidebar || getContent(child, 'Cockpit.Sidebar')
+    Center = Center || getContent(child, 'Cockpit.Center')
   })
 
   return styleCockpit(classes => {

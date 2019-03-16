@@ -1,6 +1,5 @@
 // external import
-import React, { ReactElement, ReactNode } from 'react'
-import { defineComponent, isElement, isElementOfType, isNode, withChildren } from 'js-react-utils'
+import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internals import

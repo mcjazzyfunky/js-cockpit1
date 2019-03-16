@@ -1,13 +1,11 @@
 // external imports
-import React, { ReactNode, ReactElement, CSSProperties} from 'react'
-import { isElementOfType } from 'js-react-utils'
+import React, { ReactNode, ReactElement } from 'react'
 import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
 //import { IoIosContact as DefaultIcon } from 'react-icons/io'
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
 import styleLoginForm from './styleLoginForm'
-import LoginForm from '../LoginForm'
 import LoginFormProps from '../types/LoginFormProps'
 
 // --- renderLoginForm ----------------------------------------------
@@ -119,13 +117,18 @@ function renderLoginForm(props: LoginFormProps) {
       belowBox: ReactNode | null = null
 
     React.Children.forEach(props.children, (child: any) => {
-      if (isElementOfType(LoginForm.Header, child)) {
-        header = child
-      } else if (isElementOfType(LoginForm.Above, child)) {
-        above = child
-      } else if (isElementOfType(LoginForm.Below, child)) {
-        below = child
-        console.log('juhu', child)
+      switch (child.type.displayName) {
+        case 'LoginForm.Header':
+          header = child
+          break
+        
+        case 'LoginForm.Above':
+          above = child
+          break
+        
+        case 'LoginForm.Below':
+          below = child
+          break
       }
     })
 
