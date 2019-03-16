@@ -30,20 +30,20 @@ function createRollupConfig(moduleFormat, productive) {
         'react-virtualized': 'ReactVirtualized',
         'rxjs': 'rxjs'
       },
-      external: [
-        'color',
-        'rs-react-store',
-        'js-react-utils',
-        'js-spec',
-        'office-ui-fabric-react',
-        'react',
-        'react-dom',
-        'react-virtualized',
-        'rxjs'
-      ],
     },
 
-
+    external: [
+      'color',
+      'rs-react-store',
+      'js-react-utils',
+      'js-spec',
+      'office-ui-fabric-react',
+      'react',
+      'react-dom',
+      'react-virtualized',
+      'rxjs'
+    ],
+  
     plugins: [
       resolve({
         jsnext: true,

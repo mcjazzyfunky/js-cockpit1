@@ -44,7 +44,7 @@ export default {
     resolve(),
     commonjs(),
     replace({
-      exclude: 'node_modules/**', // TODO
+      exclude: 'node_modules/**',
       
       values: {
         'process.env.NODE_ENV': "'development'"
