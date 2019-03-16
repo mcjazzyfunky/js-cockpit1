@@ -3,7 +3,9 @@
     "target": "ES5",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
+    "strict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
@@ -26,10 +28,7 @@
       "mocha",
       "chai",
       "color"
-    ],
-    "allowJs": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    ]
   },
   "files": [
     "./src/main/js-cockpit.ts"

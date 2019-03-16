@@ -1,6 +1,6 @@
 {
   "name": "js-cockpit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "LGPL-3.0",
   "homepage": "https://github.com/js-works/js-cockpit",
   "repository": {
@@ -29,7 +29,6 @@
     "@types/react-dom": "^16.8.2",
     "@types/react-virtualized": "^9.18.12",
     "@uifabric/fluent-theme": "^0.16.0",
-    "@zeit/next-typescript": "^1.1.1",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -44,7 +43,6 @@
     "esdoc-importpath-plugin": "^1.0.2",
     "esdoc-standard-plugin": "^1.0.0",
     "faker": "^4.1.0",
-    "js-react-utils": "0.0.51",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
     "react-icons": "^3.5.0",
@@ -55,6 +53,7 @@
     "rollup-plugin-gzip": "^2.2.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-react-svg": "^2.1.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-typescript2": "^0.19.3",
@@ -70,12 +69,12 @@
   "dependencies": {
     "color": "^3.1.0",
     "js-react-store": "0.0.6",
+    "js-react-utils": "0.0.51",
     "js-spec": "^0.1.63",
     "office-ui-fabric-react": "^6.154.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-virtualized": "^9.21.0",
-    "rollup-plugin-react-svg": "^2.1.0",
     "rxjs": "^6.4.0"
   },
   "scripts": {
@@ -86,7 +85,7 @@
     "test-watch": "mocha -w -r ts-node/register -r source-map-support/register src/test/**/*.ts",
     "build-demo-watch": "watch -f \"src/**/*.ts*;*.js;*.json\" -r \"rollup --c rollup.demo.config.js\"",
     "demo": "rollup --c rollup.demo.config.js -w",
-    "docs": "shx rm -rf ./dist/docs && cross-conf-env typedoc --options typedoc.json --name \"js-cockpit (version npm_package_version)\" src/main/api",
+    "docs": "shx rm -rf ./dist/docs && cross-conf-env typedoc --options typedoc.json --name \"js-cockpit (version npm_package_version)\" src/main",
     "zipsource": "shx rm -rf ./build/source && shx mkdir -p ./build/source && copyfiles -a ./* ./build/source && shx cp -r ./src ./build/source && shx mkdir -p ./dist/source && cd build/source && bestzip ../../dist/source/source.zip . && cd ../..",
     "dist": "npm run clean && npm run test && npm run build && npm run docs && npm run zipsource"
   }

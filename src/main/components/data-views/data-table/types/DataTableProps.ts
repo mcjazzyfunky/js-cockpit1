@@ -1,5 +1,4 @@
 // internal imports
-import DataTableColumn from './DataTableColumn'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import SortChangeEvent from '../../../../events/SortChangeEvent'
 

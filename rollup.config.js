@@ -1,7 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
-import reactSvg from 'rollup-plugin-react-svg'
 import typescript from 'rollup-plugin-typescript2'
 import { uglify as uglifyJS } from 'rollup-plugin-uglify'
 import uglifyES from 'rollup-plugin-uglify-es'
@@ -18,16 +17,30 @@ function createRollupConfig(moduleFormat, productive) {
 
       format: moduleFormat,
       name: 'jsCockpit', 
-      sourcemap: productive ? false : 'inline',
+      sourcemap: false, // TODO: productive ? false : 'inline',
 
       globals: {
+        'color': 'Color',
+        'js-react-store': 'jsReactStore',
         'js-react-utils': 'jsReactUtils',
         'js-spec': 'jsSpec',
-        'react': 'React',
         'office-ui-fabric-react': 'Fabric',
-        'react-virtualized': 'ReactVirtualized'
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'react-virtualized': 'ReactVirtualized',
+        'rxjs': 'rxjs'
       },
-      external: ['react', 'js-react-utils', 'js-spec', 'office-ui-fabric-react', 'react-virtualized'],
+      external: [
+        'color',
+        'rs-react-store',
+        'js-react-utils',
+        'js-spec',
+        'office-ui-fabric-react',
+        'react',
+        'react-dom',
+        'react-virtualized',
+        'rxjs'
+      ],
     },
 
 
@@ -83,16 +96,6 @@ function createRollupConfig(moduleFormat, productive) {
         },
       }),
       */
-      reactSvg({
-        svgo: {
-          plugins: [],
-          multipass: false
-        },
-
-        jsx: false,
-        include: './**/*.svg',
-        exclude: null
-      }),
       typescript({
         exclude: 'node_modules/**'
       }),
@@ -112,7 +115,7 @@ function createRollupConfig(moduleFormat, productive) {
 const configs = []
 
 for (const format of ['umd', /*'cjs', 'amd', 'esm'*/]) {
-  for (const productive of [true/*, false*/]) {
+  for (const productive of [true, false]) {
     configs.push(createRollupConfig(format, productive))
   }
 }

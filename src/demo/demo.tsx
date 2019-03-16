@@ -346,11 +346,11 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit
+  return cockpit 
 }
 
 function fakeData(count: number) {
