@@ -9,11 +9,10 @@ import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 import { of as observableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 
-import faker from 'faker'
+import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 //import { FluentCustomizations } from '@uifabric/fluent-theme';
-
 
 initSystemIcons()
 loadThemeByName('orange', false)
@@ -354,15 +353,17 @@ function Demo() {
 }
 
 function fakeData(count: number) {
-  const ret: any[] = []
+  const
+    ret: any[] = [],
+    chance = typeof Chance === 'function' ? new Chance() : new (window as any).Chance() // TODO
 
   for(let i = 0; i < count; ++i) {
     ret.push({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      city: faker.address.city(),
-      postalCode: faker.address.zipCode(),
-      country: faker.address.country()
+      firstName: chance.first(),
+      lastName: chance.last(),
+      city: chance.city(),
+      postalCode: chance.zip(),
+      country: chance.country()
     })
   }
 

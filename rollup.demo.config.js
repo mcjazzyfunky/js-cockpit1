@@ -11,28 +11,40 @@ export default {
     file: './build/demo.js',
     format: 'umd',
     name: 'jsCockpitDemo',
+    sourcemap: false,
 
     globals: {
-      'react': 'React',
-      'react-dom': 'ReactDOM',
+      'chance': 'chance',
       'js-react-utils': 'jsReactUtils',
       'js-react-store': 'jsReactStore',
       'js-spec': 'jsSpec',
       'js-spec/dev-only': 'jsSpec',
       'office-ui-fabric-react': 'Fabric',
+      'react': 'React',
+      'react-dom': 'ReactDOM',
       'react-virtualized': 'ReactVirtualized',
-      'rxjs': 'rxjs',
-      'faker': 'Faker'
+      'rxjs': 'rxjs'
     },
   },
 
-  external: ['react', 'react-dom', 'js-react-utils', 'js-react-store', 'js-spec', 'js-spec/dev-only', 'office-ui-fabric-react', 'react-virtualized', 'rxjs'],
+  external: [
+    'chance',
+    'js-react-utils',
+    'js-react-store',
+    'js-spec',
+    'js-spec/dev-only',
+    'office-ui-fabric-react',
+    'react',
+    'react-dom',
+    'react-virtualized',
+    'rxjs'
+  ],
 
   plugins: [
     resolve(),
     commonjs(),
     replace({
-      //exclude: 'node_modules/**', // TODO
+      exclude: 'node_modules/**', // TODO
       
       values: {
         'process.env.NODE_ENV': "'development'"
