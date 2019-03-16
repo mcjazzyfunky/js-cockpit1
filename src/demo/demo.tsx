@@ -407,8 +407,8 @@ if (params.sortBy) {
 }
 
 ReactDOM.render(
-  <Customizer {...FluentCustomizations}>
+  //<Customizer {...FluentCustomizations}>
     <Demo/>,
-  </Customizer>,
+  //</Customizer>,
   document.getElementById('main-content'))
 

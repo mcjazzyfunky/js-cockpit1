@@ -12,11 +12,12 @@ const styleSection = defineStyle(theme => ({
   },
 
   title: {
-    color: theme.palette.themeTertiary,
+    color: theme.palette.themeSecondary,
     fontSize: theme.fonts.smallPlus.fontSize,
     fontFamily: theme.fonts.smallPlus.fontFamily,
     fontWeight: 'bold',
     padding: '0 0 0.5rem 0',
+    opacity: 0.8,
   },
 
   content: {

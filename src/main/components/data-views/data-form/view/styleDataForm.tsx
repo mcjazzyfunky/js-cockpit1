@@ -42,7 +42,7 @@ const styleDataForm = defineStyle(theme => ({
 
   title: {
     display: 'inline-block',
-    color: theme.palette.neutralSecondary,
+    color: theme.palette.neutralPrimary,
     fontSize: theme.fonts.large.fontSize,
     fontFamily: theme.fonts.large.fontFamily,
     margin: '0 6px 3px 6px',
