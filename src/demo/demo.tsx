@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
 import { loadThemeByName, initSystemIcons, Brand, CheckGroup, Choice, RadioGroup, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
-//import { Customizer } from 'office-ui-fabric-react'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 
@@ -12,10 +11,11 @@ import { delay } from 'rxjs/operators'
 import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
-//import { FluentCustomizations } from '@uifabric/fluent-theme';
+import { Customizer } from 'office-ui-fabric-react'
+import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('orange', false)
+loadThemeByName('default', true)
 
 const menuBar = 
   <MenuBar
@@ -231,7 +231,7 @@ function Demo() {
       <Tabs>
         <Tabs.Page title="Contact data">
           <Compound>
-            <Section title="Section-1">
+            <Section title="Primary contact">
               <RadioGroup
                 label="Salutation"
                 defaultSelectedKey={'ms'}
@@ -258,7 +258,7 @@ function Demo() {
               />
               <DateInput name="dateOfBirth" label="Date of birth"/>
             </Section>
-            <Section title="Section-1">
+            <Section title="Secondary contact">
               <RadioGroup
                 label="Salutation"
                 defaultSelectedKey={'ms'}
@@ -287,7 +287,7 @@ function Demo() {
               />
             </Section>
           </Compound>
-          <Section title="Section-1">
+          <Section title="Tertiary contact">
             <TextInput label="First name"/>
             <TextInput label="Last name"/>
             <Compound>
@@ -345,7 +345,7 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
+        {dataForm}
       </Cockpit.Center>
     </Cockpit>
 
@@ -407,8 +407,8 @@ if (params.sortBy) {
 }
 
 ReactDOM.render(
- // <Customizer {...FluentCustomizations}>
+  <Customizer {...FluentCustomizations}>
     <Demo/>,
- // </Customizer>,
+  </Customizer>,
   document.getElementById('main-content'))
 

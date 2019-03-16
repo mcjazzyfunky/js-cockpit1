@@ -42,6 +42,7 @@ const styleDataForm = defineStyle(theme => ({
 
   title: {
     display: 'inline-block',
+    color: theme.palette.neutralSecondary,
     fontSize: theme.fonts.large.fontSize,
     fontFamily: theme.fonts.large.fontFamily,
     margin: '0 6px 3px 6px',
@@ -105,6 +106,7 @@ const styleDataForm = defineStyle(theme => ({
   closeButton: {
     color: theme.palette.themeSecondary,
     backgroundColor: 'transparent',
+    border: 'none',
     padding: '0 !important',
     minWidth: 'auto',
     marginRight: '0.5rem',

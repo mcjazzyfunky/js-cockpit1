@@ -1,6 +1,9 @@
 import { createTheme, loadTheme, ITheme } from 'office-ui-fabric-react/lib/Styling'
 
 const themes = {
+  default: {
+  },
+
   blue: {
     palette: {
       themePrimary: '#0078d4',
