@@ -340,6 +340,7 @@ function Demo() {
         <LogoutButton/>
       </Cockpit.UserNav>
       <Cockpit.Menu>
+        {menuBar}
       </Cockpit.Menu>
       <Cockpit.Sidebar>
         {verticalMenu}
