@@ -8,7 +8,7 @@ import Color from 'color'
 
 const styleSection = defineStyle(theme => ({
   container: {
-    padding: '1rem 1rem 0.25rem 0.75rem',
+    padding: '1rem 1rem 0 0.75rem',
   },
 
   title: {
@@ -19,8 +19,18 @@ const styleSection = defineStyle(theme => ({
     padding: '0 0 1rem 0',
   },
 
-  content: {
-    padding: '0 0 0 1rem'
+  defaultContent: {
+    padding: '0 0 0.5rem 1rem',
+
+    selectors: {
+      '& > *': {
+        marginBottom: '8px'
+      }
+    }
+  },
+
+  compactContent: {
+    padding: '0 0 0 1rem',
   },
 
   layoutTable: {
@@ -32,13 +42,14 @@ const styleSection = defineStyle(theme => ({
 
       '& > tbody > tr > td:first-child': {
         textAlign: 'right',
-        padding: '2px 0.25rem 0 0',
+        padding: '3px 0.75rem 0 0',
+        //width: '120px'
       }
     }
   },
 
   innerLabel: {
-    margin: '2px 0.25rem 0 0.5rem'
+    margin: '3px 0.25rem 0 0.25rem'
   }
 }))
 

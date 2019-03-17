@@ -288,7 +288,7 @@ function Demo() {
             </Section>
           </Compound>
           <Section title="Tertiary contact">
-            <TextInput label="First name"/>
+            <TextInput label="First xxx yy name"/>
             <TextInput label="Last name"/>
             <Compound>
               <TextInput label="Postal code"/>

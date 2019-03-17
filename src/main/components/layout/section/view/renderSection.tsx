@@ -16,20 +16,28 @@ type SectionClasses = CssClassesOf<typeof styleSection>
 // --- renderSection ------------------------------------------------
 
 function renderSection(props: SectionProps) {
-  const compact = true
+  const compact = true 
 
   return (
-    styleSection(classes =>
-      <div className={classes.container}>
-        {renderLabel(props, classes)}
-        <div className={classes.content}>
-          {
-            compact
-              ? renderCompactContent(props, classes)
-              : renderContent(props, classes)
-          }
+    styleSection(classes => {
+      const contentClassName =
+        compact
+          ? classes.compactContent
+          : classes.defaultContent
+
+      return (
+        <div className={classes.container}>
+          {renderLabel(props, classes)}
+          <div className={contentClassName}>
+            {
+              compact
+                ? renderCompactContent(props, classes)
+                : renderDefaultContent(props, classes)
+            }
+          </div>
         </div>
-      </div>
+      )
+    }
     )
   )
 }
@@ -49,9 +57,9 @@ function renderLabel(props: SectionProps, classes: SectionClasses) {
   return ret
 }
 
-function renderContent(props: SectionProps, classes: SectionClasses) {
+function renderDefaultContent(props: SectionProps, classes: SectionClasses) {
   return (
-    <div className={classes.content}>
+    <div className={classes.defaultContent}>
       {props.children}
     </div>
   )
