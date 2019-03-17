@@ -8,7 +8,7 @@ import Color from 'color'
 
 const styleSection = defineStyle(theme => ({
   container: {
-    padding: '1rem 1rem 0.75rem 0.75rem',
+    padding: '1rem 1rem 0.25rem 0.75rem',
   },
 
   title: {
@@ -16,11 +16,25 @@ const styleSection = defineStyle(theme => ({
     fontSize: theme.fonts.smallPlus.fontSize,
     fontFamily: theme.fonts.smallPlus.fontFamily,
     fontWeight: 'bold',
-    padding: '0 0 0.5rem 0',
+    padding: '0 0 1rem 0',
   },
 
   content: {
     padding: '0 0 0 1rem'
+  },
+
+  layoutTable: {
+    selectors: {
+      '& > tbody > tr > td': {
+        verticalAlign: 'top',
+        padding: '2px',
+      },
+
+      '& > tbody > tr > td:first-child': {
+        textAlign: 'right',
+        paddingRight: '0.25rem',
+      }
+    }
   }
 }))
 

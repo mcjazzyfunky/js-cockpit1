@@ -18,7 +18,11 @@ function renderChoice(props: ChoiceProps) {
   return (
     styleChoice(classes =>
       <div data-component="Choice" className={classes.container} style={style}>
-        <Dropdown label={props.label} options={props.options as any}/> 
+        {
+          props.label
+            ? <Dropdown label={props.label} options={props.options as any}/> 
+            : <Dropdown options={props.options as any}/> 
+        }
       </div>
     )
   )

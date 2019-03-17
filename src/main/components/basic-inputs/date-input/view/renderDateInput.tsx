@@ -18,7 +18,11 @@ function renderDateInput(props: DateInputProps) {
   return (
     styleTextInput(classes =>
       <div data-component="DateInput" className={classes.container} style={style}>
-        <Label className={classes.label}>{props.label}</Label>
+        {
+          props.label
+            ? <Label className={classes.label}>{props.label}</Label>
+            : null
+        }
         <div>
           <DatePicker/>
         </div>

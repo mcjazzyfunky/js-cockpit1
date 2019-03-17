@@ -1,6 +1,7 @@
 // externals imports
 import React, { ReactNode } from 'react'
 import { isElement, isElementOfType } from 'js-react-utils'
+import { Label } from 'office-ui-fabric-react'
 
 // internal imports
 import styleSection from './styleSection'
@@ -21,11 +22,13 @@ function renderSection(props: SectionProps) {
     styleSection(classes =>
       <div className={classes.container}>
         {renderLabel(props, classes)}
-        {
-          compact
-            ? renderCompactContent(props, classes)
-            : renderContent(props, classes)
-        }
+        <div className={classes.content}>
+          {
+            compact
+              ? renderCompactContent(props, classes)
+              : renderContent(props, classes)
+          }
+        </div>
       </div>
     )
   )
@@ -72,9 +75,9 @@ function renderCompactContent(props: SectionProps, classes: SectionClasses) {
           label2 = child2.props.label
 
           if (idx === 0) {
-            label = label2
+            label = <Label>{label2}</Label>
           } else {
-            subNodes.push(label2)
+            subNodes.push(<Label>{label2}</Label>)
           }
 
           node2 = cloneElement(child2, { label: undefined })
@@ -91,19 +94,16 @@ function renderCompactContent(props: SectionProps, classes: SectionClasses) {
       node = cloneElement(node, { label: undefined })
     }
 
-    console.log('label', label)
-    console.log('node', node)
-
     return (
       <tr>
-        <td>{label}</td>
+        <td><Label>{label}</Label></td>
         <td>{node}</td>
       </tr>
     )
   })
 
   return (
-    <table>
+    <table className={classes.layoutTable}>
       <tbody>
         {tableRows} 
       </tbody>
