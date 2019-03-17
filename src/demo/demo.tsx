@@ -15,7 +15,7 @@ import { Customizer } from 'office-ui-fabric-react'
 import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('default', true)
+loadThemeByName('green', false)
 
 const menuBar = 
   <MenuBar

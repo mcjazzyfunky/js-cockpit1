@@ -12,7 +12,7 @@ const styleFieldSet = defineStyle(theme => ({
   },
 
   title: {
-    color: theme.palette.themeSecondary,
+    color: theme.palette.neutralSecondaryAlt,
     fontSize: theme.fonts.smallPlus.fontSize,
     fontFamily: theme.fonts.smallPlus.fontFamily,
     fontWeight: 'bold',
