@@ -4,9 +4,9 @@ import defineStyle from '../../../../styling/defineStyle'
 // external imports
 import Color from 'color'
 
-// --- styleSection -------------------------------------------------
+// --- styleFieldSet -------------------------------------------------
 
-const styleSection = defineStyle(theme => ({
+const styleFieldSet = defineStyle(theme => ({
   container: {
     padding: '1rem 1rem 0 0.75rem',
   },
@@ -55,4 +55,4 @@ const styleSection = defineStyle(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleSection
+export default styleFieldSet

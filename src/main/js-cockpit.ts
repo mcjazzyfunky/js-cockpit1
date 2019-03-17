@@ -16,6 +16,8 @@ import DataForm from './components/data-views/data-form/DataForm'
 import DataTable from './components/data-views/data-table/DataTable'
 import DateInput from './components/basic-inputs/date-input/DateInput'
 import DateInputProps from './components/basic-inputs/date-input/types/DateInputProps'
+import FieldSet from './components/layout/field-set/FieldSet'
+import FieldSetProps from './components/layout/field-set/types/FieldSetProps'
 import HBox from './components/layout/hbox/HBox'
 import HBoxProps from './components/layout/hbox/types/HBoxProps'
 import LoginForm from './components/login/login-form/LoginForm'
@@ -25,8 +27,6 @@ import MenuBar from './components/navigation/menu-bar/MenuBar'
 import VerticalMenu from './components/navigation/vertical-menu/VerticalMenu'
 import RadioGroup from './components/basic-inputs/radio-group/RadioGroup'
 import RadioGroupProps from './components/basic-inputs/radio-group/types/RadioGroupProps'
-import Section from './components/layout/section/Section'
-import SectionProps from './components/layout/section/types/SectionProps'
 import Tabs from './components/layout/tabs/Tabs'
 import TabsProps from './components/layout/tabs/types/TabsProps'
 import TabsPageProps from './components/layout/tabs/types/TabsPageProps'
@@ -62,8 +62,8 @@ export {
   HBoxProps,
   VBox,
   VBoxProps,
-  Section,
-  SectionProps,
+  FieldSet,
+  FieldSetProps,
   Tabs,
   TabsProps,
   TabsPageProps,

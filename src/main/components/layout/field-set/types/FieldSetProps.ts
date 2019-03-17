@@ -1,9 +1,9 @@
 // external imports
 import React, { CSSProperties, ReactNode } from 'react'
 
-// --- SectionProps -------------------------------------------------
+// --- FieldSetProps -------------------------------------------------
 
-type SectionProps = {
+type FieldSetProps = {
   title?: string,
   className?: string,
   style?: CSSProperties,
@@ -12,4 +12,4 @@ type SectionProps = {
 
 // --- exports ------------------------------------------------------
 
-export default SectionProps
+export default FieldSetProps

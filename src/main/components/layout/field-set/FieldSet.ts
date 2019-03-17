@@ -3,13 +3,13 @@ import { Spec } from 'js-spec'
 import { defineComponent, isNode, withChildren } from 'js-react-utils'
 
 // internal imports
-import SectionProps from './types/SectionProps'
-import renderSection from './view/renderSection'
+import FieldSetProps from './types/FieldSetProps'
+import renderFieldSet from './view/renderFieldSet'
 
-// --- Section ---------------------------------------------------------
+// --- FieldSet ---------------------------------------------------------
 
-const Section = defineComponent<SectionProps>({
-  displayName: 'Section',
+const FieldSet = defineComponent<FieldSetProps>({
+  displayName: 'FieldSet',
 
   properties: {
     title: {
@@ -30,10 +30,10 @@ const Section = defineComponent<SectionProps>({
   },
 
   render(props) {
-    return renderSection(props)
+    return renderFieldSet(props)
   }
 })
 
 // --- exports ------------------------------------------------------
 
-export default Section
+export default FieldSet

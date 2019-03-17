@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { defineComponent } from 'js-react-utils'
-import { loadThemeByName, initSystemIcons, Brand, CheckGroup, Choice, RadioGroup, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, Section, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
+import { loadThemeByName, initSystemIcons, Brand, CheckGroup, Choice, RadioGroup, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, FieldSet, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 
@@ -221,17 +221,17 @@ function Demo() {
         { type: 'default', text: 'Delete', icon: <FiTrash2/> }
       ]}
     >
-      <Section>
+      <FieldSet>
         <Compound>
           <TextInput label="Customer no." grow={1}></TextInput>
           <TextInput label="Display name" grow={5}></TextInput>
         </Compound>
-      </Section>
+      </FieldSet>
 
       <Tabs>
         <Tabs.Page title="Contact data">
           <Compound>
-            <Section title="Primary contact">
+            <FieldSet title="Primary contact">
               <RadioGroup
                 label="Salutation"
                 defaultSelectedKey={'ms'}
@@ -257,8 +257,8 @@ function Demo() {
                 <TextInput label="City"/>
               </Compound>
               <DateInput name="dateOfBirth" label="Date of birth"/>
-            </Section>
-            <Section title="Secondary contact">
+            </FieldSet>
+            <FieldSet title="Secondary contact">
               <RadioGroup
                 label="Salutation"
                 defaultSelectedKey={'ms'}
@@ -285,9 +285,9 @@ function Demo() {
                   { key: 'c', text: 'receives newsletter' }
                 ]}
               />
-            </Section>
+            </FieldSet>
           </Compound>
-          <Section title="Tertiary contact">
+          <FieldSet title="Tertiary contact">
             <TextInput label="First xxx yy name"/>
             <TextInput label="Last name"/>
             <Compound>
@@ -303,9 +303,9 @@ function Demo() {
                 { key: 'us', text: 'United States' }
               ]}
             />
-          </Section>
-          <Section title="Section-2">
-          </Section>
+          </FieldSet>
+          <FieldSet title="FieldSet-2">
+          </FieldSet>
         </Tabs.Page>
         <Tabs.Page title="Documents">
           {dataExplorer}

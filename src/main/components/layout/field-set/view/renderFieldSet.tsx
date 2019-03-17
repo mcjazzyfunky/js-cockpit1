@@ -4,22 +4,22 @@ import { isElement, isElementOfType } from 'js-react-utils'
 import { Label } from 'office-ui-fabric-react'
 
 // internal imports
-import styleSection from './styleSection'
-import SectionProps from '../types/SectionProps'
+import styleFieldSet from './styleFieldSet'
+import FieldSetProps from '../types/FieldSetProps'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import Compound from '../../compound/Compound'
 
 // derived imports
 const { cloneElement, createElement: h, Children, Fragment } = React
-type SectionClasses = CssClassesOf<typeof styleSection>
+type FieldSetClasses = CssClassesOf<typeof styleFieldSet>
 
-// --- renderSection ------------------------------------------------
+// --- renderFieldSet ------------------------------------------------
 
-function renderSection(props: SectionProps) {
-  const compact = true 
+function renderFieldSet(props: FieldSetProps) {
+  const compact = false 
 
   return (
-    styleSection(classes => {
+    styleFieldSet(classes => {
       const contentClassName =
         compact
           ? classes.compactContent
@@ -44,7 +44,7 @@ function renderSection(props: SectionProps) {
 
 // --- locals -------------------------------------------------------
 
-function renderLabel(props: SectionProps, classes: SectionClasses) {
+function renderLabel(props: FieldSetProps, classes: FieldSetClasses) {
   let ret: ReactNode = null
 
   if (typeof props.title === 'string' && props.title.trim().length > 0) {
@@ -57,7 +57,7 @@ function renderLabel(props: SectionProps, classes: SectionClasses) {
   return ret
 }
 
-function renderDefaultContent(props: SectionProps, classes: SectionClasses) {
+function renderDefaultContent(props: FieldSetProps, classes: FieldSetClasses) {
   return (
     <div className={classes.defaultContent}>
       {props.children}
@@ -65,7 +65,7 @@ function renderDefaultContent(props: SectionProps, classes: SectionClasses) {
   )
 }
 
-function renderCompactContent(props: SectionProps, classes: SectionClasses) {
+function renderCompactContent(props: FieldSetProps, classes: FieldSetClasses) {
   const tableRows = Children.map(props.children, child => {
     let
       label: any = null,
@@ -120,4 +120,4 @@ function renderCompactContent(props: SectionProps, classes: SectionClasses) {
 }
 // --- exports -----------------------------------------------------
 
-export default renderSection
+export default renderFieldSet
