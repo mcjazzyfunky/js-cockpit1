@@ -32,9 +32,13 @@ const styleSection = defineStyle(theme => ({
 
       '& > tbody > tr > td:first-child': {
         textAlign: 'right',
-        paddingRight: '0.25rem',
+        padding: '2px 0.25rem 0 0',
       }
     }
+  },
+
+  innerLabel: {
+    margin: '2px 0.25rem 0 0.5rem'
   }
 }))
 

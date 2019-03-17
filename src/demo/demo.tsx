@@ -242,11 +242,6 @@ function Demo() {
                 ]}
               />
               <TextInput label="First name"/>
-              <TextInput label="Last name"/>
-              <Compound>
-                <TextInput label="Postal code"/>
-                <TextInput label="City"/>
-              </Compound>
               <Choice
                 label="Country"
 
@@ -256,6 +251,11 @@ function Demo() {
                   { key: 'us', text: 'United States' }
                 ]}
               />
+              <TextInput label="Last name"/>
+              <Compound>
+                <TextInput label="Postal code"/>
+                <TextInput label="City"/>
+              </Compound>
               <DateInput name="dateOfBirth" label="Date of birth"/>
             </Section>
             <Section title="Secondary contact">

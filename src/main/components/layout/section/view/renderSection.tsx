@@ -75,9 +75,9 @@ function renderCompactContent(props: SectionProps, classes: SectionClasses) {
           label2 = child2.props.label
 
           if (idx === 0) {
-            label = <Label>{label2}</Label>
+            label = label2
           } else {
-            subNodes.push(<Label>{label2}</Label>)
+            subNodes.push(<Label className={classes.innerLabel}>{label2}</Label>)
           }
 
           node2 = cloneElement(child2, { label: undefined })

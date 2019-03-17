@@ -5,7 +5,6 @@ import defineStyle from '../../../../styling/defineStyle'
 
 const styleDateInput = defineStyle(theme => ({
   container: {
-    margin: '0.5rem 0 0.5rem 0',
   },
 
   label: {
