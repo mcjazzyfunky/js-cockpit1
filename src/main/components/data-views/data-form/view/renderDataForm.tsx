@@ -7,17 +7,18 @@ import { IoMdClose as CloseIcon } from 'react-icons/io'
 import styleDataForm from './styleDataForm'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataFormProps from '../types/DataFormProps'
+import ViewModesCtx from '../../../../contexts/ViewModesCtx'
 
 // --- derived imports --------------------------------------------
 
-const { useEffect, useRef,  useState, useCallback } = React
+const { useContext } = React
 
 type DataFormClasses = CssClassesOf<typeof styleDataForm>
 
 // --- renderDataForm -----------------------------------------------
 
 function renderDataForm(props: DataFormProps) {
-  return styleDataForm(classes => {
+  let ret = styleDataForm(classes => {
     return (
       <div>
         <div className={classes.container}>
@@ -29,6 +30,21 @@ function renderDataForm(props: DataFormProps) {
       </div>
     )
   })
+
+  const
+    viewModes = useContext(ViewModesCtx),
+    compact = props.compact === true
+
+  if (viewModes.compact !== compact) {
+    const newViewModes = { ...viewModes, compact }
+
+    ret =
+      <ViewModesCtx.Provider value={newViewModes}>
+        {props.children}
+      </ViewModesCtx.Provider>
+  }
+
+  return ret
 }
 
 // --- locals -------------------------------------------------------

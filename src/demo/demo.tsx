@@ -212,6 +212,7 @@ function Demo() {
   const dataForm =
     <DataForm
       title="Customer"
+      compact={true}
 
       onClose={() => alert('close')}
       

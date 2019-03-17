@@ -8,38 +8,36 @@ import styleFieldSet from './styleFieldSet'
 import FieldSetProps from '../types/FieldSetProps'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import Compound from '../../compound/Compound'
+import ViewModesCtx from '../../../../contexts/ViewModesCtx'
 
 // derived imports
-const { cloneElement, createElement: h, Children, Fragment } = React
+const { cloneElement, createElement: h, useContext, Children } = React
 type FieldSetClasses = CssClassesOf<typeof styleFieldSet>
 
 // --- renderFieldSet ------------------------------------------------
 
 function renderFieldSet(props: FieldSetProps) {
-  const compact = false 
+  const compact = useContext(ViewModesCtx).compact 
 
-  return (
-    styleFieldSet(classes => {
-      const contentClassName =
-        compact
-          ? classes.compactContent
-          : classes.defaultContent
+  return styleFieldSet(classes => {
+    const contentClassName =
+      compact
+        ? classes.compactContent
+        : classes.defaultContent
 
-      return (
-        <div className={classes.container}>
-          {renderLabel(props, classes)}
-          <div className={contentClassName}>
-            {
-              compact
-                ? renderCompactContent(props, classes)
-                : renderDefaultContent(props, classes)
-            }
-          </div>
+    return (
+      <div className={classes.container}>
+        {renderLabel(props, classes)}
+        <div className={contentClassName}>
+          {
+            compact
+              ? renderCompactContent(props, classes)
+              : renderDefaultContent(props, classes)
+          }
         </div>
-      )
-    }
+      </div>
     )
-  )
+  })
 }
 
 // --- locals -------------------------------------------------------

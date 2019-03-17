@@ -39,6 +39,11 @@ const DataForm = defineComponent<DataFormProps>({
         )
     },
 
+    compact: {
+      type: Boolean,
+      defaultValue: false
+    },
+
     onClose: {
       type: Function
     },
