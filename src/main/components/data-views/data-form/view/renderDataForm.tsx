@@ -40,7 +40,7 @@ function renderDataForm(props: DataFormProps) {
 
     ret =
       <ViewModesCtx.Provider value={newViewModes}>
-        {props.children}
+        {ret}
       </ViewModesCtx.Provider>
   }
 
