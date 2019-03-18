@@ -19,7 +19,7 @@ function renderCompound(props: CompoundProps) {
         return <span style={cellStyle}>{child}</span>
       }),
 
-    style = { ...props.style, flexGrow: 1 } 
+    style = { ...props.style, flexGrow: 1, display: 'inline-flex' } 
     
   
   return (

@@ -5,6 +5,7 @@ import React, { CSSProperties, ReactNode } from 'react'
 
 type FieldSetProps = {
   title?: string,
+  grow?: number,
   className?: string,
   style?: CSSProperties,
   children?: ReactNode 

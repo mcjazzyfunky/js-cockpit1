@@ -1,14 +1,20 @@
-// internal imports
-import defineStyle from '../../../../styling/defineStyle'
-
 // external imports
+import { ITheme } from 'office-ui-fabric-react'
 import Color from 'color'
+
+// internal imports
+import FieldSetProps from '../types/FieldSetProps'
+import defineStyle from '../../../../styling/defineStyle'
 
 // --- styleFieldSet -------------------------------------------------
 
 const styleFieldSet = defineStyle(theme => ({
   container: {
+    display: 'flex',
+    alignItems: 'stretch',
+    flexDirection: 'column',
     padding: '1rem 1rem 0 0.75rem',
+    //border: '1px solid red',
   },
 
   title: {

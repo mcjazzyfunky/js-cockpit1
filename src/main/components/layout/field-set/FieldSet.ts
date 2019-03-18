@@ -16,6 +16,10 @@ const FieldSet = defineComponent<FieldSetProps>({
       type: String
     },
 
+    grow: {
+      type: Number
+    },
+
     className: {
       type: String
     },

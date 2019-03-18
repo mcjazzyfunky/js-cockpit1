@@ -20,13 +20,16 @@ function renderFieldSet(props: FieldSetProps) {
   const compact = useContext(ViewModesCtx).compact 
 
   return styleFieldSet(classes => {
-    const contentClassName =
-      compact
-        ? classes.compactContent
-        : classes.defaultContent
+    const
+      style = props.grow ? { flexGrow: props.grow }: undefined,
+
+      contentClassName =
+        compact
+          ? classes.compactContent
+          : classes.defaultContent
 
     return (
-      <div className={classes.container}>
+      <div data-component="FieldSet" className={classes.container} style={style}>
         {renderLabel(props, classes)}
         <div className={contentClassName}>
           {
