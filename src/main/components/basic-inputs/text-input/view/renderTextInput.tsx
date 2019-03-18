@@ -6,11 +6,17 @@ import { Label, TextField } from 'office-ui-fabric-react'
 import styleTextInput from './styleTextInput'
 import TextInputProps from '../types/TextInputProps'
 import createUniqueId from '../../../../tools/createUniqueId'
+import FormCtrlCtx from '../../../../contexts/form-ctx/FormCtrlCtx'
+
+// derived imports
+const { useContext } = React
 
 // --- renderTextInput ----------------------------------------------
 
 function renderTextInput(props: TextInputProps) {
   const
+    ctrl = useContext(FormCtrlCtx),
+  
     style =
       props.grow === undefined
         ? undefined
@@ -22,6 +28,22 @@ function renderTextInput(props: TextInputProps) {
 
   textFieldProps.id = id
   labelProps.htmlFor = id
+
+  if (props.name && ctrl !== null) {
+    textFieldProps.onChange = (event: any) => {
+      ctrl.setTempValue(props.name!, event.target.value) 
+    }
+    
+    textFieldProps.onBlur = (event: any) => {
+      ctrl.setValue(props.name!, event.target.value) 
+    }
+
+    textFieldProps.onKeyDown = (event: any) => {
+      if (event.charCode === 13) {
+        ctrl.setValue(props.name!, event.target.value) 
+      }
+    }
+  }
 
   return (
     styleTextInput(classes =>

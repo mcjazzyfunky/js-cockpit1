@@ -1,13 +1,15 @@
 // externals imports
 import React from 'react'
-import { css, CommandBar, Button, Spinner, SpinnerSize, TooltipHost } from 'office-ui-fabric-react'
+import { css, CommandBar, Button, TooltipHost } from 'office-ui-fabric-react'
 import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 // internal imports
 import styleDataForm from './styleDataForm'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataFormProps from '../types/DataFormProps'
-import ViewModesCtx from '../../../../contexts/ViewModesCtx'
+import DataFormCtrl from '../ctrl/DataFormCtrl'
+import FormCtrlCtx from '../../../../contexts/form-ctx/FormCtrlCtx'
+import ViewModesCtx from '../../../../contexts/view-modes/ViewModesCtx'
 
 // --- derived imports --------------------------------------------
 
@@ -17,17 +19,19 @@ type DataFormClasses = CssClassesOf<typeof styleDataForm>
 
 // --- renderDataForm -----------------------------------------------
 
-function renderDataForm(props: DataFormProps) {
+function renderDataForm(props: DataFormProps, ctrl: DataFormCtrl) {
   let ret = styleDataForm(classes => {
     return (
-      <div>
-        <div className={classes.container}>
-          { renderHeader(props, classes) } 
+      <FormCtrlCtx.Provider value={ctrl}>
+        <div>
+          <div className={classes.container}>
+            { renderHeader(props, classes) } 
+          </div>
+          <div className={classes.content}>
+            { props.children }
+          </div>
         </div>
-        <div className={classes.content}>
-          { props.children }
-        </div>
-      </div>
+      </FormCtrlCtx.Provider>
     )
   })
 

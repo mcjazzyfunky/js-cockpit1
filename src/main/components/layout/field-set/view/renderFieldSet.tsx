@@ -8,7 +8,7 @@ import styleFieldSet from './styleFieldSet'
 import FieldSetProps from '../types/FieldSetProps'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import Compound from '../../compound/Compound'
-import ViewModesCtx from '../../../../contexts/ViewModesCtx'
+import ViewModesCtx from '../../../../contexts/view-modes/ViewModesCtx'
 
 // derived imports
 const { cloneElement, createElement: h, useContext, Children } = React

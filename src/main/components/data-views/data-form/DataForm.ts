@@ -5,6 +5,7 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import DataFormProps from './types/DataFormProps'
+import DataFormCtrl from './ctrl/DataFormCtrl'
 import renderDataForm from './view/renderDataForm'
 
 // --- DataForm -----------------------------------------------------
@@ -55,7 +56,16 @@ const DataForm = defineComponent<DataFormProps>({
   },
 
   render(props) {
-    return renderDataForm(props)
+    const ctrl = new DataFormCtrl
+
+    ctrl.subscribe((values, tempValues) => {
+      console.log('\n--- values ---')
+      console.log(values)
+      console.log('--- tempValues ---')
+      console.log(tempValues)
+    })
+    
+    return renderDataForm(props, ctrl)
   }
 })
 

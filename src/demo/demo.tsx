@@ -242,7 +242,7 @@ function Demo() {
                   { key: 'mr', text: 'Mr' },
                 ]}
               />
-              <TextInput label="First name"/>
+              <TextInput name="firstName" label="First name"/>
               <Choice
                 label="Country"
 

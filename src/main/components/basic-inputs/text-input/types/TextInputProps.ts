@@ -1,7 +1,7 @@
 // --- TextInputProps -----------------------------------------------
 
 type TextInputProps = {
-  name?: string
+  name?: string,
   label?: string,
   id?: string,
   grow?: number
