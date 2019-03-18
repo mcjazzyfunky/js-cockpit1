@@ -252,10 +252,10 @@ function Demo() {
                   { key: 'us', text: 'United States' }
                 ]}
               />
-              <TextInput label="Last name"/>
+              <TextInput name="lastName" label="Last name"/>
               <Compound>
-                <TextInput label="Postal code"/>
-                <TextInput label="City"/>
+                <TextInput name="postalCode" label="Postal code"/>
+                <TextInput name="city" label="City" disabled={ (data: any) => data.postalCode === '111'}/>
               </Compound>
               <DateInput name="dateOfBirth" label="Date of birth"/>
             </FieldSet>
@@ -273,7 +273,6 @@ function Demo() {
               <TextInput label="Last name"/>
               <Compound>
                 <TextInput label="Postal code"/>
-                <TextInput label="City"/>
               </Compound>
               <CheckGroup
                 label="Options"

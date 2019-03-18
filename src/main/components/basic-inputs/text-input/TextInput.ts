@@ -20,6 +20,18 @@ const TextInput = defineComponent<TextInputProps>({
       type: String
     },
 
+    value: {
+      type: String
+    },
+
+    disabled: {
+      validate: (Spec.boolean, Spec.function)
+    },
+
+    errorMessage: {
+      type: String
+    },
+
     id: {
       type: String
     },

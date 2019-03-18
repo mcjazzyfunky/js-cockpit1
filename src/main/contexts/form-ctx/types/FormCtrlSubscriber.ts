@@ -1,7 +1,10 @@
+// internal inputs
+import FormValues from './FormValues'
+
 // --- FormCtrlSubscriber -------------------------------------------
 
 type FormCtrlSubscriber =
-  (values: Record<string, any>, tempValues: Record<string, any>) => void
+  (values: FormValues, tempValues: FormValues) => void
 
 // --- exports ------------------------------------------------------
 

@@ -8,86 +8,43 @@ import FormCtrlUnsubscribe from '../../../../contexts/form-ctx/types/FormCtrlUns
 class DataFormCtrl implements FormCtrl {
   private _values: any = {}
   private _tempValues: any = {}
-  private _errorMsgs: Record<string, string> = {}
-  private _requiredFields: Set<string> = new Set()
-  private _disabledFields: Set<string> = new Set()
   private _subscribers: Set<Function> = new Set() // TODO
 
-  getValue(field: string): any {
-    return this._values.hasOwnProperty(field)
-      ? this._values[field]
+  getValue(name: string): any {
+    return this._values.hasOwnProperty(name)
+      ? this._values[name]
       : undefined
   }
 
-  setValue(field: string, value: any): void {
-    this._values[field] = value
-    delete this._tempValues[field]
+  setValue(name: string, value: any): void {
+    this._values[name] = value
+    this._tempValues[name] = value
     this._emitUpdate() 
   }
 
-  getTempValue(field: string): any {
+  getTempValue(name: string): any {
     let ret: any = undefined
 
-    if (this._tempValues.hasOwnProperty(field)) {
-      ret = this._tempValues[field]
-    } else if (this._values.hasOwnProperty(field)) {
-      ret = this._values[field]
+    if (this._tempValues.hasOwnProperty(name)) {
+      ret = this._tempValues[name]
     }
 
     return ret
   }
 
-  setTempValue(field: string, value: any): void {
-    this._tempValues[field] = value
+  setTempValue(name: string, value: any): void {
+    this._tempValues[name] = value
     this._emitUpdate() 
   }
-  
-  getErrorMsg(field: string): string | undefined {
-    let ret: string | undefined = undefined
-
-    if (this._errorMsgs.hasOwnProperty(field)) {
-      ret = this._errorMsgs[field]
-    }
-
-    return ret
-  }
-  
-  setErrorMsg(field: string, errorMsg: string): void {
-    this._errorMsgs[field] = errorMsg
-    this._emitUpdate() 
+ 
+  setValues(values: Record<string, any>) {
+    this._values = {...values}
+    this._tempValues = {...values}
+    this._emitUpdate()
   }
 
-  clearErrorMsg(field: string, errorMsg: string): void {
-    delete this._errorMsgs[field]
-    this._emitUpdate() 
-  }
-
-  getRequired(field: string): boolean {
-    return this._requiredFields.has(field)
-  }
-
-  setRequired(field: string, required: boolean): void {
-    if (required) {
-      this._requiredFields.add(field)
-    } else {
-      this._requiredFields.delete(field)
-    }
-    
-    this._emitUpdate() 
-  }
-
-  getDisabled(field: string): boolean {
-    return this._disabledFields.has(field)
-  }
-
-  setDisabled(field: string, disabled: boolean): void {
-    if (disabled) {
-      this._disabledFields.add(field)
-    } else {
-      this._disabledFields.delete(field)
-    }
-    
-    this._emitUpdate() 
+  getValues() {
+    return this._values
   }
 
   subscribe(subscriber: FormCtrlSubscriber): FormCtrlUnsubscribe {

@@ -29,7 +29,41 @@ function renderTextInput(props: TextInputProps) {
   textFieldProps.id = id
   labelProps.htmlFor = id
 
-  if (props.name && ctrl !== null) {
+  if (!props.name || !ctrl) {
+    if (props.hasOwnProperty('value')) {
+      textFieldProps.value = props.value
+    }
+    
+    if (props.hasOwnProperty('disabled')) {
+      textFieldProps.value = props.disabled
+    }
+    
+    if (props.hasOwnProperty('errorMessage')) {
+      textFieldProps.value = props.errorMessage
+    }
+  } else {
+    if (props.hasOwnProperty('value')) {
+      textFieldProps.value = props.value
+    } else {
+      const value = ctrl.getTempValue(props.name)
+
+      if (typeof value === 'string') {
+        textFieldProps.value = value
+      }
+    }
+
+    if (props.hasOwnProperty('disabled')) {
+      let disabled = props.disabled
+      
+      if (typeof disabled === 'function') {
+        disabled = disabled(ctrl.getValues())
+      }
+
+      disabled = disabled === true
+
+      textFieldProps.disabled = disabled
+    }
+
     textFieldProps.onChange = (event: any) => {
       ctrl.setTempValue(props.name!, event.target.value) 
     }
@@ -39,7 +73,7 @@ function renderTextInput(props: TextInputProps) {
     }
 
     textFieldProps.onKeyDown = (event: any) => {
-      if (event.charCode === 13) {
+      if (event.keyCode === 13) {
         ctrl.setValue(props.name!, event.target.value) 
       }
     }

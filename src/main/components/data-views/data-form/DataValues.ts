@@ -1,5 +1,5 @@
 // external imports
-import { ComponentType } from 'react'
+import React from 'react'
 import { defineComponent, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
@@ -7,6 +7,10 @@ import { Spec } from 'js-spec'
 import DataFormProps from './types/DataFormProps'
 import DataFormCtrl from './ctrl/DataFormCtrl'
 import renderDataForm from './view/renderDataForm'
+import useForceUpdate from '../../../hooks/useForceUpdate'
+
+// derived imports
+const { useEffect, useState } = React
 
 // --- DataForm -----------------------------------------------------
 
@@ -56,7 +60,24 @@ const DataForm = defineComponent<DataFormProps>({
   },
 
   render(props) {
-    const ctrl = new DataFormCtrl
+    const
+      forceUpdate = useForceUpdate(),
+
+      [ctrl] = useState(() => {
+        const ret = new DataFormCtrl
+      
+        //ret.subscribe(() => forceUpdate()) // TODO
+        
+        return ret
+      })
+
+    ctrl.setValues({
+      firstName: 'Jane',
+      lastName: 'Doe',
+      postalCode: '12345',
+      city: 'New York',
+      country: 'US'
+    })
 
     ctrl.subscribe((values, tempValues) => {
       console.log('\n--- values ---')
@@ -64,7 +85,7 @@ const DataForm = defineComponent<DataFormProps>({
       console.log('--- tempValues ---')
       console.log(tempValues)
     })
-    
+
     return renderDataForm(props, ctrl)
   }
 })
