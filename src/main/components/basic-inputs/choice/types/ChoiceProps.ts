@@ -3,6 +3,7 @@
 type ChoiceProps = {
   name?: string
   label?: string,
+  id?: string,
   grow?: number,
   options?: Option[]
 }

@@ -20,6 +20,10 @@ const DateInput = defineComponent<DateInputProps>({
       type: String
     },
 
+    id: {
+      type: String
+    },
+
     grow: {
       type: Number
     }

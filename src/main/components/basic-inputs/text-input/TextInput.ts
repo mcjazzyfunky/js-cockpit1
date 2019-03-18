@@ -20,6 +20,10 @@ const TextInput = defineComponent<TextInputProps>({
       type: String
     },
 
+    id: {
+      type: String
+    },
+
     grow: {
       type: Number
     }

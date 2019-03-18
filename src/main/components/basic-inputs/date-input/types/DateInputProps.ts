@@ -3,6 +3,7 @@
 type DateInputProps = {
   name?: string
   label?: string,
+  id?: string,
   grow?: number
 }
 

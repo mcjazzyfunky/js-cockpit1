@@ -20,6 +20,10 @@ const Choice = defineComponent<ChoiceProps>({
       type: String
     },
 
+    id: {
+      type: String
+    },
+
     grow: {
       type: Number
     },

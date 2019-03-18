@@ -212,7 +212,7 @@ function Demo() {
   const dataForm =
     <DataForm
       title="Customer"
-      compact={true}
+      compact={false}
 
       onClose={() => alert('close')}
       
@@ -341,7 +341,6 @@ function Demo() {
         <LogoutButton/>
       </Cockpit.UserNav>
       <Cockpit.Menu>
-        {menuBar}
       </Cockpit.Menu>
       <Cockpit.Sidebar>
         {verticalMenu}
