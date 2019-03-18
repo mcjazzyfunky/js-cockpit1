@@ -1,4 +1,5 @@
 // internal imports
+import FormValues from '../../../../contexts/form-ctx/types/FormValues'
 
 // --- TextInputProps -----------------------------------------------
 
@@ -7,7 +8,7 @@ type TextInputProps = {
   label?: string,
   id?: string,
   value?: string,
-  disabled?: boolean | ((data: FormValues) => boolean),
+  disabled?: boolean | ((data: FormValues, tempData: FormValues) => boolean),
   errorMessage?: string,
   grow?: number
 }

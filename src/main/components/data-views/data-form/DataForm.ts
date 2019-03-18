@@ -65,26 +65,28 @@ const DataForm = defineComponent<DataFormProps>({
 
       [ctrl] = useState(() => {
         const ret = new DataFormCtrl
-      
-        //ret.subscribe(() => forceUpdate()) // TODO
         
+        ret.setValues({
+          firstName: 'Jane',
+          lastName: 'Doe',
+          postalCode: '12345',
+          city: 'New York',
+          country: 'US'
+        }, true)
+        
+        ret.subscribe(() => forceUpdate())
+
         return ret
       })
 
-    ctrl.setValues({
-      firstName: 'Jane',
-      lastName: 'Doe',
-      postalCode: '12345',
-      city: 'New York',
-      country: 'US'
-    })
-
+    /*
     ctrl.subscribe((values, tempValues) => {
       console.log('\n--- values ---')
       console.log(values)
       console.log('--- tempValues ---')
       console.log(tempValues)
     })
+    */
 
     return renderDataForm(props, ctrl)
   }

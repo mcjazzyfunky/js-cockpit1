@@ -3,7 +3,6 @@ import { ITheme } from 'office-ui-fabric-react'
 import Color from 'color'
 
 // internal imports
-import FieldSetProps from '../types/FieldSetProps'
 import defineStyle from '../../../../styling/defineStyle'
 
 // --- styleFieldSet -------------------------------------------------
@@ -26,6 +25,7 @@ const styleFieldSet = defineStyle(theme => ({
   },
 
   defaultContent: {
+    display: 'flex',
     padding: '0 0 0.5rem 1rem',
 
     selectors: {
@@ -37,6 +37,7 @@ const styleFieldSet = defineStyle(theme => ({
 
   compactContent: {
     padding: '0 0 0 1rem',
+    display: 'flex'
   },
 
   layoutTable: {

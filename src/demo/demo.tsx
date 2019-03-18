@@ -15,7 +15,7 @@ import { Customizer } from 'office-ui-fabric-react'
 import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('green', false)
+loadThemeByName('default', false)
 
 const menuBar = 
   <MenuBar
@@ -255,7 +255,9 @@ function Demo() {
               <TextInput name="lastName" label="Last name"/>
               <Compound>
                 <TextInput name="postalCode" label="Postal code"/>
-                <TextInput name="city" label="City" disabled={ (data: any) => data.postalCode === '111'}/>
+                <TextInput name="city" label="City" disabled={ (data: any, tempData: any) => {
+                  return tempData.postalCode === '111'
+                 }}/>
               </Compound>
               <DateInput name="dateOfBirth" label="Date of birth"/>
             </FieldSet>
@@ -272,7 +274,8 @@ function Demo() {
               <TextInput label="First name"/>
               <TextInput label="Last name"/>
               <Compound>
-                <TextInput label="Postal code"/>
+                <TextInput name="postalCode" label="Postal code"/>
+                <TextInput name="city" label="City" disabled={ (data: any) => data.postalCode === '111'}/>
               </Compound>
               <CheckGroup
                 label="Options"

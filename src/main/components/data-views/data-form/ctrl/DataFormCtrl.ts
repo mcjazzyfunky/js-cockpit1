@@ -1,5 +1,6 @@
 // internal imports
 import FormCtrl from '../../../../contexts/form-ctx/types/FormCtrl'
+import FormValues from '../../../../contexts/form-ctx/types/FormValues'
 import FormCtrlSubscriber from '../../../../contexts/form-ctx/types/FormCtrlSubscriber'
 import FormCtrlUnsubscribe from '../../../../contexts/form-ctx/types/FormCtrlUnsubscribe'
 
@@ -9,6 +10,7 @@ class DataFormCtrl implements FormCtrl {
   private _values: any = {}
   private _tempValues: any = {}
   private _subscribers: Set<Function> = new Set() // TODO
+  private _timeout: any = null
 
   getValue(name: string): any {
     return this._values.hasOwnProperty(name)
@@ -16,10 +18,13 @@ class DataFormCtrl implements FormCtrl {
       : undefined
   }
 
-  setValue(name: string, value: any): void {
+  setValue(name: string, value: any, quiet: boolean = false): void {
     this._values[name] = value
     this._tempValues[name] = value
-    this._emitUpdate() 
+
+    if (!quiet) {
+      this._emitUpdate() 
+    }
   }
 
   getTempValue(name: string): any {
@@ -32,19 +37,29 @@ class DataFormCtrl implements FormCtrl {
     return ret
   }
 
-  setTempValue(name: string, value: any): void {
+  setTempValue(name: string, value: any, quiet: boolean = false): void {
     this._tempValues[name] = value
-    this._emitUpdate() 
+
+    if (!quiet) {
+      this._emitUpdate() 
+    }
   }
  
-  setValues(values: Record<string, any>) {
+  setValues(values: FormValues, quiet: boolean = false) {
     this._values = {...values}
     this._tempValues = {...values}
-    this._emitUpdate()
+
+    if (!quiet) {
+      this._emitUpdate()
+    }
   }
 
   getValues() {
     return this._values
+  }
+
+  getTempValues() {
+    return this._tempValues
   }
 
   subscribe(subscriber: FormCtrlSubscriber): FormCtrlUnsubscribe {
@@ -58,13 +73,19 @@ class DataFormCtrl implements FormCtrl {
   }
 
   _emitUpdate() {
-    const
-      values = this._values,
-      tempValues = { ...values, ...this._tempValues }
+    if (!this._timeout) {
+      this._timeout = setTimeout(() => {
+        const
+          values = this._values,
+          tempValues = { ...values, ...this._tempValues }
 
-    this._subscribers.forEach(callback => {
-      callback(values, tempValues)
-    })
+        this._timeout = null
+
+        this._subscribers.forEach(callback => {
+          callback(values, tempValues)
+        })
+      }, 0)
+    }
   }
 }
 

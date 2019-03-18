@@ -54,13 +54,12 @@ function renderTextInput(props: TextInputProps) {
 
     if (props.hasOwnProperty('disabled')) {
       let disabled = props.disabled
-      
+
       if (typeof disabled === 'function') {
-        disabled = disabled(ctrl.getValues())
+        disabled = disabled(ctrl.getValues(), ctrl.getTempValues())
       }
 
       disabled = disabled === true
-
       textFieldProps.disabled = disabled
     }
 
