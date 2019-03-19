@@ -171,8 +171,9 @@ function renderLoginForm(props: LoginFormProps) {
 
       return (
         <div className={props.fullSize ? classes.containerFullSize : classes.container}>
+          <div className={classes.inner}>
           {aboveBox}
-          <div data-component="LoginForm:inner" className={classes.inner}>
+          <div className={classes.card}>
             {headerBox}
             <form onSubmit={onSubmit} className={classes.form}>
               <div className={classes.content}>
@@ -238,6 +239,7 @@ function renderLoginForm(props: LoginFormProps) {
             </form>
           </div>
           {belowBox}
+          </div>
         </div>
       )
     })

@@ -28,13 +28,21 @@ const styleLoginForm = defineStyle(theme => ({
       },
 
       '& [data-component="LoginForm:inner"]': {
-        marginTop: '-5%',
+        //marginTop: '-5%',
       }
     }
   },
 
   inner: {
-    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginBottom: '10%'
+  },
+
+  card: {
     backgroundColor: theme.palette.white,
     display: 'flex',
     width: '350px',

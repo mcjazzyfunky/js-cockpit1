@@ -160,6 +160,13 @@ function Demo() {
       </Cockpit.TopNav>
       <Cockpit.Center>
         <LoginForm fullSize={true}>
+          <LoginForm.Above>
+            <Brand
+              vendor="meet+greet"
+              title="Back office"
+              size="huge"
+            />
+          </LoginForm.Above>
           <LoginForm.Below>
             &copy; 2019, meet+greet
           </LoginForm.Below>

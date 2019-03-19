@@ -37,6 +37,7 @@ module.exports = {
 
   devServer: {
     contentBase: path.join(__dirname),
+    open: true,
     openPage: '/src/demo/index.html',
     port: 9000,
     hot: true
