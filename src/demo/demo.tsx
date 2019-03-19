@@ -169,7 +169,7 @@ function Demo() {
 
   const dataExplorer =
     <DataExplorer
-      title="Back-office users"
+      title="xBack-office users"
 
       loadData={loadData}
 
@@ -348,7 +348,7 @@ function Demo() {
         {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
-        {dataForm}
+        {dataExplorer}
       </Cockpit.Center>
     </Cockpit>
 
@@ -409,9 +409,11 @@ if (params.sortBy) {
 
 }
 
-ReactDOM.render(
+export default Demo
+
+//ReactDOM.render(
   //<Customizer {...FluentCustomizations}>
-    <Demo/>,
+//    <Demo/>,
   //</Customizer>,
-  document.getElementById('main-content'))
+//  document.getElementById('main-content'))
 

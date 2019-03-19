@@ -6,7 +6,7 @@ import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
 export default {
-  input: 'src/demo/demo.tsx',
+  input: 'src/demo/run.tsx',
   output: {
     file: './build/demo.js',
     format: 'umd',
@@ -58,7 +58,7 @@ export default {
     serve({
       open: true,
       contentBase: '.',
-      openPage: '/src/demo/demo.html'
+      openPage: '/src/demo/index.html'
     }),
     livereload({
       watch: ['src/demo/', 'build']
