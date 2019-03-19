@@ -169,7 +169,7 @@ function Demo() {
 
   const dataExplorer =
     <DataExplorer
-      title="xBack-office users"
+      title="Back-office users"
 
       loadData={loadData}
 

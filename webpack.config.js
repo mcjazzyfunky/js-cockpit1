@@ -3,6 +3,19 @@ var path = require('path')
 module.exports = {
   entry: './src/demo/run.tsx',
 
+  externals: {
+    'chance': 'chance',
+    'js-react-utils': 'jsReactUtils',
+    'js-react-store': 'jsReactStore',
+    'js-spec': 'jsSpec',
+    'js-spec/dev-only': 'jsSpec',
+    'office-ui-fabric-react': 'Fabric',
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+    'react-virtualized': 'ReactVirtualized',
+    'rxjs': 'rxjs'
+  },
+
   module: {
     rules: [
       {
@@ -12,6 +25,7 @@ module.exports = {
       }
     ]
   },
+
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
