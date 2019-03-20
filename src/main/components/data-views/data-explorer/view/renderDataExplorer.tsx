@@ -335,31 +335,6 @@ function renderFilterSections(
   )
 }
 
-/*
-function renderFilters(
-  filters: DataExplorerFilterInput[],
-  store: DataExplorerStore,
-  classes: DataExplorerClasses
-) {
-  const contents = filters.map(filter => {
-    let ret = null
-
-    switch (filter.type) {
-      case 'text':
-        ret = <TextField label={filter.label} />
-        break
-    }
-
-    return ret
-  }) 
-
-  return (
-    <div className={classes.filters}>
-      {...contents}
-    </div>
-  )
-}
-*/
 function renderSearchButton(store: DataExplorerStore, classes: DataExplorerClasses) {
   return (
     <PrimaryButton>

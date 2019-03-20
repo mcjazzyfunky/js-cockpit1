@@ -80,14 +80,13 @@ const styleDataExplorer = defineStyle(theme => ({
 
   filterIcon: {
     color: theme.palette.neutralTertiary,
-    margin: '0 -4px 14px 20px',
+    margin: '14px -4px 0 20px',
     width: '24px',
     height: '24px',
   },
 
   filterBox: {
     display: 'flex',
-    alignItems: 'center',
   },
 
   filters: {
@@ -96,7 +95,7 @@ const styleDataExplorer = defineStyle(theme => ({
   },
 
   searchButtonBox: {
-    margin: '0 0 14px 20px',
+    margin: '14px 0 0 20px',
   },
 
   searchIcon: {

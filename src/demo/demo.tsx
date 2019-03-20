@@ -194,6 +194,7 @@ function Demo() {
         { type: 'multiRow', text: 'Delete', icon: <FiTrash2/> }
       ]}
 
+      /*
       search={{
         type: 'filters',
 
@@ -207,6 +208,46 @@ function Demo() {
             type: 'text',
             name: 'lastName',
             label: 'Last name'
+          }
+        ]
+      }}
+      */
+
+      search={{
+        type: 'section',
+
+        contents: [
+          {
+            type: 'filterSet',
+
+            filters: [
+              {
+                type: 'text',
+                name: 'firstName',
+                label: 'First name'
+              },
+              {
+                type: 'text',
+                name: 'lastName',
+                label: 'Last name'
+              }
+            ]
+          },
+          {
+            type: 'filterSet',
+
+            filters: [
+              {
+                type: 'text',
+                name: 'postalCode',
+                label: 'Postal code'
+              },
+              {
+                type: 'text',
+                name: 'city',
+                label: 'City'
+              }
+            ]
           }
         ]
       }}
