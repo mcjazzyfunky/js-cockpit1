@@ -1,7 +1,7 @@
 // external imports
 import React from 'react'
 import { defineComponent } from 'js-react-utils'
-import { TextField } from 'office-ui-fabric-react'
+import { Label } from 'office-ui-fabric-react'
 
 // internal imports
 import styleDataExplorerFilterPanel from './styleDataExplorerFilterPanel'
@@ -33,7 +33,7 @@ const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
         return (
           <tr>
             <td className={classes.labelCell}>
-              <label>{filter.label}</label>
+              <Label>{filter.label}</Label>
             </td>
             <td className={classes.fieldCell}>
               {filterField}

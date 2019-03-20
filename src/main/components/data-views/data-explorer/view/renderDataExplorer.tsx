@@ -1,6 +1,9 @@
 // externals imports
-import React, { ReactNode } from 'react'
-import { css, CommandBar, Spinner, SpinnerSize, Label } from 'office-ui-fabric-react'
+import React from 'react'
+import { css, CommandBar, DefaultButton, PrimaryButton, Spinner, SpinnerSize, Label } from 'office-ui-fabric-react'
+//import { FiFilter as FilterIcon } from 'react-icons/fi'
+import { MdFilterList as FilterIcon } from 'react-icons/md'
+import { GoSearch as SearchIcon } from 'react-icons/go'
 
 // internal imports
 import styleDataExplorer from './styleDataExplorer'
@@ -16,6 +19,7 @@ import DataExplorerFilterSection from '../types/DataExplorerFilterSection'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableMethods from '../../data-table/types/DataTableMethods'
 import isBlankString from '../../../../utils/isBlankString'
+import DataExplorerFilterPanel from './DataExplorerFilterPanel'
 
 
 // --- derived imports --------------------------------------------
@@ -278,39 +282,36 @@ function renderFilterSections(
   classes: DataExplorerClasses
 ) {
   const output: any = sections.map((section) => {
-    const contents = section.contents.map(content => {
+    return section.contents.map(content => {
       const
         label =
           isBlankString(content.title)
             ? null
             : <Label>{content.title}</Label>,
       
-        filters = content.filters.map(filter => {
-          const
-            label =
-              isBlankString(filter.label)
-                ? null
-                : <Label>{filter.label}</Label>,
-            
-            input =  "input"
+        filters = <DataExplorerFilterPanel filters={content.filters} store={store} />
 
-          return (
-            <div>
-              {label}
-              {input}
-            </div>
-          )
-        })
-
-        return <div>{label}{filters}</div>
+        return (
+          <div className={classes.filterSection}>
+            {label}
+            {filters}
+          </div>
+        )
       })
-    
-    return <div>{contents}</div>
   })
 
   return (
-    <div className={classes.filterSections}>
-      {...output}
+    <div className={classes.filterBox}>
+      <FilterIcon className={classes.filterIcon}/>
+      <div className={classes.filterSections}>
+        {...output}
+      </div>
+      <div className={classes.searchButtonBox}>
+        <PrimaryButton>
+          <SearchIcon className={classes.searchIcon}/>
+          Search
+        </PrimaryButton>
+      </div>
     </div>
   )
 }

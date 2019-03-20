@@ -15,7 +15,7 @@ import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 //import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('green', true)
+loadThemeByName('default', false)
 
 const menuBar = 
   <MenuBar
@@ -193,7 +193,7 @@ function Demo() {
         { type: 'singleRow', text: 'Edit', icon: <FiEdit/> },
         { type: 'multiRow', text: 'Delete', icon: <FiTrash2/> }
       ]}
-/*
+
       search={{
         type: 'sections',
 
@@ -205,14 +205,24 @@ function Demo() {
             contents: [
               {
                 type: 'filterSet',
-                title: 'FilterSet-1',
 
                 filters: [
                   {
                     type: 'text',
+                    name: 'firstName',
+                    label: 'First name'
+                  },
+                  {
+                    type: 'text',
                     name: 'lastName',
                     label: 'Last name'
-                  },
+                  }
+                ]
+              },
+              {
+                type: 'filterSet',
+
+                filters: [
                   {
                     type: 'text',
                     name: 'postalCode',
@@ -229,7 +239,8 @@ function Demo() {
           }
         ]
       }}
-*/
+
+/*
       search={{
         type: 'default',
 
@@ -249,8 +260,8 @@ function Demo() {
           ]
         }
       }}
-    >
-    </DataExplorer>
+*/
+    />
 
   const dataForm =
     <DataForm
@@ -455,9 +466,7 @@ if (params.sortBy) {
 
 export default Demo
 
-//ReactDOM.render(
-  //<Customizer {...FluentCustomizations}>
+//<Customizer {...FluentCustomizations}>
 //    <Demo/>,
-  //</Customizer>,
-//  document.getElementById('main-content'))
+//</Customizer>,
 

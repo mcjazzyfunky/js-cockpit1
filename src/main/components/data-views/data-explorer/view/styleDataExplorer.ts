@@ -72,13 +72,32 @@ const styleDataExplorer = defineStyle(theme => ({
   
   filterSections: {
     display: 'flex',
-    padding: '1rem',
   },
 
   filterSection: {
-
+    display: 'flex',
   },
 
+  filterIcon: {
+    color: theme.palette.neutralTertiary,
+    margin: '0 0 14px 20px',
+    width: '24px',
+    height: '24px',
+  },
+
+  filterBox: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  searchButtonBox: {
+    margin: '0 0 14px 20px',
+  },
+
+  searchIcon: {
+    color: theme.palette.white,
+    marginRight: '0.5rem',
+  },
 
   title: {
     display: 'inline-block',
