@@ -11,11 +11,11 @@ import Paginator from '../../../pagination/paginator/Paginator'
 import PageSizeSelector from '../../../pagination/page-size-selector/PageSizeSelector'
 import PaginationInfo from '../../../pagination/pagination-info/PaginationInfo'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
-import DataExplorerSearchBar from './types/DataExplorerSearchBar'
+import DataExplorerSearchBar from './DataExplorerSearchBar'
 import DataExplorerFilterSection from '../types/DataExplorerFilterSection'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableMethods from '../../data-table/types/DataTableMethods'
-import StringUtils from '../../../../utils/StringUtils'
+import isBlankString from '../../../../utils/isBlankString'
 
 
 // --- derived imports --------------------------------------------
@@ -281,14 +281,14 @@ function renderFilterSections(
     const contents = section.contents.map(content => {
       const
         label =
-          StringUtils.isBlank(content.title)
+          isBlankString(content.title)
             ? null
             : <Label>{content.title}</Label>,
       
         filters = content.filters.map(filter => {
           const
             label =
-              StringUtils.isBlank(filter.label)
+              isBlankString(filter.label)
                 ? null
                 : <Label>{filter.label}</Label>,
             

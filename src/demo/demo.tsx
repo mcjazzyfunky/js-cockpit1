@@ -11,11 +11,11 @@ import { delay } from 'rxjs/operators'
 import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
-import { Customizer } from 'office-ui-fabric-react'
-import { FluentCustomizations } from '@uifabric/fluent-theme';
+//import { Customizer } from 'office-ui-fabric-react'
+//import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('green', false)
+loadThemeByName('green', true)
 
 const menuBar = 
   <MenuBar
@@ -193,7 +193,7 @@ function Demo() {
         { type: 'singleRow', text: 'Edit', icon: <FiEdit/> },
         { type: 'multiRow', text: 'Delete', icon: <FiTrash2/> }
       ]}
-
+/*
       search={{
         type: 'sections',
 
@@ -229,8 +229,7 @@ function Demo() {
           }
         ]
       }}
-
-/*
+*/
       search={{
         type: 'default',
 
@@ -250,7 +249,6 @@ function Demo() {
           ]
         }
       }}
-*/
     >
     </DataExplorer>
 

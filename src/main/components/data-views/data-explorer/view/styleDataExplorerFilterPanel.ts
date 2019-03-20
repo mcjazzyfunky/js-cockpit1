@@ -9,16 +9,13 @@ const styleDataExplorerFilterPanel = defineStyle({
   },
 
   labelCell: {
-    padding: '2px 12px 2px 5px',
+    padding: '2px 12px 2px 1rem',
     whiteSpace: 'nowrap',
+    textAlign: 'right',
   },
 
   fieldCell: {
     padding: '2px'
-  },
-
-  textFilter: {
-    width: '300px',
   }
 })
 

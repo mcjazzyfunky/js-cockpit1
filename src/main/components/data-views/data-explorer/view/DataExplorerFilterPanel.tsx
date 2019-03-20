@@ -4,32 +4,29 @@ import { defineComponent } from 'js-react-utils'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
-import styleDataExplorerFilterPanel from '../styleDataExplorerFilterPanel'
-import DataExplorerProps from '../../types/DataExplorerProps'
-import DataExplorerStore from '../../types/DataExplorerStore'
+import styleDataExplorerFilterPanel from './styleDataExplorerFilterPanel'
+import DataExplorerStore from '../types/DataExplorerStore'
+import DataExplorerTextFilter from './DataExplorerTextFilter'
+import DataExplorerFilterInput from '../types/DataExplorerFilterInput'
 
 // --- DataExplorerFilterPanel --------------------------------------
 
 type DataExplorerFilterPanelProps = {
-  dataExplorerProps: DataExplorerProps,
-  dataExplorerStore: DataExplorerStore
+  filters: DataExplorerFilterInput[],
+  store: DataExplorerStore
 }
 
 const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
-  displayName: 'FilterPanel',
+  displayName: 'DataExplorerFilterPanel',
 
-  render({ dataExplorerProps: props, dataExplorerStore: store }) {
-    if (!props.search) {
-      return null
-    }
-
+  render({ filters, store }) {
     return styleDataExplorerFilterPanel(classes => {
-      const rows = (props.search as any).advanced.filters.map((filter: any) => {
+      const rows = filters.map((filter: any) => {
         let filterField: any = null // TODO
 
         switch (filter.type) {
           case 'text':
-             filterField = createTextFilter({ classes })
+             filterField = <DataExplorerTextFilter/>
              break
         }
 
@@ -57,12 +54,6 @@ const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
     })
   }
 })
-
-// --- createTextFilter ---------------------------------------------
-
-function createTextFilter({ classes }: any) { // TODO
-  return <TextField className={classes.textFilter} />
-}
 
 // --- exports ------------------------------------------------------
 

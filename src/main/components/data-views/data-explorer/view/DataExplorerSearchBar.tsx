@@ -5,10 +5,10 @@ import { css, ActionButton, Callout, CommandBar, ITheme, SearchBox } from 'offic
 import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 
 // internal imports
-import styleDataExplorerSearchBar from '../styleDataExplorerSearchBar'
-import DataExplorerProps from '../../types/DataExplorerProps'
-import DataExplorerStore from '../../types/DataExplorerStore'
-import DataExplorerFilter from '../../types/DataExplorerFilter'
+import styleDataExplorerSearchBar from './styleDataExplorerSearchBar'
+import DataExplorerProps from '../types/DataExplorerProps'
+import DataExplorerStore from '../types/DataExplorerStore'
+import DataExplorerFilter from '../types/DataExplorerFilter'
 import DataExplorerFilterPanel from './DataExplorerFilterPanel'
 
 // derived imports
@@ -103,7 +103,7 @@ const SearchBar = defineComponent<SearchBarProps>({
                 onDismiss={ () => closeCallout()}
               >
                 <div className={classes.filterContainer}>
-                  <DataExplorerFilterPanel dataExplorerProps={props} dataExplorerStore={store}/> 
+                  <DataExplorerFilterPanel filters={(props as any).search.advanced.filters} store={store}/> 
                 </div>
                 <CommandBar
                   items={[

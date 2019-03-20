@@ -2,7 +2,7 @@ import React from 'react'
 import { defineComponent } from 'js-react-utils'
 
 export default defineComponent({
-  displayName: 'ChevronDownIcon',
+  displayName: 'CheckMarkIcon',
 
   render() {
     return (
