@@ -84,7 +84,7 @@
     "rxjs": "^6.4.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config webpack.demo.config.js",
     "clean": "shx rm -rf ./build ./dist",
     "build": "rollup --c rollup.config.js && tsc -d --emitDeclarationOnly --declarationDir dist/types",
     "build-watch": "watch -f \"src/main/**/*.js\" -r \"rollup --c rollup.config.js\"",
