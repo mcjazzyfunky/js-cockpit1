@@ -15,7 +15,7 @@ import { Customizer } from 'office-ui-fabric-react'
 import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('default', false)
+loadThemeByName('green', false)
 
 const menuBar = 
   <MenuBar
@@ -207,7 +207,13 @@ function Demo() {
                 type: 'filterSet',
                 title: 'FilterSet-1',
 
-                filters: []
+                filters: [
+                  {
+                    type: 'text',
+                    name: 'firstName',
+                    label: 'First name'
+                  }
+                ]
               }
             ]
           }
@@ -372,6 +378,7 @@ function Demo() {
         <LogoutButton/>
       </Cockpit.UserNav>
       <Cockpit.Menu>
+        {menuBar}
       </Cockpit.Menu>
       <Cockpit.Sidebar>
         {verticalMenu}
@@ -381,7 +388,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit
+  return cockpit 
 }
 
 function fakeData(count: number) {

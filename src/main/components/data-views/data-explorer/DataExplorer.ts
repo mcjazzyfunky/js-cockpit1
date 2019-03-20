@@ -60,33 +60,17 @@ const DataExplorer = defineComponent<DataExplorerProps>({
 
     search: {
       type: Object,
-
-      validate:
-        Spec.nullable(
-          Spec.strictShape({
-            type: Spec.is('default'),
-            
-            basic:
-              Spec.strictShape({
-                type: Spec.is('fullText'),
-                name: Spec.match(REGEX_NAME)
-              }),
-            
-            advanced:
-              Spec.strictShape({
-                type: Spec.is('filters'),
-                
-                filters:
-                  Spec.arrayOf(
-                    Spec.and(
-                      Spec.prop('type', Spec.oneOf('text')),
-                    
-                      Spec.or({
-                        when: Spec.prop('type', Spec.is('text')),
-                        then: Spec.lazy(() => specTextFilter)
-                      })))
-              })
-          }))
+      validate: Spec.nullable(
+        Spec.lazy(() =>
+          Spec.or(
+            {
+              when: Spec.prop('type', Spec.is('default')),
+              then: specDefaultSearch 
+            },
+            {
+              when: Spec.prop('type', Spec.is('sections')),
+              then: specFilterSections
+            })))
     }
   },
 
@@ -97,7 +81,52 @@ const DataExplorer = defineComponent<DataExplorerProps>({
   }
 }) 
 
-// --- specs of search filter ---------------------------------------
+// --- locals -------------------------------------------------------
+
+const specDefaultSearch = 
+  Spec.strictShape({
+    type: Spec.is('default'),
+    
+    basic:
+      Spec.strictShape({
+        type: Spec.is('fullText'),
+        name: Spec.match(REGEX_NAME)
+      }),
+    
+    advanced:
+      Spec.strictShape({
+        type: Spec.is('filters'),
+        
+        filters:
+          Spec.arrayOf(
+            Spec.and(
+              Spec.prop('type', Spec.oneOf('text')),
+            
+              Spec.or({
+                when: Spec.prop('type', Spec.is('text')),
+                then: Spec.lazy(() => specTextFilter)
+              })))
+      })
+  })
+
+const specFilterSections =
+  Spec.strictShape({
+    type: Spec.is('sections'),
+    sections:
+      Spec.arrayOf(
+        Spec.strictShape({
+          type: Spec.is('section'),
+          title: Spec.string,
+          contents: 
+            Spec.arrayOf(
+              Spec.strictShape({
+                type: Spec.is('fieldSet'),
+                title: Spec.string,
+                fields: Spec.arrayOf(Spec.lazy(() => specTextFilter))
+              }))
+        })
+      )
+  })
 
 const specTextFilter =
   Spec.strictShape({

@@ -1,4 +1,4 @@
-import DataExplorerFilterInput from './DataExplorerFilter'
+import DataExplorerFilterInput from './DataExplorerFilterInput'
 
 type DataExplorerFilterSet = {
   type: 'filterSet',
