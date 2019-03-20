@@ -69,6 +69,16 @@ const styleDataExplorer = defineStyle(theme => ({
 
   footerEnd: {
   },
+  
+  filterSections: {
+    display: 'flex',
+    padding: '1rem',
+  },
+
+  filterSection: {
+
+  },
+
 
   title: {
     display: 'inline-block',

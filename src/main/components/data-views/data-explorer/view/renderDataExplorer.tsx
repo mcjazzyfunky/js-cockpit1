@@ -1,24 +1,26 @@
 // externals imports
-import React from 'react'
-import { css, CommandBar, Spinner, SpinnerSize, Text } from 'office-ui-fabric-react'
+import React, { ReactNode } from 'react'
+import { css, CommandBar, Spinner, SpinnerSize, Label } from 'office-ui-fabric-react'
 
 // internal imports
 import styleDataExplorer from './styleDataExplorer'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerStore from '../types/DataExplorerStore'
 import DataTable from '../../data-table/DataTable'
-import DataTableProps from '../../data-table/types/DataTableProps'
 import Paginator from '../../../pagination/paginator/Paginator'
 import PageSizeSelector from '../../../pagination/page-size-selector/PageSizeSelector'
 import PaginationInfo from '../../../pagination/pagination-info/PaginationInfo'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import DataExplorerSearchBar from './types/DataExplorerSearchBar'
+import DataExplorerFilterSection from '../types/DataExplorerFilterSection'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
-import DataTableMethods from '../../data-table/types/DataTableMethods';
+import DataTableMethods from '../../data-table/types/DataTableMethods'
+import StringUtils from '../../../../utils/StringUtils'
+
 
 // --- derived imports --------------------------------------------
 
-const { useEffect, useRef,  useState, useCallback } = React
+const { Children, useEffect, useRef,  useState, useCallback } = React
 
 type DataExplorerClasses = CssClassesOf<typeof styleDataExplorer>
 
@@ -101,6 +103,13 @@ function renderDataExplorer(props: DataExplorerProps, store: DataExplorerStore) 
       <div className={classes.container}>
         {loadingPanel}
         { renderHeader(props, store, classes) }
+        {
+          props.search
+            && props.search.type === 'sections'
+            && props.search.sections.length > 0
+              ? renderFilterSections(props.search.sections as DataExplorerFilterSection[], store, classes)
+              : null
+        }
         <div className={classes.content}>
           <DataTable
             ref={dataTableRef}
@@ -262,6 +271,50 @@ function renderActionBar(
     />
   )
 }
+
+function renderFilterSections(
+  sections: DataExplorerFilterSection[],
+  store: DataExplorerStore,
+  classes: DataExplorerClasses
+) {
+  const output: any = sections.map((section) => {
+    const contents = section.contents.map(content => {
+      const
+        label =
+          StringUtils.isBlank(content.title)
+            ? null
+            : <Label>{content.title}</Label>,
+      
+        filters = content.filters.map(filter => {
+          const
+            label =
+              StringUtils.isBlank(filter.label)
+                ? null
+                : <Label>{filter.label}</Label>,
+            
+            input =  "input"
+
+          return (
+            <div>
+              {label}
+              {input}
+            </div>
+          )
+        })
+
+        return <div>{label}{filters}</div>
+      })
+    
+    return <div>{contents}</div>
+  })
+
+  return (
+    <div className={classes.filterSections}>
+      {...output}
+    </div>
+  )
+}
+
 
 // --- exports ------------------------------------------------------
 

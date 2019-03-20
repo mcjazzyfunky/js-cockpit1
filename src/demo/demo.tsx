@@ -210,8 +210,18 @@ function Demo() {
                 filters: [
                   {
                     type: 'text',
-                    name: 'firstName',
-                    label: 'First name'
+                    name: 'lastName',
+                    label: 'Last name'
+                  },
+                  {
+                    type: 'text',
+                    name: 'postalCode',
+                    label: 'Postal code'
+                  },
+                  {
+                    type: 'text',
+                    name: 'city',
+                    label: 'City'
                   }
                 ]
               }
