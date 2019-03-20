@@ -153,7 +153,7 @@ function Demo() {
             {
               type: 'app',
               id: '0',
-              title: 'User Login'
+              title: 'Login'
             }
           ]}
         />
@@ -359,7 +359,7 @@ function Demo() {
       </Cockpit.Center>
     </Cockpit>
 
-  return cockpit 
+  return cockpit
 }
 
 function fakeData(count: number) {
