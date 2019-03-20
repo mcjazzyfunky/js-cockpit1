@@ -30,7 +30,7 @@ const styleDataExplorer = defineStyle(theme => ({
   },
 
   headerStart: {
-    marginRight: '30px',
+    marginRight: '10px',
   },
 
   headerCenter: {
@@ -80,7 +80,7 @@ const styleDataExplorer = defineStyle(theme => ({
 
   filterIcon: {
     color: theme.palette.neutralTertiary,
-    margin: '0 0 14px 20px',
+    margin: '0 -4px 14px 20px',
     width: '24px',
     height: '24px',
   },
