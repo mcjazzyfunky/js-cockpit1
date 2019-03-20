@@ -195,47 +195,18 @@ function Demo() {
       ]}
 
       search={{
-        type: 'sections',
+        type: 'filters',
 
-        sections: [
+        filters: [
           {
-            type: 'section',
-            title: 'Section-1',
-
-            contents: [
-              {
-                type: 'filterSet',
-
-                filters: [
-                  {
-                    type: 'text',
-                    name: 'firstName',
-                    label: 'First name'
-                  },
-                  {
-                    type: 'text',
-                    name: 'lastName',
-                    label: 'Last name'
-                  }
-                ]
-              },
-              {
-                type: 'filterSet',
-
-                filters: [
-                  {
-                    type: 'text',
-                    name: 'postalCode',
-                    label: 'Postal code'
-                  },
-                  {
-                    type: 'text',
-                    name: 'city',
-                    label: 'City'
-                  }
-                ]
-              }
-            ]
+            type: 'text',
+            name: 'firstName',
+            label: 'First name'
+          },
+          {
+            type: 'text',
+            name: 'lastName',
+            label: 'Last name'
           }
         ]
       }}
@@ -400,6 +371,7 @@ function Demo() {
         {menuBar}
       </Cockpit.Menu>
       <Cockpit.Sidebar>
+        {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}

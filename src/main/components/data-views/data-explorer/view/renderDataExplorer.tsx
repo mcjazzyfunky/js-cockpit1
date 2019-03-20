@@ -1,6 +1,6 @@
 // externals imports
 import React from 'react'
-import { css, CommandBar, DefaultButton, PrimaryButton, Spinner, SpinnerSize, Label } from 'office-ui-fabric-react'
+import { css, CommandBar, Label, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
 //import { FiFilter as FilterIcon } from 'react-icons/fi'
 import { MdFilterList as FilterIcon } from 'react-icons/md'
 import { GoSearch as SearchIcon } from 'react-icons/go'
@@ -16,6 +16,7 @@ import PaginationInfo from '../../../pagination/pagination-info/PaginationInfo'
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import DataExplorerSearchBar from './DataExplorerSearchBar'
 import DataExplorerFilterSection from '../types/DataExplorerFilterSection'
+import DataExplorerFilterInput from '../types/DataExplorerFilterInput'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableMethods from '../../data-table/types/DataTableMethods'
 import isBlankString from '../../../../utils/isBlankString'
@@ -111,7 +112,28 @@ function renderDataExplorer(props: DataExplorerProps, store: DataExplorerStore) 
           props.search
             && props.search.type === 'sections'
             && props.search.sections.length > 0
-              ? renderFilterSections(props.search.sections as DataExplorerFilterSection[], store, classes)
+              ? renderFilterSections(props.search.sections, store, classes)
+              : null
+        }
+        {
+          props.search
+            && props.search.type === 'section'
+            && props.search.contents.length > 0
+              ? renderFilterSections([props.search], store, classes)
+              : null
+        }
+        {
+          props.search
+            && props.search.type === 'filters'
+            && props.search.filters.length > 0
+              ? renderFilterSections(props.search.filters.map(filter => ({
+                type: 'section',
+    
+                contents: [{
+                  type: 'filterSet',
+                  filters: [filter]
+                }]
+              })) as any, store, classes) // TODO (-> any)
               : null
         }
         <div className={classes.content}>
@@ -307,15 +329,45 @@ function renderFilterSections(
         {...output}
       </div>
       <div className={classes.searchButtonBox}>
-        <PrimaryButton>
-          <SearchIcon className={classes.searchIcon}/>
-          Search
-        </PrimaryButton>
+        {renderSearchButton(store, classes)}
       </div>
     </div>
   )
 }
 
+/*
+function renderFilters(
+  filters: DataExplorerFilterInput[],
+  store: DataExplorerStore,
+  classes: DataExplorerClasses
+) {
+  const contents = filters.map(filter => {
+    let ret = null
+
+    switch (filter.type) {
+      case 'text':
+        ret = <TextField label={filter.label} />
+        break
+    }
+
+    return ret
+  }) 
+
+  return (
+    <div className={classes.filters}>
+      {...contents}
+    </div>
+  )
+}
+*/
+function renderSearchButton(store: DataExplorerStore, classes: DataExplorerClasses) {
+  return (
+    <PrimaryButton>
+      <SearchIcon className={classes.searchIcon}/>
+      Search
+    </PrimaryButton>
+  )
+}
 
 // --- exports ------------------------------------------------------
 

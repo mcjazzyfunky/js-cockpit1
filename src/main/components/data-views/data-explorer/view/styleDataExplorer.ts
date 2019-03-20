@@ -90,6 +90,11 @@ const styleDataExplorer = defineStyle(theme => ({
     alignItems: 'center',
   },
 
+  filters: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+
   searchButtonBox: {
     margin: '0 0 14px 20px',
   },
