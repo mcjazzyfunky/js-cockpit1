@@ -80,7 +80,7 @@ const styleDataExplorer = defineStyle(theme => ({
 
   filterIcon: {
     color: theme.palette.neutralTertiary,
-    margin: '14px -4px 0 20px',
+    margin: '17px -4px 0 20px',
     width: '24px',
     height: '24px',
   },
@@ -122,6 +122,8 @@ const styleDataExplorer = defineStyle(theme => ({
   },
   
   actionButton: {
+    fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
     color: theme.palette.black,
     backgroundColor: 'transparent',
     margin: '1px 0 0 4px',

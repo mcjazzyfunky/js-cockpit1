@@ -15,7 +15,7 @@ import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 //import { FluentCustomizations } from '@uifabric/fluent-theme';
 
 initSystemIcons()
-loadThemeByName('default', false)
+loadThemeByName('green', false)
 
 const menuBar = 
   <MenuBar
