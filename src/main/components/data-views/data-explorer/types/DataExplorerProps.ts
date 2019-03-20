@@ -3,6 +3,11 @@ import { ReactNode } from 'react'
 import { Observable } from 'rxjs'
 
 // internal imports
+import DataExplorerColumn from './DataExplorerColumn'
+import DataExplorerDefaultAction from './DataExplorerDefaultAction'
+import DataExplorerSingleRowAction from './DataExplorerSingleRowAction'
+import DataExplorerMultiRowAction from './DataExplorerMultiRowAction'
+import DataExplorerSearch from './DataExplorerSearch'
 import DataExplorerQueryParams from './DataExplorerQueryParams'
 import DataExplorerQueryResult from './DataExplorerQueryResult'
 
@@ -11,55 +16,14 @@ import DataExplorerQueryResult from './DataExplorerQueryResult'
 type DataExplorerProps = {
   title?: string | null,
   loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>, // TODO
-  columns: Column[],
-  actions: (DefaultAction | SingleRowAction | MultiRowAction)[],
+  columns: DataExplorerColumn[],
 
-  search?: {
-    type: 'default',
+  actions:
+    (DataExplorerDefaultAction
+      | DataExplorerSingleRowAction
+      | DataExplorerMultiRowAction)[],
 
-    basic: {
-      type: 'fullText',
-      name: string
-    }
-
-    advanced: {
-      type: 'filters',
-
-      filters: (TextFilter)[]
-    }
-  } | null
-}
-
-type Column = {
-  type: 'column',
-  title: string,
-  field?: string,
-  align?: 'start' | 'center' | 'end'
-  sortable?: boolean,
-  width?: number
-}
-
-type DefaultAction = {
-  type: 'default',
-  text: string,
-  icon?: ReactNode
-}
-
-type SingleRowAction = {
-  type: 'singleRow',
-  text: string,
-  icon?: ReactNode
-}
-
-type MultiRowAction = {
-  type: 'multiRow',
-  text: string,
-  icon?: ReactNode
-}
-type TextFilter = {
-  type: 'text',
-  name: string,
-  label: string
+  search?: DataExplorerSearch | null
 }
 
 // --- exports ------------------------------------------------------

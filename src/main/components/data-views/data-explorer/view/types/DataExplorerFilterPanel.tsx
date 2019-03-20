@@ -24,7 +24,7 @@ const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
     }
 
     return styleDataExplorerFilterPanel(classes => {
-      const rows = props.search!.advanced.filters.map(filter => {
+      const rows = (props.search as any).advanced.filters.map((filter: any) => {
         let filterField: any = null // TODO
 
         switch (filter.type) {

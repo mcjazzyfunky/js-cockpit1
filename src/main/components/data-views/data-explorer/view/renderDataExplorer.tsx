@@ -152,9 +152,13 @@ function renderHeader(
       <div className={classes.headerCenter}>
           { renderActionBar(props, store, classes) }
       </div>
-      <div className={classes.headerEnd}>
-        <DataExplorerSearchBar dataExplorerProps={props} dataExplorerStore={store} />
-      </div>
+      {
+        props.search && props.search.type === 'default'
+          ? <div className={classes.headerEnd}>
+              <DataExplorerSearchBar dataExplorerProps={props} dataExplorerStore={store} />
+            </div>
+          : null
+      }
     </div>
   ) 
 }

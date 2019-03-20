@@ -195,6 +195,27 @@ function Demo() {
       ]}
 
       search={{
+        type: 'sections',
+
+        sections: [
+          {
+            type: 'section',
+            title: 'Section-1',
+
+            contents: [
+              {
+                type: 'filterSet',
+                title: 'FilterSet-1',
+
+                filters: []
+              }
+            ]
+          }
+        ]
+      }}
+
+/*
+      search={{
         type: 'default',
 
         basic: {
@@ -213,6 +234,7 @@ function Demo() {
           ]
         }
       }}
+*/
     >
     </DataExplorer>
 
