@@ -39,7 +39,7 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    marginBottom: '10%'
+    marginBottom: '5%'
   },
 
   card: {

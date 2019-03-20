@@ -400,7 +400,6 @@ function Demo() {
         {menuBar}
       </Cockpit.Menu>
       <Cockpit.Sidebar>
-        {verticalMenu}
       </Cockpit.Sidebar>
       <Cockpit.Center style={{ padding: '5px' }}>
         {dataExplorer}
