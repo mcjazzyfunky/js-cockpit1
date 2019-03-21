@@ -21,7 +21,11 @@ const styleDataTable = defineStyle(theme => ({
       },
 
       '& .ReactVirtualized__Table__rowColumn': {
-        margin: 0
+        margin: 0,
+      },
+
+      '& .ReactVirtualized__Table__rowColumn:first-of-type': {
+        marginLeft: '1px',
       }
     }
   },
