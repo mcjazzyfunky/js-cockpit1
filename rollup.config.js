@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import postcss from 'rollup-plugin-postcss'
 import replace from 'rollup-plugin-replace'
 import typescript from 'rollup-plugin-typescript2'
 import { uglify as uglifyJS } from 'rollup-plugin-uglify'
@@ -96,6 +97,7 @@ function createRollupConfig(moduleFormat, productive) {
         },
       }),
       */
+      postcss(),
       typescript({
         exclude: 'node_modules/**'
       }),
@@ -114,7 +116,7 @@ function createRollupConfig(moduleFormat, productive) {
 
 const configs = []
 
-for (const format of ['umd', /*'cjs', 'amd', 'esm'*/]) {
+for (const format of ['umd', 'cjs'/*, 'amd', 'esm'*/]) {
   for (const productive of [true, false]) {
     configs.push(createRollupConfig(format, productive))
   }
