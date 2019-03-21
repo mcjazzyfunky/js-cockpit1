@@ -1,3 +1,6 @@
+// import css
+import '../../node_modules/react-virtualized/styles.css'
+
 // import component types
 
 import AppMenu from './components/navigation/app-menu/AppMenu'

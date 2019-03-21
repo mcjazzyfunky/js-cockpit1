@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import postcss from 'rollup-plugin-postcss'
 import typescript from 'rollup-plugin-typescript2'
 import replace from 'rollup-plugin-replace'
 import serve from 'rollup-plugin-serve'
@@ -43,6 +44,7 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
+    postcss(),
     replace({
       exclude: 'node_modules/**',
       
