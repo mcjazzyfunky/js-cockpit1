@@ -1,6 +1,6 @@
 // external imports
 import { defineComponent, isNode } from 'js-react-utils'
-import { useStore } from 'js-react-store'
+import { useStore } from 'js-stores/react'
 import { Spec } from 'js-spec'
 
 // internal imports

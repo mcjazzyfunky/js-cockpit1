@@ -22,7 +22,6 @@ function createRollupConfig(moduleFormat, productive) {
 
       globals: {
         'color': 'Color',
-        'js-react-store': 'jsReactStore',
         'js-react-utils': 'jsReactUtils',
         'js-spec': 'jsSpec',
         'office-ui-fabric-react': 'Fabric',
@@ -35,7 +34,6 @@ function createRollupConfig(moduleFormat, productive) {
 
     external: [
       'color',
-      'rs-react-store',
       'js-react-utils',
       'js-spec',
       'office-ui-fabric-react',

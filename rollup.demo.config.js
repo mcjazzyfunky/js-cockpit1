@@ -17,7 +17,8 @@ export default {
     globals: {
       'chance': 'chance',
       'js-react-utils': 'jsReactUtils',
-      'js-react-store': 'jsReactStore',
+      'js-stores': 'jsStores',
+      'js-stores/react': 'jsStores.react',
       'js-spec': 'jsSpec',
       'js-spec/dev-only': 'jsSpec',
       'office-ui-fabric-react': 'Fabric',
@@ -31,7 +32,8 @@ export default {
   external: [
     'chance',
     'js-react-utils',
-    'js-react-store',
+    'js-stores',
+    'js-stores/react',
     'js-spec',
     'js-spec/dev-only',
     'office-ui-fabric-react',

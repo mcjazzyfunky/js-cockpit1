@@ -6,7 +6,6 @@ module.exports = {
   externals: {
     'chance': 'chance',
     'js-react-utils': 'jsReactUtils',
-    'js-react-store': 'jsReactStore',
     'js-spec': 'jsSpec',
     'js-spec/dev-only': 'jsSpec',
     'office-ui-fabric-react': 'Fabric',

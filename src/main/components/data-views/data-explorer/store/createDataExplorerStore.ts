@@ -1,5 +1,5 @@
 // external imports
-import { initStore } from 'js-react-store'
+import { initStore } from 'js-stores'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
 
