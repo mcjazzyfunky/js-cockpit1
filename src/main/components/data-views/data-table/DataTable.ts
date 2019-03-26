@@ -24,7 +24,7 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
 
       validate:
         Spec.nullable(
-          Spec.strictShape({
+          Spec.exact({
             mode: Spec.oneOf('none', 'single', 'multi')
           })),
 
@@ -53,7 +53,7 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
 
       validate:
         Spec.arrayOf(
-          Spec.strictShape({
+          Spec.exact({
             title: Spec.string, 
             field: Spec.nullableOptional(Spec.string),
             align: Spec.optional(Spec.oneOf('start', 'center', 'end')),

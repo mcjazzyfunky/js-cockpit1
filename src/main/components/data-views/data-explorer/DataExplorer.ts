@@ -33,7 +33,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
 
       validate:
         Spec.arrayOf(
-          Spec.strictShape({
+          Spec.exact({
             type: Spec.is('column'),
             title: Spec.string,
             field: Spec.optional(Spec.string),
@@ -51,7 +51,7 @@ const DataExplorer = defineComponent<DataExplorerProps>({
       validate:
         Spec.arrayOf(
           Spec.and(
-            Spec.strictShape({
+            Spec.exact({
               type: Spec.oneOf('default', 'singleRow', 'multiRow'),
               text: Spec.string,
               icon: Spec.optional(isNode)
@@ -84,17 +84,17 @@ const DataExplorer = defineComponent<DataExplorerProps>({
 // --- locals -------------------------------------------------------
 
 const specDefaultSearch = 
-  Spec.strictShape({
+  Spec.exact({
     type: Spec.is('default'),
     
     basic:
-      Spec.strictShape({
+      Spec.exact({
         type: Spec.is('fullText'),
         name: Spec.match(REGEX_NAME)
       }),
     
     advanced:
-      Spec.strictShape({
+      Spec.exact({
         type: Spec.is('filters'),
         
         filters:
@@ -110,16 +110,16 @@ const specDefaultSearch =
   })
 
 const specFilterSections =
-  Spec.strictShape({
+  Spec.exact({
     type: Spec.is('sections'),
     sections:
       Spec.arrayOf(
-        Spec.strictShape({
+        Spec.exact({
           type: Spec.is('section'),
           title: Spec.string,
           contents: 
             Spec.arrayOf(
-              Spec.strictShape({
+              Spec.exact({
                 type: Spec.is('fieldSet'),
                 title: Spec.string,
                 fields: Spec.arrayOf(Spec.lazy(() => specTextFilter))
@@ -129,7 +129,7 @@ const specFilterSections =
   })
 
 const specTextFilter =
-  Spec.strictShape({
+  Spec.exact({
     type: Spec.is('text'),
     name: Spec.match(REGEX_NAME),
     label: Spec.string

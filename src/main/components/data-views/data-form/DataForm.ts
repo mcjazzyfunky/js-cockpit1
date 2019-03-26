@@ -34,7 +34,7 @@ const DataForm = defineComponent<DataFormProps>({
               when: Spec.prop('type', Spec.is('default')),
 
               then:
-                Spec.strictShape({
+                Spec.exact({
                   type: Spec.is('default'),
                   text: Spec.string,
                   icon: Spec.optional(isNode)

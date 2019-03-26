@@ -93,10 +93,10 @@ const Form = defineComponent<FormProps<FormConfig>>({
         Spec.and(
           Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
           Spec.valuesOf(
-              Spec.strictShape({
+              Spec.exact({
                 rules:
                   Spec.arrayOf(
-                    Spec.strictShape({
+                    Spec.exact({
                       validate: Spec.function,
                       errorMsg: Spec.string
                     })),

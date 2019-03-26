@@ -44,7 +44,7 @@ const specItems =
             Spec.prop('type', Spec.is('item')),
 
           then:
-            Spec.strictShape({
+            Spec.exact({
               type: Spec.is('item'),
               id: Spec.string,
               text: Spec.string,
@@ -54,7 +54,7 @@ const specItems =
             Spec.prop('type', Spec.is('menu')),
             
           then:
-            Spec.strictShape({
+            Spec.exact({
               type: Spec.is('menu'),
               menuId: Spec.optional(Spec.string),
               items: specItems

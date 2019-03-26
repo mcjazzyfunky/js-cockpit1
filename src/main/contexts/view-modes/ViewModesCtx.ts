@@ -12,7 +12,7 @@ export default defineContext<ViewModes>({
   type: Object,
 
   validate:
-    Spec.strictShape({
+    Spec.exact({
       compact: Spec.boolean,
       readOnly: Spec.boolean
     }),

@@ -45,7 +45,7 @@ const specItems =
             when: Spec.prop('type', Spec.is('menu')),
 
             then:
-              Spec.strictShape({
+              Spec.exact({
                 type: Spec.is('menu'),
                 id: Spec.string,
                 text: Spec.string,
@@ -56,7 +56,7 @@ const specItems =
             when: Spec.prop('type', Spec.is('item')),
 
             then:
-              Spec.strictShape({
+              Spec.exact({
                 type: Spec.is('item'),
                 id: Spec.string,
                 text: Spec.string,
@@ -68,7 +68,7 @@ const specItems =
             when: Spec.prop('type', Spec.is('divider')),
 
             then:
-              Spec.strictShape({
+              Spec.exact({
                 type: Spec.is('divider')
               })
           }

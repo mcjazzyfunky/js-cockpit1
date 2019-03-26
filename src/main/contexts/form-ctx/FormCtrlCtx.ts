@@ -14,7 +14,7 @@ const FormCtrlCtx = defineContext<FormCtrl | null>({
   nullable: true,
 
   validate:
-    Spec.strictShape({
+    Spec.exact({
       getValue: Spec.function,
       setValue: Spec.function,
       getErrorMsg: Spec.function,

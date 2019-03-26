@@ -17,7 +17,7 @@ const AppMenu = defineComponent<AppMenuProps>({
 
       validate:
         Spec.arrayOf(
-          Spec.strictShape({
+          Spec.exact({
             type: Spec.is('app'),
             id: Spec.string,
             title: Spec.string,
