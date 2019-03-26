@@ -11,32 +11,26 @@ import renderRadioGroup from './view/renderRadioGroup'
 const RadioGroup = defineComponent<RadioGroupProps>({
   displayName: 'RadioGroup',
 
-  properties: {
-    label: {
-      type: String
+  validate: Spec.exactProps({
+    required: {
+      options: Spec.arrayOf(
+        Spec.exact({
+          key: Spec.string,
+          text: Spec.string
+        }))
     },
 
-    name: {
-      type: String
-    },
-
-    defaultSelectedKey: {
-      type: String
-    },
-
-    orientation: {
-      type: String,
-      defaultValue: 'vertical',
-      validate: Spec.oneOf('horizontal', 'vertical')
-    },
-
-    grow: {
-      type: Number
-    },
-
-    options: {
-      type: Array
+    optional: {
+      label: Spec.string,
+      name: Spec.string,
+      defaultSelectedKey: Spec.string,
+      orientation: Spec.string,
+      grow: Spec.number
     }
+  }),
+
+  defaultProps: {
+    orientation: 'vertical'
   },
 
   render(props) {

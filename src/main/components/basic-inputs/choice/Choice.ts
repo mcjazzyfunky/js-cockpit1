@@ -11,28 +11,23 @@ import renderChoice from './view/renderChoice'
 const Choice = defineComponent<ChoiceProps>({
   displayName: 'TextInput',
 
-  properties: {
-    label: {
-      type: String
+  validate: Spec.exactProps({
+    required: {
+      options: 
+        Spec.arrayOf(
+          Spec.exact({
+            key: Spec.string,
+            text: Spec.string
+          }))
     },
 
-    name: {
-      type: String
-    },
-
-    id: {
-      type: String
-    },
-
-    grow: {
-      type: Number
-    },
-
-    options: {
-      type: Array,
-      validate: Spec.arrayOf(Spec.string)
+    optional: {
+      label: Spec.string,
+      name: Spec.string,
+      id: Spec.string,
+      grow: Spec.float,
     }
-  },
+  }),
 
   render(props) {
     return renderChoice(props)

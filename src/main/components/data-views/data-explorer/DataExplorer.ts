@@ -17,21 +17,18 @@ const REGEX_NAME = /^[a-z][a-zA-Z0-9]+/
 const DataExplorer = defineComponent<DataExplorerProps>({
   displayName: 'DataExplorer',
 
-  properties: {
-    title: {
-      type: String
-    },
+  validate: Spec.exactProps({
+    required: {
+      actions:
+        Spec.arrayOf(
+          Spec.and(
+            Spec.exact({
+              type: Spec.oneOf('default', 'singleRow', 'multiRow'),
+              text: Spec.string,
+              icon: Spec.optional(isNode)
+            }))),
 
-    loadData: {
-      type: Function,
-      required: true
-    },
-
-    columns: {
-      type: Array,
-      required: true,
-
-      validate:
+      columns:
         Spec.arrayOf(
           Spec.exact({
             type: Spec.is('column'),
@@ -40,39 +37,28 @@ const DataExplorer = defineComponent<DataExplorerProps>({
             align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
             sortable: Spec.optional(Spec.boolean),
             width: Spec.optional(Spec.integer)
-          })
-        )
+          })),
+
+      loadData: Spec.function
     },
 
-    actions: {
-      type: Array,
-      required: true,
+    optional: {
+      title: Spec.string,
 
-      validate:
-        Spec.arrayOf(
-          Spec.and(
-            Spec.exact({
-              type: Spec.oneOf('default', 'singleRow', 'multiRow'),
-              text: Spec.string,
-              icon: Spec.optional(isNode)
-            })))
-    },
-
-    search: {
-      type: Object,
-      validate: Spec.nullable(
-        Spec.lazy(() =>
-          Spec.or(
-            {
-              when: Spec.prop('type', Spec.is('default')),
-              then: specDefaultSearch 
-            },
-            {
-              when: Spec.prop('type', Spec.is('sections')),
-              then: specFilterSections
-            })))
+      search:
+        Spec.nullable(
+          Spec.lazy(() =>
+            Spec.or(
+              {
+                when: Spec.prop('type', Spec.is('default')),
+                then: specDefaultSearch 
+              },
+              {
+                when: Spec.prop('type', Spec.is('sections')),
+                then: specFilterSections
+              })))
     }
-  },
+  }),
 
   render(props) {
     const store = useStore(createDataExplorerStore)

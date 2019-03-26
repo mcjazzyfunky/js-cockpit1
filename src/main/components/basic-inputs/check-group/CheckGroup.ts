@@ -11,32 +11,25 @@ import renderCheckGroup from './view/renderCheckGroup'
 const CheckGroup = defineComponent<CheckGroupProps>({
   displayName: 'CheckGroup',
 
-  properties: {
-    label: {
-      type: String
+  validate: Spec.exactProps({
+    required: {
+      options: 
+        Spec.arrayOf(
+          Spec.exact({
+            key: Spec.string,
+            text: Spec.string
+          }))
     },
 
-    name: {
-      type: String
-    },
+    optional: {
+      label: Spec.string,
+      name: Spec.string,
+      selectedKeys: Spec.arrayOf(Spec.string),
+      orientation: Spec.oneOf('horizontal', 'vertical'),
+      grow: Spec.number,
 
-    selectedKeys: {
-      type: Array,
-      validate: Spec.arrayOf(Spec.string)
-    },
-
-    orientation: {
-      type: String
-    },
-
-    grow: {
-      type: Number
-    },
-
-    options: {
-      type: Array
     }
-  },
+  }),
 
   render(props) {
     return renderCheckGroup(props)

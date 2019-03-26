@@ -10,23 +10,20 @@ import renderDataForm from './view/renderDataForm'
 import useForceUpdate from '../../../hooks/useForceUpdate'
 
 // derived imports
-const { useEffect, useState } = React
+const { useState } = React
 
 // --- DataForm -----------------------------------------------------
 
 const DataForm = defineComponent<DataFormProps>({
   displayName: 'DataForm',
 
-  properties: {
-    title: {
-      type: String,
-      required: true
+  validate: Spec.exactProps({
+    required: {
+      title: Spec.string
     },
 
-    actions: {
-      type: Array,
-
-      validate:
+    optional: {
+      actions:
         Spec.arrayOf(
           Spec.and(
             Spec.prop('type', Spec.oneOf('default')),
@@ -39,24 +36,16 @@ const DataForm = defineComponent<DataFormProps>({
                   text: Spec.string,
                   icon: Spec.optional(isNode)
                 })
-            })
-          )
-        )
-    },
+            }))),
 
-    compact: {
-      type: Boolean,
-      defaultValue: false
-    },
-
-    onClose: {
-      type: Function
-    },
-
-    children: {
-      validate:
-        withChildren(isNode)
+      compact: Spec.boolean,
+      onClose: Spec.function,
+      children: withChildren(isNode)
     }
+  }),
+
+  defaultProps: {
+    compact: true
   },
 
   render(props) {

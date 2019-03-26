@@ -10,24 +10,15 @@ import renderDateInput from './view/renderDateInput'
 
 const DateInput = defineComponent<DateInputProps>({
   displayName: 'DateInput',
-
-  properties: {
-    label: {
-      type: String
-    },
-
-    name: {
-      type: String
-    },
-
-    id: {
-      type: String
-    },
-
-    grow: {
-      type: Number
+  
+  validate: Spec.exactProps({
+    optional: {
+      label: Spec.string,
+      name: Spec.string,
+      id: Spec.string,
+      grow: Spec.float
     }
-  },
+  }),
 
   render(props) {
     return renderDateInput(props)

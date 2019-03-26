@@ -23,8 +23,8 @@ const styleLoginForm = defineStyle(theme => ({
     position: 'absolute',
 
     selectors: {
-      '& > *': {
-        borderRadius: '6px'
+      '& > div > *': {
+        borderRadius: '8px'
       },
 
       '& [data-component="LoginForm:inner"]': {

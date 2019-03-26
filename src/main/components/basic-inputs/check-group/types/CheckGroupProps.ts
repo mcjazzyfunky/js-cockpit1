@@ -6,7 +6,7 @@ type CheckGroupProps = {
   selectedKeys?: string[],
   orientation?: 'horizontal' | 'vertical',
   grow?: number,
-  options?: Option[]
+  options: Option[]
 }
 
 // --- locals -------------------------------------------------------

@@ -79,7 +79,7 @@
   "dependencies": {
     "color": "^3.1.0",
     "js-react-utils": "0.0.51",
-    "js-spec": "^0.1.64",
+    "js-spec": "^0.1.66",
     "office-ui-fabric-react": "^6.157.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

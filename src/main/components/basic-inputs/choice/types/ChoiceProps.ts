@@ -5,7 +5,7 @@ type ChoiceProps = {
   label?: string,
   id?: string,
   grow?: number,
-  options?: Option[]
+  options: Option[]
 }
 
 // --- locals -------------------------------------------------------

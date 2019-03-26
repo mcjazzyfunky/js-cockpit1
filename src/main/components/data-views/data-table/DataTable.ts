@@ -13,45 +13,11 @@ import renderDataTable from './view/renderDataTable'
 const DataTable = defineComponent<DataTableProps, DataTableMethods>({
   displayName: 'DataTable',
 
-  properties: {
-    title: {
-      type: String,
-      validate: Spec.nullable(Spec.string)
-    },
+  validate: Spec.exactProps({
+    required: {
+      data: Spec.arrayOf(Spec.object),
 
-    rowSelectionOptions: {
-      type: Object,
-
-      validate:
-        Spec.nullable(
-          Spec.exact({
-            mode: Spec.oneOf('none', 'single', 'multi')
-          })),
-
-      defaultValue: { mode:  'none' }
-    },
-
-    sortBy: {
-      type: String,
-      nullable: true
-    },
-
-    sortDir: {
-      type: String,
-      validate: Spec.oneOf('asc', 'desc') 
-    },
-
-    data: {
-      type: Array,
-      required: true,
-      validate: Spec.arrayOf(Spec.object),
-    },
-
-    columns: {
-      type: Array,
-      required: true,
-
-      validate:
+      columns:
         Spec.arrayOf(
           Spec.exact({
             title: Spec.string, 
@@ -59,20 +25,28 @@ const DataTable = defineComponent<DataTableProps, DataTableMethods>({
             align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
             width: Spec.nullableOptional(Spec.positiveFloat),
             sortable: Spec.optional(Spec.boolean)
-          })
-        ) 
+          }))
     },
 
-    onRowSelectionChange: {
-      type: Function
-    },
+    optional: {
+      title: Spec.nullable(Spec.string),
+      sortBy: Spec.nullable(Spec.string),
+      sortDir: Spec.oneOf('asc', 'desc'),
 
-    onSortChange: {
-      type: Function
-    }
+      rowSelectionOption:
+        Spec.nullable(
+          Spec.exact({
+            mode: Spec.oneOf('none', 'single', 'multi')
+          })),
+
+      onRowSelectionChange: Spec.function,
+      onSortChange: Spec.function
+    },
+  }),
+
+  defaultProps: {
+    rowSelectionOptions: { mode:  'none' }
   },
-
-  methods: ['unselectAllRows'],
 
   render(props, ref) {
     return renderDataTable(props, ref)
