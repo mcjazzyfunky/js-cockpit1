@@ -126,7 +126,7 @@ const styleLoginForm = defineStyle(theme => ({
 
       '& > :nth-child(2)': {
         display: 'table-cell',
-        padding: '2px',
+        padding: '3px',
         width: '100%',
       },
     }

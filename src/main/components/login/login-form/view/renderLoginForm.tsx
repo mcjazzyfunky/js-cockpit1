@@ -266,7 +266,10 @@ function renderExtraFields(props: LoginFormProps, classes: LoginFormCssClasses) 
 
         case 'choice':
           field =
-            <LoginFormChoice />
+            <LoginFormChoice
+              options={extraField.options}
+              defaultValue={extraField.defaultValue}
+            />
           break
       }
 
@@ -308,12 +311,19 @@ function LoginFormChoice({
   value = '',
   disabled = false,
   errorMsg = '',
+  defaultValue = '',
   onChange = null as any,
   options = null as any
 }) {
   return (
     <Dropdown
-      options={[]}
+      defaultSelectedKey={defaultValue}
+      options={
+        options.map((option: any) => ({
+          key: option.value,
+          text: option.text
+        }))
+      }
     />
   )
 }
