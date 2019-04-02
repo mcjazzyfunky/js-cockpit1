@@ -459,7 +459,7 @@ function Demo() {
       }
     />
 
-  return loginScreen 
+  return loginScreen
 }
 
 function fakeData(count: number) {

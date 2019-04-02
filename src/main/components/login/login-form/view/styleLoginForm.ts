@@ -5,11 +5,19 @@ import defineStyle from '../../../../styling/defineStyle'
 
 const styleLoginForm = defineStyle(theme => ({
   container: {
-    backgroundColor: theme.palette.white,
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralSecondary,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'relative',
+
+    selectors: {
+      '& > div > [class^=card]': {
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: theme.palette.neutralTertiaryAlt,
+      }
+    }
   },
 
   containerFullSize: {
@@ -21,20 +29,17 @@ const styleLoginForm = defineStyle(theme => ({
     height: '100%',
     backgroundColor: theme.palette.neutralLight,
     position: 'absolute',
+    overflow: 'auto',
 
     selectors: {
       '& > div > *': {
         borderRadius: '8px'
       },
-
-      '& [data-component="LoginForm:inner"]': {
-       //marginTop: '-5%',
-      }
     }
   },
 
   inner: {
-    display: 'flex',
+    display: 'block',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -43,7 +48,6 @@ const styleLoginForm = defineStyle(theme => ({
 
   card: {
     backgroundColor: theme.palette.white,
-    //display: 'flex',
     minWidth: '350px',
     flexDirection: 'column',
     minHeight: '130px',
@@ -138,11 +142,12 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   above: {
+    display: 'flex',
+    justifyContent: 'center',
     fontSize: theme.fonts.mediumPlus.fontSize,
     fontFamily: theme.fonts.mediumPlus.fontFamily,
     color: theme.palette.neutralSecondary,
     padding: '1.25rem 0',
-    textAlign: 'center',
   },
 
   below: {

@@ -93,6 +93,7 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       flexGrow: 1,
       display: 'flex',
       flexDirection: 'row',
+      position: 'relative',
     },
 
     sidebar: {
