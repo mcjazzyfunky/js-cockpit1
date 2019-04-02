@@ -163,7 +163,6 @@ function Demo() {
       slotCenter={
         <LoginForm
           fullSize={true}
-          
           extraFields={[
             {
               type: 'text',
@@ -189,6 +188,8 @@ function Demo() {
                 { value: 'de', text: 'German' }
               ]
             }
+            /*
+            */
           ]}
          
           slotAbove={

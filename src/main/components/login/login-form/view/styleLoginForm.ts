@@ -107,15 +107,19 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   fields: {
+    display: 'block',
+  },
+  
+  fieldsWithHorizontalLabel: {
     display: 'table',
     flexGrow: 1,
-  },
-
-  field: {
-    display: 'table-row',
-
+    
     selectors: {
-      '& > :first-child': {
+      '& > div': {
+        display: 'table-row'
+      },
+    
+      '& > div > :first-child': {
         display: 'table-cell',
         padding: '3px 1rem 4px 2px',
         textAlign: 'right',
@@ -124,9 +128,10 @@ const styleLoginForm = defineStyle(theme => ({
         verticalAlign: 'top',
       },
 
-      '& > :nth-child(2)': {
+      '& > div > :nth-child(2)': {
         display: 'table-cell',
         padding: '3px',
+        minWidth: '250px',
         width: '100%',
       },
     }

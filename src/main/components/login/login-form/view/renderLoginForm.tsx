@@ -159,8 +159,8 @@ function renderLoginForm(props: LoginFormProps) {
             {headerBox}
             <form onSubmit={onSubmit} className={classes.form}>
               <div className={classes.content}>
-                <div className={classes.fields}>
-                  <div className={classes.field}>
+                <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
+                  <div>
                     <div>
                       <Label>User name</Label>
                     </div>
@@ -185,7 +185,7 @@ function renderLoginForm(props: LoginFormProps) {
                     </div>
                   </div>
 
-                  <div className={classes.field}>
+                  <div>
                     <div>
                       <Label>Password</Label>
                     </div>
@@ -274,7 +274,7 @@ function renderExtraFields(props: LoginFormProps, classes: LoginFormCssClasses) 
       }
 
       return (
-        <div className={classes.field}>
+        <div>
           <div>
             <Label>{extraField.label}</Label>
           </div>
