@@ -28,7 +28,7 @@ const styleLoginForm = defineStyle(theme => ({
       },
 
       '& [data-component="LoginForm:inner"]': {
-        //marginTop: '-5%',
+       //marginTop: '-5%',
       }
     }
   },
@@ -39,15 +39,14 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    marginBottom: '5%'
   },
 
   card: {
     backgroundColor: theme.palette.white,
-    display: 'flex',
-    width: '350px',
+    //display: 'flex',
+    minWidth: '350px',
     flexDirection: 'column',
-    minHeight: '430px',
+    minHeight: '130px',
     textAlign: 'left',
   },
 
@@ -81,11 +80,6 @@ const styleLoginForm = defineStyle(theme => ({
     color: theme.palette.themePrimary,
   },
 
-  content: {
-    flexGrow: 1,
-    padding: '1rem 1.5rem',
-  },
-
   footer: {
     padding: '1rem 1.5rem',
   },
@@ -95,7 +89,7 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   generalError: {
-    marginTop: '2rem',
+    margin: '0.5rem 0',
     color: theme.semanticColors.errorText
   },
 
@@ -106,6 +100,36 @@ const styleLoginForm = defineStyle(theme => ({
   loadingIndicator: {
     display: 'inline-block',
     margin: '0 0 0 0.75rem',
+  },
+
+  content: {
+    padding: '1rem 1.5rem 0 1.5rem',
+  },
+
+  fields: {
+    display: 'table',
+    flexGrow: 1,
+  },
+
+  field: {
+    display: 'table-row',
+
+    selectors: {
+      '& > :first-child': {
+        display: 'table-cell',
+        padding: '3px 1rem 4px 2px',
+        textAlign: 'right',
+        whiteSpace: 'nowrap',
+        width: '0%',
+        verticalAlign: 'top',
+      },
+
+      '& > :nth-child(2)': {
+        display: 'table-cell',
+        padding: '2px',
+        width: '100%',
+      },
+    }
   },
 
   above: {

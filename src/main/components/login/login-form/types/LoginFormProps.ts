@@ -5,13 +5,38 @@ import { CSSProperties, ReactNode } from 'react'
 
 type LoginFormProps = {
   fullSize?: boolean,
+
   performLogin?:
     (params: { username: string, password: string, remember: boolean }) =>
-      Promise<{ fullName: string }> | null
+      Promise<{ fullName: string }> | null,
+
+  slotHeader?: ReactNode,
+  slotAbove?: ReactNode,
+  slotBelow?: ReactNode,
 
   className?: string | null,
   style?: CSSProperties | null,
-  children?: ReactNode // TODO
+
+  extraFields?: (
+    {
+      type: 'text',
+      key: string,
+      label: string,
+      defaultValue?: string
+    }
+    |
+    {
+      type: 'choice',
+      key: string,
+      label: string,
+      defaultValue?: string
+      
+      options: {
+        value: string,
+        text: string
+      }[]
+    }
+  )[],
 }
 
 // --- exports ------------------------------------------------------

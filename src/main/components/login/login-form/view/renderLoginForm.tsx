@@ -1,12 +1,13 @@
 // external imports
 import React, { ReactNode, ReactElement } from 'react'
-import { Checkbox, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
+import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, TextField, Dropdown } from 'office-ui-fabric-react'
 //import { IoIosContact as DefaultIcon } from 'react-icons/io'
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
 import styleLoginForm from './styleLoginForm'
 import LoginFormProps from '../types/LoginFormProps'
+import CssClassesOf from '../../../../styling/types/CssClassesOf';
 
 // --- renderLoginForm ----------------------------------------------
 
@@ -109,34 +110,15 @@ function renderLoginForm(props: LoginFormProps) {
         : 'Log in'
 
     let
-      header: ReactElement<any> | null = null, // TODO
-      above: ReactElement<any> | null = null, // TODO
-      below: ReactElement<any> | null = null, // TODO
       headerBox: ReactNode | null = null,
       aboveBox: ReactNode | null = null,
       belowBox: ReactNode | null = null
 
-    React.Children.forEach(props.children, (child: any) => {
-      switch (child.type.displayName) {
-        case 'LoginForm.Header':
-          header = child
-          break
-        
-        case 'LoginForm.Above':
-          above = child
-          break
-        
-        case 'LoginForm.Below':
-          below = child
-          break
-      }
-    })
-
     return styleLoginForm(classes => { // TODO
-      if (header) {
+      if (props.slotHeader) {
         headerBox =
           <div className={classes.header}>
-            { header.props.children }
+            { props.slotHeader }
           </div>
       } else {
         headerBox =
@@ -146,17 +128,17 @@ function renderLoginForm(props: LoginFormProps) {
           </div>
       }
 
-      if (above) {
+      if (props.slotAbove) {
         aboveBox = 
           <div className={classes.above}>
-            {above.props.children} 
+            {props.slotAbove} 
           </div>
       }
       
-      if (below) {
+      if (props.slotBelow) {
         belowBox = 
           <div className={classes.below}>
-            {below.props.children}
+            {props.slotBelow}
           </div>
       }
 
@@ -177,42 +159,66 @@ function renderLoginForm(props: LoginFormProps) {
             {headerBox}
             <form onSubmit={onSubmit} className={classes.form}>
               <div className={classes.content}>
-                <TextField
-                  name="username"
-                  label="User name"
-                  autoComplete="off"
-                  disabled={state.loading}
-                  value={state.username}
-                  errorMessage={state.usernameErrorMsg}
+                <div className={classes.fields}>
+                  <div className={classes.field}>
+                    <div>
+                      <Label>User name</Label>
+                    </div>
+                    <div>
+                      <LoginFormTextField
+                        name="username"
+                        disabled={state.loading}
+                        value={state.username}
+                        errorMsg={state.usernameErrorMsg}
 
-                  onChange={
-                    event => setState({
-                      ...state,
-                      username: (event.target as any).value,
-                      usernameErrorMsg: '',
-                      passwordErrorMsg: '',
-                      generalErrorMsg: ''
-                    })
-                  }
-                />
-                <TextField
-                  name="password"
-                  label="Password"
-                  type="password"
-                  disabled={state.loading}
-                  value={state.password}
-                  errorMessage={state.passwordErrorMsg}
-                  
-                  onChange={
-                    event => setState({
-                      ...state,
-                      password: (event.target as any).value,
-                      usernameErrorMsg: '',
-                      passwordErrorMsg: '',
-                      generalErrorMsg: ''
-                    })
-                  }
-                />
+              /*
+                        onChange={
+                          (event: any) => setState({
+                            ...state,
+                            username: (event.target as any).value,
+                            usernameErrorMsg: '',
+                            passwordErrorMsg: '',
+                            generalErrorMsg: ''
+                          })
+            */
+                      />
+                    </div>
+                  </div>
+
+                  <div className={classes.field}>
+                    <div>
+                      <Label>Password</Label>
+                    </div>
+                    <div>
+                      <LoginFormTextField
+                        name="password"
+                        label="Password"
+                        isPassword={true}
+                        disabled={state.loading}
+                        value={state.password}
+                        errorMsg={state.passwordErrorMsg}
+
+              /*
+                        onChange={
+                          event => setState({
+                            ...state,
+                            password: (event.target as any).value,
+                            usernameErrorMsg: '',
+                            passwordErrorMsg: '',
+                            generalErrorMsg: ''
+                          })
+                        }
+            */
+                      />
+                    </div>
+                  </div>
+                  {renderExtraFields(props, classes)}
+                </div>
+                <div className={classes.generalError}>
+                    {state.generalErrorMsg}
+                </div>
+              </div>
+              <div className={classes.footer}>
                 <Checkbox
                   name="remember"
                   label="Remember me"
@@ -226,11 +232,7 @@ function renderLoginForm(props: LoginFormProps) {
                     })
                   }
                 />
-                <div className={classes.generalError}>
-                    {state.generalErrorMsg}
-                </div>
-              </div>
-              <div className={classes.footer}>
+                <br/>
                 <PrimaryButton type="submit" className={classes.submitButton}>
                   {loginButtonText}
                   {loadingIndicator}
@@ -244,6 +246,78 @@ function renderLoginForm(props: LoginFormProps) {
       )
     })
 }
+
+// --- locals -------------------------------------------------------
+
+type LoginFormCssClasses = CssClassesOf<typeof styleLoginForm>
+
+function renderExtraFields(props: LoginFormProps, classes: LoginFormCssClasses) {
+  let ret: ReactNode = null
+
+  if (props.extraFields && props.extraFields.length > 0) {
+    const fields = props.extraFields.map((extraField, idx) => {
+      let field: ReactNode | undefined
+
+      switch (extraField.type) {
+        case 'text':
+          field =
+            <LoginFormTextField />
+          break
+
+        case 'choice':
+          field =
+            <LoginFormChoice />
+          break
+      }
+
+      return (
+        <div className={classes.field}>
+          <div>
+            <Label>{extraField.label}</Label>
+          </div>
+          <div>
+            {field}
+          </div>
+        </div>
+      ) 
+    })
+
+    ret = <>{...fields}</>
+  }
+
+  return ret
+}
+
+function LoginFormTextField({
+  name = '',
+  label = '',
+  value = '',
+  disabled = false,
+  errorMsg = '',
+  isPassword = false,
+  onChange = null as any
+}) {
+  return (
+     <TextField/>
+  )
+}
+
+function LoginFormChoice({
+  name = '',
+  label = '',
+  value = '',
+  disabled = false,
+  errorMsg = '',
+  onChange = null as any,
+  options = null as any
+}) {
+  return (
+    <Dropdown
+      options={[]}
+    />
+  )
+}
+
 
 // --- exports ------------------------------------------------------
 

@@ -79,7 +79,7 @@ const menuBar =
         ]
       }
     ]}
-    />
+  />
 
 const appMenu = 
   <AppMenu
@@ -139,15 +139,16 @@ const verticalMenu =
 
 function Demo() {
   const loginScreen =
-    <Cockpit>
-      <Cockpit.Brand>
+    <Cockpit
+      slotBrand={
         <Brand
           vendor="meet+greet"
           title="Back office"
           size="medium"
         />
-      </Cockpit.Brand>
-      <Cockpit.TopNav>
+      }
+
+      slotTopNav={
         <AppMenu
           apps={[
             {
@@ -157,22 +158,53 @@ function Demo() {
             }
           ]}
         />
-      </Cockpit.TopNav>
-      <Cockpit.Center>
-        <LoginForm fullSize={true}>
-          <LoginForm.Above>
+      }
+
+      slotCenter={
+        <LoginForm
+          fullSize={true}
+          
+          extraFields={[
+            {
+              type: 'text',
+              key: 'host',
+              label: 'Host',
+              defaultValue: 'hhh'
+            },
+            {
+              type: 'text',
+              key: 'client',
+              label: 'Client',
+              defaultValue: 'ccc'
+            },
+            {
+              type: 'choice',
+              key: 'langage',
+              label: 'Language',
+              defaultValue: 'en',
+
+              options: [
+                { value: 'en', text: 'English' },
+                { value: 'fr', text: 'France' },
+                { value: 'de', text: 'German' }
+              ]
+            }
+          ]}
+         
+          slotAbove={
             <Brand
               vendor="meet+greet"
               title="Back office"
               size="huge"
             />
-          </LoginForm.Above>
-          <LoginForm.Below>
-            &copy; 2019, meet+greet
-          </LoginForm.Below>
-        </LoginForm>
-      </Cockpit.Center>
-    </Cockpit>
+          }
+
+          slotBelow={
+            <div>&copy; 2019, meet+greet</div>
+          }
+        />
+      }
+    />
 
   const dataExplorer =
     <DataExplorer
@@ -392,34 +424,41 @@ function Demo() {
     </DataForm>
 
   const cockpit =
-    <Cockpit>
-      <Cockpit.Brand>
+    <Cockpit
+      slotBrand={
         <Brand
           vendor="meet+greet"
           title="Back Office"
         />
-      </Cockpit.Brand>
-      <Cockpit.TopNav>
-        {appMenu}
-      </Cockpit.TopNav>
-      <Cockpit.UserNav>
-        <UserMenu
-          fullName="Jane Doe"
-        />
-        <LogoutButton/>
-      </Cockpit.UserNav>
-      <Cockpit.Menu>
-        {menuBar}
-      </Cockpit.Menu>
-      <Cockpit.Sidebar>
-        {verticalMenu}
-      </Cockpit.Sidebar>
-      <Cockpit.Center style={{ padding: '5px' }}>
-        {dataExplorer}
-      </Cockpit.Center>
-    </Cockpit>
+      }
 
-  return cockpit 
+      slotTopNav={
+        appMenu
+      }
+
+      slotUserNav={
+        <>
+          <UserMenu
+            fullName="Jane Doe"
+          />
+          <LogoutButton/>
+        </>
+      }
+
+      slotMenu={
+        menuBar 
+      }
+
+      slotSidebar={
+        verticalMenu
+      }
+
+      slotCenter={
+        dataExplorer
+      }
+    />
+
+  return loginScreen 
 }
 
 function fakeData(count: number) {

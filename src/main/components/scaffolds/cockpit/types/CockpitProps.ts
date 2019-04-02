@@ -4,7 +4,12 @@ import { ReactNode } from 'react'
 // --- CockpitProps -------------------------------------------
 
 type CockpitProps = {
-  children?: ReactNode // TODO
+  slotBrand?: ReactNode,
+  slotTopNav?: ReactNode,
+  slotUserNav?: ReactNode,
+  slotMenu?: ReactNode,
+  slotSidebar?: ReactNode,
+  slotCenter?: ReactNode
 }
 
 // --- exports ------------------------------------------------------

@@ -5,96 +5,69 @@ import { Spec } from 'js-spec'
 // internal imports
 import renderLoginForm from './view/renderLoginForm'
 import LoginFormProps from './types/LoginFormProps' 
-import LoginFormHeaderProps from './types/LoginFormHeaderProps'
-import LoginFormAboveProps from './types/LoginFormAboveProps'
-import LoginFormBelowProps from './types/LoginFormBelowProps'
-
-// --- LoginForm.Header ---------------------------------------------
-
-const Header = defineComponent<LoginFormHeaderProps>({
-  displayName: 'LoginForm.Header',
-
-  properties: {
-    children: {
-      validate: isNode
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type LoginForm.Header can only be used as children '
-        + 'of LoginForm components')
-  }
-})
-
-// --- LoginForm.Above ----------------------------------------------
-
-const Above = defineComponent<LoginFormAboveProps>({
-  displayName: 'LoginForm.Above',
-
-  properties: {
-    children: {
-      validate: isNode
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type LoginForm.Above can only be used as children '
-        + 'of LoginForm components')
-  }
-})
-
-// --- LoginForm.Below ----------------------------------------------
-
-const Below = defineComponent<LoginFormBelowProps>({
-  displayName: 'LoginForm.Below',
-
-  properties: {
-    children: {
-      validate: isNode
-    }
-  },
-
-  render() {
-    throw new Error(
-      'Components of type LoginForm.Below can only be used as children '
-        + 'of LoginForm components')
-  }
-})
 
 // --- LoginForm ----------------------------------------------------
 
 const LoginForm = defineComponent<LoginFormProps>({
   displayName: 'LoginForm',
 
-  properties: {
-    performLogin: {
-      type: Function,
-      nullable: true
-    },
+  validate: Spec.exactProps({
+    optional: {
+      performLogin:
+        Spec.nullable(Spec.function),
+      
+      fullSize:
+        Spec.boolean,
 
-    fullSize: {
-      type: Boolean
-    },
+      extraFields:
+        Spec.arrayOf(
+          Spec.and(
+            Spec.prop('type', Spec.oneOf('text', 'choice')),
 
-    className: {
-      type: String,
-      nullable: true,
-      defaultValue: null
-    },
+            Spec.or(
+              {
+                when: Spec.prop('type', Spec.is('text')),
+  
+                then:
+                  Spec.exact({
+                    type: Spec.is('text'),
+                    key: Spec.string,
+                    label: Spec.string,
+                    defaultValue: Spec.optional(Spec.string)
+                  })
+              },
+              {
+                when: Spec.prop('type', Spec.is('choice')),
 
-    style: {
-      type: Object,
-      nullable: true,
-      defaultValue: null
-    },
+                then:
+                  Spec.exact({
+                    type: Spec.is('choice'),
+                    key: Spec.string,
+                    label: Spec.string,
+                    defaultValue: Spec.string,
 
-    children: {
-      validate:
-        withChildren(Spec.all(isElementOfType([Header, Above, Below])))
+                    options: Spec.arrayOf(
+                      Spec.exact({
+                        value: Spec.string,
+                        text: Spec.string
+                      })
+                    )
+                  })
+              })
+          )
+        ),
+      
+      className:
+        Spec.nullable(Spec.string),
+      
+      style:
+        Spec.nullable(Spec.object),
+
+      slotHeader: isNode,
+      slotAbove: isNode,
+      slotBelow: isNode
     }
-  }, 
+  }),
 
   render(props) {
     return renderLoginForm(props)
@@ -103,8 +76,4 @@ const LoginForm = defineComponent<LoginFormProps>({
 
 // --- exports ------------------------------------------------------
 
-export default Object.assign(LoginForm, {
-  Header,
-  Above,
-  Below
-})
+export default LoginForm
