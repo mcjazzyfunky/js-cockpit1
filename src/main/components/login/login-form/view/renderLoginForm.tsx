@@ -1,5 +1,5 @@
 // external imports
-import React, { ReactNode, ReactElement } from 'react'
+import React, { ReactNode, ReactElement, FormEvent } from 'react'
 import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, TextField, Dropdown } from 'office-ui-fabric-react'
 //import { IoIosContact as DefaultIcon } from 'react-icons/io'
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
@@ -7,112 +7,24 @@ import { IoMdContact as DefaultIcon } from 'react-icons/io'
 // internal imports
 import styleLoginForm from './styleLoginForm'
 import LoginFormProps from '../types/LoginFormProps'
+import LoginFormStore from '../types/LoginFormStore'
 import CssClassesOf from '../../../../styling/types/CssClassesOf';
+
+// derived imports
+const { useCallback } = React
 
 // --- renderLoginForm ----------------------------------------------
 
-function renderLoginForm(props: LoginFormProps) {
-  const
-    [state, setState] = React.useState(() => ({
-      username: '',
-      password: '',
-      remember: false,
-      usernameErrorMsg: '',
-      passwordErrorMsg: '',
-      generalErrorMsg: '',
-      loading: false
-    })),
-
-    onSubmit = React.useCallback((ev: any) => {
-      ev.preventDefault()
-
-      const
-        usernameGiven = state.username.trim().length > 0,
-        passwordGiven = state.password.trim().length > 0
-
-      if (!usernameGiven || !passwordGiven) {
-        setState({
-          ...state,
-          usernameErrorMsg:
-            usernameGiven ? '' : 'Please enter username',
-
-          passwordErrorMsg:
-            passwordGiven ? '' : 'Please enter password',
-
-          generalErrorMsg: ''
-        })
-      } else if (typeof props.performLogin === 'function' && !state.loading) {
-        setState({
-          ...state,
-          generalErrorMsg: '',
-          loading: true
-        })
-
-        const loginParams = {
-          username: state.username,
-          password: state.password,
-          remember: state.remember
-        }
-
-        if (props.performLogin) {
-          setTimeout(() => {
-            try {
-              (props as any).performLogin(loginParams)
-                .then((result: any) => {
-                  if (result
-                    && typeof result.fullName === 'string'
-                    && result.fullName.trim() !== '') {
-                    
-                    setState(
-                      { ...state, loading: false })
-  // TODO                () => setTimeout(
-  // TODO                      () => alert(result.fullName + ' has been logged in successfully'), 100))
-                  } else {
-                    setState({
-                      ...state,
-                      loading: false,
-                      generalErrorMsg: 'Error: Could not log in'
-                    })
-                  }
-                })
-                .catch((error: Error | string) => {
-                  let errorMsg = ''
-
-                  if (error instanceof Error) {
-                    errorMsg = 'Error: ' + String(error.message).trim()
-                  } else if (typeof error === 'string' && error.trim() !== '') {
-                    errorMsg = 'Error: ' + error 
-                  } else {
-                    errorMsg = 'Error: Could not log in'
-                  }
-
-                  setState({
-                    ...state,
-                    loading: false,
-                    generalErrorMsg: errorMsg
-                  })
-                })
-            } catch (e) {
-              setState({
-                ...state,
-                loading: false,
-                generalErrorMsg: 'Error: Could not log in'
-              })
-            }
-          }, 1000)
-        }
-      }
-    }, []),
-
-    loginButtonText =
-      state.loading
-        ? 'Logging in...'
-        : 'Log in'
-
+function renderLoginForm(props: LoginFormProps, store: LoginFormStore) {
     let
       headerBox: ReactNode | null = null,
       aboveBox: ReactNode | null = null,
       belowBox: ReactNode | null = null
+
+    const onSubmit = useCallback((ev: FormEvent) => {
+      ev.preventDefault()
+      store.performLogin(null as any)
+    }, [])
 
     return styleLoginForm(classes => { // TODO
       if (props.slotHeader) {
@@ -142,14 +54,17 @@ function renderLoginForm(props: LoginFormProps) {
           </div>
       }
 
-      const loadingIndicator =
-        state.loading
-          ? <div className={classes.loadingIndicator}>
-              <Spinner
-                size={SpinnerSize.small}
-              />
-            </div>
-          : null
+      const
+        loginButtonText = store.isLoading() ? 'Logging in...' : 'Login',
+  
+        loadingIndicator =
+          store.isLoading()
+            ? <div className={classes.loadingIndicator}>
+                <Spinner
+                  size={SpinnerSize.small}
+                />
+              </div>
+            : null
 
       return (
         <div className={props.fullSize ? classes.containerFullSize : classes.container}>
@@ -166,21 +81,10 @@ function renderLoginForm(props: LoginFormProps) {
                     </div>
                     <div>
                       <LoginFormTextField
-                        name="username"
-                        disabled={state.loading}
-                        value={state.username}
-                        errorMsg={state.usernameErrorMsg}
-
-              /*
-                        onChange={
-                          (event: any) => setState({
-                            ...state,
-                            username: (event.target as any).value,
-                            usernameErrorMsg: '',
-                            passwordErrorMsg: '',
-                            generalErrorMsg: ''
-                          })
-            */
+                        field="username"
+                        label="User name"
+                        store={store}
+                        isPassword={false}
                       />
                     </div>
                   </div>
@@ -191,31 +95,17 @@ function renderLoginForm(props: LoginFormProps) {
                     </div>
                     <div>
                       <LoginFormTextField
-                        name="password"
+                        field="password"
                         label="Password"
+                        store={store}
                         isPassword={true}
-                        disabled={state.loading}
-                        value={state.password}
-                        errorMsg={state.passwordErrorMsg}
-
-              /*
-                        onChange={
-                          event => setState({
-                            ...state,
-                            password: (event.target as any).value,
-                            usernameErrorMsg: '',
-                            passwordErrorMsg: '',
-                            generalErrorMsg: ''
-                          })
-                        }
-            */
                       />
                     </div>
                   </div>
-                  {renderExtraFields(props, classes)}
+                  {renderExtraFields(props, store, classes)}
                 </div>
                 <div className={classes.generalError}>
-                    {state.generalErrorMsg}
+                    {store.getGeneralErrorMsg()}
                 </div>
               </div>
               <div className={classes.footer}>
@@ -223,14 +113,16 @@ function renderLoginForm(props: LoginFormProps) {
                   name="remember"
                   label="Remember me"
                   className={classes.remember}
-                  disabled={state.loading}
+                  disabled={store.isLoading()}
 
+                  /*
                   onChange={
                     event => setState({
                       ...state,
                       remember: (event!.target as any).checked
                     })
                   }
+                  */
                 />
                 <br/>
                 <PrimaryButton type="submit" className={classes.submitButton}>
@@ -251,7 +143,11 @@ function renderLoginForm(props: LoginFormProps) {
 
 type LoginFormCssClasses = CssClassesOf<typeof styleLoginForm>
 
-function renderExtraFields(props: LoginFormProps, classes: LoginFormCssClasses) {
+function renderExtraFields(
+  props: LoginFormProps,
+  store: LoginFormStore,
+  classes: LoginFormCssClasses
+) {
   let ret: ReactNode = null
 
   if (props.extraFields && props.extraFields.length > 0) {
@@ -261,14 +157,21 @@ function renderExtraFields(props: LoginFormProps, classes: LoginFormCssClasses) 
       switch (extraField.type) {
         case 'text':
           field =
-            <LoginFormTextField />
+            <LoginFormTextField
+              field={extraField.key}
+              label={extraField.label}
+              store={store}
+              isPassword={false}
+            />
           break
 
         case 'choice':
           field =
             <LoginFormChoice
+              field={extraField.key}
+              label={extraField.label}
+              store={store}
               options={extraField.options}
-              defaultValue={extraField.defaultValue}
             />
           break
       }
@@ -291,35 +194,62 @@ function renderExtraFields(props: LoginFormProps, classes: LoginFormCssClasses) 
   return ret
 }
 
-function LoginFormTextField({
-  name = '',
-  label = '',
-  value = '',
-  disabled = false,
-  errorMsg = '',
-  isPassword = false,
-  onChange = null as any
-}) {
+type LoginFormTextFieldProps = {
+  field: string,
+  label: string,
+  isPassword: boolean,
+  store: LoginFormStore
+}
+
+function LoginFormTextField(props: LoginFormTextFieldProps) {
+  const
+    value = props.store.getValue(props.field),
+
+    onChange = useCallback(
+      (ev: any) => props.store.setValue(props.field, ev.target.value),
+      [props.store, props.field]),
+
+    errorMsg =
+      props.store.isValidationActivated() && value === ''
+        ? `Please fill field "${props.label}"`
+        : ''
+
   return (
-     <TextField/>
+     <TextField
+       value={props.store.getValue(props.field)}
+       disabled={props.store.isLoading()}
+       type={props.isPassword ? 'password' : 'text'}
+       errorMessage={errorMsg}
+       onChange={onChange}
+     />
   )
 }
 
-function LoginFormChoice({
-  name = '',
-  label = '',
-  value = '',
-  disabled = false,
-  errorMsg = '',
-  defaultValue = '',
-  onChange = null as any,
-  options = null as any
-}) {
+type LoginFormChoiceProps = {
+  field: string,
+  label: string,
+  options: any, // TODO
+  store: LoginFormStore
+}
+
+function LoginFormChoice(props: LoginFormChoiceProps) {
+  const
+    selectedKey = props.store.getValue(props.field),
+
+    errorMsg =
+      props.store.isValidationActivated()
+        && (selectedKey === null || selectedKey === undefined)
+        ? `Please select "${props.label}"`
+        : ''
+
   return (
     <Dropdown
-      defaultSelectedKey={defaultValue}
+      selectedKey={props.store.getValue(props.field)}
+      disabled={props.store.isLoading()}
+      errorMessage={errorMsg}
+      
       options={
-        options.map((option: any) => ({
+        props.options.map((option: any) => ({
           key: option.value,
           text: option.text
         }))
@@ -327,7 +257,6 @@ function LoginFormChoice({
     />
   )
 }
-
 
 // --- exports ------------------------------------------------------
 
