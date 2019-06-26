@@ -10,8 +10,9 @@ const styleLoginForm = defineStyle(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
+    userSelect: 'none',
 
-    selectors: {
+    selectors: { 
       '& > div > [class^=card]': {
         borderWidth: '1px',
         borderStyle: 'solid',
@@ -23,13 +24,13 @@ const styleLoginForm = defineStyle(theme => ({
   containerFullSize: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '100%',
     backgroundColor: theme.palette.neutralLight,
     position: 'absolute',
     overflow: 'auto',
+    userSelect: 'none',
 
     selectors: {
       '& > div > *': {
@@ -44,6 +45,7 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
+    padding: '10px 0 0 0'
   },
 
   card: {

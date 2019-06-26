@@ -226,8 +226,7 @@ function Demo() {
         { type: 'singleRow', text: 'Edit', icon: <FiEdit/> },
         { type: 'multiRow', text: 'Delete', icon: <FiTrash2/> }
       ]}
-
-      /*
+/*
       search={{
         type: 'filters',
 
@@ -244,8 +243,8 @@ function Demo() {
           }
         ]
       }}
-      */
 
+*/
       search={{
         type: 'section',
 
@@ -285,7 +284,7 @@ function Demo() {
         ]
       }}
 
-/*
+      /*
       search={{
         type: 'default',
 
@@ -447,7 +446,7 @@ function Demo() {
       }
 
       slotMenu={
-        menuBar 
+        null // menuBar 
       }
 
       slotSidebar={
@@ -455,11 +454,12 @@ function Demo() {
       }
 
       slotCenter={
+        // dataForm
         dataExplorer
       }
     />
 
-  return loginScreen
+  return cockpit 
 }
 
 function fakeData(count: number) {

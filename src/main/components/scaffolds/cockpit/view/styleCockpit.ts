@@ -111,7 +111,7 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       display: 'flex',
       alignItems: 'stretch',
       justifyContent: 'stretch',
-      
+
       selectors: {
         '> div': {
           flexGrow: 1
