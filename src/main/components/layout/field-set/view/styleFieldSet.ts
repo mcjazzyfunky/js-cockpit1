@@ -13,14 +13,13 @@ const styleFieldSet = defineStyle(theme => ({
     alignItems: 'stretch',
     flexDirection: 'column',
     padding: '1rem 1rem 0 0.75rem',
-    //border: '1px solid red',
   },
 
   title: {
-    color: theme.palette.neutralSecondaryAlt,
-    fontSize: theme.fonts.smallPlus.fontSize,
-    fontFamily: theme.fonts.smallPlus.fontFamily,
-    fontWeight: 'bold',
+    color: theme.palette.themePrimary,
+    fontSize: theme.fonts.medium.fontSize,
+    fontFamily: theme.fonts.medium.fontFamily,
+    fontWeight: '600',
     padding: '0 0 1rem 0',
   },
 
@@ -48,15 +47,15 @@ const styleFieldSet = defineStyle(theme => ({
       },
 
       '& > tbody > tr > td:first-child': {
-        textAlign: 'right',
-        padding: '3px 0.75rem 0 0',
-        //width: '120px'
+        textAlign: 'left',
+        padding: '0 0.75rem 0 0',
+        width: '120px',
       }
     }
   },
 
   innerLabel: {
-    margin: '3px 0.25rem 0 0.25rem'
+    margin: '3px 0.25rem 0 0.25rem',
   }
 }))
 

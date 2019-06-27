@@ -49,7 +49,7 @@ const styleDataTable = defineStyle(theme => ({
         borderStyle: 'solid',
         fontFamily: theme.fonts.medium.fontFamily,
         fontSize: theme.fonts.medium.fontSize,
-        fontWeight: 'normal',
+        fontWeight: 600,
         textTransform: 'none',
       },
 

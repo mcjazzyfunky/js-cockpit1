@@ -18,7 +18,8 @@ const VerticalMenu = defineComponent<VerticalMenuProps>({
     },
 
     collapsible: {
-      type: Boolean
+      type: Boolean,
+      defaultValue: false
     },
 
     items: {

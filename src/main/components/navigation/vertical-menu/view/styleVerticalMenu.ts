@@ -9,24 +9,52 @@ const styleVerticalMenu = defineStyle(theme => ({
     flexGrow: 1,
     flexDirection: 'column',
     height: '100%',
+    backgroundColor: theme.palette.neutralLight,
+    marginRight: '3px',
+
+    borderWidth: '0 1px 0 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.neutralQuaternary,
+
+    selectors: {
+      '& .ms-Nav-compositeLink': {
+        backgroundColor: 'transparent !important'
+      },
+
+      '& .ms-Nav-compositeLink.is-expanded.is-selected *': {
+        fontWeight: 600,
+        backgroundColor: theme.palette.neutralQuaternaryAlt
+      },
+
+      '& .ms-Nav-group.is-expanded': {
+        borderWidth: '0 0 1px 0',
+        borderColor: theme.palette.neutralTertiary,
+        borderStyle: 'solid'
+      },
+
+      '& .ms-Nav-group.is-expanded:last-child': {
+        borderWidth: 0,
+      },
+
+      '& .ms-Nav-link:hover': {
+        backgroundColor: `${theme.palette.neutralQuaternaryAlt} !important`
+      }
+    }
   },
 
   header: {
     flex: 0,
-    padding: '11px 20px',
-    fontSize: theme.fonts.mediumPlus.fontSize,
-    fontWeight: theme.fonts.medium.fontWeight,
-    fontFamily: theme.fonts.mediumPlus.fontFamily,
-    borderColor: theme.palette.neutralLight,
-    borderStyle: 'solid',
-    borderWidth: '0 0 1px 0',
+    padding: '11px 20px 0 20px',
+    fontSize: theme.fonts.medium.fontSize,
+    fontWeight: 600,
+    fontFamily: theme.fonts.medium.fontFamily,
   },
 
   navigation: {
     flex: 1,
     width: '12rem',
-    padding: '0 8px',
-    margin: '6px',
+    padding: '0 0 0 1px',
+    margin: '8px 0 1px 1px',
     boxSizing: 'border-box',
     borderColor: theme.palette.neutralLight,
     borderWidth: '0 1px 0 0',
@@ -43,38 +71,15 @@ const styleVerticalMenu = defineStyle(theme => ({
         margin: '0 !important',
         marginTop: '0 !important',
       },
-    
-      '.ms-Nav-navItems *': {
-      //  backgroundColor: 'transparent !important',
-      },
 
       '& .ms-Nav-chevronButton': {
-        ...theme.fonts.mediumPlus,
-        //color: theme.palette.neutralDark,
+        fontSize: theme.fonts.mediumPlus.fontSize,
+        fontFamily: theme.fonts.mediumPlus.fontFamily,
         backgroundColor: 'transparent',
-
         borderWidth: '0 0 1px 0',
         borderColor: theme.palette.neutralQuaternaryAlt,
         borderStyle: 'solid',
         marginBottom: '0',
-
-        selectors: {
-          ':hover': {
-            //backgroundColor: theme.palette.neutralLight, 
-          }
-        }
-      },
-
-      '.ms-Nav-compositeLink.is-expanded': {
-        selectors: {
-          ':hover': {
-            //backgroundColor: theme.palette.neutralLight + ' !important',
-          },
-          
-          ':active': {
-            //backgroundColor: theme.palette.neutralQuaternary + ' !important',
-          }
-        }
       },
 
       '.ms-Nav-navItems': {
@@ -82,23 +87,15 @@ const styleVerticalMenu = defineStyle(theme => ({
       },
 
       '.ms-Nav-compositeLink.is-expanded.is-selected': {
-        //backgroundColor: theme.palette.themeLighterAlt + ' !important',
 
         selectors: {
           '*': {
-            //color: theme.palette.black + ' !important',
-            //fontWeight: '600 !important',
             cursor: 'default !important',
           },
 
           '> button:after': {
             borderColor: theme.palette.themeSecondary,
           },
-
-          ':hover *': {
-            //color: theme.palette.black + ' !important',
-            //backgroundColor: theme.palette.themeLighterAlt + ' !important',
-          }
         }
       }
     }

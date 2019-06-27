@@ -154,7 +154,7 @@ function loadThemeByName(name: ThemeName, fontFamilySubstitution: boolean | stri
   let fontFamily: string | null = null
   
   if (fontFamilySubstitution === true) {
-    fontFamily = 'Arial, Helvetica, sans-serif'
+    fontFamily = '"Liberation Sans", Lato, Roboto, Arial, Helvetica, sans-serif'
   } else if (typeof fontFamilySubstitution === 'string') {
     fontFamily = fontFamilySubstitution
   }

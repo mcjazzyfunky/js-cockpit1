@@ -11,11 +11,8 @@ import { delay } from 'rxjs/operators'
 import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
-//import { Customizer } from 'office-ui-fabric-react'
-//import { FluentCustomizations } from '@uifabric/fluent-theme';
-
 initSystemIcons()
-loadThemeByName('green', false)
+loadThemeByName('green', true)
 
 const menuBar = 
   <MenuBar
@@ -245,6 +242,7 @@ function Demo() {
       }}
 
 */
+
       search={{
         type: 'section',
 
@@ -283,8 +281,7 @@ function Demo() {
           }
         ]
       }}
-
-      /*
+/*
       search={{
         type: 'default',
 
@@ -446,7 +443,8 @@ function Demo() {
       }
 
       slotMenu={
-        null // menuBar 
+        null
+        // menuBar 
       }
 
       slotSidebar={
@@ -454,11 +452,12 @@ function Demo() {
       }
 
       slotCenter={
-        // dataForm
+        //dataForm
         dataExplorer
       }
     />
 
+  //return loginScreen
   return cockpit 
 }
 
@@ -517,8 +516,4 @@ if (params.sortBy) {
 }
 
 export default Demo
-
-//<Customizer {...FluentCustomizations}>
-//    <Demo/>,
-//</Customizer>,
 

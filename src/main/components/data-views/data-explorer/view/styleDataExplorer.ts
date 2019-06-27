@@ -19,7 +19,7 @@ const styleDataExplorer = defineStyle(theme => ({
     flexGrow: 0,
     flexShrink: 0,
     padding: '9px 0 2px 10px',
-    height: '50px',
+    height: '48px',
     boxSizing: 'border-box',
     margin: '0 0 4px 0',
     zIndex: 1,
@@ -107,19 +107,13 @@ const styleDataExplorer = defineStyle(theme => ({
     display: 'inline-block',
     fontFamily: theme.fonts.large.fontFamily,
     fontSize: theme.fonts.large.fontSize,
-    fontWeight: 'bold',
+    fontWeight: 600,
     margin: '0 6px 3px 6px',
     whiteSpace: 'nowrap',
   },
 
   actionBar: {
     display: 'inline-flex',
-
-    selectors: {
-      '& .ms-CommandBar': {
-        backgroundColor: 'transparent !important'
-      }
-    }
   },
   
   actionButton: {
