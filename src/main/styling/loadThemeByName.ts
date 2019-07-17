@@ -154,7 +154,8 @@ function loadThemeByName(name: ThemeName, fontFamilySubstitution: boolean | stri
   let fontFamily: string | null = null
   
   if (fontFamilySubstitution === true) {
-    fontFamily = '"Liberation Sans", Lato, Roboto, Arial, Helvetica, sans-serif'
+    fontFamily = '"Segoe UI", "Liberation Sans", Lato, Roboto, Arial, Helvetica, sans-serif'
+    // fontFamily = '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji'
   } else if (typeof fontFamilySubstitution === 'string') {
     fontFamily = fontFamilySubstitution
   }

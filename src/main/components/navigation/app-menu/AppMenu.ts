@@ -12,7 +12,7 @@ const AppMenu = defineComponent<AppMenuProps>({
   displayName: 'AppMenu',
 
   properties: {
-    apps: {
+    items: {
       type: Array,
 
       validate:

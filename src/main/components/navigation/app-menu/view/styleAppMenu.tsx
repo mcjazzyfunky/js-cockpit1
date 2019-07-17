@@ -44,7 +44,7 @@ const styleAppMenu = defineStyle(theme => ({
 
   appLink: {
     margin: '4px 4px',
-    padding: '6px 10px',
+    padding: '10px 20px',
     color: theme.palette.black,
     borderWidth: '1px 0 0 0',
     borderStyle: 'solid',
@@ -57,7 +57,7 @@ const styleAppMenu = defineStyle(theme => ({
       },
 
       ':hover': {
-        backgroundColor: theme.palette.themeLighter,
+        backgroundColor: theme.palette.neutralLight,
       },
       
       ':active': {
@@ -70,6 +70,7 @@ const styleAppMenu = defineStyle(theme => ({
     display: 'inline-block',
     fontSize: theme.fonts.medium.fontSize,
     fontFamily: theme.fonts.medium.fontFamily,
+    fontWeight: 600
   },
 
   appLinkDescription: {

@@ -12,7 +12,7 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('green', true)
+loadThemeByName('default', true)
 
 const menuBar = 
   <MenuBar
@@ -80,7 +80,7 @@ const menuBar =
 
 const appMenu = 
   <AppMenu
-    apps={[
+    items={[
       {
         type: 'app',
         id: 'dashboard',
@@ -106,6 +106,8 @@ const appMenu =
         description: 'Some description for the media'
       }
     ]}
+
+    showCallout={true}
   />
 
 const verticalMenu =
@@ -147,7 +149,7 @@ function Demo() {
 
       slotTopNav={
         <AppMenu
-          apps={[
+          items={[
             {
               type: 'app',
               id: '0',
@@ -444,7 +446,7 @@ function Demo() {
 
       slotMenu={
         null
-        // menuBar 
+        //menuBar 
       }
 
       slotSidebar={

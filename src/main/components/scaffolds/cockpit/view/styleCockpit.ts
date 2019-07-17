@@ -28,7 +28,7 @@ const styleCockpit = defineStyle((theme: ITheme) => {
       height: '46px',
       minWidth: '100%',
       color: '#f0f0f0',
-      backgroundColor: 'rgb(50,50,50)',
+      backgroundColor: theme.palette.themeDark,//'rgb(68, 68, 68)',
       zIndex: 32000
     },
 

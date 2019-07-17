@@ -35,8 +35,8 @@ function renderDefault(props: AppMenuProps, classes: AppMenuClasses) {
   return (
     <Pivot>
       {
-        props.apps.map((app, i) => 
-          <PivotItem key={i} headerText={app.title}/>
+        props.items.map((item, i) => 
+          <PivotItem key={i} headerText={item.title}/>
         )
       }
     </Pivot>
@@ -49,8 +49,8 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
     [calloutVisible, setCalloutVisible] = React.useState(false),
     calloutContent: ReactNode[] = []
 
-  for (let i = 0; i < props.apps.length; ++i) {
-    const app = props.apps[i]
+  for (let i = 0; i < props.items.length; ++i) {
+    const app = props.items[i]
 
     calloutContent.push(
       <div key={app.id} className={classes.appLink}>
@@ -70,7 +70,7 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
     <div onClick={() => setCalloutVisible(true)}>
       <div ref={ref}>
         <label className={classes.label}>
-          {props.apps[0].title}
+          {props.items[0].title}
         </label>
         <ChevronDownIcon/>
       </div>

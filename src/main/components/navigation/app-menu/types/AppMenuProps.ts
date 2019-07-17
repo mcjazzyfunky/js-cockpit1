@@ -7,7 +7,7 @@ import AppSelectionEvent from '../../../../events/AppSelectionEvent'
 // --- AppMenuProps ------------------------------------------------
 
 type AppMenuProps = {
-  apps: {
+  items: {
     type: 'app'
     id: string,
     title: string,

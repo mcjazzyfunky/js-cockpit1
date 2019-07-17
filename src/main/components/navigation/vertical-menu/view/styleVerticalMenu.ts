@@ -9,12 +9,12 @@ const styleVerticalMenu = defineStyle(theme => ({
     flexGrow: 1,
     flexDirection: 'column',
     height: '100%',
-    backgroundColor: theme.palette.neutralLight,
+    //backgroundColor: theme.palette.neutralLight,
     marginRight: '3px',
 
-    borderWidth: '0 1px 0 0',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternary,
+    // borderWidth: '0 1px 0 0',
+    // borderStyle: 'solid',
+    // borderColor: theme.palette.neutralQuaternary,
 
     selectors: {
       '& .ms-Nav-compositeLink': {
@@ -23,12 +23,12 @@ const styleVerticalMenu = defineStyle(theme => ({
 
       '& .ms-Nav-compositeLink.is-expanded.is-selected *': {
         fontWeight: 600,
-        backgroundColor: theme.palette.neutralQuaternaryAlt
+        backgroundColor: `${theme.palette.neutralLighter} !important`,
       },
 
       '& .ms-Nav-group.is-expanded': {
         borderWidth: '0 0 1px 0',
-        borderColor: theme.palette.neutralTertiary,
+        borderColor: theme.palette.neutralLight,
         borderStyle: 'solid'
       },
 
@@ -37,7 +37,7 @@ const styleVerticalMenu = defineStyle(theme => ({
       },
 
       '& .ms-Nav-link:hover': {
-        backgroundColor: `${theme.palette.neutralQuaternaryAlt} !important`
+        backgroundColor: `${theme.palette.neutralLighter} !important`
       }
     }
   },

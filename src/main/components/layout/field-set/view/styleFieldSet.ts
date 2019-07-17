@@ -16,11 +16,10 @@ const styleFieldSet = defineStyle(theme => ({
   },
 
   title: {
-    color: theme.palette.themePrimary,
-    fontSize: theme.fonts.medium.fontSize,
-    fontFamily: theme.fonts.medium.fontFamily,
-    fontWeight: '600',
-    padding: '0 0 1rem 0',
+    display: 'inline-block',
+    fontSize: theme.fonts.mediumPlus.fontSize,
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
+    margin: '0 0 1rem 0',
   },
 
   defaultContent: {
@@ -47,7 +46,7 @@ const styleFieldSet = defineStyle(theme => ({
       },
 
       '& > tbody > tr > td:first-child': {
-        textAlign: 'left',
+        textAlign: 'right',
         padding: '0 0.75rem 0 0',
         width: '120px',
       }
