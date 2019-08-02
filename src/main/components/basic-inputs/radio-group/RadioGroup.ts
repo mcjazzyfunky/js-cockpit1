@@ -11,7 +11,7 @@ import renderRadioGroup from './view/renderRadioGroup'
 const RadioGroup = defineComponent<RadioGroupProps>({
   displayName: 'RadioGroup',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     required: {
       options: Spec.arrayOf(
         Spec.exact({

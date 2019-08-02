@@ -11,7 +11,7 @@ import renderChoice from './view/renderChoice'
 const Choice = defineComponent<ChoiceProps>({
   displayName: 'TextInput',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     required: {
       options: 
         Spec.arrayOf(

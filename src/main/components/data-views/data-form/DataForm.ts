@@ -17,7 +17,7 @@ const { useState } = React
 const DataForm = defineComponent<DataFormProps>({
   displayName: 'DataForm',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     required: {
       title: Spec.string
     },

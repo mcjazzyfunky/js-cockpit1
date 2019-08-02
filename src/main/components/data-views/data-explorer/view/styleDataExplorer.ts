@@ -189,6 +189,7 @@ const styleDataExplorer = defineStyle(theme => ({
   loadingPanelContent: {
     fontSize: theme.fonts.medium.fontSize,
     fontFamily: theme.fonts.medium.fontFamily,
+    //backgroundColor: theme.palette.neutralPrimaryAlt,
     backgroundColor: theme.palette.neutralPrimaryAlt,
     borderRadius: '2px',
     display: 'flex',

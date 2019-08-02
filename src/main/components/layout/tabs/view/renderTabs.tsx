@@ -1,6 +1,6 @@
 // externals imports
 import React, { ReactElement } from 'react'
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import { Pivot, PivotItem, PivotLinkFormat } from 'office-ui-fabric-react/lib/Pivot'
 
 // internal imports
 import styleTabs from './styleTabs'

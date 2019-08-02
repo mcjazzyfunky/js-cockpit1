@@ -13,7 +13,7 @@ import renderDataTable from './view/renderDataTable'
 const DataTable = defineComponent<DataTableProps, DataTableMethods>({
   displayName: 'DataTable',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     required: {
       data: Spec.arrayOf(Spec.object),
 

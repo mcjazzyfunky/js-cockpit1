@@ -11,7 +11,7 @@ import renderDateInput from './view/renderDateInput'
 const DateInput = defineComponent<DateInputProps>({
   displayName: 'DateInput',
   
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     optional: {
       label: Spec.string,
       name: Spec.string,

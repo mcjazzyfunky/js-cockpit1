@@ -11,7 +11,7 @@ import CockpitProps from './types/CockpitProps'
 const Cockpit = defineComponent<CockpitProps>({
   displayName: 'Cockpit',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     optional: {
       slotBrand: isNode,
       slotTopNav: isNode,

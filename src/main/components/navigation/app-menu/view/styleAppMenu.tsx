@@ -27,6 +27,12 @@ const styleAppMenu = defineStyle(theme => ({
     display: 'inline-block',
     color: theme.palette.themePrimary,
   },
+  
+  iconInCallout: {
+    display: 'inline-block',
+    color: theme.palette.themePrimary,
+    margin: '0 6px 0 0',
+  },
 
   label: {
     margin: '0 0.5rem',
@@ -57,7 +63,7 @@ const styleAppMenu = defineStyle(theme => ({
       },
 
       ':hover': {
-        backgroundColor: theme.palette.neutralLight,
+        backgroundColor: theme.palette.neutralLighter,
       },
       
       ':active': {
@@ -70,7 +76,7 @@ const styleAppMenu = defineStyle(theme => ({
     display: 'inline-block',
     fontSize: theme.fonts.medium.fontSize,
     fontFamily: theme.fonts.medium.fontFamily,
-    fontWeight: 600
+    fontWeight: 600,
   },
 
   appLinkDescription: {

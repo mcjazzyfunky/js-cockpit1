@@ -14,7 +14,7 @@ import LoginFormProps from './types/LoginFormProps'
 const LoginForm = defineComponent<LoginFormProps>({
   displayName: 'LoginForm',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     optional: {
       performLogin:
         Spec.nullable(Spec.function),

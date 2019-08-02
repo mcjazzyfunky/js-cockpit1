@@ -17,7 +17,7 @@ const REGEX_NAME = /^[a-z][a-zA-Z0-9]+/
 const DataExplorer = defineComponent<DataExplorerProps>({
   displayName: 'DataExplorer',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     required: {
       actions:
         Spec.arrayOf(

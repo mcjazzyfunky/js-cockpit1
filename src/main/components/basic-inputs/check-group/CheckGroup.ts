@@ -11,7 +11,7 @@ import renderCheckGroup from './view/renderCheckGroup'
 const CheckGroup = defineComponent<CheckGroupProps>({
   displayName: 'CheckGroup',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     required: {
       options: 
         Spec.arrayOf(

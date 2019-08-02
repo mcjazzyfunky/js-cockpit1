@@ -54,6 +54,9 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
 
     calloutContent.push(
       <div key={app.id} className={classes.appLink}>
+        <div className={classes.iconInCallout}>
+          <AppMenuIcon/>
+        </div>
         <div className={classes.appLinkTitle}>
           {app.title}
         </div>
@@ -67,7 +70,7 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
   }
 
   return (
-    <div onClick={() => setCalloutVisible(true)}>
+    <div onClick={() => setCalloutVisible(true)} className={classes.label}>
       <div ref={ref}>
         <label className={classes.label}>
           {props.items[0].title}

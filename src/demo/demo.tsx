@@ -450,12 +450,13 @@ function Demo() {
       }
 
       slotSidebar={
+        //null
         verticalMenu
       }
 
       slotCenter={
-        //dataForm
-        dataExplorer
+        dataForm
+        //dataExplorer
       }
     />
 

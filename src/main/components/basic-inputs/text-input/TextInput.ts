@@ -11,7 +11,7 @@ import renderTextInput from './view/renderTextInput'
 const TextInput = defineComponent<TextInputProps>({
   displayName: 'TextInput',
 
-  validate: Spec.exactProps({
+  validate: Spec.checkProps({
     optional: {
       label: Spec.string,
       name: Spec.string,
