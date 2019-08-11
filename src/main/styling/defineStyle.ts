@@ -3,7 +3,6 @@
 import React, { ReactNode, CSSProperties  } from 'react'
 import { ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
 
-const getClasses = classNamesFunction()
 
 let styleId = 0
 
@@ -23,6 +22,7 @@ function defineStyle<S extends Styles>(getStyles: (theme: ITheme, props?: any) =
 function defineStyle<S extends Styles>(styles: S): Return<S>
 function defineStyle(arg: any): any {
   let StyleComponent: any
+  const getClasses = classNamesFunction()
 
   if (typeof arg == 'function') {
     const

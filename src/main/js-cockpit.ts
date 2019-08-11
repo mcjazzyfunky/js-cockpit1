@@ -27,6 +27,9 @@ import LoginForm from './components/login/login-form/LoginForm'
 import LogoutButton from './components/login/logout-button/LogoutButton'
 import LogoutButtonProps from './components/login/logout-button/types/LogoutButtonProps'
 import MenuBar from './components/navigation/menu-bar/MenuBar'
+import Paginator from './components/pagination/paginator/Paginator'
+import PageSizeSelector from './components/pagination/page-size-selector/PageSizeSelector'
+import PaginationInfo from './components/pagination/pagination-info/PaginationInfo'
 import VerticalMenu from './components/navigation/vertical-menu/VerticalMenu'
 import RadioGroup from './components/basic-inputs/radio-group/RadioGroup'
 import RadioGroupProps from './components/basic-inputs/radio-group/types/RadioGroupProps'
@@ -90,6 +93,11 @@ export {
   LogoutButtonProps,
   UserMenu,
   
+  // pagination
+  Paginator,
+  PaginationInfo,
+  PageSizeSelector,
+
   // misc components
   Brand,
   Cockpit,
