@@ -487,29 +487,29 @@ function loadData(params: DataExplorerQueryParams) {
   
   let data = fakeData(totalItemCount)
 
-if (params.sortBy) {
-  data.sort((recs1, recs2) => {
-    let ret = 0
+  if (params.sortBy) {
+    data.sort((recs1, recs2) => {
+      let ret = 0
 
-    const
-      v1 = recs1[params.sortBy!],
-      v2 = recs2[params.sortBy!];
+      const
+        v1 = recs1[params.sortBy!],
+        v2 = recs2[params.sortBy!];
 
-    if (v1 > v2) {
-      ret = 1
-    } else if (v1 < v2) {
-      ret = -1
-    } else {
-      ret = 0
-    }
+      if (v1 > v2) {
+        ret = 1
+      } else if (v1 < v2) {
+        ret = -1
+      } else {
+        ret = 0
+      }
 
-    if (params.sortDir === 'desc') {
-      ret = -ret
-    }
+      if (params.sortDir === 'desc') {
+        ret = -ret
+      }
 
-    return ret
-  })
-}
+      return ret
+    })
+  }
 
   data = data.slice(params.offset, params.offset + params.count)
 
