@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -9,25 +9,19 @@ import renderPageSizeSelector from './view/renderPageSizeSelector'
 
 // --- PageSizeSelector ---------------------------------------------
 
-const PageSizeSelector = defineComponent<PageSizeSelectorProps>({
-  displayName: 'PageSizeSelector',
+const PageSizeSelector = component<PageSizeSelectorProps>('PageSizeSelector')
+  .validate(
+    Spec.checkProps({
+      required: {
+        pageSize: Spec.in(PAGE_SIZE_OPTIONS)
+      },
 
-  properties: {
-    pageSize: {
-      type: Number,
-      required: true,
-      validate: Spec.in(PAGE_SIZE_OPTIONS)
-    },
-
-    onPageSizeChange: {
-      type: Function 
-    }
-  },
-
-  render(props) {
-    return renderPageSizeSelector(props)
-  }
-})
+      optional: {
+        onPageSizeChange: Spec.function
+      }
+    })
+  )
+  .render(renderPageSizeSelector)
 
 // --- exports ------------------------------------------------------
 

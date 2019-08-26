@@ -1,5 +1,5 @@
 import React from 'react'
-import { defineContext } from 'js-react-utils'
+import { context } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 type ViewModes = {
@@ -7,18 +7,14 @@ type ViewModes = {
   readOnly: boolean
 }
 
-export default defineContext<ViewModes>({
-  displayName: 'ViewModesCtx',
-  type: Object,
-
-  validate:
+export default context<ViewModes>('ViewModesCtx')
+  .validate(
     Spec.exact({
       compact: Spec.boolean,
       readOnly: Spec.boolean
-    }),
-
-  defaultValue: {
+    })
+  )
+  .defaultValue({
     compact: false,
     readOnly: false
-  }
-})
+  })

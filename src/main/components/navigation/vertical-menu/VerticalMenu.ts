@@ -1,6 +1,6 @@
 // externals imports
 import { ComponentType } from 'react'
-import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
+import { component, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -9,29 +9,17 @@ import renderVerticalMenu from './view/renderVerticalMenu'
 
 // --- VerticalMenu ------------------------------------------------------
 
-const VerticalMenu = defineComponent<VerticalMenuProps>({
-  displayName: 'VerticalMenu',
-
-  properties: {
-    activeItemId: {
-      type: String
-    },
-
-    collapsible: {
-      type: Boolean,
-      defaultValue: false
-    },
-
-    items: {
-      type: Array,
-      validate: Spec.lazy(() => specItems)
-    }
-  },
-
-  render(props) {
-    return renderVerticalMenu(props)
-  }
-})
+const VerticalMenu = component<VerticalMenuProps>('VerticalMenu')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        activeItemId: Spec.string,
+        collapsible: Spec.boolean,
+        items: Spec.lazy(() => specItems)
+      }
+    })
+  )
+  .render(renderVerticalMenu)
 
 // --- locals -------------------------------------------------------
 

@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent, isNode, withChildren, isElementOfType } from 'js-react-utils'
+import { component, isNode, withChildren, isElementOfType } from 'js-react-utils'
 import { Spec } from 'js-spec'
 import { initStore } from 'js-stores'
 import { useStore } from 'js-stores/with-react'
@@ -11,68 +11,67 @@ import LoginFormProps from './types/LoginFormProps'
 
 // --- LoginForm ----------------------------------------------------
 
-const LoginForm = defineComponent<LoginFormProps>({
-  displayName: 'LoginForm',
+const LoginForm = component<LoginFormProps>('LoginForm')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        performLogin:
+          Spec.nullable(Spec.function),
+        
+        fullSize:
+          Spec.boolean,
 
-  validate: Spec.checkProps({
-    optional: {
-      performLogin:
-        Spec.nullable(Spec.function),
-      
-      fullSize:
-        Spec.boolean,
+        extraFields:
+          Spec.arrayOf(
+            Spec.and(
+              Spec.prop('type', Spec.oneOf('text', 'choice')),
 
-      extraFields:
-        Spec.arrayOf(
-          Spec.and(
-            Spec.prop('type', Spec.oneOf('text', 'choice')),
+              Spec.or(
+                {
+                  when: Spec.prop('type', Spec.is('text')),
+    
+                  then:
+                    Spec.exact({
+                      type: Spec.is('text'),
+                      key: Spec.string,
+                      label: Spec.string,
+                      defaultValue: Spec.optional(Spec.string)
+                    })
+                },
+                {
+                  when: Spec.prop('type', Spec.is('choice')),
 
-            Spec.or(
-              {
-                when: Spec.prop('type', Spec.is('text')),
-  
-                then:
-                  Spec.exact({
-                    type: Spec.is('text'),
-                    key: Spec.string,
-                    label: Spec.string,
-                    defaultValue: Spec.optional(Spec.string)
-                  })
-              },
-              {
-                when: Spec.prop('type', Spec.is('choice')),
+                  then:
+                    Spec.exact({
+                      type: Spec.is('choice'),
+                      key: Spec.string,
+                      label: Spec.string,
+                      defaultValue: Spec.string,
 
-                then:
-                  Spec.exact({
-                    type: Spec.is('choice'),
-                    key: Spec.string,
-                    label: Spec.string,
-                    defaultValue: Spec.string,
+                      options: Spec.arrayOf(
+                        Spec.exact({
+                          value: Spec.string,
+                          text: Spec.string
+                        })
+                      )
+                    })
+                })
+            )
+          ),
+        
+        className:
+          Spec.nullable(Spec.string),
+        
+        style:
+          Spec.nullable(Spec.object),
 
-                    options: Spec.arrayOf(
-                      Spec.exact({
-                        value: Spec.string,
-                        text: Spec.string
-                      })
-                    )
-                  })
-              })
-          )
-        ),
-      
-      className:
-        Spec.nullable(Spec.string),
-      
-      style:
-        Spec.nullable(Spec.object),
-
-      slotHeader: isNode,
-      slotAbove: isNode,
-      slotBelow: isNode
-    }
-  }),
-
-  render(props) {
+        slotHeader: isNode,
+        slotAbove: isNode,
+        slotBelow: isNode
+      }
+    })
+  )
+  .render(props => {
     const initialValues: Record<string, any> = {
       username: '',
       password: ''
@@ -90,8 +89,7 @@ const LoginForm = defineComponent<LoginFormProps>({
     const store = useStore(() => createLoginFormStore(initialValues))
 
     return renderLoginForm(props, store)
-  }
-})
+  })
 
 // --- locals -------------------------------------------------------
 

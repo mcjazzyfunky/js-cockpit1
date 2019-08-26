@@ -1,5 +1,6 @@
 // external imports 
-import { defineComponent, isNode, withChildren } from 'js-react-utils'
+import { component, isNode, withChildren } from 'js-react-utils'
+import { Spec } from 'js-spec'
 
 // internal imports
 import renderHBox from './view/renderHBox'
@@ -7,27 +8,17 @@ import HBoxProps from './types/HBoxProps'
 
 // --- HBox ---------------------------------------------------------
 
-const HBox = defineComponent<HBoxProps>({
-  displayName: 'HBox',
-
-  properties: {
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(isNode)
-    }
-  },
-
-  render(props) {
-    return renderHBox(props)
-  }
-})
+const HBox = component<HBoxProps>('HBox')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(Spec.all(isNode))
+      }
+    })
+  )
+  .render(renderHBox)
 
 // --- exports ------------------------------------------------------
 

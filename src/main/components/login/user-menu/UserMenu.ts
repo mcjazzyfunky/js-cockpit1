@@ -1,5 +1,6 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
+import { Spec } from 'js-spec'
 
 // internal imports
 import UserMenuProps from './types/UserMenuProps'
@@ -7,23 +8,16 @@ import renderUserMenu from './view/renderUserMenu'
 
 // --- UserMenu -----------------------------------------------------
 
-const UserMenu = defineComponent<UserMenuProps>({
-  displayName: 'UserMenu',
-
-  properties: {
-    username: {
-      type: String
-    },
-
-    fullName: {
-      type: String
-    }
-  },
-
-  render(props) {
-    return renderUserMenu(props)
-  }
-})
+const UserMenu = component<UserMenuProps>('UserMenu')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        userName: Spec.string,
+        fullName: Spec.string,
+      }
+    })
+  )
+  .render(renderUserMenu)
 
 // --- exports ------------------------------------------------------
 

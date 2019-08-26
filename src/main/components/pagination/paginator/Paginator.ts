@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,37 +8,22 @@ import PaginatorView from './view/renderPaginator'
 
 // --- Paginator ----------------------------------------------------
 
-const Paginator = defineComponent<PaginatorProps>({
-  displayName: 'Paginator',
+const Paginator = component<PaginatorProps>('Paginator')
+  .validate(
+    Spec.checkProps({
+      required: {
+        pageIndex: Spec.nonnegativeInteger,
+        pageSize: Spec.positiveInteger,
+        totalItemCOunt: Spec.nonnegativeInteger,
+        about: Spec.oneOf('items')
+      },
 
-  properties: {
-    pageIndex: {
-      type: Number,
-      validate: Spec.nonnegativeInteger,
-      required: true
-    },
-
-    pageSize: {
-      type: Number,
-      validate: Spec.positiveInteger,
-      required: true
-    },
-
-    totalItemCount: {
-      type: Number,
-      validate: Spec.nonnegativeInteger,
-      required: true
-    },
-
-    onPageChange: {
-      type: Function
-    }
-  },
-
-  render(props: PaginatorProps) {
-    return PaginatorView(props) 
-  }
-})
+      optional: {
+        onPageChange: Spec.function
+      }
+    })
+  )
+  .render(PaginatorView)
 
 // --- exports ------------------------------------------------------
 

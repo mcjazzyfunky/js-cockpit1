@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
+import { component, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,27 +8,17 @@ import VBoxProps from './types/VBoxProps'
 
 // --- VBox ---------------------------------------------------------
 
-const VBox = defineComponent<VBoxProps>({
-  displayName: 'VBox',
-
-  properties: {
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(isNode)
-    }
-  },
-
-  render(props) {
-    return renderVBox(props)
-  }
-})
+const VBox = component<VBoxProps>('VBox')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(isNode)
+      }
+    })
+  )
+  .render(renderVBox)
 
 // --- exports ------------------------------------------------------
 

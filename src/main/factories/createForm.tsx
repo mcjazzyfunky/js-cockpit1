@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { defineComponent } from 'js-react-utils'
+import { component, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 type FormConfig = {
@@ -55,25 +55,16 @@ type TextFieldProps = {
   field?: FormFieldCtrl<any>
 }
 
-const TextField = defineComponent<TextFieldProps>({
-  displayName: 'TextField',
-
-  properties: {
-    label: {
-      type: String
-    },
-
-    field: {
-      type: Object
-    }
-  },
-
-  render() {
-    // not really important here
-    return null
-  }
-})
-
+const TextField = component<TextFieldProps>('TextField')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        label: Spec.string,
+        field: Spec.object
+      }
+    })
+  )
+  .render(() => null) // TODO
 
 type FormProps<T extends FormConfig> = {
   fields: {
@@ -82,39 +73,33 @@ type FormProps<T extends FormConfig> = {
   children: FormCtrl<T>
 }
 
-const Form = defineComponent<FormProps<FormConfig>>({
-  displayName: 'Form',
-  
-  properties: {
-    fields: {
-      type: Object,
+const Form = component<FormProps<FormConfig>>('form')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        fields:
+          Spec.and(
+            Spec.object,
+            Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
+            Spec.valuesOf(
+                Spec.exact({
+                  rules:
+                    Spec.arrayOf(
+                      Spec.exact({
+                        validate: Spec.function,
+                        errorMsg: Spec.string
+                      })),
 
-      validate:
-        Spec.and(
-          Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
-          Spec.valuesOf(
-              Spec.exact({
-                rules:
-                  Spec.arrayOf(
-                    Spec.exact({
-                      validate: Spec.function,
-                      errorMsg: Spec.string
-                    })),
+                  defaultValue:
+                    Spec.any
+                }))),
 
-                defaultValue:
-                  Spec.any
-              })))
-    },
+        children: withChildren(Spec.singleOf(Spec.function))
+      }
+    })
+  )
+  .render(props => null) // TODO
 
-    children: {
-      validate: Spec.function
-    }
-  },
-
-  render(props: FormProps<any>) {
-    return null
-  }
-})
 /*
 void(
   <Form

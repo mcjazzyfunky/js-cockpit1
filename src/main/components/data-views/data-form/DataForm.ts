@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { defineComponent, isNode, withChildren } from 'js-react-utils'
+import { component, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -14,41 +14,39 @@ const { useState } = React
 
 // --- DataForm -----------------------------------------------------
 
-const DataForm = defineComponent<DataFormProps>({
-  displayName: 'DataForm',
+const DataForm = component<DataFormProps>('DataForm')
+  .validate(
+    Spec.checkProps({
+      required: {
+        title: Spec.string
+      },
 
-  validate: Spec.checkProps({
-    required: {
-      title: Spec.string
-    },
+      optional: {
+        actions:
+          Spec.arrayOf(
+            Spec.and(
+              Spec.prop('type', Spec.oneOf('default')),
+              Spec.or({
+                when: Spec.prop('type', Spec.is('default')),
 
-    optional: {
-      actions:
-        Spec.arrayOf(
-          Spec.and(
-            Spec.prop('type', Spec.oneOf('default')),
-            Spec.or({
-              when: Spec.prop('type', Spec.is('default')),
+                then:
+                  Spec.exact({
+                    type: Spec.is('default'),
+                    text: Spec.string,
+                    icon: Spec.optional(isNode)
+                  })
+              }))),
 
-              then:
-                Spec.exact({
-                  type: Spec.is('default'),
-                  text: Spec.string,
-                  icon: Spec.optional(isNode)
-                })
-            }))),
-
-      compact: Spec.boolean,
-      onClose: Spec.function,
-      children: withChildren(isNode)
-    }
-  }),
-
-  defaultProps: {
+        compact: Spec.boolean,
+        onClose: Spec.function,
+        children: withChildren(isNode)
+      }
+    })
+  )
+  .defaultProps({
     compact: true
-  },
-
-  render(props) {
+  })
+  .render(props => {
     const
       forceUpdate = useForceUpdate(),
 
@@ -78,8 +76,7 @@ const DataForm = defineComponent<DataFormProps>({
     */
 
     return renderDataForm(props, ctrl)
-  }
-})
+  })
 
 // --- exports ------------------------------------------------------
 

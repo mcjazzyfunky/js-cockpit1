@@ -83,7 +83,7 @@ const styleDataTable = defineStyle(theme => ({
   },
 
   selectAllRowsCheckBox: {
-    padding: '4px 0 0 4px',
+    padding: '4px 0 0 5px',
   },
   
   selectRowCheckBox: {

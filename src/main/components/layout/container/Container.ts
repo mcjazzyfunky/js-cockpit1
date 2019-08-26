@@ -1,5 +1,5 @@
 // external imports 
-import { defineComponent, isElementOfType, isNode, withChildren } from 'js-react-utils'
+import { component, isElementOfType, isNode, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,47 +8,21 @@ import ContainerProps from './types/ContainerProps'
 
 // --- HBox.Cell ----------------------------------------------------
 
-const Container = defineComponent<ContainerProps>({
-  displayName: 'Container',
-
-  properties: {
-    grow: {
-      type: Number,
-      validate: Spec.nonnegativeFloat
-    },
-    
-    shrink: {
-      type: Number,
-      validate: Spec.nonnegativeFloat
-    },
-
-    horizontalAlign: {
-      type: String,
-      validate: Spec.oneOf('start', 'center', 'end'),
-    },
-
-    verticalAlign: {
-      type: String,
-      validate: Spec.oneOf('top', 'middle', 'bottom'),
-    },
-
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(Spec.all(isNode))
-    },
-  },
-
-  render(props) {
-    return renderContainer(props)
-  }
-})
+const Container = component<ContainerProps>('Container')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        grow: Spec.nonnegativeFloat,
+        shrink: Spec.nonnegativeFloat,
+        horizontalAlign: Spec.oneOf('start', 'center', 'end'),
+        verticalAlign: Spec.oneOf('top', 'middle', 'bottom'),
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(isNode)
+      }
+    })
+  )
+  .render(props => renderContainer(props))
 
 // --- exports ------------------------------------------------------
 

@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,35 +8,30 @@ import renderRadioGroup from './view/renderRadioGroup'
 
 // --- RadioGroup ---------------------------------------------------
 
-const RadioGroup = defineComponent<RadioGroupProps>({
-  displayName: 'RadioGroup',
+const RadioGroup = component<RadioGroupProps>('RadioGroup')
+  .validate(
+    Spec.checkProps({
+      required: {
+        options: Spec.arrayOf(
+          Spec.exact({
+            key: Spec.string,
+            text: Spec.string
+          }))
+      },
 
-  validate: Spec.checkProps({
-    required: {
-      options: Spec.arrayOf(
-        Spec.exact({
-          key: Spec.string,
-          text: Spec.string
-        }))
-    },
-
-    optional: {
-      label: Spec.string,
-      name: Spec.string,
-      defaultSelectedKey: Spec.string,
-      orientation: Spec.string,
-      grow: Spec.number
-    }
-  }),
-
-  defaultProps: {
+      optional: {
+        label: Spec.string,
+        name: Spec.string,
+        defaultSelectedKey: Spec.string,
+        orientation: Spec.string,
+        grow: Spec.number
+      }
+    })
+  )
+  .defaultProps({
     orientation: 'vertical'
-  },
-
-  render(props) {
-    return renderRadioGroup(props)
-  }
-})
+  })
+  .render(props => renderRadioGroup(props))
 
 // --- exports ------------------------------------------------------
 

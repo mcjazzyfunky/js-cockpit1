@@ -1,6 +1,6 @@
 // external imports
 import { Ref } from 'react'
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -10,48 +10,45 @@ import renderDataTable from './view/renderDataTable'
 
 // --- DataTable ----------------------------------------------------
 
-const DataTable = defineComponent<DataTableProps, DataTableMethods>({
-  displayName: 'DataTable',
+const DataTable = component<DataTableProps, DataTableMethods>('DataTable')
+  .validate(
+    Spec.checkProps({
+      required: {
+        data: Spec.arrayOf(Spec.object),
 
-  validate: Spec.checkProps({
-    required: {
-      data: Spec.arrayOf(Spec.object),
+        columns:
+          Spec.arrayOf(
+            Spec.exact({
+              title: Spec.string, 
+              field: Spec.nullableOptional(Spec.string),
+              align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
+              width: Spec.nullableOptional(Spec.positiveFloat),
+              sortable: Spec.optional(Spec.boolean)
+            }))
+      },
 
-      columns:
-        Spec.arrayOf(
-          Spec.exact({
-            title: Spec.string, 
-            field: Spec.nullableOptional(Spec.string),
-            align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
-            width: Spec.nullableOptional(Spec.positiveFloat),
-            sortable: Spec.optional(Spec.boolean)
-          }))
-    },
+      optional: {
+        title: Spec.nullable(Spec.string),
+        sortBy: Spec.nullable(Spec.string),
+        sortDir: Spec.oneOf('asc', 'desc'),
 
-    optional: {
-      title: Spec.nullable(Spec.string),
-      sortBy: Spec.nullable(Spec.string),
-      sortDir: Spec.oneOf('asc', 'desc'),
+        rowSelectionOption:
+          Spec.nullable(
+            Spec.exact({
+              mode: Spec.oneOf('none', 'single', 'multi')
+            })),
 
-      rowSelectionOption:
-        Spec.nullable(
-          Spec.exact({
-            mode: Spec.oneOf('none', 'single', 'multi')
-          })),
-
-      onRowSelectionChange: Spec.function,
-      onSortChange: Spec.function
-    },
-  }),
-
-  defaultProps: {
+        onRowSelectionChange: Spec.function,
+        onSortChange: Spec.function
+      },
+    })
+  )
+  .defaultProps({
     rowSelectionOptions: { mode:  'none' }
-  },
-
-  render(props, ref) {
+  })
+  .render((props, ref) => {
     return renderDataTable(props, ref)
-  }
-})
+  })
 
 // --- exports ------------------------------------------------------
 

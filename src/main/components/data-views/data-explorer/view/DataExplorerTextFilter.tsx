@@ -1,13 +1,10 @@
 import React from 'react'
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { TextField } from 'office-ui-fabric-react'
 
-const DataExplorerTextFilter = defineComponent({
-  displayName: 'DataExplorerTextFilter',
-
-  render() {
+const DataExplorerTextFilter = component('DataExplorerTextFilter')
+  .render(() => {
     return <TextField  />
-  }
-})
+  })
 
 export default DataExplorerTextFilter

@@ -1,6 +1,6 @@
 // external imports 
 import { Spec } from 'js-spec'
-import { defineComponent, isNode, withChildren } from 'js-react-utils'
+import { component, isNode, withChildren } from 'js-react-utils'
 
 // internal imports
 import FieldSetProps from './types/FieldSetProps'
@@ -8,35 +8,19 @@ import renderFieldSet from './view/renderFieldSet'
 
 // --- FieldSet ---------------------------------------------------------
 
-const FieldSet = defineComponent<FieldSetProps>({
-  displayName: 'FieldSet',
-
-  properties: {
-    title: {
-      type: String
-    },
-
-    grow: {
-      type: Number
-    },
-
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(isNode)
-    }
-  },
-
-  render(props) {
-    return renderFieldSet(props)
-  }
-})
+const FieldSet = component<FieldSetProps>('FieldSet')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        title: Spec.string,
+        grow: Spec.number,
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(Spec.all(isNode))
+      }
+    })
+  )
+  .render(renderFieldSet)
 
 // --- exports ------------------------------------------------------
 

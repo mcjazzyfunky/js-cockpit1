@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent, isNode } from 'js-react-utils'
+import { component, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,29 +8,20 @@ import renderMenuBar from './view/renderMenuBar'
 
 // --- MenuBar --------------------------------------------------------
 
-const MenuBar = defineComponent<MenuBarProps>({
-  displayName: 'MenuBar',
-
-  properties: {
-    onAction: {
-      type: Function
-    },
-
-    items: {
-      type: Object,
-      validate: Spec.lazy(() => specItems)
-    },
-
-    showMenuBeaks: {
-      type: Boolean,
-      defaultValue: false
-    }
-  },
-
-  render(props) {
-    return renderMenuBar(props)
-  }
-})
+const MenuBar = component<MenuBarProps>('MenuBar')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        onAction: Spec.function,
+        items: Spec.lazy(() => specItems),
+        showMenuBeaks: Spec.boolean
+      }
+    })
+  )
+  .defaultProps({
+    showMenuBeaks: true
+  })
+  .render(renderMenuBar)
 
 // --- locals -------------------------------------------------------
 

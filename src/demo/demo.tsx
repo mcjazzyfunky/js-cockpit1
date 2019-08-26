@@ -1,6 +1,4 @@
 import React, { ReactNode } from 'react'
-import ReactDOM from 'react-dom'
-import { defineComponent } from 'js-react-utils'
 import { loadThemeByName, initSystemIcons, Brand, CheckGroup, Choice, RadioGroup, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, FieldSet, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
 
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
@@ -12,7 +10,7 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('default', true)
+loadThemeByName('teal', true)
 
 const menuBar = 
   <MenuBar
@@ -455,7 +453,7 @@ function Demo() {
       }
 
       slotCenter={
-        // dataForm
+        //dataForm
         dataExplorer
       }
     />

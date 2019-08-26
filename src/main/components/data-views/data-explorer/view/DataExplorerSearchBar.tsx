@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { css, ActionButton, Callout, CommandBar, ITheme, SearchBox } from 'office-ui-fabric-react'
 import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 
@@ -21,10 +21,8 @@ type SearchBarProps = {
   dataExplorerStore: DataExplorerStore
 }
 
-const SearchBar = defineComponent<SearchBarProps>({
-  displayName: 'SearchBar',
-
-  render({ dataExplorerProps: props, dataExplorerStore: store }) { 
+const SearchBar = component<SearchBarProps>('SearchBar')
+  .render(({ dataExplorerProps: props, dataExplorerStore: store }) => { 
     const
       [state, setState] = useState({
         calloutVisible: false,
@@ -157,8 +155,7 @@ const SearchBar = defineComponent<SearchBarProps>({
         calloutVisible: false
       })
     }
-  }
-})
+  })
 
 // --- exports ------------------------------------------------------
 

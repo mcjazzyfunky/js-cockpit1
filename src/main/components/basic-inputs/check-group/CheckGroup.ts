@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,33 +8,28 @@ import renderCheckGroup from './view/renderCheckGroup'
 
 // --- CheckGroup ---------------------------------------------------
 
-const CheckGroup = defineComponent<CheckGroupProps>({
-  displayName: 'CheckGroup',
+const CheckGroup = component<CheckGroupProps>('CheckGroup')
+  .validate(
+    Spec.checkProps({
+      required: {
+        options: 
+          Spec.arrayOf(
+            Spec.exact({
+              key: Spec.string,
+              text: Spec.string
+            }))
+      },
 
-  validate: Spec.checkProps({
-    required: {
-      options: 
-        Spec.arrayOf(
-          Spec.exact({
-            key: Spec.string,
-            text: Spec.string
-          }))
-    },
-
-    optional: {
-      label: Spec.string,
-      name: Spec.string,
-      selectedKeys: Spec.arrayOf(Spec.string),
-      orientation: Spec.oneOf('horizontal', 'vertical'),
-      grow: Spec.number,
-
-    }
-  }),
-
-  render(props) {
-    return renderCheckGroup(props)
-  }
-})
+      optional: {
+        label: Spec.string,
+        name: Spec.string,
+        selectedKeys: Spec.arrayOf(Spec.string),
+        orientation: Spec.oneOf('horizontal', 'vertical'),
+        grow: Spec.number
+      }
+    })
+  )
+  .render(props => renderCheckGroup(props))
 
 // --- exports ------------------------------------------------------
 

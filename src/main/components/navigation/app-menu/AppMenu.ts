@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,37 +8,28 @@ import renderAppMenu from './view/renderAppMenu'
 
 // --- AppMenu -----------------------------------------------------
 
-const AppMenu = defineComponent<AppMenuProps>({
-  displayName: 'AppMenu',
-
-  properties: {
-    items: {
-      type: Array,
-
-      validate:
-        Spec.arrayOf(
-          Spec.exact({
-            type: Spec.is('app'),
-            id: Spec.string,
-            title: Spec.string,
-            description: Spec.optional(Spec.string)
-          }))
-    },
-
-    showCallout: {
-      type: Boolean,
-      defaultValue: false
-    },
-
-    onSelection: {
-      type: Function
-    }
-  },
-
-  render(props) {
-    return renderAppMenu(props)
-  }
-})
+const AppMenu = component<AppMenuProps>('AppMenu')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        items:
+          Spec.arrayOf(
+            Spec.exact({
+              type: Spec.is('app'),
+              id: Spec.string,
+              title: Spec.string,
+              description: Spec.optional(Spec.string)
+            })),
+        
+        showCallout: Spec.boolean,
+        onSelection: Spec.function
+      }
+    })
+  )
+  .defaultProps({
+    showCallout: false
+  })
+  .render(renderAppMenu)
 
 // --- exports ------------------------------------------------------
 

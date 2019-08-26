@@ -1,5 +1,5 @@
 // external imports 
-import { defineComponent, isNode, isElementOfType, withChildren } from 'js-react-utils'
+import { component, isNode, isElementOfType, withChildren } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -9,56 +9,35 @@ import renderTabs from './view/renderTabs'
 
 // --- Tabs.Page ----------------------------------------------------
 
-const Page = defineComponent<TabsPageProps>({
-  displayName: 'Tabs.Page',
-
-  properties: {
-    title: {
-      type: String
-    },
-    
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(isNode)
-    }
-  },
-
-  render() {
+const Page = component<TabsPageProps>('Tabs.Page')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        title: Spec.string,
+        type: Spec.string,
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(isNode)
+      }
+    })
+  )  
+  .render(props => {
     return 'Page'
-  }
-})
+  })
 
 // --- Tabs ---------------------------------------------------------
 
-const Tabs = defineComponent<TabsProps>({
-  displayName: 'Tabs',
-
-  properties: {
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(
-        Spec.all(isElementOfType(Page)))
-    }
-  },
-
-  render(props) {
-    return renderTabs(props)
-  }
-})
+const Tabs = component<TabsProps>('Tabs')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(Spec.all(isNode))
+      }
+    })
+  )
+ . render(renderTabs)
 
 // --- exports ------------------------------------------------------
 

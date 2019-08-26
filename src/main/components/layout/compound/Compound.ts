@@ -1,5 +1,6 @@
 // external imports 
-import { defineComponent, isNode, withChildren } from 'js-react-utils'
+import { component, isNode, withChildren } from 'js-react-utils'
+import { Spec } from 'js-spec'
 
 // internal imports
 import renderCompound from './view/renderCompound'
@@ -7,27 +8,17 @@ import CompoundProps from './types/CompoundProps'
 
 // --- Compound -----------------------------------------------------
 
-const Compound = defineComponent<CompoundProps>({
-  displayName: 'Compound',
-
-  properties: {
-    className: {
-      type: String
-    },
-
-    style: {
-      type: Object
-    },
-
-    children: {
-      validate: withChildren(isNode)
-    }
-  },
-
-  render(props) {
-    return renderCompound(props)
-  }
-})
+const Compound = component<CompoundProps>('Compound')
+  .validate(
+    Spec.checkProps({
+      optional: {
+        className: Spec.string,
+        style: Spec.object,
+        children: withChildren(isNode)
+      }
+    })
+  )
+  .render(props => renderCompound(props))
 
 // --- exports ------------------------------------------------------
 

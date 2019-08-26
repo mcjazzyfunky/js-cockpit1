@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Label } from 'office-ui-fabric-react'
 
 // internal imports
@@ -16,10 +16,8 @@ type DataExplorerFilterPanelProps = {
   store: DataExplorerStore
 }
 
-const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
-  displayName: 'DataExplorerFilterPanel',
-
-  render({ filters, store }) {
+const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>('DataExplorerFilterPanel')
+  .render(({ filters, store }) => {
     return styleDataExplorerFilterPanel(classes => {
       const rows = filters.map((filter: any) => {
         let filterField: any = null // TODO
@@ -52,8 +50,7 @@ const DataExplorerFilterPanel = defineComponent<DataExplorerFilterPanelProps>({
         </div>
       )
     })
-  }
-})
+  })
 
 // --- exports ------------------------------------------------------
 

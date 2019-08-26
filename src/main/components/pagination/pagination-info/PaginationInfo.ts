@@ -1,5 +1,5 @@
 // external imports
-import { defineComponent } from 'js-react-utils'
+import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -8,39 +8,18 @@ import PaginationInfoView from './view/renderPaginatorInfo'
 
 // --- PaginationInfo ---------------------------------------------
 
-const PaginationInfo = defineComponent<PaginationInfoProps>({
-  displayName: 'PaginationInfo',
-
-  properties: {
-    pageIndex: {
-      type: Number,
-      required: true,
-      validate: Spec.nonnegativeInteger,
-    },
-
-    pageSize: {
-      type: Number,
-      required: true,
-      validate: Spec.positiveNumber
-    },
-
-    totalItemCount: {
-      type: Number,
-      required: true,
-      validate: Spec.nonnegativeInteger
-    },
-
-    about: {
-      type: String,
-      required: true,
-      validate: Spec.oneOf('items')
-    }
-  },
-
-  render(props: PaginationInfoProps) {
-    return PaginationInfoView(props)
-  }
-})
+const PaginationInfo = component<PaginationInfoProps>('PaginationInfo')
+  .validate(
+    Spec.checkProps({
+      required: {
+        pageIndex: Spec.nonnegativeInteger,
+        pageSize: Spec.positiveInteger,
+        totalItemCOunt: Spec.nonnegativeInteger,
+        about: Spec.oneOf('items')
+      }
+    })
+  )
+  .render(PaginationInfoView)
 
 // --- exports ------------------------------------------------------
 
