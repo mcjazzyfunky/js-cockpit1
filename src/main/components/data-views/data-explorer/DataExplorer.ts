@@ -1,12 +1,10 @@
 // external imports
 import { component, isNode } from 'js-react-utils'
-import { useStore } from 'js-stores/with-react'
 import { Spec } from 'js-spec'
 
 // internal imports
 import DataExplorerProps from './types/DataExplorerProps'
-import renderDataExplorer from './view/renderDataExplorer'
-import createDataExplorerStore from './store/createDataExplorerStore'
+import DataExplorerView from './view/DataExplorerView'
 
 // --- constants ---------------------------------------------------
 
@@ -59,11 +57,7 @@ const DataExplorer = component<DataExplorerProps>('DataExplorer')
       }
     })
   )
-  .render(props => {
-    const store = useStore(createDataExplorerStore)
-
-    return renderDataExplorer(props, store)
-  })
+  .render(DataExplorerView)
 
 // --- locals -------------------------------------------------------
 

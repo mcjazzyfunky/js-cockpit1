@@ -5,19 +5,17 @@ import { Label } from 'office-ui-fabric-react'
 
 // internal imports
 import styleDataExplorerFilterPanel from './styleDataExplorerFilterPanel'
-import DataExplorerStore from '../types/DataExplorerStore'
 import DataExplorerTextFilter from './DataExplorerTextFilter'
 import DataExplorerFilterInput from '../types/DataExplorerFilterInput'
 
 // --- DataExplorerFilterPanel --------------------------------------
 
 type DataExplorerFilterPanelProps = {
-  filters: DataExplorerFilterInput[],
-  store: DataExplorerStore
+  filters: DataExplorerFilterInput[]
 }
 
 const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>('DataExplorerFilterPanel')
-  .render(({ filters, store }) => {
+  .render(({ filters }) => {
     return styleDataExplorerFilterPanel(classes => {
       const rows = filters.map((filter: any) => {
         let filterField: any = null // TODO

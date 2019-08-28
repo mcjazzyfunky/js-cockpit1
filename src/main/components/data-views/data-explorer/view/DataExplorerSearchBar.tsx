@@ -7,7 +7,8 @@ import { MdClose, MdFilterList, MdCheck, MdUndo } from 'react-icons/md'
 // internal imports
 import styleDataExplorerSearchBar from './styleDataExplorerSearchBar'
 import DataExplorerProps from '../types/DataExplorerProps'
-import DataExplorerStore from '../types/DataExplorerStore'
+import DataExplorerState from '../types/DataExplorerState'
+import DataExplorerActions from '../types/DataExplorerActions'
 import DataExplorerFilter from '../types/DataExplorerFilter'
 import DataExplorerFilterPanel from './DataExplorerFilterPanel'
 
@@ -18,11 +19,11 @@ const { useCallback, useRef, useState } = React
 
 type SearchBarProps = {
   dataExplorerProps: DataExplorerProps,
-  dataExplorerStore: DataExplorerStore
+  dataExplorerActions: DataExplorerActions
 }
 
 const SearchBar = component<SearchBarProps>('SearchBar')
-  .render(({ dataExplorerProps: props, dataExplorerStore: store }) => { 
+  .render(({ dataExplorerProps: props, dataExplorerActions: actions }) => { 
     const
       [state, setState] = useState({
         calloutVisible: false,
@@ -47,7 +48,7 @@ const SearchBar = component<SearchBarProps>('SearchBar')
                 }]
               }
 
-        store.loadFilter(filter, props.loadData, () => {}) // TODO
+        actions.loadFilter(filter, props.loadData, () => {}) // TODO
       }, [])
 
     return styleDataExplorerSearchBar(classes => {
@@ -101,7 +102,7 @@ const SearchBar = component<SearchBarProps>('SearchBar')
                 onDismiss={ () => closeCallout()}
               >
                 <div className={classes.filterContainer}>
-                  <DataExplorerFilterPanel filters={(props as any).search.advanced.filters} store={store}/> 
+                  <DataExplorerFilterPanel filters={(props as any).search.advanced.filters} /> 
                 </div>
                 <CommandBar
                   items={[

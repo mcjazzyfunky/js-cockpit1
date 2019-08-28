@@ -2,16 +2,15 @@
 import React from 'react'
 import { css } from 'office-ui-fabric-react' 
 import { IoIosApps  as DefaultLogo } from 'react-icons/io'
-//import { FiLayers  as DefaultLogo } from 'react-icons/fi'
-//import { IoIosCloudOutline  as DefaultLogo } from 'react-icons/io'
 
 // internal imports
+import defaultBrandProps from '../defaults/defaultBrandProps'
 import styleBrand from './styleBrand'
 import BrandProps from '../types/BrandProps'
 
-// --- renderBrand --------------------------------------------------
+// --- BrandView ----------------------------------------------------
 
-function renderBrand(props: BrandProps) {
+function BrandView(props: BrandAttrs) {
   return styleBrand(classes => {
     const
       size = props.size,
@@ -68,6 +67,10 @@ function renderBrand(props: BrandProps) {
   })
 }
 
+// --- locals -------------------------------------------------------
+
+type BrandAttrs = BrandProps & typeof defaultBrandProps
+
 // --- exports ------------------------------------------------------
 
-export default renderBrand 
+export default BrandView

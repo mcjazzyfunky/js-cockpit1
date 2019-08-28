@@ -1,33 +1,18 @@
 // external imports
-import { component, isNode } from 'js-react-utils'
-import { Spec } from 'js-spec'
+import { component } from 'js-react-utils'
 
 // internal imports
 import BrandProps from './types/BrandProps'
-import renderBrand from './view/renderBrand'
+import validateBrandProps from './validation/validateBrandProps'
+import defaultBrandProps from './defaults/defaultBrandProps'
+import BrandView from './view/BrandView'
 
 // --- Brand --------------------------------------------------------
 
 const Brand = component<BrandProps>('Brand')
-  .validate(
-    Spec.checkProps({
-      required: {
-      },
-
-      optional: {
-        vender: Spec.string,
-        title: Spec.string,
-        logo: isNode,
-        size: Spec.oneOf('medium', 'large', 'huge'),
-        className: Spec.string,
-        style: Spec.object
-      }
-    })
-  )
-  .defaultProps({
-    size: 'medium'
-  })
-  .render(props => renderBrand(props))
+  .validate(validateBrandProps)
+  .defaultProps(defaultBrandProps)
+  .render(BrandView)
 
 // --- exports ------------------------------------------------------
 
