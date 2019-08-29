@@ -3,8 +3,8 @@ import BrandProps from '../types/BrandProps'
 
 // --- defaultBrandProps --------------------------------------------
 
-const defaultBrandProps: Partial<BrandProps> = {
-  size: 'medium'
+const defaultBrandProps = {
+  size: 'medium' as 'medium'
 }
 
 // --- exports ------------------------------------------------------

@@ -1,6 +1,5 @@
 // external imports
 import React from 'react'
-import { withDefaultProps } from 'js-react-utils'
 import { css } from 'office-ui-fabric-react' 
 import { IoIosApps  as DefaultLogo } from 'react-icons/io'
 
@@ -8,11 +7,12 @@ import { IoIosApps  as DefaultLogo } from 'react-icons/io'
 import defaultBrandProps from '../defaults/defaultBrandProps'
 import styleBrand from './styleBrand'
 import BrandProps from '../types/BrandProps'
+import useWithDefaultProps from '../../../../hooks/useWithDefaultProps'
 
 // --- BrandView ----------------------------------------------------
 
 function BrandView(rawProps: BrandProps) {
-  const props = defaultizeBrandProps(rawProps) 
+  const props = useWithDefaultProps(rawProps, defaultBrandProps)
 
   return styleBrand(classes => {
     const
@@ -69,12 +69,6 @@ function BrandView(rawProps: BrandProps) {
     )
   })
 }
-
-// --- locals -------------------------------------------------------
-
-type BrandAttrs = BrandProps & typeof defaultBrandProps
-
-const defaultizeBrandProps = withDefaultProps(defaultBrandProps)
 
 // --- exports ------------------------------------------------------
 
