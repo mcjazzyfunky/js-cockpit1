@@ -4,19 +4,21 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import LogoutButtonProps from './types/LogoutButtonProps'
-import renderLogoutButton from './view/renderLogoutButton'
+import LogoutButtonView from './view/renderLogoutButton'
 
 // --- LogoutButton -----------------------------------------------------
 
-const LogoutButton = component<LogoutButtonProps>('LogoutButton')
-  .validate(
-    Spec.checkProps({
-      optional: {
-        onClick: Spec.function
-      }
-    })
-  )
-  .render(renderLogoutButton)
+const LogoutButton = component<LogoutButtonProps>({
+  displayName: 'LogoutButton',
+
+  validate: Spec.checkProps({
+    optional: {
+      onClick: Spec.function
+    }
+  }),
+
+  render: LogoutButtonView
+})
 
 // --- exports ------------------------------------------------------
 

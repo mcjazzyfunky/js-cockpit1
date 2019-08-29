@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 // internal imports
 import DataFormProps from './types/DataFormProps'
 import DataFormCtrl from './ctrl/DataFormCtrl'
-import renderDataForm from './view/renderDataForm'
+import DataFormView from './view/DataFormView'
 import useForceUpdate from '../../../hooks/useForceUpdate'
 
 // derived imports
@@ -14,39 +14,37 @@ const { useState } = React
 
 // --- DataForm -----------------------------------------------------
 
-const DataForm = component<DataFormProps>('DataForm')
-  .validate(
-    Spec.checkProps({
-      required: {
-        title: Spec.string
-      },
+const DataForm = component<DataFormProps>({
+  displayName: 'DataForm',
 
-      optional: {
-        actions:
-          Spec.arrayOf(
-            Spec.and(
-              Spec.prop('type', Spec.oneOf('default')),
-              Spec.or({
-                when: Spec.prop('type', Spec.is('default')),
+  validate: Spec.checkProps({
+    required: {
+      title: Spec.string
+    },
 
-                then:
-                  Spec.exact({
-                    type: Spec.is('default'),
-                    text: Spec.string,
-                    icon: Spec.optional(isNode)
-                  })
-              }))),
+    optional: {
+      actions:
+        Spec.arrayOf(
+          Spec.and(
+            Spec.prop('type', Spec.oneOf('default')),
+            Spec.or({
+              when: Spec.prop('type', Spec.is('default')),
 
-        compact: Spec.boolean,
-        onClose: Spec.function,
-        children: withChildren(isNode)
-      }
-    })
-  )
-  .defaultProps({
-    compact: true
-  })
-  .render(props => {
+              then:
+                Spec.exact({
+                  type: Spec.is('default'),
+                  text: Spec.string,
+                  icon: Spec.optional(isNode)
+                })
+            }))),
+
+      compact: Spec.boolean,
+      onClose: Spec.function,
+      children: withChildren(isNode)
+    }
+  }),
+
+  render(props) {
     const
       forceUpdate = useForceUpdate(),
 
@@ -75,8 +73,9 @@ const DataForm = component<DataFormProps>('DataForm')
     })
     */
 
-    return renderDataForm(props, ctrl)
-  })
+    return DataFormView(props, ctrl)
+  }
+})
 
 // --- exports ------------------------------------------------------
 

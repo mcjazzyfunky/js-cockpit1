@@ -4,24 +4,23 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import MenuBarProps from './types/MenuBarProps'
-import renderMenuBar from './view/renderMenuBar'
+import MenuBarView from './view/MenuBarView'
 
 // --- MenuBar --------------------------------------------------------
 
-const MenuBar = component<MenuBarProps>('MenuBar')
-  .validate(
-    Spec.checkProps({
-      optional: {
-        onAction: Spec.function,
-        items: Spec.lazy(() => specItems),
-        showMenuBeaks: Spec.boolean
-      }
-    })
-  )
-  .defaultProps({
-    showMenuBeaks: true
-  })
-  .render(renderMenuBar)
+const MenuBar = component<MenuBarProps>({
+  displayName: 'MenuBar',
+
+  validate: Spec.checkProps({
+    optional: {
+      onAction: Spec.function,
+      items: Spec.lazy(() => specItems),
+      showMenuBeaks: Spec.boolean
+    }
+  }),
+
+  render: MenuBarView
+})
 
 // --- locals -------------------------------------------------------
 

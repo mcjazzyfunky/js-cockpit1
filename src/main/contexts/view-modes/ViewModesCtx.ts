@@ -7,14 +7,16 @@ type ViewModes = {
   readOnly: boolean
 }
 
-export default context<ViewModes>('ViewModesCtx')
-  .validate(
-    Spec.exact({
-      compact: Spec.boolean,
-      readOnly: Spec.boolean
-    })
-  )
-  .defaultValue({
+export default context<ViewModes>({
+  displayName: 'ViewModesCtx',
+
+  validate: Spec.exact({
+    compact: Spec.boolean,
+    readOnly: Spec.boolean
+  }),
+
+  defaultValue: {
     compact: false,
     readOnly: false
-  })
+  }
+})

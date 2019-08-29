@@ -12,52 +12,54 @@ const REGEX_NAME = /^[a-z][a-zA-Z0-9]+/
 
 // --- DataExplorer ------------------------------------------------
 
-const DataExplorer = component<DataExplorerProps>('DataExplorer')
-  .validate(
-    Spec.checkProps({
-      required: {
-        actions:
-          Spec.arrayOf(
-            Spec.and(
-              Spec.exact({
-                type: Spec.oneOf('default', 'singleRow', 'multiRow'),
-                text: Spec.string,
-                icon: Spec.optional(isNode)
-              }))),
+const DataExplorer = component<DataExplorerProps>({
+  displayName: 'DataExplorer',
 
-        columns:
-          Spec.arrayOf(
+  validate: Spec.checkProps({
+    required: {
+      actions:
+        Spec.arrayOf(
+          Spec.and(
             Spec.exact({
-              type: Spec.is('column'),
-              title: Spec.string,
-              field: Spec.optional(Spec.string),
-              align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
-              sortable: Spec.optional(Spec.boolean),
-              width: Spec.optional(Spec.integer)
-            })),
+              type: Spec.oneOf('default', 'singleRow', 'multiRow'),
+              text: Spec.string,
+              icon: Spec.optional(isNode)
+            }))),
 
-        loadData: Spec.function
-      },
+      columns:
+        Spec.arrayOf(
+          Spec.exact({
+            type: Spec.is('column'),
+            title: Spec.string,
+            field: Spec.optional(Spec.string),
+            align: Spec.optional(Spec.oneOf('start', 'center', 'end')),
+            sortable: Spec.optional(Spec.boolean),
+            width: Spec.optional(Spec.integer)
+          })),
 
-      optional: {
-        title: Spec.string,
+      loadData: Spec.function
+    },
 
-        search:
-          Spec.nullable(
-            Spec.lazy(() =>
-              Spec.or(
-                {
-                  when: Spec.prop('type', Spec.is('default')),
-                  then: specDefaultSearch 
-                },
-                {
-                  when: Spec.prop('type', Spec.is('sections')),
-                  then: specFilterSections
-                })))
-      }
-    })
-  )
-  .render(DataExplorerView)
+    optional: {
+      title: Spec.string,
+
+      search:
+        Spec.nullable(
+          Spec.lazy(() =>
+            Spec.or(
+              {
+                when: Spec.prop('type', Spec.is('default')),
+                then: specDefaultSearch 
+              },
+              {
+                when: Spec.prop('type', Spec.is('sections')),
+                then: specFilterSections
+              })))
+    }
+  }),
+  
+  render: DataExplorerView
+})
 
 // --- locals -------------------------------------------------------
 

@@ -20,7 +20,7 @@ type DataFormClasses = CssClassesOf<typeof styleDataForm>
 
 // --- renderDataForm -----------------------------------------------
 
-function renderDataForm(props: DataFormProps, ctrl: DataFormCtrl) {
+function DataFormView(props: DataFormProps, ctrl: DataFormCtrl) {
     let ret: ReactNode = styleDataForm(classes =>
       <FormCtrlCtx.Provider value={ctrl}>
         <div>
@@ -38,7 +38,7 @@ function renderDataForm(props: DataFormProps, ctrl: DataFormCtrl) {
     viewModes = useContext(ViewModesCtx),
     compact = props.compact === true
 
-  if (viewModes.compact !== compact) {
+  if (viewModes && viewModes.compact !== compact) {
     const newViewModes = { ...viewModes, compact }
 
     ret =
@@ -133,4 +133,4 @@ function renderActionBar(props: DataFormProps, classes: DataFormClasses) {
 
 // --- exports ------------------------------------------------------
 
-export default renderDataForm
+export default DataFormView

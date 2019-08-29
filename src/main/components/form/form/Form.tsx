@@ -36,40 +36,42 @@ interface IFormProps {
   children: ReactNode
 }
 
-const Form = component<IFormProps>('Form')
-  .validate(
-    Spec.checkProps({
-      required: {
-        fields:
-          Spec.and(
-            Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
-            Spec.valuesOf(
-              Spec.exact({
-                rules:
-                  Spec.arrayOf(
-                    Spec.exact({
-                      validate: Spec.function,
-                      errorMsg: Spec.string
-                    })),
+const Form = component<IFormProps>({
+  displayName: 'Form',
 
-                defaultValue:
-                  Spec.any
-              })))
-      },
+  validate: Spec.checkProps({
+    required: {
+      fields:
+        Spec.and(
+          Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
+          Spec.valuesOf(
+            Spec.exact({
+              rules:
+                Spec.arrayOf(
+                  Spec.exact({
+                    validate: Spec.function,
+                    errorMsg: Spec.string
+                  })),
 
-      optional: {
-        children: withChildren(isNode)
-      }
-    })
-  )
-  .render(props => {
+              defaultValue:
+                Spec.any
+            })))
+    },
+
+    optional: {
+      children: withChildren(isNode)
+    }
+  }),
+
+  render(props) {
     const
       formCtrl = new FormCtrl({
         fields: props.fields
       })
     
     return 'TODO'
-  })
+  }
+})
 
 interface IFormCtrlConfig {
   fields: { 

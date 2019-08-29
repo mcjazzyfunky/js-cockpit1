@@ -13,9 +13,9 @@ import CssClassesOf from '../../../../styling/types/CssClassesOf'
 // derived imports
 type AppMenuClasses = CssClassesOf<typeof styleAppMenu>
 
-// --- renderAppMenu --------------------------------------------
+// --- AppMenuView --------------------------------------------------
 
-function renderAppMenu(props: AppMenuProps) {
+function AppMenuView(props: AppMenuProps) {
   return styleAppMenu(classes =>
     <div data-component="AppMenu" className={classes.container}>
       <div data-component="AppMenu:inner" className={classes.inner}>
@@ -93,4 +93,4 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
 
 // --- experts ------------------------------------------------------
 
-export default renderAppMenu
+export default AppMenuView

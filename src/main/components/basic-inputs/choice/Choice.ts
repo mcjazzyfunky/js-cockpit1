@@ -4,31 +4,33 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import ChoiceProps from './types/ChoiceProps'
-import renderChoice from './view/renderChoice'
+import ChoiceView from './view/renderChoice'
 
 // --- Choice -------------------------------------------------------
 
-const Choice = component<ChoiceProps>('TextInput')
-  .validate(
-    Spec.checkProps({
-      required: {
-        options: 
-          Spec.arrayOf(
-            Spec.exact({
-              key: Spec.string,
-              text: Spec.string
-            }))
-      },
+const validateChoice = Spec.checkProps({
+  required: {
+    options: 
+      Spec.arrayOf(
+        Spec.exact({
+          key: Spec.string,
+          text: Spec.string
+        }))
+  },
 
-      optional: {
-        label: Spec.string,
-        name: Spec.string,
-        id: Spec.string,
-        grow: Spec.float,
-      }
-    })
-  )
-  .render(props => renderChoice(props))
+  optional: {
+    label: Spec.string,
+    name: Spec.string,
+    id: Spec.string,
+    grow: Spec.float,
+  }
+})
+
+const Choice = component<ChoiceProps>({
+  displayName: 'TextInput',
+  validate: validateChoice,
+  render: ChoiceView
+})
 
 // --- exports ------------------------------------------------------
 

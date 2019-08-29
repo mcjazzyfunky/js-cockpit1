@@ -8,17 +8,19 @@ import FormCtrl from './types/FormCtrl'
 
 // --- FormCtrlCtx --------------------------------------------------
 
-const FormCtrlCtx = context<FormCtrl | null>('FormCtx')
-  .validate(
-    Spec.exact({
-      getValue: Spec.function,
-      setValue: Spec.function,
-      getErrorMsg: Spec.function,
-      getRequired: Spec.function,
-      getDisabled: Spec.function
-    })
-  )
-  .defaultValue(null)
+const FormCtrlCtx = context<FormCtrl | null>({
+  displayName: 'FormCtx',
+
+  validate: Spec.exact({
+    getValue: Spec.function,
+    setValue: Spec.function,
+    getErrorMsg: Spec.function,
+    getRequired: Spec.function,
+    getDisabled: Spec.function
+  }),
+
+  defaultValue: null
+})
 
 // --- exports ------------------------------------------------------
 

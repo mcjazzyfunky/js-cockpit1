@@ -5,23 +5,25 @@ import { Spec } from 'js-spec'
 // internal imports
 import { PAGE_SIZE_OPTIONS } from '../misc/constants'
 import PageSizeSelectorProps from './types/PageSizeSelectorProps'
-import renderPageSizeSelector from './view/renderPageSizeSelector'
+import PageSizeSelectorView from './view/renderPageSizeSelector'
 
 // --- PageSizeSelector ---------------------------------------------
 
-const PageSizeSelector = component<PageSizeSelectorProps>('PageSizeSelector')
-  .validate(
-    Spec.checkProps({
-      required: {
-        pageSize: Spec.in(PAGE_SIZE_OPTIONS)
-      },
+const PageSizeSelector = component<PageSizeSelectorProps>({
+  displayName: 'PageSizeSelector',
 
-      optional: {
-        onPageSizeChange: Spec.function
-      }
-    })
-  )
-  .render(renderPageSizeSelector)
+  validate: Spec.checkProps({
+    required: {
+      pageSize: Spec.in(PAGE_SIZE_OPTIONS)
+    },
+
+    optional: {
+      onPageSizeChange: Spec.function
+    }
+  }),
+
+  render: PageSizeSelectorView
+})
 
 // --- exports ------------------------------------------------------
 

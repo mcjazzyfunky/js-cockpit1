@@ -11,67 +11,68 @@ import LoginFormProps from './types/LoginFormProps'
 
 // --- LoginForm ----------------------------------------------------
 
-const LoginForm = component<LoginFormProps>('LoginForm')
-  .validate(
-    Spec.checkProps({
-      optional: {
-        performLogin:
-          Spec.nullable(Spec.function),
-        
-        fullSize:
-          Spec.boolean,
+const LoginForm = component<LoginFormProps>({
+  displayName: 'LoginForm',
 
-        extraFields:
-          Spec.arrayOf(
-            Spec.and(
-              Spec.prop('type', Spec.oneOf('text', 'choice')),
+  validate: Spec.checkProps({
+    optional: {
+      performLogin:
+        Spec.nullable(Spec.function),
+      
+      fullSize:
+        Spec.boolean,
 
-              Spec.or(
-                {
-                  when: Spec.prop('type', Spec.is('text')),
-    
-                  then:
-                    Spec.exact({
-                      type: Spec.is('text'),
-                      key: Spec.string,
-                      label: Spec.string,
-                      defaultValue: Spec.optional(Spec.string)
-                    })
-                },
-                {
-                  when: Spec.prop('type', Spec.is('choice')),
+      extraFields:
+        Spec.arrayOf(
+          Spec.and(
+            Spec.prop('type', Spec.oneOf('text', 'choice')),
 
-                  then:
-                    Spec.exact({
-                      type: Spec.is('choice'),
-                      key: Spec.string,
-                      label: Spec.string,
-                      defaultValue: Spec.string,
+            Spec.or(
+              {
+                when: Spec.prop('type', Spec.is('text')),
+  
+                then:
+                  Spec.exact({
+                    type: Spec.is('text'),
+                    key: Spec.string,
+                    label: Spec.string,
+                    defaultValue: Spec.optional(Spec.string)
+                  })
+              },
+              {
+                when: Spec.prop('type', Spec.is('choice')),
 
-                      options: Spec.arrayOf(
-                        Spec.exact({
-                          value: Spec.string,
-                          text: Spec.string
-                        })
-                      )
-                    })
-                })
-            )
-          ),
-        
-        className:
-          Spec.nullable(Spec.string),
-        
-        style:
-          Spec.nullable(Spec.object),
+                then:
+                  Spec.exact({
+                    type: Spec.is('choice'),
+                    key: Spec.string,
+                    label: Spec.string,
+                    defaultValue: Spec.string,
 
-        slotHeader: isNode,
-        slotAbove: isNode,
-        slotBelow: isNode
-      }
-    })
-  )
-  .render(props => {
+                    options: Spec.arrayOf(
+                      Spec.exact({
+                        value: Spec.string,
+                        text: Spec.string
+                      })
+                    )
+                  })
+              })
+          )
+        ),
+      
+      className:
+        Spec.nullable(Spec.string),
+      
+      style:
+        Spec.nullable(Spec.object),
+
+      slotHeader: isNode,
+      slotAbove: isNode,
+      slotBelow: isNode
+    }
+  }),
+
+  render(props) {
     const initialValues: Record<string, any> = {
       username: '',
       password: ''
@@ -89,7 +90,8 @@ const LoginForm = component<LoginFormProps>('LoginForm')
     const store = useStore(() => createLoginFormStore(initialValues))
 
     return renderLoginForm(props, store)
-  })
+  }
+})
 
 // --- locals -------------------------------------------------------
 

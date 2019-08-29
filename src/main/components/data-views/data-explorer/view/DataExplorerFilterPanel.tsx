@@ -14,8 +14,10 @@ type DataExplorerFilterPanelProps = {
   filters: DataExplorerFilterInput[]
 }
 
-const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>('DataExplorerFilterPanel')
-  .render(({ filters }) => {
+const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>({
+  displayName: 'DataExplorerFilterPanel',
+
+  render({ filters }) {
     return styleDataExplorerFilterPanel(classes => {
       const rows = filters.map((filter: any) => {
         let filterField: any = null // TODO
@@ -48,7 +50,8 @@ const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>('DataExp
         </div>
       )
     })
-  })
+  }
+})
 
 // --- exports ------------------------------------------------------
 

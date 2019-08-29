@@ -8,22 +8,24 @@ import PaginatorView from './view/renderPaginator'
 
 // --- Paginator ----------------------------------------------------
 
-const Paginator = component<PaginatorProps>('Paginator')
-  .validate(
-    Spec.checkProps({
-      required: {
-        pageIndex: Spec.nonnegativeInteger,
-        pageSize: Spec.positiveInteger,
-        totalItemCOunt: Spec.nonnegativeInteger,
-        about: Spec.oneOf('items')
-      },
+const Paginator = component<PaginatorProps>({
+  displayName: 'Paginator',
 
-      optional: {
-        onPageChange: Spec.function
-      }
-    })
-  )
-  .render(PaginatorView)
+  validate: Spec.checkProps({
+    required: {
+      pageIndex: Spec.nonnegativeInteger,
+      pageSize: Spec.positiveInteger,
+      totalItemCOunt: Spec.nonnegativeInteger,
+      about: Spec.oneOf('items')
+    },
+
+    optional: {
+      onPageChange: Spec.function
+    }
+  }),
+
+  render: PaginatorView
+})
 
 // --- exports ------------------------------------------------------
 

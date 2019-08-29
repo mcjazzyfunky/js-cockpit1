@@ -7,9 +7,9 @@ import styleMenuBar from './styleMenuBar'
 import MenuBarProps from '../types/MenuBarProps'
 import MenuBarIcon from './MenuBarIcon'
 
-// --- renderMenuBar ------------------------------------------------
+// --- MenuBarView --------------------------------------------------
 
-function renderMenuBar(props: MenuBarProps) {
+function MenuBarView(props: MenuBarProps) {
   let
     ret = null,
     buttonAs: any = null
@@ -106,4 +106,4 @@ function getItemProps(items: any, baseOnAction: any) { // TODO
 
 // --- exports ------------------------------------------------------
 
-export default renderMenuBar
+export default MenuBarView

@@ -4,32 +4,34 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import CheckGroupProps from './types/CheckGroupProps'
-import renderCheckGroup from './view/renderCheckGroup'
+import CheckGroupView from './view/renderCheckGroup'
 
 // --- CheckGroup ---------------------------------------------------
 
-const CheckGroup = component<CheckGroupProps>('CheckGroup')
-  .validate(
-    Spec.checkProps({
-      required: {
-        options: 
-          Spec.arrayOf(
-            Spec.exact({
-              key: Spec.string,
-              text: Spec.string
-            }))
-      },
+const validateCheckGroup = Spec.checkProps({
+  required: {
+    options: 
+      Spec.arrayOf(
+        Spec.exact({
+          key: Spec.string,
+          text: Spec.string
+        }))
+  },
 
-      optional: {
-        label: Spec.string,
-        name: Spec.string,
-        selectedKeys: Spec.arrayOf(Spec.string),
-        orientation: Spec.oneOf('horizontal', 'vertical'),
-        grow: Spec.number
-      }
-    })
-  )
-  .render(props => renderCheckGroup(props))
+  optional: {
+    label: Spec.string,
+    name: Spec.string,
+    selectedKeys: Spec.arrayOf(Spec.string),
+    orientation: Spec.oneOf('horizontal', 'vertical'),
+    grow: Spec.number
+  }
+})
+
+const CheckGroup = component<CheckGroupProps>({
+  displayName: 'CheckGroup',
+  validate: validateCheckGroup,
+  render: CheckGroupView
+})
 
 // --- exports ------------------------------------------------------
 

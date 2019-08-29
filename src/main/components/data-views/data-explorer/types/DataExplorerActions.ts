@@ -1,4 +1,4 @@
-import { ActionsOf } from 'js-react-utils'
+import ActionsOf from '../../../../hooks/types/ActionsOf'
 
 import initDataExplorerActions from '../store/initDataExplorerActions'
 

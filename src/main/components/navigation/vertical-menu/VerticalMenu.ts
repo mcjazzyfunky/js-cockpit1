@@ -5,21 +5,23 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import VerticalMenuProps from './types/VerticalMenuProps'
-import renderVerticalMenu from './view/renderVerticalMenu'
+import VerticalMenuView from './view/renderVerticalMenu'
 
 // --- VerticalMenu ------------------------------------------------------
 
-const VerticalMenu = component<VerticalMenuProps>('VerticalMenu')
-  .validate(
-    Spec.checkProps({
-      optional: {
-        activeItemId: Spec.string,
-        collapsible: Spec.boolean,
-        items: Spec.lazy(() => specItems)
-      }
-    })
-  )
-  .render(renderVerticalMenu)
+const VerticalMenu = component<VerticalMenuProps>({
+  displayName: 'VerticalMenu',
+
+  validate: Spec.checkProps({
+    optional: {
+      activeItemId: Spec.string,
+      collapsible: Spec.boolean,
+      items: Spec.lazy(() => specItems)
+    }
+  }),
+
+  render: VerticalMenuView
+})
 
 // --- locals -------------------------------------------------------
 

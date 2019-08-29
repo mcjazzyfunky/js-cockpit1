@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "ES5",
     "jsx": "react",
+    "module": "es2015",
     "moduleResolution": "node",
+    "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,

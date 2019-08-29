@@ -22,8 +22,8 @@ type SearchBarProps = {
   dataExplorerActions: DataExplorerActions
 }
 
-const SearchBar = component<SearchBarProps>('SearchBar')
-  .render(({ dataExplorerProps: props, dataExplorerActions: actions }) => { 
+const SearchBar = component<SearchBarProps>('SearchBar',
+  ({ dataExplorerProps: props, dataExplorerActions: actions }) => { 
     const
       [state, setState] = useState({
         calloutVisible: false,
@@ -156,7 +156,8 @@ const SearchBar = component<SearchBarProps>('SearchBar')
         calloutVisible: false
       })
     }
-  })
+  }
+)
 
 // --- exports ------------------------------------------------------
 

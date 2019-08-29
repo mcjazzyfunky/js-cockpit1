@@ -8,7 +8,7 @@ import RadioGroupProps from '../types/RadioGroupProps'
 
 // --- renderRadioGroup ---------------------------------------------
 
-function renderDateInput(props: RadioGroupProps) {
+function ViewRadioGroup(props: RadioGroupProps) {
   const
     style =
       props.grow === undefined
@@ -44,4 +44,4 @@ function renderDateInput(props: RadioGroupProps) {
 
 // --- exports ------------------------------------------------------
 
-export default renderDateInput
+export default ViewRadioGroup

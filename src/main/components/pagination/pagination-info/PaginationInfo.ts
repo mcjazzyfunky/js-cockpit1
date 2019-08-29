@@ -8,18 +8,20 @@ import PaginationInfoView from './view/renderPaginatorInfo'
 
 // --- PaginationInfo ---------------------------------------------
 
-const PaginationInfo = component<PaginationInfoProps>('PaginationInfo')
-  .validate(
-    Spec.checkProps({
-      required: {
-        pageIndex: Spec.nonnegativeInteger,
-        pageSize: Spec.positiveInteger,
-        totalItemCOunt: Spec.nonnegativeInteger,
-        about: Spec.oneOf('items')
-      }
-    })
-  )
-  .render(PaginationInfoView)
+const PaginationInfo = component<PaginationInfoProps>({
+  displayName: 'PaginationInfo',
+
+  validate: Spec.checkProps({
+    required: {
+      pageIndex: Spec.nonnegativeInteger,
+      pageSize: Spec.positiveInteger,
+      totalItemCOunt: Spec.nonnegativeInteger,
+      about: Spec.oneOf('items')
+    }
+  }),
+
+  render: PaginationInfoView
+})
 
 // --- exports ------------------------------------------------------
 

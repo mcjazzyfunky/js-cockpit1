@@ -1,6 +1,5 @@
 // externals imports
 import React from 'react'
-import { useActions } from 'js-react-utils'
 import { css, CommandBar, Label, PrimaryButton, Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react'
 
 //import { FiFilter as FilterIcon } from 'react-icons/fi'
@@ -8,6 +7,7 @@ import { MdFilterList as FilterIcon } from 'react-icons/md'
 import { GoSearch as SearchIcon } from 'react-icons/go'
 
 // internal imports
+import useActions from '../../../../hooks/useActions'
 import styleDataExplorer from './styleDataExplorer'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerState from '../types/DataExplorerState'

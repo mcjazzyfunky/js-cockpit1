@@ -55,16 +55,18 @@ type TextFieldProps = {
   field?: FormFieldCtrl<any>
 }
 
-const TextField = component<TextFieldProps>('TextField')
-  .validate(
-    Spec.checkProps({
-      optional: {
-        label: Spec.string,
-        field: Spec.object
-      }
-    })
-  )
-  .render(() => null) // TODO
+const TextField = component<TextFieldProps>({
+  displayName: 'TextField',
+
+  validate: Spec.checkProps({
+    optional: {
+      label: Spec.string,
+      field: Spec.object
+    }
+  }),
+
+  render: () => null // TODO
+})
 
 type FormProps<T extends FormConfig> = {
   fields: {
@@ -73,32 +75,34 @@ type FormProps<T extends FormConfig> = {
   children: FormCtrl<T>
 }
 
-const Form = component<FormProps<FormConfig>>('form')
-  .validate(
-    Spec.checkProps({
-      optional: {
-        fields:
-          Spec.and(
-            Spec.object,
-            Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
-            Spec.valuesOf(
-                Spec.exact({
-                  rules:
-                    Spec.arrayOf(
-                      Spec.exact({
-                        validate: Spec.function,
-                        errorMsg: Spec.string
-                      })),
+const Form = component<FormProps<FormConfig>>({
+  displayName: 'Form',
 
-                  defaultValue:
-                    Spec.any
-                }))),
+  validate: Spec.checkProps({
+    optional: {
+      fields:
+        Spec.and(
+          Spec.object,
+          Spec.keysOf(Spec.match(/^[a-z][a-zA-Z0-9]$/)),
+          Spec.valuesOf(
+              Spec.exact({
+                rules:
+                  Spec.arrayOf(
+                    Spec.exact({
+                      validate: Spec.function,
+                      errorMsg: Spec.string
+                    })),
 
-        children: withChildren(Spec.singleOf(Spec.function))
-      }
-    })
-  )
-  .render(props => null) // TODO
+                defaultValue:
+                  Spec.any
+              }))),
+
+      children: withChildren(Spec.singleOf(Spec.function))
+    }
+  }),
+
+  render: props => null // TODO
+})
 
 /*
 void(
