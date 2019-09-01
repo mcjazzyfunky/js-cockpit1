@@ -1,18 +1,19 @@
 // external import
 import React, { KeyboardEvent, ReactNode } from 'react'
+import { component } from 'js-react-utils'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
 import stylePaginator from './stylePaginator'
-import PaginatorProps from '../types/PaginatorProps'
+import PaginatorViewProps from '../types/PaginatorViewProps'
 import ArrowDoubleLeftIcon from '../../../../icons/ArrowDoubleLeftIcon' 
 import ArrowDoubleRightIcon from '../../../../icons/ArrowDoubleRightIcon' 
 import ArrowLeftIcon from '../../../../icons/ArrowLeftIcon' 
 import ArrowRightIcon from '../../../../icons/ArrowRightIcon' 
 
-// --- renderPaginator ----------------------------------------------
+// --- PaginatorView ------------------------------------------------
 
-function renderPaginator(props: PaginatorProps): ReactNode {
+const PaginatorView = component<PaginatorViewProps>('PaginatorView', props => {
   const
     { pageIndex, pageSize, totalItemCount, onPageChange } = props,
     lastPageIndex = Math.ceil(totalItemCount / pageSize) - 1,
@@ -80,7 +81,7 @@ function renderPaginator(props: PaginatorProps): ReactNode {
       </button>
     </div>
   )
-}
+})
 
 // --- helpers ------------------------------------------------------
 
@@ -101,4 +102,4 @@ function handleKeyDown(event: KeyboardEvent, pageIndex: number, totalItemCount: 
 
 // --- exports ------------------------------------------------------
 
-export default renderPaginator
+export default PaginatorView

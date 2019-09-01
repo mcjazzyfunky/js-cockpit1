@@ -4,26 +4,14 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import PaginatorProps from './types/PaginatorProps'
-import PaginatorView from './view/renderPaginator'
+import PaginatorView from './view/PaginatorView'
+import validatePaginatorProps from '../validation/validatPaginatorProps'
 
 // --- Paginator ----------------------------------------------------
 
 const Paginator = component<PaginatorProps>({
   displayName: 'Paginator',
-
-  validate: Spec.checkProps({
-    required: {
-      pageIndex: Spec.nonnegativeInteger,
-      pageSize: Spec.positiveInteger,
-      totalItemCOunt: Spec.nonnegativeInteger,
-      about: Spec.oneOf('items')
-    },
-
-    optional: {
-      onPageChange: Spec.function
-    }
-  }),
-
+  validate: validatePaginatorProps,
   render: PaginatorView
 })
 

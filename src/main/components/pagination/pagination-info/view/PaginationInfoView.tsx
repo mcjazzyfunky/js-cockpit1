@@ -1,13 +1,16 @@
 // external imports
 import React, { ReactNode } from 'react'
+import { component } from 'js-react-utils'
 
 // internal imports
 import stylePaginationInfo from './stylePaginatorInfo'
-import PaginationInfoProps from '../types/PaginationInfoProps'
+import PaginationInfoViewProps from '../types/PaginationInfoViewProps'
 
-// --- PaginationInfoRenderer ---------------------------------------
+// --- PaginationInfoView -------------------------------------------
 
-function renderPaginationInfo(props: PaginationInfoProps) {
+const PaginationInfoView = component<PaginationInfoViewProps>(
+  'PaginationInfoView', props => {
+
   let content: ReactNode = null
 
   const
@@ -19,20 +22,20 @@ function renderPaginationInfo(props: PaginationInfoProps) {
 
   switch (props.about) {
     case 'items':
-    content =
+      content =
         <div>
-        Items {itemNumberStart}-{itemNumberEnd} of {totalItemCount}
+          Items {itemNumberStart}-{itemNumberEnd} of {totalItemCount}
         </div>
     break
   }
 
   return stylePaginationInfo(classes =>
     <div className={classes.container}>
-        { content }
+      { content }
     </div>
   ) 
-}
+})
 
 // --- exports ------------------------------------------------------
 
-export default renderPaginationInfo
+export default PaginationInfoView
