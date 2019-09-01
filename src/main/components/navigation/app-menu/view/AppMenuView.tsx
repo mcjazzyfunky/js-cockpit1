@@ -1,7 +1,6 @@
 // external imports
 import React, { ReactNode } from 'react'
-import { css, Callout, Pivot, PivotItem } from 'office-ui-fabric-react' 
-import { FiLoader } from 'react-icons/fi'
+import { Callout, Pivot, PivotItem } from 'office-ui-fabric-react' 
 
 // internal imports
 import styleAppMenu from './styleAppMenu'

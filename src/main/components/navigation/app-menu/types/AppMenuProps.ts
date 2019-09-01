@@ -1,6 +1,3 @@
-// external imports
-import { CSSProperties, ReactNode } from 'react'
-
 //internal imports
 import AppSelectionEvent from '../../../../events/AppSelectionEvent'
 
