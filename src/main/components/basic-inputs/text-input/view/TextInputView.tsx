@@ -1,19 +1,22 @@
 // external imports
 import React from 'react'
+import { component } from 'js-react-utils'
 import { Label, TextField } from 'office-ui-fabric-react'
 
 // internal imports
-import styleTextInput from './styleTextInput'
-import TextInputProps from '../types/TextInputProps'
-import createUniqueId from '../../../../tools/createUniqueId'
+import TextInputViewProps from '../types/TextInputViewProps'
 import FormCtrlCtx from '../../../../contexts/form-ctx/FormCtrlCtx'
+import styleTextInput from './styleTextInput'
+import createUniqueId from '../../../../tools/createUniqueId'
 
 // derived imports
 const { useContext } = React
 
-// --- renderTextInput ----------------------------------------------
+// --- TextInputView ------------------------------------------------
 
-function renderTextInput(props: TextInputProps) {
+const TextInputView = component<TextInputViewProps>(
+  'TextInputView', props => {
+
   const
     ctrl = useContext(FormCtrlCtx),
   
@@ -92,10 +95,8 @@ function renderTextInput(props: TextInputProps) {
       </div>
     )
   )
-}
-
-// --- locals -------------------------------------------------------
+})
 
 // --- exports ------------------------------------------------------
 
-export default renderTextInput
+export default TextInputView

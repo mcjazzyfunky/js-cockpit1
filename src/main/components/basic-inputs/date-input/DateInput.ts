@@ -4,22 +4,14 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import DateInputProps from './types/DateInputProps'
-import DateInputView from './view/renderDateInput'
+import DateInputView from './view/DateInputView'
+import validateDateInputProps from './validation/validateDataInputProps'
 
 // --- DateInput ----------------------------------------------------
 
-const validateDateInput = Spec.checkProps({
-  optional: {
-    label: Spec.string,
-    name: Spec.string,
-    id: Spec.string,
-    grow: Spec.float
-  }
-})
-
 const DateInput = component<DateInputProps>({
   displayName: 'DateInput',
-  validate: validateDateInput,
+  validate: validateDateInputProps,
   render: DateInputView
 })
 

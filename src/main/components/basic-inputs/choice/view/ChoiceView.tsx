@@ -1,15 +1,18 @@
 // external imports
-import React, { ReactElement } from 'react'
+import React from 'react'
+import { component } from 'js-react-utils'
 import { Dropdown, Label } from 'office-ui-fabric-react'
 
 // internal imports
+import ChoiceViewProps from '../types/ChoiceViewProps'
 import styleChoice from './styleChoice'
-import ChoiceProps from '../types/ChoiceProps'
 import createUniqueId from '../../../../tools/createUniqueId'
 
-// --- renderTextField ------------------------------------------------
+// --- ChoiceView ---------------------------------------------------
 
-function renderChoice(props: ChoiceProps) {
+const ChoiceView = component<ChoiceViewProps>(
+  'ChoiceView', props => {
+
   const
     style =
       props.grow === undefined
@@ -35,10 +38,8 @@ function renderChoice(props: ChoiceProps) {
       </div>
     )
   )
-}
-
-// --- locals -------------------------------------------------------
+})
 
 // --- exports ------------------------------------------------------
 
-export default renderChoice
+export default ChoiceView

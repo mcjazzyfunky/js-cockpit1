@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 
 // internal imports
 import VerticalMenuProps from './types/VerticalMenuProps'
-import VerticalMenuView from './view/renderVerticalMenu'
+import VerticalMenuView from './view/VerticalMenuView'
 
 // --- VerticalMenu ------------------------------------------------------
 

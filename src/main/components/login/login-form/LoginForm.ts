@@ -5,72 +5,16 @@ import { initStore } from 'js-stores'
 import { useStore } from 'js-stores/with-react'
 
 // internal imports
-import LoginFormStore from './types/LoginFormStore'
-import renderLoginForm from './view/renderLoginForm'
 import LoginFormProps from './types/LoginFormProps' 
+import LoginFormView from './view/LoginFormView'
+import LoginFormStore from './types/LoginFormStore'
+import validateLoginFormProps from './validation/validateLoginFormProps'
 
 // --- LoginForm ----------------------------------------------------
 
 const LoginForm = component<LoginFormProps>({
   displayName: 'LoginForm',
-
-  validate: Spec.checkProps({
-    optional: {
-      performLogin:
-        Spec.nullable(Spec.function),
-      
-      fullSize:
-        Spec.boolean,
-
-      extraFields:
-        Spec.arrayOf(
-          Spec.and(
-            Spec.prop('type', Spec.oneOf('text', 'choice')),
-
-            Spec.or(
-              {
-                when: Spec.prop('type', Spec.is('text')),
-  
-                then:
-                  Spec.exact({
-                    type: Spec.is('text'),
-                    key: Spec.string,
-                    label: Spec.string,
-                    defaultValue: Spec.optional(Spec.string)
-                  })
-              },
-              {
-                when: Spec.prop('type', Spec.is('choice')),
-
-                then:
-                  Spec.exact({
-                    type: Spec.is('choice'),
-                    key: Spec.string,
-                    label: Spec.string,
-                    defaultValue: Spec.string,
-
-                    options: Spec.arrayOf(
-                      Spec.exact({
-                        value: Spec.string,
-                        text: Spec.string
-                      })
-                    )
-                  })
-              })
-          )
-        ),
-      
-      className:
-        Spec.nullable(Spec.string),
-      
-      style:
-        Spec.nullable(Spec.object),
-
-      slotHeader: isNode,
-      slotAbove: isNode,
-      slotBelow: isNode
-    }
-  }),
+  validate: validateLoginFormProps,
 
   render(props) {
     const initialValues: Record<string, any> = {
@@ -89,7 +33,7 @@ const LoginForm = component<LoginFormProps>({
 
     const store = useStore(() => createLoginFormStore(initialValues))
 
-    return renderLoginForm(props, store)
+    return LoginFormView({ ...props, store })
   }
 })
 

@@ -1,18 +1,21 @@
 // externals imports
 import React, { ReactNode } from 'react'
+import { component } from 'js-react-utils'
 import { Nav, INavLink, IRenderFunction, INavLinkGroup } from 'office-ui-fabric-react'
 
 // internal imports
+import VerticalMenuViewProps from '../types/VerticalMenuViewProps'
 import styleVerticalMenu from './styleVerticalMenu'
-import VerticalMenuProps from '../types/VerticalMenuProps'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 
 // derived imports
 type VerticalMenuClasses = CssClassesOf<typeof styleVerticalMenu>
 
-// --- VerticalMenu View -------------------------------------------------
+// --- VerticalMenuView ---------------------------------------------
 
-function VerticalMenuView(props: VerticalMenuProps) {
+const VerticalMenuView = component<VerticalMenuViewProps>(
+  'VerticalMenuView', props => {
+
   let ret = undefined
 
   if (props.items) {
@@ -42,9 +45,9 @@ function VerticalMenuView(props: VerticalMenuProps) {
   }
 
   return ret
-}
+})
 
-// --- helpers ------------------------------------------------------
+// --- locals -------------------------------------------------------
 
 function getLinkGroups(items: any): INavLinkGroup[] { // TODO
   const

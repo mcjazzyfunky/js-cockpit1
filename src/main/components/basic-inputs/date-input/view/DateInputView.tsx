@@ -1,15 +1,18 @@
 // external imports
 import React from 'react'
+import { component } from 'js-react-utils'
 import { DatePicker, Label } from 'office-ui-fabric-react'
 
 // internal imports
+import DateInputViewProps from '../types/DateInputViewProps'
 import styleTextInput from './styleDateInput'
-import DateInputProps from '../types/DateInputProps'
 import createUniqueId from '../../../../tools/createUniqueId'
 
 // --- renderDateInput ----------------------------------------------
 
-function renderDateInput(props: DateInputProps) {
+const DateInputView = component<DateInputViewProps>(
+  'DateInputView', props => {
+
   const
     style =
       props.grow === undefined
@@ -37,10 +40,8 @@ function renderDateInput(props: DateInputProps) {
       </div>
     )
   )
-}
-
-// --- locals -------------------------------------------------------
+})
 
 // --- exports ------------------------------------------------------
 
-export default renderDateInput
+export default DateInputView 

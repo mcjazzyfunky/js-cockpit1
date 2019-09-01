@@ -1,25 +1,26 @@
 // external imports
 import React, { ReactNode, ReactElement, FormEvent } from 'react'
 import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, TextField, Dropdown } from 'office-ui-fabric-react'
-//import { IoIosContact as DefaultIcon } from 'react-icons/io'
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
 import styleLoginForm from './styleLoginForm'
-import LoginFormProps from '../types/LoginFormProps'
+import LoginFormViewProps from '../types/LoginFormViewProps'
 import LoginFormStore from '../types/LoginFormStore'
 import CssClassesOf from '../../../../styling/types/CssClassesOf';
 
 // derived imports
 const { useCallback } = React
 
-// --- renderLoginForm ----------------------------------------------
+// --- LoginFormView ------------------------------------------------
 
-function renderLoginForm(props: LoginFormProps, store: LoginFormStore) {
+function renderLoginForm(props: LoginFormViewProps) {
     let
       headerBox: ReactNode | null = null,
       aboveBox: ReactNode | null = null,
       belowBox: ReactNode | null = null
+
+    const store = props.store
 
     const onSubmit = useCallback((ev: FormEvent) => {
       ev.preventDefault()
@@ -102,7 +103,7 @@ function renderLoginForm(props: LoginFormProps, store: LoginFormStore) {
                       />
                     </div>
                   </div>
-                  {renderExtraFields(props, store, classes)}
+                  {renderExtraFields(props, classes)}
                 </div>
                 <div className={classes.generalError}>
                     {store.getGeneralErrorMsg()}
@@ -144,11 +145,12 @@ function renderLoginForm(props: LoginFormProps, store: LoginFormStore) {
 type LoginFormCssClasses = CssClassesOf<typeof styleLoginForm>
 
 function renderExtraFields(
-  props: LoginFormProps,
-  store: LoginFormStore,
+  props: LoginFormViewProps,
   classes: LoginFormCssClasses
 ) {
   let ret: ReactNode = null
+
+  const store = props.store
 
   if (props.extraFields && props.extraFields.length > 0) {
     const fields = props.extraFields.map((extraField, idx) => {

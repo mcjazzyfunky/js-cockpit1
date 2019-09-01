@@ -1,14 +1,17 @@
 // external imports
-import React, { ReactNode } from 'react'
+import React from 'react'
+import { component } from 'js-react-utils'
 import { ChoiceGroup, Label } from 'office-ui-fabric-react'
 
 // internal imports
 import styleRadioGroup from './styleRadioGroup'
-import RadioGroupProps from '../types/RadioGroupProps'
+import RadioGroupViewProps from '../types/RadioGroupViewProps'
 
-// --- renderRadioGroup ---------------------------------------------
+// --- RadioGroupView -----------------------------------------------
 
-function ViewRadioGroup(props: RadioGroupProps) {
+const ViewRadioGroup = component<RadioGroupViewProps>(
+  'RadioGroupView', props => {
+
   const
     style =
       props.grow === undefined
@@ -38,9 +41,7 @@ function ViewRadioGroup(props: RadioGroupProps) {
       </div>
     )
   })
-}
-
-// --- locals -------------------------------------------------------
+})
 
 // --- exports ------------------------------------------------------
 

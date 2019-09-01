@@ -1,13 +1,16 @@
 // external imports
-import React, { ReactNode } from 'react'
+import React from 'react'
+import { component } from 'js-react-utils'
 
 // internal imports
+import CockpitViewProps from '../types/CockpitViewProps'
 import styleCockpit from './styleCockpit'
-import CockpitProps from '../types/CockpitProps'
 
-// --- renderCockpit ------------------------------------------------
+// --- CockpitView --------------------------------------------------
 
-function renderCockpit(props: CockpitProps) {
+const CockpitView = component<CockpitViewProps>(
+  'CockpitViewProps', props => {
+
   return styleCockpit(classes => {
     const header =
       !props.slotBrand && !props.slotTopNav && !props.slotUserNav
@@ -41,8 +44,8 @@ function renderCockpit(props: CockpitProps) {
       </div>
     )
   })
-}
+})
 
 // --- exports ------------------------------------------------------
 
-export default renderCockpit 
+export default CockpitView 

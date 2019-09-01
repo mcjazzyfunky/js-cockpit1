@@ -1,15 +1,18 @@
 // external imports
 import React from 'react'
-import { CommandBar, DirectionalHint, CommandBarButton } from 'office-ui-fabric-react'
+import { component } from 'js-react-utils'
+import { CommandBar, CommandBarButton } from 'office-ui-fabric-react'
 
 // internal imports
 import styleMenuBar from './styleMenuBar'
-import MenuBarProps from '../types/MenuBarProps'
+import MenuBarViewProps from '../types/MenuBarViewProps'
 import MenuBarIcon from './MenuBarIcon'
 
 // --- MenuBarView --------------------------------------------------
 
-function MenuBarView(props: MenuBarProps) {
+const MenuBarView = component<MenuBarViewProps>(
+  'MenuBarView', props => {
+
   let
     ret = null,
     buttonAs: any = null
@@ -44,7 +47,7 @@ function MenuBarView(props: MenuBarProps) {
   }
 
   return ret
-}
+})
 
 // --- locals -------------------------------------------------------
 

@@ -1,12 +1,9 @@
-// external imports
-import { ReactNode } from 'react'
-
 // --- MenuBarProps --------------------------------------------------
 
 type MenuBarProps = {
-  onAction?: () => void,
   items: (Menu | Item | Divider)[],
-  showMenuBeaks?: boolean
+  showMenuBeaks?: boolean,
+  onAction?: () => void
 }
 
 // --- locals -------------------------------------------------------

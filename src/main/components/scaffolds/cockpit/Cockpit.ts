@@ -1,26 +1,16 @@
 // external import
-import { component, isNode } from 'js-react-utils'
-import { Spec } from 'js-spec'
+import { component } from 'js-react-utils'
 
 // internals import
 import CockpitProps from './types/CockpitProps'
-import CockpitView from './view/renderCockpit'
+import CockpitView from './view/CockpitView'
+import validateCockpitProps from './validation/validateCockpitProps'
 
 // --- Cockpit ------------------------------------------------
 
 const Cockpit = component<CockpitProps>({
   displayName: 'Cockpit',
-
-  validate: Spec.checkProps({
-    optional: {
-      slotBrand: isNode,
-      slotTopNav: isNode,
-      slotUserNav: isNode,
-      slotSidebar: isNode,
-      slotCenter: isNode
-    }
-  }),
-
+  validate: validateCockpitProps,
   render: CockpitView
 })
 
