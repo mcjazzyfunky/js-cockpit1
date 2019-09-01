@@ -1,23 +1,19 @@
 // external imports
 import React from 'react'
+import { component } from 'js-react-utils'
 import { css } from 'office-ui-fabric-react' 
 import { IoIosApps  as DefaultLogo } from 'react-icons/io'
 
 // internal imports
-import defaultBrandProps from '../defaults/defaultBrandProps'
 import styleBrand from './styleBrand'
-import BrandProps from '../types/BrandProps'
-import useWithDefaultProps from '../../../../hooks/useWithDefaultProps'
+import BrandViewProps from '../types/BrandViewProps'
 
 // --- BrandView ----------------------------------------------------
 
-function BrandView(rawProps: BrandProps) {
-  const props = useWithDefaultProps(rawProps, defaultBrandProps)
-
+const BrandView = component<BrandViewProps>('BrandView', props => {
   return styleBrand(classes => {
     const
-      size = props.size,
-      sizePascalCase = !size ? null : size[0].toUpperCase() + size.substring(1),
+      sizePascalCase = !props.size ? null : props.size[0].toUpperCase() + props.size.substring(1),
       vendorClassName: string = css(classes.vendor, (classes as any)[`vendor${sizePascalCase}`]),
       titleClassName: string = css(classes.title, (classes as any)[`title${sizePascalCase}`]),
       logoClassName: string = css(classes.logo, (classes as any)[`logo${sizePascalCase}`])
@@ -56,19 +52,17 @@ function BrandView(rawProps: BrandProps) {
       </div>
 
     return (
-      <div className={props.className} style={props.style}>
-        <div className={classes.container}>
-          <div className={classes.firstColumn}>
-              {firstColumnContent}
-          </div>
-          <div className={classes.secondColumn}>
-            {secondColumnContent}
-          </div>
+      <div data-component="Brand" className={classes.container}>
+        <div className={classes.firstColumn}>
+            {firstColumnContent}
+        </div>
+        <div className={classes.secondColumn}>
+          {secondColumnContent}
         </div>
       </div>
     )
   })
-}
+})
 
 // --- exports ------------------------------------------------------
 

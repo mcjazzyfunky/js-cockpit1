@@ -4,7 +4,7 @@ import BrandProps from '../types/BrandProps'
 // --- defaultBrandProps --------------------------------------------
 
 const defaultBrandProps = {
-  size: 'medium' as 'medium'
+  size: 'medium'
 }
 
 // --- exports ------------------------------------------------------

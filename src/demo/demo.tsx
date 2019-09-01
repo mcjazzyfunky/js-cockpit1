@@ -458,8 +458,8 @@ function Demo() {
       }
     />
 
-  //return loginScreen
-  return cockpit 
+  return loginScreen
+  //return cockpit 
 }
 
 function fakeData(count: number) {

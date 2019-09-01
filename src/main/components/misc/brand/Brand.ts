@@ -1,17 +1,18 @@
 // external imports
-import { component } from 'js-react-utils'
+import { component, withDefaultProps } from 'js-react-utils'
 
 // internal imports
 import BrandProps from './types/BrandProps'
-import validateBrandProps from './validation/validateBrandProps'
 import BrandView from './view/BrandView'
+import validateBrandProps from './validation/validateBrandProps'
+import defaultBrandProps from './defaults/defaultBrandProps'
 
 // --- Brand --------------------------------------------------------
 
 const Brand = component<BrandProps>({
   displayName: 'Brand',
   validate: validateBrandProps,
-  render: BrandView
+  render: withDefaultProps(defaultBrandProps, BrandView)
 })
 
 // --- exports ------------------------------------------------------
