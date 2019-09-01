@@ -4,7 +4,7 @@ import PageSizeChangeEvent from '../../../../events/PageSizeChangeEvent'
 // --- PageSizeSelectorProps ----------------------------------------
 
 type PageSizeSelectorProps = {
-  pageSize: number,
+  pageSize?: number,
   onPageSizeChange?: (event: PageSizeChangeEvent) => void
 }
 

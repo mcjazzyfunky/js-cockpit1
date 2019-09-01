@@ -1,8 +1,10 @@
+// internal imports
 import CheckGroupProps from '../types/CheckGroupProps'
+import PickOptionalProps from '../../../../types/PickOptionalProps'
 
 // --- defaultCheckGroupProps ---------------------------------------
 
-const defaultCheckGroupProps: Partial<CheckGroupProps> = {
+const defaultCheckGroupProps: PickOptionalProps<CheckGroupProps> = {
   orientation: 'vertical'
 }
 
