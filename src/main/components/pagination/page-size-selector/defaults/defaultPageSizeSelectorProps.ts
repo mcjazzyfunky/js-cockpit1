@@ -1,6 +1,9 @@
+// internal imports
+import PageSizeSelectorProps from '../types/PageSizeSelectorProps'
+
 // --- defaultPageSizeSelectorProps ---------------------------------
 
-const defaultPageSizeSelectorProps = {
+const defaultPageSizeSelectorProps: Partial<PageSizeSelectorProps> = {
   pageSize: 25
 }
 

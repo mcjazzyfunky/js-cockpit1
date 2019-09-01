@@ -453,8 +453,8 @@ function Demo() {
       }
 
       slotCenter={
-        //dataForm
-        dataExplorer
+        dataForm
+        //dataExplorer
       }
     />
 

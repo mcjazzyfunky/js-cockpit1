@@ -9,4 +9,4 @@ the develpment of administration applications
 
 ## Project status
 
-This project is in alpha state - please do not use it in production yet.
+This project is in pre-alpha state.

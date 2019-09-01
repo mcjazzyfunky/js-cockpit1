@@ -1,14 +1,17 @@
 // external imports
 import React, { ReactNode } from 'react'
+import { component } from 'js-react-utils'
 import { Checkbox, Label } from 'office-ui-fabric-react'
 
 // internal imports
+import CheckGroupViewProps from '../types/CheckGroupViewProps'
 import styleCheckGroup from './styleCheckGroup'
-import CheckGroupProps from '../types/CheckGroupProps'
 
-// --- renderCheckGroup ---------------------------------------------
+// --- CheckGroupView -----------------------------------------------
 
-function renderDateInput(props: CheckGroupProps) {
+const CheckGroupView = component<CheckGroupViewProps>(
+  'CheckGroupView', props => {
+
   const
     style =
       props.grow === undefined
@@ -44,10 +47,10 @@ function renderDateInput(props: CheckGroupProps) {
       </div>
     )
   })
-}
+})
 
 // --- locals -------------------------------------------------------
 
 // --- exports ------------------------------------------------------
 
-export default renderDateInput
+export default CheckGroupView

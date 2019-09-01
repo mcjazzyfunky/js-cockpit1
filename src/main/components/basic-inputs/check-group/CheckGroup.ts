@@ -1,36 +1,18 @@
 // external imports
-import { component } from 'js-react-utils'
-import { Spec } from 'js-spec'
+import { component, withDefaultProps } from 'js-react-utils'
 
 // internal imports
 import CheckGroupProps from './types/CheckGroupProps'
-import CheckGroupView from './view/renderCheckGroup'
+import CheckGroupView from './view/CheckGroupView'
+import validateCheckGroup from './validate/validateCheckGroupProps'
+import defaultCheckGroupProps from './defaults/defaultCheckGroupProps'
 
 // --- CheckGroup ---------------------------------------------------
-
-const validateCheckGroup = Spec.checkProps({
-  required: {
-    options: 
-      Spec.arrayOf(
-        Spec.exact({
-          key: Spec.string,
-          text: Spec.string
-        }))
-  },
-
-  optional: {
-    label: Spec.string,
-    name: Spec.string,
-    selectedKeys: Spec.arrayOf(Spec.string),
-    orientation: Spec.oneOf('horizontal', 'vertical'),
-    grow: Spec.number
-  }
-})
 
 const CheckGroup = component<CheckGroupProps>({
   displayName: 'CheckGroup',
   validate: validateCheckGroup,
-  render: CheckGroupView
+  render: withDefaultProps(defaultCheckGroupProps, CheckGroupView)
 })
 
 // --- exports ------------------------------------------------------
