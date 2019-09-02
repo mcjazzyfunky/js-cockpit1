@@ -6,13 +6,11 @@ import { Spec } from 'js-spec'
 
 const validateBrandProps = Spec.checkProps({
   optional: {
-    vender: Spec.string,
+    vendor: Spec.string,
     title: Spec.string,
     logo: isNode,
-    size: Spec.oneOf('medium', 'large', 'huge'),
-    className: Spec.string,
-    style: Spec.object
-    }
+    size: Spec.oneOf('medium', 'large', 'huge')
+  }
 })
 
 // --- exports ------------------------------------------------------

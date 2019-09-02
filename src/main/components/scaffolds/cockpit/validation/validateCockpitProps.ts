@@ -9,6 +9,7 @@ const validateCockpitProps = Spec.checkProps({
     slotBrand: isNode,
     slotTopNav: isNode,
     slotUserNav: isNode,
+    slotMenu: isNode,
     slotSidebar: isNode,
     slotCenter: isNode
   }

@@ -10,7 +10,7 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('teal', true)
+loadThemeByName('green', true)
 
 const menuBar = 
   <MenuBar
@@ -458,8 +458,8 @@ function Demo() {
       }
     />
 
-  //return loginScreen
-  return cockpit 
+  return loginScreen
+  //return cockpit 
 }
 
 function fakeData(count: number) {

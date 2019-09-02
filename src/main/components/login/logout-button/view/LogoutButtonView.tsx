@@ -14,9 +14,11 @@ const LogoutButtonView = component<LogoutButtonViewProps>(
 
   return styleUserMenu(classes => {
     return (
-      <button className={classes.logoutButton}>
-        <LogoutIcon/>
-      </button>
+      <div data-component="LogoutButton">
+        <button className={classes.logoutButton}>
+          <LogoutIcon/>
+        </button>
+      </div>
     )
   })
 })

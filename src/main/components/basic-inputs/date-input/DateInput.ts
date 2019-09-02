@@ -1,6 +1,5 @@
 // external imports
 import { component } from 'js-react-utils'
-import { Spec } from 'js-spec'
 
 // internal imports
 import DateInputProps from './types/DateInputProps'

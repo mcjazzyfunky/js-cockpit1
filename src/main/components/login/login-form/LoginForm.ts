@@ -1,8 +1,7 @@
 // external imports
 import { component, isNode, withChildren, isElementOfType } from 'js-react-utils'
-import { Spec } from 'js-spec'
-import { initStore } from 'js-stores'
-import { useStore } from 'js-stores/with-react'
+import initStore from '../../../tools/store/initStore'
+import useStore from '../../../tools/store/useStore'
 
 // internal imports
 import LoginFormProps from './types/LoginFormProps' 
