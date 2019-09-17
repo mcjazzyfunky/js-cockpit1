@@ -6,7 +6,7 @@ import { IoMdContact as DefaultIcon } from 'react-icons/io'
 // internal imports
 import styleLoginForm from './styleLoginForm'
 import LoginFormViewProps from '../types/LoginFormViewProps'
-import LoginFormStore from '../types/LoginFormStore'
+//import LoginFormStore from '../types/LoginFormStore' // TODO!!!
 import CssClassesOf from '../../../../styling/types/CssClassesOf';
 
 // derived imports
@@ -20,7 +20,7 @@ function renderLoginForm(props: LoginFormViewProps) {
       aboveBox: ReactNode | null = null,
       belowBox: ReactNode | null = null
 
-    const store = props.store
+    const store = {} as any // props.store // TODO!!!
 
     const onSubmit = useCallback((ev: FormEvent) => {
       ev.preventDefault()
@@ -150,7 +150,7 @@ function renderExtraFields(
 ) {
   let ret: ReactNode = null
 
-  const store = props.store
+  const store = {} as any // props.store // TODO!!!
 
   if (props.extraFields && props.extraFields.length > 0) {
     const fields = props.extraFields.map((extraField, idx) => {
@@ -200,7 +200,7 @@ type LoginFormTextFieldProps = {
   field: string,
   label: string,
   isPassword: boolean,
-  store: LoginFormStore
+  store: any // LoginFormStore // TODO!!!
 }
 
 function LoginFormTextField(props: LoginFormTextFieldProps) {
@@ -231,7 +231,7 @@ type LoginFormChoiceProps = {
   field: string,
   label: string,
   options: any, // TODO
-  store: LoginFormStore
+  store: any // LoginFormStore // TODO!!!
 }
 
 function LoginFormChoice(props: LoginFormChoiceProps) {

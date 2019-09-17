@@ -453,13 +453,13 @@ function Demo() {
       }
 
       slotCenter={
-        dataForm
-        //dataExplorer
+        //dataForm
+        dataExplorer
       }
     />
 
-  return loginScreen
-  //return cockpit 
+  //return loginScreen
+  return cockpit 
 }
 
 function fakeData(count: number) {

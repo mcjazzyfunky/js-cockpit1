@@ -1,12 +1,12 @@
 // external imports
 import { component, isNode, withChildren, isElementOfType } from 'js-react-utils'
-import initStore from '../../../tools/store/initStore'
-import useStore from '../../../tools/store/useStore'
+//import initStore from '../../../tools/store/initStore' // TODO!!!
+//import useStore from '../../../tools/store/useStore' // TODO!!!
 
 // internal imports
 import LoginFormProps from './types/LoginFormProps' 
 import LoginFormView from './view/LoginFormView'
-import LoginFormStore from './types/LoginFormStore'
+// import LoginFormStore from './types/LoginFormStore' // TODO!!!
 import validateLoginFormProps from './validation/validateLoginFormProps'
 
 // --- LoginForm ----------------------------------------------------
@@ -30,14 +30,15 @@ const LoginForm = component<LoginFormProps>({
       })
     }
 
-    const store = useStore(() => createLoginFormStore(initialValues))
+    const store = {} as any // useStore(() => createLoginFormStore(initialValues)) // TODO!!!
 
-    return LoginFormView({ ...props, store })
+    return LoginFormView({ ...props/*, store*/ }) // TODO!!!
   }
 })
 
 // --- locals -------------------------------------------------------
 
+/*
 function createLoginFormStore(initialValues: Record<string, any> = {}): LoginFormStore {
   let
     loading = false,
@@ -97,6 +98,7 @@ function createLoginFormStore(initialValues: Record<string, any> = {}): LoginFor
 
   return self
 }
+*/
 
 // --- exports ------------------------------------------------------
 

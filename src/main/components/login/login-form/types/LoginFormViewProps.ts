@@ -1,11 +1,11 @@
 // internal imports
 import LoginFormProps from './LoginFormProps'
-import LoginFormStore from './LoginFormStore'
+//import LoginFormStore from './LoginFormStore' // TODO!!!
 
 // --- LoginFormViewProps -------------------------------------------
 
 type LoginFormViewProps =
-  LoginFormProps & { store: LoginFormStore }
+  LoginFormProps //& { store: LoginFormStore } // TODO!!!!
 
 // --- exports ------------------------------------------------------
 

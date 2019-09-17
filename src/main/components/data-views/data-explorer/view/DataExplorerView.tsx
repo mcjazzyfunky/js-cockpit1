@@ -7,7 +7,6 @@ import { MdFilterList as FilterIcon } from 'react-icons/md'
 import { GoSearch as SearchIcon } from 'react-icons/go'
 
 // internal imports
-import useActions from '../../../../hooks/useActions'
 import styleDataExplorer from './styleDataExplorer'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerState from '../types/DataExplorerState'
@@ -24,8 +23,7 @@ import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableMethods from '../../data-table/types/DataTableMethods'
 import isBlankString from '../../../../utils/isBlankString'
 import DataExplorerFilterPanel from './DataExplorerFilterPanel'
-import initDataExplorerActions from '../store/initDataExplorerActions'
-import initDataExplorerState from '../store/initDataExplorerState'
+import useDataExplorerStore from '../store/useDataExplorerStore'
 
 // --- derived imports --------------------------------------------
 
@@ -37,7 +35,7 @@ type DataExplorerClasses = CssClassesOf<typeof styleDataExplorer>
 
 function DataExplorerView(props: DataExplorerProps) {
   const
-    [actions, state] = useActions(initDataExplorerActions, initDataExplorerState),
+    [state, actions] = useDataExplorerStore(),
     dataTableRef = useRef(null as unknown as DataTableMethods),
 
     onSortChange = useCallback((event: any) => { // TODO

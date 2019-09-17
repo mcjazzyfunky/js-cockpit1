@@ -1,7 +1,5 @@
-import ActionsOf from '../../../../hooks/types/ActionsOf'
+import useDataExplorerStore from '../store/useDataExplorerStore'
 
-import initDataExplorerActions from '../store/initDataExplorerActions'
-
-type DataExplorerActions = ActionsOf<typeof initDataExplorerActions>
+type DataExplorerActions = ReturnType<typeof useDataExplorerStore>[1]
 
 export default DataExplorerActions
