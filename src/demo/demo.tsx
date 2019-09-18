@@ -10,7 +10,7 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('green', true)
+loadThemeByName('teal', true)
 
 const menuBar = 
   <MenuBar

@@ -1,5 +1,5 @@
-import useDataExplorerStore from '../store/useDataExplorerStore'
+import useDataExplorerActions from '../actions/useDataExplorerActions'
 
-type DataExplorerActions = ReturnType<typeof useDataExplorerStore>[1]
+type DataExplorerActions = ReturnType<typeof useDataExplorerActions>[0]
 
 export default DataExplorerActions

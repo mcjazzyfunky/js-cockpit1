@@ -23,7 +23,7 @@ import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableMethods from '../../data-table/types/DataTableMethods'
 import isBlankString from '../../../../utils/isBlankString'
 import DataExplorerFilterPanel from './DataExplorerFilterPanel'
-import useDataExplorerStore from '../store/useDataExplorerStore'
+import useDataExplorerActions from '../actions/useDataExplorerActions'
 
 // --- derived imports --------------------------------------------
 
@@ -35,7 +35,7 @@ type DataExplorerClasses = CssClassesOf<typeof styleDataExplorer>
 
 function DataExplorerView(props: DataExplorerProps) {
   const
-    [state, actions] = useDataExplorerStore(),
+    [actions, state] = useDataExplorerActions(),
     dataTableRef = useRef(null as unknown as DataTableMethods),
 
     onSortChange = useCallback((event: any) => { // TODO

@@ -4,13 +4,13 @@ import React from 'react'
 // derived imports
 const { useState, useRef } = React
 
-// --- defineComponentStore -----------------------------------------
+// --- defineComponentActions ----------------------------------------
 
-function defineComponentStore<
+function defineComponentActions<
   S extends State,
   A extends any[],
   M extends { [k: string]: (...args: any[]) => void }
->(config: StoreConfig<S, A, M>): (...args: A) => [S, M] {
+>(config: ActionsConfig<S, A, M>): (...args: A) => [M, S] {
   
   return (...args: A) => {
     const
@@ -28,7 +28,7 @@ function defineComponentStore<
       
     stateRef.current = state
 
-    return [state, actions]
+    return [actions, state]
   }
 }
 
@@ -36,7 +36,7 @@ function defineComponentStore<
 
 type State = { [key: string]: any }
 
-type StoreConfig<
+type ActionsConfig<
   S extends State,
   A extends any[],
   M extends { [k: string]: (...args: any[]) => void }> =
@@ -64,4 +64,4 @@ function createStateProxy<S extends State>(stateRef: { current: S }): S {
 
 // --- exports ------------------------------------------------------
 
-export default defineComponentStore
+export default defineComponentActions

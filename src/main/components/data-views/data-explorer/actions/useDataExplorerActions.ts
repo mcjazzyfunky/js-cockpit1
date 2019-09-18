@@ -3,15 +3,15 @@ import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
 
 // internal imports
-import defineComponentStore from '../../../../tools/defineComponentStore'
+import defineComponentActions from '../../../../tools/defineComponentActions'
 import DataExplorerState from '../types/DataExplorerState'
 import DataExplorerFilter from '../types/DataExplorerFilter'
 import DataExplorerQueryParams from '../types/DataExplorerQueryParams'
 import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
-// -- useDataExplorerStore ------------------------------------------
+// -- useDataExplorerActions ----------------------------------------
 
-const useDataExplorerStore = defineComponentStore({
+const useDataExplorerActions = defineComponentActions({
   initState(): DataExplorerState {
     return {
         isInitialized: false,
@@ -165,4 +165,4 @@ const useDataExplorerStore = defineComponentStore({
 
 // --- exports ------------------------------------------------------
 
-export default useDataExplorerStore
+export default useDataExplorerActions
