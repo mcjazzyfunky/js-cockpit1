@@ -1,9 +1,9 @@
 // external imports
+import { prepareActions } from 'js-react-utils'
 import { Observable } from 'rxjs'
 import { take  } from 'rxjs/operators'
 
 // internal imports
-import defineComponentActions from '../../../../tools/defineComponentActions'
 import DataExplorerState from '../types/DataExplorerState'
 import DataExplorerFilter from '../types/DataExplorerFilter'
 import DataExplorerQueryParams from '../types/DataExplorerQueryParams'
@@ -11,8 +11,10 @@ import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
 // -- useDataExplorerActions ----------------------------------------
 
-const useDataExplorerActions = defineComponentActions({
-  initState(): DataExplorerState {
+const useDataExplorerActions = prepareActions<DataExplorerState>()({
+  displayName: 'DataExplorerActions',
+  
+  initState() {
     return {
         isInitialized: false,
         isLoading: false,
