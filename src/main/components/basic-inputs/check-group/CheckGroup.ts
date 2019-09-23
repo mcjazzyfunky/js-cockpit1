@@ -12,7 +12,7 @@ import defaultCheckGroupProps from './defaults/defaultCheckGroupProps'
 const CheckGroup = component<CheckGroupProps>({
   displayName: 'CheckGroup',
   validate: validateCheckGroup,
-  render: withDefaultProps(defaultCheckGroupProps, CheckGroupView)
+  render: withDefaultProps(defaultCheckGroupProps, CheckGroupView as any) // TODO!!!!!
 })
 
 // --- exports ------------------------------------------------------

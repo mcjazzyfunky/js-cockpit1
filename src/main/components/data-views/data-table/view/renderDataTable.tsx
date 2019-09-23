@@ -14,13 +14,13 @@ type DataTableClasses = CssClassesOf<typeof styleDataTable>
 
 // --- renderDataTable ----------------------------------------------
 
-function renderDataTable(props: DataTableProps, ref: any) { // TODO
+function renderDataTable(props: DataTableProps) { // TODO
   const
     [selectedRows, setSelectionRows] = React.useState(() => new Set<number>()),
     runOnUpdater = React.useRef([] as Function[]),
     rowSelectionMode = props.rowSelectionOptions && props.rowSelectionOptions.mode || 'none'
 
-  React.useImperativeHandle(ref, () => {
+  React.useImperativeHandle(props.ref, () => {
     return {
       unselectAllRows: () => {
         setSelectionRows(new Set()) 

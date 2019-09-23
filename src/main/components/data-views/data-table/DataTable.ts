@@ -10,9 +10,10 @@ import renderDataTable from './view/renderDataTable'
 
 // --- DataTable ----------------------------------------------------
 
-const DataTable = component<DataTableProps, DataTableMethods>({
+const DataTable = component<DataTableProps>({
   displayName: 'DataTable',
-  
+  //forwardRef: true,
+
   validate: Spec.checkProps({
     required: {
       data: Spec.arrayOf(Spec.object),
@@ -44,9 +45,7 @@ const DataTable = component<DataTableProps, DataTableMethods>({
     },
   }),
 
-  render(props, ref) {
-    return renderDataTable(props, ref)
-  }
+  render: renderDataTable
 })
 
 // --- exports ------------------------------------------------------

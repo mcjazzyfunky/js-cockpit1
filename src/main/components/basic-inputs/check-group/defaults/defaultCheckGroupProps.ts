@@ -4,7 +4,7 @@ import PickOptionalProps from '../../../../types/PickOptionalProps'
 
 // --- defaultCheckGroupProps ---------------------------------------
 
-const defaultCheckGroupProps: PickOptionalProps<CheckGroupProps> = {
+const defaultCheckGroupProps: Partial<PickOptionalProps<CheckGroupProps>> = {
   orientation: 'vertical'
 }
 

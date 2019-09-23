@@ -25,7 +25,9 @@ type DataTableProps = {
   data: object[],
 
   onRowSelectionChange?: (event: RowSelectionChangeEvent) => void
-  onSortChange?: (event: SortChangeEvent) => void
+  onSortChange?: (event: SortChangeEvent) => void,
+
+  ref?: any // TODO
 }
 
 // --- exports ------------------------------------------------------
