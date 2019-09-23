@@ -16,21 +16,21 @@ const useDataExplorerActions = prepareActions<DataExplorerState>()({
   
   initState() {
     return {
-        isInitialized: false,
-        isLoading: false,
-        data: [],
-        pageIndex: 0,
-        pageSize: 50,
-        totalItemCount: null,
-        sortBy: null,
-        sortDir: 'asc', 
-        filter: null,
-        rowSelection: [],
-        errorMessage: null
+      isInitialized: false,
+      isLoading: false,
+      data: [],
+      pageIndex: 0,
+      pageSize: 50,
+      totalItemCount: null,
+      sortBy: null,
+      sortDir: 'asc', 
+      filter: null,
+      rowSelection: [],
+      errorMessage: null
     }
   },
 
-  initActions(state: DataExplorerState, setState) {
+  initActions(state, setState) {
     let timeout: any
 
     return {
@@ -148,12 +148,14 @@ const useDataExplorerActions = prepareActions<DataExplorerState>()({
             params.onSuccess()
           }
         },
+
         complete: () => {
           if (timeout) {
             clearTimeout(timeout)
             timeout = null
           }
         },
+
         error: (e: any) => {
           setState({
             isLoading: false,
