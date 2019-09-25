@@ -102,7 +102,7 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   content: {
-    padding: '1rem 1.5rem 0 1.5rem',
+    padding: '1rem 0 0 0',
   },
 
   fields: {
@@ -110,6 +110,7 @@ const styleLoginForm = defineStyle(theme => ({
   },
   
   fieldsWithHorizontalLabel: {
+    padding: '0 1rem 0 1.5rem',
     display: 'table',
     flexGrow: 1,
     
@@ -134,15 +135,6 @@ const styleLoginForm = defineStyle(theme => ({
         width: '100%',
       },
     }
-  },
-
-  above: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontSize: theme.fonts.mediumPlus.fontSize,
-    fontFamily: theme.fonts.mediumPlus.fontFamily,
-    color: theme.palette.neutralSecondary,
-    padding: '1.25rem 0',
   },
 
   footer: {
