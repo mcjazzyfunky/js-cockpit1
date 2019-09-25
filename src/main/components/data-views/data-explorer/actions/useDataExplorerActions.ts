@@ -1,7 +1,7 @@
 // external imports
 import { prepareActions } from 'js-react-utils'
 import { Observable } from 'rxjs'
-import { take  } from 'rxjs/operators'
+import { take } from 'rxjs/operators'
 
 // internal imports
 import DataExplorerState from '../types/DataExplorerState'
@@ -11,10 +11,10 @@ import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
 // -- useDataExplorerActions ----------------------------------------
 
-const useDataExplorerActions = prepareActions<DataExplorerState>()({
+const useDataExplorerActions = prepareActions({
   displayName: 'DataExplorerActions',
   
-  initState() {
+  initState(): DataExplorerState {
     return {
       isInitialized: false,
       isLoading: false,
@@ -30,7 +30,7 @@ const useDataExplorerActions = prepareActions<DataExplorerState>()({
     }
   },
 
-  initActions(state, setState) {
+  initActions(state: DataExplorerState, setState) {
     let timeout: any
 
     return {
