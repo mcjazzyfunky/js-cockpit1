@@ -5,8 +5,8 @@ import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
 import styleLoginForm from './styleLoginForm'
+import useLoginFormStore from '../store/useLoginFormStore'
 import LoginFormViewProps from '../types/LoginFormViewProps'
-//import LoginFormStore from '../types/LoginFormStore' // TODO!!!
 import CssClassesOf from '../../../../styling/types/CssClassesOf';
 
 // derived imports
@@ -14,13 +14,13 @@ const { useCallback } = React
 
 // --- LoginFormView ------------------------------------------------
 
-function renderLoginForm(props: LoginFormViewProps) {
+function LoginFormView(props: LoginFormViewProps) {
     let
       headerBox: ReactNode | null = null,
       aboveBox: ReactNode | null = null,
       belowBox: ReactNode | null = null
 
-    const store = {} as any // props.store // TODO!!!
+    const store = useLoginFormStore({}) 
 
     const onSubmit = useCallback((ev: FormEvent) => {
       ev.preventDefault()
@@ -103,7 +103,7 @@ function renderLoginForm(props: LoginFormViewProps) {
                       />
                     </div>
                   </div>
-                  {renderExtraFields(props, classes)}
+                  {renderExtraFields(props, classes, store)}
                 </div>
                 <div className={classes.generalError}>
                     {store.getGeneralErrorMsg()}
@@ -146,11 +146,10 @@ type LoginFormCssClasses = CssClassesOf<typeof styleLoginForm>
 
 function renderExtraFields(
   props: LoginFormViewProps,
-  classes: LoginFormCssClasses
+  classes: LoginFormCssClasses,
+  store: any // TODO
 ) {
   let ret: ReactNode = null
-
-  const store = {} as any // props.store // TODO!!!
 
   if (props.extraFields && props.extraFields.length > 0) {
     const fields = props.extraFields.map((extraField, idx) => {
@@ -262,4 +261,4 @@ function LoginFormChoice(props: LoginFormChoiceProps) {
 
 // --- exports ------------------------------------------------------
 
-export default renderLoginForm
+export default LoginFormView
