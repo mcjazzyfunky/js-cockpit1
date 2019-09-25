@@ -10,6 +10,7 @@ type LoginFormProps = {
     (params: { username: string, password: string, remember: boolean }) =>
       Promise<{ fullName: string }> | null,
 
+  slotIntro?: ReactNode,
   slotHeader?: ReactNode,
   slotFooter?: ReactNode,
 

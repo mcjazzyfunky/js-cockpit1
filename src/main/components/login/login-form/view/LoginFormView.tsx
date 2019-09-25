@@ -16,6 +16,7 @@ const { useCallback } = React
 
 function LoginFormView(props: LoginFormViewProps) {
     let
+      introColumn: ReactNode | null = null,
       headerBox: ReactNode | null = null,
       footerBox: ReactNode | null = null
 
@@ -27,6 +28,15 @@ function LoginFormView(props: LoginFormViewProps) {
     }, [])
 
     return styleLoginForm(classes => { // TODO
+      if (props.slotIntro) {
+        introColumn =
+          <div className={classes.introColumn}>
+            <div className={classes.intro}>
+              {props.slotIntro}
+            </div>
+          </div>
+      }
+
       if (props.slotHeader) {
         headerBox =
           <div className={classes.header}>
@@ -62,76 +72,76 @@ function LoginFormView(props: LoginFormViewProps) {
       return (
         <div className={props.fullSize ? classes.containerFullSize : classes.container}>
           <div className={classes.inner}>
-          <div className={classes.card}>
-            {headerBox}
-            <form onSubmit={onSubmit} className={classes.form}>
-              {
-                !props.slotHeader
-                  ? null
-                  : <div className={classes.headline}>
-                      User Login
-                    </div>
-              }
-              <div className={classes.content}>
-                <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
-                  <div>
+            {introColumn}
+            <div className={classes.formColumn}>
+              {headerBox}
+              <form onSubmit={onSubmit} className={classes.form}>
+                {
+                  !props.slotHeader
+                    ? null
+                    : <div className={classes.headline}>
+                        User Login
+                      </div>
+                }
+                <div className={classes.content}>
+                  <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
                     <div>
-                      <Label>User name</Label>
+                      <div>
+                        <Label>User name</Label>
+                      </div>
+                      <div>
+                        <LoginFormTextField
+                          field="username"
+                          label="User name"
+                          store={store}
+                          isPassword={false}
+                        />
+                      </div>
                     </div>
                     <div>
-                      <LoginFormTextField
-                        field="username"
-                        label="User name"
-                        store={store}
-                        isPassword={false}
-                      />
+                      <div>
+                        <Label>Password</Label>
+                      </div>
+                      <div>
+                        <LoginFormTextField
+                          field="password"
+                          label="Password"
+                          store={store}
+                          isPassword={true}
+                        />
+                      </div>
                     </div>
+                    {renderExtraFields(props, classes, store)}
                   </div>
-
-                  <div>
-                    <div>
-                      <Label>Password</Label>
-                    </div>
-                    <div>
-                      <LoginFormTextField
-                        field="password"
-                        label="Password"
-                        store={store}
-                        isPassword={true}
-                      />
-                    </div>
-                  </div>
-                  {renderExtraFields(props, classes, store)}
-                </div>
-                <div className={classes.generalError}>
+                  <div className={classes.generalError}>
                     {store.getGeneralErrorMsg()}
+                  </div>
                 </div>
-              </div>
-              <div className={classes.footer}>
-                <Checkbox
-                  name="remember"
-                  label="Remember me"
-                  className={classes.remember}
-                  disabled={store.isLoading()}
+                <div className={classes.footer}>
+                  <Checkbox
+                    name="remember"
+                    label="Remember me"
+                    className={classes.remember}
+                    disabled={store.isLoading()}
 
-                  /*
-                  onChange={
-                    event => setState({
-                      ...state,
-                      remember: (event!.target as any).checked
-                    })
-                  }
-                  */
-                />
-                <br/>
-                <PrimaryButton type="submit" className={classes.submitButton}>
-                  {loginButtonText}
-                  {loadingIndicator}
-                </PrimaryButton>
-              </div>
-            </form>
-          </div>
-          {footerBox}
+                    /*
+                    onChange={
+                      event => setState({
+                        ...state,
+                        remember: (event!.target as any).checked
+                      })
+                    }
+                    */
+                  />
+                  <br/>
+                  <PrimaryButton type="submit" className={classes.submitButton}>
+                    {loginButtonText}
+                    {loadingIndicator}
+                  </PrimaryButton>
+                </div>
+              </form>
+              {footerBox}
+            </div>
           </div>
         </div>
       )

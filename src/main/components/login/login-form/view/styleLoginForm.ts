@@ -28,19 +28,32 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   inner: {
-    display: 'block',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'stretch',
     justifyContent: 'center',
     textAlign: 'center',
-    padding: '10px 0 0 0'
+    padding: '10px 0 0 0',
   },
 
-  card: {
+  formColumn: {
     minWidth: '350px',
     flexDirection: 'column',
     minHeight: '130px',
     textAlign: 'left',
+  },
+
+  introColumn: {
+    borderWidth: '0 1px 0 0',
+    borderStyle: 'dashed',
+    borderColor: theme.palette.themePrimary,
+    margin: '0 24px 0 0',
+    maxWidth: '300px'
+  },
+
+  intro: {
+    margin: '0 20px 0 0',
+    padding: '1rem 2rem',
   },
 
   form: {
@@ -54,22 +67,22 @@ const styleLoginForm = defineStyle(theme => ({
     borderWidth: '0 0 0.5px 0',
     borderStyle: 'dashed',
     borderColor: theme.palette.themeTertiary,
-    padding: '0.25rem 1.5rem 0.75rem 1.5rem',
+    padding: '0.5rem 1.5rem 1rem 1.5rem',
     justifyContent: 'center',
     display: 'flex',
   },
 
   defaultHeader: {
-    borderWidth: '0 0 1px 0',
+    borderWidth: '0 0 0.5px 0',
     borderStyle: 'dashed',
     borderColor: theme.palette.themeTertiary,
-    padding: '0.75rem 1.5rem 1.25rem 1.5rem',
+    padding: '0.75rem 1.5rem 0.5rem 1.5rem',
     textAlign: 'center',
     fontSize: theme.fonts.xLarge.fontSize,
     fontFamily: theme.fonts.xLarge.fontFamily,
     color: theme.palette.themePrimary,
   },
-
+  
   defaultIcon: {
     height: '40px',
     width: '40px',
@@ -141,7 +154,7 @@ const styleLoginForm = defineStyle(theme => ({
     fontSize: theme.fonts.mediumPlus.fontSize,
     fontFamily: theme.fonts.mediumPlus.fontFamily,
     color: theme.palette.neutralSecondaryAlt,
-    padding: '1rem 0 0.75rem 0',
+    padding: '0.5rem 0 0.75rem 0',
     textAlign: 'center',
   }
 }))

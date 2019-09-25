@@ -22,12 +22,12 @@ const validateLoginFormProps = Spec.checkProps({
             when: Spec.prop('type', Spec.is('text')),
 
             then:
-                Spec.exact({
+              Spec.exact({
                 type: Spec.is('text'),
                 key: Spec.string,
                 label: Spec.string,
                 defaultValue: Spec.optional(Spec.string)
-                })
+              })
           },
           {
             when: Spec.prop('type', Spec.is('choice')),
@@ -41,14 +41,15 @@ const validateLoginFormProps = Spec.checkProps({
 
                 options: Spec.arrayOf(
                     Spec.exact({
-                    value: Spec.string,
-                    text: Spec.string
+                      value: Spec.string,
+                      text: Spec.string
                     })
                 )
               })
           })
         )),
     
+    slotIntro: isNode,
     slotHeader: isNode,
     slotFooter: isNode
   }
