@@ -54,7 +54,7 @@ const styleLoginForm = defineStyle(theme => ({
     borderWidth: '0 0 0.5px 0',
     borderStyle: 'dashed',
     borderColor: theme.palette.themeTertiary,
-    padding: '0.25rem 1.5rem 1.25rem 1.5rem',
+    padding: '0.25rem 1.5rem 0.75rem 1.5rem',
     justifyContent: 'center',
     display: 'flex',
   },

@@ -29,61 +29,79 @@ const styleBrand = defineStyle(theme => ({
     padding: '0 7px',
   },
 
-  vendor: {
+  vendorSmall: {
     fontSize: theme.fonts.smallPlus.fontSize,
     fontFamily: theme.fonts.smallPlus.fontFamily,
     padding: 0,
     margin: 0,
   },
-
-  vendorLarge: {
-    fontSize: theme.fonts.medium.fontSize + ' !important',
-    fontFamily: theme.fonts.medium.fontFamily,
-    margin: '0 0 0 2px',
-  },
   
-  vendorHuge: {
-    fontSize: theme.fonts.mediumPlus.fontSize + ' !important',
-    fontFamily: theme.fonts.mediumPlus.fontFamily,
-    margin: '0 0 0 8px', 
-  },
-
-  title: {
+  titleSmall: {
     fontSize: theme.fonts.mediumPlus.fontSize,
     fontFamily: theme.fonts.mediumPlus.fontFamily,
     padding: 0,
     margin: '-3px 0 0 0',
     lineHeight: '1.25rem',
   },
+  
+  logoSmall: {
+    width: '24px',
+    height: '24px',
+    padding: '5px 0 0 0',
+  },
 
-  titleLarge: {
+  vendorMedium: {
+    fontSize: theme.fonts.medium.fontSize + ' !important',
+    fontFamily: theme.fonts.medium.fontFamily,
+    margin: '0 0 0 2px',
+  },
+  
+  titleMedium: {
     fontSize: theme.fonts.large.fontSize + ' !important',
     fontFamily: theme.fonts.large.fontFamily,
     margin: '-3px 0 0 2px',
   },
   
-  titleHuge: {
-    fontSize: theme.fonts.xLarge.fontSize + ' !important',
-    fontFamily: theme.fonts.xLarge.fontFamily,
-    margin: '-1px 0 0 8px', 
-  },
-
-  logo: {
-    width: '24px',
-    height: '24px',
-    padding: '1px 0 0 0',
-  },
-
-  logoLarge: {
+  logoMedium: {
     width: '28px',
     height: '28px',
-    padding: 0
+    padding: '7px 0 0 0', 
+  },
+
+  vendorLarge: {
+    fontSize: theme.fonts.mediumPlus.fontSize + ' !important',
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
+    margin: '0 0 0 4px', 
+  },
+  
+  titleLarge: {
+    fontSize: theme.fonts.xLarge.fontSize + ' !important',
+    fontFamily: theme.fonts.xLarge.fontFamily,
+    margin: '-5px 0 0 4px', 
+  },
+  
+  logoLarge: {
+    width: '32px',
+    height: '32px',
+    padding: '10px 0 0 0',
+  },
+
+  vendorHuge: {
+    fontSize: theme.fonts.large.fontSize + ' !important',
+    fontFamily: theme.fonts.mediumPlus.fontFamily,
+    margin: '0 0 0 4px',
+  },
+
+  titleHuge: {
+    fontSize: theme.fonts.xxLarge.fontSize + ' !important',
+    fontFamily: theme.fonts.xxLarge.fontFamily,
+    margin: '-8px 0 0 4px', 
   },
 
   logoHuge: {
-    width: '32px',
-    height: '32px',
-    padding: 0
+    width: '42px',
+    height: '42px',
+    padding: '4px 0 0 0',
   },
 }))
 

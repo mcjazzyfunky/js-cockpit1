@@ -135,7 +135,7 @@ const verticalMenu =
   />
 
 function Demo() {
-  const loginScreen =
+  const loginForm =
       <LoginForm
         fullSize={true}
         extraFields={[
@@ -171,7 +171,7 @@ function Demo() {
           <Brand
             vendor="meet+greet"
             title="Back office"
-            size="huge"
+            size="large"
             colorization="theme"
           />
         }
@@ -403,6 +403,7 @@ function Demo() {
         <Brand
           vendor="meet+greet"
           title="Back Office"
+          size="small"
         />
       }
 
@@ -435,7 +436,7 @@ function Demo() {
       }
     />
 
-  return loginScreen
+  return loginForm
   //return cockpit 
 }
 

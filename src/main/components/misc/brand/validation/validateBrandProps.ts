@@ -9,7 +9,7 @@ const validateBrandProps = Spec.checkProps({
     vendor: Spec.string,
     title: Spec.string,
     logo: isNode,
-    size: Spec.oneOf('medium', 'large', 'huge')
+    size: Spec.oneOf('small', 'medium', 'large', 'huge')
   }
 })
 

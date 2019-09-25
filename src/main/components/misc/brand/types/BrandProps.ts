@@ -7,7 +7,7 @@ type BrandProps = {
   vendor?: string,
   title?: string,
   logo?: ReactNode,
-  size?: 'medium' | 'large' | 'huge',
+  size?: 'small' | 'medium' | 'large' | 'huge',
   colorization?: 'neutral' | 'theme'
 }
 
