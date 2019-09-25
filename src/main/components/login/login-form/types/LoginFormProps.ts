@@ -11,11 +11,7 @@ type LoginFormProps = {
       Promise<{ fullName: string }> | null,
 
   slotHeader?: ReactNode,
-  slotAbove?: ReactNode,
-  slotBelow?: ReactNode,
-
-  className?: string | null,
-  style?: CSSProperties | null,
+  slotFooter?: ReactNode,
 
   extraFields?: (
     {

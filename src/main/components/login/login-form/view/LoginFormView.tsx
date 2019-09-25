@@ -17,8 +17,7 @@ const { useCallback } = React
 function LoginFormView(props: LoginFormViewProps) {
     let
       headerBox: ReactNode | null = null,
-      aboveBox: ReactNode | null = null,
-      belowBox: ReactNode | null = null
+      footerBox: ReactNode | null = null
 
     const store = useLoginFormStore({}) 
 
@@ -41,17 +40,10 @@ function LoginFormView(props: LoginFormViewProps) {
           </div>
       }
 
-      if (props.slotAbove) {
-        aboveBox = 
-          <div className={classes.above}>
-            {props.slotAbove} 
-          </div>
-      }
-      
-      if (props.slotBelow) {
-        belowBox = 
-          <div className={classes.below}>
-            {props.slotBelow}
+      if (props.slotFooter) {
+        footerBox = 
+          <div className={classes.footer}>
+            {props.slotFooter}
           </div>
       }
 
@@ -70,10 +62,16 @@ function LoginFormView(props: LoginFormViewProps) {
       return (
         <div className={props.fullSize ? classes.containerFullSize : classes.container}>
           <div className={classes.inner}>
-          {aboveBox}
           <div className={classes.card}>
             {headerBox}
             <form onSubmit={onSubmit} className={classes.form}>
+              {
+                !props.slotHeader
+                  ? null
+                  : <div className={classes.headline}>
+                      User Login
+                    </div>
+              }
               <div className={classes.content}>
                 <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
                   <div>
@@ -133,7 +131,7 @@ function LoginFormView(props: LoginFormViewProps) {
               </div>
             </form>
           </div>
-          {belowBox}
+          {footerBox}
           </div>
         </div>
       )

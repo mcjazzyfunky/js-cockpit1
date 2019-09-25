@@ -50,8 +50,7 @@ const validateLoginFormProps = Spec.checkProps({
         )),
     
     slotHeader: isNode,
-    slotAbove: isNode,
-    slotBelow: isNode
+    slotFooter: isNode
   }
 })
 

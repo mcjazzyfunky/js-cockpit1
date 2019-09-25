@@ -10,6 +10,10 @@ const styleBrand = defineStyle(theme => ({
     textAlign: 'left',
   },
 
+  themeColored: {
+    color: theme.palette.themePrimary
+  },
+
   firstColumn: {
     justify: 'stretch',
     alignSelf: 'stretch',

@@ -10,7 +10,7 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('orange', true)
+loadThemeByName('blue', true)
 
 const menuBar = 
   <MenuBar
@@ -136,73 +136,50 @@ const verticalMenu =
 
 function Demo() {
   const loginScreen =
-    <Cockpit
-      slotBrand={
-        <Brand
-          vendor="meet+greet"
-          title="Back office"
-          size="medium"
-        />
-      }
+      <LoginForm
+        fullSize={true}
+        extraFields={[
+          {
+            type: 'text',
+            key: 'host',
+            label: 'Host',
+            defaultValue: 'hhh'
+          },
+          {
+            type: 'text',
+            key: 'client',
+            label: 'Client',
+            defaultValue: 'ccc'
+          },
+          {
+            type: 'choice',
+            key: 'langage',
+            label: 'Language',
+            defaultValue: 'en',
 
-      slotTopNav={
-        <AppMenu
-          items={[
-            {
-              type: 'app',
-              id: '0',
-              title: 'Login'
-            }
-          ]}
-        />
-      }
-
-      slotCenter={
-        <LoginForm
-          fullSize={true}
-          extraFields={[
-            {
-              type: 'text',
-              key: 'host',
-              label: 'Host',
-              defaultValue: 'hhh'
-            },
-            {
-              type: 'text',
-              key: 'client',
-              label: 'Client',
-              defaultValue: 'ccc'
-            },
-            {
-              type: 'choice',
-              key: 'langage',
-              label: 'Language',
-              defaultValue: 'en',
-
-              options: [
-                { value: 'en', text: 'English' },
-                { value: 'fr', text: 'France' },
-                { value: 'de', text: 'German' }
-              ]
-            }
-            /*
-            */
-          ]}
-         
-          slotAbove={
-            <Brand
-              vendor="meet+greet"
-              title="Back office"
-              size="huge"
-            />
+            options: [
+              { value: 'en', text: 'English' },
+              { value: 'fr', text: 'France' },
+              { value: 'de', text: 'German' }
+            ]
           }
+          /*
+          */
+        ]}
 
-          slotBelow={
-            <div>&copy; 2019, meet+greet</div>
-          }
-        />
-      }
-    />
+        slotHeader={
+          <Brand
+            vendor="meet+greet"
+            title="Back office"
+            size="huge"
+            colorization="theme"
+          />
+        }
+
+        slotFooter={
+          <div>&copy; 2019, meet+greet</div>
+        }
+      />
 
   const dataExplorer =
     <DataExplorer

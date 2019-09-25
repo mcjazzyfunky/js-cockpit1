@@ -15,6 +15,7 @@ const BrandView = component<BrandViewProps>('BrandView', props => {
     const
       sizePascalCase = !props.size ? null : props.size[0].toUpperCase() + props.size.substring(1),
       vendorClassName: string = css(classes.vendor, (classes as any)[`vendor${sizePascalCase}`]),
+      colorizationClassName: string = props.colorization === 'theme' ? classes.themeColored : '',
       titleClassName: string = css(classes.title, (classes as any)[`title${sizePascalCase}`]),
       logoClassName: string = css(classes.logo, (classes as any)[`logo${sizePascalCase}`])
 
@@ -52,7 +53,7 @@ const BrandView = component<BrandViewProps>('BrandView', props => {
       </div>
 
     return (
-      <div data-component="Brand" className={classes.container}>
+      <div data-component="Brand" className={css(classes.container, colorizationClassName)}>
         <div className={classes.firstColumn}>
             {firstColumnContent}
         </div>

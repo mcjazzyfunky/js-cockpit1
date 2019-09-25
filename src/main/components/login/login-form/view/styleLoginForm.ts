@@ -11,32 +11,20 @@ const styleLoginForm = defineStyle(theme => ({
     alignItems: 'center',
     position: 'relative',
     userSelect: 'none',
-
-    selectors: { 
-      '& > div > [class^=card]': {
-        borderWidth: '1px',
-        borderStyle: 'solid',
-        borderColor: theme.palette.neutralTertiaryAlt,
-      }
-    }
   },
 
   containerFullSize: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5%)',
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.neutralLight,
     position: 'absolute',
     overflow: 'auto',
     userSelect: 'none',
-
-    selectors: {
-      '& > div > *': {
-        borderRadius: '8px'
-      },
-    }
+    boxSizing: 'border-box',
+    paddingTop: '30px',
   },
 
   inner: {
@@ -49,7 +37,6 @@ const styleLoginForm = defineStyle(theme => ({
   },
 
   card: {
-    backgroundColor: theme.palette.white,
     minWidth: '350px',
     flexDirection: 'column',
     minHeight: '130px',
@@ -59,21 +46,24 @@ const styleLoginForm = defineStyle(theme => ({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1
+    flexGrow: 1,
+    paddingTop: '10px',
   },
 
   header: {
-    borderWidth: '0 0 1px 0',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternaryAlt,
-    padding: '1rem 1.5rem',
+    borderWidth: '0 0 0.5px 0',
+    borderStyle: 'dashed',
+    borderColor: theme.palette.themeTertiary,
+    padding: '0.25rem 1.5rem 1.25rem 1.5rem',
+    justifyContent: 'center',
+    display: 'flex',
   },
 
   defaultHeader: {
     borderWidth: '0 0 1px 0',
-    borderStyle: 'solid',
-    borderColor: theme.palette.neutralQuaternaryAlt,
-    padding: '0.75rem 1.5rem',
+    borderStyle: 'dashed',
+    borderColor: theme.palette.themeTertiary,
+    padding: '0.75rem 1.5rem 1.25rem 1.5rem',
     textAlign: 'center',
     fontSize: theme.fonts.xLarge.fontSize,
     fontFamily: theme.fonts.xLarge.fontFamily,
@@ -86,8 +76,11 @@ const styleLoginForm = defineStyle(theme => ({
     color: theme.palette.themePrimary,
   },
 
-  footer: {
-    padding: '1rem 1.5rem',
+  headline: {
+    margin: '1rem 1rem 0.5rem 1rem',
+    fontFamily: theme.fonts.large.fontFamily,
+    fontSize: theme.fonts.large.fontSize,
+    color: theme.palette.neutralPrimary,
   },
 
   remember: {
@@ -152,11 +145,11 @@ const styleLoginForm = defineStyle(theme => ({
     padding: '1.25rem 0',
   },
 
-  below: {
+  footer: {
     fontSize: theme.fonts.mediumPlus.fontSize,
     fontFamily: theme.fonts.mediumPlus.fontFamily,
     color: theme.palette.neutralSecondaryAlt,
-    padding: '0.75rem 0',
+    padding: '1rem 0 0.75rem 0',
     textAlign: 'center',
   }
 }))
