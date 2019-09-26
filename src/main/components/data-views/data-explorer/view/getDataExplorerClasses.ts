@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleDataExplorer -------------------------------------------
+// --- getDataExplorerClasses ---------------------------------------
 
-const styleDataExplorer = defineStyle2(theme => ({
+const getDataExplorerClasses = defineStyle(theme => ({
   container: {
     position: 'relative',
     display: 'flex',
@@ -208,4 +208,4 @@ const styleDataExplorer = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleDataExplorer
+export default getDataExplorerClasses

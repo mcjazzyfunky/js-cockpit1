@@ -7,7 +7,7 @@ import { MdFilterList as FilterIcon } from 'react-icons/md'
 import { GoSearch as SearchIcon } from 'react-icons/go'
 
 // internal imports
-import styleDataExplorer from './styleDataExplorer'
+import getDataExplorerClasses from './getDataExplorerClasses'
 import DataExplorerProps from '../types/DataExplorerProps'
 import DataExplorerState from '../types/DataExplorerState'
 import DataExplorerActions from '../types/DataExplorerActions'
@@ -19,7 +19,6 @@ import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import DataExplorerSearchBar from './DataExplorerSearchBar'
 import DataExplorerFilterSection from '../types/DataExplorerFilterSection'
 import DataExplorerFilterInput from '../types/DataExplorerFilterInput'
-import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableMethods from '../../data-table/types/DataTableMethods'
 import isBlankString from '../../../../utils/isBlankString'
 import DataExplorerFilterPanel from './DataExplorerFilterPanel'
@@ -29,12 +28,13 @@ import useDataExplorerActions from '../actions/useDataExplorerActions'
 
 const { Children, useEffect, useRef,  useState, useCallback } = React
 
-type DataExplorerClasses = CssClassesOf<typeof styleDataExplorer>
+type DataExplorerClasses = ReturnType<typeof getDataExplorerClasses>
 
 // --- renderDataExplorer -------------------------------------------
 
 function DataExplorerView(props: DataExplorerProps) {
   const
+    classes = getDataExplorerClasses(),
     [actions, state] = useDataExplorerActions(),
     dataTableRef = useRef(null as unknown as DataTableMethods),
 
@@ -92,85 +92,81 @@ function DataExplorerView(props: DataExplorerProps) {
     })
   }, [])
 
-  const ret = styleDataExplorer(classes => {
-    const loadingPanel =
-      state.isLoading
-        ? <div className={classes.loadingPanel}>
-            <div className={classes.loadingPanelContent}>
-              <Spinner
-                size={SpinnerSize.large}
-                className={classes.loadingSpinner}
-                label="Loading data, please wait..."
-                ariaLive="assertive"
-              /> 
-            </div>
+  const loadingPanel =
+    state.isLoading
+      ? <div className={classes.loadingPanel}>
+          <div className={classes.loadingPanelContent}>
+            <Spinner
+              size={SpinnerSize.large}
+              className={classes.loadingSpinner}
+              label="Loading data, please wait..."
+              ariaLive="assertive"
+            /> 
           </div>
-        : null
-
-    return (
-      <div className={classes.container}>
-        {loadingPanel}
-        { renderHeader(props, state, actions, classes) }
-        {
-          props.search
-            && props.search.type === 'sections'
-            && props.search.sections.length > 0
-              ? renderFilterSections(props.search.sections, state, classes)
-              : null
-        }
-        {
-          props.search
-            && props.search.type === 'section'
-            && props.search.contents.length > 0
-              ? renderFilterSections([props.search], state, classes)
-              : null
-        }
-        {
-          props.search
-            && props.search.type === 'filters'
-            && props.search.filters.length > 0
-              ? renderFilterSections(props.search.filters.map(filter => ({
-                type: 'section',
-    
-                contents: [{
-                  type: 'filterSet',
-                  filters: [filter]
-                }]
-              })) as any, state, classes) // TODO (-> any)
-              : null
-        }
-        <div className={classes.content}>
-          <DataTable
-            ref={dataTableRef}
-            data={state.data}
-            rowSelectionOptions={{
-              mode: 'multi' // TODO
-            }}
-
-            sortBy={state.sortBy || undefined}
-            sortDir={state.sortDir}
-
-            onRowSelectionChange={
-              (event: RowSelectionChangeEvent) => {
-                actions.setRowSelection(event.selection) 
-              }
-            }
-            
-            onSortChange={onSortChange}
-            
-            columns={tableColumns}
-          />
         </div>
-          {
-             state.pageIndex >= 0 && state.pageSize > 0 && (state.totalItemCount as number) > 0 
-              ? renderFooter(props, state, classes, onPageChange, onPageSizeChange)
-              : null
-          }
-      </div>
-    )
-  })
+      : null
 
-  return ret
+  return (
+    <div className={classes.container}>
+      {loadingPanel}
+      { renderHeader(props, state, actions, classes) }
+      {
+        props.search
+          && props.search.type === 'sections'
+          && props.search.sections.length > 0
+            ? renderFilterSections(props.search.sections, state, classes)
+            : null
+      }
+      {
+        props.search
+          && props.search.type === 'section'
+          && props.search.contents.length > 0
+            ? renderFilterSections([props.search], state, classes)
+            : null
+      }
+      {
+        props.search
+          && props.search.type === 'filters'
+          && props.search.filters.length > 0
+            ? renderFilterSections(props.search.filters.map(filter => ({
+              type: 'section',
+  
+              contents: [{
+                type: 'filterSet',
+                filters: [filter]
+              }]
+            })) as any, state, classes) // TODO (-> any)
+            : null
+      }
+      <div className={classes.content}>
+        <DataTable
+          ref={dataTableRef}
+          data={state.data}
+          rowSelectionOptions={{
+            mode: 'multi' // TODO
+          }}
+
+          sortBy={state.sortBy || undefined}
+          sortDir={state.sortDir}
+
+          onRowSelectionChange={
+            (event: RowSelectionChangeEvent) => {
+              actions.setRowSelection(event.selection) 
+            }
+          }
+          
+          onSortChange={onSortChange}
+          
+          columns={tableColumns}
+        />
+      </div>
+        {
+            state.pageIndex >= 0 && state.pageSize > 0 && (state.totalItemCount as number) > 0 
+            ? renderFooter(props, state, classes, onPageChange, onPageSizeChange)
+            : null
+        }
+    </div>
+  )
 }
 
 // --- helpers ------------------------------------------------------

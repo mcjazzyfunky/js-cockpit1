@@ -4,7 +4,7 @@ import { component } from 'js-react-utils'
 import { Label } from 'office-ui-fabric-react'
 
 // internal imports
-import styleDataExplorerFilterPanel from './styleDataExplorerFilterPanel'
+import getDataExplorerFilterPanelClasses from './getDataExplorerFilterPanelClasses'
 import DataExplorerTextFilter from './DataExplorerTextFilter'
 import DataExplorerFilterInput from '../types/DataExplorerFilterInput'
 
@@ -18,38 +18,38 @@ const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>({
   displayName: 'DataExplorerFilterPanel',
 
   render({ filters }) {
-    return styleDataExplorerFilterPanel(classes => {
-      const rows = filters.map((filter: any) => {
-        let filterField: any = null // TODO
+    const classes = getDataExplorerFilterPanelClasses()
 
-        switch (filter.type) {
-          case 'text':
-             filterField = <DataExplorerTextFilter/>
-             break
-        }
+    const rows = filters.map((filter: any) => {
+      let filterField: any = null // TODO
 
-        return (
-          <tr>
-            <td className={classes.labelCell}>
-              <Label>{filter.label}</Label>
-            </td>
-            <td className={classes.fieldCell}>
-              {filterField}
-            </td>
-          </tr>
-        )
-      })
+      switch (filter.type) {
+        case 'text':
+            filterField = <DataExplorerTextFilter/>
+            break
+      }
 
       return (
-        <div className={classes.container}>
-          <table>
-            <tbody>
-              {rows}
-            </tbody>
-          </table>
-        </div>
+        <tr>
+          <td className={classes.labelCell}>
+            <Label>{filter.label}</Label>
+          </td>
+          <td className={classes.fieldCell}>
+            {filterField}
+          </td>
+        </tr>
       )
     })
+
+    return (
+      <div className={classes.container}>
+        <table>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
+    )
   }
 })
 
