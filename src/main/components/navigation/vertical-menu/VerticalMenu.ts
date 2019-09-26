@@ -13,10 +13,13 @@ const VerticalMenu = component<VerticalMenuProps>({
   displayName: 'VerticalMenu',
 
   validate: Spec.checkProps({
+    required: {
+      items: Spec.lazy(() => specItems)
+    },
+
     optional: {
       activeItemId: Spec.string,
       collapsible: Spec.boolean,
-      items: Spec.lazy(() => specItems)
     }
   }),
 

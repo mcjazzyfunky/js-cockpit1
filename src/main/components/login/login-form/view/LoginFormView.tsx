@@ -20,7 +20,7 @@ function LoginFormView(props: LoginFormViewProps) {
       headerBox: ReactNode | null = null,
       footerBox: ReactNode | null = null
 
-    const store = useLoginFormStore({}) 
+    const store = useLoginFormStore() 
 
     const onSubmit = useCallback((ev: FormEvent) => {
       ev.preventDefault()

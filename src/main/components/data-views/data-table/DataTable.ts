@@ -34,7 +34,7 @@ const DataTable = component<DataTableProps>({
       sortBy: Spec.nullable(Spec.string),
       sortDir: Spec.oneOf('asc', 'desc'),
 
-      rowSelectionOption:
+      rowSelectionOptions:
         Spec.nullable(
           Spec.exact({
             mode: Spec.oneOf('none', 'single', 'multi')

@@ -181,7 +181,7 @@ function Demo() {
             vendor="meet+greet"
             title="Back office"
             size="large"
-            colorization="theme"
+            coloring="theme"
           />
         }
 

@@ -15,7 +15,6 @@ const Page = component<TabsPageProps>({
   validate: Spec.checkProps({
     optional: {
       title: Spec.string,
-      type: Spec.string,
       className: Spec.string,
       style: Spec.object,
       children: withChildren(isNode)

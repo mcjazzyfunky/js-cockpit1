@@ -3,7 +3,7 @@
 type VerticalMenuProps = {
   activeItemId?: string,
   collapsible?: boolean,
-  items: (Item | Menu)[]
+  items?: (Item | Menu)[]
 }
 
 type Item = {
