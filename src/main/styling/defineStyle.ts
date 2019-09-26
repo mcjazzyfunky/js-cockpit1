@@ -1,54 +1,16 @@
-// TODO - please fix this mess
+import { getTheme, ITheme, mergeStyleSets, IStyleSet } from 'office-ui-fabric-react'
 
-import React, { ReactNode, CSSProperties  } from 'react'
-import { ITheme, classNamesFunction, customizable } from 'office-ui-fabric-react'
-
-
-let styleId = 0
-
-type Styles = {
-  [name: string]: any, // TODO!!!
-}
-
-type Classes<S extends Styles> = {
-  [name in keyof S]: string
-}
-
-type Return<S extends Styles> =
-  (f: (classes: Classes<S>) => ReactNode) => ReactNode
-
-
-function defineStyle<S extends Styles>(getStyles: (theme: ITheme, props?: any) => S): Return<S>
-function defineStyle<S extends Styles>(styles: S): Return<S>
-function defineStyle(arg: any): any {
-  let StyleComponent: any
-  const getClasses = classNamesFunction()
-
-  if (typeof arg == 'function') {
+export default function defineStyle<P extends Props, D extends any[], S extends IStyleSet<any>>(
+  getStyle: (theme: ITheme, ...args: D) => S
+): (...args: D) => Record<keyof S, string> {
+  
+  return function useStyle(...args: D) {
     const
-      render = ({ props, theme, children }: any): any => {
-        const classes = getClasses((params: any) => arg(params.theme, params.props), { props, theme })
+      theme = getTheme(),
+      styleSets = getStyle(theme, ...args)
 
-        return children(classes)  
-      }
-
-    StyleComponent = customizable('Classes', ['theme', 'props'])(render)
-  } else {
-    let classes: any = null
-
-    StyleComponent = ({ children }: any) => {
-      if (!classes) {
-        classes = getClasses(() => arg)
-      }
-
-      return children(classes)
-    }
+    return mergeStyleSets(styleSets) as any
   } 
-  
-  StyleComponent.displayName = 'Style-' + (++styleId)
-  
-  return (f: (classes: any) => any) =>
-    React.createElement(StyleComponent, null, (classes: any) => f(classes))
 }
 
-export default defineStyle
+type Props = Record<string, any>

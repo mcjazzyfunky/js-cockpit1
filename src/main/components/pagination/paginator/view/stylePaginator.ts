@@ -1,10 +1,10 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 import { ITheme } from 'office-ui-fabric-react'
 
 // --- stylePaginator -----------------------------------------------
 
-const stylePaginator = defineStyle((theme: ITheme) => ({
+const stylePaginator = defineStyle2((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',

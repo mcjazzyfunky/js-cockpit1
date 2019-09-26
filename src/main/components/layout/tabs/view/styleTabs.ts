@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleSection -------------------------------------------------
 
-const styleSection = defineStyle(theme => ({
+const styleSection = defineStyle2(theme => ({
   container: {
     padding: '0.5rem 0.75rem',
   },

@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleDataExplorerSearchBar -----------------------------------
 
-const styleDataExplorerSearchBar = defineStyle(theme => ({
+const styleDataExplorerSearchBar = defineStyle2(theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',

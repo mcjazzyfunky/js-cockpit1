@@ -2,11 +2,11 @@
 import { ITheme } from 'office-ui-fabric-react'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- stylePageSizeSelector ----------------------------------------
 
-const stylePageSizeSelector = defineStyle((theme: ITheme) => ({
+const stylePageSizeSelector = defineStyle2((theme: ITheme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',

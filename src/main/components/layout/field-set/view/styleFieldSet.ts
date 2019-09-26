@@ -3,11 +3,11 @@ import { ITheme } from 'office-ui-fabric-react'
 import Color from 'color'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleFieldSet -------------------------------------------------
 
-const styleFieldSet = defineStyle(theme => ({
+const styleFieldSet = defineStyle2(theme => ({
   container: {
     display: 'flex',
     alignItems: 'stretch',

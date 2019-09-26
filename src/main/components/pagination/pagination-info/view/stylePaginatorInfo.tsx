@@ -2,11 +2,11 @@
 import { ITheme } from 'office-ui-fabric-react'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- stylePaginationInfo ------------------------------------------
 
-const stylePaginationInfo = defineStyle((theme: ITheme) => ({
+const stylePaginationInfo = defineStyle2((theme: ITheme) => ({
   container: {
     whiteSpace: 'nowrap',
     ...theme.fonts.medium

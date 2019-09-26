@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleDataExplorerFilterPanel ---------------------------------
 
-const styleDataExplorerFilterPanel = defineStyle({
+const styleDataExplorerFilterPanel = defineStyle2({
   container: {
     margin: '10px',
   },

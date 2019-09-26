@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleCheckGroup ----------------------------------------------
 
-const styleCheckGroup = defineStyle(theme => ({
+const styleCheckGroup = defineStyle2(theme => ({
   container: {
   },
 

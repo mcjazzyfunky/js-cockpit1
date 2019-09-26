@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleChoice --------------------------------------------------
 
-const styleChoice = defineStyle(theme => ({
+const styleChoice = defineStyle2(theme => ({
   container: {
   },
 

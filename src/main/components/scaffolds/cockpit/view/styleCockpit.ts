@@ -3,11 +3,11 @@ import { ITheme } from 'office-ui-fabric-react'
 import Color from 'color'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleCockpit -------------------------------------------------
 
-const styleCockpit = defineStyle((theme: ITheme) => {
+const styleCockpit = defineStyle2((theme: ITheme) => {
   return {
     container: {
       position: 'absolute',

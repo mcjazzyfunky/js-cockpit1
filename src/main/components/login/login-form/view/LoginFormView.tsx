@@ -20,132 +20,133 @@ function LoginFormView(props: LoginFormViewProps) {
       headerBox: ReactNode | null = null,
       footerBox: ReactNode | null = null
 
-    const store = useLoginFormStore() 
+    const
+      classes = styleLoginForm(Boolean(props.slotIntro)),
+      store = useLoginFormStore() 
 
     const onSubmit = useCallback((ev: FormEvent) => {
       ev.preventDefault()
       store.performLogin(null as any)
     }, [])
 
-    return styleLoginForm(classes => { // TODO
-      if (props.slotIntro) {
-        introColumn =
-          <div className={classes.introColumn}>
-            <div className={classes.intro}>
-              {props.slotIntro}
-            </div>
-          </div>
-      }
 
-      if (props.slotHeader) {
-        headerBox =
-          <div className={classes.header}>
-            { props.slotHeader }
-          </div>
-      } else {
-        headerBox =
-          <div className={classes.defaultHeader}>
-            <div><DefaultIcon className={classes.defaultIcon}/></div>
-            <div>User Login</div> 
-          </div>
-      }
-
-      if (props.slotFooter) {
-        footerBox = 
-          <div className={classes.footer}>
-            {props.slotFooter}
-          </div>
-      }
-
-      const
-        loginButtonText = store.isLoading() ? 'Logging in...' : 'Login',
-  
-        loadingIndicator =
-          store.isLoading()
-            ? <div className={classes.loadingIndicator}>
-                <Spinner
-                  size={SpinnerSize.small}
-                />
-              </div>
-            : null
-
-      return (
-        <div className={props.fullSize ? classes.containerFullSize : classes.container}>
-          <div className={classes.inner}>
-            {introColumn}
-            <div className={classes.formColumn}>
-              {headerBox}
-              <form onSubmit={onSubmit} className={classes.form}>
-                {
-                  !props.slotHeader
-                    ? null
-                    : <div className={classes.headline}>
-                        User Login
-                      </div>
-                }
-                <div className={classes.content}>
-                  <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
-                    <div>
-                      <div>
-                        <Label>User name</Label>
-                      </div>
-                      <div>
-                        <LoginFormTextField
-                          field="username"
-                          label="User name"
-                          store={store}
-                          isPassword={false}
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <Label>Password</Label>
-                      </div>
-                      <div>
-                        <LoginFormTextField
-                          field="password"
-                          label="Password"
-                          store={store}
-                          isPassword={true}
-                        />
-                      </div>
-                    </div>
-                    {renderExtraFields(props, classes, store)}
-                  </div>
-                  <div className={classes.generalError}>
-                    {store.getGeneralErrorMsg()}
-                  </div>
-                </div>
-                <div className={classes.footer}>
-                  <Checkbox
-                    name="remember"
-                    label="Remember me"
-                    className={classes.remember}
-                    disabled={store.isLoading()}
-
-                    /*
-                    onChange={
-                      event => setState({
-                        ...state,
-                        remember: (event!.target as any).checked
-                      })
-                    }
-                    */
-                  />
-                  <br/>
-                  <PrimaryButton type="submit" className={classes.submitButton}>
-                    {loginButtonText}
-                    {loadingIndicator}
-                  </PrimaryButton>
-                </div>
-              </form>
-              {footerBox}
-            </div>
+    if (props.slotIntro) {
+      introColumn =
+        <div className={classes.introColumn}>
+          <div className={classes.intro}>
+            {props.slotIntro}
           </div>
         </div>
-      )
-    })
+    }
+
+    if (props.slotHeader) {
+      headerBox =
+        <div className={classes.header}>
+          { props.slotHeader }
+        </div>
+    } else {
+      headerBox =
+        <div className={classes.defaultHeader}>
+          <div><DefaultIcon className={classes.defaultIcon}/></div>
+          <div>User Login</div> 
+        </div>
+    }
+
+    if (props.slotFooter) {
+      footerBox = 
+        <div className={classes.footer}>
+          {props.slotFooter}
+        </div>
+    }
+
+    const
+      loginButtonText = store.isLoading() ? 'Logging in...' : 'Login',
+
+      loadingIndicator =
+        store.isLoading()
+          ? <div className={classes.loadingIndicator}>
+              <Spinner
+                size={SpinnerSize.small}
+              />
+            </div>
+          : null
+
+    return (
+      <div className={props.fullSize ? classes.containerFullSize : classes.container}>
+        <div className={classes.inner}>
+          {introColumn}
+          <div className={classes.formColumn}>
+            {headerBox}
+            <form onSubmit={onSubmit} className={classes.form}>
+              {
+                !props.slotHeader
+                  ? null
+                  : <div className={classes.headline}>
+                      User Login
+                    </div>
+              }
+              <div className={classes.content}>
+                <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
+                  <div>
+                    <div>
+                      <Label>User name</Label>
+                    </div>
+                    <div>
+                      <LoginFormTextField
+                        field="username"
+                        label="User name"
+                        store={store}
+                        isPassword={false}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <Label>Password</Label>
+                    </div>
+                    <div>
+                      <LoginFormTextField
+                        field="password"
+                        label="Password"
+                        store={store}
+                        isPassword={true}
+                      />
+                    </div>
+                  </div>
+                  {renderExtraFields(props, classes, store)}
+                </div>
+                <div className={classes.generalError}>
+                  {store.getGeneralErrorMsg()}
+                </div>
+              </div>
+              <div className={classes.footer}>
+                <Checkbox
+                  name="remember"
+                  label="Remember me"
+                  className={classes.remember}
+                  disabled={store.isLoading()}
+
+                  /*
+                  onChange={
+                    event => setState({
+                      ...state,
+                      remember: (event!.target as any).checked
+                    })
+                  }
+                  */
+                />
+                <br/>
+                <PrimaryButton type="submit" className={classes.submitButton}>
+                  {loginButtonText}
+                  {loadingIndicator}
+                </PrimaryButton>
+              </div>
+            </form>
+            {footerBox}
+          </div>
+        </div>
+      </div>
+    )
 }
 
 // --- locals -------------------------------------------------------

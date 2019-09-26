@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyle2 from '../../../../styling/defineStyle2'
 
 // --- styleMenuBar -------------------------------------------------
 
-const styleMenuBar = defineStyle(theme => ({
+const styleMenuBar = defineStyle2(theme => ({
   container: {
     position: 'relative'
   },
