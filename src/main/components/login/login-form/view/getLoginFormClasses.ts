@@ -1,9 +1,9 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleLoginForm -----------------------------------------------
+// --- getLoginFormClasses ------------------------------------------
 
-const styleLoginForm = defineStyle((theme, hasIntro: boolean) => {
+const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
   const headerBorder = !hasIntro
     ? {
         borderWidth: '0 0 0.5px 0',
@@ -167,4 +167,4 @@ const styleLoginForm = defineStyle((theme, hasIntro: boolean) => {
 
 // --- exports ------------------------------------------------------
 
-export default styleLoginForm
+export default getLoginFormClasses

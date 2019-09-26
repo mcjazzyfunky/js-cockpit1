@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleUserMenu ------------------------------------------------
+// --- getUserMenuClasses -------------------------------------------
 
-const styleUserMenu = defineStyle2(theme => ({
+const getUserMenuClasses = defineStyle(theme => ({
   container: {
     display: 'flex',
     adjustItems: 'center',
@@ -24,4 +24,4 @@ const styleUserMenu = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleUserMenu
+export default getUserMenuClasses

@@ -431,7 +431,7 @@ function Demo() {
 
       slotMenu={
         null
-        //menuBar 
+        // menuBar 
       }
 
       slotSidebar={
@@ -445,8 +445,8 @@ function Demo() {
       }
     />
 
-  return loginForm
-  //return cockpit 
+  //return loginForm
+  return cockpit 
 }
 
 function fakeData(count: number) {

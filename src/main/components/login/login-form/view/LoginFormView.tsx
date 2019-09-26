@@ -4,10 +4,9 @@ import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, TextField, Dropdo
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
-import styleLoginForm from './styleLoginForm'
+import getLoginFormClasses from './getLoginFormClasses'
 import useLoginFormStore from '../store/useLoginFormStore'
 import LoginFormViewProps from '../types/LoginFormViewProps'
-import CssClassesOf from '../../../../styling/types/CssClassesOf';
 
 // derived imports
 const { useCallback } = React
@@ -21,7 +20,7 @@ function LoginFormView(props: LoginFormViewProps) {
       footerBox: ReactNode | null = null
 
     const
-      classes = styleLoginForm(Boolean(props.slotIntro)),
+      classes = getLoginFormClasses(Boolean(props.slotIntro)),
       store = useLoginFormStore() 
 
     const onSubmit = useCallback((ev: FormEvent) => {
@@ -151,7 +150,7 @@ function LoginFormView(props: LoginFormViewProps) {
 
 // --- locals -------------------------------------------------------
 
-type LoginFormCssClasses = CssClassesOf<typeof styleLoginForm>
+type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 
 function renderExtraFields(
   props: LoginFormViewProps,

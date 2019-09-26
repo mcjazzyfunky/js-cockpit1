@@ -1,4 +1,4 @@
-import { createTheme, loadTheme, ITheme } from 'office-ui-fabric-react/lib/Styling'
+import { createTheme, loadTheme, ITheme } from 'office-ui-fabric-react'
 
 const themes = {
   default: {

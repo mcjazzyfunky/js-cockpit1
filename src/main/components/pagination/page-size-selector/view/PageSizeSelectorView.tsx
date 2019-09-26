@@ -4,7 +4,7 @@ import { component } from 'js-react-utils'
 import { DefaultButton, ITheme } from 'office-ui-fabric-react'
 
 // internal imports
-import stylePageSizeSelector from './stylePageSizeSelector'
+import getPageSizeSelectorClasses from './getPageSizeSelectorClasses'
 import { PAGE_SIZE_OPTIONS } from '../../misc/constants'
 import PageSizeSelectorViewProps from '../types/PageSizeSelectorViewProps'
 
@@ -12,8 +12,10 @@ import PageSizeSelectorViewProps from '../types/PageSizeSelectorViewProps'
 
 const PageSizeSelectorView = component<PageSizeSelectorViewProps>(
   'PageSizeSelectorView', props => {
-  
-  return stylePageSizeSelector(classes =>
+ 
+  const classes = getPageSizeSelectorClasses()
+
+  return (
     <div className={classes.container}>
       <label className={classes.pageSizeText}>Items/Page</label>
       <DefaultButton

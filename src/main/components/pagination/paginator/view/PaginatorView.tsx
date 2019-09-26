@@ -1,10 +1,10 @@
 // external import
-import React, { KeyboardEvent, ReactNode } from 'react'
+import React, { KeyboardEvent } from 'react'
 import { component } from 'js-react-utils'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
-import stylePaginator from './stylePaginator'
+import getPaginatorClasses from './getPaginatorClasses'
 import PaginatorViewProps from '../types/PaginatorViewProps'
 import ArrowDoubleLeftIcon from '../../../../icons/ArrowDoubleLeftIcon' 
 import ArrowDoubleRightIcon from '../../../../icons/ArrowDoubleRightIcon' 
@@ -15,6 +15,7 @@ import ArrowRightIcon from '../../../../icons/ArrowRightIcon'
 
 const PaginatorView = component<PaginatorViewProps>('PaginatorView', props => {
   const
+    classes = getPaginatorClasses(),
     { pageIndex, pageSize, totalItemCount, onPageChange } = props,
     lastPageIndex = Math.ceil(totalItemCount / pageSize) - 1,
     firstButtonDisabled = pageIndex <= 0,
@@ -22,7 +23,7 @@ const PaginatorView = component<PaginatorViewProps>('PaginatorView', props => {
     nextButtonDisabled = pageIndex >= lastPageIndex,
     lastButtonDisabled = pageIndex >= lastPageIndex
 
-  return stylePaginator(classes =>
+  return (
     <div className={classes.container}>
       <button
         disabled={firstButtonDisabled}

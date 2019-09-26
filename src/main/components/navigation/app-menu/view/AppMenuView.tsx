@@ -3,19 +3,20 @@ import React, { ReactNode } from 'react'
 import { Callout, Pivot, PivotItem } from 'office-ui-fabric-react' 
 
 // internal imports
-import styleAppMenu from './styleAppMenu'
-import AppMenuProps from '../types/AppMenuProps'
+import getAppMenuClasses from './getAppMenuClasses'
 import AppMenuIcon from './AppMenuIcon'
 import ChevronDownIcon from '../../../../system-icons/ChevronDownIcon'
-import CssClassesOf from '../../../../styling/types/CssClassesOf'
+import AppMenuProps from '../types/AppMenuProps'
 
 // derived imports
-type AppMenuClasses = CssClassesOf<typeof styleAppMenu>
+type AppMenuClasses = ReturnType<typeof getAppMenuClasses>
 
 // --- AppMenuView --------------------------------------------------
 
 function AppMenuView(props: AppMenuProps) {
-  return styleAppMenu(classes =>
+  const classes = getAppMenuClasses()
+
+  return (
     <div data-component="AppMenu" className={classes.container}>
       <div data-component="AppMenu:inner" className={classes.inner}>
         <div className={classes.icon}>
@@ -27,7 +28,8 @@ function AppMenuView(props: AppMenuProps) {
             : renderDefault(props, classes)
         }
       </div>
-    </div>)
+    </div>
+  )
 }
 
 function renderDefault(props: AppMenuProps, classes: AppMenuClasses) {

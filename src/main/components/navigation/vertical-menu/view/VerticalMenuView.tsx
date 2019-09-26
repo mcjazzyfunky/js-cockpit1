@@ -5,11 +5,10 @@ import { Nav, INavLink, IRenderFunction, INavLinkGroup } from 'office-ui-fabric-
 
 // internal imports
 import VerticalMenuViewProps from '../types/VerticalMenuViewProps'
-import styleVerticalMenu from './styleVerticalMenu'
-import CssClassesOf from '../../../../styling/types/CssClassesOf'
+import getVerticalMenuClasses from './getVerticalMenuClasses'
 
 // derived imports
-type VerticalMenuClasses = CssClassesOf<typeof styleVerticalMenu>
+type VerticalMenuClasses = ReturnType<typeof getVerticalMenuClasses>
 
 // --- VerticalMenuView ---------------------------------------------
 
@@ -20,28 +19,27 @@ const VerticalMenuView = component<VerticalMenuViewProps>(
 
   if (props.items) {
     const
+      classes = getVerticalMenuClasses(),
       linkGroups = getLinkGroups(props.items)
 
-    ret = styleVerticalMenu(classes => { 
-      let onRenderGroupHeader: IRenderFunction<INavLinkGroup> | undefined = undefined 
+    let onRenderGroupHeader: IRenderFunction<INavLinkGroup> | undefined = undefined 
 
-      if (props.collapsible === false || linkGroups.length === 1 && typeof linkGroups[0].name === 'string') {
-        onRenderGroupHeader =
-          ((linkGroup: INavLinkGroup) => renderGroupHeader(linkGroup, classes)) as any
-      }
+    if (props.collapsible === false || linkGroups.length === 1 && typeof linkGroups[0].name === 'string') {
+      onRenderGroupHeader =
+        ((linkGroup: INavLinkGroup) => renderGroupHeader(linkGroup, classes)) as any
+    }
 
-      return (
-        <div className={classes.container}>
-          <div className={classes.navigation}>
-            <Nav
-              groups={linkGroups}
-              onRenderGroupHeader={onRenderGroupHeader}
-              selectedKey={props.activeItemId}
-            />
-          </div>
+    return (
+      <div className={classes.container}>
+        <div className={classes.navigation}>
+          <Nav
+            groups={linkGroups}
+            onRenderGroupHeader={onRenderGroupHeader}
+            selectedKey={props.activeItemId}
+          />
         </div>
-      )
-    })
+      </div>
+    )
   }
 
   return ret

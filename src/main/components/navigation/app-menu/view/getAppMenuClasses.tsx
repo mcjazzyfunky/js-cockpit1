@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleAppMenu ---------------------------------------------
+// --- getAppMenuClasses --------------------------------------------
 
-const styleAppMenu = defineStyle2(theme => ({
+const getAppMenuClasses = defineStyle(theme => ({
   container: {
   },
 
@@ -89,4 +89,4 @@ const styleAppMenu = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleAppMenu
+export default getAppMenuClasses

@@ -1,16 +1,12 @@
-import { getTheme, ITheme, mergeStyleSets, IStyleSet } from 'office-ui-fabric-react'
+import { getTheme, ITheme, mergeStyleSets, IStyleSet, memoizeFunction } from 'office-ui-fabric-react'
 
-export default function defineStyle<P extends Props, D extends any[], S extends IStyleSet<any>>(
-  getStyle: (theme: ITheme, ...args: D) => S
-): (...args: D) => Record<keyof S, string> {
+export default function defineStyle<A extends any[], S extends IStyleSet<any>>(
+  getStyle: (theme: ITheme, ...args: A) => S
+): (...args: A) => { [K in keyof S]: string } {
   
-  return function useStyle(...args: D) {
-    const
-      theme = getTheme(),
-      styleSets = getStyle(theme, ...args)
+  return memoizeFunction((...args: any[]) => {
+    const styleSets = getStyle(getTheme(), ...args as any)
 
     return mergeStyleSets(styleSets) as any
-  } 
+  }) 
 }
-
-type Props = Record<string, any>

@@ -4,7 +4,7 @@ import { component } from 'js-react-utils'
 import { CommandBar, CommandBarButton } from 'office-ui-fabric-react'
 
 // internal imports
-import styleMenuBar from './styleMenuBar'
+import getMenuBarClasses from './getMenuBarClasses'
 import MenuBarViewProps from '../types/MenuBarViewProps'
 import MenuBarIcon from './MenuBarIcon'
 
@@ -31,7 +31,9 @@ const MenuBarView = component<MenuBarViewProps>(
   }
 
   if (itemCount > 0) {
-    ret = styleMenuBar(classes =>
+    const classes = getMenuBarClasses()
+
+    ret =
       <div data-component="MenuBar" className={classes.container}>
         <div className={classes.inner}>
           <div data-component="MenuBar:icon" className={classes.icon}>
@@ -43,7 +45,7 @@ const MenuBarView = component<MenuBarViewProps>(
             buttonAs={buttonAs}
           />
         </div>
-      </div>)
+      </div>
   }
 
   return ret

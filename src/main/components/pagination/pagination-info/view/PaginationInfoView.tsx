@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import { component } from 'js-react-utils'
 
 // internal imports
-import stylePaginationInfo from './stylePaginatorInfo'
+import getPaginationInfoClasses from './getPaginationInfoClasses'
 import PaginationInfoViewProps from '../types/PaginationInfoViewProps'
 
 // --- PaginationInfoView -------------------------------------------
@@ -14,6 +14,7 @@ const PaginationInfoView = component<PaginationInfoViewProps>(
   let content: ReactNode = null
 
   const
+    classes = getPaginationInfoClasses(),
     pageIndex = props.pageIndex,
     pageSize = props.pageSize,
     totalItemCount = props.totalItemCount,
@@ -29,7 +30,7 @@ const PaginationInfoView = component<PaginationInfoViewProps>(
     break
   }
 
-  return stylePaginationInfo(classes =>
+  return (
     <div className={classes.container}>
       { content }
     </div>

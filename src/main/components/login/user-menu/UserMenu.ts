@@ -3,7 +3,7 @@ import { component } from 'js-react-utils'
 
 // internal imports
 import UserMenuProps from './types/UserMenuProps'
-import UserMenuView from './view/renderUserMenu'
+import UserMenuView from './view/UserMenuView'
 import validateUserMenuProps from './validation/validateUserMenuProps'
 
 // --- UserMenu -----------------------------------------------------
