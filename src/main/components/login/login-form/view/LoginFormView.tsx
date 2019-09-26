@@ -21,12 +21,35 @@ function LoginFormView(props: LoginFormViewProps) {
       footerBox: ReactNode | null = null
 
     const
-      classes = getLoginFormClasses(Boolean(props.slotIntro))
+      classes = getLoginFormClasses(Boolean(props.slotIntro)),
 
-    const onSubmit = useCallback((ev: FormEvent) => {
-      ev.preventDefault()
-    }, [])
+      onSubmit = useCallback((ev: FormEvent) => {
+        ev.preventDefault()
+        let valid: boolean = true
 
+        const
+          data: any = {},
+
+          elems = (ev.target as any)
+            .querySelectorAll('input[type=hidden][data-login-field]')
+
+        if (!elems) {
+          valid = false
+        } else {
+          for (let i = 0; i < elems.length; ++i) {
+            const elem = elems[i]
+
+            data[elem.name] = elem.value
+
+            if (elem.value === '') {
+              valid = false
+            }
+          }
+        }
+
+        console.log(data)
+        alert(valid)
+      }, [])
 
     if (props.slotIntro) {
       introColumn =

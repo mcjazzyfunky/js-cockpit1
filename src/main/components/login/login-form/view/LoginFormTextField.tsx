@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { TextField } from 'office-ui-fabric-react'
+import { TextField, ITextField } from 'office-ui-fabric-react'
 
 // derived imports
 const { useCallback, useRef, useState } = React
@@ -52,17 +52,25 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
     }, [value])
 
   return (
-     <TextField
-       value={value}
-       type={props.isPassword ? 'password' : 'text'}
-       validateOnFocusOut={true}
-       validateOnFocusIn={false}
-       validateOnLoad={false}
-       onBlur={onBlur}
-       onKeyDown={onKeyDown}
-       onGetErrorMessage={onGetErrorMessage}
-       onChange={onChange}
-     />
+     <>
+      <TextField
+        value={value}
+        type={props.isPassword ? 'password' : 'text'}
+        validateOnFocusOut={true}
+        validateOnFocusIn={false}
+        validateOnLoad={false}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        onGetErrorMessage={onGetErrorMessage}
+        onChange={onChange}
+      />
+      <input
+        type="hidden"
+        name={props.field}
+        value={value}
+        data-login-field
+      />
+    </>
   )
 }
 
