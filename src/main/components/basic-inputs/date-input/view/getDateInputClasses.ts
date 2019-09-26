@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleDateInput -----------------------------------------------
+// --- getDateInputClasses ------------------------------------------
 
-const styleDateInput = defineStyle2(theme => ({
+const getDateInputClasses = defineStyle(theme => ({
   container: {
   },
 
@@ -16,4 +16,4 @@ const styleDateInput = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleDateInput
+export default getDateInputClasses

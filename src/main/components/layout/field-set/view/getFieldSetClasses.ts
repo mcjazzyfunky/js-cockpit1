@@ -1,13 +1,9 @@
-// external imports
-import { ITheme } from 'office-ui-fabric-react'
-import Color from 'color'
-
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleFieldSet -------------------------------------------------
+// --- getFieldSetClasses -------------------------------------------
 
-const styleFieldSet = defineStyle2(theme => ({
+const getFieldSetClasses = defineStyle(theme => ({
   container: {
     display: 'flex',
     alignItems: 'stretch',
@@ -60,4 +56,4 @@ const styleFieldSet = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleFieldSet
+export default getFieldSetClasses

@@ -1,21 +1,22 @@
 // external imports
 import React, { ReactElement } from 'react'
-import { css, Checkbox, ITheme } from 'office-ui-fabric-react'
+import { css, Checkbox } from 'office-ui-fabric-react'
 import { AutoSizer, Column, Table } from 'react-virtualized'
 
 // internal imports
-import styleDataTable from './styleDataTable'
+import getDataTableClasses from './getDataTableClasses'
 import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import DataTableProps from '../types/DataTableProps'
 import SortAscIcon from './SortAscIcon'
 import SortDescIcon from './SortDescIcon'
 
-type DataTableClasses = CssClassesOf<typeof styleDataTable>
+type DataTableClasses = ReturnType<typeof getDataTableClasses>
 
-// --- renderDataTable ----------------------------------------------
+// --- DataTableView ------------------------------------------------
 
-function renderDataTable(props: DataTableProps) { // TODO
+function DataTableView(props: DataTableProps) { // TODO
   const
+    classes = getDataTableClasses(),
     [selectedRows, setSelectionRows] = React.useState(() => new Set<number>()),
     runOnUpdater = React.useRef([] as Function[]),
     rowSelectionMode = props.rowSelectionOptions && props.rowSelectionOptions.mode || 'none'
@@ -65,76 +66,74 @@ function renderDataTable(props: DataTableProps) { // TODO
     }
   }
 
-  return styleDataTable(classes => {
-    return (
-      <div className={classes.container}>
-        <AutoSizer>
-          {
-            ({ width, height }) => { 
-              const
-                columnWidths = calculateColumnWidths(props, width),
+  return (
+    <div className={classes.container}>
+      <AutoSizer>
+        {
+          ({ width, height }) => { 
+            const
+              columnWidths = calculateColumnWidths(props, width),
 
-                dataColumns = 
-                  props.columns.map((column: any, columnIndex: any)  => // TODO
-                    <Column
-                      width={columnWidths.dataColumns[columnIndex]}
-                      label={column.title}
-                      dataKey={column.field}
-                      className={classes.cell}
-                      cellRenderer={({ rowIndex }) => {
-                        const isSelected = selectedRows.has(rowIndex)
+              dataColumns = 
+                props.columns.map((column: any, columnIndex: any)  => // TODO
+                  <Column
+                    width={columnWidths.dataColumns[columnIndex]}
+                    label={column.title}
+                    dataKey={column.field}
+                    className={classes.cell}
+                    cellRenderer={({ rowIndex }) => {
+                      const isSelected = selectedRows.has(rowIndex)
 
-                        return createTableBodyCell(rowIndex, columnIndex, props, props.data[rowIndex], classes, isSelected)}
+                      return createTableBodyCell(rowIndex, columnIndex, props, props.data[rowIndex], classes, isSelected)}
+                    }
+                  />
+                )
+              if (props.rowSelectionOptions && props.rowSelectionOptions.mode !== 'none') {
+                dataColumns.unshift(
+                  <Column
+                    width={columnWidths.selectorColumn}
+                    dataKey={'-1'}
+                    className={classes.cell}
+                    cellRenderer={({ rowIndex }) => {
+                      const isSelected = selectedRows.has(rowIndex)
+
+                      let className = rowIndex % 2 === 1 ? classes.evenRow : null
+                      
+                      className = css(className, classes.dataCell)
+
+                      if (isSelected) {
+                        className = css(className, classes.selectedRow)
                       }
-                    />
-                  )
-               if (props.rowSelectionOptions && props.rowSelectionOptions.mode !== 'none') {
-                  dataColumns.unshift(
-                    <Column
-                      width={columnWidths.selectorColumn}
-                      dataKey={'-1'}
-                      className={classes.cell}
-                      cellRenderer={({ rowIndex }) => {
-                        const isSelected = selectedRows.has(rowIndex)
 
-                        let className = rowIndex % 2 === 1 ? classes.evenRow : null
-                       
-                        className = css(className, classes.dataCell)
-
-                        if (isSelected) {
-                          className = css(className, classes.selectedRow)
-                        }
-
-                        return (
-                          <div className={className}>
-                            {createSelectRowCheckbox(rowIndex, props, selectedRows, changeSelection, classes)}
-                          </div>
-                        )
-                      }}
-                    />
-                  )
-                }
-
-                return (
-                  <Table
-                    width={width}
-                    height={height - 10}
-                    headerHeight={20}
-                    rowHeight={28}
-                    rowCount={props.data.length}
-                    rowGetter={({ index }) => props.data[index]}
-                    headerRowRenderer={(params: any) => createHeaderRow(props, selectedRows, columnWidths, classes, changeSelection, changeSort)}
-                    rowClassName={classes.tableRow}
-                  >
-                    {dataColumns}
-                  </Table>
+                      return (
+                        <div className={className}>
+                          {createSelectRowCheckbox(rowIndex, props, selectedRows, changeSelection, classes)}
+                        </div>
+                      )
+                    }}
+                  />
                 )
               }
+
+              return (
+                <Table
+                  width={width}
+                  height={height - 10}
+                  headerHeight={20}
+                  rowHeight={28}
+                  rowCount={props.data.length}
+                  rowGetter={({ index }) => props.data[index]}
+                  headerRowRenderer={(params: any) => createHeaderRow(props, selectedRows, columnWidths, classes, changeSelection, changeSort)}
+                  rowClassName={classes.tableRow}
+                >
+                  {dataColumns}
+                </Table>
+              )
             }
-          </AutoSizer>
-        </div>
-    )
-  })
+          }
+        </AutoSizer>
+      </div>
+  )
 }
 
 // --- locals -------------------------------------------------------
@@ -320,4 +319,4 @@ function createSelectAllCheckbox(props: DataTableProps, selectedRows: Set<number
 
 // --- exports ------------------------------------------------------
 
-export default renderDataTable
+export default DataTableView

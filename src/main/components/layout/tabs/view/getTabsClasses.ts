@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleSection -------------------------------------------------
+// --- getTabsClasses -----------------------------------------------
 
-const styleSection = defineStyle2(theme => ({
+const getTabsClasses = defineStyle(theme => ({
   container: {
     padding: '0.5rem 0.75rem',
   },
@@ -26,4 +26,4 @@ const styleSection = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleSection
+export default getTabsClasses

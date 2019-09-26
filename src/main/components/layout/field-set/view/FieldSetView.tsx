@@ -4,43 +4,42 @@ import { isElement, isElementOfType } from 'js-react-utils'
 import { Label } from 'office-ui-fabric-react'
 
 // internal imports
-import styleFieldSet from './styleFieldSet'
+import getFieldSetClasses from './getFieldSetClasses'
 import FieldSetProps from '../types/FieldSetProps'
-import CssClassesOf from '../../../../styling/types/CssClassesOf'
 import Compound from '../../compound/Compound'
 import ViewModesCtx from '../../../../contexts/view-modes/ViewModesCtx'
 
 // derived imports
 const { cloneElement, createElement: h, useContext, Children } = React
-type FieldSetClasses = CssClassesOf<typeof styleFieldSet>
+type FieldSetClasses = ReturnType<typeof getFieldSetClasses>
 
-// --- renderFieldSet ------------------------------------------------
+// --- FieldSetView -------------------------------------------------
 
-function renderFieldSet(props: FieldSetProps) {
-  const compact = useContext(ViewModesCtx).compact 
+function FieldSetView(props: FieldSetProps) {
+  const
+    classes = getFieldSetClasses(),
+    compact = useContext(ViewModesCtx).compact 
 
-  return styleFieldSet(classes => {
-    const
-      style = props.grow ? { flexGrow: props.grow }: undefined,
+  const
+    style = props.grow ? { flexGrow: props.grow }: undefined,
 
-      contentClassName =
-        compact
-          ? classes.compactContent
-          : classes.defaultContent
+    contentClassName =
+      compact
+        ? classes.compactContent
+        : classes.defaultContent
 
-    return (
-      <div data-component="FieldSet" className={classes.container} style={style}>
-        {renderLabel(props, classes)}
-        <div className={contentClassName}>
-          {
-            compact
-              ? renderCompactContent(props, classes)
-              : renderDefaultContent(props, classes)
-          }
-        </div>
+  return (
+    <div data-component="FieldSet" className={classes.container} style={style}>
+      {renderLabel(props, classes)}
+      <div className={contentClassName}>
+        {
+          compact
+            ? renderCompactContent(props, classes)
+            : renderDefaultContent(props, classes)
+        }
       </div>
-    )
-  })
+    </div>
+  )
 }
 
 // --- locals -------------------------------------------------------
@@ -121,4 +120,4 @@ function renderCompactContent(props: FieldSetProps, classes: FieldSetClasses) {
 }
 // --- exports -----------------------------------------------------
 
-export default renderFieldSet
+export default FieldSetView

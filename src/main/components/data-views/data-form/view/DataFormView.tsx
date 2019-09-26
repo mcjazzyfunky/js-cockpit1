@@ -4,8 +4,7 @@ import { css, CommandBar, Button, TooltipHost } from 'office-ui-fabric-react'
 import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 // internal imports
-import styleDataForm from './styleDataForm'
-import CssClassesOf from '../../../../styling/types/CssClassesOf'
+import getDataFormClasses from './getDataFormClasses'
 import DataFormProps from '../types/DataFormProps'
 import DataFormCtrl from '../ctrl/DataFormCtrl'
 import FormCtrlCtx from '../../../../contexts/form-ctx/FormCtrlCtx'
@@ -16,12 +15,14 @@ import useForceUpdate from '../../../../hooks/useForceUpdate'
 
 const { useContext } = React
 
-type DataFormClasses = CssClassesOf<typeof styleDataForm>
+type DataFormClasses = ReturnType<typeof getDataFormClasses>
 
 // --- renderDataForm -----------------------------------------------
 
 function DataFormView(props: DataFormProps, ctrl: DataFormCtrl) {
-    let ret: ReactNode = styleDataForm(classes =>
+    const classes = getDataFormClasses()
+
+    let ret: ReactNode = 
       <FormCtrlCtx.Provider value={ctrl}>
         <div>
           <div className={classes.container}>
@@ -32,7 +33,6 @@ function DataFormView(props: DataFormProps, ctrl: DataFormCtrl) {
           </div>
         </div>
       </FormCtrlCtx.Provider>
-    )
 
   const
     viewModes = useContext(ViewModesCtx),

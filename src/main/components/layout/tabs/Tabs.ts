@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 // internal imports
 import TabsProps from './types/TabsProps'
 import TabsPageProps from './types/TabsPageProps'
-import TabsView from './view/renderTabs'
+import TabsView from './view/TabsView'
 
 // --- Tabs.Page ----------------------------------------------------
 

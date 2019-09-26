@@ -4,7 +4,7 @@ import { component, isNode, withChildren } from 'js-react-utils'
 
 // internal imports
 import FieldSetProps from './types/FieldSetProps'
-import FieldSetView from './view/renderFieldSet'
+import FieldSetView from './view/FieldSetView'
 
 // --- FieldSet ---------------------------------------------------------
 

@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle2 from '../../../../styling/defineStyle2'
+import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleRadioGroup ----------------------------------------------
+// --- getRadioGroupClasses -----------------------------------------
 
-const styleRadioGroup = defineStyle2(theme => ({
+const getRadioGroupClasses = defineStyle(theme => ({
   container: {
   },
 
@@ -22,4 +22,4 @@ const styleRadioGroup = defineStyle2(theme => ({
 
 // --- exports ------------------------------------------------------
 
-export default styleRadioGroup
+export default getRadioGroupClasses

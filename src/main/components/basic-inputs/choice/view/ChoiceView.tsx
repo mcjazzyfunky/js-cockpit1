@@ -4,8 +4,8 @@ import { component } from 'js-react-utils'
 import { Dropdown, Label } from 'office-ui-fabric-react'
 
 // internal imports
+import getChoiceClasses from './getChoiceClasses'
 import ChoiceViewProps from '../types/ChoiceViewProps'
-import styleChoice from './styleChoice'
 import createUniqueId from '../../../../tools/createUniqueId'
 
 // --- ChoiceView ---------------------------------------------------
@@ -14,6 +14,8 @@ const ChoiceView = component<ChoiceViewProps>(
   'ChoiceView', props => {
 
   const
+    classes = getChoiceClasses(),
+
     style =
       props.grow === undefined
         ? undefined
@@ -27,16 +29,14 @@ const ChoiceView = component<ChoiceViewProps>(
   labelProps.htmlFor = id
 
   return (
-    styleChoice(classes =>
-      <div data-component="Choice" className={classes.container} style={style}>
-        {
-          props.label
-            ? <Label {...labelProps} className={classes.label}>{props.label}</Label>
-            : null
-        }
-        <Dropdown {...dropdownProps} options={props.options as any}/> 
-      </div>
-    )
+    <div data-component="Choice" className={classes.container} style={style}>
+      {
+        props.label
+          ? <Label {...labelProps} className={classes.label}>{props.label}</Label>
+          : null
+      }
+      <Dropdown {...dropdownProps} options={props.options as any}/> 
+    </div>
   )
 })
 

@@ -6,7 +6,7 @@ import { Label, TextField } from 'office-ui-fabric-react'
 // internal imports
 import TextInputViewProps from '../types/TextInputViewProps'
 import FormCtrlCtx from '../../../../contexts/form-ctx/FormCtrlCtx'
-import styleTextInput from './styleTextInput'
+import getTextInputClasses from './getTextInputClasses'
 import createUniqueId from '../../../../tools/createUniqueId'
 
 // derived imports
@@ -18,6 +18,7 @@ const TextInputView = component<TextInputViewProps>(
   'TextInputView', props => {
 
   const
+    classes = getTextInputClasses(),
     ctrl = useContext(FormCtrlCtx),
   
     style =
@@ -82,18 +83,16 @@ const TextInputView = component<TextInputViewProps>(
   }
 
   return (
-    styleTextInput(classes =>
-      <div data-component="TextInput" className={classes.container} style={style}>
-        {
-          props.label
-            ? <Label {...labelProps} className={classes.label}>{props.label}</Label>
-            : null
-        }
-        <div>
-          <TextField {...textFieldProps}/>
-        </div>
+    <div data-component="TextInput" className={classes.container} style={style}>
+      {
+        props.label
+          ? <Label {...labelProps} className={classes.label}>{props.label}</Label>
+          : null
+      }
+      <div>
+        <TextField {...textFieldProps}/>
       </div>
-    )
+    </div>
   )
 })
 
