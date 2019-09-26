@@ -15,7 +15,7 @@ const BrandView = component<BrandViewProps>('BrandView', props => {
     const
       sizePascalCase = !props.size ? null : props.size[0].toUpperCase() + props.size.substring(1),
       vendorClassName: string = (classes as any)[`vendor${sizePascalCase}`],
-      colorizationClassName: string = props.colorization === 'theme' ? classes.themeColored : '',
+      colorizationClassName: string = props.coloring === 'theme' ? classes.themeColored : '',
       titleClassName: string = (classes as any)[`title${sizePascalCase}`],
       logoClassName: string = (classes as any)[`logo${sizePascalCase}`]
 

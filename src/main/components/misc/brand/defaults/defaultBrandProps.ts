@@ -6,7 +6,7 @@ import PickOptionalProps from '../../../../types/PickOptionalProps'
 
 const defaultBrandProps: PickOptionalProps<BrandProps> = {
   size: 'medium',
-  colorization: 'neutral'
+  coloring: 'neutral'
 }
 
 // --- exports ------------------------------------------------------
