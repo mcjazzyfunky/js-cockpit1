@@ -21,6 +21,7 @@ function LoginFormView(props: LoginFormViewProps) {
       footerBox: ReactNode | null = null
 
     const
+      [loading, setLoading] = useState(false),
       classes = getLoginFormClasses(Boolean(props.slotIntro)),
 
       onSubmit = useCallback((ev: FormEvent) => {
@@ -47,8 +48,12 @@ function LoginFormView(props: LoginFormViewProps) {
           }
         }
 
-        console.log(data)
-        alert(valid)
+        if (!valid) {
+          alert('Please check input')
+        } else {
+          setLoading(true)
+          performLogin(data)
+        }
       }, [])
 
     if (props.slotIntro) {
@@ -98,29 +103,31 @@ function LoginFormView(props: LoginFormViewProps) {
                 <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
                   <div>
                     <div>
-                      <Label>User name</Label>
+                      <Label disabled={loading}>User name</Label>
                     </div>
                     <div>
                       <LoginFormTextField
                         field="username"
                         label="User name"
                         isPassword={false}
+                        disabled={loading}
                       />
                     </div>
                   </div>
                   <div>
                     <div>
-                      <Label>Password</Label>
+                      <Label disabled={loading}>Password</Label>
                     </div>
                     <div>
                       <LoginFormTextField
                         field="password"
                         label="Password"
                         isPassword={true}
+                        disabled={loading}
                       />
                     </div>
                   </div>
-                  {renderExtraFields(props, classes)}
+                  {renderExtraFields(props, classes, loading)}
                 </div>
               </div>
               <div className={classes.footer}>
@@ -128,6 +135,7 @@ function LoginFormView(props: LoginFormViewProps) {
                   name="remember"
                   label="Remember me"
                   className={classes.remember}
+                  disabled={loading}
 
                   /*
                   onChange={
@@ -139,8 +147,15 @@ function LoginFormView(props: LoginFormViewProps) {
                   */
                 />
                 <br/>
-                <PrimaryButton type="submit" className={classes.submitButton}>
-                  Login (TODO')
+                <PrimaryButton type={ loading ? 'button' : 'submit' } className={classes.submitButton}>
+                  {
+                    !loading
+                      ? 'Login'
+                      : <>
+                          Logging in...
+                          <Spinner className={classes.spinner} size={SpinnerSize.small}/>
+                        </>
+                  }
                 </PrimaryButton>
               </div>
             </form>
@@ -157,7 +172,8 @@ type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 
 function renderExtraFields(
   props: LoginFormViewProps,
-  classes: LoginFormCssClasses
+  classes: LoginFormCssClasses,
+  disableFields: boolean
 ) {
   let ret: ReactNode = null
 
@@ -172,6 +188,7 @@ function renderExtraFields(
               field={extraField.key}
               label={extraField.label}
               isPassword={false}
+              disabled={disableFields}
             />
           break
 
@@ -188,7 +205,7 @@ function renderExtraFields(
       return (
         <div>
           <div>
-            <Label>{extraField.label}</Label>
+            <Label disabled={disableFields}>{extraField.label}</Label>
           </div>
           <div>
             {field}
@@ -201,6 +218,10 @@ function renderExtraFields(
   }
 
   return ret
+}
+
+function performLogin(data: Record<string, string>) {
+  console.log('Loading', data)
 }
 
 // --- exports ------------------------------------------------------

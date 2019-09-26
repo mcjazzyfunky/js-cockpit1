@@ -63,6 +63,7 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
         onKeyDown={onKeyDown}
         onGetErrorMessage={onGetErrorMessage}
         onChange={onChange}
+        disabled={props.disabled}
       />
       <input
         type="hidden"
@@ -79,7 +80,8 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
 type LoginFormTextFieldProps = {
   field: string,
   label: string,
-  isPassword: boolean
+  isPassword?: boolean,
+  disabled?: boolean
 }
 
 // --- exports ------------------------------------------------------

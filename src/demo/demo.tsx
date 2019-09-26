@@ -137,7 +137,7 @@ function Demo() {
   const loginForm =
       <LoginForm
         fullSize={true}
-
+/*
         extraFields={[
           {
             type: 'text',
@@ -163,10 +163,8 @@ function Demo() {
               { value: 'de', text: 'German' }
             ]
           }
-          /*
-          */
         ]}
-
+*/
         slotHeader={
           <Brand
             vendor="meet+greet"

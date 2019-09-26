@@ -161,7 +161,11 @@ const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
       color: theme.palette.neutralSecondaryAlt,
       padding: '0.5rem 0 0.75rem 0',
       textAlign: 'center',
-    }
+    },
+
+    spinner: {
+      margin: '0 0 0 10px',
+    },
   }
 })
 
