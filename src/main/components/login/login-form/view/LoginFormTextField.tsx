@@ -1,6 +1,6 @@
 // external imports
 import React from 'react'
-import { TextField, ITextField } from 'office-ui-fabric-react'
+import { TextField, Label } from 'office-ui-fabric-react'
 
 // derived imports
 const { useCallback, useRef, useState } = React
@@ -52,8 +52,12 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
     }, [value])
 
   return (
-     <>
+    <div>
+      <div>
+        <Label disabled={props.disabled}>{props.label}</Label>
+      </div>
       <TextField
+        key={props.name}
         value={value}
         type={props.isPassword ? 'password' : 'text'}
         validateOnFocusOut={true}
@@ -67,18 +71,18 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
       />
       <input
         type="hidden"
-        name={props.field}
+        name={props.name}
         value={value}
         data-login-field
       />
-    </>
+    </div>
   )
 }
 
 // --- locals -------------------------------------------------------
 
 type LoginFormTextFieldProps = {
-  field: string,
+  name: string,
   label: string,
   isPassword?: boolean,
   disabled?: boolean

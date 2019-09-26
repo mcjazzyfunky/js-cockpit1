@@ -137,23 +137,23 @@ function Demo() {
   const loginForm =
       <LoginForm
         fullSize={true}
-/*
+/* 
         extraFields={[
           {
             type: 'text',
-            key: 'host',
+            name: 'host',
             label: 'Host',
             defaultValue: 'hhh'
           },
           {
             type: 'text',
-            key: 'client',
+            name: 'client',
             label: 'Client',
             defaultValue: 'ccc'
           },
           {
             type: 'choice',
-            key: 'langage',
+            name: 'langage',
             label: 'Language',
             defaultValue: 'en',
 
@@ -215,8 +215,6 @@ function Demo() {
           }
         ]
       }}
-
-*/
 
       search={{
         type: 'section',

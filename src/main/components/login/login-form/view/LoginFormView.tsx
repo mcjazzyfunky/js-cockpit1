@@ -101,33 +101,7 @@ function LoginFormView(props: LoginFormViewProps) {
               }
               <div className={classes.content}>
                 <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
-                  <div>
-                    <div>
-                      <Label disabled={loading}>User name</Label>
-                    </div>
-                    <div>
-                      <LoginFormTextField
-                        field="username"
-                        label="User name"
-                        isPassword={false}
-                        disabled={loading}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <Label disabled={loading}>Password</Label>
-                    </div>
-                    <div>
-                      <LoginFormTextField
-                        field="password"
-                        label="Password"
-                        isPassword={true}
-                        disabled={loading}
-                      />
-                    </div>
-                  </div>
-                  {renderExtraFields(props, classes, loading)}
+                  {renderFields(props, classes, loading)}
                 </div>
               </div>
               <div className={classes.footer}>
@@ -170,24 +144,34 @@ function LoginFormView(props: LoginFormViewProps) {
 
 type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 
-function renderExtraFields(
+function renderFields(
   props: LoginFormViewProps,
   classes: LoginFormCssClasses,
   disableFields: boolean
 ) {
-  let ret: ReactNode = null
+  const contents: ReactNode[] = [
+    <LoginFormTextField
+      name="username"
+      label="User name"
+      disabled={disableFields}
+    />,
+    <LoginFormTextField
+      name="password"
+      label="Password"
+      disabled={disableFields}
+    />
+  ]
 
   if (props.extraFields && props.extraFields.length > 0) {
-    const fields = props.extraFields.map((extraField, idx) => {
-      let field: ReactNode | undefined
+    props.extraFields.forEach((extraField, idx) => {
+      let field: ReactNode
 
       switch (extraField.type) {
         case 'text':
           field =
             <LoginFormTextField
-              field={extraField.key}
+              name={extraField.name}
               label={extraField.label}
-              isPassword={false}
               disabled={disableFields}
             />
           break
@@ -195,29 +179,19 @@ function renderExtraFields(
         case 'choice':
           field =
             <LoginFormDropdown
-              field={extraField.key}
+              name={extraField.name}
               label={extraField.label}
               options={extraField.options}
+              disabled={disableFields}
             />
           break
       }
 
-      return (
-        <div>
-          <div>
-            <Label disabled={disableFields}>{extraField.label}</Label>
-          </div>
-          <div>
-            {field}
-          </div>
-        </div>
-      ) 
+      contents.push(field)
     })
-
-    ret = <>{...fields}</>
   }
 
-  return ret
+  return contents
 }
 
 function performLogin(data: Record<string, string>) {

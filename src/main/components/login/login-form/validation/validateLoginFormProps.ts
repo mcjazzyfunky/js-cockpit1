@@ -24,7 +24,7 @@ const validateLoginFormProps = Spec.checkProps({
             then:
               Spec.exact({
                 type: Spec.is('text'),
-                key: Spec.string,
+                name: Spec.string,
                 label: Spec.string,
                 defaultValue: Spec.optional(Spec.string)
               })
@@ -35,7 +35,7 @@ const validateLoginFormProps = Spec.checkProps({
             then:
                 Spec.exact({
                 type: Spec.is('choice'),
-                key: Spec.string,
+                name: Spec.string,
                 label: Spec.string,
                 defaultValue: Spec.string,
 

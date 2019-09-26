@@ -17,14 +17,14 @@ type LoginFormProps = {
   extraFields?: (
     {
       type: 'text',
-      key: string,
+      name: string,
       label: string,
       defaultValue?: string
     }
     |
     {
       type: 'choice',
-      key: string,
+      name: string,
       label: string,
       defaultValue?: string
       

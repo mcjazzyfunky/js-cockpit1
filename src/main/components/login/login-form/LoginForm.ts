@@ -23,7 +23,7 @@ const LoginForm = component<LoginFormProps>({
 
     if (props.extraFields) {
       props.extraFields.forEach(extraField => {
-        initialValues[extraField.key] =
+        initialValues[extraField.name] =
           extraField.hasOwnProperty('defaultValue')
             ? extraField.defaultValue
             : null
