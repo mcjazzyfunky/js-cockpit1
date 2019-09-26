@@ -9,7 +9,7 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('teal', true)
+loadThemeByName('default', true)
 
 const menuBar = 
   <MenuBar
@@ -137,6 +137,7 @@ function Demo() {
   const loginForm =
       <LoginForm
         fullSize={true}
+
         extraFields={[
           {
             type: 'text',
@@ -166,16 +167,6 @@ function Demo() {
           */
         ]}
 
-        slotIntro = {
-          <div>
-            <br/>
-            <Text variant="large">Welcome to the back office of meet+ greet</Text>
-            <br/>
-            <br/>
-            <Text variant="medium">Hope you have a good time</Text>
-          </div>
-        }
-
         slotHeader={
           <Brand
             vendor="meet+greet"
@@ -186,7 +177,7 @@ function Demo() {
         }
 
         slotFooter={
-          null // <div>&copy; 2019, meet+greet</div>
+          <div>&copy; 2019, meet+greet</div>
         }
       />
 
@@ -445,8 +436,8 @@ function Demo() {
       }
     />
 
-  //return loginForm
-  return cockpit 
+  return loginForm
+  //return cockpit 
 }
 
 function fakeData(count: number) {

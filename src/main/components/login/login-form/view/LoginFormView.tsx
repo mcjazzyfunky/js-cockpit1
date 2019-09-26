@@ -1,15 +1,16 @@
 // external imports
-import React, { ReactNode, ReactElement, FormEvent } from 'react'
+import React, { ReactNode, FormEvent } from 'react'
 import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, TextField, Dropdown } from 'office-ui-fabric-react'
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
+import LoginFormTextField from './LoginFormTextField'
+import LoginFormDropdown from './LoginFormDropdown'
 import getLoginFormClasses from './getLoginFormClasses'
-import useLoginFormStore from '../store/useLoginFormStore'
 import LoginFormViewProps from '../types/LoginFormViewProps'
 
 // derived imports
-const { useCallback } = React
+const { useCallback, useRef, useState } = React
 
 // --- LoginFormView ------------------------------------------------
 
@@ -20,12 +21,10 @@ function LoginFormView(props: LoginFormViewProps) {
       footerBox: ReactNode | null = null
 
     const
-      classes = getLoginFormClasses(Boolean(props.slotIntro)),
-      store = useLoginFormStore() 
+      classes = getLoginFormClasses(Boolean(props.slotIntro))
 
     const onSubmit = useCallback((ev: FormEvent) => {
       ev.preventDefault()
-      store.performLogin(null as any)
     }, [])
 
 
@@ -58,18 +57,6 @@ function LoginFormView(props: LoginFormViewProps) {
         </div>
     }
 
-    const
-      loginButtonText = store.isLoading() ? 'Logging in...' : 'Login',
-
-      loadingIndicator =
-        store.isLoading()
-          ? <div className={classes.loadingIndicator}>
-              <Spinner
-                size={SpinnerSize.small}
-              />
-            </div>
-          : null
-
     return (
       <div className={props.fullSize ? classes.containerFullSize : classes.container}>
         <div className={classes.inner}>
@@ -94,7 +81,6 @@ function LoginFormView(props: LoginFormViewProps) {
                       <LoginFormTextField
                         field="username"
                         label="User name"
-                        store={store}
                         isPassword={false}
                       />
                     </div>
@@ -107,15 +93,11 @@ function LoginFormView(props: LoginFormViewProps) {
                       <LoginFormTextField
                         field="password"
                         label="Password"
-                        store={store}
                         isPassword={true}
                       />
                     </div>
                   </div>
-                  {renderExtraFields(props, classes, store)}
-                </div>
-                <div className={classes.generalError}>
-                  {store.getGeneralErrorMsg()}
+                  {renderExtraFields(props, classes)}
                 </div>
               </div>
               <div className={classes.footer}>
@@ -123,7 +105,6 @@ function LoginFormView(props: LoginFormViewProps) {
                   name="remember"
                   label="Remember me"
                   className={classes.remember}
-                  disabled={store.isLoading()}
 
                   /*
                   onChange={
@@ -136,8 +117,7 @@ function LoginFormView(props: LoginFormViewProps) {
                 />
                 <br/>
                 <PrimaryButton type="submit" className={classes.submitButton}>
-                  {loginButtonText}
-                  {loadingIndicator}
+                  Login (TODO')
                 </PrimaryButton>
               </div>
             </form>
@@ -154,8 +134,7 @@ type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 
 function renderExtraFields(
   props: LoginFormViewProps,
-  classes: LoginFormCssClasses,
-  store: any // TODO
+  classes: LoginFormCssClasses
 ) {
   let ret: ReactNode = null
 
@@ -169,17 +148,15 @@ function renderExtraFields(
             <LoginFormTextField
               field={extraField.key}
               label={extraField.label}
-              store={store}
               isPassword={false}
             />
           break
 
         case 'choice':
           field =
-            <LoginFormChoice
+            <LoginFormDropdown
               field={extraField.key}
               label={extraField.label}
-              store={store}
               options={extraField.options}
             />
           break
@@ -201,70 +178,6 @@ function renderExtraFields(
   }
 
   return ret
-}
-
-type LoginFormTextFieldProps = {
-  field: string,
-  label: string,
-  isPassword: boolean,
-  store: any // LoginFormStore // TODO!!!
-}
-
-function LoginFormTextField(props: LoginFormTextFieldProps) {
-  const
-    value = props.store.getValue(props.field),
-
-    onChange = useCallback(
-      (ev: any) => props.store.setValue(props.field, ev.target.value),
-      [props.store, props.field]),
-
-    errorMsg =
-      props.store.isValidationActivated() && value === ''
-        ? `Please fill field "${props.label}"`
-        : ''
-
-  return (
-     <TextField
-       value={props.store.getValue(props.field)}
-       disabled={props.store.isLoading()}
-       type={props.isPassword ? 'password' : 'text'}
-       errorMessage={errorMsg}
-       onChange={onChange}
-     />
-  )
-}
-
-type LoginFormChoiceProps = {
-  field: string,
-  label: string,
-  options: any, // TODO
-  store: any // LoginFormStore // TODO!!!
-}
-
-function LoginFormChoice(props: LoginFormChoiceProps) {
-  const
-    selectedKey = props.store.getValue(props.field),
-
-    errorMsg =
-      props.store.isValidationActivated()
-        && (selectedKey === null || selectedKey === undefined)
-        ? `Please select "${props.label}"`
-        : ''
-
-  return (
-    <Dropdown
-      selectedKey={props.store.getValue(props.field)}
-      disabled={props.store.isLoading()}
-      errorMessage={errorMsg}
-      
-      options={
-        props.options.map((option: any) => ({
-          key: option.value,
-          text: option.text
-        }))
-      }
-    />
-  )
 }
 
 // --- exports ------------------------------------------------------
