@@ -163,7 +163,7 @@ function LoginFormView({
                     </div>
               }
               <div className={classes.content}>
-                <div className={!extraFields || extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
+                <div className={classes.fields}>
                   {renderFields(extraFields, classes, loading, forceValidation, onValueChanged)}
                 </div>
               </div>

@@ -56,8 +56,39 @@ const getLoginFormClasses = defineStyle((
           fontSize: theme.fonts.xLarge.fontSize,
           fontFamily: theme.fonts.xLarge.fontFamily,
           color: theme.palette.themePrimary,
+        },
+    
+    fields = !hasExtraFields
+      ? {
+           display: 'block',
         }
+      : {
+          padding: '0 1rem 0 1.5rem',
+          display: 'table',
+          flexGrow: 1,
+          
+          selectors: {
+            '& > div': {
+              display: 'table-row'
+            },
+          
+            '& > div > :first-child': {
+              display: 'table-cell',
+              padding: '3px 1rem 4px 2px',
+              textAlign: 'right',
+              whiteSpace: 'nowrap',
+              width: '0%',
+              verticalAlign: 'top',
+            },
 
+            '& > div > :nth-child(2)': {
+              display: 'table-cell',
+              padding: '3px',
+              minWidth: '250px',
+              width: '100%',
+            },
+          }
+        }
 
   return {
     root,
@@ -135,37 +166,8 @@ const getLoginFormClasses = defineStyle((
       padding: '1rem 0 0 0',
     },
 
-    fields: {
-      display: 'block',
-    },
-    
-    fieldsWithHorizontalLabel: {
-      padding: '0 1rem 0 1.5rem',
-      display: 'table',
-      flexGrow: 1,
-      
-      selectors: {
-        '& > div': {
-          display: 'table-row'
-        },
-      
-        '& > div > :first-child': {
-          display: 'table-cell',
-          padding: '3px 1rem 4px 2px',
-          textAlign: 'right',
-          whiteSpace: 'nowrap',
-          width: '0%',
-          verticalAlign: 'top',
-        },
+    fields,
 
-        '& > div > :nth-child(2)': {
-          display: 'table-cell',
-          padding: '3px',
-          minWidth: '250px',
-          width: '100%',
-        },
-      }
-    },
 
     footer: {
       fontSize: theme.fonts.mediumPlus.fontSize,

@@ -137,7 +137,7 @@ function Demo() {
   const loginForm =
       <LoginForm
         fullSize={true}
-/* 
+/*
         extraFields={[
           {
             type: 'text',
