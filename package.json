@@ -60,7 +60,7 @@
     "rollup-plugin-react-svg": "^3.0.3",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-serve": "^1.0.1",
-    "rollup-plugin-typescript2": "^0.24.2",
+    "rollup-plugin-typescript2": "^0.24.3",
     "rollup-plugin-uglify": "^6.0.3",
     "rollup-plugin-uglify-es": "0.0.1",
     "shx": "^0.3.2",
@@ -79,7 +79,7 @@
   "dependencies": {
     "color": "^3.1.2",
     "js-spec": "^0.1.72",
-    "office-ui-fabric-react": "^7.39.0",
+    "office-ui-fabric-react": "^7.39.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-virtualized": "^9.21.1",

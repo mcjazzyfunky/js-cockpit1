@@ -227,6 +227,7 @@ function renderFields(
               label={extraField.label}
               disabled={disableFields}
               forceValidation={forceValidation}
+              onValueChanged={onValueChanged}
             />
           break
 
@@ -237,6 +238,8 @@ function renderFields(
               label={extraField.label}
               options={extraField.options}
               disabled={disableFields}
+              forceValidation={forceValidation}
+              onValueChanged={onValueChanged}
             />
           break
       }
