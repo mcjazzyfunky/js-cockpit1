@@ -12,14 +12,13 @@ const getCockpitClasses = defineStyle((theme, look: CockpitProps['look'])  => {
     menu = look !== 'default'
       ? null
       : {
-
           selectors: {
-            '& [data-component=MenuBar]': {
+            '& > [data-component=MenuBar]': {
               backgroundColor: '#f0f0f0 !important',
               marginBottom: '1px',
 
               selectors: {
-                '& *': {
+                '*': {
                   border: 'none !important',
                   background: 'none !important',
                 }
