@@ -4,7 +4,7 @@ import defineStyle from '../../../../styling/defineStyle'
 // --- getMenuBarClasses --------------------------------------------
 
 const getMenuBarClasses = defineStyle(theme => ({
-  container: {
+  root: {
     position: 'relative'
   },
 

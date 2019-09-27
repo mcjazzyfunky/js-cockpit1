@@ -1,5 +1,5 @@
 // external imports
-import { component, isNode } from 'js-react-utils'
+import { component } from 'js-react-utils'
 
 // internal imports
 import MenuBarProps from './types/MenuBarProps'

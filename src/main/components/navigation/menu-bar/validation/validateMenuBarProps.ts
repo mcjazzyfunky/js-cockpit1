@@ -6,8 +6,7 @@ import { Spec } from 'js-spec'
 const validateMenuBarProps = Spec.checkProps({
   optional: {
     onAction: Spec.function,
-    items: Spec.lazy(() => validateItems),
-    showMenuBeaks: Spec.boolean
+    items: Spec.lazy(() => validateItems)
   }
 })
 

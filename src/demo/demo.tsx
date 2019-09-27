@@ -9,12 +9,11 @@ import Chance from 'chance'
 import { FiEdit, FiPlus, FiMinus, FiTrash, FiTrash2 } from 'react-icons/fi'
 
 initSystemIcons()
-loadThemeByName('default', true)
+loadThemeByName('teal', true)
 
 const menuBar = 
   <MenuBar
-    onAction={() => alert('Juhu')}
-    showMenuBeaks={false}
+    onAction={() => alert('Base action handler')}
    
     items={[
       {
@@ -69,7 +68,7 @@ const menuBar =
         text: 'Help',
         
         items: [
-          { type: 'item', id: '4.1', text: 'About...'},
+          { type: 'item', id: '4.1', text: 'About...', onAction: () => alert('Item action handler') },
         ]
       }
     ]}

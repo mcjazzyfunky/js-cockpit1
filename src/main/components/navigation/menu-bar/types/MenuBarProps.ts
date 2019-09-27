@@ -1,8 +1,12 @@
+// inernal imports
+
+import ActionEvent from '../../../../events/ActionEvent'
+
 // --- MenuBarProps --------------------------------------------------
 
 type MenuBarProps = {
   items: (Menu | Item | Divider)[],
-  onAction?: () => void
+  onAction?: (ev: ActionEvent) => void
 }
 
 // --- locals -------------------------------------------------------
@@ -19,7 +23,7 @@ type Item = {
   id: string,
   text: string,
   disabled?: boolean,
-  onAction?: () => void
+  onAction?: (ev: ActionEvent) => void
 }
 
 type Divider = {

@@ -1,45 +1,50 @@
 // external imports
 import React from 'react'
-import { component } from 'js-react-utils'
-import { CommandBar, CommandBarButton } from 'office-ui-fabric-react'
+
+import { CommandBar, CommandBarButton, ICommandBarItemProps, IComponentAs, IButtonProps }
+  from 'office-ui-fabric-react'
 
 // internal imports
 import getMenuBarClasses from './getMenuBarClasses'
 import MenuBarViewProps from '../types/MenuBarViewProps'
 import MenuBarIcon from './MenuBarIcon'
+import ActionEvent from '../../../../events/ActionEvent'
 
 // --- MenuBarView --------------------------------------------------
 
-const MenuBarView = component<MenuBarViewProps>(
-  'MenuBarView', props => {
-
+function MenuBarView({
+  items,
+  onAction
+}: MenuBarViewProps) {
   let
     ret = null,
-    buttonAs: any = null
+    buttonAs: IComponentAs<IButtonProps>
 
-  const itemCount = props.items.length
+  const itemCount = items.length
 
-  buttonAs = (props: any) => 
+  buttonAs = props => 
     <CommandBarButton 
       {...props}
+
       menuProps={{
         ...props.menuProps,
         isBeakVisible: true,
         gapSpace: -6
-      }}/>
+      } as any}
+    />
 
   if (itemCount > 0) {
     const classes = getMenuBarClasses()
 
     ret =
-      <div data-component="MenuBar" className={classes.container}>
+      <div data-component="MenuBar" className={classes.root}>
         <div className={classes.inner}>
           <div data-component="MenuBar:icon" className={classes.icon}>
             <MenuBarIcon/>
           </div>
           <CommandBar
             className={classes.commandBar}
-            items={getItemProps(props.items, props.onAction)}
+            items={getItemProps(items, onAction)}
             buttonAs={buttonAs}
           />
         </div>
@@ -47,63 +52,85 @@ const MenuBarView = component<MenuBarViewProps>(
   }
 
   return ret
-})
+}
 
 // --- locals -------------------------------------------------------
 
-function getItemProps(items: any, baseOnAction: any) { // TODO
-  const ret: any[] = []
+type Item = MenuBarViewProps['items'] extends (infer I)[] ? I : never
+
+function getItemProps(
+  items: Item[],
+  baseOnAction?: (ev: ActionEvent) => void
+): ICommandBarItemProps[] {
+  const ret: ICommandBarItemProps[] = []
 
   for (let i = 0; i < items.length; ++i) {
     const
-      child: any = items[i],
+      child = items[i],
+      type = child.type
 
-      childOnAction =
-        child && child.onAction
-          ? child.onAction
-          : null
+    let item: ICommandBarItemProps
 
-    let onClick: any = null
-
-    if (childOnAction) {
-      if (!baseOnAction) {
-        onClick = () => childOnAction()
-      } else {
-        onClick = () => {
-          childOnAction()
-          baseOnAction()
+    switch (child.type) {
+      case 'divider':
+        item = {
+          key: `[divider-${i}]`,
+          text: '-'
         }
-      }
-    } else if (baseOnAction) {
-      onClick = () => baseOnAction()
-    }
+        break
 
-    let item: any = {
-    }
+      case 'menu':
+        item = {
+          key: `[menu-${i}]`,
+          text: child.text,
 
-    if (child.type === 'divider') {
-      item = {
-        text: '-'
-      }
-    } else {
-      item = {
-        key: Math.random(),
-        text: child.text,
-        disabled: !!child.disabled,
-        subMenuProps: null as any,
-        onClick
-      }
-
-      if (child && child.items) {
-        item.subMenuProps = {
-          items: getItemProps(child.items, baseOnAction),
+          subMenuProps: {
+            items: getItemProps(child.items, baseOnAction)
+          }
         }
+        break
+      
+      case 'item': {
+        const
+          id = child.id,
+          childOnAction = child.onAction
+
+        let onClick: (() => void) | undefined
+
+        if (childOnAction || baseOnAction) {
+          const event: ActionEvent = {
+            type: 'action',
+            kind: 'menuBar',
+            id
+          }
+  
+          onClick = () => {
+            if (childOnAction) {
+              childOnAction(event)
+            }
+
+            if (baseOnAction) {
+              baseOnAction(event)
+            }
+          }
+        }
+
+        item = {
+          key: child.id,
+          text: child.text,
+          onClick
+        }
+
+        break
       }
+
+      default:
+        throw new Error('This should never happen')
     }
 
     ret.push(item)
   }
-    
+
   return ret
 }
 
