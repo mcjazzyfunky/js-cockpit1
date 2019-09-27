@@ -10,7 +10,7 @@ import getLoginFormClasses from './getLoginFormClasses'
 import LoginFormViewProps from '../types/LoginFormViewProps'
 
 // derived imports
-const { useCallback, useRef, useState } = React
+const { useCallback, useEffect, useState } = React
 
 // --- LoginFormView ------------------------------------------------
 
@@ -22,6 +22,7 @@ function LoginFormView(props: LoginFormViewProps) {
 
     const
       [loading, setLoading] = useState(false),
+      [forceValidation, setForceValidation] = useState(false),
       classes = getLoginFormClasses(Boolean(props.slotIntro)),
 
       onSubmit = useCallback((ev: FormEvent) => {
@@ -49,12 +50,18 @@ function LoginFormView(props: LoginFormViewProps) {
         }
 
         if (!valid) {
-          alert('Please check input')
+          setForceValidation(true)
         } else {
           setLoading(true)
           performLogin(data)
         }
       }, [])
+    
+    useEffect(() => {
+      if (forceValidation) {
+        setForceValidation(false)
+      }
+    }, [forceValidation])
 
     if (props.slotIntro) {
       introColumn =
@@ -101,7 +108,7 @@ function LoginFormView(props: LoginFormViewProps) {
               }
               <div className={classes.content}>
                 <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
-                  {renderFields(props, classes, loading)}
+                  {renderFields(props, classes, loading, forceValidation)}
                 </div>
               </div>
               <div className={classes.footer}>
@@ -147,18 +154,21 @@ type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 function renderFields(
   props: LoginFormViewProps,
   classes: LoginFormCssClasses,
-  disableFields: boolean
+  disableFields: boolean,
+  forceValidation: boolean
 ) {
   const contents: ReactNode[] = [
     <LoginFormTextField
       name="username"
       label="User name"
       disabled={disableFields}
+      forceValidation={forceValidation}
     />,
     <LoginFormTextField
       name="password"
       label="Password"
       disabled={disableFields}
+      forceValidation={forceValidation}
     />
   ]
 
@@ -173,6 +183,7 @@ function renderFields(
               name={extraField.name}
               label={extraField.label}
               disabled={disableFields}
+              forceValidation={forceValidation}
             />
           break
 

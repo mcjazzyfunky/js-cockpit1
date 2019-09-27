@@ -10,46 +10,41 @@ const { useCallback, useRef, useState } = React
 function LoginFormTextField(props: LoginFormTextFieldProps) {
   const
     [value, setValue] = useState(''),
+    [errorMsg, setErrorMsg] = useState(''),
     valueChangedRef = useRef(false),
-    errorMsgRef = useRef(''),
 
-    onGetErrorMessage = useCallback((value: string) => {
-      if (valueChangedRef.current) {
-        if (value.length === 0) {
-          errorMsgRef.current = 
-            `Please enter field "${props.label}"`
-        } else {
-          errorMsgRef.current = ''
-        }
+    validate = () => {
+      const msg = value.length === 0
+        ? `Please enter field "${props.label}"`
+        : ''
+
+      if (msg !== errorMsg) {
+        setErrorMsg(msg)
       }
- 
-      valueChangedRef.current = false
-
-      return errorMsgRef.current as string
-    }, [props.label]),
+    },
 
     onChange = useCallback((ev: any) => {
-      valueChangedRef.current = true
       setValue(ev.target.value)
+      valueChangedRef.current = true,
+      setErrorMsg('')
     }, []),
 
-    onBlur = useCallback(() => {
-      const trimmedValue = value.trim()
-
-      if (value !== trimmedValue) {
-        setValue(trimmedValue)
-      }
-    }, [value]),
-
-    onKeyDown = useCallback((ev: any) => {
-      if (ev.keyCode === 13) {
+    onEnter = useCallback((ev: any) => {
+      if (!ev.keyCode || ev.keyCode === 13) {
         const trimmedValue = value.trim()
 
         if (value !== trimmedValue) {
           setValue(trimmedValue)
+        } else if (valueChangedRef.current) {
+          validate()
+          valueChangedRef.current = false
         }
       }
     }, [value])
+
+  if (props.forceValidation) {
+    validate()
+  }
 
   return (
     <div>
@@ -59,13 +54,13 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
       <TextField
         key={props.name}
         value={value}
+        errorMessage={errorMsg}
         type={props.isPassword ? 'password' : 'text'}
-        validateOnFocusOut={true}
+        validateOnFocusOut={false}
         validateOnFocusIn={false}
         validateOnLoad={false}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        onGetErrorMessage={onGetErrorMessage}
+        onBlur={onEnter}
+        onKeyDown={onEnter}
         onChange={onChange}
         disabled={props.disabled}
       />
@@ -85,7 +80,8 @@ type LoginFormTextFieldProps = {
   name: string,
   label: string,
   isPassword?: boolean,
-  disabled?: boolean
+  disabled?: boolean,
+  forceValidation?: boolean
 }
 
 // --- exports ------------------------------------------------------
