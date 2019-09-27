@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import { loadThemeByName, initSystemIcons, Brand, CheckGroup, Choice, RadioGroup, Compound, DateInput, AppMenu, DataExplorer, DataExplorerQueryParams, HBox, VBox, DataForm, FieldSet, VerticalMenu, LoginForm, LogoutButton, MenuBar, Cockpit, TextInput, Tabs, UserMenu } from '../main/js-cockpit'
 import { MdAdd, MdEdit, MdRemove } from 'react-icons/md'
 import { Text } from 'office-ui-fabric-react'
-import { of as observableOf } from 'rxjs'
+import { of as observableOf, throwError as errorObservableOf } from 'rxjs'
 import { delay } from 'rxjs/operators'
 
 import Chance from 'chance'
@@ -176,6 +176,18 @@ function Demo() {
 
         slotFooter={
           <div>&copy; 2019, meet+greet</div>
+        }
+
+        performLogin={
+          (loginData: Record<string, string>, rememberLogin: boolean) => {
+            console.log('Logging in', loginData, rememberLogin)
+
+            return new Promise<any>((resolve, reject) => {
+              setTimeout(() => {
+                reject('Invalid credentials')
+              }, 2000)
+            })
+          }
         }
       />
 

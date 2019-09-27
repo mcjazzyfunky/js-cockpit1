@@ -7,8 +7,8 @@ type LoginFormProps = {
   fullSize?: boolean,
 
   performLogin?:
-    (params: { username: string, password: string, remember: boolean }) =>
-      Promise<{ fullName: string }> | null,
+    (loginData: Record<string, string>, rememberLogin: boolean) =>
+      Promise<any>,
 
   slotIntro?: ReactNode,
   slotHeader?: ReactNode,

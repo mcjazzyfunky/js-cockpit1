@@ -1,6 +1,6 @@
 // external imports
 import React, { ReactNode, FormEvent } from 'react'
-import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, TextField, Dropdown } from 'office-ui-fabric-react'
+import { Checkbox, Label, PrimaryButton, Spinner, SpinnerSize, Text } from 'office-ui-fabric-react'
 import { IoMdContact as DefaultIcon } from 'react-icons/io'
 
 // internal imports
@@ -22,11 +22,12 @@ function LoginFormView(props: LoginFormViewProps) {
 
     const
       [loading, setLoading] = useState(false),
+      [errorMsg, setErrorMsg] = useState(''),
       [forceValidation, setForceValidation] = useState(false),
       [rememberLogin, setRememberLogin] = useState(false), // TODO 
       classes = getLoginFormClasses(Boolean(props.slotIntro)),
 
-      onRememberLoginChange = useCallback((_, checked?: boolean) => {
+      onRememberLoginChange = useCallback((_: any, checked?: boolean) => {
         setRememberLogin(!!checked)
       }, []),
 
@@ -54,15 +55,42 @@ function LoginFormView(props: LoginFormViewProps) {
           }
         }
 
-        data['rememberLogin'] = rememberLogin
-
         if (!valid) {
           setForceValidation(true)
-        } else {
+        } else if (props.performLogin && !loading && !errorMsg) {
           setLoading(true)
-          performLogin(data)
+          
+          props.performLogin(data, rememberLogin)
+            .then(() => {
+              setTimeout(() => {
+                setLoading(false)
+              }, 1000)
+            })
+            .catch((reason: any) => {
+              let errorMsg = ''
+
+              if (typeof reason === 'string') {
+                errorMsg = reason
+              } else if (reason && typeof reason === 'object') {
+                errorMsg =
+                  reason.message === 'string'
+                    ? reason.message
+                    : String(reason.message)
+              }
+
+              errorMsg = errorMsg.trim()
+
+              if (errorMsg === '') {
+                errorMsg = 'Could not log in'
+              }
+
+              errorMsg = 'Error: ' + errorMsg
+
+              setLoading(false)
+              setErrorMsg(errorMsg)
+            })
         }
-      }, [rememberLogin])
+      }, [rememberLogin, loading, errorMsg])
 
     useEffect(() => {
       if (forceValidation) {
@@ -118,6 +146,7 @@ function LoginFormView(props: LoginFormViewProps) {
                   {renderFields(props, classes, loading, forceValidation)}
                 </div>
               </div>
+              <Text className={classes.errorMessage}>{errorMsg}</Text>
               <div className={classes.footer}>
                 <Checkbox
                   label="Remember me"
@@ -202,10 +231,6 @@ function renderFields(
   }
 
   return contents
-}
-
-function performLogin(data: Record<string, string>) {
-  console.log('Loading', data)
 }
 
 // --- exports ------------------------------------------------------

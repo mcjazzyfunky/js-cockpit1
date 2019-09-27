@@ -105,9 +105,9 @@ const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
       margin: '1.25rem 0 0 0',
     },
 
-    generalError: {
-      margin: '0.5rem 0',
-      color: theme.semanticColors.errorText
+    errorMessage: {
+      margin: '1.5rem 0 0 0',
+      color: theme.semanticColors.errorText,
     },
 
     submitButton: {
