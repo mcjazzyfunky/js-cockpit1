@@ -226,7 +226,7 @@ function Demo() {
           }
         ]
       }}
-
+*/
       search={{
         type: 'section',
 
@@ -425,13 +425,13 @@ function Demo() {
           <UserMenu
             fullName="Jane Doe"
           />
-          <LogoutButton/>
+          <LogoutButton onAction={() => alert('Logging out...')}/>
         </>
       }
 
       slotMenu={
-        //null
-        menuBar 
+        null
+        // menuBar 
       }
 
       slotSidebar={

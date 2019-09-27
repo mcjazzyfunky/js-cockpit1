@@ -1,5 +1,5 @@
 export default interface ActionEvent {
   type: 'action',
-  kind: string | null,
+  kind: string,
   id: string | null
 }

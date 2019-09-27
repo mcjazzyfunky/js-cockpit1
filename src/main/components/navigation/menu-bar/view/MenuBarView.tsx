@@ -100,7 +100,7 @@ function getItemProps(
         if (childOnAction || baseOnAction) {
           const event: ActionEvent = {
             type: 'action',
-            kind: 'menuBar',
+            kind: 'command',
             id
           }
   

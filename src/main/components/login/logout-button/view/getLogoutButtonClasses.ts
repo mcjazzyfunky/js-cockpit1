@@ -7,10 +7,10 @@ import defineStyle from '../../../../styling/defineStyle'
 // --- getLogoutButtonClasses ---------------------------------------
 
 const getLogoutButtonClasses = defineStyle(theme => ({
-  container: {
+  root: {
   },
 
-  logoutButton: {
+  button: {
     color: theme.palette.white,
     backgroundColor: theme.palette.themePrimary,
     border: 'none',

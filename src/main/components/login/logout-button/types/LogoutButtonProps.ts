@@ -1,7 +1,10 @@
+// internal imports
+import ActionEvent from '../../../../events/ActionEvent'
+
 // --- LogoutButtonProps --------------------------------------------
 
 type LogoutButtonProps = {
-  onClick?: () => void
+  onAction?: (ev: ActionEvent) => void
 }
 
 // --- exports ------------------------------------------------------

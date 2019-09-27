@@ -62,28 +62,28 @@ const getCockpitClasses = defineStyle((theme, look: CockpitProps['look'])  => {
       whiteSpace: 'nowrap',
 
       selectors: {
-        '& [data-component=AppMenu] [data-component="AppMenu:inner"]': {
+        '& > [data-component=AppMenu] [data-component="AppMenu:inner"]': {
           paddingTop: '5px',
         },
   
-        '& [data-component=AppMenu] .ms-Pivot-text': {
+        '& > [data-component=AppMenu] .ms-Pivot-text': {
           color: theme.palette.white,
         },
         
-        '& [data-component=AppMenu] *:hover *': {
+        '& > [data-component=AppMenu] *:hover *': {
           backgroundColor: 'transparent',
         },
 
-        '& [data-component=MenuBar] [data-component="MenuBar:icon"]': {
+        '& > [data-component=MenuBar] [data-component="MenuBar:icon"]': {
           display: 'block !important',
         },
         
-        '& [data-component=MenuBar] [data-component="MenuBar:icon"] *': {
+        '& > [data-component=MenuBar] [data-component="MenuBar:icon"] *': {
           color: theme.palette.themeSecondary + ' !important',
         },
 
-        '& [data-component=MenuBar] *': {
-           color: theme.palette.white,
+        '& > [data-component=MenuBar] *': {
+           color: theme.palette.white + ' !important',
            backgroundColor: 'transparent !important',
            borderStyle: 'hidden !important',
         }

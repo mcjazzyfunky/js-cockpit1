@@ -10,6 +10,7 @@ import validateLogoutButtonProps from './validation/validateLogoutButtonProps'
 
 const LogoutButton = component<LogoutButtonProps>({
   displayName: 'LogoutButton',
+  memoize: true,
   validate: validateLogoutButtonProps,
   render: LogoutButtonView
 })

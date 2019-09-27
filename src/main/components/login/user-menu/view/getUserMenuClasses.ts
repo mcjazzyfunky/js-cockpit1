@@ -4,7 +4,7 @@ import defineStyle from '../../../../styling/defineStyle'
 // --- getUserMenuClasses -------------------------------------------
 
 const getUserMenuClasses = defineStyle(theme => ({
-  container: {
+  root: {
     display: 'flex',
     adjustItems: 'center',
   },

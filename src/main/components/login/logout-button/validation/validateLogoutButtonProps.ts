@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 
 const validateLogoutButtonProps = Spec.checkProps({
   optional: {
-    onClick: Spec.function
+    onAction: Spec.function
   }
 })
 
