@@ -167,7 +167,9 @@ function LoginFormView({
                   {renderFields(extraFields, classes, loading, forceValidation, onValueChanged)}
                 </div>
               </div>
-              <Text className={classes.errorMessage}>{generalErrorMsg}</Text>
+              <div className={classes.errorMessage}>
+                <Text>{generalErrorMsg}</Text>
+              </div>
               <div className={classes.footer}>
                 <Checkbox
                   label="Remember me"

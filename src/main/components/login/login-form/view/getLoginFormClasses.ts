@@ -61,6 +61,13 @@ const getLoginFormClasses = defineStyle((
     fields = !hasExtraFields
       ? {
            display: 'block',
+
+           selectors: {
+             '& > div': {
+               display: 'block',
+               minHeight: '84px'
+             }
+           }
         }
       : {
           padding: '0 1rem 0 1.5rem',
@@ -88,7 +95,17 @@ const getLoginFormClasses = defineStyle((
               width: '100%',
             },
           }
+        },
+
+    errorMessage = !hasExtraFields
+      ? {
+          minHeight: '20px',
+          color: theme.semanticColors.errorText,
         }
+      : {
+          margin: !hasExtraFields ? '0' : '1.5rem 0 0 0',
+          color: theme.semanticColors.errorText,
+      }
 
   return {
     root,
@@ -148,10 +165,7 @@ const getLoginFormClasses = defineStyle((
       margin: '1.25rem 0 0 0',
     },
 
-    errorMessage: {
-      margin: '1.5rem 0 0 0',
-      color: theme.semanticColors.errorText,
-    },
+    errorMessage,
 
     submitButton: {
       width: '100%'
