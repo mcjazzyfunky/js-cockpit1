@@ -14,19 +14,26 @@ const { useCallback, useEffect, useRef, useState } = React
 
 // --- LoginFormView ------------------------------------------------
 
-function LoginFormView(props: LoginFormViewProps) {
+function LoginFormView({
+  extraFields,
+  fullSize,
+  slotFooter,
+  slotHeader,
+  slotIntro,
+  performLogin
+}: LoginFormViewProps) {
     let
       introColumn: ReactNode | null = null,
       headerBox: ReactNode | null = null,
       footerBox: ReactNode | null = null
 
     const
-      loginData = useRef<Record<string, string>>({}).current,
+      data = useRef<Record<string, string>>({}).current,
       [loading, setLoading] = useState(false),
       [generalErrorMsg, setGeneralErrorMsg] = useState(''),
       [forceValidation, setForceValidation] = useState(false),
       [rememberLogin, setRememberLogin] = useState(false), // TODO 
-      classes = getLoginFormClasses(Boolean(props.slotIntro)),
+      classes = getLoginFormClasses(Boolean(slotIntro)),
 
       onValueChanged = useCallback((ev: { value: string, name: string }) => {
         // WHY IS THIS NOT WORKING????
@@ -35,8 +42,8 @@ function LoginFormView(props: LoginFormViewProps) {
           setGeneralErrorMsg('')
         //}
   
-        loginData[ev.name] = ev.value
-      }, [loginData, generalErrorMsg]),
+        data[ev.name] = ev.value
+      }, [data, generalErrorMsg]),
 
       onRememberLoginChange = useCallback((_: any, checked?: boolean) => {
         setRememberLogin(!!checked)
@@ -44,21 +51,39 @@ function LoginFormView(props: LoginFormViewProps) {
 
       onSubmit = useCallback((ev: FormEvent) => {
         ev.preventDefault()
-        let valid: boolean = true
+        const loginData: Record<string, string> = {}
 
-        for (const key of Object.keys(loginData)) {
-          if (loginData[key] === '') {
-            valid = false
-            break
+        let valid: boolean = Boolean(data.username && data.password)
+
+        if (valid && extraFields) {
+          for (let i = 0; i < extraFields.length; ++i) {
+            const extraField = extraFields[i]
+
+            if (data[extraField.name] === undefined) {
+              if (extraField.defaultValue) {
+                loginData[extraField.name] = extraField.defaultValue
+              } else {
+                valid = false
+                break
+              }
+            } else if (!data[extraField.name]) {
+              valid = false
+              break
+            } else {
+              loginData[extraField.name] = data[extraField.name]
+            }
           }
         }
 
         if (!valid) {
           setForceValidation(true)
-        } else if (props.performLogin && !loading && !generalErrorMsg) {
+        } else if (performLogin && !loading && !generalErrorMsg) {
+          loginData['username'] = data['username'],
+          loginData['password'] = data['password']
+
           setLoading(true)
 
-          props.performLogin(loginData, rememberLogin)
+          performLogin(loginData, rememberLogin)
             .then(() => {
               setTimeout(() => {
                 setLoading(false)
@@ -88,21 +113,22 @@ function LoginFormView(props: LoginFormViewProps) {
               setGeneralErrorMsg(errorMsg)
             })
         }
-      }, [rememberLogin, loading, generalErrorMsg, loginData])
+      }, [rememberLogin, loading, generalErrorMsg, data, extraFields]) // TODO
 
-
+/*
     useEffect(() => {
       loginData['username'] = '',
       loginData['password'] = ''
 
-      if (props.extraFields) {
-        for (let i = 0; i < props.extraFields.length; ++i) {
-          const field = props.extraFields[i]
+      if (extraFields) {
+        for (let i = 0; i < extraFields.length; ++i) {
+          const field = extraFields[i]
 
           loginData[field.name] = field.defaultValue || ''
         }
       }
     }, [loginData])
+*/
 
     useEffect(() => {
       if (forceValidation) {
@@ -110,19 +136,19 @@ function LoginFormView(props: LoginFormViewProps) {
       }
     }, [forceValidation])
 
-    if (props.slotIntro) {
+    if (slotIntro) {
       introColumn =
         <div className={classes.introColumn}>
           <div className={classes.intro}>
-            {props.slotIntro}
+            {slotIntro}
           </div>
         </div>
     }
 
-    if (props.slotHeader) {
+    if (slotHeader) {
       headerBox =
         <div className={classes.header}>
-          { props.slotHeader }
+          { slotHeader }
         </div>
     } else {
       headerBox =
@@ -132,30 +158,30 @@ function LoginFormView(props: LoginFormViewProps) {
         </div>
     }
 
-    if (props.slotFooter) {
+    if (slotFooter) {
       footerBox = 
         <div className={classes.footer}>
-          {props.slotFooter}
+          {slotFooter}
         </div>
     }
 
     return (
-      <div className={props.fullSize ? classes.containerFullSize : classes.container}>
+      <div className={fullSize ? classes.containerFullSize : classes.container}>
         <div className={classes.inner}>
           {introColumn}
           <div className={classes.formColumn}>
             {headerBox}
             <form onSubmit={onSubmit} className={classes.form}>
               {
-                !props.slotHeader
+                !slotHeader
                   ? null
                   : <div className={classes.headline}>
                       User Login
                     </div>
               }
               <div className={classes.content}>
-                <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
-                  {renderFields(props, classes, loading, forceValidation, onValueChanged)}
+                <div className={!extraFields || extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
+                  {renderFields(extraFields, classes, loading, forceValidation, onValueChanged)}
                 </div>
               </div>
               <Text className={classes.errorMessage}>{generalErrorMsg}</Text>
@@ -192,7 +218,7 @@ function LoginFormView(props: LoginFormViewProps) {
 type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 
 function renderFields(
-  props: LoginFormViewProps,
+  extraFields: LoginFormViewProps['extraFields'],
   classes: LoginFormCssClasses,
   disableFields: boolean,
   forceValidation: boolean,
@@ -215,8 +241,8 @@ function renderFields(
     />
   ]
 
-  if (props.extraFields && props.extraFields.length > 0) {
-    props.extraFields.forEach((extraField, idx) => {
+  if (extraFields && extraFields.length > 0) {
+    extraFields.forEach((extraField, idx) => {
       let field: ReactNode
 
       switch (extraField.type) {

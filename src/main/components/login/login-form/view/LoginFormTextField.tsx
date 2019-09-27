@@ -45,7 +45,7 @@ function LoginFormTextFieldView({
     [errorMsg, setErrorMsg] = useState(''),
     valueChangedRef = useRef(false),
 
-    validate = () => {
+    validate = useCallback(() => {
       const msg = value.length === 0
         ? `Please enter field "${label}"`
         : ''
@@ -53,7 +53,7 @@ function LoginFormTextFieldView({
       if (msg !== errorMsg) {
         setErrorMsg(msg)
       }
-    },
+    }, [value, label, errorMsg]),
 
     onChange = useCallback((ev: any) => {
       const newValue = ev.target.value

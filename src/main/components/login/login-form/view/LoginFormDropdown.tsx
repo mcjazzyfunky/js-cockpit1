@@ -45,7 +45,7 @@ function LoginFormDropdownView({
     [errorMsg, setErrorMsg] = useState(''),
     valueChangedRef = useRef(false),
 
-    validate = () => {
+    validate = useCallback(() => {
       const msg = value.length === 0
         ? `Please enter field "${label}"`
         : ''
@@ -53,7 +53,7 @@ function LoginFormDropdownView({
       if (msg !== errorMsg) {
         setErrorMsg(msg)
       }
-    },
+    }, [value, label, errorMsg]),
 
     onChange = useCallback((ev: any) => {
       const newValue = ev.target.value
@@ -92,7 +92,8 @@ function LoginFormDropdownView({
       <Dropdown
         selectedKey={value}
         disabled={disabled}
-        
+        errorMessage={errorMsg}
+
         options={
           options.map(({ value, text }) => ({
             key: value,
