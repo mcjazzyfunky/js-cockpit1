@@ -1,5 +1,6 @@
 // external imports
 import React from 'react'
+import { component } from 'js-react-utils'
 import { TextField, Label } from 'office-ui-fabric-react'
 
 // derived imports
@@ -7,15 +8,39 @@ const { useCallback, useRef, useState } = React
 
 // --- LoginFormTextField -------------------------------------------
 
-function LoginFormTextField(props: LoginFormTextFieldProps) {
+const LoginFormTextField = component({
+  displayName: 'LoginFormTextField',
+  memoize: true,
+  render: LoginFormTextFieldView
+})
+
+// --- locals -------------------------------------------------------
+
+type LoginFormTextFieldProps = {
+  name: string,
+  label: string,
+  isPassword?: boolean,
+  defaultValue?: string,
+  disabled?: boolean,
+  forceValidation?: boolean
+}
+
+function LoginFormTextFieldView({
+  name,
+  label,
+  isPassword = false,
+  defaultValue = '',
+  disabled = false,
+  forceValidation = false
+}: LoginFormTextFieldProps) {
   const
-    [value, setValue] = useState(''),
+    [value, setValue] = useState(defaultValue),
     [errorMsg, setErrorMsg] = useState(''),
     valueChangedRef = useRef(false),
 
     validate = () => {
       const msg = value.length === 0
-        ? `Please enter field "${props.label}"`
+        ? `Please enter field "${label}"`
         : ''
 
       if (msg !== errorMsg) {
@@ -42,46 +67,36 @@ function LoginFormTextField(props: LoginFormTextFieldProps) {
       }
     }, [value])
 
-  if (props.forceValidation) {
+  if (forceValidation) {
     validate()
   }
 
   return (
     <div>
       <div>
-        <Label disabled={props.disabled}>{props.label}</Label>
+        <Label disabled={disabled}>{label}</Label>
       </div>
       <TextField
-        key={props.name}
+        key={name}
         value={value}
         errorMessage={errorMsg}
-        type={props.isPassword ? 'password' : 'text'}
+        type={isPassword ? 'password' : 'text'}
         validateOnFocusOut={false}
         validateOnFocusIn={false}
         validateOnLoad={false}
         onBlur={onEnter}
         onKeyDown={onEnter}
         onChange={onChange}
-        disabled={props.disabled}
+        disabled={disabled}
       />
       <input
         type="hidden"
-        name={props.name}
+        name={name}
         value={value}
         data-login-field
       />
     </div>
   )
-}
-
-// --- locals -------------------------------------------------------
-
-type LoginFormTextFieldProps = {
-  name: string,
-  label: string,
-  isPassword?: boolean,
-  disabled?: boolean,
-  forceValidation?: boolean
 }
 
 // --- exports ------------------------------------------------------

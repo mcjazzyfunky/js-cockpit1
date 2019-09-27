@@ -23,7 +23,12 @@ function LoginFormView(props: LoginFormViewProps) {
     const
       [loading, setLoading] = useState(false),
       [forceValidation, setForceValidation] = useState(false),
+      [rememberLogin, setRememberLogin] = useState(false), // TODO 
       classes = getLoginFormClasses(Boolean(props.slotIntro)),
+
+      onRememberLoginChange = useCallback((_, checked?: boolean) => {
+        setRememberLogin(!!checked)
+      }, []),
 
       onSubmit = useCallback((ev: FormEvent) => {
         ev.preventDefault()
@@ -49,14 +54,16 @@ function LoginFormView(props: LoginFormViewProps) {
           }
         }
 
+        data['rememberLogin'] = rememberLogin
+
         if (!valid) {
           setForceValidation(true)
         } else {
           setLoading(true)
           performLogin(data)
         }
-      }, [])
-    
+      }, [rememberLogin])
+
     useEffect(() => {
       if (forceValidation) {
         setForceValidation(false)
@@ -113,19 +120,11 @@ function LoginFormView(props: LoginFormViewProps) {
               </div>
               <div className={classes.footer}>
                 <Checkbox
-                  name="remember"
                   label="Remember me"
-                  className={classes.remember}
+                  checked={rememberLogin}
+                  className={classes.rememberLogin}
                   disabled={loading}
-
-                  /*
-                  onChange={
-                    event => setState({
-                      ...state,
-                      remember: (event!.target as any).checked
-                    })
-                  }
-                  */
+                  onChange={onRememberLoginChange}
                 />
                 <br/>
                 <PrimaryButton type={ loading ? 'button' : 'submit' } className={classes.submitButton}>

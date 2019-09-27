@@ -101,7 +101,7 @@ const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
       color: theme.palette.neutralPrimary,
     },
 
-    remember: {
+    rememberLogin: {
       margin: '1.25rem 0 0 0',
     },
 
