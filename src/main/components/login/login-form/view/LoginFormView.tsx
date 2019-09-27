@@ -10,7 +10,7 @@ import getLoginFormClasses from './getLoginFormClasses'
 import LoginFormViewProps from '../types/LoginFormViewProps'
 
 // derived imports
-const { useCallback, useEffect, useState } = React
+const { useCallback, useEffect, useRef, useState } = React
 
 // --- LoginFormView ------------------------------------------------
 
@@ -21,11 +21,22 @@ function LoginFormView(props: LoginFormViewProps) {
       footerBox: ReactNode | null = null
 
     const
+      loginData = useRef<Record<string, string>>({}).current,
       [loading, setLoading] = useState(false),
-      [errorMsg, setErrorMsg] = useState(''),
+      [generalErrorMsg, setGeneralErrorMsg] = useState(''),
       [forceValidation, setForceValidation] = useState(false),
       [rememberLogin, setRememberLogin] = useState(false), // TODO 
       classes = getLoginFormClasses(Boolean(props.slotIntro)),
+
+      onValueChanged = useCallback((ev: { value: string, name: string }) => {
+        // WHY IS THIS NOT WORKING????
+        //console.log('2222', generalErrorMsg)
+        //if (generalErrorMsg) {
+          setGeneralErrorMsg('')
+        //}
+  
+        loginData[ev.name] = ev.value
+      }, [loginData, generalErrorMsg]),
 
       onRememberLoginChange = useCallback((_: any, checked?: boolean) => {
         setRememberLogin(!!checked)
@@ -35,32 +46,19 @@ function LoginFormView(props: LoginFormViewProps) {
         ev.preventDefault()
         let valid: boolean = true
 
-        const
-          data: any = {},
-
-          elems = (ev.target as any)
-            .querySelectorAll('input[type=hidden][data-login-field]')
-
-        if (!elems) {
-          valid = false
-        } else {
-          for (let i = 0; i < elems.length; ++i) {
-            const elem = elems[i]
-
-            data[elem.name] = elem.value
-
-            if (elem.value === '') {
-              valid = false
-            }
+        for (const key of Object.keys(loginData)) {
+          if (loginData[key] === '') {
+            valid = false
+            break
           }
         }
 
         if (!valid) {
           setForceValidation(true)
-        } else if (props.performLogin && !loading && !errorMsg) {
+        } else if (props.performLogin && !loading && !generalErrorMsg) {
           setLoading(true)
-          
-          props.performLogin(data, rememberLogin)
+
+          props.performLogin(loginData, rememberLogin)
             .then(() => {
               setTimeout(() => {
                 setLoading(false)
@@ -87,10 +85,24 @@ function LoginFormView(props: LoginFormViewProps) {
               errorMsg = 'Error: ' + errorMsg
 
               setLoading(false)
-              setErrorMsg(errorMsg)
+              setGeneralErrorMsg(errorMsg)
             })
         }
-      }, [rememberLogin, loading, errorMsg])
+      }, [rememberLogin, loading, generalErrorMsg, loginData])
+
+
+    useEffect(() => {
+      loginData['username'] = '',
+      loginData['password'] = ''
+
+      if (props.extraFields) {
+        for (let i = 0; i < props.extraFields.length; ++i) {
+          const field = props.extraFields[i]
+
+          loginData[field.name] = field.defaultValue || ''
+        }
+      }
+    }, [loginData])
 
     useEffect(() => {
       if (forceValidation) {
@@ -143,10 +155,10 @@ function LoginFormView(props: LoginFormViewProps) {
               }
               <div className={classes.content}>
                 <div className={!props.extraFields || props.extraFields.length < 2 ? classes.fields : classes.fieldsWithHorizontalLabel }>
-                  {renderFields(props, classes, loading, forceValidation)}
+                  {renderFields(props, classes, loading, forceValidation, onValueChanged)}
                 </div>
               </div>
-              <Text className={classes.errorMessage}>{errorMsg}</Text>
+              <Text className={classes.errorMessage}>{generalErrorMsg}</Text>
               <div className={classes.footer}>
                 <Checkbox
                   label="Remember me"
@@ -183,7 +195,8 @@ function renderFields(
   props: LoginFormViewProps,
   classes: LoginFormCssClasses,
   disableFields: boolean,
-  forceValidation: boolean
+  forceValidation: boolean,
+  onValueChanged: any // TODO!!!
 ) {
   const contents: ReactNode[] = [
     <LoginFormTextField
@@ -191,12 +204,14 @@ function renderFields(
       label="User name"
       disabled={disableFields}
       forceValidation={forceValidation}
+      onValueChanged={onValueChanged}
     />,
     <LoginFormTextField
       name="password"
       label="Password"
       disabled={disableFields}
       forceValidation={forceValidation}
+      onValueChanged={onValueChanged}
     />
   ]
 

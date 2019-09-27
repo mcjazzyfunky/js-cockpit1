@@ -22,7 +22,13 @@ type LoginFormTextFieldProps = {
   isPassword?: boolean,
   defaultValue?: string,
   disabled?: boolean,
-  forceValidation?: boolean
+  forceValidation?: boolean,
+
+  onValueChanged?: (ev: {
+    type: 'valueChanged',
+    value: string,
+    name: string
+  }) => void
 }
 
 function LoginFormTextFieldView({
@@ -31,7 +37,8 @@ function LoginFormTextFieldView({
   isPassword = false,
   defaultValue = '',
   disabled = false,
-  forceValidation = false
+  forceValidation = false,
+  onValueChanged
 }: LoginFormTextFieldProps) {
   const
     [value, setValue] = useState(defaultValue),
@@ -49,10 +56,20 @@ function LoginFormTextFieldView({
     },
 
     onChange = useCallback((ev: any) => {
-      setValue(ev.target.value)
+      const newValue = ev.target.value
+
+      setValue(newValue)
       valueChangedRef.current = true,
       setErrorMsg('')
-    }, []),
+      
+      if (onValueChanged) {
+        onValueChanged({
+          type: 'valueChanged',
+          value: newValue,
+          name
+        })
+      }
+    }, [name]),
 
     onEnter = useCallback((ev: any) => {
       if (!ev.keyCode || ev.keyCode === 13) {
@@ -88,12 +105,6 @@ function LoginFormTextFieldView({
         onKeyDown={onEnter}
         onChange={onChange}
         disabled={disabled}
-      />
-      <input
-        type="hidden"
-        name={name}
-        value={value}
-        data-login-field
       />
     </div>
   )

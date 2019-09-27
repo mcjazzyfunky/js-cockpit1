@@ -22,7 +22,13 @@ type LoginFormDropdownProps = {
   options: { value: string, text: string }[],
   defaultValue?: string,
   disabled?: boolean,
-  forceValidation?: boolean
+  forceValidation?: boolean,
+
+  onValueChanged?: (ev: {
+    type: 'valueChanged',
+    value: string,
+    name: string
+  }) => void
 }
 
 function LoginFormDropdownView({
@@ -31,7 +37,8 @@ function LoginFormDropdownView({
   options,
   defaultValue = '',
   disabled = false,
-  forceValidation = false
+  forceValidation = false,
+  onValueChanged
 }: LoginFormDropdownProps) {
   const
     [value, setValue] = useState(defaultValue),
@@ -49,10 +56,20 @@ function LoginFormDropdownView({
     },
 
     onChange = useCallback((ev: any) => {
-      setValue(ev.target.value)
+      const newValue = ev.target.value
+
+      setValue(newValue)
       valueChangedRef.current = true,
       setErrorMsg('')
-    }, []),
+
+      if (onValueChanged) {
+        onValueChanged({
+          type: 'valueChanged',
+          value: newValue,
+          name
+        })
+      }
+    }, [name]),
 
     onEnter = useCallback((ev: any) => {
       if (!ev.keyCode || ev.keyCode === 13) {
@@ -86,12 +103,6 @@ function LoginFormDropdownView({
         onChange={onChange}
         onBlur={onEnter}
         onKeyDown={onEnter}
-      />
-      <input
-        type="hidden"
-        name={name}
-        value={value}
-        data-login-field
       />
     </div>
   )
