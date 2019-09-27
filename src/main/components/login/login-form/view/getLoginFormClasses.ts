@@ -3,39 +3,65 @@ import defineStyle from '../../../../styling/defineStyle'
 
 // --- getLoginFormClasses ------------------------------------------
 
-const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
-  const headerBorder = !hasIntro
-    ? {
-        borderWidth: '0 0 0.5px 0',
-        borderStyle: 'dashed',
-        borderColor: theme.palette.themeTertiary
-      }
-    : {} 
+const getLoginFormClasses = defineStyle((
+  theme,
+  hasIntro: boolean,
+  hasHeader: boolean,
+  hasExtraFields: boolean,
+  isFullSize: boolean
+) => {
+  const
+    root = !isFullSize
+      ? {
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'relative',
+          userSelect: 'none',
+        }
+      : {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0.5%)',
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          overflow: 'auto',
+          userSelect: 'none',
+          boxSizing: 'border-box',
+          paddingTop: '30px',
+      },
+
+    headerBorder = !hasIntro
+      ? {
+          borderWidth: '0 0 0.5px 0',
+          borderStyle: 'dashed',
+          borderColor: theme.palette.themeTertiary
+        }
+      : {},
+
+    header = !hasHeader
+      ? {
+          ...headerBorder,
+          padding: '0.5rem 1.5rem 1rem 1.5rem',
+          justifyContent: 'center',
+          display: 'flex',
+        }
+      : {
+          ...headerBorder,
+          padding: '0.75rem 1.5rem 0.5rem 1.5rem',
+          textAlign: 'center',
+          fontSize: theme.fonts.xLarge.fontSize,
+          fontFamily: theme.fonts.xLarge.fontFamily,
+          color: theme.palette.themePrimary,
+        }
+
 
   return {
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'relative',
-      userSelect: 'none',
-    },
-
-    containerFullSize: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5%)',
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-      overflow: 'auto',
-      userSelect: 'none',
-      boxSizing: 'border-box',
-      paddingTop: '30px',
-    },
-
+    root,
+  
     inner: {
       display: 'flex',
       flexDirection: 'row',
@@ -65,6 +91,8 @@ const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
       padding: '1rem 2rem',
     },
 
+    header,
+
     form: {
       display: 'flex',
       flexDirection: 'column',
@@ -72,22 +100,6 @@ const getLoginFormClasses = defineStyle((theme, hasIntro: boolean) => {
       paddingTop: '10px',
     },
 
-    header: {
-      ...headerBorder,
-      padding: '0.5rem 1.5rem 1rem 1.5rem',
-      justifyContent: 'center',
-      display: 'flex',
-    },
-
-    defaultHeader: {
-      ...headerBorder,
-      padding: '0.75rem 1.5rem 0.5rem 1.5rem',
-      textAlign: 'center',
-      fontSize: theme.fonts.xLarge.fontSize,
-      fontFamily: theme.fonts.xLarge.fontFamily,
-      color: theme.palette.themePrimary,
-    },
-    
     defaultIcon: {
       height: '40px',
       width: '40px',

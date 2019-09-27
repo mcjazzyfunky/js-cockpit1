@@ -16,7 +16,7 @@ const { useCallback, useEffect, useRef, useState } = React
 
 function LoginFormView({
   extraFields,
-  fullSize,
+  fullSize = false,
   slotFooter,
   slotHeader,
   slotIntro,
@@ -28,22 +28,20 @@ function LoginFormView({
       footerBox: ReactNode | null = null
 
     const
+      hasExtraFields = !!extraFields && extraFields.length > 0,
       data = useRef<Record<string, string>>({}).current,
       [loading, setLoading] = useState(false),
       [generalErrorMsg, setGeneralErrorMsg] = useState(''),
       [forceValidation, setForceValidation] = useState(false),
       [rememberLogin, setRememberLogin] = useState(false), // TODO 
-      classes = getLoginFormClasses(Boolean(slotIntro)),
+
+      classes = getLoginFormClasses(
+        !!slotIntro, !!slotHeader, hasExtraFields, fullSize),
 
       onValueChanged = useCallback((ev: { value: string, name: string }) => {
-        // WHY IS THIS NOT WORKING????
-        //console.log('2222', generalErrorMsg)
-        //if (generalErrorMsg) {
-          setGeneralErrorMsg('')
-        //}
-  
+        setGeneralErrorMsg('')
         data[ev.name] = ev.value
-      }, [data, generalErrorMsg]),
+      }, [data]),
 
       onRememberLoginChange = useCallback((_: any, checked?: boolean) => {
         setRememberLogin(!!checked)
@@ -113,22 +111,7 @@ function LoginFormView({
               setGeneralErrorMsg(errorMsg)
             })
         }
-      }, [rememberLogin, loading, generalErrorMsg, data, extraFields]) // TODO
-
-/*
-    useEffect(() => {
-      loginData['username'] = '',
-      loginData['password'] = ''
-
-      if (extraFields) {
-        for (let i = 0; i < extraFields.length; ++i) {
-          const field = extraFields[i]
-
-          loginData[field.name] = field.defaultValue || ''
-        }
-      }
-    }, [loginData])
-*/
+      }, [rememberLogin, loading, generalErrorMsg, data, extraFields])
 
     useEffect(() => {
       if (forceValidation) {
@@ -152,7 +135,7 @@ function LoginFormView({
         </div>
     } else {
       headerBox =
-        <div className={classes.defaultHeader}>
+        <div className={classes.header}>
           <div><DefaultIcon className={classes.defaultIcon}/></div>
           <div>User Login</div> 
         </div>
@@ -166,7 +149,7 @@ function LoginFormView({
     }
 
     return (
-      <div className={fullSize ? classes.containerFullSize : classes.container}>
+      <div className={classes.root}>
         <div className={classes.inner}>
           {introColumn}
           <div className={classes.formColumn}>
@@ -222,7 +205,7 @@ function renderFields(
   classes: LoginFormCssClasses,
   disableFields: boolean,
   forceValidation: boolean,
-  onValueChanged: any // TODO!!!
+  onValueChanged: any // TODO
 ) {
   const contents: ReactNode[] = [
     <LoginFormTextField

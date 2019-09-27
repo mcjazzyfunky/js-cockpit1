@@ -1,45 +1,24 @@
 // external imports
 import React from 'react'
-import { component } from 'js-react-utils'
-import { TextField, Label } from 'office-ui-fabric-react'
+import { Dropdown, Label } from 'office-ui-fabric-react'
+
+// internal imports
+import LoginFormDropdownProps from './LoginFormDropdownProps'
 
 // derived imports
-const { useCallback, useRef, useState } = React
+const { useCallback, useState, useRef, useEffect } = React
 
-// --- LoginFormTextField -------------------------------------------
+// --- LoginFormDropdownView ----------------------------------------
 
-const LoginFormTextField = component({
-  displayName: 'LoginFormTextField',
-  memoize: true,
-  render: LoginFormTextFieldView
-})
-
-// --- locals -------------------------------------------------------
-
-type LoginFormTextFieldProps = {
-  name: string,
-  label: string,
-  isPassword?: boolean,
-  defaultValue?: string,
-  disabled?: boolean,
-  forceValidation?: boolean,
-
-  onValueChanged?: (ev: {
-    type: 'valueChanged',
-    value: string,
-    name: string
-  }) => void
-}
-
-function LoginFormTextFieldView({
+function LoginFormDropdownView({
   name,
   label,
-  isPassword = false,
+  options,
   defaultValue = '',
   disabled = false,
   forceValidation = false,
   onValueChanged
-}: LoginFormTextFieldProps) {
+}: LoginFormDropdownProps) {
   const
     [value, setValue] = useState(defaultValue),
     [errorMsg, setErrorMsg] = useState(''),
@@ -61,7 +40,7 @@ function LoginFormTextFieldView({
       setValue(newValue)
       valueChangedRef.current = true,
       setErrorMsg('')
-      
+
       if (onValueChanged) {
         onValueChanged({
           type: 'valueChanged',
@@ -73,11 +52,7 @@ function LoginFormTextFieldView({
 
     onEnter = useCallback((ev: any) => {
       if (!ev.keyCode || ev.keyCode === 13) {
-        const trimmedValue = value.trim()
-
-        if (value !== trimmedValue) {
-          setValue(trimmedValue)
-        } else if (valueChangedRef.current) {
+        if (valueChangedRef.current) {
           validate()
           valueChangedRef.current = false
         }
@@ -93,18 +68,21 @@ function LoginFormTextFieldView({
       <div>
         <Label disabled={disabled}>{label}</Label>
       </div>
-      <TextField
-        key={name}
-        value={value}
+      <Dropdown
+        selectedKey={value}
+        disabled={disabled}
         errorMessage={errorMsg}
-        type={isPassword ? 'password' : 'text'}
-        validateOnFocusOut={false}
-        validateOnFocusIn={false}
-        validateOnLoad={false}
+
+        options={
+          options.map(({ value, text }) => ({
+            key: value,
+            text: text
+          }))
+        }
+
+        onChange={onChange}
         onBlur={onEnter}
         onKeyDown={onEnter}
-        onChange={onChange}
-        disabled={disabled}
       />
     </div>
   )
@@ -112,4 +90,4 @@ function LoginFormTextFieldView({
 
 // --- exports ------------------------------------------------------
 
-export default LoginFormTextField
+export default LoginFormDropdownView
