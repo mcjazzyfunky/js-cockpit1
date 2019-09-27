@@ -3,12 +3,33 @@ import Color from 'color'
 
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
+import CockpitProps from '../types/CockpitProps'
 
 // --- styleCockpit -------------------------------------------------
 
-const getCockpitClasses = defineStyle(theme => {
+const getCockpitClasses = defineStyle((theme, look: CockpitProps['look'])  => {
+  const
+    menu = look !== 'default'
+      ? null
+      : {
+
+          selectors: {
+            '& [data-component=MenuBar]': {
+              backgroundColor: '#f0f0f0 !important',
+              marginBottom: '1px',
+
+              selectors: {
+                '& *': {
+                  border: 'none !important',
+                  background: 'none !important',
+                }
+              }
+            }
+          }
+        }
+
   return {
-    container: {
+    root: {
       position: 'absolute',
       display: 'flex',
       flexDirection: 'column',
@@ -27,8 +48,7 @@ const getCockpitClasses = defineStyle(theme => {
       height: '46px',
       minWidth: '100%',
       color: '#f0f0f0',
-      //backgroundColor: theme.palette.themeDark, //'rgb(68, 68, 68)',
-      backgroundColor: 'rgb(68, 68, 68)',
+      backgroundColor: look === 'bright' ? theme.palette.themeDark : 'rgb(68, 68, 68)',
       zIndex: 32000
     },
 
@@ -88,6 +108,8 @@ const getCockpitClasses = defineStyle(theme => {
         }
       }
     },
+
+    menu,
 
     content: {
       flexGrow: 1,

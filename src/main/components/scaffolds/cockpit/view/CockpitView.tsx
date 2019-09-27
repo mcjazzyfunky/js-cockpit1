@@ -8,43 +8,49 @@ import CockpitViewProps from '../types/CockpitViewProps'
 
 // --- CockpitView --------------------------------------------------
 
-const CockpitView = component<CockpitViewProps>(
-  'CockpitViewProps', props => {
-
-  const classes = getCockpitClasses()
+function CockpitView({
+  look = 'default',
+  slotBrand,
+  slotCenter,
+  slotMenu,
+  slotSidebar,
+  slotTopNav,
+  slotUserNav
+}: CockpitViewProps) {
+  const classes = getCockpitClasses(look)
 
   const header =
-    !props.slotBrand && !props.slotTopNav && !props.slotUserNav
+    !slotBrand && !slotTopNav && !slotUserNav
       ? null
       : <div className={classes.header}>
           <div className={classes.headerStart}>
-            {props.slotBrand}
+            {slotBrand}
           </div>
           <div className={classes.headerCenter}>
-            {props.slotTopNav}
+            {slotTopNav}
           </div>
           <div className={classes.headerEnd}>
-            {props.slotUserNav}
+            {slotUserNav}
           </div>
         </div>
 
   return (
-    <div data-component="Cockpit" className={classes.container}>
+    <div data-component="Cockpit" className={classes.root}>
       {header}
-      <div>
-        {props.slotMenu}
+      <div className={classes.menu}>
+        {slotMenu}
       </div>
       <div className={classes.content}>
         <div className={classes.sidebar}>
-          {props.slotSidebar}
+          {slotSidebar}
         </div>
         <div className={classes.center}>
-          {props.slotCenter}
+          {slotCenter}
         </div>
       </div>
     </div>
   )
-})
+}
 
 // --- exports ------------------------------------------------------
 

@@ -18,17 +18,15 @@ const MenuBarView = component<MenuBarViewProps>(
     buttonAs: any = null
 
   const itemCount = props.items.length
-    
-  if (props.showMenuBeaks) {
-    buttonAs = (props: any) => 
-      <CommandBarButton 
-        {...props}
-        menuProps={{
-          ...props.menuProps,
-          isBeakVisible: true,
-          gapSpace: -2
-        }}/>
-  }
+
+  buttonAs = (props: any) => 
+    <CommandBarButton 
+      {...props}
+      menuProps={{
+        ...props.menuProps,
+        isBeakVisible: true,
+        gapSpace: -6
+      }}/>
 
   if (itemCount > 0) {
     const classes = getMenuBarClasses()

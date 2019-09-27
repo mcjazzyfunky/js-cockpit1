@@ -2,7 +2,6 @@
 
 type MenuBarProps = {
   items: (Menu | Item | Divider)[],
-  showMenuBeaks?: boolean,
   onAction?: () => void
 }
 

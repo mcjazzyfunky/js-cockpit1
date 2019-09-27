@@ -407,6 +407,8 @@ function Demo() {
 
   const cockpit =
     <Cockpit
+//      look = 'bright'
+
       slotBrand={
         <Brand
           vendor="meet+greet"
@@ -429,8 +431,8 @@ function Demo() {
       }
 
       slotMenu={
-        null
-        // menuBar 
+        //null
+        menuBar 
       }
 
       slotSidebar={
@@ -444,8 +446,8 @@ function Demo() {
       }
     />
 
-  return loginForm
-  //return cockpit 
+  //return loginForm
+  return cockpit 
 }
 
 function fakeData(count: number) {
