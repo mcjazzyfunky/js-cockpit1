@@ -78,32 +78,32 @@ const appMenu =
   <AppMenu
     items={[
       {
-        type: 'app',
+        type: 'item',
         id: 'dashboard',
         title: 'Dashboard',
         description: 'Some description for the Dashboard'
       },
       {
-        type: 'app',
+        type: 'item',
         id: 'catalog',
         title: 'Catalog',
         description: 'Some description for the Catalog'
       },
       {
-        type: 'app',
+        type: 'item',
         id: 'cms',
         title: 'CMS',
         description: 'Some description for the CMS'
       },
       {
-        type: 'app',
-        id: 'cms',
+        type: 'item',
+        id: 'mm',
         title: 'Media management',
         description: 'Some description for the media'
       }
     ]}
 
-    showCallout={true}
+    mode='callout'
   />
 
 const verticalMenu =

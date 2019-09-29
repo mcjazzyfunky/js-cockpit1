@@ -1,19 +1,19 @@
 //internal imports
-import AppSelectionEvent from '../../../../events/AppSelectionEvent'
+import ActionEvent from '../../../../events/ActionEvent'
 
 // --- AppMenuProps ------------------------------------------------
 
 type AppMenuProps = {
   items: {
-    type: 'app'
+    type: 'item'
     id: string,
     title: string,
     description?: string
   }[],
 
-  showCallout?: boolean,
+  mode: 'default' | 'callout',
 
-  onSelection?: (ev: AppSelectionEvent) => void
+  onAction?: (ev: ActionEvent) => void
 }
 
 // --- exports ------------------------------------------------------

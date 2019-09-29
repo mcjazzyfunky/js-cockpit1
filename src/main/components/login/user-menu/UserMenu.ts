@@ -10,7 +10,7 @@ import validateUserMenuProps from './validation/validateUserMenuProps'
 
 const UserMenu = component<UserMenuProps>({
   displayName: 'UserMenu',
-  memoize: true
+  memoize: true,
   validate: validateUserMenuProps,
   render: UserMenuView
 })

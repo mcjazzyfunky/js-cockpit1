@@ -4,7 +4,7 @@ import defineStyle from '../../../../styling/defineStyle'
 // --- getAppMenuClasses --------------------------------------------
 
 const getAppMenuClasses = defineStyle(theme => ({
-  container: {
+  root: {
   },
 
   inner: {

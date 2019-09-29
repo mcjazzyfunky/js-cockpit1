@@ -17,13 +17,13 @@ function AppMenuView(props: AppMenuProps) {
   const classes = getAppMenuClasses()
 
   return (
-    <div data-component="AppMenu" className={classes.container}>
+    <div data-component="AppMenu" className={classes.root}>
       <div data-component="AppMenu:inner" className={classes.inner}>
         <div className={classes.icon}>
           <AppMenuIcon/>
         </div>
         {
-          props.showCallout
+          props.mode === 'callout'
             ? renderWithCallout(props, classes)
             : renderDefault(props, classes)
         }

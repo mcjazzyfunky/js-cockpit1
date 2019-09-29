@@ -7,15 +7,15 @@ const validateAppMenuProps = Spec.checkProps({
   optional: {
     items:
     Spec.arrayOf(
-        Spec.exact({
-        type: Spec.is('app'),
-        id: Spec.string,
-        title: Spec.string,
-        description: Spec.optional(Spec.string)
-        })),
+      Spec.exact({
+      type: Spec.is('item'),
+      id: Spec.string,
+      title: Spec.string,
+      description: Spec.optional(Spec.string)
+    })),
     
-    showCallout: Spec.boolean,
-    onSelection: Spec.function
+    mode: Spec.oneOf('default', 'callout'),
+    onAction: Spec.function
   }
 })
 
