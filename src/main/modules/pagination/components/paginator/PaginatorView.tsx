@@ -31,14 +31,14 @@ function PaginatorView() {
       <button
         disabled={firstButtonDisabled}
         className={classes.button}
-        onClick={() => console.log('move to first page')}
+        onClick={() => ctrl.moveToPage(0)}
       >
         <ArrowDoubleLeftIcon/>
       </button>
       <button
         disabled={previousButtonDisabled}
         className={classes.button}
-        onClick={ () => console.log('move to previous page') }
+        onClick={ () => ctrl.moveToPage(ctrl.getPageIndex() - 1) }
       >
         <ArrowLeftIcon/>
       </button>
@@ -52,14 +52,14 @@ function PaginatorView() {
       <button
         disabled={nextButtonDisabled}
         className={classes.button}
-        onClick={() => console.log('move to next page')}
+        onClick={() => ctrl.moveToPage(ctrl.getPageIndex() + 1)}
       >
         <ArrowRightIcon/>
       </button>
       <button
         disabled={lastButtonDisabled}
         className={classes.button}
-        onClick={() => 'Console log move to last page'}
+        onClick={() => ctrl.moveToPage(Math.floor((ctrl.getTotalItemCount() - 1) / ctrl.getPageSize()))}
       >
         <ArrowDoubleRightIcon/>
       </button>

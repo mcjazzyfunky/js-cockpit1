@@ -8,7 +8,7 @@ const { useContext } = React
 // --- usePaginationCtrl --------------------------------------------
 
 function usePagination() {
-  return useContext(PaginationCtx)
+  return useContext(PaginationCtx)[0]
 }
 
 // --- exports ------------------------------------------------------
