@@ -1,0 +1,1 @@
+export * from '../main/modules/pagination/index'
