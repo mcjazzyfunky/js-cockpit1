@@ -1,5 +1,5 @@
 // external imports
-import { prepareActions } from 'js-react-utils'
+import { componentActions } from 'js-react-utils'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
 
@@ -11,17 +11,19 @@ import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
 // -- useDataExplorerActions ----------------------------------------
 
-const useDataExplorerActions = prepareActions(
- (state: DataExplorerState, setState) => {
-
+const useDataExplorerActions = componentActions(setState => {
   let timeout: any
 
   return {
-    setRowSelection(rowSelection: number[]) {
+    setRowSelection(
+      state,
+      rowSelection: number[]
+    ) {
       setState({ rowSelection })
     },
 
     loadPage(
+      state,
       pageIndex: number,
       loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
       onSuccess: () => void
@@ -38,6 +40,7 @@ const useDataExplorerActions = prepareActions(
     },
 
     loadPageSize(
+      state,
       pageSize: number,
       loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
       onSuccess: () => void
@@ -54,6 +57,7 @@ const useDataExplorerActions = prepareActions(
     },
 
     loadSorting(
+      state,
       sortBy: string,
       sortDir: 'asc' | 'desc',
       loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
@@ -71,6 +75,7 @@ const useDataExplorerActions = prepareActions(
     },
 
     loadFilter(
+      state,
       filter: DataExplorerFilter | null,
       loadData: (params: DataExplorerQueryParams) => Observable<DataExplorerQueryResult>,
       onSuccess: () => void
