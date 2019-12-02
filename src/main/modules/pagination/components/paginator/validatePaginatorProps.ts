@@ -1,10 +1,10 @@
 // external import
 import { Spec } from 'js-spec'
 
-// --- validatePaginatorProps ---------------------------------------
+// --- validatePaginatorProps ----------------------------------------
 
 const validatePaginatorProps = Spec.checkProps({})
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validatePaginatorProps

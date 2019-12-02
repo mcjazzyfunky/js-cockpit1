@@ -1,11 +1,11 @@
 // internal inputs
 import FormValues from './FormValues'
 
-// --- FormCtrlSubscriber -------------------------------------------
+// --- FormCtrlSubscriber --------------------------------------------
 
 type FormCtrlSubscriber =
   (values: FormValues, tempValues: FormValues) => void
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default FormCtrlSubscriber 

@@ -6,7 +6,7 @@ import TextInputProps from './types/TextInputProps'
 import TextInputView from './view/TextInputView'
 import validateTextInputProps from './validation/validateTextInputProps'
 
-// --- TextInput ----------------------------------------------------
+// --- TextInput -----------------------------------------------------
 
 const TextInput = component<TextInputProps>({
   displayName: 'TextInput',
@@ -14,6 +14,6 @@ const TextInput = component<TextInputProps>({
   render: TextInputView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default TextInput

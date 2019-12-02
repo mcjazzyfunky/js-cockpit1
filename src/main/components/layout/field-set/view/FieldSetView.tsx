@@ -13,7 +13,7 @@ import ViewModesCtx from '../../../../contexts/view-modes/ViewModesCtx'
 const { cloneElement, createElement: h, useContext, Children } = React
 type FieldSetClasses = ReturnType<typeof getFieldSetClasses>
 
-// --- FieldSetView -------------------------------------------------
+// --- FieldSetView --------------------------------------------------
 
 function FieldSetView(props: FieldSetProps) {
   const
@@ -42,7 +42,7 @@ function FieldSetView(props: FieldSetProps) {
   )
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 function renderLabel(props: FieldSetProps, classes: FieldSetClasses) {
   let ret: ReactNode = null
@@ -118,6 +118,6 @@ function renderCompactContent(props: FieldSetProps, classes: FieldSetClasses) {
     </table>
   )
 }
-// --- exports -----------------------------------------------------
+// --- exports ------------------------------------------------------
 
 export default FieldSetView

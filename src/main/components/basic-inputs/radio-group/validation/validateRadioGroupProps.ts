@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateRadioGroupProps --------------------------------------
+// --- validateRadioGroupProps ---------------------------------------
 
 const validateRadioGroupProps = Spec.checkProps({
   required: {
@@ -21,6 +21,6 @@ const validateRadioGroupProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateRadioGroupProps

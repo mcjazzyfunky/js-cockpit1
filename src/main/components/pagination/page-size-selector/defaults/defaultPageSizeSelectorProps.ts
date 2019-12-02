@@ -2,12 +2,12 @@
 import PageSizeSelectorProps from '../types/PageSizeSelectorProps'
 import PickOptionalProps from '../../../../types/PickOptionalProps'
 
-// --- defaultPageSizeSelectorProps ---------------------------------
+// --- defaultPageSizeSelectorProps ----------------------------------
 
 const defaultPageSizeSelectorProps: PickOptionalProps<PageSizeSelectorProps> = {
   pageSize: 25
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default defaultPageSizeSelectorProps

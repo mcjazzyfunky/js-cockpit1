@@ -7,7 +7,7 @@ import { ChoiceGroup, Label } from 'office-ui-fabric-react'
 import getRadioGroupClasses from './getRadioGroupClasses'
 import RadioGroupViewProps from '../types/RadioGroupViewProps'
 
-// --- RadioGroupView -----------------------------------------------
+// --- RadioGroupView ------------------------------------------------
 
 const ViewRadioGroup = component<RadioGroupViewProps>(
   'RadioGroupView', props => {
@@ -43,6 +43,6 @@ const ViewRadioGroup = component<RadioGroupViewProps>(
   )
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default ViewRadioGroup

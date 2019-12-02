@@ -2,11 +2,11 @@
 import PageSizeSelectorProps from './PageSizeSelectorProps'
 import defaultPageSizeSelectorProps from '../defaults/defaultPageSizeSelectorProps'
 
-// -- PageSizeSelectorViewProps -------------------------------------
+// -- PageSizeSelectorViewProps --------------------------------------
 
 type PageSizeSelectorViewProps =
   PageSizeSelectorProps & typeof defaultPageSizeSelectorProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PageSizeSelectorViewProps

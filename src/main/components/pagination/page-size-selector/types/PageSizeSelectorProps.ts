@@ -1,13 +1,13 @@
 // internal imports
 import PageSizeChangeEvent from '../../../../events/PageSizeChangeEvent'
 
-// --- PageSizeSelectorProps ----------------------------------------
+// --- PageSizeSelectorProps -----------------------------------------
 
 type PageSizeSelectorProps = {
   pageSize?: number,
   onPageSizeChange?: (event: PageSizeChangeEvent) => void
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PageSizeSelectorProps

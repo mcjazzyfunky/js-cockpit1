@@ -6,7 +6,7 @@ import UserMenuProps from './types/UserMenuProps'
 import UserMenuView from './view/UserMenuView'
 import validateUserMenuProps from './validation/validateUserMenuProps'
 
-// --- UserMenu -----------------------------------------------------
+// --- UserMenu ------------------------------------------------------
 
 const UserMenu = component<UserMenuProps>({
   displayName: 'UserMenu',
@@ -15,6 +15,6 @@ const UserMenu = component<UserMenuProps>({
   render: UserMenuView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default UserMenu

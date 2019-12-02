@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getDateInputClasses ------------------------------------------
+// --- getDateInputClasses -------------------------------------------
 
 const getDateInputClasses = defineStyle(theme => ({
   container: {
@@ -14,6 +14,6 @@ const getDateInputClasses = defineStyle(theme => ({
   },
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getDateInputClasses

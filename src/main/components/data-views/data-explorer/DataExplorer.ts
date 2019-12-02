@@ -6,11 +6,11 @@ import { Spec } from 'js-spec'
 import DataExplorerProps from './types/DataExplorerProps'
 import DataExplorerView from './view/DataExplorerView'
 
-// --- constants ---------------------------------------------------
+// --- constants ----------------------------------------------------
 
 const REGEX_NAME = /^[a-z][a-zA-Z0-9]+/
 
-// --- DataExplorer ------------------------------------------------
+// --- DataExplorer -------------------------------------------------
 
 const DataExplorer = component<DataExplorerProps>({
   displayName: 'DataExplorer',
@@ -61,7 +61,7 @@ const DataExplorer = component<DataExplorerProps>({
   render: DataExplorerView
 })
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 const specDefaultSearch = 
   Spec.exact({
@@ -115,6 +115,6 @@ const specTextFilter =
     label: Spec.string
   })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorer

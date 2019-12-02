@@ -3,7 +3,7 @@ import FormValues from './FormValues'
 import FormCtrlSubscriber from './FormCtrlSubscriber'
 import FormCtrlUnsubscribe from './FormCtrlUnsubscribe'
 
-// --- FormCtrl -----------------------------------------------------
+// --- FormCtrl ------------------------------------------------------
 
 type FormCtrl = {
   getValue(name: string): any,
@@ -16,6 +16,6 @@ type FormCtrl = {
   subscribe(subscriber: FormCtrlSubscriber): FormCtrlUnsubscribe
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default FormCtrl

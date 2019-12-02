@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getDataExplorerClasses ---------------------------------------
+// --- getDataExplorerClasses ----------------------------------------
 
 const getDataExplorerClasses = defineStyle(theme => ({
   container: {
@@ -206,6 +206,6 @@ const getDataExplorerClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getDataExplorerClasses

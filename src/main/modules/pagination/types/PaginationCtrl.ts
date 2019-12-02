@@ -1,4 +1,4 @@
-// --- PaginationCtrl -----------------------------------------------
+// --- PaginationCtrl ------------------------------------------------
 
 type PaginationCtrl = {
   getPageIndex(): number,
@@ -8,6 +8,6 @@ type PaginationCtrl = {
   setPageSize(pageIndex: number): Promise<number>
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginationCtrl

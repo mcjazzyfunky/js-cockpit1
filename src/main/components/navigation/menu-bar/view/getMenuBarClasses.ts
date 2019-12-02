@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getMenuBarClasses --------------------------------------------
+// --- getMenuBarClasses ---------------------------------------------
 
 const getMenuBarClasses = defineStyle(theme => ({
   root: {
@@ -27,6 +27,6 @@ const getMenuBarClasses = defineStyle(theme => ({
   },
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getMenuBarClasses

@@ -6,7 +6,7 @@ import { component, isNode, withChildren } from 'js-react-utils'
 import FieldSetProps from './types/FieldSetProps'
 import FieldSetView from './view/FieldSetView'
 
-// --- FieldSet ---------------------------------------------------------
+// --- FieldSet ----------------------------------------------------------
 
 const FieldSet = component<FieldSetProps>({
   displayName: 'FieldSet',
@@ -24,6 +24,6 @@ const FieldSet = component<FieldSetProps>({
   render: FieldSetView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default FieldSet

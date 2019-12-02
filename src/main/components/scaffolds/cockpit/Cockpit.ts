@@ -6,7 +6,7 @@ import CockpitProps from './types/CockpitProps'
 import CockpitView from './view/CockpitView'
 import validateCockpitProps from './validation/validateCockpitProps'
 
-// --- Cockpit ------------------------------------------------
+// --- Cockpit -------------------------------------------------
 
 const Cockpit = component<CockpitProps>({
   displayName: 'Cockpit',
@@ -14,6 +14,6 @@ const Cockpit = component<CockpitProps>({
   render: CockpitView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Cockpit

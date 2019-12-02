@@ -1,9 +1,9 @@
-// --- DataTableMethods ---------------------------------------------
+// --- DataTableMethods ----------------------------------------------
 
 type DataTableMethods = {
   unselectAllRows: () => void
 }
 
-// --- export -------------------------------------------------------
+// --- export --------------------------------------------------------
 
 export default DataTableMethods

@@ -11,7 +11,7 @@ import DataExplorerSearch from './DataExplorerSearch'
 import DataExplorerQueryParams from './DataExplorerQueryParams'
 import DataExplorerQueryResult from './DataExplorerQueryResult'
 
-// --- DataExplorerProps ----------------------------------------------
+// --- DataExplorerProps -----------------------------------------------
 
 type DataExplorerProps = {
   title?: string | null,
@@ -26,6 +26,6 @@ type DataExplorerProps = {
   search?: DataExplorerSearch | null
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorerProps

@@ -1,7 +1,7 @@
 // external import
 import { Spec } from 'js-spec'
 
-// --- validateTextInputProps ---------------------------------------
+// --- validateTextInputProps ----------------------------------------
 
 const validateTextInputProps = Spec.checkProps({
   optional: {
@@ -15,6 +15,6 @@ const validateTextInputProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateTextInputProps

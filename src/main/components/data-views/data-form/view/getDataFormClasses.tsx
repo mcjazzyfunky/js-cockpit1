@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getDataFormClasses -------------------------------------------
+// --- getDataFormClasses --------------------------------------------
 
 const getDataFormClasses = defineStyle(theme => ({
   container: {
@@ -131,6 +131,6 @@ const getDataFormClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getDataFormClasses

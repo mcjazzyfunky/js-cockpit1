@@ -1,7 +1,7 @@
 //internal imports
 import ActionEvent from '../../../../events/ActionEvent'
 
-// --- AppMenuProps ------------------------------------------------
+// --- AppMenuProps -------------------------------------------------
 
 type AppMenuProps = {
   items: {
@@ -16,6 +16,6 @@ type AppMenuProps = {
   onAction?: (ev: ActionEvent) => void
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default AppMenuProps

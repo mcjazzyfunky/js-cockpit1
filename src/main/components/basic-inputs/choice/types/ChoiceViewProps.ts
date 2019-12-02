@@ -1,10 +1,10 @@
 // internal imports
 import ChoiceProps from './ChoiceProps'
 
-// --- ChoiceViewProps ----------------------------------------------
+// --- ChoiceViewProps -----------------------------------------------
 
 type ChoiceViewProps = ChoiceProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default ChoiceViewProps

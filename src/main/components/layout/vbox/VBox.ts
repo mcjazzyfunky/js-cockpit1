@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 import VBoxProps from './types/VBoxProps'
 import VBoxView from './view/renderVBox'
 
-// --- VBox ---------------------------------------------------------
+// --- VBox ----------------------------------------------------------
 
 const VBox = component<VBoxProps>({
   displayName: 'VBox',
@@ -22,6 +22,6 @@ const VBox = component<VBoxProps>({
   render: VBoxView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default VBox 

@@ -2,11 +2,11 @@
 import BrandProps from './BrandProps'
 import defaultBrandProps from '../defaults/defaultBrandProps'
 
-// --- BrandViewProps -----------------------------------------------
+// --- BrandViewProps ------------------------------------------------
 
 type BrandViewProps = BrandProps & typeof defaultBrandProps
 let x: BrandViewProps = {} as any
 
-// -- exports -------------------------------------------------------
+// -- exports --------------------------------------------------------
 
 export default BrandViewProps

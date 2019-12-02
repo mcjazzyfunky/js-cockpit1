@@ -7,7 +7,7 @@ import { Spec } from 'js-spec'
 import VerticalMenuProps from './types/VerticalMenuProps'
 import VerticalMenuView from './view/VerticalMenuView'
 
-// --- VerticalMenu ------------------------------------------------------
+// --- VerticalMenu -------------------------------------------------------
 
 const VerticalMenu = component<VerticalMenuProps>({
   displayName: 'VerticalMenu',
@@ -26,7 +26,7 @@ const VerticalMenu = component<VerticalMenuProps>({
   render: VerticalMenuView
 })
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 const specItems =
   Spec.lazy(() =>
@@ -55,6 +55,6 @@ const specItems =
             })
         }))))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default VerticalMenu

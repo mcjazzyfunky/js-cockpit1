@@ -1,7 +1,7 @@
 // external imports
 import React, { CSSProperties, ReactNode } from 'react'
 
-// --- HBoxProps ---------------------------------------------------- 
+// --- HBoxProps ----------------------------------------------------- 
 
 type HBoxProps = {
   className?: string,
@@ -9,6 +9,6 @@ type HBoxProps = {
   children?: ReactNode 
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default HBoxProps

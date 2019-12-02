@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 // internal imports
 import HBoxProps from '../types/HBoxProps'
 
-// --- renderHBox ---------------------------------------------------
+// --- renderHBox ----------------------------------------------------
 
 function renderHBox(props: HBoxProps) {
   return (
@@ -16,6 +16,6 @@ function renderHBox(props: HBoxProps) {
   )
 }
 
-// --- exports -----------------------------------------------------
+// --- exports ------------------------------------------------------
 
 export default renderHBox

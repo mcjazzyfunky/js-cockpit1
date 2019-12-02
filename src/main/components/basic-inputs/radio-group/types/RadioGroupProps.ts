@@ -1,4 +1,4 @@
-// --- RadioGroupProps ----------------------------------------------
+// --- RadioGroupProps -----------------------------------------------
 
 type RadioGroupProps = {
   name?: string
@@ -9,13 +9,13 @@ type RadioGroupProps = {
   options: Option[]
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type Option = {
   key: string,
   text: string
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default RadioGroupProps 

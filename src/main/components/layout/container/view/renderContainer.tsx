@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 // internal imports
 import ContainerProps from '../types/ContainerProps'
 
-// --- renderHBox ---------------------------------------------------
+// --- renderHBox ----------------------------------------------------
 
 function renderContainer(props: ContainerProps) {
   const
@@ -33,6 +33,6 @@ function renderContainer(props: ContainerProps) {
   )
 }
 
-// --- exports -----------------------------------------------------
+// --- exports ------------------------------------------------------
 
 export default renderContainer

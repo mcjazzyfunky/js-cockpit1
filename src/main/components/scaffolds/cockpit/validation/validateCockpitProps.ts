@@ -2,7 +2,7 @@
 import { isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
-// --- validateCockpitProps -----------------------------------------
+// --- validateCockpitProps ------------------------------------------
 
 const validateCockpitProps = Spec.checkProps({
   optional: {
@@ -15,6 +15,6 @@ const validateCockpitProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateCockpitProps

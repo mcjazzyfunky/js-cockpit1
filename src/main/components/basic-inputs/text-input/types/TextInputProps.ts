@@ -1,7 +1,7 @@
 // internal imports
 import FormValues from '../../../../contexts/form-ctx/types/FormValues'
 
-// --- TextInputProps -----------------------------------------------
+// --- TextInputProps ------------------------------------------------
 
 type TextInputProps = {
   name?: string,
@@ -13,6 +13,6 @@ type TextInputProps = {
   grow?: number
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default TextInputProps 

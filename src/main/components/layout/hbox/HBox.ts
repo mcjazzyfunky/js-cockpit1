@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 import HBoxProps from './types/HBoxProps'
 import HBoxView from './view/renderHBox'
 
-// --- HBox ---------------------------------------------------------
+// --- HBox ----------------------------------------------------------
 
 const HBox = component<HBoxProps>({
   displayName: 'HBox',
@@ -22,6 +22,6 @@ const HBox = component<HBoxProps>({
   render: HBoxView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default HBox

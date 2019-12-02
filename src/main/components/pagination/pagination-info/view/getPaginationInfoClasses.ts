@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getPaginationInfoClasses -------------------------------------
+// --- getPaginationInfoClasses --------------------------------------
 
 const getPaginationInfoClasses = defineStyle(theme => ({
   container: {
@@ -10,6 +10,6 @@ const getPaginationInfoClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getPaginationInfoClasses

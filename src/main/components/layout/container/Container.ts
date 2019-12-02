@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 import ContainerProps from './types/ContainerProps'
 import ContainerView from './view/renderContainer'
 
-// --- Container ----------------------------------------------------
+// --- Container -----------------------------------------------------
 
 const Container = component<ContainerProps>({
   displayName: 'Container',
@@ -26,6 +26,6 @@ const Container = component<ContainerProps>({
   render: ContainerView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Container 

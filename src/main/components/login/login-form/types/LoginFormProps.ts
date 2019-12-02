@@ -1,7 +1,7 @@
 // external imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- LoginFormProps -----------------------------------------------
+// --- LoginFormProps ------------------------------------------------
 
 type LoginFormProps = {
   fullSize?: boolean,
@@ -36,6 +36,6 @@ type LoginFormProps = {
   )[],
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormProps

@@ -6,7 +6,7 @@ import MenuBarProps from './types/MenuBarProps'
 import MenuBarView from './view/MenuBarView'
 import validateMenuBarProps from './validation/validateMenuBarProps'
 
-// --- MenuBar --------------------------------------------------------
+// --- MenuBar ---------------------------------------------------------
 
 const MenuBar = component<MenuBarProps>({
   displayName: 'MenuBar',
@@ -14,6 +14,6 @@ const MenuBar = component<MenuBarProps>({
   render: MenuBarView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default MenuBar

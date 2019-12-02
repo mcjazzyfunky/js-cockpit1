@@ -6,7 +6,7 @@ import LogoutButtonProps from './types/LogoutButtonProps'
 import LogoutButtonView from './view/LogoutButtonView'
 import validateLogoutButtonProps from './validation/validateLogoutButtonProps'
 
-// --- LogoutButton -----------------------------------------------------
+// --- LogoutButton ------------------------------------------------------
 
 const LogoutButton = component<LogoutButtonProps>({
   displayName: 'LogoutButton',
@@ -15,6 +15,6 @@ const LogoutButton = component<LogoutButtonProps>({
   render: LogoutButtonView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LogoutButton

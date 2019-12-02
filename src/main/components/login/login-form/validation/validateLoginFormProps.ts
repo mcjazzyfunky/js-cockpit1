@@ -2,7 +2,7 @@
 import { isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
-// --- validateLoginFormProps ---------------------------------------
+// --- validateLoginFormProps ----------------------------------------
 
 const validateLoginFormProps = Spec.checkProps({
   optional: {
@@ -55,6 +55,6 @@ const validateLoginFormProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateLoginFormProps

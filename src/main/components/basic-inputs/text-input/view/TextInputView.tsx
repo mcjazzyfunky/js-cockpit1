@@ -12,7 +12,7 @@ import createUniqueId from '../../../../tools/createUniqueId'
 // derived imports
 const { useContext } = React
 
-// --- TextInputView ------------------------------------------------
+// --- TextInputView -------------------------------------------------
 
 const TextInputView = component<TextInputViewProps>(
   'TextInputView', props => {
@@ -96,6 +96,6 @@ const TextInputView = component<TextInputViewProps>(
   )
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default TextInputView

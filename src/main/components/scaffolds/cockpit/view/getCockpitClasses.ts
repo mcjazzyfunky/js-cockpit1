@@ -5,7 +5,7 @@ import Color from 'color'
 import defineStyle from '../../../../styling/defineStyle'
 import CockpitProps from '../types/CockpitProps'
 
-// --- styleCockpit -------------------------------------------------
+// --- styleCockpit --------------------------------------------------
 
 const getCockpitClasses = defineStyle((theme, look: CockpitProps['look'])  => {
   const
@@ -143,6 +143,6 @@ const getCockpitClasses = defineStyle((theme, look: CockpitProps['look'])  => {
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getCockpitClasses

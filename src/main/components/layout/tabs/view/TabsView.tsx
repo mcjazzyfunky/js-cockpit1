@@ -10,7 +10,7 @@ import TabsPageProps from '../types/TabsPageProps'
 // derived import
 const { Children } = React
 
-// --- TabsView -----------------------------------------------------
+// --- TabsView ------------------------------------------------------
 
 function TabsView(props: TabsProps) {
   const classes = getTabsClasses()
@@ -34,6 +34,6 @@ function TabsView(props: TabsProps) {
   )
 }
 
-// --- exports -----------------------------------------------------
+// --- exports ------------------------------------------------------
 
 export default TabsView

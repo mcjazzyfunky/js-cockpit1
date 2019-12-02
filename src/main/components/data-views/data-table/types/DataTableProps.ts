@@ -2,7 +2,7 @@
 import RowSelectionChangeEvent from '../../../../events/RowSelectionChangeEvent'
 import SortChangeEvent from '../../../../events/SortChangeEvent'
 
-// --- DataTableProps -----------------------------------------------
+// --- DataTableProps ------------------------------------------------
 
 type DataTableProps = {
   title?: string | null,
@@ -30,6 +30,6 @@ type DataTableProps = {
   ref?: any // TODO
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataTableProps

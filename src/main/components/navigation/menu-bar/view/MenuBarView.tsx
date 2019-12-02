@@ -10,7 +10,7 @@ import MenuBarViewProps from '../types/MenuBarViewProps'
 import MenuBarIcon from './MenuBarIcon'
 import ActionEvent from '../../../../events/ActionEvent'
 
-// --- MenuBarView --------------------------------------------------
+// --- MenuBarView ---------------------------------------------------
 
 function MenuBarView({
   items,
@@ -54,7 +54,7 @@ function MenuBarView({
   return ret
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type Item = MenuBarViewProps['items'] extends (infer I)[] ? I : never
 
@@ -134,6 +134,6 @@ function getItemProps(
   return ret
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default MenuBarView

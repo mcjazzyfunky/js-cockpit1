@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getUserMenuClasses -------------------------------------------
+// --- getUserMenuClasses --------------------------------------------
 
 const getUserMenuClasses = defineStyle(theme => ({
   root: {
@@ -22,6 +22,6 @@ const getUserMenuClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getUserMenuClasses

@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getChoiceClasses ---------------------------------------------
+// --- getChoiceClasses ----------------------------------------------
 
 const getChoiceClasses = defineStyle(theme => ({
   container: {
@@ -14,6 +14,6 @@ const getChoiceClasses = defineStyle(theme => ({
   },
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getChoiceClasses

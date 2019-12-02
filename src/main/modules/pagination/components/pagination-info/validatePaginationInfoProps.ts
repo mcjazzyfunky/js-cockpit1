@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validatePagniationInfoProps ----------------------------------
+// --- validatePagniationInfoProps -----------------------------------
 
 const validatePaginationInfoProps = Spec.checkProps({
   required: {
@@ -9,6 +9,6 @@ const validatePaginationInfoProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validatePaginationInfoProps

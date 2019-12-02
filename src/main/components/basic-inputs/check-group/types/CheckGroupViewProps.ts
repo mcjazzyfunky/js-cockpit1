@@ -2,10 +2,10 @@
 import CheckGroupProps from './CheckGroupProps'
 import defaultCheckGroupProps from '../defaults/defaultCheckGroupProps'
 
-// --- CheckGroupViewProps ------------------------------------------
+// --- CheckGroupViewProps -------------------------------------------
 
 type CheckGroupViewProps = CheckGroupProps & typeof defaultCheckGroupProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CheckGroupViewProps

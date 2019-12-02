@@ -11,13 +11,13 @@ import FormCtrlCtx from '../../../../contexts/form-ctx/FormCtrlCtx'
 import ViewModesCtx from '../../../../contexts/view-modes/ViewModesCtx'
 import useForceUpdate from '../../../../hooks/useForceUpdate'
 
-// --- derived imports --------------------------------------------
+// --- derived imports ---------------------------------------------
 
 const { useContext } = React
 
 type DataFormClasses = ReturnType<typeof getDataFormClasses>
 
-// --- renderDataForm -----------------------------------------------
+// --- renderDataForm ------------------------------------------------
 
 function DataFormView(props: DataFormProps, ctrl: DataFormCtrl) {
     const classes = getDataFormClasses()
@@ -50,7 +50,7 @@ function DataFormView(props: DataFormProps, ctrl: DataFormCtrl) {
   return ret
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 function renderHeader(props: DataFormProps, classes: DataFormClasses) {
   const closeButton =
@@ -131,6 +131,6 @@ function renderActionBar(props: DataFormProps, classes: DataFormClasses) {
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataFormView

@@ -1,10 +1,10 @@
 // internal imports
 import UserMenuProps from './UserMenuProps'
 
-// --- UserMenuViewProps ----------------------------------------
+// --- UserMenuViewProps -----------------------------------------
 
 type UserMenuViewProps = UserMenuProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default UserMenuViewProps

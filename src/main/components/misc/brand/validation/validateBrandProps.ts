@@ -2,7 +2,7 @@
 import { isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
-// --- validateBrandProps -------------------------------------------
+// --- validateBrandProps --------------------------------------------
 
 const validateBrandProps = Spec.checkProps({
   optional: {
@@ -13,6 +13,6 @@ const validateBrandProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateBrandProps

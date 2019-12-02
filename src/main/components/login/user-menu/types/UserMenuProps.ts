@@ -1,10 +1,10 @@
-// --- UserMenuProps ------------------------------------------------
+// --- UserMenuProps -------------------------------------------------
 
 type UserMenuProps = {
   username?: string,
   fullName?: string
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default UserMenuProps

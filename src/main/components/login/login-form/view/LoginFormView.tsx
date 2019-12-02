@@ -12,7 +12,7 @@ import LoginFormViewProps from '../types/LoginFormViewProps'
 // derived imports
 const { useCallback, useEffect, useRef, useState } = React
 
-// --- LoginFormView ------------------------------------------------
+// --- LoginFormView -------------------------------------------------
 
 function LoginFormView({
   extraFields,
@@ -198,7 +198,7 @@ function LoginFormView({
     )
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type LoginFormCssClasses = ReturnType<typeof getLoginFormClasses>
 
@@ -262,6 +262,6 @@ function renderFields(
   return contents
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormView

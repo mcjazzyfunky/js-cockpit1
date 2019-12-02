@@ -1,7 +1,7 @@
 // external imports
 import React, { CSSProperties, ReactNode } from 'react'
 
-// --- FieldSetProps -------------------------------------------------
+// --- FieldSetProps --------------------------------------------------
 
 type FieldSetProps = {
   title?: string,
@@ -11,6 +11,6 @@ type FieldSetProps = {
   children?: ReactNode 
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default FieldSetProps

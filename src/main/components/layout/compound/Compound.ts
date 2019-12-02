@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 import CompoundProps from './types/CompoundProps'
 import CompoundView from './view/renderCompound'
 
-// --- Compound -----------------------------------------------------
+// --- Compound ------------------------------------------------------
 
 const Compound = component<CompoundProps>({
   displayName: 'Compound',
@@ -22,6 +22,6 @@ const Compound = component<CompoundProps>({
   render: CompoundView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Compound

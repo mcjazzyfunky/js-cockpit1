@@ -1,10 +1,10 @@
 // internal imports
 import LoginFormProps from './LoginFormProps'
 
-// --- LoginFormViewProps -------------------------------------------
+// --- LoginFormViewProps --------------------------------------------
 
 type LoginFormViewProps = LoginFormProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormViewProps

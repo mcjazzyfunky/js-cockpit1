@@ -10,7 +10,7 @@ import ActionEvent from '../../../../events/ActionEvent'
 // derived imports
 const { useCallback } = React
 
-// --- LogoutButtonView ---------------------------------------------
+// --- LogoutButtonView ----------------------------------------------
 
 function LogoutButtonView({
   onAction
@@ -33,7 +33,7 @@ function LogoutButtonView({
   )
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 const logoutActionEvent: ActionEvent = Object.freeze({
   type: 'action',
@@ -41,6 +41,6 @@ const logoutActionEvent: ActionEvent = Object.freeze({
   id: null
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LogoutButtonView

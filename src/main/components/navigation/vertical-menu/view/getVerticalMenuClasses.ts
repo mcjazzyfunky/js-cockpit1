@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleVerticalMenu --------------------------------------------------
+// --- styleVerticalMenu ---------------------------------------------------
 
 const getVerticalMenuClasses = defineStyle(theme => ({
   container: {
@@ -102,6 +102,6 @@ const getVerticalMenuClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getVerticalMenuClasses

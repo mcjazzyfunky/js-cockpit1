@@ -4,7 +4,7 @@ import React from 'react'
 // derived imports
 const { useRef } = React
 
-// --- useWithDefaultProps ------------------------------------------
+// --- useWithDefaultProps -------------------------------------------
 
 function useWithDefaultProps<P extends Props, D extends Partial<P>>(
   props: P,
@@ -24,10 +24,10 @@ function useWithDefaultProps<P extends Props, D extends Partial<P>>(
   return lastResultRef.current
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type Props = Record<string, any>
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default useWithDefaultProps

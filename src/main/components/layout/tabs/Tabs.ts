@@ -7,7 +7,7 @@ import TabsProps from './types/TabsProps'
 import TabsPageProps from './types/TabsPageProps'
 import TabsView from './view/TabsView'
 
-// --- Tabs.Page ----------------------------------------------------
+// --- Tabs.Page -----------------------------------------------------
 
 const Page = component<TabsPageProps>({
   displayName: 'Tabs.Page',
@@ -26,7 +26,7 @@ const Page = component<TabsPageProps>({
   }
 })
 
-// --- Tabs ---------------------------------------------------------
+// --- Tabs ----------------------------------------------------------
 
 const Tabs = component<TabsProps>({
   displayName: 'Tabs',
@@ -42,7 +42,7 @@ const Tabs = component<TabsProps>({
   render: TabsView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Object.assign(Tabs, {
   Page

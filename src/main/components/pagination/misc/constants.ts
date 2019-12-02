@@ -1,8 +1,8 @@
-// --- constants for PageSizeSelector -------------------------------
+// --- constants for PageSizeSelector --------------------------------
 
 const PAGE_SIZE_OPTIONS = [25, 50, 100, 250, 500]
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export {
   PAGE_SIZE_OPTIONS

@@ -1,7 +1,7 @@
 // external import
 import { Spec } from 'js-spec'
 
-// --- validateUserMenuProps ----------------------------------------
+// --- validateUserMenuProps -----------------------------------------
 
 const validateUserMenuProps = Spec.checkProps({
   optional: {
@@ -10,6 +10,6 @@ const validateUserMenuProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateUserMenuProps

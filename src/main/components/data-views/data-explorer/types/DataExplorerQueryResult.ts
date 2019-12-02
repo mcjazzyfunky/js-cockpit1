@@ -1,10 +1,10 @@
-// --- DataExplorerQueryResult -------------------------------------
+// --- DataExplorerQueryResult --------------------------------------
 
 type DataExplorerQueryResult = {
   data: any[],
   totalItemCount: number
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorerQueryResult

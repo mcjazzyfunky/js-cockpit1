@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getAppMenuClasses --------------------------------------------
+// --- getAppMenuClasses ---------------------------------------------
 
 const getAppMenuClasses = defineStyle(theme => ({
   root: {
@@ -87,6 +87,6 @@ const getAppMenuClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getAppMenuClasses

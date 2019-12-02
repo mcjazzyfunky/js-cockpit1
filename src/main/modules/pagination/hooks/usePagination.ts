@@ -5,12 +5,12 @@ import PaginationCtx from '../contexts/PaginationCtx'
 // derived imports
 const { useContext } = React
 
-// --- usePaginationCtrl --------------------------------------------
+// --- usePaginationCtrl ---------------------------------------------
 
 function usePagination() {
   return useContext(PaginationCtx)[0]
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default usePagination

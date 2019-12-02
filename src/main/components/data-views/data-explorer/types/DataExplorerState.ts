@@ -1,6 +1,6 @@
 import DataExplorerFilter from './DataExplorerFilter'
 
-// --- DataExplorerState --------------------------------------------
+// --- DataExplorerState ---------------------------------------------
 
 type DataExplorerState = {
   isInitialized: boolean,
@@ -16,6 +16,6 @@ type DataExplorerState = {
   data: any[]
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorerState

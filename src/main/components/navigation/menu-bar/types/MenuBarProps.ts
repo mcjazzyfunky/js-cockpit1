@@ -2,14 +2,14 @@
 
 import ActionEvent from '../../../../events/ActionEvent'
 
-// --- MenuBarProps --------------------------------------------------
+// --- MenuBarProps ---------------------------------------------------
 
 type MenuBarProps = {
   items: (Menu | Item | Divider)[],
   onAction?: (ev: ActionEvent) => void
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type Menu = {
   type: 'menu',
@@ -30,6 +30,6 @@ type Divider = {
   type: 'divider'
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default MenuBarProps

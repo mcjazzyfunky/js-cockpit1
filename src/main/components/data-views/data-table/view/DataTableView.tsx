@@ -11,7 +11,7 @@ import SortDescIcon from './SortDescIcon'
 
 type DataTableClasses = ReturnType<typeof getDataTableClasses>
 
-// --- DataTableView ------------------------------------------------
+// --- DataTableView -------------------------------------------------
 
 function DataTableView(props: DataTableProps) { // TODO
   const
@@ -135,7 +135,7 @@ function DataTableView(props: DataTableProps) { // TODO
   )
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 function calculateColumnWidths(props: DataTableProps, totalWidth: number) {
   const
@@ -316,6 +316,6 @@ function createSelectAllCheckbox(props: DataTableProps, selectedRows: Set<number
   ) 
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataTableView

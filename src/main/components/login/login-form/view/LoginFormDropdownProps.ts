@@ -1,4 +1,4 @@
-// --- LoginFormDropdownProps ---------------------------------------
+// --- LoginFormDropdownProps ----------------------------------------
 
 type LoginFormDropdownProps = {
   name: string,
@@ -15,7 +15,7 @@ type LoginFormDropdownProps = {
   }) => void
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormDropdownProps
 

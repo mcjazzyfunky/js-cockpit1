@@ -8,7 +8,7 @@ import DataTableProps from './types/DataTableProps'
 import DataTableMethods from './types/DataTableMethods'
 import renderDataTable from './view/DataTableView'
 
-// --- DataTable ----------------------------------------------------
+// --- DataTable -----------------------------------------------------
 
 const DataTable = component<DataTableProps>({
   displayName: 'DataTable',
@@ -48,6 +48,6 @@ const DataTable = component<DataTableProps>({
   render: renderDataTable
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataTable

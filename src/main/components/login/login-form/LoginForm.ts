@@ -9,7 +9,7 @@ import LoginFormView from './view/LoginFormView'
 // import LoginFormStore from './types/LoginFormStore' // TODO!!!
 import validateLoginFormProps from './validation/validateLoginFormProps'
 
-// --- LoginForm ----------------------------------------------------
+// --- LoginForm -----------------------------------------------------
 
 const LoginForm = component<LoginFormProps>({
   displayName: 'LoginForm',
@@ -36,7 +36,7 @@ const LoginForm = component<LoginFormProps>({
   }
 })
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 /*
 function createLoginFormStore(initialValues: Record<string, any> = {}): LoginFormStore {
@@ -100,6 +100,6 @@ function createLoginFormStore(initialValues: Record<string, any> = {}): LoginFor
 }
 */
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginForm

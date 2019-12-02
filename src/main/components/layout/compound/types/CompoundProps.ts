@@ -1,7 +1,7 @@
 // external imports
 import React, { CSSProperties, ReactNode } from 'react'
 
-// --- CompoundProps ------------------------------------------------
+// --- CompoundProps -------------------------------------------------
 
 type CompoundProps = {
   className?: string,
@@ -9,6 +9,6 @@ type CompoundProps = {
   children?: ReactNode 
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CompoundProps

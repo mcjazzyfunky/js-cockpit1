@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateCheckGroupProps --------------------------------------
+// --- validateCheckGroupProps ---------------------------------------
 
 const validateCheckGroupProps = Spec.checkProps({
   required: {
@@ -22,6 +22,6 @@ const validateCheckGroupProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateCheckGroupProps

@@ -1,10 +1,10 @@
 // internal imports
 import TextInputProps from './TextInputProps'
 
-// --- TextInputViewProps -------------------------------------------
+// --- TextInputViewProps --------------------------------------------
 
 type TextInputViewProps = TextInputProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default TextInputViewProps

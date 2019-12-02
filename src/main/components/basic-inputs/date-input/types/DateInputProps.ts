@@ -1,4 +1,4 @@
-// --- DateInputProps -----------------------------------------------
+// --- DateInputProps ------------------------------------------------
 
 type DateInputProps = {
   name?: string
@@ -7,6 +7,6 @@ type DateInputProps = {
   grow?: number
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DateInputProps 

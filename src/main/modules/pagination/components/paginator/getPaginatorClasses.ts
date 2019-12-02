@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getPaginatorClasses ------------------------------------------
+// --- getPaginatorClasses -------------------------------------------
 
 const getPaginatorClasses = defineStyle(theme => ({
   container: {
@@ -78,6 +78,6 @@ const getPaginatorClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getPaginatorClasses

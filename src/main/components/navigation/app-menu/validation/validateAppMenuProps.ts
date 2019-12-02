@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateAppMenuProps -----------------------------------------
+// --- validateAppMenuProps ------------------------------------------
 
 const validateAppMenuProps = Spec.checkProps({
   optional: {
@@ -19,6 +19,6 @@ const validateAppMenuProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateAppMenuProps

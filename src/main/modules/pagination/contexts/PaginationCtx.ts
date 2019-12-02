@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 import validatePaginationCtrl from '../validation/validatePaginationCtrl'
 import PaginationCtrl from '../types/PaginationCtrl'
 
-// --- PaginationCtx ------------------------------------------------
+// --- PaginationCtx -------------------------------------------------
 
 const PaginationCtx = context<[PaginationCtrl]>({
   displayName: 'PaginationCtx',
@@ -21,6 +21,6 @@ const PaginationCtx = context<[PaginationCtrl]>({
   }]
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginationCtx

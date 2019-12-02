@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getDataExplorerSearchBarClasses ------------------------------
+// --- getDataExplorerSearchBarClasses -------------------------------
 
 const getDataExplorerSearchBarClasses = defineStyle(theme => {
   return {
@@ -66,6 +66,6 @@ const getDataExplorerSearchBarClasses = defineStyle(theme => {
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getDataExplorerSearchBarClasses

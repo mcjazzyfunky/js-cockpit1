@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateLogoutButtonProps ------------------------------------
+// --- validateLogoutButtonProps -------------------------------------
 
 const validateLogoutButtonProps = Spec.checkProps({
   optional: {
@@ -9,6 +9,6 @@ const validateLogoutButtonProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateLogoutButtonProps

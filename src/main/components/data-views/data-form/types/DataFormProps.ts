@@ -1,7 +1,7 @@
 // external imports
 import { ReactNode } from 'react'
 
-// --- DataFormProps ------------------------------------------------
+// --- DataFormProps -------------------------------------------------
 
 type DataFormProps = {
   title?: string | null,
@@ -11,7 +11,7 @@ type DataFormProps = {
   children?: ReactNode,
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type Action = {
   type: 'default',
@@ -20,6 +20,6 @@ type Action = {
   disabled?: boolean
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataFormProps

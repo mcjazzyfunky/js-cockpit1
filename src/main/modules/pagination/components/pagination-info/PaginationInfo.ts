@@ -6,7 +6,7 @@ import PaginationInfoProps from './types/PaginationInfoProps'
 import PaginationInfoView from './PaginationInfoView'
 import validatePaginationInfoProps from './validatePaginationInfoProps'
 
-// --- PaginationInfo ---------------------------------------------
+// --- PaginationInfo ----------------------------------------------
 
 const PaginationInfo = component<PaginationInfoProps>({
   displayName: 'PaginationInfo',
@@ -14,6 +14,6 @@ const PaginationInfo = component<PaginationInfoProps>({
   render: PaginationInfoView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginationInfo

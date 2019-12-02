@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getPageSizeSelectorClasses -----------------------------------
+// --- getPageSizeSelectorClasses ------------------------------------
 
 const getPageSizeSelectorClasses = defineStyle(theme => {
   return {
@@ -18,6 +18,6 @@ const getPageSizeSelectorClasses = defineStyle(theme => {
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getPageSizeSelectorClasses

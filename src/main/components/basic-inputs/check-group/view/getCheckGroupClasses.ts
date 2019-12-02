@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getCheckGroupClasses -----------------------------------------
+// --- getCheckGroupClasses ------------------------------------------
 
 const getCheckGroupClasses = defineStyle(() => ({
   container: {
@@ -15,6 +15,6 @@ const getCheckGroupClasses = defineStyle(() => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getCheckGroupClasses

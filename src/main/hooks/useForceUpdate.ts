@@ -4,7 +4,7 @@ import React from 'react'
 // derived imports
 const { useState } = React
 
-// --- useForceUpdate -----------------------------------------------
+// --- useForceUpdate ------------------------------------------------
 
 function useForceUpdate() {
   const [, setState] = useState(true)
@@ -12,6 +12,6 @@ function useForceUpdate() {
   return () => setState(state => !state)
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default useForceUpdate

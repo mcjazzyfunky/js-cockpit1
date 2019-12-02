@@ -8,7 +8,7 @@ import LoginFormTextFieldProps from './LoginFormTextFieldProps'
 // derived imports
 const { useCallback, useRef, useState } = React
 
-// --- LoginFormTextFieldView ---------------------------------------
+// --- LoginFormTextFieldView ----------------------------------------
 
 function LoginFormTextFieldView({
   name,
@@ -89,6 +89,6 @@ function LoginFormTextFieldView({
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormTextFieldView

@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 // internal imports
 import CompoundProps from '../types/CompoundProps'
 
-// --- Compound -----------------------------------------------------
+// --- Compound ------------------------------------------------------
 
 function renderCompound(props: CompoundProps) {
   const
@@ -31,6 +31,6 @@ function renderCompound(props: CompoundProps) {
   )
 }
 
-// --- exports -----------------------------------------------------
+// --- exports ------------------------------------------------------
 
 export default renderCompound

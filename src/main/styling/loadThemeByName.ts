@@ -170,6 +170,6 @@ function loadThemeByName(name: ThemeName, fontFamilySubstitution: boolean | stri
   loadTheme(theme)
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default loadThemeByName

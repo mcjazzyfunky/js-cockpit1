@@ -1,7 +1,7 @@
 // external imports
 import { ReactNode } from 'react'
 
-// --- CockpitProps -------------------------------------------
+// --- CockpitProps --------------------------------------------
 
 type CockpitProps = {
   look?: 'default' | 'bright',
@@ -13,6 +13,6 @@ type CockpitProps = {
   slotCenter?: ReactNode
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CockpitProps

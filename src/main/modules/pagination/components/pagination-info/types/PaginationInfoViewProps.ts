@@ -1,10 +1,10 @@
 // internal imports
 import PaginationInfoProps from './PaginationInfoProps'
 
-// -- PaginationInfoViewProps ---------------------------------------
+// -- PaginationInfoViewProps ----------------------------------------
 
 type PaginationInfoViewProps = PaginationInfoProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginationInfoViewProps

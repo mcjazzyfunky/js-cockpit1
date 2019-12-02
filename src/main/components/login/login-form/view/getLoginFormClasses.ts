@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getLoginFormClasses ------------------------------------------
+// --- getLoginFormClasses -------------------------------------------
 
 const getLoginFormClasses = defineStyle((
   theme,
@@ -197,6 +197,6 @@ const getLoginFormClasses = defineStyle((
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getLoginFormClasses

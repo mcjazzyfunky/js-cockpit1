@@ -1,10 +1,10 @@
 // internal imports
 import CockpitProps from './CockpitProps'
 
-// --- CockpitViewProps ---------------------------------------------
+// --- CockpitViewProps ----------------------------------------------
 
 type CockpitViewProps = CockpitProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CockpitViewProps

@@ -1,4 +1,4 @@
-// --- VerticalMenuProps -------------------------------------------------
+// --- VerticalMenuProps --------------------------------------------------
 
 type VerticalMenuProps = {
   activeItemId?: string,
@@ -19,6 +19,6 @@ type Menu = {
   items?: (Item | Menu)[]  
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default VerticalMenuProps

@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getDataExplorerFilterPanelClasses ----------------------------
+// --- getDataExplorerFilterPanelClasses -----------------------------
 
 const getDataExplorerFilterPanelClasses = defineStyle(() => {
   return {
@@ -21,6 +21,6 @@ const getDataExplorerFilterPanelClasses = defineStyle(() => {
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getDataExplorerFilterPanelClasses

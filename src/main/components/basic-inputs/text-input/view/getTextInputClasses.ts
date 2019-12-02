@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getTextInputClasses ------------------------------------------
+// --- getTextInputClasses -------------------------------------------
 
 const getTextInputClasses = defineStyle(theme => ({
   container: {
@@ -14,6 +14,6 @@ const getTextInputClasses = defineStyle(theme => ({
   },
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getTextInputClasses

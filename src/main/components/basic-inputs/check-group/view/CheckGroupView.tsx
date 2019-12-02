@@ -7,7 +7,7 @@ import { Checkbox, Label } from 'office-ui-fabric-react'
 import getCheckGroupClasses from './getCheckGroupClasses'
 import CheckGroupViewProps from '../types/CheckGroupViewProps'
 
-// --- CheckGroupView -----------------------------------------------
+// --- CheckGroupView ------------------------------------------------
 
 const CheckGroupView = component<CheckGroupViewProps>(
   'CheckGroupView', props => {
@@ -49,8 +49,8 @@ const CheckGroupView = component<CheckGroupViewProps>(
   )
 })
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CheckGroupView

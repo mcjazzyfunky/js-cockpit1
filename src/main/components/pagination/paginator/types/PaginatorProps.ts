@@ -1,7 +1,7 @@
 // internal imports
 import PageChangeEvent from '../../../../events/PageChangeEvent'
 
-// --- PaginatorProps -----------------------------------------------
+// --- PaginatorProps ------------------------------------------------
 
 type PaginatorProps = {
   pageIndex: number,
@@ -10,6 +10,6 @@ type PaginatorProps = {
   onPageChange?: (event: PageChangeEvent) => void 
 }
 
-// exports ----------------------------------------------------------
+// exports -----------------------------------------------------------
 
 export default PaginatorProps

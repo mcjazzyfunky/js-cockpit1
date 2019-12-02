@@ -1,7 +1,7 @@
 // external imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- BrandProps ---------------------------------------------------
+// --- BrandProps ----------------------------------------------------
 
 type BrandProps = {
   vendor?: string,
@@ -11,6 +11,6 @@ type BrandProps = {
   coloring?: 'neutral' | 'theme'
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default BrandProps

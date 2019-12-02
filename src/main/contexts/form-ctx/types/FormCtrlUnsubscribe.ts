@@ -1,7 +1,7 @@
-// --- FormCtrlUnsubscribe ------------------------------------------
+// --- FormCtrlUnsubscribe -------------------------------------------
 
 type FormCtrlUnsubscribe = () => void
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default FormCtrlUnsubscribe

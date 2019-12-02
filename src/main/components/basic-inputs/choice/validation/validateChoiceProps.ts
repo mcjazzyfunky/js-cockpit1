@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateChoiceProps ------------------------------------------
+// --- validateChoiceProps -------------------------------------------
 
 const validateChoiceProps = Spec.checkProps({
   required: {
@@ -21,6 +21,6 @@ const validateChoiceProps = Spec.checkProps({
   }
 })
 
-// --- externals ----------------------------------------------------
+// --- externals -----------------------------------------------------
 
 export default validateChoiceProps

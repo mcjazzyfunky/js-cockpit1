@@ -10,7 +10,7 @@ import getVerticalMenuClasses from './getVerticalMenuClasses'
 // derived imports
 type VerticalMenuClasses = ReturnType<typeof getVerticalMenuClasses>
 
-// --- VerticalMenuView ---------------------------------------------
+// --- VerticalMenuView ----------------------------------------------
 
 const VerticalMenuView = component<VerticalMenuViewProps>(
   'VerticalMenuView', props => {
@@ -45,7 +45,7 @@ const VerticalMenuView = component<VerticalMenuViewProps>(
   return ret
 })
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 function getLinkGroups(items: any): INavLinkGroup[] { // TODO
   const
@@ -108,7 +108,7 @@ function renderGroupHeader(linkGroup: INavLinkGroup, classes: VerticalMenuClasse
   return <div className={classes.header}>{linkGroup.name}</div>
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default VerticalMenuView
 

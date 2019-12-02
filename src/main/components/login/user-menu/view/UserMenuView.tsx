@@ -6,7 +6,7 @@ import { FiUser as DefaultAvatarIcon } from 'react-icons/fi'
 import getUserMenuClasses from './getUserMenuClasses'
 import UserMenuViewProps from '../types/UserMenuViewProps'
 
-// --- UserMenuView -------------------------------------------------
+// --- UserMenuView --------------------------------------------------
 
 function UserMenuView({
   fullName,
@@ -25,6 +25,6 @@ function UserMenuView({
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default UserMenuView

@@ -11,7 +11,7 @@ import AppMenuProps from '../types/AppMenuProps'
 // derived imports
 type AppMenuClasses = ReturnType<typeof getAppMenuClasses>
 
-// --- AppMenuView --------------------------------------------------
+// --- AppMenuView ---------------------------------------------------
 
 function AppMenuView(props: AppMenuProps) {
   const classes = getAppMenuClasses()
@@ -92,6 +92,6 @@ function renderWithCallout(props: AppMenuProps, classes: AppMenuClasses) {
   )
 }
 
-// --- experts ------------------------------------------------------
+// --- experts -------------------------------------------------------
 
 export default AppMenuView

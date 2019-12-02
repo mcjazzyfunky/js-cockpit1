@@ -6,7 +6,7 @@ import RadioGroupProps from './types/RadioGroupProps'
 import RadioGroupView from './view/RadioGroupView'
 import validateRadioGroupProps from './validation/validateRadioGroupProps'
 
-// --- RadioGroup ---------------------------------------------------
+// --- RadioGroup ----------------------------------------------------
 
 const RadioGroup = component<RadioGroupProps>({
   displayName: 'RadioGroup',
@@ -14,6 +14,6 @@ const RadioGroup = component<RadioGroupProps>({
   render: RadioGroupView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default RadioGroup 

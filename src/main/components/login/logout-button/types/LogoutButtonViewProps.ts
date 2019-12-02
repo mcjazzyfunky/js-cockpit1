@@ -1,10 +1,10 @@
 // internal imports
 import LogoutButtonProps from './LogoutButtonProps'
 
-// --- LogoutButtonViewProps ----------------------------------------
+// --- LogoutButtonViewProps -----------------------------------------
 
 type LogoutButtonViewProps = LogoutButtonProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LogoutButtonViewProps

@@ -9,7 +9,7 @@ import DataExplorerFilter from '../types/DataExplorerFilter'
 import DataExplorerQueryParams from '../types/DataExplorerQueryParams'
 import DataExplorerQueryResult from '../types/DataExplorerQueryResult'
 
-// -- useDataExplorerActions ----------------------------------------
+// -- useDataExplorerActions -----------------------------------------
 
 const useDataExplorerActions = componentActions(setState => {
   let timeout: any
@@ -154,7 +154,7 @@ const useDataExplorerActions = componentActions(setState => {
   }
 }, initDataExplorerState)
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 function initDataExplorerState(): DataExplorerState {
   return {
@@ -172,6 +172,6 @@ function initDataExplorerState(): DataExplorerState {
   }
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default useDataExplorerActions

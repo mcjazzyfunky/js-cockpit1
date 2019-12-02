@@ -6,7 +6,7 @@ import PaginatorProps from './types/PaginatorProps'
 import PaginatorView from './PaginatorView'
 import validatePaginatorProps from './validatePaginatorProps'
 
-// --- Paginator ----------------------------------------------------
+// --- Paginator -----------------------------------------------------
 
 const Paginator = component<PaginatorProps>({
   displayName: 'Paginator',
@@ -14,6 +14,6 @@ const Paginator = component<PaginatorProps>({
   render: PaginatorView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Paginator

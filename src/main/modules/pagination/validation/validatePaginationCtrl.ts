@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validatePaginationCtrl ---------------------------------------
+// --- validatePaginationCtrl ----------------------------------------
 
 const validatePaginationCtrl = Spec.exact({
   getPageIndex: Spec.function,
@@ -11,6 +11,6 @@ const validatePaginationCtrl = Spec.exact({
   setPageSize: Spec.function
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validatePaginationCtrl

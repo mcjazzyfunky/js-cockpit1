@@ -1,10 +1,10 @@
 // internal import
 import RadioGroupProps from './RadioGroupProps'
 
-// --- RadioGroupViewProps ------------------------------------------
+// --- RadioGroupViewProps -------------------------------------------
 
 type RadioGroupViewProps = RadioGroupProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default RadioGroupViewProps

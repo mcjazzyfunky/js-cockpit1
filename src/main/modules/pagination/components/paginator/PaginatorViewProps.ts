@@ -1,10 +1,10 @@
 // internal imports
 import PaginatorProps from './PaginatorProps'
 
-// --- PaginatorViewProps -------------------------------------------
+// --- PaginatorViewProps --------------------------------------------
 
 type PaginatorViewProps = PaginatorProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginatorViewProps

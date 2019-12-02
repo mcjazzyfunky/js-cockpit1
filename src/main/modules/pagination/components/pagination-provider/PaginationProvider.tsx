@@ -6,7 +6,7 @@ import { component } from 'js-react-utils'
 import PaginationCtx from '../../contexts/PaginationCtx'
 import PaginationCtrl from '../../types/PaginationCtrl'
 
-// --- PaginationProvider -------------------------------------------
+// --- PaginationProvider --------------------------------------------
 
 const PaginationProvider = component<{ controller: PaginationCtrl, children: any }>({
    displayName: 'PaginationProvider',
@@ -18,6 +18,6 @@ const PaginationProvider = component<{ controller: PaginationCtrl, children: any
    }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginationProvider

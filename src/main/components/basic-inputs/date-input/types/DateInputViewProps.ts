@@ -1,10 +1,10 @@
 // internal import
 import DateInputProps from './DateInputProps'
 
-// --- DateInputViewProps -------------------------------------------
+// --- DateInputViewProps --------------------------------------------
 
 type DateInputViewProps = DateInputProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DateInputViewProps

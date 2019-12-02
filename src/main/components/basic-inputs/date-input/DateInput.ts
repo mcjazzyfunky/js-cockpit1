@@ -6,7 +6,7 @@ import DateInputProps from './types/DateInputProps'
 import DateInputView from './view/DateInputView'
 import validateDateInputProps from './validation/validateDataInputProps'
 
-// --- DateInput ----------------------------------------------------
+// --- DateInput -----------------------------------------------------
 
 const DateInput = component<DateInputProps>({
   displayName: 'DateInput',
@@ -14,6 +14,6 @@ const DateInput = component<DateInputProps>({
   render: DateInputView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DateInput

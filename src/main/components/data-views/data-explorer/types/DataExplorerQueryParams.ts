@@ -1,7 +1,7 @@
 // internal imports
 import DataExplorerFilter from './DataExplorerFilter'
 
-// --- DataExplorerQueryParams -------------------------------------
+// --- DataExplorerQueryParams --------------------------------------
 
 type DataExplorerQueryParams = {
   offset: number,
@@ -11,6 +11,6 @@ type DataExplorerQueryParams = {
   filter: DataExplorerFilter | null  
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorerQueryParams

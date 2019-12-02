@@ -1,7 +1,7 @@
 // externals imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- VBoxProps ----------------------------------------------------
+// --- VBoxProps -----------------------------------------------------
 
 type VBoxProps = {
   className?: string,
@@ -9,6 +9,6 @@ type VBoxProps = {
   children?: ReactNode 
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default VBoxProps

@@ -1,7 +1,7 @@
 // external imports
 import React, { CSSProperties, ReactNode } from 'react'
 
-// --- TabsPageProps ------------------------------------------------
+// --- TabsPageProps -------------------------------------------------
 
 type TabsPageProps = {
   title?: string,
@@ -10,6 +10,6 @@ type TabsPageProps = {
   children?: ReactNode 
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default TabsPageProps 

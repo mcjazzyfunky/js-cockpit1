@@ -4,7 +4,7 @@ import Color from 'color'
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getLogoutButtonClasses ---------------------------------------
+// --- getLogoutButtonClasses ----------------------------------------
 
 const getLogoutButtonClasses = defineStyle(theme => ({
   root: {
@@ -35,6 +35,6 @@ const getLogoutButtonClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getLogoutButtonClasses

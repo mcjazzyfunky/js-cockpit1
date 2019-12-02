@@ -8,7 +8,7 @@ import getDateInputClasses from './getDateInputClasses'
 import createUniqueId from '../../../../tools/createUniqueId'
 import DateInputViewProps from '../types/DateInputViewProps'
 
-// --- renderDateInput ----------------------------------------------
+// --- renderDateInput -----------------------------------------------
 
 const DateInputView = component<DateInputViewProps>(
   'DateInputView', props => {
@@ -42,6 +42,6 @@ const DateInputView = component<DateInputViewProps>(
   )
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DateInputView 

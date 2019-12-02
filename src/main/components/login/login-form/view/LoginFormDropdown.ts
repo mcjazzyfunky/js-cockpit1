@@ -5,7 +5,7 @@ import { component } from 'js-react-utils'
 // internal imports
 import LoginFormDropdownView from './LoginFormDropdownView'
 
-// --- LoginFormDropdown --------------------------------------------
+// --- LoginFormDropdown ---------------------------------------------
 
 const LoginFormDropdown = component({
   displayName: 'LoginFormDropdownField',
@@ -13,6 +13,6 @@ const LoginFormDropdown = component({
   render: LoginFormDropdownView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormDropdown

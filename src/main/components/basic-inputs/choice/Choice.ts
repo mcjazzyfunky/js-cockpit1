@@ -6,7 +6,7 @@ import ChoiceProps from './types/ChoiceProps'
 import ChoiceView from './view/ChoiceView'
 import validateChoiceProps from './validation/validateChoiceProps'
 
-// --- Choice -------------------------------------------------------
+// --- Choice --------------------------------------------------------
 
 const Choice = component<ChoiceProps>({
   displayName: 'Choice',
@@ -14,6 +14,6 @@ const Choice = component<ChoiceProps>({
   render: ChoiceView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Choice

@@ -6,7 +6,7 @@ import { Spec } from 'js-spec'
 // internal imports
 import FormCtrl from './types/FormCtrl'
 
-// --- FormCtrlCtx --------------------------------------------------
+// --- FormCtrlCtx ---------------------------------------------------
 
 const FormCtrlCtx = context<FormCtrl | null>({
   displayName: 'FormCtx',
@@ -22,6 +22,6 @@ const FormCtrlCtx = context<FormCtrl | null>({
   defaultValue: null
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default FormCtrlCtx

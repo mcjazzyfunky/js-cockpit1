@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateDateInputProps ---------------------------------------
+// --- validateDateInputProps ----------------------------------------
 
 const validateDateInputProps = Spec.checkProps({
   optional: {
@@ -12,6 +12,6 @@ const validateDateInputProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateDateInputProps

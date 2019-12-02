@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 // internal imports
 import VBoxProps from '../types/VBoxProps'
 
-// --- renderVBox ---------------------------------------------------
+// --- renderVBox ----------------------------------------------------
 
 function renderVBox(props: VBoxProps) {
   return (
@@ -16,6 +16,6 @@ function renderVBox(props: VBoxProps) {
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default renderVBox

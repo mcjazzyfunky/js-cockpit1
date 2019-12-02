@@ -1,12 +1,12 @@
 // internal imports
 import ActionEvent from '../../../../events/ActionEvent'
 
-// --- LogoutButtonProps --------------------------------------------
+// --- LogoutButtonProps ---------------------------------------------
 
 type LogoutButtonProps = {
   onAction?: (ev: ActionEvent) => void
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LogoutButtonProps

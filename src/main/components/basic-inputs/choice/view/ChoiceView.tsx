@@ -8,7 +8,7 @@ import getChoiceClasses from './getChoiceClasses'
 import ChoiceViewProps from '../types/ChoiceViewProps'
 import createUniqueId from '../../../../tools/createUniqueId'
 
-// --- ChoiceView ---------------------------------------------------
+// --- ChoiceView ----------------------------------------------------
 
 const ChoiceView = component<ChoiceViewProps>(
   'ChoiceView', props => {
@@ -40,6 +40,6 @@ const ChoiceView = component<ChoiceViewProps>(
   )
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default ChoiceView

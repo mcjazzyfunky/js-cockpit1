@@ -8,7 +8,7 @@ import { IoIosApps  as DefaultLogo } from 'react-icons/io'
 import getBrandClasses from './getBrandClasses'
 import BrandViewProps from '../types/BrandViewProps'
 
-// --- BrandView ----------------------------------------------------
+// --- BrandView -----------------------------------------------------
 
 const BrandView = component<BrandViewProps>('BrandView', props => {
   const classes = getBrandClasses()
@@ -65,6 +65,6 @@ const BrandView = component<BrandViewProps>('BrandView', props => {
   )
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default BrandView

@@ -15,7 +15,7 @@ import DataExplorerFilterPanel from './DataExplorerFilterPanel'
 // derived imports
 const { useCallback, useRef, useState } = React
 
-// --- SearchBar ----------------------------------------------------
+// --- SearchBar -----------------------------------------------------
 
 type SearchBarProps = {
   dataExplorerProps: DataExplorerProps,
@@ -159,6 +159,6 @@ const SearchBar = component<SearchBarProps>('SearchBar',
   }
 )
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default SearchBar

@@ -1,10 +1,10 @@
 // internal imports
 import VerticalMenuProps from './VerticalMenuProps'
 
-// --- VerticalMenuViewProps ----------------------------------------
+// --- VerticalMenuViewProps -----------------------------------------
 
 type VerticalMenuViewProps = VerticalMenuProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default VerticalMenuViewProps

@@ -6,7 +6,7 @@ import { component } from 'js-react-utils'
 import getCockpitClasses from './getCockpitClasses'
 import CockpitViewProps from '../types/CockpitViewProps'
 
-// --- CockpitView --------------------------------------------------
+// --- CockpitView ---------------------------------------------------
 
 function CockpitView({
   look = 'default',
@@ -52,6 +52,6 @@ function CockpitView({
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CockpitView 

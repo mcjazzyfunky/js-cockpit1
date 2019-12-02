@@ -8,7 +8,7 @@ import getDataExplorerFilterPanelClasses from './getDataExplorerFilterPanelClass
 import DataExplorerTextFilter from './DataExplorerTextFilter'
 import DataExplorerFilterInput from '../types/DataExplorerFilterInput'
 
-// --- DataExplorerFilterPanel --------------------------------------
+// --- DataExplorerFilterPanel ---------------------------------------
 
 type DataExplorerFilterPanelProps = {
   filters: DataExplorerFilterInput[]
@@ -53,6 +53,6 @@ const DataExplorerFilterPanel = component<DataExplorerFilterPanelProps>({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorerFilterPanel

@@ -1,10 +1,10 @@
 // internal imports
 import AppMenuProps from './AppMenuProps'
 
-// --- AppMenuViewProps ---------------------------------------------
+// --- AppMenuViewProps ----------------------------------------------
 
 type AppMenuViewProps = AppMenuProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default AppMenuViewProps

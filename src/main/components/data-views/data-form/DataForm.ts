@@ -12,7 +12,7 @@ import useForceUpdate from '../../../hooks/useForceUpdate'
 // derived imports
 const { useState } = React
 
-// --- DataForm -----------------------------------------------------
+// --- DataForm ------------------------------------------------------
 
 const DataForm = component<DataFormProps>({
   displayName: 'DataForm',
@@ -77,6 +77,6 @@ const DataForm = component<DataFormProps>({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataForm

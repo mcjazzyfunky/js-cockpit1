@@ -24,13 +24,13 @@ import isBlankString from '../../../../utils/isBlankString'
 import DataExplorerFilterPanel from './DataExplorerFilterPanel'
 import useDataExplorerActions from '../actions/useDataExplorerActions'
 
-// --- derived imports --------------------------------------------
+// --- derived imports ---------------------------------------------
 
 const { Children, useEffect, useRef,  useState, useCallback } = React
 
 type DataExplorerClasses = ReturnType<typeof getDataExplorerClasses>
 
-// --- renderDataExplorer -------------------------------------------
+// --- renderDataExplorer --------------------------------------------
 
 function DataExplorerView(props: DataExplorerProps) {
   const
@@ -169,7 +169,7 @@ function DataExplorerView(props: DataExplorerProps) {
   )
 }
 
-// --- helpers ------------------------------------------------------
+// --- helpers -------------------------------------------------------
 
 function renderHeader(
   props: DataExplorerProps,
@@ -344,6 +344,6 @@ function renderSearchButton(state: DataExplorerState, classes: DataExplorerClass
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataExplorerView

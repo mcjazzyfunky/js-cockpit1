@@ -4,7 +4,7 @@ import Color from 'color'
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getDataTableClasses ------------------------------------------
+// --- getDataTableClasses -------------------------------------------
 
 const getDataTableClasses = defineStyle(theme => ({
   container: {
@@ -179,6 +179,6 @@ const getDataTableClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getDataTableClasses

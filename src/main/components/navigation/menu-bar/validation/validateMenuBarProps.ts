@@ -1,7 +1,7 @@
 // external imports
 import { Spec } from 'js-spec'
 
-// --- validateMenuBarProps -----------------------------------------
+// --- validateMenuBarProps ------------------------------------------
 
 const validateMenuBarProps = Spec.checkProps({
   optional: {
@@ -10,7 +10,7 @@ const validateMenuBarProps = Spec.checkProps({
   }
 })
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 const validateItems =
   Spec.lazy(() =>
@@ -52,6 +52,6 @@ const validateItems =
           }
         ))))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validateMenuBarProps

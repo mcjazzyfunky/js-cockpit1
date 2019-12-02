@@ -4,7 +4,7 @@ import { component } from 'js-react-utils'
 // internal imports
 import LoginFormTextFieldView from './LoginFormTextFieldView'
 
-// --- LoginFormTextField -------------------------------------------
+// --- LoginFormTextField --------------------------------------------
 
 const LoginFormTextField = component({
   displayName: 'LoginFormTextField',
@@ -12,6 +12,6 @@ const LoginFormTextField = component({
   render: LoginFormTextFieldView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormTextField

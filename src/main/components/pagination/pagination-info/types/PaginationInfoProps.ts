@@ -1,4 +1,4 @@
-// --- PaginationInfoProps ------------------------------------------
+// --- PaginationInfoProps -------------------------------------------
 
 type PaginationInfoProps = {
   pageIndex: number,
@@ -7,6 +7,6 @@ type PaginationInfoProps = {
   about: 'items'
 }
 
-// --- export -------------------------------------------------------
+// --- export --------------------------------------------------------
 
 export default PaginationInfoProps

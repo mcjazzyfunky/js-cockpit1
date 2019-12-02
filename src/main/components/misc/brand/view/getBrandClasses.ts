@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- styleBrand ---------------------------------------------------
+// --- styleBrand ----------------------------------------------------
 
 const getBrandClasses = defineStyle(theme => ({
   container: {
@@ -105,6 +105,6 @@ const getBrandClasses = defineStyle(theme => ({
   },
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getBrandClasses

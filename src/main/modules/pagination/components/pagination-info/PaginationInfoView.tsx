@@ -7,7 +7,7 @@ import usePagination from '../../hooks/usePagination'
 import getPaginationInfoClasses from './getPaginationInfoClasses'
 import PaginationInfoViewProps from './types/PaginationInfoViewProps'
 
-// --- PaginationInfoView -------------------------------------------
+// --- PaginationInfoView --------------------------------------------
 
 const PaginationInfoView = component<PaginationInfoViewProps>(
   'PaginationInfoView', props => {
@@ -42,6 +42,6 @@ const PaginationInfoView = component<PaginationInfoViewProps>(
   ) 
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginationInfoView

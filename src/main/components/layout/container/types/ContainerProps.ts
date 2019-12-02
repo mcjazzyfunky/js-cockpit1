@@ -1,7 +1,7 @@
 // external imports
 import { CSSProperties, ReactNode } from 'react'
 
-// --- ContainerProps -----------------------------------------------
+// --- ContainerProps ------------------------------------------------
 
 type ContainerProps = {
   grow?: number,
@@ -13,6 +13,6 @@ type ContainerProps = {
   children?: ReactNode
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default ContainerProps

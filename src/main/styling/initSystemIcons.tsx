@@ -31,6 +31,6 @@ export default function initSystemIcons() {
   })
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 let alreadyRegistered = false

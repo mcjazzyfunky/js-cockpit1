@@ -4,7 +4,7 @@ import { Spec } from 'js-spec'
 // internal imports
 import { PAGE_SIZE_OPTIONS } from '../../misc/constants'
 
-// --- validatePageSizeSelecorProps ---------------------------------
+// --- validatePageSizeSelecorProps ----------------------------------
 
 const validatePageSizeSelectorProps = Spec.checkProps({
   required: {
@@ -16,6 +16,6 @@ const validatePageSizeSelectorProps = Spec.checkProps({
   }
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default validatePageSizeSelectorProps

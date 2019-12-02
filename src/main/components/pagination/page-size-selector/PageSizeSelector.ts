@@ -6,7 +6,7 @@ import PageSizeSelectorProps from './types/PageSizeSelectorProps'
 import PageSizeSelectorView from './view/PageSizeSelectorView'
 import validatePageSizeSelectorProps from './validate/validatePageSizeSelectorProps'
 
-// --- PageSizeSelector ---------------------------------------------
+// --- PageSizeSelector ----------------------------------------------
 
 const PageSizeSelector = component<PageSizeSelectorProps>({
   displayName: 'PageSizeSelector',
@@ -14,6 +14,6 @@ const PageSizeSelector = component<PageSizeSelectorProps>({
   render: PageSizeSelectorView
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PageSizeSelector

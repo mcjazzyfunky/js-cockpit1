@@ -11,7 +11,7 @@ import ArrowDoubleRightIcon from '../../../../icons/ArrowDoubleRightIcon'
 import ArrowLeftIcon from '../../../../icons/ArrowLeftIcon' 
 import ArrowRightIcon from '../../../../icons/ArrowRightIcon' 
 
-// --- PaginatorView ------------------------------------------------
+// --- PaginatorView -------------------------------------------------
 
 const PaginatorView = component<PaginatorViewProps>('PaginatorView', props => {
   const
@@ -84,7 +84,7 @@ const PaginatorView = component<PaginatorViewProps>('PaginatorView', props => {
   )
 })
 
-// --- helpers ------------------------------------------------------
+// --- helpers -------------------------------------------------------
 
 function handleKeyDown(event: KeyboardEvent, pageIndex: number, totalItemCount: number, pageSize: number, onPageChange: Function) {
   if (event.keyCode === 13) {
@@ -101,6 +101,6 @@ function handleKeyDown(event: KeyboardEvent, pageIndex: number, totalItemCount: 
   }
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default PaginatorView

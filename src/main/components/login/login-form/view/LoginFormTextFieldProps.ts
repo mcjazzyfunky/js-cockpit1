@@ -1,4 +1,4 @@
-// --- LoginFormTextFieldProps --------------------------------------
+// --- LoginFormTextFieldProps ---------------------------------------
 
 type LoginFormTextFieldProps = {
   name: string,
@@ -15,6 +15,6 @@ type LoginFormTextFieldProps = {
   }) => void
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormTextFieldProps

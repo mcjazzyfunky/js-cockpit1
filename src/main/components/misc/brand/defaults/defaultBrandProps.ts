@@ -2,13 +2,13 @@
 import BrandProps from '../types/BrandProps' 
 import PickOptionalProps from '../../../../types/PickOptionalProps'
 
-// --- defaultBrandProps --------------------------------------------
+// --- defaultBrandProps ---------------------------------------------
 
 const defaultBrandProps: PickOptionalProps<BrandProps> = {
   size: 'medium',
   coloring: 'neutral'
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default defaultBrandProps

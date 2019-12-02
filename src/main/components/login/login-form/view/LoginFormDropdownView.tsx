@@ -8,7 +8,7 @@ import LoginFormDropdownProps from './LoginFormDropdownProps'
 // derived imports
 const { useCallback, useState, useRef, useEffect } = React
 
-// --- LoginFormDropdownView ----------------------------------------
+// --- LoginFormDropdownView -----------------------------------------
 
 function LoginFormDropdownView({
   name,
@@ -88,6 +88,6 @@ function LoginFormDropdownView({
   )
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default LoginFormDropdownView

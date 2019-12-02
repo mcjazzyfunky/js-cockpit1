@@ -4,7 +4,7 @@ import FormValues from '../../../../contexts/form-ctx/types/FormValues'
 import FormCtrlSubscriber from '../../../../contexts/form-ctx/types/FormCtrlSubscriber'
 import FormCtrlUnsubscribe from '../../../../contexts/form-ctx/types/FormCtrlUnsubscribe'
 
-// --- DataFormCtrl -------------------------------------------------
+// --- DataFormCtrl --------------------------------------------------
 
 class DataFormCtrl implements FormCtrl {
   private _values: any = {}
@@ -89,6 +89,6 @@ class DataFormCtrl implements FormCtrl {
   }
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default DataFormCtrl

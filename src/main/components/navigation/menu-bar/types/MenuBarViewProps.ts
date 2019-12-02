@@ -1,10 +1,10 @@
 // internal imports
 import MenuBarProps from './MenuBarProps'
 
-// --- MenuBarViewProps ---------------------------------------------
+// --- MenuBarViewProps ----------------------------------------------
 
 type MenuBarViewProps = MenuBarProps
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default MenuBarViewProps

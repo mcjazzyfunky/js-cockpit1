@@ -1,4 +1,4 @@
-// --- CheckGroupProps ----------------------------------------------
+// --- CheckGroupProps -----------------------------------------------
 
 type CheckGroupProps = {
   options: Option[]
@@ -9,13 +9,13 @@ type CheckGroupProps = {
   grow?: number,
 }
 
-// --- locals -------------------------------------------------------
+// --- locals --------------------------------------------------------
 
 type Option = {
   key: string,
   text: string
 }
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default CheckGroupProps 

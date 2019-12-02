@@ -7,7 +7,7 @@ import BrandView from './view/BrandView'
 import validateBrandProps from './validation/validateBrandProps'
 import defaultBrandProps from './defaults/defaultBrandProps'
 
-// --- Brand --------------------------------------------------------
+// --- Brand ---------------------------------------------------------
 
 const Brand = component<BrandProps>({
   displayName: 'Brand',
@@ -15,6 +15,6 @@ const Brand = component<BrandProps>({
   render: withDefaultProps(defaultBrandProps, BrandView)
 })
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default Brand

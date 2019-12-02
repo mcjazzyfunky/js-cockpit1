@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getTabsClasses -----------------------------------------------
+// --- getTabsClasses ------------------------------------------------
 
 const getTabsClasses = defineStyle(theme => ({
   container: {
@@ -24,6 +24,6 @@ const getTabsClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getTabsClasses

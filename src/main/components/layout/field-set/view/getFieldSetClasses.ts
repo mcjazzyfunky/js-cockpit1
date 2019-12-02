@@ -1,7 +1,7 @@
 // internal imports
 import defineStyle from '../../../../styling/defineStyle'
 
-// --- getFieldSetClasses -------------------------------------------
+// --- getFieldSetClasses --------------------------------------------
 
 const getFieldSetClasses = defineStyle(theme => ({
   container: {
@@ -54,6 +54,6 @@ const getFieldSetClasses = defineStyle(theme => ({
   }
 }))
 
-// --- exports ------------------------------------------------------
+// --- exports -------------------------------------------------------
 
 export default getFieldSetClasses
