@@ -1,6 +1,7 @@
 // components
 export { default as PaginationProvider } from './components/PaginationProvider'
 export { default as Paginator } from './components/Paginator'
+export { default as PageSizeSelector } from './components/PageSizeSelector'
 export { default as PaginationInfo } from './components/PaginationInfo'
 
 // tools

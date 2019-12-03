@@ -1,7 +1,7 @@
 // imports
 import React from 'react'
 
-import { createPaginationCtrl, Paginator, PaginationInfo, PaginationProvider, PaginationCtrl }
+import { createPaginationCtrl, Paginator, PaginationInfo, PaginationProvider, PageSizeSelector }
   from '../js-cockpit'
 
 
@@ -43,6 +43,10 @@ export const overview = () => {
       <h3>Paginator:</h3>
       <section>
         <Paginator/>
+      </section>
+      <h3>PageSizeSelector</h3>
+      <section>
+        <PageSizeSelector/>
       </section>
       <h3>PaginationInfo:</h3>
       <section>
