@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getDateInputClasses -------------------------------------------
 
-const getDateInputClasses = defineStyle(theme => ({
+const getDateInputClasses = defineStyles(theme => ({
   container: {
   },
 

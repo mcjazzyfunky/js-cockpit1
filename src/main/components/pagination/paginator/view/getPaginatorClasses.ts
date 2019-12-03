@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getPaginatorClasses -------------------------------------------
 
-const getPaginatorClasses = defineStyle(theme => ({
+const getPaginatorClasses = defineStyles(theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',

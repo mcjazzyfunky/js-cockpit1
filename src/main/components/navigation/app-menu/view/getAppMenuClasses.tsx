@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getAppMenuClasses ---------------------------------------------
 
-const getAppMenuClasses = defineStyle(theme => ({
+const getAppMenuClasses = defineStyles(theme => ({
   root: {
   },
 

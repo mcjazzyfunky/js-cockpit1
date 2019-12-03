@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getDataFormClasses --------------------------------------------
 
-const getDataFormClasses = defineStyle(theme => ({
+const getDataFormClasses = defineStyles(theme => ({
   container: {
     position: 'relative',
     display: 'flex',

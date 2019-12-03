@@ -2,11 +2,11 @@
 import Color from 'color'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getLogoutButtonClasses ----------------------------------------
 
-const getLogoutButtonClasses = defineStyle(theme => ({
+const getLogoutButtonClasses = defineStyles(theme => ({
   root: {
   },
 

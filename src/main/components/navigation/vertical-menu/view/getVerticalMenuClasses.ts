@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- styleVerticalMenu ---------------------------------------------------
 
-const getVerticalMenuClasses = defineStyle(theme => ({
+const getVerticalMenuClasses = defineStyles(theme => ({
   container: {
     display: 'flex',
     flexGrow: 1,

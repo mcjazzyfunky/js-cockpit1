@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getDataExplorerClasses ----------------------------------------
 
-const getDataExplorerClasses = defineStyle(theme => ({
+const getDataExplorerClasses = defineStyles(theme => ({
   container: {
     position: 'relative',
     display: 'flex',

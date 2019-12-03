@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getPaginationInfoClasses --------------------------------------
 
-const getPaginationInfoClasses = defineStyle(theme => ({
+const getPaginationInfoClasses = defineStyles(theme => ({
   container: {
     whiteSpace: 'nowrap',
     ...theme.fonts.medium

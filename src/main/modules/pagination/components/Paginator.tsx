@@ -5,7 +5,7 @@ import { Spec } from 'js-spec'
 import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
-import defineStyle from '../../../styling/defineStyle'
+import defineStyles from '../../../styling/defineStyles'
 import useForceUpdate from '../../shared/hooks/useForceUpdate'
 
 import usePaginationCtrl from '../hooks/usePagination'
@@ -120,7 +120,7 @@ function handleKeyDown(event: KeyboardEvent, pageIndex: number, totalItemCount: 
 
 // --- styles --------------------------------------------------------
 
-const getPaginatorClasses = defineStyle(theme => ({
+const getPaginatorClasses = defineStyles(theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',

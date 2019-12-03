@@ -2,12 +2,12 @@
 import Color from 'color'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 import CockpitProps from '../types/CockpitProps'
 
 // --- styleCockpit --------------------------------------------------
 
-const getCockpitClasses = defineStyle((theme, look: CockpitProps['look'])  => {
+const getCockpitClasses = defineStyles((theme, look: CockpitProps['look'])  => {
   const
     menu = look !== 'default'
       ? null

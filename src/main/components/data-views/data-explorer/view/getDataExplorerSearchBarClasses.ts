@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getDataExplorerSearchBarClasses -------------------------------
 
-const getDataExplorerSearchBarClasses = defineStyle(theme => {
+const getDataExplorerSearchBarClasses = defineStyles(theme => {
   return {
     container: {
       display: 'flex',

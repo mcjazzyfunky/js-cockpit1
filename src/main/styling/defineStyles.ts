@@ -1,6 +1,6 @@
 import { getTheme, ITheme, mergeStyleSets, IStyleSet, memoizeFunction } from 'office-ui-fabric-react'
 
-export default function defineStyle<A extends any[], S extends IStyleSet<any>>(
+export default function defineStyles<A extends any[], S extends IStyleSet<any>>(
   getStyle: (theme: ITheme, ...args: A) => S
 ): (...args: A) => { [K in keyof S]: string } {
   

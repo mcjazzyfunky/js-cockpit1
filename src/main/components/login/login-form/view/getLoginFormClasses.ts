@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getLoginFormClasses -------------------------------------------
 
-const getLoginFormClasses = defineStyle((
+const getLoginFormClasses = defineStyles((
   theme,
   hasIntro: boolean,
   hasHeader: boolean,

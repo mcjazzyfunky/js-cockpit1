@@ -4,7 +4,7 @@ import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import defineStyle from '../../../styling/defineStyle'
+import defineStyles from '../../../styling/defineStyles'
 import usePagination from '../hooks/usePagination'
 import useForceUpdate from '../../shared/hooks/useForceUpdate'
 
@@ -84,7 +84,7 @@ function PaginationInfoView({
 
 // ---- styles -------------------------------------------------------
 
-const getPaginationInfoClasses = defineStyle(theme => ({
+const getPaginationInfoClasses = defineStyles(theme => ({
   container: {
     whiteSpace: 'nowrap',
     ...theme.fonts.medium

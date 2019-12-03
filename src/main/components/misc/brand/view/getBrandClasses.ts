@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- styleBrand ----------------------------------------------------
 
-const getBrandClasses = defineStyle(theme => ({
+const getBrandClasses = defineStyles(theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',

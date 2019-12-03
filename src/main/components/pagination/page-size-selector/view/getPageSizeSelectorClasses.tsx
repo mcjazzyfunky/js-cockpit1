@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getPageSizeSelectorClasses ------------------------------------
 
-const getPageSizeSelectorClasses = defineStyle(theme => {
+const getPageSizeSelectorClasses = defineStyles(theme => {
   return {
     container: {
       display: 'flex',

@@ -1,9 +1,9 @@
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getFieldSetClasses --------------------------------------------
 
-const getFieldSetClasses = defineStyle(theme => ({
+const getFieldSetClasses = defineStyles(theme => ({
   container: {
     display: 'flex',
     alignItems: 'stretch',

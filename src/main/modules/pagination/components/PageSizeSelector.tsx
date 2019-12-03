@@ -4,7 +4,7 @@ import { component } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
-import defineStyle from '../../../styling/defineStyle'
+import defineStyles from '../../../styling/defineStyles'
 import usePagination from '../hooks/usePagination'
 
 // --- components ----------------------------------------------------
@@ -39,7 +39,7 @@ function PageSizeSelectorView({
 
 // ---- styles -------------------------------------------------------
 
-const getPageSizeSelectorClasses = defineStyle(theme => ({
+const getPageSizeSelectorClasses = defineStyles(theme => ({
 }))
 
 // --- exports -------------------------------------------------------

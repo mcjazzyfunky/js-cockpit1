@@ -2,11 +2,11 @@
 import Color from 'color'
 
 // internal imports
-import defineStyle from '../../../../styling/defineStyle'
+import defineStyles from '../../../../styling/defineStyles'
 
 // --- getDataTableClasses -------------------------------------------
 
-const getDataTableClasses = defineStyle(theme => ({
+const getDataTableClasses = defineStyles(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
