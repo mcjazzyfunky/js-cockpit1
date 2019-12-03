@@ -6,6 +6,10 @@ import { Spec } from 'js-spec'
 // internal imports
 import defineStyle from '../../../styling/defineStyle'
 import usePagination from '../hooks/usePagination'
+import useForceUpdate from '../../shared/hooks/useForceUpdate'
+
+// derived imports
+const { useEffect } = React
 
 // --- components ----------------------------------------------------
 
@@ -42,6 +46,7 @@ function PaginationInfoView({
   let content: ReactNode = null
 
   const
+    forceUpdate = useForceUpdate(),
     ctrl = usePagination(),
     classes = getPaginationInfoClasses(),
     pageIndex = ctrl.getPageIndex(),
@@ -50,6 +55,14 @@ function PaginationInfoView({
     itemNumberStart = pageIndex * pageSize + 1,
     itemNumberEnd = Math.min(totalItemCount, (pageIndex + 1) * pageSize),
     valuesValid = pageIndex >= 0 && pageSize >= 0 && totalItemCount >= 0
+
+  useEffect(() => {
+    const unsubscribe = ctrl.subscribe(() => {
+      forceUpdate()
+    })
+
+    return unsubscribe
+  }, [ctrl, forceUpdate])
 
   switch (about) {
     case 'items':

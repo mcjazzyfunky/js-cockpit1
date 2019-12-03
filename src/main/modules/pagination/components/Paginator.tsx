@@ -6,12 +6,16 @@ import { TextField } from 'office-ui-fabric-react'
 
 // internal imports
 import defineStyle from '../../../styling/defineStyle'
+import useForceUpdate from '../../shared/hooks/useForceUpdate'
 
 import usePaginationCtrl from '../hooks/usePagination'
 import ArrowDoubleLeftIcon from '../../../icons/ArrowDoubleLeftIcon' 
 import ArrowDoubleRightIcon from '../../../icons/ArrowDoubleRightIcon' 
 import ArrowLeftIcon from '../../../icons/ArrowLeftIcon' 
 import ArrowRightIcon from '../../../icons/ArrowRightIcon' 
+
+// derived imports
+const { useCallback, useEffect, useState } = React
 
 // --- components ----------------------------------------------------
 
@@ -38,6 +42,7 @@ const validatePaginatorProps = Spec.checkProps({})
 
 function PaginatorView() {
   const
+    forceUpdate = useForceUpdate(), 
     ctrl = usePaginationCtrl(),
     classes = getPaginatorClasses(),
     pageIndex = ctrl.getPageIndex(),
@@ -48,6 +53,14 @@ function PaginatorView() {
     previousButtonDisabled = pageIndex <= 0,
     nextButtonDisabled = pageIndex >= lastPageIndex,
     lastButtonDisabled = pageIndex >= lastPageIndex
+
+  useEffect(() => {
+    const unsubscribe = ctrl.subscribe(() => {
+      forceUpdate()
+    })
+
+    return unsubscribe
+  }, [ctrl, forceUpdate])
 
   return (
     <div className={classes.container}>

@@ -27,16 +27,14 @@ export const overview = () => {
       pageSize: currPageSize,
       totalItemCount: currTotalItemCount,
 
-      update(pageIndex, pageCount) {
-        console.log(pageIndex, pageCount)
-
+      update(pageIndex, pageSize) {
         setTimeout(() => {
           setValues({
-            pageIndex: currPageIndex,
-            pageSize: currPageSize,
+            pageIndex: pageIndex,
+            pageSize: pageSize,
             totalItemCount: currTotalItemCount
           })
-        }, 1000)
+        }, 1)
       }
     }))
 
