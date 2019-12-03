@@ -1,7 +1,7 @@
 // imports
 import React from 'react'
 
-import { Paginator, PaginationInfo, PaginationProvider, PaginationCtrl }
+import { createPaginationCtrl, Paginator, PaginationInfo, PaginationProvider, PaginationCtrl }
   from '../js-cockpit'
 
 
@@ -14,44 +14,30 @@ export default {
   title: 'Pagination'
 }
 
-const pageSizeOptions = [10, 25, 50, 100, 250, 500]
-
-function createPaginationCtrl(totalItemCount: number, onUpdate: () => void): PaginationCtrl {
-  let
-    currPageIndex = 0,
-    currPageSize = 50
-  
-  return {
-    getPageIndex: () => currPageIndex,
-    getPageSize: () => currPageSize,
-    getTotalItemCount: () => totalItemCount,
-
-    moveToPage(pageIndex) {console.log(pageIndex)
-      if (pageIndex >= 0 && pageIndex <= (totalItemCount - 1) / currPageSize) {
-        currPageIndex = pageIndex
-        setTimeout(onUpdate, 0)
-      }
-
-      return Promise.resolve(currPageIndex)
-    },
-    
-    setPageSize(pageSize: number) {
-      if (pageSizeOptions.includes(pageSize)) {
-        currPageSize = pageSize
-        setTimeout(onUpdate, 0)
-      }
-
-      return Promise.resolve(currPageSize)
-    }
-  }
-}
 
 export const overview = () => {
-  const
-    [, setDummy] = useState(false),
+  let
+    currPageIndex = 0,
+    currPageSize = 25,
+    currTotalItemCount = 1253
 
-    [paginationCtrl] = useState(() => createPaginationCtrl(1245, () => {
-      setDummy(dummy => !dummy)
+  const
+    [[paginationCtrl, setValues]] = useState(() => createPaginationCtrl({
+      pageIndex: currPageIndex,
+      pageSize: currPageSize,
+      totalItemCount: currTotalItemCount,
+
+      update(pageIndex, pageCount) {
+        console.log(pageIndex, pageCount)
+
+        setTimeout(() => {
+          setValues({
+            pageIndex: currPageIndex,
+            pageSize: currPageSize,
+            totalItemCount: currTotalItemCount
+          })
+        }, 1000)
+      }
     }))
 
   return (

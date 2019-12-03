@@ -1,6 +1,6 @@
 // external import
-import React from 'react'
-import { component } from 'js-react-utils'
+import React, { ReactNode } from 'react'
+import { component, isNode } from 'js-react-utils'
 import { Spec } from 'js-spec'
 
 // internal imports
@@ -23,12 +23,27 @@ const PaginationProvider = component<PaginationProviderProps>({
 
 type PaginationProviderProps = {
   controller: PaginationCtrl,
-  children: any
+  children: ReactNode
 }
 
 // --- validation ----------------------------------------------------
 
-const validatePaginationProviderProps = Spec.any // TODO
+const validatePaginationProviderProps = Spec.checkProps({
+  required: {
+    controller: Spec.exact({
+      getPageIndex: Spec.function,
+      getPageSize: Spec.function,
+      getTotalItemCount: Spec.function,
+      moveToPage: Spec.function,
+      setPageSize: Spec.function,
+      subscribe: Spec.function
+    })
+  },
+
+  optional: {
+    children: isNode
+  }
+})
 
 // --- views ---------------------------------------------------------
 
@@ -37,7 +52,7 @@ function PaginationProviderView({
   children 
 }: PaginationProviderProps) {
   return (
-    <PaginationCtx.Provider value={[controller]}>
+    <PaginationCtx.Provider value={controller}>
       {children}
     </PaginationCtx.Provider>
   )
