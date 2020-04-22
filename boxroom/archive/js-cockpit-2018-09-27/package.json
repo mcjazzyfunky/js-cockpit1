@@ -21,7 +21,7 @@
     "css-loader": "^0.28.11",
     "dio.js": "^9.0.3",
     "esdoc": "^1.0.3",
-    "eslint": "^3.13.1",
+    "eslint": "^4.18.2",
     "eslint-plugin-react": "^7.8.2",
     "feather-icons": "^4.7.0",
     "font-awesome": "^4.5.0",
